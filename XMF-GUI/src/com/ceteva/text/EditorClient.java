@@ -12,7 +12,7 @@ import uk.ac.mdx.xmf.swt.client.Client;
 import uk.ac.mdx.xmf.swt.client.EventHandler;
 import uk.ac.mdx.xmf.swt.client.IconManager;
 import uk.ac.mdx.xmf.swt.client.IdManager;
-import uk.ac.mdx.xmf.swt.demo.GUIDemo;
+import uk.ac.mdx.xmf.swt.demo.Main;
 import XOS.Message;
 import XOS.Value;
 
@@ -74,18 +74,18 @@ public class EditorClient extends Client {
 	public void showBrowser(String url) {
 		// Create a web browser
 
-		CTabItem tabItem = new CTabItem(GUIDemo.tabFolderDiagram, SWT.BORDER);
+		CTabItem tabItem = new CTabItem(Main.tabFolderDiagram, SWT.BORDER);
 		tabItem.setText("Welcome");
-		Canvas c = new Canvas(GUIDemo.tabFolderDiagram, SWT.BORDER);
+		Canvas c = new Canvas(Main.tabFolderDiagram, SWT.BORDER);
 		tabItem.setControl(c);
 
 		Browser browser = new Browser(c, SWT.BORDER);
 		browser.setUrl(url);
-		browser.setBounds(GUIDemo.tabFolderDiagram.getBounds());
+		browser.setBounds(Main.tabFolderDiagram.getBounds());
 		browser.setLocation(0, 0);
 		browser.layout(true, true);
 
-		GUIDemo.sectionTopLeft.setFocus();
+		Main.sectionTopLeft.setFocus();
 
 	}
 
@@ -105,7 +105,7 @@ public class EditorClient extends Client {
 				// "com.ceteva.text.TextEditor");
 				TextEditor newEditor = new TextEditor();
 				try {
-					newEditor.init(GUIDemo.sectionTopMiddle, input);
+					newEditor.init(Main.sectionTopMiddle, input);
 				} catch (PartInitException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

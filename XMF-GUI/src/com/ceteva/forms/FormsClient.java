@@ -11,7 +11,7 @@ import uk.ac.mdx.xmf.swt.client.EventHandler;
 import uk.ac.mdx.xmf.swt.client.XMLClient;
 import uk.ac.mdx.xmf.swt.client.xml.Document;
 import uk.ac.mdx.xmf.swt.client.xml.Element;
-import uk.ac.mdx.xmf.swt.demo.GUIDemo;
+import uk.ac.mdx.xmf.swt.demo.Main;
 import XOS.Message;
 import XOS.Value;
 
@@ -78,7 +78,7 @@ public class FormsClient extends XMLClient {
 		// forms.add(view);
 		// }
 
-		forms.add(GUIDemo.propertyView);
+		forms.add(Main.propertyView);
 		return forms;
 	}
 
@@ -120,13 +120,13 @@ public class FormsClient extends XMLClient {
 		// return null;
 		// }
 		FormView form = null;
-		form = GUIDemo.propertyView;
+		form = Main.propertyView;
 		form.setName(name);
 		form.setType(type);
 		form.setIdentity(identity);
 		form.registerEventHandler(handler);
 
-		form.createPartControl(GUIDemo.tabFolderProperty);
+		form.createPartControl(Main.tabFolderProperty);
 		return form;
 
 	}

@@ -8,7 +8,7 @@ import org.eclipse.ui.dialogs.ListDialog;
 import org.eclipse.ui.dialogs.ListSelectionDialog;
 
 import uk.ac.mdx.xmf.swt.client.EventHandler;
-import uk.ac.mdx.xmf.swt.demo.GUIDemo;
+import uk.ac.mdx.xmf.swt.demo.Main;
 import XOS.Value;
 
 public class SelectionDialog {
@@ -44,7 +44,7 @@ public class SelectionDialog {
 	}
 
 	private static Shell getShell() {
-		return GUIDemo.getInstance().shell;
+		return Main.getInstance().shell;
 	}
 
 	public static Value openMultiSelectionDialog(String title, String message,

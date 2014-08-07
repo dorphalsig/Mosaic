@@ -21,7 +21,7 @@ import org.eclipse.swt.graphics.ImageLoader;
 import org.eclipse.swt.widgets.Display;
 
 import uk.ac.mdx.xmf.swt.client.ClientElement;
-import uk.ac.mdx.xmf.swt.demo.GUIDemo;
+import uk.ac.mdx.xmf.swt.demo.Main;
 import uk.ac.mdx.xmf.swt.diagram.clipboard.ImageDataTransfer;
 import uk.ac.mdx.xmf.swt.figure.DiagramFigure;
 import uk.ac.mdx.xmf.swt.model.AbstractDiagram;
@@ -120,7 +120,7 @@ public class ImageProducer {
 		GC gc = null;
 		Graphics g = null;
 		try {
-			image = new Image(GUIDemo.display, GUIDemo.display.getBounds());
+			image = new Image(Main.display, Main.display.getBounds());
 			gc = new GC(image);
 			g = new SWTGraphics(gc);
 			g.translate(r.x * -1, r.y * -1);
@@ -188,7 +188,7 @@ public class ImageProducer {
 		// LayerManager lm = (LayerManager) viewer.getEditPartRegistry().get(
 		// LayerManager.ID);
 		// IFigure figure = lm.getLayer(LayerConstants.PRINTABLE_LAYERS);
-		IFigure figure = GUIDemo.getInstance().getView().rootFigure;
+		IFigure figure = Main.getInstance().getView().rootFigure;
 		createImage(filename, figure, format);
 		// viewer.getRootEditPart().deactivate();
 	}

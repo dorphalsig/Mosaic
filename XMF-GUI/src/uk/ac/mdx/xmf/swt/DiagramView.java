@@ -26,7 +26,7 @@ import org.eclipse.swt.widgets.Listener;
 import uk.ac.mdx.xmf.swt.command.ConnectionCommand;
 import uk.ac.mdx.xmf.swt.command.CreateNodeCommand;
 import uk.ac.mdx.xmf.swt.command.CreateWaypointCommand;
-import uk.ac.mdx.xmf.swt.demo.GUIDemo;
+import uk.ac.mdx.xmf.swt.demo.Main;
 import uk.ac.mdx.xmf.swt.editPart.BoxEditPart;
 import uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart;
 import uk.ac.mdx.xmf.swt.editPart.DiagramEditPart;
@@ -292,7 +292,7 @@ public class DiagramView extends View {
 
 				}
 
-				String s = GUIDemo.getInstance().palette.getSelectImage();
+				String s = Main.getInstance().palette.getSelectImage();
 				if (s.equalsIgnoreCase("Class")) {
 					raiseFocusGained();
 
@@ -305,7 +305,7 @@ public class DiagramView extends View {
 
 					selectIconName = "";
 
-					GUIDemo.getInstance().palette.setSelectImage();
+					Main.getInstance().palette.setSelectImage();
 				} else if (s.equalsIgnoreCase("Package")) {
 					raiseFocusGained();
 
@@ -316,7 +316,7 @@ public class DiagramView extends View {
 							toolIdentity, location2);
 					createNodeCommand.execute();
 
-					GUIDemo.getInstance().palette.setSelectImage();
+					Main.getInstance().palette.setSelectImage();
 				} else if (s.equalsIgnoreCase("Note")) {
 					raiseFocusGained();
 
@@ -327,7 +327,7 @@ public class DiagramView extends View {
 							toolIdentity, location2);
 					createNodeCommand.execute();
 
-					GUIDemo.getInstance().palette.setSelectImage();
+					Main.getInstance().palette.setSelectImage();
 					// System.out.println("click diagramView:" + s + ":"
 					// + location2.x + "-" + location2.y);
 				} else if (s.equalsIgnoreCase("Association")
@@ -348,7 +348,7 @@ public class DiagramView extends View {
 					connectionCommand.execute();
 					ports.clear();
 
-					GUIDemo.getInstance().palette.setSelectImage();
+					Main.getInstance().palette.setSelectImage();
 				} else if (s.equalsIgnoreCase("Inheritance")
 						&& (ports.size() > 1)) {
 					raiseFocusGained();
@@ -405,7 +405,7 @@ public class DiagramView extends View {
 					connectionCommand.execute();
 					ports.clear();
 
-					GUIDemo.getInstance().palette.setSelectImage();
+					Main.getInstance().palette.setSelectImage();
 				} else if (s.equalsIgnoreCase("Slot Value")
 						&& (ports.size() > 3)) {
 					raiseFocusGained();
@@ -424,7 +424,7 @@ public class DiagramView extends View {
 					connectionCommand.execute();
 					ports.clear();
 
-					GUIDemo.getInstance().palette.setSelectImage();
+					Main.getInstance().palette.setSelectImage();
 				} else if (s.equalsIgnoreCase("Object")) {
 					raiseFocusGained();
 
@@ -435,7 +435,7 @@ public class DiagramView extends View {
 							toolIdentity, location2);
 					createNodeCommand.execute();
 
-					GUIDemo.getInstance().palette.setSelectImage();
+					Main.getInstance().palette.setSelectImage();
 					// System.out.println("click diagramView:" + s + ":"
 					// + location2.x + "-" + location2.y);
 				} else if (s.equalsIgnoreCase("Mapping")) {
@@ -448,7 +448,7 @@ public class DiagramView extends View {
 							toolIdentity, location2);
 					createNodeCommand.execute();
 
-					GUIDemo.getInstance().palette.setSelectImage();
+					Main.getInstance().palette.setSelectImage();
 					// System.out.println("click diagramView:" + s + ":"
 					// + location2.x + "-" + location2.y);
 				} else if (s.equalsIgnoreCase("Domain") && (ports.size() > 1)) {
@@ -495,7 +495,7 @@ public class DiagramView extends View {
 		canvas.addListener(SWT.MouseHover, new Listener() {
 			@Override
 			public void handleEvent(Event arg0) {
-				String selectIconName = GUIDemo.getInstance().palette
+				String selectIconName = Main.getInstance().palette
 						.getSelectImage();
 				if (selectIconName.equalsIgnoreCase("Class")) {
 					canvas.setCursor(Display.getCurrent().getSystemCursor(
@@ -966,8 +966,8 @@ public class DiagramView extends View {
 		// canvas.pack();
 		// parent.layout(true);
 
-		GUIDemo.getInstance().tabFolderDiagram.layout(true);
-		GUIDemo.getInstance().outlineView.layout(true);
+		Main.getInstance().tabFolderDiagram.layout(true);
+		Main.getInstance().outlineView.layout(true);
 
 		// canvas.pack();
 		// canvas.layout(true);

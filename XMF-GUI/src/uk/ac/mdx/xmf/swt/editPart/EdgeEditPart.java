@@ -18,7 +18,7 @@ import org.eclipse.swt.graphics.RGB;
 
 import uk.ac.mdx.xmf.swt.DiagramView;
 import uk.ac.mdx.xmf.swt.client.ClientElement;
-import uk.ac.mdx.xmf.swt.demo.GUIDemo;
+import uk.ac.mdx.xmf.swt.demo.Main;
 import uk.ac.mdx.xmf.swt.figure.EdgeFigure;
 import uk.ac.mdx.xmf.swt.figure.EdgeShapeFigure;
 import uk.ac.mdx.xmf.swt.model.CommandEvent;
@@ -64,7 +64,7 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 		Vector dragPoint = edge.getDragPoints();
 		EdgeShapeFigure shape = new EdgeShapeFigure(points, dragPoint, true);
 
-		Rectangle rec = new Rectangle(GUIDemo.getInstance().getView()
+		Rectangle rec = new Rectangle(Main.getInstance().getView()
 				.getCanvas().getBounds());
 		shape.setBounds(rec);
 		shape.setLineWidth(2);

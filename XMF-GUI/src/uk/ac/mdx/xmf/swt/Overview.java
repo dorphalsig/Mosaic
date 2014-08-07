@@ -7,7 +7,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.widgets.Composite;
 
-import uk.ac.mdx.xmf.swt.demo.GUIDemo;
+import uk.ac.mdx.xmf.swt.demo.Main;
 
 public class Overview {
 	private FigureCanvas canvas;
@@ -34,7 +34,7 @@ public class Overview {
 		canvas.layout(true);
 		canvas.pack();
 
-		GUIDemo.getInstance().tabFolderOverview.layout(true);
+		Main.getInstance().tabFolderOverview.layout(true);
 	}
 
 	public void setRootFigure(Figure rootFigure) {

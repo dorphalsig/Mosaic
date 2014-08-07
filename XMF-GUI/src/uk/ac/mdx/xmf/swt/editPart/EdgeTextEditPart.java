@@ -12,7 +12,7 @@ import org.eclipse.gef.Request;
 import org.eclipse.gef.RequestConstants;
 import org.eclipse.swt.graphics.RGB;
 
-import uk.ac.mdx.xmf.swt.demo.GUIDemo;
+import uk.ac.mdx.xmf.swt.demo.Main;
 import uk.ac.mdx.xmf.swt.figure.EdgeFigure;
 import uk.ac.mdx.xmf.swt.figure.EdgeLabelFigure;
 import uk.ac.mdx.xmf.swt.model.EdgeText;
@@ -106,7 +106,7 @@ public class EdgeTextEditPart extends CommandEventEditPart implements
 		figure.setSize(100, 30);
 		Point offset = ((EdgeText) getModel()).getLocation();
 		figure.setLocation(offset);
-		EdgeEditPart parent = GUIDemo.getInstance().getView().getEdgeParts()
+		EdgeEditPart parent = Main.getInstance().getView().getEdgeParts()
 				.get(model.parent.getIdentity());
 		EdgeTextConstraint constraint = new EdgeTextConstraint(this,
 				model.getText(), getFigure(), (EdgeEditPart) parent,

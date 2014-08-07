@@ -14,7 +14,7 @@ import uk.ac.mdx.xmf.swt.client.IdManager;
 import uk.ac.mdx.xmf.swt.client.XMLClient;
 import uk.ac.mdx.xmf.swt.client.xml.Document;
 import uk.ac.mdx.xmf.swt.client.xml.Element;
-import uk.ac.mdx.xmf.swt.demo.GUIDemo;
+import uk.ac.mdx.xmf.swt.demo.Main;
 import uk.ac.mdx.xmf.swt.misc.DiagramPlugin;
 import uk.ac.mdx.xmf.swt.misc.FontManager;
 import uk.ac.mdx.xmf.swt.model.AbstractDiagram;
@@ -87,7 +87,7 @@ public class DiagramClient extends XMLClient {
 		// this.diagram = diagram;
 		// if (show)
 		// displayDiagramModel(diagram);
-		GUIDemo.getInstance().startNewDiagram(identity, diagram);
+		Main.getInstance().startNewDiagram(identity, diagram);
 
 		return diagram;
 	}

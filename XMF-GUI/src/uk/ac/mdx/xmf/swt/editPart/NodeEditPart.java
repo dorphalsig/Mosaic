@@ -20,7 +20,7 @@ import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.requests.DropRequest;
 import org.eclipse.swt.graphics.RGB;
 
-import uk.ac.mdx.xmf.swt.demo.GUIDemo;
+import uk.ac.mdx.xmf.swt.demo.Main;
 import uk.ac.mdx.xmf.swt.diagram.tracker.NodeSelectionTracker;
 import uk.ac.mdx.xmf.swt.figure.NodeFigure;
 import uk.ac.mdx.xmf.swt.figure.NodeShapeFigure;
@@ -147,7 +147,7 @@ public class NodeEditPart extends CommandEventEditPart implements
 	@Override
 	public void refreshSourceConnections() {
 		Node source = (Node) getModel();
-		_diagramView = GUIDemo.getInstance().getView();
+		_diagramView = Main.getInstance().getView();
 		String identity = source.getIdentity();
 		// int id = Integer.valueOf(identity) - 1;
 		// identity = String.valueOf(id);
@@ -162,7 +162,7 @@ public class NodeEditPart extends CommandEventEditPart implements
 	@Override
 	public void refreshTargetConnections() {
 		Node source = (Node) getModel();
-		_diagramView = GUIDemo.getInstance().getView();
+		_diagramView = Main.getInstance().getView();
 		String identity = source.getIdentity();
 		// int id = Integer.valueOf(identity) - 1;
 		// identity = String.valueOf(id);

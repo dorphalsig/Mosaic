@@ -11,7 +11,7 @@ import org.eclipse.swt.widgets.Text;
 
 import uk.ac.mdx.xmf.swt.command.EdgeTextChangeCommand;
 import uk.ac.mdx.xmf.swt.command.TextChangeCommand;
-import uk.ac.mdx.xmf.swt.demo.GUIDemo;
+import uk.ac.mdx.xmf.swt.demo.Main;
 
 public class TextEditManager {
 
@@ -55,7 +55,7 @@ public class TextEditManager {
 		choice = "";
 		if (object instanceof uk.ac.mdx.xmf.swt.model.Text) {
 			model = (uk.ac.mdx.xmf.swt.model.Text) object;
-			text = new Text(GUIDemo.getInstance().getView().canvas, SWT.SINGLE
+			text = new Text(Main.getInstance().getView().canvas, SWT.SINGLE
 					| SWT.NORMAL);
 
 			text.setLocation(p.x, p.y + 2);
@@ -68,7 +68,7 @@ public class TextEditManager {
 			choice = "text";
 		} else if (object instanceof uk.ac.mdx.xmf.swt.model.EdgeText) {
 			modelEdgeText = (uk.ac.mdx.xmf.swt.model.EdgeText) object;
-			text = new Text(GUIDemo.getInstance().getView().canvas, SWT.SINGLE
+			text = new Text(Main.getInstance().getView().canvas, SWT.SINGLE
 					| SWT.NORMAL);
 
 			text.setLocation(p.x, p.y + 2);

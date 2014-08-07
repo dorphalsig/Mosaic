@@ -16,7 +16,7 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 
-import uk.ac.mdx.xmf.swt.demo.GUIDemo;
+import uk.ac.mdx.xmf.swt.demo.Main;
 
 public class Palette extends View {
 	Composite parent;
@@ -159,7 +159,7 @@ public class Palette extends View {
 							labelImages[k].setBackground(colorSelect);
 							labelTexts[k].setBackground(colorSelect);
 							imageName = tools.get(j);
-							GUIDemo.getInstance().getView().clearPorts();
+							Main.getInstance().getView().clearPorts();
 
 							for (int a = 0; a < size; a++) {
 								if (a != k) {
@@ -212,7 +212,7 @@ public class Palette extends View {
 							labelImages[k].setBackground(colorSelect);
 							labelTexts[k].setBackground(colorSelect);
 							imageName = tools.get(j);
-							GUIDemo.getInstance().getView().clearPorts();
+							Main.getInstance().getView().clearPorts();
 
 							for (int a = 0; a < size; a++) {
 								if (a != k) {

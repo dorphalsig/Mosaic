@@ -7,7 +7,7 @@ import uk.ac.mdx.xmf.swt.client.EventHandler;
 import uk.ac.mdx.xmf.swt.client.XMLClient;
 import uk.ac.mdx.xmf.swt.client.xml.Document;
 import uk.ac.mdx.xmf.swt.client.xml.Element;
-import uk.ac.mdx.xmf.swt.demo.GUIDemo;
+import uk.ac.mdx.xmf.swt.demo.Main;
 import XOS.Message;
 import XOS.Value;
 
@@ -68,11 +68,11 @@ public class ModelBrowserClient extends XMLClient {
 		// ModelBrowserView.ID, id, IWorkbenchPage.VIEW_ACTIVATE);
 
 		ModelBrowserView browser = new ModelBrowserView();
-		GUIDemo.outlineView.setSize(
-				(int) (GUIDemo.sectionTopLeft.getBounds().width),
-				GUIDemo.sectionTopLeft.getBounds().height);
-		browser.createPartControl(GUIDemo.outlineView);
-		GUIDemo.getInstance().outlineView.layout(true);// refresh layout
+		Main.outlineView.setSize(
+				(int) (Main.sectionTopLeft.getBounds().width),
+				Main.sectionTopLeft.getBounds().height);
+		browser.createPartControl(Main.outlineView);
+		Main.getInstance().outlineView.layout(true);// refresh layout
 		System.err.println("Modelbrowser added with id: "
 				+ browser.getIdentity() + " id:" + id);
 		browser.setName(name);

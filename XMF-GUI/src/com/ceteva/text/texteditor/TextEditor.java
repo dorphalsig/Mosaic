@@ -46,7 +46,7 @@ import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 
 import uk.ac.mdx.xmf.swt.client.EventHandler;
-import uk.ac.mdx.xmf.swt.demo.GUIDemo;
+import uk.ac.mdx.xmf.swt.demo.Main;
 import uk.ac.mdx.xmf.swt.model.ImageManager;
 import XOS.Message;
 import XOS.Value;
@@ -207,7 +207,7 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 					identity = d.readLine();
 					model = new TextEditorModel(identity, null, this);
 
-					CTabItem tabItem = new CTabItem(GUIDemo.tabFolderDiagram,
+					CTabItem tabItem = new CTabItem(Main.tabFolderDiagram,
 							SWT.BORDER);
 					tabItem.setText(identity);
 
@@ -227,7 +227,7 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 
 					tabItem.setControl(text);
 
-					GUIDemo.sectionTopMiddle.layout(true);
+					Main.sectionTopMiddle.layout(true);
 
 				} catch (IOException io) {
 					System.out.println(io);

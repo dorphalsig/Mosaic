@@ -6,7 +6,7 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 
 import uk.ac.mdx.xmf.swt.DiagramView;
-import uk.ac.mdx.xmf.swt.demo.GUIDemo;
+import uk.ac.mdx.xmf.swt.demo.Main;
 import uk.ac.mdx.xmf.swt.model.CommandEvent;
 
 public abstract class CommandEventEditPart extends AbstractGraphicalEditPart
@@ -48,7 +48,7 @@ public abstract class CommandEventEditPart extends AbstractGraphicalEditPart
 		// _diagramView.update();
 		// if (_diagramView != null)
 		// _diagramView.display(true);
-		GUIDemo.getInstance().getView().rootFigure.repaint();
+		Main.getInstance().getView().rootFigure.repaint();
 	}
 
 	@Override

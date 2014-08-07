@@ -5,7 +5,7 @@ import java.util.Vector;
 import org.eclipse.swt.graphics.RGB;
 
 import uk.ac.mdx.xmf.swt.client.xml.Element;
-import uk.ac.mdx.xmf.swt.demo.GUIDemo;
+import uk.ac.mdx.xmf.swt.demo.Main;
 import XOS.Message;
 
 class Graph {
@@ -61,8 +61,8 @@ class Graph {
 		parent.setRender(true);
 		render(true);
 
-		if (!GUIDemo.getInstance().getView().getPallete().getInitial()) {
-			GUIDemo.getInstance().getView().getPallete().createPartControl();
+		if (!Main.getInstance().getView().getPallete().getInitial()) {
+			Main.getInstance().getView().getPallete().createPartControl();
 		}
 		if (parent.isRendering()) {
 			parent.firePropertyChange("startRender", null, null);
@@ -140,7 +140,7 @@ class Graph {
 		Node node = new Node(this.parent, parent.handler, identity, x, y,
 				width, height, isSelectable);
 		nodes.addElement(node);
-		GUIDemo.getInstance().getView().refresh(nodes);
+		Main.getInstance().getView().refresh(nodes);
 		// if (parent.isRendering())
 		parent.firePropertyChange("newNode", null, null);
 		return node;
@@ -156,7 +156,7 @@ class Graph {
 					target, sourcePort, targetPort, xRef, yRef, sourceHead,
 					targetHead, dotStyle, color);
 			edges.addElement(edge);
-			GUIDemo.getInstance().getView().refresh(edges);
+			Main.getInstance().getView().refresh(edges);
 			// if (parent.isRendering())
 			{
 				parent.firePropertyChange("newEdge", null, null);

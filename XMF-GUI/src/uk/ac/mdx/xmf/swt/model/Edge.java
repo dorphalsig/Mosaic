@@ -11,7 +11,7 @@ import uk.ac.mdx.xmf.swt.client.ClientElement;
 import uk.ac.mdx.xmf.swt.client.EventHandler;
 import uk.ac.mdx.xmf.swt.client.IdManager;
 import uk.ac.mdx.xmf.swt.client.xml.Element;
-import uk.ac.mdx.xmf.swt.demo.GUIDemo;
+import uk.ac.mdx.xmf.swt.demo.Main;
 import uk.ac.mdx.xmf.swt.misc.VisualElementEvents;
 import XOS.Message;
 import XOS.Value;
@@ -512,7 +512,7 @@ public class Edge extends CommandEvent {
 		if (message.hasName("newEdgeText")
 				&& message.args[0].hasStrValue(identity)) {
 			labels.addElement(ModelFactory.newEdgeText(this, handler, message));
-			GUIDemo.getInstance().getView().refresh(labels);
+			Main.getInstance().getView().refresh(labels);
 			// if (isRendering())
 			firePropertyChange("newEdgeText", null, null);
 			return true;

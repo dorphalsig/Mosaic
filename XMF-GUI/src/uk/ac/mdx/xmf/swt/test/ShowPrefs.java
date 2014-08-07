@@ -20,7 +20,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import uk.ac.mdx.xmf.swt.demo.GUIDemo;
+import uk.ac.mdx.xmf.swt.demo.Main;
 
 import com.ceteva.console.preferences.IPreferenceConstants;
 
@@ -32,7 +32,7 @@ public class ShowPrefs {
 	 * Runs the application
 	 */
 	public void run() {
-		Display display = GUIDemo.display;
+		Display display = Main.display;
 
 		// Create the preference manager
 		PreferenceManager mgr = new PreferenceManager();

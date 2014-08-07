@@ -16,7 +16,7 @@ import org.eclipse.swt.widgets.MenuItem;
 
 import uk.ac.mdx.xmf.swt.client.Client;
 import uk.ac.mdx.xmf.swt.client.EventHandler;
-import uk.ac.mdx.xmf.swt.demo.GUIDemo;
+import uk.ac.mdx.xmf.swt.demo.Main;
 import XOS.Message;
 import XOS.Value;
 
@@ -139,7 +139,7 @@ public class MenusClient extends Client {
 			m.add(newMenu);
 			refreshMenus();
 		}
-		GUIDemo.getInstance().shell.setMaximized(true);
+		Main.getInstance().shell.setMaximized(true);
 	}
 
 	public void refreshMenus() {
@@ -154,7 +154,7 @@ public class MenusClient extends Client {
 		// return window.getMenuBarManager();
 		// Add menus.
 
-		return GUIDemo.mb;
+		return Main.mb;
 	}
 
 	public boolean xmfId(String id) {

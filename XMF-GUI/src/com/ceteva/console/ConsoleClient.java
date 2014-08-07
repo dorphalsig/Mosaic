@@ -10,7 +10,7 @@ import java.io.PrintStream;
 
 import org.eclipse.swt.widgets.Display;
 
-import uk.ac.mdx.xmf.swt.demo.GUIDemo;
+import uk.ac.mdx.xmf.swt.demo.Main;
 
 import com.ceteva.console.views.ConsoleView;
 
@@ -69,7 +69,7 @@ public class ConsoleClient extends Thread {
 		// return false;
 		// }
 
-		view = GUIDemo.consoleView;
+		view = Main.consoleView;
 		// view.setSize(GUIDemo.getInstance().sectionBottomRight.getSize());
 		view.setOutput(out);
 		view.processInput(queuedInput.toString());
