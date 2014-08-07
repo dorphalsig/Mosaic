@@ -468,9 +468,7 @@ public class GUIDemo {
 		while (!GUIDemo.getInstance().shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
-
 			}
-
 		}
 		display.dispose();
 		System.exit(0); // exit successful
