@@ -77,7 +77,13 @@ public class ModelFactory {
 		int red = message.args[8].intValue;
 		int green = message.args[9].intValue;
 		int blue = message.args[10].intValue;
-		String font = message.args[11].strValue();
+		String font = "8";
+		try {
+			font = message.args[11].strValue();
+		} catch (NullPointerException ex) {
+			// System.out.println(ex);
+		}
+		System.out.println("font:" + font);
 		return new Text(parent, handler, identity, x, y, text, editable,
 				underline, italicise, getColor(red, green, blue), font);
 	}
