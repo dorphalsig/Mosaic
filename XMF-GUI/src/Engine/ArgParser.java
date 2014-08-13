@@ -7,7 +7,7 @@ public class ArgParser {
 	// This class provides static methods that deal with parsing and
 	// deconstructing
 	// command line arguments.
-
+//
 	public static String argName(String argSpec) {
 
 		// Returns the argument name portion of the supplied arg spec.
