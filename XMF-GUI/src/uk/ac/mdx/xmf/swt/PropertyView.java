@@ -55,8 +55,7 @@ public class PropertyView extends View {
 		dragLabel.addListener(SWT.Paint, new Listener() {
 			@Override
 			public void handleEvent(Event e) {
-				image = new Image(e.display,
-						"F:\\xmf\\code\\xmfGUI\\images\\class_obj.gif");
+				image = new Image(e.display, "images/class_obj.gif");
 				GC gc = e.gc;
 				gc.drawImage(image, 10, 20);
 				gc.dispose();

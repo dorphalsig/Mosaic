@@ -119,7 +119,7 @@ public class Palette extends View {
 		int count = 0;
 
 		for (int m = 0; m < groups.size(); m++) {
-			image = new Image(display, "images\\" + groups.get(m) + ".gif");
+			image = new Image(display, "images/" + groups.get(m) + ".gif");
 
 			label = new Label(canvas, SWT.NO);
 			label.setImage(image);
@@ -135,8 +135,8 @@ public class Palette extends View {
 
 			for (int i = 0; i < size; i++) {
 				if (groups.get(m).equalsIgnoreCase(tools.get(i * 2 + 1))) {
-					images[i] = new Image(display, "images\\"
-							+ tools.get(i * 2) + ".gif");
+					images[i] = new Image(display, "images/" + tools.get(i * 2)
+							+ ".gif");
 
 					labelImages[i] = new Label(canvas, SWT.NO);
 					labelImages[i].setImage(images[i]);
