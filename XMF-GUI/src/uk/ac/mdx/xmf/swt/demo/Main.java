@@ -349,7 +349,7 @@ public class Main {
 		item3.setImage(new Image(display, "icons/user/Arrow2Left.gif"));
 
 		treeToolBar.pack();
-
+		//
 		treeToolBar.addListener(SWT.Resize, new Listener() {
 			@Override
 			public void handleEvent(Event event) {
