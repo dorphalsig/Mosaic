@@ -1,6 +1,8 @@
 package uk.ac.mdx.xmf.swt.io;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public class IOThread extends Thread {
 

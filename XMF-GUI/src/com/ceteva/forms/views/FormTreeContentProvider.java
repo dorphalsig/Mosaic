@@ -1,7 +1,8 @@
 package com.ceteva.forms.views;
 
+import org.eclipse.jface.viewers.ITreeContentProvider;
+import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.widgets.TreeItem;
-import org.eclipse.jface.viewers.*;
 
 public class FormTreeContentProvider implements ITreeContentProvider{
 	

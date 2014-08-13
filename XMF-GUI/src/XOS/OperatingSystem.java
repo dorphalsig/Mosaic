@@ -1091,8 +1091,8 @@ public final class OperatingSystem implements EventHandler {
 		// into the input channels table.
 
 		try {
-			File file = new File(fileName);
-			if (file.exists()) {
+			File file = new java.io.File(fileName);
+			if (file.exists()) {   
 				InputStream in = new FileInputStream(file);
 				XChannel bin = new XChannel(in, true);
 				return newInputChannel(bin);
@@ -2186,12 +2186,5 @@ public final class OperatingSystem implements EventHandler {
 			// messageString = gson.toJson(message);
 			// writeText(messageString, file);
 		}
-	}
-
-	public void deletFile(String file) {
-		File f = new File(file);
-		if (f.exists())
-			f.delete();
-
 	}
 }

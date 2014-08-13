@@ -1,9 +1,15 @@
 package XOS;
 
-import org.xml.sax.*;
-import org.xml.sax.helpers.*;
-import javax.xml.parsers.*;
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXParseException;
+import org.xml.sax.helpers.DefaultHandler;
 
 public class XMLReader extends DefaultHandler {
 

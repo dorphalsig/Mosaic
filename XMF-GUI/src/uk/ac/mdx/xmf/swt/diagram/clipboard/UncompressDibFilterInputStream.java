@@ -3,8 +3,7 @@ package uk.ac.mdx.xmf.swt.diagram.clipboard;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.eclipse.swt.internal.win32.BITMAPINFOHEADER;
-
+import uk.ac.mdx.xmf.swt.diagram.stubs.BITMAPINFOHEADER;
 import uk.ac.mdx.xmf.swt.diagram.stubs.OS;
 
 class UncompressDibFilterInputStream extends InputStream {

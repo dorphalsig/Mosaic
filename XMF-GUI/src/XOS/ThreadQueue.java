@@ -1,8 +1,8 @@
 package XOS;
 
-import Engine.Thread;
-
 import java.util.LinkedList;
+
+import Engine.Thread;
 
 public class ThreadQueue extends LinkedList {
     

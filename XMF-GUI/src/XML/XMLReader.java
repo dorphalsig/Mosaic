@@ -6,11 +6,18 @@
  */
 package XML;
 
-import org.xml.sax.*;
-import org.xml.sax.helpers.*;
-import javax.xml.parsers.*;
-import java.io.*;
-import Engine.*;
+import java.io.File;
+import java.io.InputStream;
+
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXParseException;
+import org.xml.sax.helpers.DefaultHandler;
+
+import Engine.Machine;
+import Engine.ValueStack;
 
 /**
  * @author tony

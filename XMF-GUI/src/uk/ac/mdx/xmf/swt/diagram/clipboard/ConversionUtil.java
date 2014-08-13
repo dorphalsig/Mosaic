@@ -1,6 +1,6 @@
 package uk.ac.mdx.xmf.swt.diagram.clipboard;
 
-import org.eclipse.swt.internal.win32.BITMAPINFOHEADER;
+import uk.ac.mdx.xmf.swt.diagram.stubs.BITMAPINFOHEADER;
 
 public class ConversionUtil {
 	private ConversionUtil() {

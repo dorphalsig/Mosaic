@@ -1,6 +1,9 @@
 package Engine;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class ValueLoader extends SaveLoadMachine implements Errors {
 

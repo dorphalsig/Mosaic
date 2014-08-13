@@ -10,7 +10,8 @@ import org.eclipse.swt.dnd.ByteArrayTransfer;
 import org.eclipse.swt.dnd.TransferData;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
-import org.eclipse.swt.internal.ole.win32.COM;
+
+import uk.ac.mdx.xmf.swt.diagram.stubs.COM;
 
 public class ImageDataTransfer extends ByteArrayTransfer {
 
