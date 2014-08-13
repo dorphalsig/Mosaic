@@ -469,7 +469,7 @@ public class Main {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
-			// test commit
+			// test commit test
 		}
 		display.dispose();
 		System.exit(0); // exit successful
