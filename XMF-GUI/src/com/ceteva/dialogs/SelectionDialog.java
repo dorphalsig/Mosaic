@@ -5,7 +5,6 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.dialogs.ListDialog;
-import org.eclipse.ui.dialogs.ListSelectionDialog;
 
 import uk.ac.mdx.xmf.swt.client.EventHandler;
 import uk.ac.mdx.xmf.swt.demo.Main;
@@ -49,17 +48,37 @@ public class SelectionDialog {
 
 	public static Value openMultiSelectionDialog(String title, String message,
 			Object[] options, EventHandler handler) {
+		// String[] stringOptions = objectsToStrings(options);
+		// Object[] allOptions = processAllOptions(stringOptions);
+		// Object[] defaultOptions = processDefaultOptions(stringOptions);
+		// ListSelectionDialog lsd = new ListSelectionDialog(getShell(),
+		// allOptions, new ArrayContentProvider(), new LabelProvider(),
+		// message);
+		// lsd.setTitle(title);
+		// lsd.setInitialSelections(defaultOptions);
+		// // if (lsd.open() != 0)
+		// {
+		// lsd.open();
+		// Object[] result = lsd.getResult();
+		// if (result != null)
+		// return new Value(getResultArray(result, defaultOptions));
+		// }
+		// return new Value("-1");
+
 		String[] stringOptions = objectsToStrings(options);
 		Object[] allOptions = processAllOptions(stringOptions);
 		Object[] defaultOptions = processDefaultOptions(stringOptions);
-		ListSelectionDialog lsd = new ListSelectionDialog(getShell(),
-				allOptions, new ArrayContentProvider(), new LabelProvider(),
-				message);
-		lsd.setTitle(title);
-		lsd.setInitialSelections(defaultOptions);
-		if (lsd.open() != SWT.CANCEL) {
-			Object[] result = lsd.getResult();
-			if (result != null)
+		Shell shell = getShell();
+		ListDialog ld = new ListDialog(shell);
+		ld.setInput(allOptions);
+		ld.setContentProvider(new ArrayContentProvider());
+		ld.setLabelProvider(new LabelProvider());
+		ld.setMessage(message);
+		ld.setTitle(title);
+		ld.setInitialSelections(defaultOptions);
+		if (ld.open() != SWT.CANCEL) {
+			Object[] result = ld.getResult();
+			if (result != null && result.length > 0)
 				return new Value(getResultArray(result, defaultOptions));
 		}
 		return new Value("-1");

@@ -29,7 +29,7 @@ public class MessageClient extends Client {
 		Value value = null;
 		try {
 			// XOS.deletFile( "F:\\xmf\\code\\receive\\call.txt");
-			XOS.writeMessageOut(message, "F:\\xmf\\code\\receive\\call.txt");
+			// XOS.writeMessageOut(message, "F:\\xmf\\code\\receive\\call.txt");
 			value = handler.callMessage(message);
 		} catch (RuntimeException e) {
 			// TODO Auto-generated catch block

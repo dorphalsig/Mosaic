@@ -62,13 +62,21 @@ public class EditorClient extends Client {
 	public void showBrowser(String identity, String title, String tooltip,
 			String urls) {
 		// // Create a web browser
-		// Browser browser = new Browser(GUIDemo.sectionTopMiddle, SWT.NONE);
-		//
-		// // Navigate to Slashdot
-		// browser.setUrl(url);
-		// browser.setSize(GUIDemo.sectionTopMiddle.getSize().x,
-		// GUIDemo.sectionTopMiddle.getSize().y);
-		// GUIDemo.sectionTopMiddle.layout();
+		if (urls.length() > 1) {
+			CTabItem tabItem = new CTabItem(Main.tabFolderDiagram, SWT.BORDER);
+			tabItem.setText(title);
+			Canvas c = new Canvas(Main.tabFolderDiagram, SWT.BORDER);
+			tabItem.setControl(c);
+
+			Browser browser = new Browser(c, SWT.BORDER);
+			// browser.setUrl(urls);
+			browser.setText(urls);
+			browser.setBounds(Main.tabFolderDiagram.getBounds());
+			browser.setLocation(0, 0);
+			browser.layout(true, true);
+
+			Main.sectionTopLeft.setFocus();
+		}
 	}
 
 	public void showBrowser(String url) {

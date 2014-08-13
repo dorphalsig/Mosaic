@@ -103,7 +103,7 @@ public class Main {
 
 	private void createshell() {
 		shell = new Shell(SWT.BORDER | SWT.SHELL_TRIM);
-		shell.setText("XModeler-New Beta Version");
+		shell.setText("XModeler-New GUI");
 		shell.setLayout(new FillLayout());
 
 		shell.setLocation(0, 0);
