@@ -1,9 +1,9 @@
 -arg
 user:XModeler
 -arg
-home:/Users/tony/Dropbox/MDX_Files/workspace/XMF1/com.ceteva.xmf
+home:f:/xmf/com.ceteva.xmf
 -image
-/Users/tony/Dropbox/MDX_Files/workspace/XMF1/com.ceteva.xmf/Images/mosaic.img
+f:/xmf/com.ceteva.xmf/Images/mosaic.img
 -arg
 projects:
 -arg
