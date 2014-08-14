@@ -50,8 +50,8 @@ public class IdManager {
 						"F:\\xmf\\code\\receive\\processmessage.txt");
 				PacketDisplayRunnable.writeText(message.name(),
 						"F:\\xmf\\code\\receive\\processmessage.txt");
-				System.out.println("Failed: " + message.args[0].strValue()
-						+ "---" + message.toString());
+				// System.out.println("Failed: " + message.args[0].strValue()
+				// + "---" + message.toString());
 			}
 
 		}

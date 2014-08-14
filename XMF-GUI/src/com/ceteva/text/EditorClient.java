@@ -37,7 +37,7 @@ public class EditorClient extends Client {
 		String name = message.args[1].strValue();
 		String tooltip = message.args[2].strValue();
 		String url = message.args[3].strValue();
-		showBrowser(identity, name, tooltip, url);
+		showBrowser(identity, name, tooltip, tooltip);
 		return true;
 	}
 
@@ -69,13 +69,21 @@ public class EditorClient extends Client {
 			tabItem.setControl(c);
 
 			Browser browser = new Browser(c, SWT.BORDER);
-			// browser.setUrl(urls);
-			browser.setText(urls);
+			browser.setUrl(urls);
+			// browser.setText(urls);
 			browser.setBounds(Main.tabFolderDiagram.getBounds());
 			browser.setLocation(0, 0);
 			browser.layout(true, true);
 
-			Main.sectionTopLeft.setFocus();
+			Main.tabFolderDiagram.setSelection(tabItem);
+			// Main.tabFolderDiagram.redraw();
+			// Main.tabFolderDiagram.layout(true);
+			// Main.tabFolderDiagram.pack();
+			// Main.tabFolderDiagram.setFocus();
+			// Main.sectionTopMiddle.setFocus();
+			// Main.sectionTopMiddle.redraw();
+			// Main.sectionTopMiddle.pack();
+			// Main.sectionTopMiddle.layout(true);
 		}
 	}
 

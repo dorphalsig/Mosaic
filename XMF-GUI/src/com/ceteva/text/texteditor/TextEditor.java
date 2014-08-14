@@ -228,7 +228,8 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 
 					tabItem.setControl(text);
 
-					Main.sectionTopMiddle.layout(true);
+					// Main.sectionTopMiddle.layout(true);
+					Main.tabFolderDiagram.setSelection(tabItem);
 
 				} catch (IOException io) {
 					System.out.println(io);
