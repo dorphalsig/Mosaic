@@ -106,6 +106,10 @@ public class EditorClient extends Client {
 			// TextPlugin textManager = TextPlugin.getDefault();
 			// IWorkbenchPage page = textManager.getWorkbench()
 			// .getActiveWorkbenchWindow().getActivePage();
+			//
+			String[] s = name.split("/");
+			name = s[s.length - 1];
+
 			TextStorage storage = new TextStorage(identity);
 			TextEditorInput input = new TextEditorInput(storage);
 			if (handler != null) {
@@ -113,12 +117,13 @@ public class EditorClient extends Client {
 				// "com.ceteva.text.TextEditor");
 				TextEditor newEditor = new TextEditor();
 				try {
-					newEditor.init(Main.sectionTopMiddle, input);
+					newEditor.init(Main.sectionTopMiddle, input, name);
 				} catch (PartInitException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				newEditor.setName(name);
+
 				newEditor.setToolTip(tooltip);
 				newEditor.setEditable(editable);
 				newEditor.setEventHandler(handler);

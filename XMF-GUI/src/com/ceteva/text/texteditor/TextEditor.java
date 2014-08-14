@@ -168,22 +168,7 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		// highlightedLineColor = new Color(Display.getDefault(), color);
 	}
 
-	public void init() {
-		// text = new Text(GUIDemo.sectionTopMiddle, SWT.MULTI);
-		identity = "51";
-		model = new TextEditorModel(identity, null, this);
-
-		// // text.setText("var newNode = document.createElement('P'); \r\n"
-		// // +
-		// //
-		// "var text = document.createTextNode('At least when I am around');\r\n"
-		// // + "newNode.appendChild(text);\r\n"
-		// // + "document.getElementById('myid').appendChild(newNode);\r\n"
-		// // + "\r\n" + "document.bgColor='yellow';");
-
-	}
-
-	public void init(Composite paren, IEditorInput iInput)
+	public void init(Composite paren, IEditorInput iInput, String name)
 			throws PartInitException {
 		// super.init(iSite, iInput);
 		// setSite(iSite);
@@ -203,13 +188,14 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 				TextStorage storage = (TextStorage) input.getStorage();
 				BufferedReader d = new BufferedReader(new InputStreamReader(
 						storage.getContents()));
+
 				try {
 					identity = d.readLine();
 					model = new TextEditorModel(identity, null, this);
 
 					CTabItem tabItem = new CTabItem(Main.tabFolderDiagram,
 							SWT.BORDER);
-					tabItem.setText(identity);
+					tabItem.setText(name);
 
 					text = new StyledText(tabItem.getParent(), SWT.BORDER
 							| SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
