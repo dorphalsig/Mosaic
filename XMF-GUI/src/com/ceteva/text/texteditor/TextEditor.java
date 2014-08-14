@@ -27,6 +27,8 @@ import org.eclipse.swt.custom.LineStyleEvent;
 import org.eclipse.swt.custom.LineStyleListener;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.events.VerifyEvent;
+import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.RGB;
@@ -76,11 +78,12 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 	SinglelineScanner scanner;
 	EventHandler handler;
 	Vector highlights = new Vector();
-	public static StyledText text;
+	public StyledText text;
 
 	boolean showNumbers = false;
 	Color currentLineColor = null;
 	Color highlightedLineColor = null;
+	CTabItem tabItem;
 
 	Composite parent;
 
@@ -112,7 +115,7 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		// Action: copy selected text.
 		final Action actionCopy = new Action("&Copy",
 				ImageDescriptor.createFromImage(ImageManager
-						.getImage("icons//State.gif"))) {
+						.getImage("icons/State.gif"))) {
 			public void run() {
 				text.copy();
 			}
@@ -122,7 +125,7 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		if (text != null) {
 			text.addListener(SWT.MouseMove, new Listener() {
 				public void handleEvent(Event e) {
-					System.out.println("mouse double click");
+					// System.out.println("mouse double click");
 					MenuBuilder.resetKeyBindings(null);
 					org.eclipse.jface.action.MenuManager menu = new org.eclipse.jface.action.MenuManager();
 					MenuBuilder.calculateMenu(getIdentity(), menu, null);
@@ -130,6 +133,19 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 
 					menu.add(actionCopy);
 					text.setMenu(menu.createContextMenu(text));
+				}
+			});
+			text.addVerifyListener(new VerifyListener() {
+
+				@Override
+				public void verifyText(VerifyEvent e) {
+
+					// check the input, if user input, thus enable user to save
+					if (e.text.length() > 0
+							&& e.text.length() < text.getText().length()) {
+						tabItem.setImage(ImageManager
+								.getImage("icons/Parser/asterisk.gif"));
+					}
 				}
 			});
 		}
@@ -193,8 +209,7 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 					identity = d.readLine();
 					model = new TextEditorModel(identity, null, this);
 
-					CTabItem tabItem = new CTabItem(Main.tabFolderDiagram,
-							SWT.BORDER);
+					tabItem = new CTabItem(Main.tabFolderDiagram, SWT.BORDER);
 					tabItem.setText(name);
 
 					text = new StyledText(tabItem.getParent(), SWT.BORDER
