@@ -106,10 +106,7 @@ public class EditorClient extends Client {
 			// TextPlugin textManager = TextPlugin.getDefault();
 			// IWorkbenchPage page = textManager.getWorkbench()
 			// .getActiveWorkbenchWindow().getActivePage();
-			//
-			String[] s = name.split("/");
-			name = s[s.length - 1];
-
+			// //
 			TextStorage storage = new TextStorage(identity);
 			TextEditorInput input = new TextEditorInput(storage);
 			if (handler != null) {
