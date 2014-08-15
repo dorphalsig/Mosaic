@@ -23,6 +23,7 @@ public class IconManager {
 	}
 
 	public static ImageDescriptor getImageDescriptorAbsolute(String filename) {
+
 		return ImageDescriptor.createFromFile(null, filename);
 	}
 

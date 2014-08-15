@@ -26,12 +26,12 @@ public class LockForm extends Action {
 				setText("Unlock Form");
 				setToolTipText("Form is currently locked. Click to unlock.");
 				setImageDescriptor(IconManager
-						.getImageDescriptorAbsolute("Locked.gif"));
+						.getImageDescriptorAbsolute("icons/Locked.gif"));
 			} else {
 				setText("Lock Form");
 				setToolTipText("Form is currently unlocked. Click to lock.");
 				setImageDescriptor(IconManager
-						.getImageDescriptorAbsolute("Unlocked.gif"));
+						.getImageDescriptorAbsolute("icons/Unlocked.gif"));
 			}
 			this.setEnabled(true);
 		} else

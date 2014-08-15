@@ -19,7 +19,7 @@ public class NextInHistory extends Action {
 		setText("Next in History");
 		setToolTipText("Selects the next form in the history");
 		setImageDescriptor(uk.ac.mdx.xmf.swt.client.IconManager
-				.getImageDescriptorAbsolute("Forward.gif"));
+				.getImageDescriptorAbsolute("icons/Forward.gif"));
 		this.form = form;
 		this.enabled = enabled;
 		update();
@@ -36,7 +36,8 @@ public class NextInHistory extends Action {
 	}
 
 	public void update() {
-		String icon = enabled ? "Forward.gif" : "ForwardDisabled.gif";
+		String icon = enabled ? "icons/Forward.gif"
+				: "icons/ForwardDisabled.gif";
 		setImageDescriptor(IconManager.getImageDescriptorAbsolute(icon));
 	}
 

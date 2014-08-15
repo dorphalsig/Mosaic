@@ -83,7 +83,7 @@ public class ModelFactory {
 		} catch (NullPointerException ex) {
 			// System.out.println(ex);
 		}
-		System.out.println("font:" + font);
+		// System.out.println("font:" + font);
 		return new Text(parent, handler, identity, x, y, text, editable,
 				underline, italicise, getColor(red, green, blue), font);
 	}

@@ -4,7 +4,9 @@ import java.util.EventListener;
 import java.util.Iterator;
 import java.util.Vector;
 
+import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabItem;
@@ -12,8 +14,10 @@ import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.ControlListener;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.ui.IWorkbenchPartReference;
 
 import uk.ac.mdx.xmf.swt.client.EventHandler;
@@ -22,14 +26,21 @@ import XOS.Message;
 import XOS.Value;
 
 import com.ceteva.forms.XMLBindings;
+import com.ceteva.forms.actions.BrowseHistory;
+import com.ceteva.forms.actions.ClearHistory;
 import com.ceteva.forms.actions.LockForm;
+import com.ceteva.forms.actions.NextInHistory;
+import com.ceteva.forms.actions.PreviousInHistory;
 import com.ceteva.menus.MenuBuilder;
 import com.ceteva.menus.MenuListener;
 import com.ceteva.menus.MenuManager;
 
 public class FormView implements MenuListener {
 
+	Composite composite;
+
 	public FormView(Composite parent, int style, CTabItem tabItemProperty) {
+		composite = parent;
 		_tabItemProperty = tabItemProperty;
 	}
 
@@ -88,13 +99,21 @@ public class FormView implements MenuListener {
 		scrollable = new ScrolledComposite(c1, SWT.H_SCROLL | SWT.V_SCROLL);
 		scrollable.setAlwaysShowScrollBars(false);
 		scrollable.setBounds(c1.getBounds());
-		// scrollable.layout(true);
 		_tabItemProperty.setControl(c1);
+
+		ToolBar toolBar = new ToolBar(composite, SWT.NONE);
+		toolBar.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+		// ToolItem item = new ToolItem(toolBar, SWT.PUSH | SWT.CENTER);
+		// item.setImage(new Image(Main.getInstance().display,
+		// "icons/user/Arrow2Left.gif"));
+		toolBarManager = new ToolBarManager(toolBar);
+
+		double ratio = 0.8;
+		toolBar.setLocation((int) (composite.getSize().x * ratio), 2);
+		toolBar.pack(); // show the tool bar
 
 		parent.setVisible(true);
 		parent.setFocus();
-		// GUIDemo.getInstance().shell.setMaximized(false);// refresh layout
-		// GUIDemo.getInstance().shell.setMaximized(true);
 
 		init();
 		registerAsListener();
@@ -110,66 +129,61 @@ public class FormView implements MenuListener {
 	}
 
 	private void setLockTool(boolean isLocked) {
-		// if (toolBarManager.find("com.ceteva.forms.actions.LockForm") == null)
-		// {
-		// lockAction = new LockForm(this);
-		// toolBarManager.add(lockAction);
-		// toolBarManager.update(false);
-		// this.setLocked(isLocked);
-		// } else {
-		// ActionContributionItem aci = (ActionContributionItem) toolBarManager
-		// .find("com.ceteva.forms.actions.LockForm");
-		// LockForm lockForm = (LockForm) aci.getAction();
-		// this.setLocked(isLocked);
-		// lockForm.update();
-		// }
+		if (toolBarManager.find("com.ceteva.forms.actions.LockForm") == null) {
+			lockAction = new LockForm(this);
+			toolBarManager.add(lockAction);
+			toolBarManager.update(false);
+			this.setLocked(isLocked);
+		} else {
+			ActionContributionItem aci = (ActionContributionItem) toolBarManager
+					.find("com.ceteva.forms.actions.LockForm");
+			LockForm lockForm = (LockForm) aci.getAction();
+			this.setLocked(isLocked);
+			lockForm.update();
+		}
 	}
 
 	private void setHistoryTools() {
-		// if (toolBarManager.find("com.ceteva.forms.actions.ClearHistory") ==
-		// null) {
-		// ClearHistory clearHistory = new ClearHistory(this);
-		// toolBarManager.add(clearHistory);
-		// toolBarManager.update(false);
-		// }
-		// if (toolBarManager.find("com.ceteva.forms.actions.BrowseHistory") ==
-		// null) {
-		// BrowseHistory browseHistory = new BrowseHistory(this);
-		// toolBarManager.add(browseHistory);
-		// toolBarManager.update(false);
-		// }
+		if (toolBarManager.find("com.ceteva.forms.actions.ClearHistory") == null) {
+			ClearHistory clearHistory = new ClearHistory(this);
+			toolBarManager.add(clearHistory);
+			toolBarManager.update(false);
+		}
+		if (toolBarManager.find("com.ceteva.forms.actions.BrowseHistory") == null) {
+			BrowseHistory browseHistory = new BrowseHistory(this);
+			toolBarManager.add(browseHistory);
+			toolBarManager.update(false);
+		}
 	}
 
 	private void setNextInHistoryTool(boolean enabled) {
-		// if (toolBarManager.find("com.ceteva.forms.actions.NextInHistory") ==
-		// null) {
-		// NextInHistory nextInHistory = new NextInHistory(this, enabled);
-		// toolBarManager.add(nextInHistory);
-		// toolBarManager.update(false);
-		// } else {
-		// ActionContributionItem aci = (ActionContributionItem) toolBarManager
-		// .find("com.ceteva.forms.actions.NextInHistory");
-		// NextInHistory nextInHistory = (NextInHistory) aci.getAction();
-		// nextInHistory.enabled = enabled;
-		// nextInHistory.update();
-		// }
+		if (toolBarManager.find("com.ceteva.forms.actions.NextInHistory") == null) {
+			NextInHistory nextInHistory = new NextInHistory(this, enabled);
+			toolBarManager.add(nextInHistory);
+			toolBarManager.update(false);
+		} else {
+			ActionContributionItem aci = (ActionContributionItem) toolBarManager
+					.find("com.ceteva.forms.actions.NextInHistory");
+			NextInHistory nextInHistory = (NextInHistory) aci.getAction();
+			nextInHistory.enabled = enabled;
+			nextInHistory.update();
+		}
 	}
 
 	private void setPreviousInHistoryTool(boolean enabled) {
-		// if (toolBarManager.find("com.ceteva.forms.actions.PreviousInHistory")
-		// == null) {
-		// PreviousInHistory previousInHistory = new PreviousInHistory(this,
-		// enabled);
-		// toolBarManager.add(previousInHistory);
-		// toolBarManager.update(false);
-		// } else {
-		// ActionContributionItem aci = (ActionContributionItem) toolBarManager
-		// .find("com.ceteva.forms.actions.PreviousInHistory");
-		// PreviousInHistory previousInHistory = (PreviousInHistory) aci
-		// .getAction();
-		// previousInHistory.enabled = enabled;
-		// previousInHistory.update();
-		// }
+		if (toolBarManager.find("com.ceteva.forms.actions.PreviousInHistory") == null) {
+			PreviousInHistory previousInHistory = new PreviousInHistory(this,
+					enabled);
+			toolBarManager.add(previousInHistory);
+			toolBarManager.update(false);
+		} else {
+			ActionContributionItem aci = (ActionContributionItem) toolBarManager
+					.find("com.ceteva.forms.actions.PreviousInHistory");
+			PreviousInHistory previousInHistory = (PreviousInHistory) aci
+					.getAction();
+			previousInHistory.enabled = enabled;
+			previousInHistory.update();
+		}
 	}
 
 	private void removeCanvasEventListeners() {
@@ -556,6 +570,9 @@ public class FormView implements MenuListener {
 		box.setBounds(x, y, width, height);
 		box.setEditable(editable);
 		box.setText(text);
+
+		String title = ((FormTextBox) textBoxes.get(0)).getText();
+		_tabItemProperty.setText(title);
 		return box;
 	}
 

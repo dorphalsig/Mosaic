@@ -18,7 +18,7 @@ public class BrowseHistory extends Action {
 		setText("Browse History");
 		setToolTipText("Select a form from the history");
 		setImageDescriptor(IconManager
-				.getImageDescriptorAbsolute("History.gif"));
+				.getImageDescriptorAbsolute("icons/History.gif"));
 		this.form = form;
 	}
 

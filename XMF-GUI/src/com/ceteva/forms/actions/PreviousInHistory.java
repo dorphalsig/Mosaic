@@ -18,7 +18,8 @@ public class PreviousInHistory extends Action {
 		setId("com.ceteva.forms.actions.PreviousInHistory");
 		setText("Previous in History");
 		setToolTipText("Selects the previous form in the history");
-		setImageDescriptor(IconManager.getImageDescriptorAbsolute("Back.gif"));
+		setImageDescriptor(IconManager
+				.getImageDescriptorAbsolute("icons/Back.gif"));
 		this.form = form;
 		this.enabled = enabled;
 		update();
@@ -35,7 +36,7 @@ public class PreviousInHistory extends Action {
 	}
 
 	public void update() {
-		String icon = enabled ? "Back.gif" : "BackDisabled.gif";
+		String icon = enabled ? "icons/Back.gif" : "icons/BackDisabled.gif";
 		setImageDescriptor(IconManager.getImageDescriptorAbsolute(icon));
 	}
 }

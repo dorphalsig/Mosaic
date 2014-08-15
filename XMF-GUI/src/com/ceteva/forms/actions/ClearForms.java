@@ -13,7 +13,8 @@ public class ClearForms extends Action {
 		setId("com.ceteva.forms.actions.ClearForms");
 		setText("Clear Forms");
 		setToolTipText("Clear all open forms");
-		setImageDescriptor(IconManager.getImageDescriptorAbsolute("Clear.gif"));
+		setImageDescriptor(IconManager
+				.getImageDescriptorAbsolute("icons/Clear.gif"));
 		this.forms = forms;
 	}
 

@@ -17,7 +17,8 @@ public class ClearHistory extends Action {
 		setId("com.ceteva.forms.actions.ClearHistory");
 		setText("Clear History");
 		setToolTipText("Clear the history");
-		setImageDescriptor(IconManager.getImageDescriptorAbsolute("Clear.gif"));
+		setImageDescriptor(IconManager
+				.getImageDescriptorAbsolute("icons/Clear.gif"));
 		this.form = form;
 	}
 

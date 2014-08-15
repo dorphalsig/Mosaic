@@ -76,14 +76,6 @@ public class EditorClient extends Client {
 			browser.layout(true, true);
 
 			Main.tabFolderDiagram.setSelection(tabItem);
-			// Main.tabFolderDiagram.redraw();
-			// Main.tabFolderDiagram.layout(true);
-			// Main.tabFolderDiagram.pack();
-			// Main.tabFolderDiagram.setFocus();
-			// Main.sectionTopMiddle.setFocus();
-			// Main.sectionTopMiddle.redraw();
-			// Main.sectionTopMiddle.pack();
-			// Main.sectionTopMiddle.layout(true);
 		}
 	}
 
