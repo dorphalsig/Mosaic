@@ -21,6 +21,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchPartSite;
 
 import uk.ac.mdx.xmf.swt.client.EventHandler;
+import uk.ac.mdx.xmf.swt.demo.Main;
 import uk.ac.mdx.xmf.swt.misc.ColorManager;
 import XOS.Message;
 import XOS.Value;
@@ -80,6 +81,8 @@ class FormTextField extends FormElement implements MenuListener,
 	public void setText(String textString) {
 		text.setText(textString);
 		text.setToolTipText(textString);
+		Main.getInstance().tabFolderProperty.getSelection().setText(
+				"Property:" + textString);
 		changesMade(false);
 	}
 

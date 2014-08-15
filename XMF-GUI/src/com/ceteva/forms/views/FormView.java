@@ -464,6 +464,7 @@ public class FormView implements MenuListener {
 		}
 		FormTextField textField = newTextField(identity, text, x, y, width,
 				height, editable);
+
 		return addComponent(textField);
 	}
 
@@ -572,7 +573,7 @@ public class FormView implements MenuListener {
 		box.setText(text);
 
 		String title = ((FormTextBox) textBoxes.get(0)).getText();
-		_tabItemProperty.setText(title);
+
 		return box;
 	}
 
