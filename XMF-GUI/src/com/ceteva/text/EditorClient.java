@@ -94,7 +94,7 @@ public class EditorClient extends Client {
 		browser.layout(true, true);
 
 		Main.sectionTopLeft.setFocus();
-
+		Main.sectionTopMiddle.setFocus();
 	}
 
 	public boolean newTextEditor(Message message) {

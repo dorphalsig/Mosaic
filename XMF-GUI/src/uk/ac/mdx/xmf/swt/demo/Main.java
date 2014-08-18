@@ -20,13 +20,11 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 
 import uk.ac.mdx.xmf.swt.DiagramClient;
 import uk.ac.mdx.xmf.swt.DiagramView;
-import uk.ac.mdx.xmf.swt.OutlineView;
 import uk.ac.mdx.xmf.swt.Overview;
 import uk.ac.mdx.xmf.swt.Palette;
 import uk.ac.mdx.xmf.swt.io.Provider;
@@ -72,7 +70,6 @@ public class Main {
 	public static DiagramView view = null;
 	public static Palette palette = null;
 	public static Overview overview = null;
-	public static OutlineView outlineView;
 	public static ConsoleView consoleView;
 	public static FormView propertyView;
 	private int screenWidth, screenHeight;
@@ -100,6 +97,7 @@ public class Main {
 	 * This method initializes shell
 	 */
 
+	@SuppressWarnings("deprecation")
 	private void createshell() {
 		shell = new Shell(SWT.BORDER | SWT.SHELL_TRIM);
 		shell.setText("XModeler-New GUI");
@@ -128,8 +126,21 @@ public class Main {
 		sectionBottomRight = new SashForm(sectionBottom, SWT.HORIZONTAL);
 		sectionBottom.setWeights(new int[] { 20, 40, 40 }); // ini size of
 
-		// create outline
-		outlineView = new OutlineView(sectionTopLeft, SWT.BORDER);
+		// Create the outline tabs
+		tabFolderOutline = new CTabFolder(sectionTopLeft, SWT.BORDER);
+		tabFolderOutline.setBorderVisible(true);
+		tabFolderOutline.addCTabFolderListener(new CTabFolderAdapter() {
+			public void itemClosed(CTabFolderEvent event) {
+			}
+		});
+
+		// Create the diagram tabs
+		tabFolderDiagram = new CTabFolder(sectionTopMiddle, SWT.BORDER);
+		tabFolderDiagram.setBorderVisible(true);
+		tabFolderDiagram.addCTabFolderListener(new CTabFolderAdapter() {
+			public void itemClosed(CTabFolderEvent event) {
+			}
+		});
 
 		// create overview
 		tabFolderOverview = new CTabFolder(sectionBottomLeft, SWT.BORDER);
@@ -299,24 +310,6 @@ public class Main {
 		OleBridgeClient oldBridgeClient = new OleBridgeClient();
 		XOS.newMessageClient("com.ceteva.oleBridge", oldBridgeClient);
 
-		// Create the tabs
-		tabFolderDiagram = new CTabFolder(sectionTopMiddle, SWT.BORDER);
-		tabFolderDiagram.setBorderVisible(true);
-		tabFolderDiagram.addCTabFolderListener(new CTabFolderAdapter() {
-			public void itemClosed(CTabFolderEvent event) {
-			}
-		});
-		// Set up a gradient background for the selected tab
-		// tabFolder
-		// .setSelectionBackground(
-		// new Color[] {
-		// display.getSystemColor(SWT.COLOR_WIDGET_DARK_SHADOW),
-		// display.getSystemColor(SWT.COLOR_WIDGET_NORMAL_SHADOW),
-		// display.getSystemColor(SWT.COLOR_WIDGET_LIGHT_SHADOW) },
-		// new int[] { 50, 100 });
-
-		// Add a listener to get the close button on each tab
-
 		mb = new MenuManager();
 		// Add menus.
 		// initialize root menu
@@ -339,8 +332,6 @@ public class Main {
 		final ToolBar treeToolBar = new ToolBar(sectionToolBar, SWT.NONE);
 		treeToolBar
 				.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
-
-		final Text filterText = new Text(treeToolBar, SWT.BORDER);
 
 		final ToolItem item1 = new ToolItem(treeToolBar, SWT.PUSH | SWT.CENTER);
 		item1.setImage(new Image(display, "icons/Tools/box.gif"));
@@ -445,10 +436,9 @@ public class Main {
 
 	public static void iniSplash() {
 		XmfPlugin xmfplugin = new XmfPlugin();
-		Hashtable imagechoices = xmfplugin.getImages();
+		Hashtable<?, ?> imagechoices = xmfplugin.getImages();
 		Splash splash = new Splash("icons" + "/splash/splash.bmp", imagechoices);
 		splash.show();
-		String choosenimage = splash.choosenImage();
 	}
 
 	// XmfStartup
@@ -461,18 +451,15 @@ public class Main {
 
 		Main.getInstance().createshell();
 
-		// ----register id "5" within idManager)
-		HTMLViewerModel model;
 		String identity = "5";
-		model = new HTMLViewerModel(identity, null);
-		// ----end
+		new HTMLViewerModel(identity, null);
 
-		Main.getInstance().shell.open();
-		while (!Main.getInstance().shell.isDisposed()) {
+		Main.getInstance();
+		Main.shell.open();
+		while (!Main.shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
-			// test commit test
 		}
 		display.dispose();
 		System.exit(0); // exit successful

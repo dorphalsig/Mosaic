@@ -955,19 +955,11 @@ public class DiagramView extends View {
 		canvas.redraw();
 
 		rootFigure.add(figure);
-		// figure.repaint();
-
 		canvas.setContents(rootFigure);
 		rootFigure.repaint();
 
-		// canvas.redraw();
-		// canvas.update();
-		// canvas.layout(true);
-		// canvas.pack();
-		// parent.layout(true);
-
-		Main.getInstance().tabFolderDiagram.layout(true);
-		Main.getInstance().outlineView.layout(true);
+		Main.getInstance();
+		Main.tabFolderDiagram.layout(true);
 
 		// canvas.pack();
 		// canvas.layout(true);

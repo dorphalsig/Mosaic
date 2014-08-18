@@ -3,6 +3,10 @@ package com.ceteva.modelBrowser;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CTabItem;
+import org.eclipse.swt.widgets.Canvas;
+
 import uk.ac.mdx.xmf.swt.client.EventHandler;
 import uk.ac.mdx.xmf.swt.client.XMLClient;
 import uk.ac.mdx.xmf.swt.client.xml.Document;
@@ -60,19 +64,13 @@ public class ModelBrowserClient extends XMLClient {
 			String name, boolean closable, boolean hasFocus) {
 		String id = type + ID_DIV + identity;
 
-		// ModelBrowserView browser =
-		//
-		// (ModelBrowserView)getPage().showView(ModelBrowserView.modelBrowserView,id,IWorkbenchPage.VIEW_CREATE);
-		//
-		// ModelBrowserView browser = (ModelBrowserView) getPage().showView(
-		// ModelBrowserView.ID, id, IWorkbenchPage.VIEW_ACTIVATE);
+		CTabItem tabItem = new CTabItem(Main.tabFolderOutline, SWT.BORDER);
+		tabItem.setText(name);
+		Canvas c = new Canvas(Main.tabFolderOutline, SWT.BORDER);
+		tabItem.setControl(c);
 
 		ModelBrowserView browser = new ModelBrowserView();
-		Main.outlineView.setSize(
-				(int) (Main.sectionTopLeft.getBounds().width),
-				Main.sectionTopLeft.getBounds().height);
-		browser.createPartControl(Main.outlineView);
-		Main.getInstance().outlineView.layout(true);// refresh layout
+		browser.createPartControl(c);
 		System.err.println("Modelbrowser added with id: "
 				+ browser.getIdentity() + " id:" + id);
 		browser.setName(name);
@@ -84,6 +82,9 @@ public class ModelBrowserClient extends XMLClient {
 		// if(closable) // Not sure what needs to be done here
 		if (hasFocus)
 			browser.focusGained();
+
+		Main.tabFolderOutline.setSelection(tabItem);
+		Main.sectionTopLeft.setFocus();
 		return browser;
 	}
 
