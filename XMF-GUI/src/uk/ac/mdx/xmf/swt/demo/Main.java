@@ -10,7 +10,6 @@ import org.eclipse.swt.custom.CTabFolderAdapter;
 import org.eclipse.swt.custom.CTabFolderEvent;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.SashForm;
-import org.eclipse.swt.custom.ViewForm;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
@@ -140,9 +139,13 @@ public class Main {
 				sectionBottom.setWeights(new int[] { 0, 50, 50 });
 			}
 		});
-		CTabItem tabItemOverview = new CTabItem(tabFolderOverview, SWT.BORDER);
-		tabItemOverview.setText("Overview");
-		overview = new Overview(tabFolderOverview, SWT.BORDER, tabItemOverview);
+		// dynamic show the contents of overview after the discussion with users
+
+		// CTabItem tabItemOverview = new CTabItem(tabFolderOverview,
+		// SWT.BORDER);
+		// tabItemOverview.setText("");
+		// overview = new Overview(tabFolderOverview, SWT.BORDER,
+		// tabItemOverview);
 
 		// create propertyView
 		// Create the tabs
@@ -388,57 +391,57 @@ public class Main {
 		return null;
 	}
 
-	public void createExampleShell() {
-		shell = new Shell(SWT.BORDER | SWT.SHELL_TRIM);
-		shell.setText("SWT GUI");
-		// shell.setLayout(new FillLayout());
-
-		shell.setLocation(0, 0);
-		screenWidth = DisplayHelper.getScreenWidth();
-		screenHeight = DisplayHelper.getScreenHeight();
-		shell.setSize(new org.eclipse.swt.graphics.Point(screenWidth,
-				screenHeight));
-
-		double barRatio = 0.03;
-		double topRatio = 0.7;
-		double bottomRatio = 0.27;
-		double leftRatio = 0.2;
-
-		ViewForm toolBar = new ViewForm(shell, SWT.BORDER);
-
-		ViewForm outlineView = new ViewForm(shell, SWT.BORDER);
-		ViewForm diagramView = new ViewForm(shell, SWT.BORDER);
-		ViewForm overView = new ViewForm(shell, SWT.BORDER);
-		ViewForm editorView = new ViewForm(shell, SWT.BORDER);
-
-		toolBar.setBounds(0, 0, screenWidth, (int) (screenHeight * barRatio));
-		outlineView.setBounds(0, (int) (screenHeight * barRatio),
-				(int) (screenWidth * leftRatio),
-				(int) (screenHeight * topRatio));
-		diagramView.setBounds((int) (screenHeight * barRatio) + 1,
-				(int) (screenHeight * barRatio),
-				(int) (screenWidth * (1 - leftRatio)),
-				(int) (screenHeight * topRatio));
-
-		overView.setBounds(0, (int) (screenHeight * (barRatio + topRatio)),
-				(int) (screenWidth * leftRatio),
-				(int) (screenHeight * bottomRatio));
-
-		final TabFolder tabFolder = new TabFolder(outlineView, SWT.BORDER);
-		for (int i = 0; i < 2; i++) {
-			// ViewForm viewForm=new ViewForm(tabFolder,SWT.NORMAL);
-			TabItem item = new TabItem(tabFolder, SWT.NONE);
-			item.setText("TabItem " + i);
-
-			SashForm sashForm = new SashForm(tabFolder, SWT.NORMAL);
-			sashForm.setBounds(0, (int) (screenHeight * barRatio),
-					(int) (screenWidth * leftRatio),
-					(int) (screenHeight * topRatio));
-			item.setControl(sashForm);
-
-		}
-		tabFolder.pack();
-	}
+	// public void createExampleShell() {
+	// shell = new Shell(SWT.BORDER | SWT.SHELL_TRIM);
+	// shell.setText("SWT GUI");
+	// // shell.setLayout(new FillLayout());
+	//
+	// shell.setLocation(0, 0);
+	// screenWidth = DisplayHelper.getScreenWidth();
+	// screenHeight = DisplayHelper.getScreenHeight();
+	// shell.setSize(new org.eclipse.swt.graphics.Point(screenWidth,
+	// screenHeight));
+	//
+	// double barRatio = 0.03;
+	// double topRatio = 0.7;
+	// double bottomRatio = 0.27;
+	// double leftRatio = 0.2;
+	//
+	// ViewForm toolBar = new ViewForm(shell, SWT.BORDER);
+	//
+	// ViewForm outlineView = new ViewForm(shell, SWT.BORDER);
+	// ViewForm diagramView = new ViewForm(shell, SWT.BORDER);
+	// ViewForm overView = new ViewForm(shell, SWT.BORDER);
+	// ViewForm editorView = new ViewForm(shell, SWT.BORDER);
+	//
+	// toolBar.setBounds(0, 0, screenWidth, (int) (screenHeight * barRatio));
+	// outlineView.setBounds(0, (int) (screenHeight * barRatio),
+	// (int) (screenWidth * leftRatio),
+	// (int) (screenHeight * topRatio));
+	// diagramView.setBounds((int) (screenHeight * barRatio) + 1,
+	// (int) (screenHeight * barRatio),
+	// (int) (screenWidth * (1 - leftRatio)),
+	// (int) (screenHeight * topRatio));
+	//
+	// overView.setBounds(0, (int) (screenHeight * (barRatio + topRatio)),
+	// (int) (screenWidth * leftRatio),
+	// (int) (screenHeight * bottomRatio));
+	//
+	// final TabFolder tabFolder = new TabFolder(outlineView, SWT.BORDER);
+	// for (int i = 0; i < 2; i++) {
+	// // ViewForm viewForm=new ViewForm(tabFolder,SWT.NORMAL);
+	// TabItem item = new TabItem(tabFolder, SWT.NONE);
+	// item.setText("TabItem " + i);
+	//
+	// SashForm sashForm = new SashForm(tabFolder, SWT.NORMAL);
+	// sashForm.setBounds(0, (int) (screenHeight * barRatio),
+	// (int) (screenWidth * leftRatio),
+	// (int) (screenHeight * topRatio));
+	// item.setControl(sashForm);
+	//
+	// }
+	// tabFolder.pack();
+	// }
 
 	public static void iniSplash() {
 		XmfPlugin xmfplugin = new XmfPlugin();
