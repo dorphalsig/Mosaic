@@ -61,7 +61,8 @@ class Graph {
 		parent.setRender(true);
 		render(true);
 
-		if (!Main.getInstance().getView().getPallete().getInitial()) {
+		// if (!Main.getInstance().getView().getPallete().getInitial())
+		{
 			Main.getInstance().getView().getPallete().createPartControl();
 		}
 		if (parent.isRendering()) {

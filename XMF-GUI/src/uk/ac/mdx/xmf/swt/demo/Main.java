@@ -77,12 +77,10 @@ public class Main {
 	public static Provider provider;
 	public static boolean antialias = true;
 
-	public static ModelBrowserClient modelBrowserClient;
-	public static MenusClient menusClient;
-	public static DiagramClient diagramClient;
 	public static boolean isOpen = true;
 
 	public static Vector<DiagramView> views = new Vector<DiagramView>();
+	private DiagramClient diagramClient;
 
 	private volatile static Main instance = null;
 
@@ -100,7 +98,7 @@ public class Main {
 	@SuppressWarnings("deprecation")
 	private void createshell() {
 		shell = new Shell(SWT.BORDER | SWT.SHELL_TRIM);
-		shell.setText("XModeler-New GUI");
+		shell.setText("GUI-XMF1");
 		shell.setLayout(new FillLayout());
 
 		shell.setLocation(0, 0);
@@ -227,7 +225,7 @@ public class Main {
 		};
 		tWorkbenchClient.start();
 
-		menusClient = new MenusClient();
+		final MenusClient menusClient = new MenusClient();
 
 		Thread tmenusClient = new Thread() {
 			@Override
@@ -243,9 +241,7 @@ public class Main {
 		};
 		tmenusClient.start();
 
-		diagramClient = new DiagramClient();
-
-		modelBrowserClient = new ModelBrowserClient();
+		final ModelBrowserClient modelBrowserClient = new ModelBrowserClient();
 		Thread tmodelBrowserClient = new Thread() {
 			@Override
 			public void run() {
@@ -261,6 +257,7 @@ public class Main {
 		};
 		tmodelBrowserClient.start();
 
+		diagramClient = new DiagramClient();
 		Thread tdiagramClient = new Thread() {
 			@Override
 			public void run() {
@@ -304,11 +301,35 @@ public class Main {
 		};
 		tformsClient.start();
 
-		UndoClient undoClient = new UndoClient();
-		XOS.newMessageClient("com.ceteva.undo", undoClient);
+		final UndoClient undoClient = new UndoClient();
+		Thread tundoClient = new Thread() {
+			@Override
+			public void run() {
+				try {
+					XOS.newMessageClient("com.ceteva.undo", undoClient);
+				} catch (Throwable t) {
+					System.out.println(t);
+					t.printStackTrace();
+				}
+			}
+		};
+		tundoClient.start();
 
-		OleBridgeClient oldBridgeClient = new OleBridgeClient();
-		XOS.newMessageClient("com.ceteva.oleBridge", oldBridgeClient);
+		final OleBridgeClient oldBridgeClient = new OleBridgeClient();
+
+		Thread toldBridgeClient = new Thread() {
+			@Override
+			public void run() {
+				try {
+					XOS.newMessageClient("com.ceteva.oleBridge",
+							oldBridgeClient);
+				} catch (Throwable t) {
+					System.out.println(t);
+					t.printStackTrace();
+				}
+			}
+		};
+		toldBridgeClient.start();
 
 		mb = new MenuManager();
 		// Add menus.
@@ -353,9 +374,9 @@ public class Main {
 
 	}
 
-	public static void startNewDiagram(String identity,
+	public void startNewDiagram(String identity,
 			uk.ac.mdx.xmf.swt.model.Diagram diagram) {
-		palette = Palette.getInstance(sectionTopRight, SWT.BORDER, display);
+		palette = new Palette(sectionTopRight, SWT.BORDER, display);
 
 		CTabItem tabItem = new CTabItem(tabFolderDiagram, SWT.BORDER);
 		tabItem.setText(diagram.getName());

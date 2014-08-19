@@ -689,16 +689,31 @@ public final class OperatingSystem implements EventHandler {
 
 	private String[] getIni() {
 		ArrayList<String> ini = new ArrayList<String>();
-		try (BufferedReader br = new BufferedReader(new FileReader("ini.txt"))) {
+		File file = new File("ini.txt");
 
-			String sCurrentLine;
+		StringBuilder contents = new StringBuilder();
+		BufferedReader reader = null;
 
-			while ((sCurrentLine = br.readLine()) != null) {
-				ini.add(sCurrentLine);
+		try {
+			reader = new BufferedReader(new FileReader(file));
+			String text = null;
+
+			// repeat until all lines is read
+			while ((text = reader.readLine()) != null) {
+				contents.append(text).append(
+						System.getProperty("line.separator"));
+				ini.add(text);
 			}
-
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (reader != null) {
+					reader.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 		String[] values = new String[ini.size()];
@@ -1092,7 +1107,7 @@ public final class OperatingSystem implements EventHandler {
 
 		try {
 			File file = new java.io.File(fileName);
-			if (file.exists()) {   
+			if (file.exists()) {
 				InputStream in = new FileInputStream(file);
 				XChannel bin = new XChannel(in, true);
 				return newInputChannel(bin);

@@ -41,17 +41,17 @@ public class Palette extends View {
 	private Color colorSection;
 
 	// uk.ac.mdx.xmf.swt.model.AbstractDiagram diagram;
-	private volatile static Palette instance = null;
+	// private volatile static Palette instance = null;
 
-	public static Palette getInstance(Composite parent, int style,
-			Display display) {
-		if (instance == null) {
-
-			instance = new Palette(parent, style, display);
-
-		}
-		return instance;
-	}
+	// public static Palette getInstance(Composite parent, int style,
+	// Display display) {
+	// if (instance == null) {
+	//
+	// instance = new Palette(parent, style, display);
+	//
+	// }
+	// return instance;
+	// }
 
 	public Palette(Composite parent, int style, Display display) {
 		super(parent, style);
