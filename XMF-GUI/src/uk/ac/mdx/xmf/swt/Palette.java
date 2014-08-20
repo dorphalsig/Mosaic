@@ -3,6 +3,7 @@ package uk.ac.mdx.xmf.swt;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
@@ -18,10 +19,10 @@ import org.eclipse.swt.widgets.Listener;
 
 import uk.ac.mdx.xmf.swt.demo.Main;
 
-public class Palette extends View {
+public class Palette {
 	Composite parent;
 	private String imageName = "";
-	static ArrayList<String> tools = new ArrayList<String>();
+	ArrayList<String> tools = new ArrayList<String>();
 	Point point = null;
 	Point toolSize = new Point(30, 5);
 	Display display;
@@ -31,6 +32,7 @@ public class Palette extends View {
 
 	private String transferClass = "";
 	Canvas canvas;
+	private boolean isFocus = false;
 	private boolean isInitial = false;
 
 	private Image[] images;
@@ -39,6 +41,7 @@ public class Palette extends View {
 	private Color colorSelect;
 	private Color color;
 	private Color colorSection;
+	Vector<Palette> _palettes = new Vector<Palette>();
 
 	// uk.ac.mdx.xmf.swt.model.AbstractDiagram diagram;
 	// private volatile static Palette instance = null;
@@ -54,10 +57,8 @@ public class Palette extends View {
 	// }
 
 	public Palette(Composite parent, int style, Display display) {
-		super(parent, style);
 		this.parent = parent;
 		this.display = display;
-		this.setVisible(false);
 
 		addDrawer("Palette");
 		addEntry("Palette", "Select", null, false, null);
@@ -89,7 +90,7 @@ public class Palette extends View {
 	}
 
 	public void setInitial(boolean initial) {
-		isInitial = initial;
+		isFocus = initial;
 	}
 
 	public boolean getInitial() {
@@ -99,8 +100,10 @@ public class Palette extends View {
 	public void createPartControl() {
 
 		canvas = new Canvas(parent, SWT.BORDER);
-		canvas.setSize((int) (parent.getBounds().width),
+		canvas.setBounds((int) (parent.getBounds().width * 0.8), 0,
+				(int) (parent.getBounds().width * 0.2),
 				parent.getBounds().height);
+		canvas.setBackground(ColorConstants.white);
 
 		final int size = tools.size() / 2;
 		int gap = 10;
@@ -203,7 +206,6 @@ public class Palette extends View {
 
 						@Override
 						public void mouseDoubleClick(MouseEvent arg0) {
-							// TODO Auto-generated method stub
 
 						}
 
@@ -247,9 +249,18 @@ public class Palette extends View {
 					});
 
 					count++;
+
 				}
 			}
 		}
+
+		Main.tabFolderDiagram.pack();
+		Main.tabFolderDiagram.layout();
+		Main.tabFolderDiagram.layout(true);
+		Main.tabFolderDiagram.redraw();
+
+		// Main.sectionTopMiddle.pack();
+		Main.sectionTopMiddle.layout(true);
 
 		isInitial = true; // make use this function only run once
 	}
@@ -257,6 +268,26 @@ public class Palette extends View {
 	public String getSelectImage() {
 
 		return imageName;
+	}
+
+	public boolean isFocus() {
+		return isFocus;
+	}
+
+	public void setFocus(boolean focus, Vector<Palette> palettes) {
+		_palettes = palettes;
+		setAllFocus();
+		isFocus = focus;
+	}
+
+	public void setAllFocus() {
+		for (Palette palettes : _palettes) {
+			palettes.setFocus(false);
+		}
+	}
+
+	public void setFocus(boolean focus) {
+		isFocus = focus;
 	}
 
 	public void setSelectImage() {

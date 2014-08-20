@@ -3,6 +3,7 @@ package uk.ac.mdx.xmf.swt.demo;
 import java.util.Hashtable;
 import java.util.Vector;
 
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
@@ -10,6 +11,7 @@ import org.eclipse.swt.custom.CTabFolderAdapter;
 import org.eclipse.swt.custom.CTabFolderEvent;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
@@ -55,7 +57,6 @@ public class Main {
 	public static SashForm sectionTop = null;
 	public static SashForm sectionTopLeft = null;
 	public static SashForm sectionTopMiddle = null;
-	public static SashForm sectionTopRight = null;
 	public static SashForm sectionBottom = null;
 	public static SashForm sectionBottomLeft = null;
 	public static SashForm sectionBottomMiddle = null;
@@ -79,7 +80,8 @@ public class Main {
 
 	public static boolean isOpen = true;
 
-	public static Vector<DiagramView> views = new Vector<DiagramView>();
+	public Vector<DiagramView> views = new Vector<DiagramView>();
+	public Vector<Palette> palettes = new Vector<Palette>();
 	private DiagramClient diagramClient;
 
 	private volatile static Main instance = null;
@@ -115,9 +117,8 @@ public class Main {
 
 		sectionTopLeft = new SashForm(sectionTop, SWT.HORIZONTAL);
 		sectionTopMiddle = new SashForm(sectionTop, SWT.HORIZONTAL);
-		sectionTopRight = new SashForm(sectionTop, SWT.HORIZONTAL);
-		sectionTop.setWeights(new int[] { 20, 70, 10 }); // ini size of each
-															// editor part
+		sectionTop.setWeights(new int[] { 20, 80 }); // ini size of each
+														// editor part
 
 		sectionBottomLeft = new SashForm(sectionBottom, SWT.HORIZONTAL);
 		sectionBottomMiddle = new SashForm(sectionBottom, SWT.HORIZONTAL);
@@ -137,6 +138,16 @@ public class Main {
 		tabFolderDiagram.setBorderVisible(true);
 		tabFolderDiagram.addCTabFolderListener(new CTabFolderAdapter() {
 			public void itemClosed(CTabFolderEvent event) {
+			}
+		});
+		tabFolderDiagram.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(
+					org.eclipse.swt.events.SelectionEvent event) {
+				int index = tabFolderDiagram.getSelectionIndex();
+				if (views.size() > 0 && index != 0) {
+					views.get(index - 1).setFocus(true, views);
+					palettes.get(index - 1).setFocus(true, palettes);
+				}
 			}
 		});
 
@@ -376,12 +387,21 @@ public class Main {
 
 	public void startNewDiagram(String identity,
 			uk.ac.mdx.xmf.swt.model.Diagram diagram) {
-		palette = new Palette(sectionTopRight, SWT.BORDER, display);
-
 		CTabItem tabItem = new CTabItem(tabFolderDiagram, SWT.BORDER);
 		tabItem.setText(diagram.getName());
 
-		DiagramView view = new DiagramView(tabFolderDiagram, SWT.NONE, palette,
+		SashForm sashFormDiagram;
+		sashFormDiagram = new SashForm(tabFolderDiagram, SWT.BORDER);
+		sashFormDiagram.setBounds(0, 0, tabFolderDiagram.getBounds().width,
+				tabFolderDiagram.getBounds().height);
+		sashFormDiagram.setBackground(ColorConstants.white);
+		tabItem.setControl(sashFormDiagram);
+
+		palette = new Palette(sashFormDiagram, SWT.BORDER, display);
+		palettes.add(palette);
+		palette.setFocus(true, palettes);
+
+		DiagramView view = new DiagramView(sashFormDiagram, SWT.NONE, palette,
 				display, diagramClient, diagram, tabItem);
 		views.add(view);
 		view.setIdentity(identity);
@@ -392,13 +412,21 @@ public class Main {
 		diagram.setOwner(view);
 		view.display();
 
-		sectionTopMiddle.layout(true);
+		sashFormDiagram.setWeights(new int[] { 15, 85 });
 	}
 
 	public DiagramView getView() {
 		for (DiagramView view : views) {
 			if (view.isFocus())
 				return view;
+		}
+		return null;
+	}
+
+	public Palette getPalette() {
+		for (Palette palette : palettes) {
+			if (palette.isFocus())
+				return palette;
 		}
 		return null;
 	}

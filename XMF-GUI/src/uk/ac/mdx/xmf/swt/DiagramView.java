@@ -15,7 +15,6 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
@@ -129,7 +128,7 @@ public class DiagramView extends View {
 		diagramClient.setView(this);
 		this.setVisible(false);
 		canvas = new FigureCanvas(parent, SWT.H_SCROLL & SWT.V_SCROLL);
-		canvas.setBounds(0, 0, parent.getBounds().width,
+		canvas.setBounds(0, 0, (int) (parent.getBounds().width * 0.8),
 				parent.getBounds().height);
 		canvas.setBackground(ColorConstants.white);
 		canvas.setScrollBarVisibility(FigureCanvas.ALWAYS);
@@ -142,13 +141,14 @@ public class DiagramView extends View {
 		// the actual content of the tab
 		// Composite tabComposite = new Composite(this, SWT.NONE);
 		// tabComposite.setLayout(new FillLayout());
-		_tabItem.setControl(canvas);
+		// _tabItem.setControl(canvas);
 
 		figure = new Figure();
 		rootFigure = new Figure();
 		rootFigure.add(rectShape);
 		rootFigure.add(edgeDrageShape);
-		((CTabFolder) parent).setSelection(tabItem);
+		Main.tabFolderDiagram.setSelection(tabItem);
+
 		// addMouseListener(this);
 		// canvas.addMouseListener(this);
 	}
@@ -208,8 +208,8 @@ public class DiagramView extends View {
 				MenuBuilder.calculateMenu(identities, manager, null);
 				canvas.setMenu(manager.createContextMenu(canvas));
 
-				setAllFocus();
-				isFocus = true;
+				// setAllFocus();
+				// isFocus = true;
 				Point location = display.getCursorLocation();
 
 				org.eclipse.draw2d.geometry.Point location2 = translateToRelativeLocation(location);
@@ -292,7 +292,7 @@ public class DiagramView extends View {
 
 				}
 
-				String s = Main.getInstance().palette.getSelectImage();
+				String s = Main.getInstance().getPalette().getSelectImage();
 				if (s.equalsIgnoreCase("Class")) {
 					raiseFocusGained();
 
