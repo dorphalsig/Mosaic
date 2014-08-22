@@ -83,9 +83,10 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 	boolean showNumbers = false;
 	Color currentLineColor = null;
 	Color highlightedLineColor = null;
-	CTabItem tabItem;
+	public static CTabItem tabItem;
 
 	Composite parent;
+	private int length = 0;
 
 	public TextEditor() {
 		getPreferences();
@@ -135,16 +136,27 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 					text.setMenu(menu.createContextMenu(text));
 				}
 			});
+			text.addListener(SWT.MouseUp, new Listener() {
+				public void handleEvent(Event e) {
+					// System.out.println("mouse double click");
+
+				}
+			});
 			text.addVerifyListener(new VerifyListener() {
 
 				@Override
 				public void verifyText(VerifyEvent e) {
 
+					length = text.getText().length();
+					System.out.println("txt length:" + length);
+					System.out.println("etxt length:" + e.text.length());
+
 					// check the input, if user input, thus enable user to save
-					if (e.text.length() > 0
-							&& e.text.length() < text.getText().length()) {
+					if (e.text.length() > 0 && e.text.length() < length) {
 						tabItem.setImage(ImageManager
 								.getImage("icons/Parser/asterisk.gif"));
+					} else {
+						tabItem.setImage(null);
 					}
 				}
 			});
@@ -263,6 +275,7 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		if (changed) {
 			changed = false;
 			// setPartName(originalName);
+			tabItem.setImage(null);
 			clearHighlights();
 			Message m = handler.newMessage("textDirty", 2);
 			Value v1 = new Value(getIdentity());

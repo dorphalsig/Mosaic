@@ -9,6 +9,7 @@ import XOS.Message;
 import XOS.Value;
 
 import com.ceteva.menus.MenusClient;
+import com.ceteva.text.texteditor.TextEditor;
 
 public class GlobalMenuAction extends Action {
 
@@ -45,9 +46,12 @@ public class GlobalMenuAction extends Action {
 		Value[] ids = new Value[size * 2];
 		for (int i = 0; i < size; i++) {
 			String menuIdentity = (String) menuIdentities.elementAt(i);
-			if (menuIdentity.equalsIgnoreCase("53")) {
-				// GUIDemo.getInstance().startNewDiagram();
-
+			// hijack the code here, change it later, 56,57,58, magic number for
+			// save,save as and save as and compile
+			if (menuIdentity.equalsIgnoreCase("56")
+					|| menuIdentity.equalsIgnoreCase("57")
+					|| menuIdentity.equalsIgnoreCase("58")) {
+				TextEditor.tabItem.setImage(null);
 			}
 			ids[i * 2] = new Value(menuIdentity);
 			String identity = (String) identities.elementAt(i);
