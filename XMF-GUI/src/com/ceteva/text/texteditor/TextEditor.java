@@ -27,6 +27,8 @@ import org.eclipse.swt.custom.LineStyleEvent;
 import org.eclipse.swt.custom.LineStyleListener;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.graphics.Color;
@@ -76,7 +78,7 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 	TextConfiguration configuration;
 	SourceViewerDecorationSupport fSourceViewerDecorationSupport;
 	SinglelineScanner scanner;
-	EventHandler handler;
+	private EventHandler handler;
 	Vector highlights = new Vector();
 	public StyledText text;
 
@@ -240,7 +242,16 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 
 					tabItem.setControl(text);
 
-					// Main.sectionTopMiddle.layout(true);
+					tabItem.addDisposeListener(new DisposeListener() {
+
+						@Override
+						public void widgetDisposed(DisposeEvent arg0) {
+							partDeactivated();
+							dispose();
+						}
+
+					});
+
 					Main.tabFolderDiagram.setSelection(tabItem);
 
 				} catch (IOException io) {
@@ -602,14 +613,13 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 	public void partClosed(IWorkbenchPartReference partRef) {
 	}
 
-	public void partDeactivated(IWorkbenchPartReference ref) {
-		if (ref.getPart(false) != null && handler != null) {
-			if (ref.getPart(false).equals(this) && handler != null) {
-				Message m = handler.newMessage("focusLost", 1);
-				Value v1 = new Value(getIdentity());
-				m.args[0] = v1;
-				handler.raiseEvent(m);
-			}
+	public void partDeactivated() {
+
+		if (handler != null) {
+			Message m = handler.newMessage("focusLost", 1);
+			Value v1 = new Value(getIdentity());
+			m.args[0] = v1;
+			handler.raiseEvent(m);
 		}
 	}
 
@@ -639,6 +649,12 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 	@Override
 	public void newMenuAdded() {
 		// calculateMenu();
+
+	}
+
+	@Override
+	public void partDeactivated(IWorkbenchPartReference arg0) {
+		// TODO Auto-generated method stub
 
 	}
 }
