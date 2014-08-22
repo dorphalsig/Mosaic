@@ -47,7 +47,7 @@ public class GlobalMenuAction extends Action {
 		for (int i = 0; i < size; i++) {
 			String menuIdentity = (String) menuIdentities.elementAt(i);
 			// hijack the code here, change it later, 56,57,58, magic number for
-			// save,save as and save as and compile
+			// save,save as and save as and compile,
 			if (menuIdentity.equalsIgnoreCase("56")
 					|| menuIdentity.equalsIgnoreCase("57")
 					|| menuIdentity.equalsIgnoreCase("58")) {
