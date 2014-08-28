@@ -29,6 +29,7 @@ import org.eclipse.swt.widgets.Composite;
 
 import uk.ac.mdx.xmf.swt.editPart.EdgeEditPart;
 import uk.ac.mdx.xmf.swt.editPart.EdgeTextEditPart;
+import uk.ac.mdx.xmf.swt.editPart.MultilineTextEditPart;
 import uk.ac.mdx.xmf.swt.editPart.NodeEditPart;
 import uk.ac.mdx.xmf.swt.editPart.TextEditPart;
 import uk.ac.mdx.xmf.swt.figure.BoxFigure;
@@ -37,6 +38,7 @@ import uk.ac.mdx.xmf.swt.figure.EdgeLabelFigure;
 import uk.ac.mdx.xmf.swt.figure.MultilineTextFigure;
 import uk.ac.mdx.xmf.swt.model.Edge;
 import uk.ac.mdx.xmf.swt.model.EdgeText;
+import uk.ac.mdx.xmf.swt.model.MultilineText;
 import uk.ac.mdx.xmf.swt.model.Node;
 import uk.ac.mdx.xmf.swt.model.Text;
 
@@ -51,7 +53,9 @@ public abstract class View extends Composite implements KeyListener,
 	static Map<String, Figure> edgeShapes = new HashMap<String, Figure>();
 	static Map<String, Figure> figureNodes = new HashMap<String, Figure>();
 	static Map<String, TextEditPart> textEdits = new HashMap<String, TextEditPart>();
+	static Map<String, MultilineTextEditPart> multilineTextEdits = new HashMap<String, MultilineTextEditPart>();
 	static Map<String, Text> texts = new HashMap<String, Text>();
+	static Map<String, MultilineText> multilineTexts = new HashMap<String, MultilineText>();
 	static Map<String, Label> figureLabels = new HashMap<String, Label>();
 	static Map<String, MultilineTextFigure> figureMulitLineTextLabels = new HashMap<String, MultilineTextFigure>();
 	static Map<String, BoxFigure> figureBoxs = new HashMap<String, BoxFigure>();

@@ -10,6 +10,7 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 
 import uk.ac.mdx.xmf.swt.command.EdgeTextChangeCommand;
+import uk.ac.mdx.xmf.swt.command.MultilineTextChangeCommand;
 import uk.ac.mdx.xmf.swt.command.TextChangeCommand;
 import uk.ac.mdx.xmf.swt.demo.Main;
 
@@ -21,6 +22,7 @@ public class TextEditManager {
 	boolean mouseEnter = false;
 	uk.ac.mdx.xmf.swt.model.Text model = null;
 	uk.ac.mdx.xmf.swt.model.EdgeText modelEdgeText = null;
+	uk.ac.mdx.xmf.swt.model.MultilineText modelMultilineText = null;
 
 	String choice = "";
 
@@ -79,6 +81,19 @@ public class TextEditManager {
 			text.setVisible(true);
 			text.setBackground(ColorConstants.lightGray);
 			choice = "modelEdgeText";
+		} else if (object instanceof uk.ac.mdx.xmf.swt.model.MultilineText) {
+			modelMultilineText = (uk.ac.mdx.xmf.swt.model.MultilineText) object;
+			text = new Text(Main.getInstance().getView().canvas, SWT.SINGLE
+					| SWT.NORMAL);
+
+			text.setLocation(p.x, p.y + 2);
+			text.setText(modelMultilineText.getText());
+			text.setVisible(true);
+			text.setSize(d.width, d.height);
+			text.selectAll();
+			text.setVisible(true);
+			text.setBackground(ColorConstants.lightGray);
+			choice = "modelMultilineText";
 		}
 		text.addListener(SWT.KeyDown, new Listener() {
 			@Override
@@ -88,11 +103,13 @@ public class TextEditManager {
 						fireChangeText();
 					else if (choice.equalsIgnoreCase("modelEdgeText"))
 						fireChangeEdgeText();
+					else if (choice.equalsIgnoreCase("modelMultilineText"))
+						fireChangeMultilineText();
 			}
 		});
 	}
 
-	public void fireChangeText() {
+	private void fireChangeText() {
 		// System.out.println("text area changed model id:" +
 		// model.getIdentity());
 
@@ -100,10 +117,9 @@ public class TextEditManager {
 		command.execute();
 		text.setVisible(false);
 		text.dispose();
-
 	}
 
-	public void fireChangeEdgeText() {
+	private void fireChangeEdgeText() {
 		// System.out.println("text area changed model id:"
 		// + modelEdgeText.getIdentity());
 
@@ -112,6 +128,16 @@ public class TextEditManager {
 		command.execute();
 		text.setVisible(false);
 		text.dispose();
+	}
 
+	private void fireChangeMultilineText() {
+		// System.out.println("text area changed model id:"
+		// + modelEdgeText.getIdentity());
+
+		MultilineTextChangeCommand command = new MultilineTextChangeCommand(
+				modelMultilineText, text.getText());
+		command.execute();
+		text.setVisible(false);
+		text.dispose();
 	}
 }

@@ -767,6 +767,40 @@ public class DiagramView extends View {
 						textEdits.get(key).performDirectEdit(model, p, d);
 					}
 				}
+				// edit multiline label, for example, not
+				Iterator<String> itrMultiline = figureMulitLineTextLabels
+						.keySet().iterator();
+
+				while (itrMultiline.hasNext()) {
+					String key = itrMultiline.next();
+
+					MultilineText model = multilineTexts.get(key);
+					MultilineTextFigure l = figureMulitLineTextLabels.get(key);
+					String id = model.parent.identity;
+					Point p = null;
+
+					int width = l.getSize().width;
+					int height = l.getSize().height;
+					Dimension d = new Dimension(width, height);
+
+					String select = nodeSelect;
+					// select = model.getParent().getParent().getParent()
+					// .getIdentity();
+
+					Node node = nodeModels.get(select);
+					if (node != null)
+						p = new Point(node.getLocation().x
+								+ model.getLocation().x, node.getLocation().y
+								+ model.getLocation().y);
+					else
+						p = new Point(0, 0);
+
+					if (checkRectangleBoundary(location2.x, location2.y, p.x,
+							p.y, width, height)) {
+						multilineTextEdits.get(key).performDirectEdit(model, p,
+								d);
+					}
+				}
 
 				// edit edge label text
 
@@ -1079,9 +1113,11 @@ public class DiagramView extends View {
 				multilineTextEditPart.setDiagramView(this);
 				MultilineTextFigure label = (MultilineTextFigure) multilineTextEditPart
 						.createFigure();
-				String s = text.parent.identity;
+				String s = text.getIdentity();
+				multilineTexts.put(s, text);
 				figure.add(label);
-				figureMulitLineTextLabels.put(text.getIdentity(), label);
+				multilineTextEdits.put(s, multilineTextEditPart);
+				figureMulitLineTextLabels.put(s, label);
 
 			} else if (iModel instanceof Edge) {
 				edgeEditPart = new EdgeEditPart();

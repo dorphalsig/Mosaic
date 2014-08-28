@@ -12,12 +12,11 @@ import org.eclipse.swt.graphics.RGB;
 
 import uk.ac.mdx.xmf.swt.diagram.tracker.DisplaySelectionTracker;
 import uk.ac.mdx.xmf.swt.figure.MultilineTextFigure;
-import uk.ac.mdx.xmf.swt.misc.ColorManager;
 import uk.ac.mdx.xmf.swt.model.MultilineText;
 
 public class MultilineTextEditPart extends DisplayEditPart {
 
-	static private MultilineEditManager manager = null;
+	static private TextEditManager manager = null;
 	private MultilineText model = null;
 
 	public void activate() {
@@ -88,8 +87,8 @@ public class MultilineTextEditPart extends DisplayEditPart {
 	}
 
 	public void refreshColor() {
-		getFigure().setForegroundColor(ColorManager.getColor(getForeColor()));
-		getFigure().setBackgroundColor(ColorManager.getColor(getFillColor()));
+		// getFigure().setForegroundColor(ColorManager.getColor(getForeColor()));
+		// getFigure().setBackgroundColor(ColorManager.getColor(getFillColor()));
 	}
 
 	protected void refreshVisuals() {
@@ -99,7 +98,7 @@ public class MultilineTextEditPart extends DisplayEditPart {
 		Dimension size = model.getSize();
 
 		MultilineTextFigure boxFigure = _diagramView
-				.getfigureMulitLineTextLabels().get(model.getParenIdentity());
+				.getfigureMulitLineTextLabels().get(model.getIdentity());
 		if (boxFigure != null) {
 
 			Point loc = model.getLocation();
@@ -139,6 +138,19 @@ public class MultilineTextEditPart extends DisplayEditPart {
 		// MultilineCellEditorLocator((MultilineTextFigure)getFigure());
 		// manager = new MultilineEditManager(this,TextCellEditor.class, mcel);
 		// manager.show();
+	}
+
+	public void performDirectEdit(MultilineText model,
+			org.eclipse.swt.graphics.Point p, Dimension d) {
+		// if (manager != null) {
+		// manager.cancel();
+		// manager = null;
+		// }
+		// TextCellEditorLocator tcel = new TextCellEditorLocator(
+		// (Label) createFigure());
+		manager = new TextEditManager();
+
+		manager.show(model, p, d);
 	}
 
 	public void preferenceUpdate() {
