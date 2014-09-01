@@ -16,7 +16,6 @@ import org.eclipse.swt.graphics.RGB;
 import uk.ac.mdx.xmf.swt.diagram.tracker.DisplaySelectionTracker;
 import uk.ac.mdx.xmf.swt.figure.BoxFigure;
 import uk.ac.mdx.xmf.swt.figure.RoundedBoxFigure;
-import uk.ac.mdx.xmf.swt.misc.ColorManager;
 import uk.ac.mdx.xmf.swt.model.AbstractDiagram;
 import uk.ac.mdx.xmf.swt.model.Box;
 
@@ -82,7 +81,7 @@ public class BoxEditPart extends DisplayEditPart {
 	}
 
 	public RGB getFillColor() {
-		RGB fillColor = new RGB(255, 255, 255);
+		RGB fillColor = new RGB(160, 240, 199);
 		return fillColor;
 		// if (fillColor != null)
 		// return fillColor;
@@ -93,7 +92,7 @@ public class BoxEditPart extends DisplayEditPart {
 	}
 
 	public RGB getForegroundColor() {
-		RGB lineColor = new RGB(255, 255, 255);
+		RGB lineColor = new RGB(160, 240, 199);
 		return lineColor;
 		// if (lineColor != null)
 		// return lineColor;
@@ -153,10 +152,10 @@ public class BoxEditPart extends DisplayEditPart {
 				((BoxFigure) getFigure()).setGradientFill(getGradient());
 			else
 				((RoundedBoxFigure) getFigure()).setGradientFill(getGradient());
-			getFigure().setForegroundColor(
-					ColorManager.getColor(getForegroundColor()));
-			getFigure().setBackgroundColor(
-					ColorManager.getColor(getFillColor()));
+			// getFigure().setForegroundColor(
+			// ColorManager.getColor(getForegroundColor()));
+			// getFigure().setBackgroundColor(
+			// ColorManager.getColor(getFillColor()));
 		}
 	}
 

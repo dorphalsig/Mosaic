@@ -621,8 +621,7 @@ public class DiagramView extends View {
 						Dimension size = new Dimension();
 						size.width = node.getSize().width;
 						size.height = Math.abs(node.getLocation().y
-								- location2.y)
-								+ node.getSize().height;
+								- location2.y);
 						if (size != node.getSize()) {
 							org.eclipse.draw2d.geometry.Point p = new org.eclipse.draw2d.geometry.Point(
 									node.getLocation().x, location2.y);

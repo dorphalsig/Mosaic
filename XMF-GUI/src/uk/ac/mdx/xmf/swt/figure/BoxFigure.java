@@ -1,5 +1,6 @@
 package uk.ac.mdx.xmf.swt.figure;
 
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.geometry.Dimension;
@@ -23,6 +24,8 @@ public class BoxFigure extends RectangleFigure {
 		this.right = right;
 		this.bottom = bottom;
 		this.left = left;
+
+		this.setBackgroundColor(ColorConstants.lightBlue);
 	}
 
 	protected boolean useLocalCoordinates() {
@@ -30,11 +33,11 @@ public class BoxFigure extends RectangleFigure {
 	}
 
 	protected void fillShape(Graphics graphics) {
-		// graphics.fillRectangle(getBounds());
-		// if (gradient)
-		// graphics.fillGradient(getBounds(), false);
-		// else
-		// graphics.fillRectangle(getBounds());
+		graphics.fillRectangle(getBounds());
+		if (!gradient)
+			graphics.fillGradient(getBounds(), false);
+		else
+			graphics.fillRectangle(getBounds());
 	}
 
 	protected void outlineShape(Graphics graphics) {
