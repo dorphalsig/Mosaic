@@ -734,6 +734,7 @@ public class DiagramView extends View {
 			public void handleEvent(Event arg0) {
 
 				Point location = display.getCursorLocation();
+
 				org.eclipse.draw2d.geometry.Point location2 = translateToRelativeLocation(location);
 
 				Iterator<String> itrLabel = figureLabels.keySet().iterator();
@@ -761,9 +762,9 @@ public class DiagramView extends View {
 								+ model.getLocation().y);
 					else
 						p = new Point(0, 0);
-
+					// using magic numbe 15 to find the right location
 					if (checkRectangleBoundary(location2.x, location2.y, p.x,
-							p.y, width, height)) {
+							p.y + 15, width, height)) {
 						textEdits.get(key).performDirectEdit(model, p, d);
 					}
 				}
@@ -837,6 +838,9 @@ public class DiagramView extends View {
 			public void handleEvent(Event arg0) {
 				// gc.dispose();
 				Point location = display.getCursorLocation();
+				// org.eclipse.draw2d.geometry.Point location2 = new
+				// org.eclipse.draw2d.geometry.Point(
+				// location.x, location.y);
 				org.eclipse.draw2d.geometry.Point location2 = translateToRelativeLocation(location);
 				if (resizeShape
 						&& (getPoint
@@ -1103,7 +1107,6 @@ public class DiagramView extends View {
 				texts.put(text.getIdentity(), text);
 				textEdits.put(text.getIdentity(), textEditPart);
 				figureLabels.put(text.getIdentity(), label);
-
 			} else if (iModel instanceof MultilineText) {
 				multilineTextEditPart = new MultilineTextEditPart();
 				MultilineText text = (MultilineText) iModel;
