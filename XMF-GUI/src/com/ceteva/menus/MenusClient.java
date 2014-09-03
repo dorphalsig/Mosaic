@@ -110,20 +110,26 @@ public class MenusClient extends Client {
 
 	public void newRootMenu(String identity, String title) {
 
-		IMenuManager menu = getMenu();
-		MenuManager item = getRootMenuItem(menu, title);
-		menuIdBinding.put(item, identity);
-		// if (rootMenuItemExists(menu, title)) {
+		// IMenuManager menu = getMenu();
 		// MenuManager item = getRootMenuItem(menu, title);
 		// menuIdBinding.put(item, identity);
-		// } else {
-		// MenuManager newMenu = new MenuManager(title, identity);
-		//
-		// // menu.insertBefore("&File", newMenu);
-		// //
-		// // newMenu.setVisible(true);
-		// refreshMenus();
-		// }
+
+		IMenuManager menu = getMenu();
+		if (rootMenuItemExists(menu, title)) {
+			MenuManager item = getRootMenuItem(menu, title);
+			menuIdBinding.put(item, identity);
+		} else {
+			MenuManager newMenu = new MenuManager(title, identity);
+
+			if (title.equalsIgnoreCase("&File"))
+				menu.insertBefore("&windows", newMenu);
+			else
+				menu.insertAfter("&windows", newMenu);
+
+			newMenu.setVisible(true);
+			refreshMenus();
+		}
+
 	}
 
 	public void newChildMenu(String parent, String identity, String title) {
