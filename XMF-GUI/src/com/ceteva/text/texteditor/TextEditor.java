@@ -32,6 +32,7 @@ import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.layout.GridData;
@@ -51,6 +52,7 @@ import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 
 import uk.ac.mdx.xmf.swt.client.EventHandler;
 import uk.ac.mdx.xmf.swt.demo.Main;
+import uk.ac.mdx.xmf.swt.misc.FontManager;
 import uk.ac.mdx.xmf.swt.model.ImageManager;
 import XOS.Message;
 import XOS.Value;
@@ -89,6 +91,8 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 
 	Composite parent;
 	private int length = 0;
+	static FontData defaultFont = new FontData(
+			"1|Courier New|9|0|WINDOWS|1|-13|0|0|0|400|0|0|0|0|3|2|1|49|Courier New");
 
 	public TextEditor() {
 		getPreferences();
@@ -150,8 +154,8 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 				public void verifyText(VerifyEvent e) {
 
 					length = text.getText().length();
-					System.out.println("txt length:" + length);
-					System.out.println("etxt length:" + e.text.length());
+					// System.out.println("txt length:" + length);
+					// System.out.println("etxt length:" + e.text.length());
 
 					// check the input, if user input, thus enable user to save
 					if (e.text.length() > 0 && e.text.length() < length) {
@@ -236,6 +240,7 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 					text.setLayoutData(spec);
 					text.addLineStyleListener(lineStyler);
 					text.setEditable(true);
+					text.setFont(FontManager.getFont(defaultFont, true));
 					Color bg = Display.getDefault().getSystemColor(
 							SWT.COLOR_WHITE);
 					text.setBackground(bg);

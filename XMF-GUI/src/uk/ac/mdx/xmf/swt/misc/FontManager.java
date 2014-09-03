@@ -7,6 +7,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 
+import uk.ac.mdx.xmf.swt.demo.Main;
+
 public class FontManager {
 
 	private static Hashtable fontbinding = new Hashtable();
@@ -25,6 +27,12 @@ public class FontManager {
 
 		Font classFont = new Font(null, "Arial", 12, SWT.BOLD);
 		return classFont;
+	}
+
+	public static Font getFont(FontData data, boolean flag) {
+
+		return new Font(Main.getInstance().display, data);
+
 	}
 
 	public static void dispose() {
