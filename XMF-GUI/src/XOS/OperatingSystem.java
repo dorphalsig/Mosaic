@@ -1551,7 +1551,7 @@ public final class OperatingSystem implements EventHandler {
 			writeText(messageString, "F:\\xmf\\code\\message.txt");
 		}
 
-		writeText(name, "F:\\xmf\\code\\client.txt");
+		// writeText(name, "F:\\xmf\\code\\client.txt");
 
 		// //---yong
 		//
@@ -2193,13 +2193,5 @@ public final class OperatingSystem implements EventHandler {
 
 	protected void setUserPassword(UserPassword auth) {
 		this.auth = auth;
-	}
-
-	public void writeMessageOut(Message message, String file) {
-		if (message != null) {
-			// String messageString = "";
-			// messageString = gson.toJson(message);
-			// writeText(messageString, file);
-		}
 	}
 }

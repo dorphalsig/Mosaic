@@ -45,7 +45,6 @@ import com.ceteva.mosaic.actions.ShowPres;
 import com.ceteva.mosaic.splash.Splash;
 import com.ceteva.oleBridge.OleBridgeClient;
 import com.ceteva.text.EditorClient;
-import com.ceteva.text.htmlviewer.HTMLViewerModel;
 import com.ceteva.undo.UndoClient;
 
 public class Main {
@@ -58,7 +57,6 @@ public class Main {
 	public static SashForm sectionTopLeft = null;
 	public static SashForm sectionTopMiddle = null;
 	public static SashForm sectionBottom = null;
-	public static SashForm sectionBottomLeft = null;
 	public static SashForm sectionBottomMiddle = null;
 	public static SashForm sectionBottomRight = null;
 
@@ -120,10 +118,9 @@ public class Main {
 		sectionTop.setWeights(new int[] { 20, 80 }); // ini size of each
 														// editor part
 
-		sectionBottomLeft = new SashForm(sectionBottom, SWT.HORIZONTAL);
 		sectionBottomMiddle = new SashForm(sectionBottom, SWT.HORIZONTAL);
 		sectionBottomRight = new SashForm(sectionBottom, SWT.HORIZONTAL);
-		sectionBottom.setWeights(new int[] { 20, 40, 40 }); // ini size of
+		sectionBottom.setWeights(new int[] { 50, 50 }); // ini size of
 
 		// Create the outline tabs
 		tabFolderOutline = new CTabFolder(sectionTopLeft, SWT.BORDER);
@@ -152,13 +149,13 @@ public class Main {
 		});
 
 		// create overview
-		tabFolderOverview = new CTabFolder(sectionBottomLeft, SWT.BORDER);
-		tabFolderOverview.setBorderVisible(true);
-		tabFolderOverview.addCTabFolderListener(new CTabFolderAdapter() {
-			public void itemClosed(CTabFolderEvent event) {
-				sectionBottom.setWeights(new int[] { 0, 50, 50 });
-			}
-		});
+		// tabFolderOverview = new CTabFolder(sectionBottomLeft, SWT.BORDER);
+		// tabFolderOverview.setBorderVisible(true);
+		// tabFolderOverview.addCTabFolderListener(new CTabFolderAdapter() {
+		// public void itemClosed(CTabFolderEvent event) {
+		// sectionBottom.setWeights(new int[] { 0, 50, 50 });
+		// }
+		// });
 		// dynamic show the contents of overview after the discussion with users
 
 		// CTabItem tabItemOverview = new CTabItem(tabFolderOverview,
@@ -500,8 +497,8 @@ public class Main {
 
 		Main.getInstance().createshell();
 
-		String identity = "5";
-		new HTMLViewerModel(identity, null);
+		// String identity = "5";
+		// new HTMLViewerModel(identity, null);
 
 		Main.getInstance();
 		Main.shell.open();

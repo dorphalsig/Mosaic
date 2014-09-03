@@ -1,10 +1,5 @@
 package XOS;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-
 import com.google.gson.Gson;
 
 public class MessageClient extends Client {
@@ -66,7 +61,6 @@ public class MessageClient extends Client {
 	public void sendMessage(Message message) {
 		try {
 			// XOS.deletFile( "F:\\xmf\\code\\receive\\message.txt");
-			XOS.writeMessageOut(message, "F:\\xmf\\code\\receive\\message.txt");
 			handler.sendMessage(message);
 		} catch (RuntimeException e) {
 			e.printStackTrace();
@@ -91,23 +85,4 @@ public class MessageClient extends Client {
 		}
 	}
 
-	public void writeMessageOut(Message message, String file) {
-		if (message != null) {
-			String messageString = "";
-			messageString = gson.toJson(message);
-			writeText(messageString, file);
-		}
-	}
-
-	public static void writeText(String str, String file) {
-
-		try {
-			PrintWriter out = new PrintWriter(new BufferedWriter(
-					new FileWriter(file, true)));
-			out.println(str);
-			out.close();
-		} catch (IOException e) {
-			// oh noes!
-		}
-	}
 }
