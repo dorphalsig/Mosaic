@@ -1,7 +1,0 @@
-parserImport Manifests;
-
-@Manifest XMI
-  @File Package   end
-  @File Class     end
-  @File Attribute end
-end;

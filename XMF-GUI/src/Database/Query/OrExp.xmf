@@ -1,8 +1,0 @@
-parserImport XOCL;
-
-import Database;
-
-context Database
-
-  @Class OrExp extends BinExp  
-  end

@@ -1,8 +1,0 @@
-parserImport XOCL;
-
-context XML
-
-@Package XMI 
-  @Package XMI11Rose end
-  @Package XMI12Poseidon end
-end

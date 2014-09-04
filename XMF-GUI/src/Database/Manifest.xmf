@@ -1,8 +1,0 @@
-parserImport Manifests;
-
-@Manifest Database
-  @File Database	end
-  @Ref Interfaces	end
-  @Ref Query		end
-  @Ref SQLDatabase	end
-end;

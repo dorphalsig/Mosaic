@@ -1,6 +1,0 @@
-parserImport XOCL;
-
-context Database
-  @Package Interfaces
-  end
-  

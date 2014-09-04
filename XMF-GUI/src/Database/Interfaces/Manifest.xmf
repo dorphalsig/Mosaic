@@ -1,7 +1,0 @@
-parserImport Manifests;
-
-@Manifest Interfaces
-  @File Interfaces end
-  @File QueryResult end
-  @File Database end
-end;

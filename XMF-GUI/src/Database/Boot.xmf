@@ -1,4 +1,0 @@
-"Database/Database.o".loadBin(true);
-("Database/Interfaces/Boot.o").loadBin(true);
-("Database/Query/Boot.o").loadBin(true);
-("Database/SQLDatabase/Boot.o").loadBin(true);
