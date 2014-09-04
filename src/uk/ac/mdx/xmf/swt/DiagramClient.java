@@ -19,8 +19,8 @@ import uk.ac.mdx.xmf.swt.misc.DiagramPlugin;
 import uk.ac.mdx.xmf.swt.misc.FontManager;
 import uk.ac.mdx.xmf.swt.model.AbstractDiagram;
 import uk.ac.mdx.xmf.swt.model.XMLBindings;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 public class DiagramClient extends XMLClient {
 

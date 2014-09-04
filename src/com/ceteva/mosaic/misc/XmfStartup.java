@@ -32,7 +32,7 @@ public class XmfStartup implements IStartup {
 
 				try {
 					XmfPlugin.getDefault().registerEscapeHandler();
-					XmfPlugin.getDefault().XOS.init(args);
+					XmfPlugin.getDefault().xos.init(args);
 
 				} catch (Throwable t) {
 					System.out.println(t);

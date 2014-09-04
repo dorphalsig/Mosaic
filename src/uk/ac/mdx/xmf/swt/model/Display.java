@@ -2,8 +2,8 @@ package uk.ac.mdx.xmf.swt.model;
 
 import uk.ac.mdx.xmf.swt.client.ClientElement;
 import uk.ac.mdx.xmf.swt.client.EventHandler;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 public abstract class Display extends CommandEvent {
 

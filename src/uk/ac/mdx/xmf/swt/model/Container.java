@@ -10,7 +10,7 @@ import uk.ac.mdx.xmf.swt.client.ClientElement;
 import uk.ac.mdx.xmf.swt.client.EventHandler;
 import uk.ac.mdx.xmf.swt.client.xml.Element;
 import uk.ac.mdx.xmf.swt.demo.Main;
-import XOS.Message;
+import xos.Message;
 
 public class Container extends DisplayWithDimension {
 

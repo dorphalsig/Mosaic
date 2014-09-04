@@ -30,7 +30,7 @@ import uk.ac.mdx.xmf.swt.Overview;
 import uk.ac.mdx.xmf.swt.Palette;
 import uk.ac.mdx.xmf.swt.io.Provider;
 import uk.ac.mdx.xmf.swt.misc.DisplayHelper;
-import XOS.OperatingSystem;
+import xos.OperatingSystem;
 
 import com.ceteva.console.views.ConsoleView;
 import com.ceteva.dialogs.DialogsClient;
@@ -183,13 +183,13 @@ public class Main {
 		consoleView = new ConsoleView(tabFolderConsole, SWT.BORDER,
 				tabItemConsole);
 
-		final OperatingSystem XOS = new OperatingSystem();
+		final OperatingSystem xos = new OperatingSystem();
 
 		Thread t = new Thread() {
 			@Override
 			public void run() {
 				try {
-					XOS.init();
+					xos.init();
 				} catch (Throwable t) {
 					System.out.println(t);
 					t.printStackTrace();
@@ -205,7 +205,7 @@ public class Main {
 			public void run() {
 				try {
 
-					XOS.newMessageClient("com.ceteva.text", editorClient);
+					xos.newMessageClient("com.ceteva.text", editorClient);
 				} catch (Throwable t) {
 					System.out.println(t);
 					t.printStackTrace();
@@ -221,7 +221,7 @@ public class Main {
 			public void run() {
 				try {
 
-					XOS.newMessageClient("com.ceteva.mosaic", workbenchClient);
+					xos.newMessageClient("com.ceteva.mosaic", workbenchClient);
 				} catch (Throwable t) {
 					System.out.println(t);
 					t.printStackTrace();
@@ -237,7 +237,7 @@ public class Main {
 			public void run() {
 				try {
 
-					XOS.newMessageClient("com.ceteva.menus", menusClient);
+					xos.newMessageClient("com.ceteva.menus", menusClient);
 				} catch (Throwable t) {
 					System.out.println(t);
 					t.printStackTrace();
@@ -252,7 +252,7 @@ public class Main {
 			public void run() {
 				try {
 
-					XOS.newMessageClient("com.ceteva.modelBrowser",
+					xos.newMessageClient("com.ceteva.modelBrowser",
 							modelBrowserClient);
 				} catch (Throwable t) {
 					System.out.println(t);
@@ -267,7 +267,7 @@ public class Main {
 			@Override
 			public void run() {
 				try {
-					XOS.newMessageClient("com.ceteva.diagram", diagramClient);
+					xos.newMessageClient("com.ceteva.diagram", diagramClient);
 				} catch (Throwable t) {
 					System.out.println(t);
 					t.printStackTrace();
@@ -282,7 +282,7 @@ public class Main {
 			@Override
 			public void run() {
 				try {
-					XOS.newMessageClient("com.ceteva.dialogs", dialogClient);
+					xos.newMessageClient("com.ceteva.dialogs", dialogClient);
 				} catch (Throwable t) {
 					System.out.println(t);
 					t.printStackTrace();
@@ -297,7 +297,7 @@ public class Main {
 			@Override
 			public void run() {
 				try {
-					XOS.newMessageClient("com.ceteva.forms", formsClient);
+					xos.newMessageClient("com.ceteva.forms", formsClient);
 				} catch (Throwable t) {
 					System.out.println(t);
 					t.printStackTrace();
@@ -311,7 +311,7 @@ public class Main {
 			@Override
 			public void run() {
 				try {
-					XOS.newMessageClient("com.ceteva.undo", undoClient);
+					xos.newMessageClient("com.ceteva.undo", undoClient);
 				} catch (Throwable t) {
 					System.out.println(t);
 					t.printStackTrace();
@@ -326,7 +326,7 @@ public class Main {
 			@Override
 			public void run() {
 				try {
-					XOS.newMessageClient("com.ceteva.oleBridge",
+					xos.newMessageClient("com.ceteva.oleBridge",
 							oldBridgeClient);
 				} catch (Throwable t) {
 					System.out.println(t);

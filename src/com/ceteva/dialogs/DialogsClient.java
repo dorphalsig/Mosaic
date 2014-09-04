@@ -17,8 +17,8 @@ import org.eclipse.swt.widgets.Shell;
 
 import uk.ac.mdx.xmf.swt.client.Client;
 import uk.ac.mdx.xmf.swt.client.EventHandler;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 import com.ceteva.dialogs.progress.model.JobManager;
 

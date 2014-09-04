@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.Hashtable;
 
-import XOS.OperatingSystem;
+import xos.OperatingSystem;
 
 public class XmfPlugin {
 
@@ -19,7 +19,7 @@ public class XmfPlugin {
 
 	public static XmfPlugin plugin = null;
 
-	public OperatingSystem XOS = new OperatingSystem();
+	public OperatingSystem xos = new OperatingSystem();
 
 	public static String version = "undefined";
 
@@ -109,14 +109,14 @@ public class XmfPlugin {
 				// imagesDir, initFile, XmfPlugin.imageFile);
 				String[] args = null;
 				// try {
-				// args = XOS.readTxt("F:\\xmf\\code\\args.txt");
+				// args = xos.readTxt("F:\\xmf\\code\\args.txt");
 				// } catch (IOException e) {
 				// // TODO Auto-generated catch block
 				// e.printStackTrace();
 				// }
 				try {
 					// registerEscapeHandler();
-					XOS.init(args);
+					xos.init(args);
 
 				} catch (Throwable t) {
 					System.out.println(t);
@@ -198,7 +198,7 @@ public class XmfPlugin {
 					parameterTypes);
 
 			Object[] parameters = new Object[1];
-			InterruptHandler handler = new InterruptHandler(XOS);
+			InterruptHandler handler = new InterruptHandler(xos);
 			parameters[0] = handler;
 			setEscapeHandler.invoke(null, parameters);
 
@@ -251,8 +251,8 @@ public class XmfPlugin {
 	}
 
 	public void stop() throws Exception {
-		if (XOS != null)
-			XOS.closeAll();
+		if (xos != null)
+			xos.closeAll();
 		// super.stop(context);
 	}
 

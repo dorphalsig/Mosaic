@@ -17,8 +17,8 @@ import uk.ac.mdx.xmf.swt.client.ComponentWithControl;
 import uk.ac.mdx.xmf.swt.client.Draggable;
 import uk.ac.mdx.xmf.swt.client.Droppable;
 import uk.ac.mdx.xmf.swt.client.EventHandler;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 abstract class FormElement implements Commandable, ComponentWithControl,
 		Draggable, Droppable {

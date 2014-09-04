@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import XOS.Message;
+import xos.Message;
 
 import com.google.gson.Gson;
 

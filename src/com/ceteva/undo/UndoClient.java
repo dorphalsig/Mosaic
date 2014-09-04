@@ -2,7 +2,7 @@ package com.ceteva.undo;
 
 import uk.ac.mdx.xmf.swt.client.Client;
 import uk.ac.mdx.xmf.swt.client.EventHandler;
-import XOS.Message;
+import xos.Message;
 
 public class UndoClient extends Client {
 

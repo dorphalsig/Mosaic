@@ -2,8 +2,8 @@ package uk.ac.mdx.xmf.swt.client;
 
 import java.util.Hashtable;
 
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 public class IdManager {
 

@@ -2,7 +2,7 @@ package com.ceteva.text.htmlviewer;
 
 import uk.ac.mdx.xmf.swt.client.ClientElement;
 import uk.ac.mdx.xmf.swt.client.EventHandler;
-import XOS.Message;
+import xos.Message;
 
 public class HTMLViewerModel extends ClientElement {
 

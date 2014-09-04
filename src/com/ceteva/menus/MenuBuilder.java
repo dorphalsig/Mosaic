@@ -13,8 +13,8 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.ui.IWorkbenchPartSite;
 
 import uk.ac.mdx.xmf.swt.client.EventHandler;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 import com.ceteva.menus.actions.GlobalMenuAction;
 

@@ -1,9 +1,9 @@
 -arg
 user:XModeler
 -arg
-home:F:\xmf\XMF-xmf-integration\com.ceteva.xmf.system\xmf-src
+home:../../XMF2/com.ceteva.xmf.system/xmf-src
 -image
-F:\xmf\XMF-xmf-integration\com.ceteva.xmf.system\xmf-img\mosaic.img
+../../XMF2/com.ceteva.xmf.system/xmf-img/mosaic.img
 -arg
 projects:
 -arg
@@ -30,6 +30,7 @@ images:
 :com.ceteva.oleBridge:wait
 -internal
 com.ceteva.console.ConsoleClient:com.ceteva.console
+-workspace ../..
 -debug
 -heapSize
 8000

@@ -20,8 +20,8 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Text;
 
 import uk.ac.mdx.xmf.swt.client.EventHandler;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 import com.ceteva.forms.FormsPlugin;
 import com.ceteva.menus.MenuBuilder;

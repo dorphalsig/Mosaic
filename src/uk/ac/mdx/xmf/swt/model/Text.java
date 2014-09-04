@@ -5,8 +5,8 @@ import org.eclipse.swt.graphics.RGB;
 
 import uk.ac.mdx.xmf.swt.client.ClientElement;
 import uk.ac.mdx.xmf.swt.client.EventHandler;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 public class Text extends DisplayWithPosition {
 

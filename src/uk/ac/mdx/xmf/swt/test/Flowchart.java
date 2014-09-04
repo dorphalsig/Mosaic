@@ -37,7 +37,7 @@ import uk.ac.mdx.xmf.swt.Overview;
 import uk.ac.mdx.xmf.swt.Palette;
 import uk.ac.mdx.xmf.swt.io.Provider;
 import uk.ac.mdx.xmf.swt.misc.DisplayHelper;
-import XOS.Message;
+import xos.Message;
 
 public class Flowchart {
 	private static SashForm sashForm = null;

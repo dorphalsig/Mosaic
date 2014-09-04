@@ -6,11 +6,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Observable;
 
-import XOS.EventHandler;
-import XOS.Message;
-import XOS.MessageHandler;
-import XOS.MessagePacket;
-import XOS.Value;
+import xos.EventHandler;
+import xos.Message;
+import xos.MessageHandler;
+import xos.MessagePacket;
+import xos.Value;
 
 import com.google.gson.Gson;
 

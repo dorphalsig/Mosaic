@@ -11,8 +11,8 @@ import org.eclipse.swt.widgets.TreeItem;
 
 import uk.ac.mdx.xmf.swt.client.EventHandler;
 import uk.ac.mdx.xmf.swt.client.xml.Element;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 import com.ceteva.forms.XMLBindings;
 

@@ -2,10 +2,10 @@ package uk.ac.mdx.xmf.swt.client;
 
 import org.eclipse.swt.widgets.Display;
 
-import XOS.Message;
-import XOS.MessageHandler;
-import XOS.MessagePacket;
-import XOS.Value;
+import xos.Message;
+import xos.MessageHandler;
+import xos.MessagePacket;
+import xos.Value;
 
 // This is a comment
 
@@ -53,10 +53,10 @@ public abstract class Client implements MessageHandler {
 		return callRunnable.getValue();
 	}
 
-	// XOS supplies each client with an event handler
+	// xos supplies each client with an event handler
 
 	@Override
-	public void registerEventHandler(XOS.EventHandler handler) {
+	public void registerEventHandler(xos.EventHandler handler) {
 		this.handler = new EventHandler(name, handler);
 		setEventHandler(this.handler);
 	}

@@ -33,7 +33,7 @@ public class TextPlugin {
 
 	public void earlyStartup() {
 		EditorClient client = new EditorClient();
-		// XmfPlugin.XOS.newMessageClient("com.ceteva.text", client);
+		// XmfPlugin.xos.newMessageClient("com.ceteva.text", client);
 	}
 
 	protected void initializeDefaultPreferences(IPreferenceStore store) {

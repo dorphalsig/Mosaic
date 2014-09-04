@@ -1,18 +1,18 @@
 package com.ceteva.mosaic.misc;
 
-import XOS.OperatingSystem;
+import xos.OperatingSystem;
 
 class InterruptHandler implements EscapeHandler {
 
-	OperatingSystem XOS;
+	OperatingSystem xos;
 
-	public InterruptHandler(OperatingSystem XOS) {
-		this.XOS = XOS;
+	public InterruptHandler(OperatingSystem xos) {
+		this.xos = xos;
 	}
 
 	@Override
 	public void interrupt() {
-		XOS.interrupt();
+		xos.interrupt();
 	}
 
 }

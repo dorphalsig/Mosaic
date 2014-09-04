@@ -52,7 +52,7 @@ public class DiagramPlugin {
 
 	public void earlyStartup() {
 		// DiagramClient client = new DiagramClient();
-		// XmfPlugin.XOS.newMessageClient("com.ceteva.diagram", client);
+		// XmfPlugin.xos.newMessageClient("com.ceteva.diagram", client);
 	}
 
 	public void stop() throws Exception {

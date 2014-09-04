@@ -62,6 +62,6 @@ public class FormsPlugin {
 
 	public void earlyStartup() {
 		FormsClient client = new FormsClient();
-		// XmfPlugin.XOS.newMessageClient("com.ceteva.forms", client);
+		// XmfPlugin.xos.newMessageClient("com.ceteva.forms", client);
 	}
 }

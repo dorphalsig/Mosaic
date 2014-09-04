@@ -1,7 +1,7 @@
 package com.ceteva.forms.views;
 
 import uk.ac.mdx.xmf.swt.client.EventHandler;
-import XOS.Message;
+import xos.Message;
 
 class ComponentWithHandler {
 

@@ -2,8 +2,8 @@ package com.ceteva.oleBridge;
 
 import uk.ac.mdx.xmf.swt.client.Client;
 import uk.ac.mdx.xmf.swt.client.EventHandler;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 public class OleBridgeClient extends Client {
 	public EventHandler handler = null;

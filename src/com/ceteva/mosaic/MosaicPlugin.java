@@ -15,6 +15,6 @@ public class MosaicPlugin {
 
 	public void earlyStartup() {
 		// WorkbenchClient client = new WorkbenchClient();
-		// XmfPlugin.XOS.newMessageClient("com.ceteva.mosaic",client);
+		// XmfPlugin.xos.newMessageClient("com.ceteva.mosaic",client);
 	}
 }

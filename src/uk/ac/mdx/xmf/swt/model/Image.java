@@ -5,7 +5,7 @@ import org.eclipse.draw2d.geometry.Point;
 
 import uk.ac.mdx.xmf.swt.client.ClientElement;
 import uk.ac.mdx.xmf.swt.client.EventHandler;
-import XOS.Message;
+import xos.Message;
 
 public class Image extends DisplayWithDimension {
 

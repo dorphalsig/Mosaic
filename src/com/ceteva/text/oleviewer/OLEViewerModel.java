@@ -2,7 +2,7 @@ package com.ceteva.text.oleviewer;
 
 import uk.ac.mdx.xmf.swt.client.ClientElement;
 import uk.ac.mdx.xmf.swt.client.EventHandler;
-import XOS.Message;
+import xos.Message;
 
 public class OLEViewerModel extends ClientElement {
 

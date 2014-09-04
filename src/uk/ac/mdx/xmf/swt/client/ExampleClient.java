@@ -11,8 +11,8 @@ import java.util.ArrayList;
 
 import uk.ac.mdx.xmf.swt.io.IOThread;
 import uk.ac.mdx.xmf.swt.io.Provider;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 import com.google.gson.Gson;
 

@@ -3,8 +3,8 @@ package uk.ac.mdx.xmf.swt.command;
 import org.eclipse.gef.commands.Command;
 
 import uk.ac.mdx.xmf.swt.model.CommandEvent;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 public class RightClickCommand extends Command {
 	String identity = "";

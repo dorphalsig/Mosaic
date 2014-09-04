@@ -4,8 +4,8 @@ import org.eclipse.gef.commands.Command;
 
 import uk.ac.mdx.xmf.swt.model.CommandEvent;
 import uk.ac.mdx.xmf.swt.model.Edge;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 public class ConnectionCommand extends Command {
 	private String toolIdentity = "";

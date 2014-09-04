@@ -53,8 +53,8 @@ import uk.ac.mdx.xmf.swt.model.MultilineText;
 import uk.ac.mdx.xmf.swt.model.Node;
 import uk.ac.mdx.xmf.swt.model.Shape;
 import uk.ac.mdx.xmf.swt.model.Text;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 import com.ceteva.menus.MenuBuilder;
 

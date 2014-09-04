@@ -3,8 +3,8 @@ package uk.ac.mdx.xmf.swt.command;
 import org.eclipse.draw2d.geometry.Point;
 
 import uk.ac.mdx.xmf.swt.model.Edge;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 public class WaypointDeleteCommand extends org.eclipse.gef.commands.Command {
 

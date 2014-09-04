@@ -12,8 +12,8 @@ import uk.ac.mdx.xmf.swt.client.XMLClient;
 import uk.ac.mdx.xmf.swt.client.xml.Document;
 import uk.ac.mdx.xmf.swt.client.xml.Element;
 import uk.ac.mdx.xmf.swt.demo.Main;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 import com.ceteva.forms.views.FormView;
 

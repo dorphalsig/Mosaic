@@ -14,6 +14,6 @@ public class UndoPlugin {
 
 	public void earlyStartup() {
 		UndoClient undoClient = new UndoClient();
-		// XmfPlugin.XOS.newMessageClient("com.ceteva.undo",undoClient);
+		// XmfPlugin.xos.newMessageClient("com.ceteva.undo",undoClient);
 	}
 }

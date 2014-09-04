@@ -2,7 +2,7 @@ package com.ceteva.forms.views;
 
 import org.eclipse.swt.widgets.Control;
 
-import XOS.Message;
+import xos.Message;
 
 class ComponentCommandHandler {
 

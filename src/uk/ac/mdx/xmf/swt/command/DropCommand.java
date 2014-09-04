@@ -3,8 +3,8 @@ package uk.ac.mdx.xmf.swt.command;
 import org.eclipse.draw2d.geometry.Point;
 
 import uk.ac.mdx.xmf.swt.model.AbstractDiagram;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 public class DropCommand extends org.eclipse.gef.commands.Command {
 

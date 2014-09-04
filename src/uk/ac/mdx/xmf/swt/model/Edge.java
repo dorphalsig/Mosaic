@@ -13,8 +13,8 @@ import uk.ac.mdx.xmf.swt.client.IdManager;
 import uk.ac.mdx.xmf.swt.client.xml.Element;
 import uk.ac.mdx.xmf.swt.demo.Main;
 import uk.ac.mdx.xmf.swt.misc.VisualElementEvents;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 public class Edge extends CommandEvent {
 

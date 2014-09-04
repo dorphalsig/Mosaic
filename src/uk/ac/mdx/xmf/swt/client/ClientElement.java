@@ -1,8 +1,8 @@
 package uk.ac.mdx.xmf.swt.client;
 
 import uk.ac.mdx.xmf.swt.client.xml.Element;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 public class ClientElement implements Commandable, ComponentWithIdentity {
 

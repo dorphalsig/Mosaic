@@ -4,8 +4,8 @@ import org.eclipse.draw2d.geometry.Point;
 
 import uk.ac.mdx.xmf.swt.client.EventHandler;
 import uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 public class CreateNodeCommand extends org.eclipse.gef.commands.Command {
 

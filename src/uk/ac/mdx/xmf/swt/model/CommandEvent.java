@@ -8,8 +8,8 @@ import uk.ac.mdx.xmf.swt.DiagramView;
 import uk.ac.mdx.xmf.swt.client.ClientElement;
 import uk.ac.mdx.xmf.swt.client.EventHandler;
 import uk.ac.mdx.xmf.swt.editPart.ConnectionLayerManager;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 public abstract class CommandEvent extends ClientElement {
 

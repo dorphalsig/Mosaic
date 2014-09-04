@@ -3,7 +3,7 @@ package com.ceteva.oleBridge;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
-import XOS.Value;
+import xos.Value;
 
 import com.jacob.activeX.ActiveXComponent;
 import com.jacob.com.Dispatch;

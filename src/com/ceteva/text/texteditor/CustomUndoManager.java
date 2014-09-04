@@ -33,8 +33,8 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 
 import uk.ac.mdx.xmf.swt.client.EventHandler;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 // unfortunately it was necessary to copy this implementation over from Eclipse
 // since many of the methods we need to access are protected and cannot be

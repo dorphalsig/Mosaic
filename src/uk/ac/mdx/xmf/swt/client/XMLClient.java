@@ -6,9 +6,9 @@ import uk.ac.mdx.xmf.swt.client.xml.Attribute;
 import uk.ac.mdx.xmf.swt.client.xml.Document;
 import uk.ac.mdx.xmf.swt.client.xml.Element;
 import uk.ac.mdx.xmf.swt.client.xml.XML;
-import XOS.Message;
-import XOS.Value;
-import XOS.XData;
+import xos.Message;
+import xos.Value;
+import xos.XData;
 
 public abstract class XMLClient extends Client {
 

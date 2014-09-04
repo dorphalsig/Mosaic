@@ -16,6 +16,6 @@ public class DialogsPlugin
 
 	public void earlyStartup() {
 		// DialogsClient client = new DialogsClient();
-		// XmfPlugin.XOS.newMessageClient("com.ceteva.dialogs",client);
+		// XmfPlugin.xos.newMessageClient("com.ceteva.dialogs",client);
 	}
 }

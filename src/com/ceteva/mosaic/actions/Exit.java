@@ -3,7 +3,7 @@ package com.ceteva.mosaic.actions;
 import org.eclipse.jface.action.Action;
 
 import uk.ac.mdx.xmf.swt.client.EventHandler;
-import XOS.Message;
+import xos.Message;
 
 public class Exit extends Action {
 

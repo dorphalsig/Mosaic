@@ -23,8 +23,8 @@ import org.eclipse.ui.IWorkbenchPartSite;
 import uk.ac.mdx.xmf.swt.client.EventHandler;
 import uk.ac.mdx.xmf.swt.demo.Main;
 import uk.ac.mdx.xmf.swt.misc.ColorManager;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 import com.ceteva.forms.FormsPlugin;
 import com.ceteva.menus.MenuBuilder;

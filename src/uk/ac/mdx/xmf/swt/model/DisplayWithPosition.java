@@ -5,7 +5,7 @@ import org.eclipse.draw2d.geometry.Point;
 import uk.ac.mdx.xmf.swt.client.ClientElement;
 import uk.ac.mdx.xmf.swt.client.EventHandler;
 import uk.ac.mdx.xmf.swt.client.xml.Element;
-import XOS.Message;
+import xos.Message;
 
 public abstract class DisplayWithPosition extends Display {
 

@@ -17,8 +17,8 @@ import org.eclipse.swt.widgets.MenuItem;
 import uk.ac.mdx.xmf.swt.client.Client;
 import uk.ac.mdx.xmf.swt.client.EventHandler;
 import uk.ac.mdx.xmf.swt.demo.Main;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 import com.ceteva.menus.actions.MenuAction;
 

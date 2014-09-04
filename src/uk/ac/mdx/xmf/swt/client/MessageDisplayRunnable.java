@@ -1,6 +1,6 @@
 package uk.ac.mdx.xmf.swt.client;
 
-import XOS.Message;
+import xos.Message;
 
 // Used to communicate messages to the GUI thread when we
 // are not concerned about the result

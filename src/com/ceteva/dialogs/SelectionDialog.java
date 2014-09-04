@@ -8,7 +8,7 @@ import org.eclipse.ui.dialogs.ListDialog;
 
 import uk.ac.mdx.xmf.swt.client.EventHandler;
 import uk.ac.mdx.xmf.swt.demo.Main;
-import XOS.Value;
+import xos.Value;
 
 public class SelectionDialog {
 

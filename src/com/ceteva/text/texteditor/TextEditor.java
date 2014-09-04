@@ -54,8 +54,8 @@ import uk.ac.mdx.xmf.swt.client.EventHandler;
 import uk.ac.mdx.xmf.swt.demo.Main;
 import uk.ac.mdx.xmf.swt.misc.FontManager;
 import uk.ac.mdx.xmf.swt.model.ImageManager;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 import com.ceteva.menus.MenuBuilder;
 import com.ceteva.menus.MenuListener;

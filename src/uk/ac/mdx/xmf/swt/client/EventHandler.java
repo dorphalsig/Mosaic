@@ -1,16 +1,16 @@
 package uk.ac.mdx.xmf.swt.client;
 
-import XOS.Message;
+import xos.Message;
 
 public class EventHandler {
 
 	String client;
-	XOS.EventHandler eventsOut; // send message to xmf
+	xos.EventHandler eventsOut; // send message to xmf
 								// server
 	boolean commandMode = false;
 	boolean debug = false;
 
-	public EventHandler(String client, XOS.EventHandler eventsOut) {
+	public EventHandler(String client, xos.EventHandler eventsOut) {
 		this.client = client;
 		this.eventsOut = eventsOut;
 	}

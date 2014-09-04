@@ -6,8 +6,8 @@ import org.eclipse.gef.commands.Command;
 import uk.ac.mdx.xmf.swt.client.IdManager;
 import uk.ac.mdx.xmf.swt.model.Edge;
 import uk.ac.mdx.xmf.swt.model.Waypoint;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 public class MoveWaypointCommand extends Command {
 

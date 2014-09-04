@@ -5,7 +5,7 @@ import java.util.Vector;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
-import XOS.Message;
+import xos.Message;
 
 import com.ceteva.dialogs.progress.ui.BackgroundJobs;
 import com.ceteva.dialogs.progress.ui.ProgressDialog;

@@ -5,8 +5,8 @@ import java.util.Vector;
 import uk.ac.mdx.xmf.swt.client.EventHandler;
 import uk.ac.mdx.xmf.swt.client.xml.Element;
 import uk.ac.mdx.xmf.swt.editPart.ConnectionLayerManager;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 public class Diagram extends AbstractDiagram {
 

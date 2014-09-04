@@ -4,8 +4,8 @@ import org.eclipse.jface.action.Action;
 
 import uk.ac.mdx.xmf.swt.client.EventHandler;
 import uk.ac.mdx.xmf.swt.client.IconManager;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 import com.ceteva.forms.views.FormView;
 

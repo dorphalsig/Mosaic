@@ -5,8 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import XOS.Message;
-import XOS.MessagePacket;
+import xos.Message;
+import xos.MessagePacket;
 
 import com.google.gson.Gson;
 

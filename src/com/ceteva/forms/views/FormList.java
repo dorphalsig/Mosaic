@@ -15,8 +15,8 @@ import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Listener;
 
 import uk.ac.mdx.xmf.swt.client.EventHandler;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 class FormList extends FormElement {
 

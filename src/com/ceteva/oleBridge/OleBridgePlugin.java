@@ -24,7 +24,7 @@ public class OleBridgePlugin {
 	/*
 	 * public void earlyStartup() { OleBridgeClient client = new
 	 * OleBridgeClient();
-	 * XmfPlugin.XOS.newMessageClient("com.ceteva.oleBridge",client); }
+	 * XmfPlugin.xos.newMessageClient("com.ceteva.oleBridge",client); }
 	 */
 
 }

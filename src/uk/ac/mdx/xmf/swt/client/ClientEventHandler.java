@@ -10,7 +10,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 import uk.ac.mdx.xmf.swt.io.IOThread;
-import XOS.Message;
+import xos.Message;
 
 import com.google.gson.Gson;
 

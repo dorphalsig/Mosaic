@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import org.eclipse.swt.graphics.Point;
 
 import uk.ac.mdx.xmf.swt.client.ExampleClient;
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 public class ExampleCreateNodeCommand {
 

@@ -6,7 +6,7 @@ import org.eclipse.swt.graphics.RGB;
 
 import uk.ac.mdx.xmf.swt.client.xml.Element;
 import uk.ac.mdx.xmf.swt.demo.Main;
-import XOS.Message;
+import xos.Message;
 
 class Graph {
 

@@ -4,7 +4,7 @@ import org.eclipse.swt.widgets.Display;
 
 import uk.ac.mdx.xmf.swt.client.Client;
 import uk.ac.mdx.xmf.swt.client.EventHandler;
-import XOS.Message;
+import xos.Message;
 
 import com.ceteva.mosaic.perspectives.PerspectiveManager;
 

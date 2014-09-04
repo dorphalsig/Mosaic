@@ -1,7 +1,7 @@
 package uk.ac.mdx.xmf.swt.client;
 
-import XOS.Message;
-import XOS.Value;
+import xos.Message;
+import xos.Value;
 
 public interface Commandable {
 
