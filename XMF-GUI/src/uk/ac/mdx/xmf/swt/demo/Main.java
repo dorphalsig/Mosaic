@@ -340,17 +340,12 @@ public class Main {
 		toldBridgeClient.start();
 
 		mb = new MenuManager();
-		// Add menus.
 		// initialize root menu
-		// MenuManager fileMenuManager = new MenuManager("&File", "17");
 		MenuManager windowsMenuManager = new MenuManager("&Windows", "&windows");
-		// MenuManager browserMenuManager = new MenuManager("&Browse", "34");
 		MenuManager helpMenuManager = new MenuManager("&Help");
 
-		// mb.add(fileMenuManager);
 		mb.add(windowsMenuManager);
 		windowsMenuManager.add(new ShowPres());
-		// mb.add(browserMenuManager);
 
 		mb.add(helpMenuManager);
 		helpMenuManager.add(new ShowPres());
