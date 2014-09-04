@@ -1,6 +1,5 @@
 package uk.ac.mdx.xmf.swt.demo;
 
-import java.util.Hashtable;
 import java.util.Vector;
 
 import org.eclipse.draw2d.ColorConstants;
@@ -41,8 +40,6 @@ import com.ceteva.menus.MenusClient;
 import com.ceteva.modelBrowser.ModelBrowserClient;
 import com.ceteva.mosaic.WorkbenchClient;
 import com.ceteva.mosaic.actions.ShowPres;
-import com.ceteva.mosaic.misc.XmfPlugin;
-import com.ceteva.mosaic.splash.Splash;
 import com.ceteva.oleBridge.OleBridgeClient;
 import com.ceteva.text.EditorClient;
 import com.ceteva.undo.UndoClient;
@@ -475,26 +472,16 @@ public class Main {
 	// tabFolder.pack();
 	// }
 
-	public static void iniSplash() {
-		XmfPlugin xmfplugin = new XmfPlugin();
-		Hashtable<?, ?> imagechoices = xmfplugin.getImages();
-		Splash splash = new Splash("icons" + "/splash/splash.bmp", imagechoices);
-		splash.show();
-	}
-
-	// XmfStartup
 	public static void main(String[] args) {
 		/*
-		 * Before this is run, be sure to set up correct SWT library path.
+		 * Before this is run, be sure to set up correct SWT library path, and
+		 * SWT type for different OS
 		 */
 		display = new Display();
-		// iniSplash(); // make user choose previous work
+		// SplashStartup splash = new SplashStartup();
+		// splash.iniSplash(); // make user choose previous work
 
 		Main.getInstance().createshell();
-
-		// String identity = "5";
-		// new HTMLViewerModel(identity, null);
-
 		Main.getInstance();
 		Main.shell.open();
 		while (!Main.shell.isDisposed()) {
