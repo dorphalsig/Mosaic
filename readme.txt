@@ -5,7 +5,7 @@ This is the GUI version to integrate with XMF2
 3. import the project "com.ceteva.xmf.machine" to Java GUI project
 4. run the Java GUI project, uk.ac.mdx.xmf.swt.demo.Main.java
 
-for Windows OS
+for Windows OS 
 1. use org.eclipse.swt.win32.win32.x86_3.7.2.v3740f.jar
 
 for Mac
