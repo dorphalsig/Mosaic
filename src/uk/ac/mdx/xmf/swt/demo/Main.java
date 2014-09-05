@@ -126,6 +126,7 @@ public class Main {
 			public void itemClosed(CTabFolderEvent event) {
 			}
 		});
+		tabFolderOutline.setSimple(false);
 
 		// Create the diagram tabs
 		tabFolderDiagram = new CTabFolder(sectionTopMiddle, SWT.BORDER);
@@ -144,7 +145,7 @@ public class Main {
 				}
 			}
 		});
-
+		tabFolderDiagram.setSimple(false);
 		// create overview
 		// tabFolderOverview = new CTabFolder(sectionBottomLeft, SWT.BORDER);
 		// tabFolderOverview.setBorderVisible(true);
@@ -174,6 +175,7 @@ public class Main {
 		propertyView = new FormView(tabFolderProperty, SWT.BORDER,
 				tabItemProperty);
 		tabFolderProperty.setVisible(true);// set invisiable for debug
+		tabFolderProperty.setSimple(false);
 		// create console view
 		// Create the tabs
 		tabFolderConsole = new TabFolder(sectionBottomRight, SWT.BORDER);
@@ -475,7 +477,7 @@ public class Main {
 	public static void main(String[] args) {
 		/*
 		 * Before this is run, be sure to set up correct SWT library path, and
-		 * SWT type for different OS
+		 * different SWT JAR (windows, linux and mac)  for different OS
 		 */
 		display = new Display();
 		// SplashStartup splash = new SplashStartup();
