@@ -33,6 +33,7 @@ com.ceteva.console.ConsoleClient:com.ceteva.console
 -workspace ../..
 -debug
 -heapSize
-8000
+10000
 -freeHeap
-800
+80
+
