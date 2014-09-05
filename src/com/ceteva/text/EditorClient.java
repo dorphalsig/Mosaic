@@ -16,6 +16,7 @@ import uk.ac.mdx.xmf.swt.demo.Main;
 import xos.Message;
 import xos.Value;
 
+import com.ceteva.text.htmlviewer.HTMLViewer;
 import com.ceteva.text.texteditor.TextEditor;
 import com.ceteva.text.texteditor.TextEditorInput;
 import com.ceteva.text.texteditor.TextStorage;
@@ -62,14 +63,20 @@ public class EditorClient extends Client {
 	public void showBrowser(String identity, String title, String tooltip,
 			String urls) {
 		// // Create a web browser
-		if (urls.length() > 1) {
+		// if (urls.length() > 1)
+		{
 			CTabItem tabItem = new CTabItem(Main.tabFolderDiagram, SWT.BORDER);
 			tabItem.setText(title);
 			Canvas c = new Canvas(Main.tabFolderDiagram, SWT.BORDER);
 			tabItem.setControl(c);
 
+			HTMLViewer viewer = new HTMLViewer();
+			viewer.init(identity);
+
 			Browser browser = new Browser(c, SWT.BORDER);
-			browser.setUrl(urls);
+			viewer.setBrowser(browser);
+			if (urls.length() > 1)
+				browser.setUrl(urls);
 			// browser.setText(urls);
 			browser.setBounds(Main.tabFolderDiagram.getBounds());
 			browser.setLocation(0, 0);
@@ -147,7 +154,7 @@ public class EditorClient extends Client {
 			path = path.substring(0, path.length() - 4); // delete "/bin" from
 															// string
 			path += "file/Welcome/welcome.html";
-			showBrowser(path);
+			// showBrowser(path);
 			return new Value(path);
 		}
 		return IdManager.processCall(message);

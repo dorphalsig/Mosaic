@@ -3,28 +3,19 @@ package com.ceteva.text.htmlviewer;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.LocationEvent;
 import org.eclipse.swt.browser.LocationListener;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.IEditorSite;
-import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.part.EditorPart;
 
 import uk.ac.mdx.xmf.swt.client.EventHandler;
 import xos.Message;
 import xos.Value;
 
-import com.ceteva.menus.MenuBuilder;
-import com.ceteva.text.texteditor.TextEditorInput;
-
-public class HTMLViewer extends EditorPart {
+public class HTMLViewer {
 
 	HTMLViewerModel model;
 	String identity = "";
@@ -40,7 +31,7 @@ public class HTMLViewer extends EditorPart {
 		// page.closeEditor(this,false);
 	}
 
-	public void doSave(IProgressMonitor monitor) {
+	public void doSave() {
 	}
 
 	public void doSaveAs() {
@@ -54,19 +45,19 @@ public class HTMLViewer extends EditorPart {
 		return false;
 	}
 
-	public void init(IEditorSite site, IEditorInput iInput)
-			throws PartInitException {
-		this.setSite(site);
-		this.setInput(iInput);
-		if (iInput instanceof TextEditorInput) {
-			TextEditorInput input = (TextEditorInput) iInput;
-			identity = "5";
-			model = new HTMLViewerModel(identity, null, this);
-		}
-	}
+	// public void init(IEditorSite site, IEditorInput iInput)
+	// throws PartInitException {
+	// this.setSite(site);
+	// this.setInput(iInput);
+	// if (iInput instanceof TextEditorInput) {
+	// TextEditorInput input = (TextEditorInput) iInput;
+	// identity = "5";
+	// model = new HTMLViewerModel(identity, null, this);
+	// }
+	// }
 
-	public void init() {
-		identity = "5";
+	public void init(String identity) {
+
 		model = new HTMLViewerModel(identity, null, this);
 	}
 
@@ -79,12 +70,12 @@ public class HTMLViewer extends EditorPart {
 	}
 
 	public void close(final boolean save) {
-		Display display = getSite().getShell().getDisplay();
-		display.asyncExec(new Runnable() {
-			public void run() {
-				getSite().getPage().closeEditor(HTMLViewer.this, false);
-			}
-		});
+		// Display display = getSite().getShell().getDisplay();
+		// display.asyncExec(new Runnable() {
+		// public void run() {
+		// getSite().getPage().closeEditor(HTMLViewer.this, false);
+		// }
+		// });
 	}
 
 	public void createPartControl(Composite parent) {
@@ -121,9 +112,9 @@ public class HTMLViewer extends EditorPart {
 		Value v1 = new Value(identity);
 		m.args[0] = v1;
 		handler.raiseEvent(m);
-		MenuBuilder.dispose(getSite());
+		// MenuBuilder.dispose(getSite());
 		model.dispose();
-		super.dispose();
+		// super.dispose();
 	}
 
 	public void setEventHandler(EventHandler handler) {
@@ -132,8 +123,8 @@ public class HTMLViewer extends EditorPart {
 	}
 
 	public void setFocusInternal() {
-		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
-				.activate(this);
+		// PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
+		// .activate(this);
 	}
 
 	public void setHTML(String html) {
@@ -164,12 +155,12 @@ public class HTMLViewer extends EditorPart {
 	}
 
 	public void setName(String title) {
-		setPartName(title);
+		// setPartName(title);
 	}
 
 	public void setToolTip(String tooltip) {
 		this.tooltip = tooltip;
-		this.setTitleToolTip(tooltip);
+		// this.setTitleToolTip(tooltip);
 	}
 
 	public String getTitleToolTip() {
@@ -177,5 +168,9 @@ public class HTMLViewer extends EditorPart {
 	}
 
 	public void setFocus() {
+	}
+
+	public void setBrowser(Browser browser2) {
+		browser = browser2;
 	}
 }
