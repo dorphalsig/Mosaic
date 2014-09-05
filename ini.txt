@@ -1,9 +1,9 @@
 -arg
 user:XModeler
 -arg
-home:M:/code/com.ceteva.xmf.system/xmf-src
+home:../../com.ceteva.xmf.system/xmf-src
 -image
-M:/code/com.ceteva.xmf.system/xmf-img/mosaic.img
+../../com.ceteva.xmf.system/xmf-img/mosaic.img
 -arg
 projects:
 -arg
