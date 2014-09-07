@@ -19,7 +19,8 @@ public class TextPlugin {
 	public static String PARTITIONER = "default_partitioner";
 
 	public static Color RED = ColorManager.getColor(new RGB(255, 0, 0));
-	public static Color GREEN = ColorManager.getColor(new RGB(63, 127, 95));
+	//public static Color GREEN = ColorManager.getColor(new RGB(63, 127, 95));
+	public static Color GREEN = ColorManager.getColor(new RGB(0, 139, 0));
 	public static Color BLUE = ColorManager.getColor(new RGB(0, 0, 255));
 	public static Color BLACK = ColorManager.getColor(new RGB(0, 0, 0));
 
