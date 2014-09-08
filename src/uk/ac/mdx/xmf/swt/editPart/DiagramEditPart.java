@@ -17,8 +17,15 @@ import uk.ac.mdx.xmf.swt.diagram.zoom.AnimatableZoomManager;
 import uk.ac.mdx.xmf.swt.figure.DiagramFigure;
 import uk.ac.mdx.xmf.swt.model.AbstractDiagram;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DiagramEditPart.
+ */
 public class DiagramEditPart extends CommandEventEditPart {
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart#activate()
+	 */
 	@Override
 	public void activate() {
 		super.activate();
@@ -28,6 +35,9 @@ public class DiagramEditPart extends CommandEventEditPart {
 		// DropTargetListener(getViewer(),TextTransfer.getInstance()));;
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart#deactivate()
+	 */
 	@Override
 	public void deactivate() {
 		super.deactivate();
@@ -35,6 +45,9 @@ public class DiagramEditPart extends CommandEventEditPart {
 		// azm.removeZoomListener(this);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
+	 */
 	@Override
 	protected IFigure createFigure() {
 		DiagramFigure f = new DiagramFigure();
@@ -48,27 +61,42 @@ public class DiagramEditPart extends CommandEventEditPart {
 		return f;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#getCommand(org.eclipse.gef.Request)
+	 */
 	@Override
 	public Command getCommand(Request request) {
 		return super.getCommand(request);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#getModelChildren()
+	 */
 	@Override
 	protected List getModelChildren() {
 		return ((AbstractDiagram) getModel()).getContents();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#getDragTracker(org.eclipse.gef.Request)
+	 */
 	@Override
 	public DragTracker getDragTracker(Request req) {
 		return new SelectionTracker();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#createEditPolicies()
+	 */
 	@Override
 	protected void createEditPolicies() {
 		// installEditPolicy(EditPolicy.LAYOUT_ROLE, new LayoutPolicy());
 		// installEditPolicy("PopupPalette", new PopupPalette());
 	}
 
+	/* (non-Javadoc)
+	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
+	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		String prop = evt.getPropertyName();
@@ -96,10 +124,16 @@ public class DiagramEditPart extends CommandEventEditPart {
 				zoom();
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart#refreshChildren()
+	 */
 	public void refreshChildren() {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart#preferenceUpdate()
+	 */
 	@Override
 	public void preferenceUpdate() {
 		DiagramFigure figure = (DiagramFigure) getFigure();
@@ -112,6 +146,9 @@ public class DiagramEditPart extends CommandEventEditPart {
 		figure.repaint();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#performRequest(org.eclipse.gef.Request)
+	 */
 	@Override
 	public void performRequest(Request req) {
 		AbstractDiagram diagram = (AbstractDiagram) getModel();
@@ -122,6 +159,11 @@ public class DiagramEditPart extends CommandEventEditPart {
 			diagram.selected(2);
 	}
 
+	/**
+	 * Gets the background color.
+	 *
+	 * @return the background color
+	 */
 	public RGB getBackgroundColor() {
 		RGB color = ((AbstractDiagram) getModel()).getColor();
 		if (color != null)
@@ -133,12 +175,20 @@ public class DiagramEditPart extends CommandEventEditPart {
 		// IPreferenceConstants.DIAGRAM_BACKGROUND_COLOR);
 	}
 
+	/**
+	 * Gets the zoom manager.
+	 *
+	 * @return the zoom manager
+	 */
 	public ZoomManager getZoomManager() {
 		RootEditPart rep = (RootEditPart) this.getParent();
 		return null;
 		// return rep.getZoomManager();
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart#refresh()
+	 */
 	@Override
 	public void refresh() {
 		refreshBackgroundColor();
@@ -146,11 +196,17 @@ public class DiagramEditPart extends CommandEventEditPart {
 		super.refresh();
 	}
 
+	/**
+	 * Refresh background color.
+	 */
 	public void refreshBackgroundColor() {
 		// getFigure().setBackgroundColor(
 		// ColorManager.getColor(getBackgroundColor()));
 	}
 
+	/**
+	 * Refresh zoom.
+	 */
 	public void refreshZoom() {
 		AbstractDiagram diagram = (AbstractDiagram) getModel();
 		if (diagram.getQueuedZoom()) {
@@ -159,14 +215,25 @@ public class DiagramEditPart extends CommandEventEditPart {
 		}
 	}
 
+	/**
+	 * Zoom.
+	 */
 	public void zoom() {
 		AbstractDiagram diagram = (AbstractDiagram) getModel();
 		// getZoomManager().setZoomAsText(diagram.getZoom());
 	}
 
+	/**
+	 * Zoom changed.
+	 *
+	 * @param zoom the zoom
+	 */
 	public void zoomChanged(double zoom) {
 	}
 
+	/**
+	 * Animated zoom ended.
+	 */
 	public void animatedZoomEnded() {
 		AnimatableZoomManager azm = (AnimatableZoomManager) getZoomManager();
 		double zoom = azm.getZoom();
@@ -175,6 +242,9 @@ public class DiagramEditPart extends CommandEventEditPart {
 		diagram.zoomChanged(new Double(zoom * 100).intValue());
 	}
 
+	/**
+	 * Animated zoom started.
+	 */
 	public void animatedZoomStarted() {
 		// AbstractDiagram diagram = (AbstractDiagram)getModel();
 	}

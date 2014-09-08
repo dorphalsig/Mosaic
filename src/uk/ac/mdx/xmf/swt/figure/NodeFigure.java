@@ -12,20 +12,43 @@ import org.eclipse.draw2d.geometry.Point;
 
 import uk.ac.mdx.xmf.swt.model.Port;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NodeFigure.
+ */
 public class NodeFigure extends Figure {
 
+	/** The fixed anchors. */
 	Hashtable fixedAnchors = new Hashtable();
 
+	/**
+	 * Instantiates a new node figure.
+	 *
+	 * @param location the location
+	 * @param size the size
+	 * @param ports the ports
+	 */
 	public NodeFigure(Point location, Dimension size, Vector ports) {
 		setLocation(location);
 		setSize(size);
 		createFixedAnchors(ports);
 	}
 
+	/**
+	 * Contains group figure.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean containsGroupFigure() {
 		return containsGroupFigure(this);
 	}
 
+	/**
+	 * Contains group figure.
+	 *
+	 * @param parent the parent
+	 * @return true, if successful
+	 */
 	public boolean containsGroupFigure(Figure parent) {
 		List children = parent.getChildren();
 		for (int i = 0; i < children.size(); i++) {
@@ -38,6 +61,11 @@ public class NodeFigure extends Figure {
 		return false;
 	}
 
+	/**
+	 * Creates the fixed anchors.
+	 *
+	 * @param ports the ports
+	 */
 	protected void createFixedAnchors(Vector ports) {
 		for (int i = 0; i < ports.size(); i++) {
 			Port p = (Port) ports.elementAt(i);
@@ -52,10 +80,22 @@ public class NodeFigure extends Figure {
 		}
 	}
 
+	/**
+	 * Gets the connection anchor.
+	 *
+	 * @param name the name
+	 * @return the connection anchor
+	 */
 	public AbstractConnectionAnchor getConnectionAnchor(String name) {
 		return getFixedConnectionAnchor(name);
 	}
 
+	/**
+	 * Gets the fixed connection anchor.
+	 *
+	 * @param name the name
+	 * @return the fixed connection anchor
+	 */
 	public FixedAnchor getFixedConnectionAnchor(String name) {
 		if (fixedAnchors.containsKey(name))
 			return (FixedAnchor) fixedAnchors.get(name);
@@ -63,10 +103,22 @@ public class NodeFigure extends Figure {
 			return null;
 	}
 
+	/**
+	 * Gets the anchor.
+	 *
+	 * @param p the p
+	 * @return the anchor
+	 */
 	public AbstractConnectionAnchor getAnchor(Point p) {
 		return getFixedAnchor(p);
 	}
 
+	/**
+	 * Gets the fixed anchor.
+	 *
+	 * @param p the p
+	 * @return the fixed anchor
+	 */
 	public FixedAnchor getFixedAnchor(Point p) {
 		Enumeration e = fixedAnchors.elements();
 		while (e.hasMoreElements()) {
@@ -77,13 +129,22 @@ public class NodeFigure extends Figure {
 		return null;
 	}
 
+	/** The count. */
 	static int count = 0;
 
+	/**
+	 * Reset fixed ports.
+	 *
+	 * @param ports the ports
+	 */
 	public void resetFixedPorts(Vector ports) {
 		fixedAnchors = new Hashtable();
 		createFixedAnchors(ports);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.draw2d.Figure#useLocalCoordinates()
+	 */
 	@Override
 	protected boolean useLocalCoordinates() {
 		return true;

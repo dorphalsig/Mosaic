@@ -6,7 +6,15 @@ import java.util.Hashtable;
 
 import com.ceteva.mosaic.splash.Splash;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SplashStartup.
+ */
 public class SplashStartup {
+	
+	/**
+	 * Ini splash.
+	 */
 	public static void iniSplash() {
 		Hashtable<?, ?> imagechoices = getImages();
 		Splash splash = new Splash("icons" + "/splash/splash.bmp", imagechoices);
@@ -18,6 +26,11 @@ public class SplashStartup {
 		// xmfplugin.setImage(imagedefault);
 	}
 
+	/**
+	 * Gets the images.
+	 *
+	 * @return the images
+	 */
 	private static Hashtable getImages() {
 		String workingDir = System.getProperty("user.dir");
 		String imagesDir = "F:\\xmf\\XMF-xmf-integration\\com.ceteva.xmf.system\\xmf-img";

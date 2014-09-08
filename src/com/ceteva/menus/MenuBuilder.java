@@ -18,8 +18,19 @@ import xos.Value;
 
 import com.ceteva.menus.actions.GlobalMenuAction;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MenuBuilder.
+ */
 public class MenuBuilder {
 
+	/**
+	 * Adds the listener.
+	 *
+	 * @param item the item
+	 * @param elementIdentity the element identity
+	 * @param menuIdentity the menu identity
+	 */
 	private static void addListener(MenuItem item,
 			final String elementIdentity, final String menuIdentity) {
 		item.addListener(SWT.Selection, new Listener() {
@@ -40,6 +51,12 @@ public class MenuBuilder {
 	// New machinery for dealing with calculating menus based on multiple
 	// selection
 
+	/**
+	 * Calculate key bindings.
+	 *
+	 * @param manager the manager
+	 * @param site the site
+	 */
 	public static void calculateKeyBindings(IMenuManager manager,
 			IWorkbenchPartSite site) {
 		// if (site != null)
@@ -56,6 +73,13 @@ public class MenuBuilder {
 		}
 	}
 
+	/**
+	 * Calculate menu.
+	 *
+	 * @param identities the identities
+	 * @param menu the menu
+	 * @param manager the manager
+	 */
 	public static void calculateMenu(Vector identities, GlobalMenu menu,
 			IMenuManager manager) {
 		Vector menus = menu.getSubMenus();
@@ -66,6 +90,13 @@ public class MenuBuilder {
 		}
 	}
 
+	/**
+	 * Calculate menu.
+	 *
+	 * @param identities the identities
+	 * @param manager the manager
+	 * @param site the site
+	 */
 	public static void calculateMenu(Vector identities, IMenuManager manager,
 			IWorkbenchPartSite site) {
 		Vector globalMenus = new Vector();
@@ -98,6 +129,13 @@ public class MenuBuilder {
 		}
 	}
 
+	/**
+	 * Construct multi menu.
+	 *
+	 * @param menu the menu
+	 * @param menus the menus
+	 * @return true, if successful
+	 */
 	public static boolean constructMultiMenu(com.ceteva.menus.Menu menu,
 			Vector menus) {
 
@@ -166,6 +204,13 @@ public class MenuBuilder {
 
 	/* *** END *** */
 
+	/**
+	 * Calculate menu.
+	 *
+	 * @param elementIdentity the element identity
+	 * @param manager the manager
+	 * @param site the site
+	 */
 	public static void calculateMenu(String elementIdentity,
 			IMenuManager manager, IWorkbenchPartSite site) {
 		GlobalMenu globalMenu = MenuManager.getGlobalMenu(elementIdentity);
@@ -196,6 +241,12 @@ public class MenuBuilder {
 		}
 	}
 
+	/**
+	 * Calculate menu.
+	 *
+	 * @param elementIdentity the element identity
+	 * @param parent the parent
+	 */
 	public static void calculateMenu(String elementIdentity, Menu parent) {
 		clearMenu(parent);
 		GlobalMenu globalMenu = MenuManager.getGlobalMenu(elementIdentity);
@@ -209,6 +260,13 @@ public class MenuBuilder {
 		}
 	}
 
+	/**
+	 * Calculate menu.
+	 *
+	 * @param elementIdentity the element identity
+	 * @param parent the parent
+	 * @param m the m
+	 */
 	private static void calculateMenu(String elementIdentity, Menu parent,
 			com.ceteva.menus.Menu m) {
 		if (m.isParent()) {
@@ -231,6 +289,13 @@ public class MenuBuilder {
 		}
 	}
 
+	/**
+	 * Calculate menu.
+	 *
+	 * @param identities the identities
+	 * @param parent the parent
+	 * @param m the m
+	 */
 	private static void calculateMenu(Vector identities, IMenuManager parent,
 			com.ceteva.menus.Menu m) {
 		if (m.isParent()) {
@@ -250,21 +315,42 @@ public class MenuBuilder {
 		}
 	}
 
+	/**
+	 * Clear menu.
+	 *
+	 * @param menu the menu
+	 */
 	private static void clearMenu(Menu menu) {
 		MenuItem[] items = menu.getItems();
 		for (int i = 0; i < items.length; i++)
 			items[i].dispose();
 	}
 
+	/**
+	 * Dispose.
+	 *
+	 * @param site the site
+	 */
 	public static void dispose(IWorkbenchPartSite site) {
 		KeyBindingBuilder.resetKeyBindings(site);
 	}
 
+	/**
+	 * Checks for menu.
+	 *
+	 * @param elementIdentity the element identity
+	 * @return true, if successful
+	 */
 	public static boolean hasMenu(String elementIdentity) {
 		GlobalMenu globalMenu = MenuManager.getGlobalMenu(elementIdentity);
 		return globalMenu != null;
 	}
 
+	/**
+	 * Reset key bindings.
+	 *
+	 * @param site the site
+	 */
 	public static void resetKeyBindings(IWorkbenchPartSite site) {
 		if (site != null)
 			KeyBindingBuilder.resetKeyBindings(site);

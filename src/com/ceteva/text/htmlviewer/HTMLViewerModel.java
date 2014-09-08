@@ -4,24 +4,48 @@ import uk.ac.mdx.xmf.swt.client.ClientElement;
 import uk.ac.mdx.xmf.swt.client.EventHandler;
 import xos.Message;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class HTMLViewerModel.
+ */
 public class HTMLViewerModel extends ClientElement {
 
+	/** The viewer. */
 	HTMLViewer viewer;
 
+	/**
+	 * Instantiates a new HTML viewer model.
+	 *
+	 * @param identity the identity
+	 * @param handler the handler
+	 * @param viewer the viewer
+	 */
 	public HTMLViewerModel(String identity, EventHandler handler,
 			HTMLViewer viewer) {
 		super(null, handler, identity);
 		this.viewer = viewer;
 	}
 
+	/**
+	 * Instantiates a new HTML viewer model.
+	 *
+	 * @param identity the identity
+	 * @param handler the handler
+	 */
 	public HTMLViewerModel(String identity, EventHandler handler) {
 		super(null, handler, identity);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.ClientElement#delete()
+	 */
 	public void delete() {
 		// viewer.delete();
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.ClientElement#processMessage(xos.Message)
+	 */
 	public boolean processMessage(Message message) {
 		if (message.arity > 0) {
 			if (message.args[0].hasStrValue(identity)) {

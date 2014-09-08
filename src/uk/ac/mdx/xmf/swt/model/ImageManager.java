@@ -8,14 +8,23 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ImageManager.
+ */
 public class ImageManager {
 
+	/** The graphics dir. */
 	private static String graphicsDir = "images";
 
 	// private static Vector images = new Vector();
 
+	/** The images. */
 	private static Hashtable images = new Hashtable();
 
+	/**
+	 * Dispose.
+	 */
 	public static void dispose() {
 		Enumeration e = images.keys();
 		while (e.hasMoreElements()) {
@@ -24,6 +33,12 @@ public class ImageManager {
 		}
 	}
 
+	/**
+	 * Gets the image.
+	 *
+	 * @param filename the filename
+	 * @return the image
+	 */
 	public static Image getImage(String filename) {
 
 		// apply any redirects to the filename
@@ -39,6 +54,12 @@ public class ImageManager {
 		// return getImageFromFileRelative( filename);
 	}
 
+	/**
+	 * Gets the image from file absolute.
+	 *
+	 * @param filename the filename
+	 * @return the image from file absolute
+	 */
 	private static Image getImageFromFileAbsolute(String filename) {
 		Image image = ImageDescriptor.createFromFile(null, filename)
 				.createImage();
@@ -46,6 +67,12 @@ public class ImageManager {
 		return image;
 	}
 
+	/**
+	 * Gets the image from file relative.
+	 *
+	 * @param filename the filename
+	 * @return the image from file relative
+	 */
 	private static Image getImageFromFileRelative(String filename) {
 		// String iconPath = graphicsDir + "/";
 		// try {
@@ -62,6 +89,14 @@ public class ImageManager {
 		return null;
 	}
 
+	/**
+	 * Resize image.
+	 *
+	 * @param image the image
+	 * @param width the width
+	 * @param height the height
+	 * @return the image
+	 */
 	public static Image resizeImage(Image image, int width, int height) {
 		String filename = (String) images.remove(image);
 		image.dispose();

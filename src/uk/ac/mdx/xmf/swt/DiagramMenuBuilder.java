@@ -18,15 +18,32 @@ import uk.ac.mdx.xmf.swt.editPart.NodeEditPart;
 
 import com.ceteva.menus.MenuBuilder;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DiagramMenuBuilder.
+ */
 public class DiagramMenuBuilder implements ISelectionChangedListener {
+	
+	/** The viewer. */
 	FigureCanvas viewer;
+	
+	/** The site. */
 	IWorkbenchPartSite site;
 
+	/**
+	 * Instantiates a new diagram menu builder.
+	 *
+	 * @param viewer the viewer
+	 * @param site the site
+	 */
 	public DiagramMenuBuilder(FigureCanvas viewer, IWorkbenchPartSite site) {
 		this.viewer = viewer;
 		this.site = site;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.viewers.ISelectionChangedListener#selectionChanged(org.eclipse.jface.viewers.SelectionChangedEvent)
+	 */
 	public void selectionChanged(SelectionChangedEvent event) {
 		StructuredSelection selection = (StructuredSelection) event
 				.getSelection();
@@ -37,6 +54,12 @@ public class DiagramMenuBuilder implements ISelectionChangedListener {
 		viewer.setMenu(manager.createContextMenu(viewer));
 	}
 
+	/**
+	 * Gets the selected identity.
+	 *
+	 * @param selection the selection
+	 * @return the selected identity
+	 */
 	public Vector getSelectedIdentity(StructuredSelection selection) {
 
 		Vector selected = new Vector();
@@ -94,6 +117,12 @@ public class DiagramMenuBuilder implements ISelectionChangedListener {
 		return selected;
 	}
 
+	/**
+	 * Identity for edit part.
+	 *
+	 * @param ep the ep
+	 * @return the string
+	 */
 	public String identityForEditPart(EditPart ep) {
 		if (ep instanceof CommandEventEditPart) {
 			CommandEventEditPart cep = (CommandEventEditPart) ep;

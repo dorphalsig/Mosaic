@@ -6,20 +6,43 @@ import java.io.InputStream;
 import uk.ac.mdx.xmf.swt.diagram.stubs.BITMAPINFOHEADER;
 import uk.ac.mdx.xmf.swt.diagram.stubs.OS;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UncompressDibFilterInputStream.
+ */
 class UncompressDibFilterInputStream extends InputStream {
 
+	/** The in. */
 	private final InputStream in;
+	
+	/** The buffer. */
 	private byte[] buffer;
+	
+	/** The index. */
 	private int index = 0;
+	
+	/** The is compressed. */
 	private final boolean isCompressed;
 
 	// The following are only used when isCompressed==true
-	/** bits per pixel */
+	/**  bits per pixel. */
 	private short bitCount = -1;
+	
+	/** The red mask. */
 	private int redMask = -1;
+	
+	/** The green mask. */
 	private int greenMask = -1;
+	
+	/** The blue mask. */
 	private int blueMask = -1;
 
+	/**
+	 * Instantiates a new uncompress dib filter input stream.
+	 *
+	 * @param bmpFileStream the bmp file stream
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public UncompressDibFilterInputStream(InputStream bmpFileStream)
 			throws IOException {
 		this.in = bmpFileStream;
@@ -55,6 +78,9 @@ class UncompressDibFilterInputStream extends InputStream {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.io.InputStream#read()
+	 */
 	public int read() throws IOException {
 		// first try and read from the buffer
 		if (this.index < this.buffer.length) {
@@ -105,6 +131,10 @@ class UncompressDibFilterInputStream extends InputStream {
 	/**
 	 * not too elegant way of reading bitmasked color info. val.. : 10110100
 	 * 10011011 mask. : 00000111 11100000 return: 00100100
+	 *
+	 * @param val the val
+	 * @param mask the mask
+	 * @return the int
 	 */
 	private static int deMask(int val, int mask) {
 		int a = val & mask;

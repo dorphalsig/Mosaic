@@ -11,11 +11,26 @@ import xos.Value;
 import com.ceteva.menus.MenusClient;
 import com.ceteva.text.texteditor.TextEditor;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GlobalMenuAction.
+ */
 public class GlobalMenuAction extends Action {
 
+	/** The menu identities. */
 	private Vector menuIdentities;
+	
+	/** The identities. */
 	private Vector identities;
 
+	/**
+	 * Instantiates a new global menu action.
+	 *
+	 * @param text the text
+	 * @param menuIdentities the menu identities
+	 * @param identities the identities
+	 * @param enabled the enabled
+	 */
 	public GlobalMenuAction(String text, Vector menuIdentities,
 			Vector identities, boolean enabled) {
 		super(text);
@@ -39,6 +54,9 @@ public class GlobalMenuAction extends Action {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.action.Action#run()
+	 */
 	public void run() {
 		EventHandler handler = MenusClient.handler;
 		int size = identities.size();

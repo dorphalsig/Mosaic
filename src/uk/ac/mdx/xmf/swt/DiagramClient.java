@@ -22,24 +22,47 @@ import uk.ac.mdx.xmf.swt.model.XMLBindings;
 import xos.Message;
 import xos.Value;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DiagramClient.
+ */
 public class DiagramClient extends XMLClient {
 
+	/** The done. */
 	boolean done = false;
+	
+	/** The global render off. */
 	static private int globalRenderOff = 0;
+	
+	/** The handler. */
 	public EventHandler handler = null;
+	
+	/** The _view. */
 	public static DiagramView _view;
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Client#setEventHandler(uk.ac.mdx.xmf.swt.client.EventHandler)
+	 */
 	@Override
 	public void setEventHandler(EventHandler eventsOut) {
 		handler = eventsOut;
 	}
 
+	/**
+	 * Instantiates a new diagram client.
+	 */
 	public DiagramClient() {
 		super("com.ceteva.diagram");
 	}
 
+	/** The diagram. */
 	uk.ac.mdx.xmf.swt.model.Diagram diagram;
 
+	/**
+	 * Close none displayed diagrams.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean closeNoneDisplayedDiagrams() {
 		Hashtable ids = IdManager.getIds();
 		Iterator it = ids.values().iterator();
@@ -55,6 +78,11 @@ public class DiagramClient extends XMLClient {
 		return true;
 	}
 
+	/**
+	 * Display diagram model.
+	 *
+	 * @param diagram the diagram
+	 */
 	public void displayDiagramModel(uk.ac.mdx.xmf.swt.model.Diagram diagram) {
 
 		DiagramPlugin diagramManager = DiagramPlugin.getDefault();
@@ -75,6 +103,14 @@ public class DiagramClient extends XMLClient {
 		// }
 	}
 
+	/**
+	 * New diagram model.
+	 *
+	 * @param identity the identity
+	 * @param name the name
+	 * @param show the show
+	 * @return the uk.ac.mdx.xmf.swt.model. diagram
+	 */
 	public uk.ac.mdx.xmf.swt.model.Diagram newDiagramModel(String identity,
 			String name, boolean show) {
 
@@ -92,14 +128,30 @@ public class DiagramClient extends XMLClient {
 		return diagram;
 	}
 
+	/**
+	 * Sets the view.
+	 *
+	 * @param view the new view
+	 */
 	public void setView(DiagramView view) {
 		_view = view;
 	}
 
+	/**
+	 * Gets the diagram.
+	 *
+	 * @return the diagram
+	 */
 	public uk.ac.mdx.xmf.swt.model.Diagram getDiagram() {
 		return diagram;
 	}
 
+	/**
+	 * Sets the focus.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean setFocus(Message message) {
 		if (message.arity == 1) {
 			String identity = message.args[0].strValue();
@@ -121,6 +173,12 @@ public class DiagramClient extends XMLClient {
 		return false;
 	}
 
+	/**
+	 * Broadcast call.
+	 *
+	 * @param message the message
+	 * @return the value
+	 */
 	public Value broadcastCall(Message message) {
 		if (message.hasName("getTextDimension") && message.arity == 2) {
 			String text = message.args[0].strValue();
@@ -135,6 +193,13 @@ public class DiagramClient extends XMLClient {
 		return new Value(false);
 	}
 
+	/**
+	 * Gets the text dimension.
+	 *
+	 * @param text the text
+	 * @param italicise the italicise
+	 * @return the text dimension
+	 */
 	public Value getTextDimension(String text, boolean italicise) {
 		// IPreferenceStore preferences = DiagramPlugin.getDefault()
 		// .getPreferenceStore();
@@ -152,6 +217,13 @@ public class DiagramClient extends XMLClient {
 		return value;
 	}
 
+	/**
+	 * Gets the text dimension with font.
+	 *
+	 * @param text the text
+	 * @param font the font
+	 * @return the text dimension with font
+	 */
 	public Value getTextDimensionWithFont(String text, String font) {
 		Font f = FontManager.getFont(new FontData(font));
 		Dimension d = FigureUtilities.getTextExtents(text, f);
@@ -162,15 +234,26 @@ public class DiagramClient extends XMLClient {
 		return value;
 	}
 
+	/**
+	 * Checks if is rendering.
+	 *
+	 * @return true, if is rendering
+	 */
 	public static boolean isRendering() {
 		return globalRenderOff == 0;
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Client#processCall(xos.Message)
+	 */
 	@Override
 	public Value processCall(Message message) {
 		return broadcastCall(message);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.XMLClient#processMessage(xos.Message)
+	 */
 	@Override
 	public boolean processMessage(Message message) {
 		if (super.processMessage(message))
@@ -196,12 +279,18 @@ public class DiagramClient extends XMLClient {
 		return IdManager.processMessage(message);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.XMLClient#processXML(uk.ac.mdx.xmf.swt.client.xml.Document)
+	 */
 	@Override
 	public void processXML(Document xml) {
 		// xml.printString();
 		synchronise(xml);
 	}
 
+	/**
+	 * Refresh diagrams.
+	 */
 	public void refreshDiagrams() {
 		Hashtable ids = IdManager.getIds();
 		Iterator it = ids.values().iterator();
@@ -215,10 +304,20 @@ public class DiagramClient extends XMLClient {
 		}
 	}
 
+	/**
+	 * Synchronise.
+	 *
+	 * @param xml the xml
+	 */
 	public void synchronise(Element xml) {
 		synchroniseDiagrams(xml);
 	}
 
+	/**
+	 * Synchronise diagrams.
+	 *
+	 * @param xml the xml
+	 */
 	public void synchroniseDiagrams(Element xml) {
 
 		// check that there is a diagram for each of the document's diagrams

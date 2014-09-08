@@ -5,19 +5,27 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
+// TODO: Auto-generated Javadoc
 /**
- * 接收信息
- * 
- * 
+ * 接收信息.
  */
 public class M2MReceive extends Thread {
 
+	/** The s. */
 	private Socket s;
 
+	/**
+	 * Instantiates a new m2 m receive.
+	 *
+	 * @param s the s
+	 */
 	public M2MReceive(Socket s) {
 		this.s = s;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Thread#run()
+	 */
 	public void run() {
 
 		try {

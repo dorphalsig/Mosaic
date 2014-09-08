@@ -43,44 +43,107 @@ import com.ceteva.mosaic.actions.ShowPres;
 import com.ceteva.oleBridge.OleBridgeClient;
 import com.ceteva.text.EditorClient;
 import com.ceteva.undo.UndoClient;
+// TODO: Auto-generated Javadoc
 
+/**
+ * The Class Main.
+ *
+ * @author yongjun1
+ */
 public class Main {
 
+	/** The shell. */
 	public static org.eclipse.swt.widgets.Shell shell = null;
+	
+	/** The mb. */
 	public static MenuManager mb;
+	
+	/** The sash form. */
 	private SashForm sashForm = null;
+	
+	/** The section tool bar. */
 	private SashForm sectionToolBar = null;
+	
+	/** The section top. */
 	public static SashForm sectionTop = null;
+	
+	/** The section top left. */
 	public static SashForm sectionTopLeft = null;
+	
+	/** The section top middle. */
 	public static SashForm sectionTopMiddle = null;
+	
+	/** The section bottom. */
 	public static SashForm sectionBottom = null;
+	
+	/** The section bottom middle. */
 	public static SashForm sectionBottomMiddle = null;
+	
+	/** The section bottom right. */
 	public static SashForm sectionBottomRight = null;
 
+	/** The tab folder outline. */
 	public static CTabFolder tabFolderOutline;
+	
+	/** The tab folder diagram. */
 	public static CTabFolder tabFolderDiagram;
+	
+	/** The tab folder overview. */
 	public static CTabFolder tabFolderOverview;
+	
+	/** The tab folder property. */
 	public static CTabFolder tabFolderProperty;
+	
+	/** The tab folder console. */
 	public static TabFolder tabFolderConsole;
 
+	/** The view. */
 	public static DiagramView view = null;
+	
+	/** The palette. */
 	public static Palette palette = null;
+	
+	/** The overview. */
 	public static Overview overview = null;
+	
+	/** The console view. */
 	public static ConsoleView consoleView;
+	
+	/** The property view. */
 	public static FormView propertyView;
+	
+	/** The screen height. */
 	private int screenWidth, screenHeight;
+	
+	/** The display. */
 	public static Display display;
+	
+	/** The provider. */
 	public static Provider provider;
+	
+	/** The antialias. */
 	public static boolean antialias = true;
 
+	/** The is open. */
 	public static boolean isOpen = true;
 
+	/** The views. */
 	public Vector<DiagramView> views = new Vector<DiagramView>();
+	
+	/** The palettes. */
 	public Vector<Palette> palettes = new Vector<Palette>();
+	
+	/** The diagram client. */
 	private DiagramClient diagramClient;
 
+	/** The instance. */
 	private volatile static Main instance = null;
 
+	/**
+	 * Gets the single instance of Main.
+	 *
+	 * @return single instance of Main
+	 */
 	public static Main getInstance() {
 		if (instance == null) {
 			instance = new Main();
@@ -89,9 +152,9 @@ public class Main {
 	}
 
 	/**
-	 * This method initializes shell
+	 * Createshell.
 	 */
-
+	
 	@SuppressWarnings("deprecation")
 	private void createshell() {
 		shell = new Shell(SWT.BORDER | SWT.SHELL_TRIM);
@@ -376,6 +439,12 @@ public class Main {
 
 	}
 
+	/**
+	 * Start new diagram.
+	 *
+	 * @param identity the identity
+	 * @param diagram the diagram
+	 */
 	public void startNewDiagram(String identity,
 			uk.ac.mdx.xmf.swt.model.Diagram diagram) {
 		CTabItem tabItem = new CTabItem(tabFolderDiagram, SWT.BORDER);
@@ -406,6 +475,11 @@ public class Main {
 		sashFormDiagram.setWeights(new int[] { 15, 85 });
 	}
 
+	/**
+	 * Gets the view.
+	 *
+	 * @return the view
+	 */
 	public DiagramView getView() {
 		for (DiagramView view : views) {
 			if (view.isFocus())
@@ -414,6 +488,11 @@ public class Main {
 		return null;
 	}
 
+	/**
+	 * Gets the palette.
+	 *
+	 * @return the palette
+	 */
 	public Palette getPalette() {
 		for (Palette palette : palettes) {
 			if (palette.isFocus())
@@ -473,7 +552,11 @@ public class Main {
 	// }
 	// tabFolder.pack();
 	// }
-
+/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		/*
 		 * Before this is run, be sure to set up correct SWT library path, and

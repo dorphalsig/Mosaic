@@ -5,9 +5,16 @@ import org.eclipse.jface.preference.RadioGroupFieldEditor;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ModelBrowserPreferencePage.
+ */
 public class ModelBrowserPreferencePage extends FieldEditorPreferencePage
 		implements IWorkbenchPreferencePage {
 
+	/**
+	 * Instantiates a new model browser preference page.
+	 */
 	public ModelBrowserPreferencePage() {
 		super(FieldEditorPreferencePage.GRID);
 		// IPreferenceStore store =
@@ -15,6 +22,9 @@ public class ModelBrowserPreferencePage extends FieldEditorPreferencePage
 		// setPreferenceStore(store);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.preference.FieldEditorPreferencePage#createFieldEditors()
+	 */
 	protected void createFieldEditors() {
 		RadioGroupFieldEditor invokePropertyEditor = new RadioGroupFieldEditor(
 				IPreferenceConstants.INVOKE_PROPERTY_EDITOR,
@@ -35,6 +45,9 @@ public class ModelBrowserPreferencePage extends FieldEditorPreferencePage
 		addField(invokeDiagramEditor);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.IWorkbenchPreferencePage#init(org.eclipse.ui.IWorkbench)
+	 */
 	public void init(IWorkbench workbench) {
 	}
 }

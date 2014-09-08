@@ -10,13 +10,38 @@ import uk.ac.mdx.xmf.swt.client.xml.Element;
 import xos.Message;
 import xos.Value;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MultilineText.
+ */
 public class MultilineText extends DisplayWithDimension {
 
+	/** The text. */
 	private String text;
+	
+	/** The editable. */
 	private boolean editable;
+	
+	/** The edit. */
 	private boolean edit = false;
+	
+	/** The font. */
 	private String font;
 
+	/**
+	 * Instantiates a new multiline text.
+	 *
+	 * @param parent the parent
+	 * @param handler the handler
+	 * @param identity the identity
+	 * @param text the text
+	 * @param location the location
+	 * @param size the size
+	 * @param editable the editable
+	 * @param lineColor the line color
+	 * @param fillColor the fill color
+	 * @param font the font
+	 */
 	public MultilineText(ClientElement parent, EventHandler handler,
 			String identity, String text, Point location, Dimension size,
 			boolean editable, RGB lineColor, RGB fillColor, String font) {
@@ -26,6 +51,22 @@ public class MultilineText extends DisplayWithDimension {
 		this.font = font;
 	}
 
+	/**
+	 * Instantiates a new multiline text.
+	 *
+	 * @param parent the parent
+	 * @param handler the handler
+	 * @param identity the identity
+	 * @param text the text
+	 * @param x the x
+	 * @param y the y
+	 * @param width the width
+	 * @param height the height
+	 * @param editable the editable
+	 * @param lineColor the line color
+	 * @param fillColor the fill color
+	 * @param font the font
+	 */
 	public MultilineText(ClientElement parent, EventHandler handler,
 			String identity, String text, int x, int y, int width, int height,
 			boolean editable, RGB lineColor, RGB fillColor, String font) {
@@ -33,6 +74,20 @@ public class MultilineText extends DisplayWithDimension {
 				width, height), editable, lineColor, fillColor, font);
 	}
 
+	/**
+	 * Instantiates a new multiline text.
+	 *
+	 * @param parent the parent
+	 * @param handler the handler
+	 * @param identity the identity
+	 * @param text the text
+	 * @param x the x
+	 * @param y the y
+	 * @param width the width
+	 * @param height the height
+	 * @param editable the editable
+	 * @param font the font
+	 */
 	public MultilineText(ClientElement parent, EventHandler handler,
 			String identity, String text, int x, int y, int width, int height,
 			boolean editable, String font) {
@@ -40,6 +95,11 @@ public class MultilineText extends DisplayWithDimension {
 				width, height), editable, null, null, font);
 	}
 
+	/**
+	 * Change text.
+	 *
+	 * @param text the text
+	 */
 	public void changeText(String text) {
 		Message m = handler.newMessage("textChanged", 2);
 		Value v1 = new Value(identity);
@@ -49,22 +109,45 @@ public class MultilineText extends DisplayWithDimension {
 		handler.raiseEvent(m);
 	}
 
+	/**
+	 * Edits the.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean edit() {
 		return edit;
 	}
 
+	/**
+	 * Gets the font.
+	 *
+	 * @return the font
+	 */
 	public String getFont() {
 		return font;
 	}
 
+	/**
+	 * Gets the text.
+	 *
+	 * @return the text
+	 */
 	public String getText() {
 		return text;
 	}
 
+	/**
+	 * Checks if is editable.
+	 *
+	 * @return true, if is editable
+	 */
 	public boolean isEditable() {
 		return editable;
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.model.DisplayWithDimension#processMessage(xos.Message)
+	 */
 	@Override
 	public boolean processMessage(Message message) {
 		if (message.hasName("editText")
@@ -96,10 +179,18 @@ public class MultilineText extends DisplayWithDimension {
 		return super.processMessage(message);
 	}
 
+	/**
+	 * Sets the edits the.
+	 *
+	 * @param edit the new edits the
+	 */
 	public void setEdit(boolean edit) {
 		this.edit = edit;
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.model.DisplayWithDimension#synchronise(uk.ac.mdx.xmf.swt.client.xml.Element)
+	 */
 	@Override
 	public void synchronise(Element multilineText) {
 		text = multilineText.getString("text");

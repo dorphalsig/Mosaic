@@ -5,10 +5,20 @@ import org.eclipse.swt.custom.CTabFolder;
 
 import uk.ac.mdx.xmf.swt.client.IconManager;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ClearTrees.
+ */
 public class ClearTrees extends Action {
 
+	/** The trees. */
 	CTabFolder trees;
 
+	/**
+	 * Instantiates a new clear trees.
+	 *
+	 * @param trees the trees
+	 */
 	public ClearTrees(CTabFolder trees) {
 		this.setId("com.ceteva.modelBrowser.actions.ClearTrees");
 		this.trees = trees;
@@ -17,6 +27,9 @@ public class ClearTrees extends Action {
 		setImageDescriptor(IconManager.getImageDescriptorAbsolute("Clear.gif"));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.action.Action#run()
+	 */
 	public void run() {
 		/*
 		 * if(trees != null) { CTabItem[] fs = trees.getItems(); for(int
@@ -25,6 +38,9 @@ public class ClearTrees extends Action {
 		 */
 	}
 
+	/**
+	 * Update.
+	 */
 	public void update() {
 		this.setEnabled(trees.getItemCount() > 0);
 	}

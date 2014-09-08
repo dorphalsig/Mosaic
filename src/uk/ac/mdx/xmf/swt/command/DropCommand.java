@@ -6,13 +6,32 @@ import uk.ac.mdx.xmf.swt.model.AbstractDiagram;
 import xos.Message;
 import xos.Value;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DropCommand.
+ */
 public class DropCommand extends org.eclipse.gef.commands.Command {
 
+	/** The type. */
 	String type;
+	
+	/** The source. */
 	String source;
+	
+	/** The diagram. */
 	AbstractDiagram diagram;
+	
+	/** The location. */
 	Point location;
 
+	/**
+	 * Instantiates a new drop command.
+	 *
+	 * @param type the type
+	 * @param source the source
+	 * @param diagram the diagram
+	 * @param location the location
+	 */
 	public DropCommand(String type, String source, AbstractDiagram diagram,
 			Point location) {
 		this.type = type;
@@ -21,6 +40,9 @@ public class DropCommand extends org.eclipse.gef.commands.Command {
 		this.location = location;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.commands.Command#execute()
+	 */
 	@Override
 	public void execute() {
 		// System.out.println("Drop Command(" + type + "," + source + "," +

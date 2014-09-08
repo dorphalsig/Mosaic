@@ -14,30 +14,57 @@ import org.eclipse.swt.SWT;
 
 import uk.ac.mdx.xmf.swt.diagram.geometry.PointListUtilities;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EdgeFigure.
+ */
 public class EdgeFigure extends PolylineConnection {
 
+	/** The ref. */
 	private Point ref;
 
+	/** The type. */
 	private String type = "normal";
 
+	/** The smooth. */
 	private final int smooth = 30; // 0 none, 15 some, 30 lots
 
+	/** The Constant dimCheck. */
 	private static final Dimension dimCheck = new Dimension(100, 100);
 
+	/** The tolerance. */
 	private static int TOLERANCE = 3;
 
+	/** The linebounds. */
 	private static Rectangle LINEBOUNDS = Rectangle.SINGLETON;
 
+	/**
+	 * Instantiates a new edge figure.
+	 */
 	public EdgeFigure() {
 		getPreferences();
 	}
 
+	/**
+	 * Calculate tolerance.
+	 *
+	 * @param isFeedbackLayer the is feedback layer
+	 * @return the int
+	 */
 	private int calculateTolerance(boolean isFeedbackLayer) {
 		Dimension absTol = new Dimension(TOLERANCE + lineWidth / 2, 0);
 		return absTol.width;
 	}
 
 	// @Override
+	/**
+	 * Contains point.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param flag the flag
+	 * @return true, if successful
+	 */
 	public boolean containsPoint(int x, int y, boolean flag) {
 		// return true;
 		// if (isSplined()) {
@@ -72,6 +99,9 @@ public class EdgeFigure extends PolylineConnection {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.draw2d.PolylineConnection#getBounds()
+	 */
 	@Override
 	public Rectangle getBounds() {
 		if (isSplined()) {
@@ -97,10 +127,20 @@ public class EdgeFigure extends PolylineConnection {
 		}
 	}
 
+	/**
+	 * Gets the smooth factor.
+	 *
+	 * @return the smooth factor
+	 */
 	public int getSmoothFactor() {
 		return smooth;
 	}
 
+	/**
+	 * Gets the smooth points.
+	 *
+	 * @return the smooth points
+	 */
 	public PointList getSmoothPoints() {
 		if (getSmoothFactor() > 0) {
 			return PointListUtilities.calcSmoothPolyline(getPoints(),
@@ -110,18 +150,40 @@ public class EdgeFigure extends PolylineConnection {
 		}
 	}
 
+	/**
+	 * Checks if is feedback layer.
+	 *
+	 * @return true, if is feedback layer
+	 */
 	private boolean isFeedbackLayer() {
 		Dimension copied = dimCheck.getCopy();
 		translateToRelative(copied);
 		return dimCheck.equals(copied);
 	}
 
+	/**
+	 * Checks if is splined.
+	 *
+	 * @return true, if is splined
+	 */
 	private boolean isSplined() {
 		if (type == null)
 			return false;
 		return type.equals("splined");
 	}
 
+	/**
+	 * Line contains point.
+	 *
+	 * @param x1 the x1
+	 * @param y1 the y1
+	 * @param x2 the x2
+	 * @param y2 the y2
+	 * @param px the px
+	 * @param py the py
+	 * @param isFeedbackLayer the is feedback layer
+	 * @return true, if successful
+	 */
 	private boolean lineContainsPoint(int x1, int y1, int x2, int y2, int px,
 			int py, boolean isFeedbackLayer) {
 		LINEBOUNDS.setSize(0, 0);
@@ -155,6 +217,9 @@ public class EdgeFigure extends PolylineConnection {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.draw2d.Shape#paintFigure(org.eclipse.draw2d.Graphics)
+	 */
 	@Override
 	public void paintFigure(Graphics g) {
 		// if (Diagram.antialias)
@@ -162,6 +227,11 @@ public class EdgeFigure extends PolylineConnection {
 		super.paintFigure(g);
 	}
 
+	/**
+	 * Sets the source head.
+	 *
+	 * @param sourceHead the new source head
+	 */
 	public void setSourceHead(int sourceHead) {
 		if (sourceHead != 0) {
 			RotatableDecoration head = HeadFactory.getHead(sourceHead);
@@ -169,6 +239,11 @@ public class EdgeFigure extends PolylineConnection {
 		}
 	}
 
+	/**
+	 * Sets the target head.
+	 *
+	 * @param targetHead the new target head
+	 */
 	public void setTargetHead(int targetHead) {
 		if (targetHead != 0) {
 			RotatableDecoration head = HeadFactory.getHead(targetHead);
@@ -176,6 +251,9 @@ public class EdgeFigure extends PolylineConnection {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.draw2d.Polyline#outlineShape(org.eclipse.draw2d.Graphics)
+	 */
 	@Override
 	protected void outlineShape(Graphics g) {
 
@@ -194,23 +272,44 @@ public class EdgeFigure extends PolylineConnection {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.draw2d.Figure#useLocalCoordinates()
+	 */
 	@Override
 	protected boolean useLocalCoordinates() {
 		return false;
 	}
 
+	/**
+	 * Sets the ref point.
+	 *
+	 * @param ref the new ref point
+	 */
 	public void setRefPoint(Point ref) {
 		this.ref = ref;
 	}
 
+	/**
+	 * Gets the ref point.
+	 *
+	 * @return the ref point
+	 */
 	public Point getRefPoint() {
 		return ref;
 	}
 
+	/**
+	 * Preference update.
+	 */
 	public void preferenceUpdate() {
 		getPreferences();
 	}
 
+	/**
+	 * Gets the preferences.
+	 *
+	 * @return the preferences
+	 */
 	public void getPreferences() {
 		/*
 		 * Preferences preferences = DiagramPlugin.getDefault()
@@ -219,6 +318,11 @@ public class EdgeFigure extends PolylineConnection {
 		 */
 	}
 
+	/**
+	 * Sets the edge type.
+	 *
+	 * @param type the new edge type
+	 */
 	public void setEdgeType(String type) {
 		this.type = type;
 	}

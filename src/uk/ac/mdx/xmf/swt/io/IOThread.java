@@ -4,19 +4,37 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class IOThread.
+ */
 public class IOThread extends Thread {
 
+	/** The in. */
 	private InputStream in;
 
+	/** The out. */
 	private OutputStream out;
 
+	/** The Constant debug. */
 	private final static boolean debug = false;
 
+	/**
+	 * Instantiates a new IO thread.
+	 *
+	 * @param in the in
+	 * @param out the out
+	 */
 	public IOThread(InputStream in, OutputStream out) {
 		this.in = in;
 		this.out = out;
 	}
 
+	/**
+	 * Debug.
+	 *
+	 * @param s the s
+	 */
 	public static void debug(String s) {
 		if (debug) {
 			System.err.println(s);
@@ -24,6 +42,9 @@ public class IOThread extends Thread {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Thread#run()
+	 */
 	public void run() {
 		while (true) {
 			try {

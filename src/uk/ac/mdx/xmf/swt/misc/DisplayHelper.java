@@ -3,6 +3,7 @@ package uk.ac.mdx.xmf.swt.misc;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
+// TODO: Auto-generated Javadoc
 /**
  * Contains utility methods related to the display screen.
  * 
@@ -10,8 +11,13 @@ import java.awt.Toolkit;
  *
  */
 public class DisplayHelper {
+	
+	/** The _screen dimension. */
 	private static Dimension _screenDimension = null;
 
+	/**
+	 * Compute dimension.
+	 */
 	private static void computeDimension() {
 		Toolkit toolkit =  Toolkit.getDefaultToolkit();
 		_screenDimension = toolkit.getScreenSize();

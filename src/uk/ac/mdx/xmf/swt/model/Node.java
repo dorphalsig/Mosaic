@@ -12,25 +12,52 @@ import uk.ac.mdx.xmf.swt.misc.VisualElementEvents;
 import xos.Message;
 import xos.Value;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Node.
+ */
 public class Node extends Container {
 
+	/** The is draggable. */
 	private boolean isDraggable = false;
+	
+	/** The ports. */
 	private final Vector ports = new Vector(); // ports associated with this
 												// node
-	private final Vector sourceEdges = new Vector(); // all edges for which this
+	/** The source edges. */
+												private final Vector sourceEdges = new Vector(); // all edges for which this
 														// node
 	// is the source
-	private final Vector targetEdges = new Vector(); // all edges for which this
+	/** The target edges. */
+														private final Vector targetEdges = new Vector(); // all edges for which this
 														// node
 	// is the target
 
-	private boolean isSelectable = true;
+	/** The is selectable. */
+														private boolean isSelectable = true;
+	
+	/** The is clicked. */
 	private boolean isClicked = false;
+	
+	/** The points. */
 	private Vector<Point> points;
 
+	/** The distance. */
 	private int distance = 20;
+	
+	/** The gap. */
 	private int gap = 3;
 
+	/**
+	 * Instantiates a new node.
+	 *
+	 * @param parent the parent
+	 * @param handler the handler
+	 * @param identity the identity
+	 * @param location the location
+	 * @param size the size
+	 * @param isSelectable the is selectable
+	 */
 	public Node(ClientElement parent, EventHandler handler, String identity,
 			Point location, Dimension size, boolean isSelectable) {
 		super(parent, handler, identity, location, size, null, null);
@@ -42,6 +69,18 @@ public class Node extends Container {
 		this.isSelectable = isSelectable;
 	}
 
+	/**
+	 * Instantiates a new node.
+	 *
+	 * @param parent the parent
+	 * @param handler the handler
+	 * @param identity the identity
+	 * @param x the x
+	 * @param y the y
+	 * @param width the width
+	 * @param height the height
+	 * @param isSelectable the is selectable
+	 */
 	public Node(ClientElement parent, EventHandler handler, String identity,
 			int x, int y, int width, int height, boolean isSelectable) {
 
@@ -49,6 +88,12 @@ public class Node extends Container {
 				height), isSelectable);
 	}
 
+	/**
+	 * Re set points.
+	 *
+	 * @param location the location
+	 * @param size the size
+	 */
 	public void reSetPoints(Point location, Dimension size) {
 		points.clear();
 
@@ -146,10 +191,18 @@ public class Node extends Container {
 				- gap));
 	}
 
+	/**
+	 * Gets the points.
+	 *
+	 * @return the points
+	 */
 	public Vector getPoints() {
 		return points;
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.ClientElement#delete()
+	 */
 	@Override
 	public void delete() {
 		super.delete();
@@ -159,6 +212,9 @@ public class Node extends Container {
 			((Group) parent).removeNode(this);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.model.Container#dispose()
+	 */
 	@Override
 	public void dispose() {
 		super.dispose();
@@ -168,26 +224,56 @@ public class Node extends Container {
 		}
 	}
 
+	/**
+	 * Gets the ports.
+	 *
+	 * @return the ports
+	 */
 	public Vector getPorts() {
 		return ports;
 	}
 
+	/**
+	 * Gets the source edges.
+	 *
+	 * @return the source edges
+	 */
 	public Vector getSourceEdges() {
 		return sourceEdges();
 	}
 
+	/**
+	 * Gets the target edges.
+	 *
+	 * @return the target edges
+	 */
 	public Vector getTargetEdges() {
 		return targetEdges();
 	}
 
+	/**
+	 * Checks if is draggable.
+	 *
+	 * @return true, if is draggable
+	 */
 	public boolean isDraggable() {
 		return isDraggable;
 	}
 
+	/**
+	 * Checks if is selectable.
+	 *
+	 * @return true, if is selectable
+	 */
 	public boolean isSelectable() {
 		return isSelectable;
 	}
 
+	/**
+	 * Source edges.
+	 *
+	 * @return the vector
+	 */
 	public Vector sourceEdges() {
 		Vector validEdges = new Vector();
 		for (int i = 0; i < sourceEdges.size(); i++) {
@@ -198,6 +284,11 @@ public class Node extends Container {
 		return validEdges;
 	}
 
+	/**
+	 * Target edges.
+	 *
+	 * @return the vector
+	 */
 	public Vector targetEdges() {
 		Vector validEdges = new Vector();
 		for (int i = 0; i < targetEdges.size(); i++) {
@@ -208,6 +299,9 @@ public class Node extends Container {
 		return validEdges;
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.model.Container#processMessage(xos.Message)
+	 */
 	@Override
 	public boolean processMessage(Message message) {
 		if (message.hasName("enableDrag")
@@ -228,6 +322,16 @@ public class Node extends Container {
 		return super.processMessage(message);
 	}
 
+	/**
+	 * New port.
+	 *
+	 * @param identity the identity
+	 * @param x the x
+	 * @param y the y
+	 * @param width the width
+	 * @param height the height
+	 * @return the port
+	 */
 	public Port newPort(String identity, int x, int y, int width, int height) {
 		Port port = new Port(this, handler, identity, new Point(x, y),
 				new Dimension(width, height));
@@ -241,6 +345,12 @@ public class Node extends Container {
 	// invoked by changes to the diagram
 	// events are raised as a result
 
+	/**
+	 * Move resize.
+	 *
+	 * @param location the location
+	 * @param size the size
+	 */
 	public void moveResize(Point location, Dimension size) {
 		if (!location.equals(this.location)) {
 			Message m = handler.newMessage("move", 3);
@@ -265,6 +375,11 @@ public class Node extends Container {
 		}
 	}
 
+	/**
+	 * Move resize.
+	 *
+	 * @param location the location
+	 */
 	public void moveResize(Point location) {
 		if (!location.equals(this.location)) {
 			Message m = handler.newMessage("move", 3);
@@ -280,6 +395,11 @@ public class Node extends Container {
 
 	}
 
+	/**
+	 * Move resize.
+	 *
+	 * @param size the size
+	 */
 	public void moveResize(Dimension size) {
 		if (!size.equals(this.size)) {
 			Message m = handler.newMessage("resizeNode", 3);
@@ -293,6 +413,11 @@ public class Node extends Container {
 		}
 	}
 
+	/**
+	 * Checks if is clicked.
+	 *
+	 * @param point the point
+	 */
 	public void isClicked(Point point) {
 		isClicked = checkRectangleBoundary(point.x, point.y, location.x,
 				location.y, size.width, size.height);
@@ -302,6 +427,12 @@ public class Node extends Container {
 
 	}
 
+	/**
+	 * Checks if is drag point clicked.
+	 *
+	 * @param point the point
+	 * @return the string
+	 */
 	public String isDragPointClicked(Point point) {
 		Point topMiddlePoint = points.get(8);
 		Point rightMiddlePoint = points.get(20);
@@ -320,6 +451,13 @@ public class Node extends Container {
 
 	}
 
+	/**
+	 * Gets the distance of points.
+	 *
+	 * @param p1 the p1
+	 * @param p2 the p2
+	 * @return the distance of points
+	 */
 	public int getDistanceOfPoints(org.eclipse.draw2d.geometry.Point p1,
 			org.eclipse.draw2d.geometry.Point p2) {
 		int distance = (int) Math.sqrt((p1.x - p2.x) * (p1.x - p2.x)
@@ -329,10 +467,26 @@ public class Node extends Container {
 
 	}
 
+	/**
+	 * Checks if is clicked.
+	 *
+	 * @return true, if is clicked
+	 */
 	public boolean isClicked() {
 		return isClicked;
 	}
 
+	/**
+	 * Check rectangle boundary.
+	 *
+	 * @param pointX the point x
+	 * @param pointY the point y
+	 * @param rectangleX the rectangle x
+	 * @param rectangleY the rectangle y
+	 * @param width the width
+	 * @param height the height
+	 * @return true, if successful
+	 */
 	private boolean checkRectangleBoundary(float pointX, float pointY,
 			float rectangleX, float rectangleY, float width, float height) {
 		boolean isInside = ((pointX > rectangleX)
@@ -342,6 +496,9 @@ public class Node extends Container {
 		return isInside;
 	}
 
+	/**
+	 * Deselect node.
+	 */
 	public void deselectNode() {
 		Message m = handler.newMessage("nodeDeselected", 1);
 		Value v1 = new Value(identity);
@@ -349,6 +506,9 @@ public class Node extends Container {
 		handler.raiseEvent(m);
 	}
 
+	/**
+	 * Select node.
+	 */
 	public void selectNode() {
 		Message m = handler.newMessage("nodeSelected", 1);
 		Value v1 = new Value(identity);
@@ -356,6 +516,9 @@ public class Node extends Container {
 		handler.raiseEvent(m);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.model.Display#selected(int)
+	 */
 	@Override
 	public void selected(int clicks) {
 		Message m = handler.newMessage("selected", 2);
@@ -366,6 +529,9 @@ public class Node extends Container {
 		handler.raiseEvent(m);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.model.Container#synchronise(uk.ac.mdx.xmf.swt.client.xml.Element)
+	 */
 	@Override
 	public void synchronise(Element node) {
 		synchronisePorts(node);
@@ -373,10 +539,20 @@ public class Node extends Container {
 		super.synchronise(node);
 	}
 
+	/**
+	 * Synchronise displays.
+	 *
+	 * @param node the node
+	 */
 	public void synchroniseDisplays(Element node) {
 
 	}
 
+	/**
+	 * Synchronise ports.
+	 *
+	 * @param node the node
+	 */
 	public void synchronisePorts(Element node) {
 
 		// Check there is a port for each of the ports in the document
@@ -432,12 +608,22 @@ public class Node extends Container {
 		}
 	}
 
+	/**
+	 * Adds the source edge.
+	 *
+	 * @param edge the edge
+	 */
 	public void addSourceEdge(Edge edge) {
 		sourceEdges.addElement(edge);
 		// if (isRendering())
 		firePropertyChange("sourceEdges", null, null);
 	}
 
+	/**
+	 * Removes the source edge.
+	 *
+	 * @param edge the edge
+	 */
 	public void removeSourceEdge(Edge edge) {
 		if (!sourceEdges.contains(edge))
 			System.out.println("Node is not source of edge: " + edge.identity);
@@ -446,12 +632,22 @@ public class Node extends Container {
 			firePropertyChange("sourceEdges", null, null);
 	}
 
+	/**
+	 * Adds the target edge.
+	 *
+	 * @param edge the edge
+	 */
 	public void addTargetEdge(Edge edge) {
 		targetEdges.addElement(edge);
 		// if (isRendering())
 		firePropertyChange("targetEdges", null, null);
 	}
 
+	/**
+	 * Removes the target edge.
+	 *
+	 * @param edge the edge
+	 */
 	public void removeTargetEdge(Edge edge) {
 		if (!targetEdges.contains(edge))
 			System.out.println("Node is not target of edge: " + edge.identity);

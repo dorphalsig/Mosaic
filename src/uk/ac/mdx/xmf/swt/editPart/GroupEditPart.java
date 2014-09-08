@@ -24,12 +24,22 @@ import uk.ac.mdx.xmf.swt.misc.ImageProducer;
 import uk.ac.mdx.xmf.swt.model.AbstractDiagram;
 import uk.ac.mdx.xmf.swt.model.Group;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GroupEditPart.
+ */
 public class GroupEditPart extends ZoomableGraphicalEditPart {
 
+	/**
+	 * Instantiates a new group edit part.
+	 */
 	public GroupEditPart() {
 		super();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
+	 */
 	protected IFigure createFigure() {
 		Group group = getGroupModel();
 		Point location = group.getLocation();
@@ -43,23 +53,40 @@ public class GroupEditPart extends ZoomableGraphicalEditPart {
 		return groupFigure;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#getModelChildren()
+	 */
 	protected List getModelChildren() {
 		return getGroupModel().getContents();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#getDragTracker(org.eclipse.gef.Request)
+	 */
 	public DragTracker getDragTracker(Request request) {
 		return new DisplaySelectionTracker(this);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#createEditPolicies()
+	 */
 	protected void createEditPolicies() {
 		// installEditPolicy(EditPolicy.LAYOUT_ROLE, new LayoutPolicy());
 		// installEditPolicy("PopupPalette", new PopupPalette());
 	}
 
+	/**
+	 * Gets the group model.
+	 *
+	 * @return the group model
+	 */
 	public Group getGroupModel() {
 		return (Group) getModel();
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.editPart.ZoomableGraphicalEditPart#getZoomManager()
+	 */
 	public ZoomManager getZoomManager() {
 		// nested diagrams do not animate their zoom since this is expensive
 		// when redrawing a diagram with many sub diagrams.
@@ -73,6 +100,9 @@ public class GroupEditPart extends ZoomableGraphicalEditPart {
 		// return zoomManager;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
+	 */
 	public void propertyChange(PropertyChangeEvent evt) {
 		String prop = evt.getPropertyName();
 		if (prop.equals("newNode"))
@@ -101,6 +131,9 @@ public class GroupEditPart extends ZoomableGraphicalEditPart {
 					.copyToClipboard(getLayer(LayerConstants.PRINTABLE_LAYERS));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#refreshVisuals()
+	 */
 	protected void refreshVisuals() {
 		Group group = (Group) getModel();
 		Point loc = group.getLocation();
@@ -110,6 +143,9 @@ public class GroupEditPart extends ZoomableGraphicalEditPart {
 				getFigure(), r);
 	}
 
+	/**
+	 * Refresh zoom.
+	 */
 	public void refreshZoom() {
 		Group group = (Group) getModel();
 		if (group.getQueuedZoom()) {
@@ -118,10 +154,16 @@ public class GroupEditPart extends ZoomableGraphicalEditPart {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#getContentPane()
+	 */
 	public IFigure getContentPane() {
 		return ((GroupFigure) getFigure()).getFigure();
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.editPart.ZoomableGraphicalEditPart#preferenceUpdate()
+	 */
 	public void preferenceUpdate() {
 		GroupFigure figure = (GroupFigure) getFigure();
 		figure.preferenceUpdate();
@@ -133,6 +175,9 @@ public class GroupEditPart extends ZoomableGraphicalEditPart {
 		figure.repaint();
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.editPart.DisplayEditPart#performRequest(org.eclipse.gef.Request)
+	 */
 	public void performRequest(Request req) {
 		Group group = (Group) getModel();
 		Object request = req.getType();
@@ -143,16 +188,29 @@ public class GroupEditPart extends ZoomableGraphicalEditPart {
 		}
 	}
 
+	/**
+	 * Zoom.
+	 */
 	public void zoom() {
 		Group group = getGroupModel();
 		this.getViewer().flush();
 		getZoomManager().setZoomAsText(group.getNestedZoom());
 	}
 
+	/**
+	 * Gets the shell.
+	 *
+	 * @return the shell
+	 */
 	public Shell getShell() {
 		return Display.getCurrent().getActiveShell();
 	}
 
+	/**
+	 * Gets the background color.
+	 *
+	 * @return the background color
+	 */
 	public RGB getBackgroundColor() {
 		RGB color = ((AbstractDiagram) getModel()).getColor();
 		if (color != null)
@@ -164,12 +222,18 @@ public class GroupEditPart extends ZoomableGraphicalEditPart {
 		// PreferenceConverter.getColor(preferences,IPreferenceConstants.DIAGRAM_BACKGROUND_COLOR);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart#refresh()
+	 */
 	public void refresh() {
 		refreshBackgroundColor();
 		refreshZoom();
 		super.refresh();
 	}
 
+	/**
+	 * Refresh background color.
+	 */
 	public void refreshBackgroundColor() {
 		getFigure().setBackgroundColor(
 				ColorManager.getColor(getBackgroundColor()));

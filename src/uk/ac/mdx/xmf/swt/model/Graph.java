@@ -8,10 +8,19 @@ import uk.ac.mdx.xmf.swt.client.xml.Element;
 import uk.ac.mdx.xmf.swt.demo.Main;
 import xos.Message;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Graph.
+ */
 class Graph {
 
+	/** The parent. */
 	private final CommandEvent parent;
+	
+	/** The nodes. */
 	private final Vector nodes = new Vector();
+	
+	/** The edges. */
 	private final Vector edges = new Vector();
 
 	// There can be multiple calls to stop/start render, these are recorded
@@ -20,12 +29,21 @@ class Graph {
 	// Rendering is only disable if there is one element on the stack
 	// (hiddenCount = 1)
 
+	/** The hidden count. */
 	private int hiddenCount = 0;
 
+	/**
+	 * Instantiates a new graph.
+	 *
+	 * @param parent the parent
+	 */
 	public Graph(CommandEvent parent) {
 		this.parent = parent;
 	}
 
+	/**
+	 * Close.
+	 */
 	public void close() {
 		for (int i = 0; i < nodes.size(); i++) {
 			Node n = (Node) nodes.elementAt(i);
@@ -33,6 +51,9 @@ class Graph {
 		}
 	}
 
+	/**
+	 * Dispose.
+	 */
 	public void dispose() {
 		for (int i = 0; i < nodes.size(); i++) {
 			Node n = (Node) nodes.elementAt(i);
@@ -44,19 +65,35 @@ class Graph {
 		}
 	}
 
+	/**
+	 * Gets the nodes.
+	 *
+	 * @return the nodes
+	 */
 	public Vector getNodes() {
 		return nodes;
 	}
 
+	/**
+	 * Gets the edges.
+	 *
+	 * @return the edges
+	 */
 	public Vector getEdges() {
 		return edges;
 	}
 
+	/**
+	 * Stop render.
+	 */
 	public void stopRender() {
 		parent.setRender(false);
 		render(false);
 	}
 
+	/**
+	 * Start render.
+	 */
 	public void startRender() {
 		parent.setRender(true);
 		render(true);
@@ -71,6 +108,11 @@ class Graph {
 		}
 	}
 
+	/**
+	 * Render.
+	 *
+	 * @param render the render
+	 */
 	public void render(boolean render) {
 		for (int i = 0; i < nodes.size(); i++) {
 			Node node = (Node) nodes.elementAt(i);
@@ -88,6 +130,12 @@ class Graph {
 		}
 	}
 
+	/**
+	 * Process message.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean processMessage(Message message) {
 		if (message.args[0].hasStrValue(parent.getIdentity())) {
 			if (message.hasName("newNode")) {
@@ -135,6 +183,17 @@ class Graph {
 		return false;
 	}
 
+	/**
+	 * New node.
+	 *
+	 * @param identity the identity
+	 * @param x the x
+	 * @param y the y
+	 * @param width the width
+	 * @param height the height
+	 * @param isSelectable the is selectable
+	 * @return the node
+	 */
 	public Node newNode(String identity, int x, int y, int width, int height,
 			boolean isSelectable) {
 		Node node = new Node(this.parent, parent.handler, identity, x, y,
@@ -146,6 +205,20 @@ class Graph {
 		return node;
 	}
 
+	/**
+	 * New edge.
+	 *
+	 * @param identity the identity
+	 * @param sourcePort the source port
+	 * @param targetPort the target port
+	 * @param xRef the x ref
+	 * @param yRef the y ref
+	 * @param sourceHead the source head
+	 * @param targetHead the target head
+	 * @param dotStyle the dot style
+	 * @param color the color
+	 * @return the edge
+	 */
 	public Edge newEdge(String identity, String sourcePort, String targetPort,
 			int xRef, int yRef, int sourceHead, int targetHead, int dotStyle,
 			RGB color) {
@@ -168,6 +241,11 @@ class Graph {
 		return null;
 	}
 
+	/**
+	 * Removes the edge.
+	 *
+	 * @param edge the edge
+	 */
 	public void removeEdge(Edge edge) {
 		if (!edges.contains(edge))
 			System.out.println("Edge does not exist");
@@ -176,12 +254,20 @@ class Graph {
 			parent.firePropertyChange("delete", null, null);
 	}
 
+	/**
+	 * Removes the node.
+	 *
+	 * @param node the node
+	 */
 	public void removeNode(Node node) {
 		nodes.removeElement(node);
 		if (parent.isRendering())
 			parent.firePropertyChange("delete", null, null);
 	}
 
+	/**
+	 * Refresh zoom.
+	 */
 	public void refreshZoom() {
 		for (int i = 0; i < nodes.size(); i++) {
 			Node node = (Node) nodes.elementAt(i);
@@ -189,6 +275,11 @@ class Graph {
 		}
 	}
 
+	/**
+	 * Synchronise.
+	 *
+	 * @param diagram the diagram
+	 */
 	public void synchronise(Element diagram) {
 		stopRender();
 		synchroniseNodes(diagram);
@@ -196,6 +287,11 @@ class Graph {
 		startRender();
 	}
 
+	/**
+	 * Synchronise edges.
+	 *
+	 * @param diagram the diagram
+	 */
 	public void synchroniseEdges(Element diagram) {
 
 		// Check that there is a edge for each of the diagram edges
@@ -254,6 +350,11 @@ class Graph {
 		}
 	}
 
+	/**
+	 * Synchronise nodes.
+	 *
+	 * @param diagram the diagram
+	 */
 	public void synchroniseNodes(Element diagram) {
 
 		// Check that there is a node for each of the diagram nodes

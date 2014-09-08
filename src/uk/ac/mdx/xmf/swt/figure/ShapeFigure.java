@@ -8,22 +8,44 @@ import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PointList;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ShapeFigure.
+ */
 public class ShapeFigure extends Shape {
 
+	/** The points. */
 	Vector points;
+	
+	/** The outline. */
 	boolean outline;
 
+	/**
+	 * Instantiates a new shape figure.
+	 *
+	 * @param points the points
+	 * @param outline the outline
+	 */
 	public ShapeFigure(Vector points, boolean outline) {
 		this.points = points;
 		this.outline = outline;
 	}
 
+	/**
+	 * Refresh.
+	 *
+	 * @param points the points
+	 * @param outline the outline
+	 */
 	public void refresh(Vector points, boolean outline) {
 		this.points = points;
 		this.outline = outline;
 		this.repaint();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.draw2d.Shape#fillShape(org.eclipse.draw2d.Graphics)
+	 */
 	@Override
 	protected void fillShape(Graphics graphics) {
 		PointList list = new PointList();
@@ -34,6 +56,9 @@ public class ShapeFigure extends Shape {
 		graphics.fillPolygon(list);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.draw2d.Shape#outlineShape(org.eclipse.draw2d.Graphics)
+	 */
 	@Override
 	protected void outlineShape(Graphics graphics) {
 		if (outline) {

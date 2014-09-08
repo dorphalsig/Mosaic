@@ -24,6 +24,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 
+// TODO: Auto-generated Javadoc
 /**
  * A message dialog which also allows the user to adjust a toggle setting.
  * 
@@ -32,26 +33,32 @@ import org.eclipse.swt.widgets.Shell;
  */
 public class MessageDialogWithToggle extends MessageDialog {
 	
-	/**
-	 * The message displayed to the user, with the toggle button
-	 */
+	/** The message displayed to the user, with the toggle button. */
 	private String toggleMessage = null;
+	
+	/** The toggle state. */
 	private boolean toggleState = false;
+	
+	/** The toggle button. */
 	private Button toggleButton = null;
 	
-	/**
-	 * The preference store which will be affected by the toggle button
-	 */
+	/** The preference store which will be affected by the toggle button. */
 	IPreferenceStore fStore = null;
 
 	/**
 	 * Creates a message dialog with a toggle.
 	 * See the superclass constructor for info on the other parameters.
-	 * 
-	 * @param toggleMessage the message for the toggle control, or <code>null</code> 
+	 *
+	 * @param parentShell the parent shell
+	 * @param dialogTitle the dialog title
+	 * @param image the image
+	 * @param message the message
+	 * @param dialogImageType the dialog image type
+	 * @param dialogButtonLabels the dialog button labels
+	 * @param defaultIndex the default index
+	 * @param toggleMessage the message for the toggle control, or <code>null</code>
 	 *   for the default message ("Do not show this message again").
-	 * @param toggleState the initial state for the toggle 
-	 * 
+	 * @param toggleState the initial state for the toggle
 	 */
 	public MessageDialogWithToggle(Shell parentShell, String dialogTitle, Image image, String message, int dialogImageType, String[] dialogButtonLabels, int defaultIndex, String toggleMessage, boolean toggleState) {
 		super(parentShell, dialogTitle, image, message, dialogImageType, dialogButtonLabels, defaultIndex);
@@ -81,6 +88,9 @@ public class MessageDialogWithToggle extends MessageDialog {
 
 	/**
 	 * Creates a toggle button with the toggle message and state.
+	 *
+	 * @param parent the parent
+	 * @return the button
 	 */
 	protected Button createToggleButton(Composite parent) {
 		final Button button= new Button(parent, SWT.CHECK | SWT.LEFT);

@@ -19,8 +19,15 @@ import uk.ac.mdx.xmf.swt.misc.ColorManager;
 import uk.ac.mdx.xmf.swt.model.Display;
 import uk.ac.mdx.xmf.swt.model.Ellipse;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EllipseEditPart.
+ */
 public class EllipseEditPart extends DisplayEditPart {
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
+	 */
 	protected IFigure createFigure() {
 		Ellipse ellipse = (Ellipse) getModel();
 		Point location = ellipse.getLocation();
@@ -31,10 +38,18 @@ public class EllipseEditPart extends DisplayEditPart {
 		return ef;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#getDragTracker(org.eclipse.gef.Request)
+	 */
 	public DragTracker getDragTracker(Request request) {
 		return new DisplaySelectionTracker(this);
 	}
 
+	/**
+	 * Gets the fill color.
+	 *
+	 * @return the fill color
+	 */
 	public RGB getFillColor() {
 		RGB fillColor = ((Ellipse) getModel()).getFillColor();
 		if (fillColor != null)
@@ -46,6 +61,11 @@ public class EllipseEditPart extends DisplayEditPart {
 		// IPreferenceConstants.FILL_COLOR);
 	}
 
+	/**
+	 * Gets the foreground color.
+	 *
+	 * @return the foreground color
+	 */
 	public RGB getForegroundColor() {
 		RGB lineColor = ((Ellipse) getModel()).getForegroundColor();
 		if (lineColor != null)
@@ -57,13 +77,22 @@ public class EllipseEditPart extends DisplayEditPart {
 		// IPreferenceConstants.FOREGROUND_COLOR);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#getModelChildren()
+	 */
 	protected List getModelChildren() {
 		return ((Ellipse) getModel()).getContents();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#createEditPolicies()
+	 */
 	protected void createEditPolicies() {
 	}
 
+	/* (non-Javadoc)
+	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
+	 */
 	public void propertyChange(PropertyChangeEvent evt) {
 		String prop = evt.getPropertyName();
 		if (prop.equals("startRender"))
@@ -80,12 +109,18 @@ public class EllipseEditPart extends DisplayEditPart {
 		}
 	}
 
+	/**
+	 * Refresh color.
+	 */
 	public void refreshColor() {
 		getFigure().setForegroundColor(
 				ColorManager.getColor(getForegroundColor()));
 		getFigure().setBackgroundColor(ColorManager.getColor(getFillColor()));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#refreshVisuals()
+	 */
 	protected void refreshVisuals() {
 		Ellipse model = (Ellipse) getModel();
 		Point loc = ((Ellipse) getModel()).getLocation();
@@ -99,10 +134,16 @@ public class EllipseEditPart extends DisplayEditPart {
 		refreshColor();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#isSelectable()
+	 */
 	public boolean isSelectable() {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart#preferenceUpdate()
+	 */
 	public void preferenceUpdate() {
 		refreshColor();
 		List children = getChildren();

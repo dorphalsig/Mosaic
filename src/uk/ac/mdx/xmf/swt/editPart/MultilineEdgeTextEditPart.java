@@ -17,11 +17,21 @@ import uk.ac.mdx.xmf.swt.figure.MultilineEdgeTextFigure;
 import uk.ac.mdx.xmf.swt.misc.ColorManager;
 import uk.ac.mdx.xmf.swt.model.MultilineEdgeText;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MultilineEdgeTextEditPart.
+ */
 public class MultilineEdgeTextEditPart extends CommandEventEditPart {
 
+	/** The manager. */
 	private DirectEditManager manager = null;
+	
+	/** The model. */
 	private MultilineEdgeText model = null;
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
+	 */
 	protected IFigure createFigure() {
 		model = (MultilineEdgeText) getModel();
 		String text = model.getText();
@@ -33,6 +43,11 @@ public class MultilineEdgeTextEditPart extends CommandEventEditPart {
 		return mulilinetext;
 	}
 
+	/**
+	 * Gets the fore color.
+	 *
+	 * @return the fore color
+	 */
 	public RGB getForeColor() {
 		RGB foreColor = model.getColor();
 		if (foreColor != null)
@@ -44,6 +59,9 @@ public class MultilineEdgeTextEditPart extends CommandEventEditPart {
 		// PreferenceConverter.getColor(preferences,IPreferenceConstants.UNSELECTED_FONT_COLOR);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
+	 */
 	public void propertyChange(PropertyChangeEvent evt) {
 		String prop = evt.getPropertyName();
 		if (prop.equals("startRender"))
@@ -60,10 +78,16 @@ public class MultilineEdgeTextEditPart extends CommandEventEditPart {
 		}
 	}
 
+	/**
+	 * Refresh color.
+	 */
 	public void refreshColor() {
 		getFigure().setForegroundColor(ColorManager.getColor(getForeColor()));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#refreshVisuals()
+	 */
 	protected void refreshVisuals() {
 		MultilineEdgeTextFigure figure = (MultilineEdgeTextFigure) getFigure();
 		String string = model.getText();
@@ -79,6 +103,9 @@ public class MultilineEdgeTextEditPart extends CommandEventEditPart {
 		refreshColor();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#createEditPolicies()
+	 */
 	protected void createEditPolicies() {
 		// installEditPolicy(EditPolicy.GRAPHICAL_NODE_ROLE,
 		// new MultilineEdgeTextMovePolicy());
@@ -89,6 +116,9 @@ public class MultilineEdgeTextEditPart extends CommandEventEditPart {
 		// new MultilineEdgeTextEditPolicy());
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#performRequest(org.eclipse.gef.Request)
+	 */
 	public void performRequest(Request request) {
 		Object type = request.getType();
 		if (type == RequestConstants.REQ_DIRECT_EDIT
@@ -98,14 +128,27 @@ public class MultilineEdgeTextEditPart extends CommandEventEditPart {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#getDragTracker(org.eclipse.gef.Request)
+	 */
 	public DragTracker getDragTracker(Request request) {
 		return new EdgeTextDragTracker(this, (EdgeEditPart) getParent());
 	}
 
+	/**
+	 * Gets the edge edit part.
+	 *
+	 * @return the edge edit part
+	 */
 	public EdgeEditPart getEdgeEditPart() {
 		return (EdgeEditPart) getParent();
 	}
 
+	/**
+	 * Gets the edge position.
+	 *
+	 * @return the edge position
+	 */
 	public Point getEdgePosition() {
 		EdgeEditPart parent = (EdgeEditPart) getParent();
 		EdgeFigure edgeFigure = (EdgeFigure) parent.getFigure();
@@ -118,6 +161,9 @@ public class MultilineEdgeTextEditPart extends CommandEventEditPart {
 			return edgeFigure.getPoints().getMidpoint();
 	}
 
+	/**
+	 * Perform direct edit.
+	 */
 	private void performDirectEdit() {
 		if (manager == null)
 			manager = new MultilineEdgeEditManager(this, TextCellEditor.class,
@@ -126,6 +172,9 @@ public class MultilineEdgeTextEditPart extends CommandEventEditPart {
 		manager.show();
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart#preferenceUpdate()
+	 */
 	public void preferenceUpdate() {
 		refreshColor();
 		MultilineEdgeTextFigure figure = (MultilineEdgeTextFigure) getFigure();

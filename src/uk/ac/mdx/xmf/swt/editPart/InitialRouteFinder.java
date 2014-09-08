@@ -5,14 +5,29 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class InitialRouteFinder.
+ */
 public class InitialRouteFinder {
 	
+  /**
+   * Instantiates a new initial route finder.
+   */
   public InitialRouteFinder() {	
   }
   
   // takes the two rectangles and finds a mutually convenient
   // position for both ports
 	
+  /**
+   * Calculate initial port.
+   *
+   * @param r1 the r1
+   * @param r2 the r2
+   * @param start the start
+   * @param end the end
+   */
   public void calculateInitialPort(Rectangle r1,Rectangle r2,Point start,Point end) {
 	int orientation = getOrientation(r2,r1);
 	if(orientation == 1)		// north
@@ -25,6 +40,13 @@ public class InitialRouteFinder {
 	  initalizeEast(r1,r2,start,end);	  
   }
   
+  /**
+   * Gets the orientation.
+   *
+   * @param centre the centre
+   * @param periphery the periphery
+   * @return the orientation
+   */
   public int getOrientation(Rectangle centre,Rectangle periphery) {
 	if((periphery.y + periphery.height) <= centre.y)
 	  return 1; // north
@@ -37,6 +59,14 @@ public class InitialRouteFinder {
 	return 0;
   }
 	
+  /**
+   * Initialize north.
+   *
+   * @param r1 the r1
+   * @param r2 the r2
+   * @param start the start
+   * @param end the end
+   */
   public void initializeNorth(Rectangle r1,Rectangle r2,Point start,Point end) {
 	start.y = r1.y + r1.height;
 	end.y = r2.y; 
@@ -55,6 +85,14 @@ public class InitialRouteFinder {
 	}		
   }
 	
+  /**
+   * Initialize south.
+   *
+   * @param r1 the r1
+   * @param r2 the r2
+   * @param start the start
+   * @param end the end
+   */
   public void initializeSouth(Rectangle r1,Rectangle r2,Point start,Point end) {
 	start.y = r1.y;
 	end.y = r2.y + r2.height;
@@ -73,6 +111,14 @@ public class InitialRouteFinder {
 	}
   }
 	
+  /**
+   * Initalize west.
+   *
+   * @param r1 the r1
+   * @param r2 the r2
+   * @param start the start
+   * @param end the end
+   */
   public void initalizeWest(Rectangle r1,Rectangle r2,Point start,Point end) {
 	start.x = r1.x + r1.width;
 	end.x = r2.x;
@@ -83,6 +129,14 @@ public class InitialRouteFinder {
 	}	    	
   }
 	
+  /**
+   * Initalize east.
+   *
+   * @param r1 the r1
+   * @param r2 the r2
+   * @param start the start
+   * @param end the end
+   */
   public void initalizeEast(Rectangle r1,Rectangle r2,Point start,Point end) {
 	start.x = r1.x;
 	end.x = r2.x + r2.width;
@@ -93,18 +147,39 @@ public class InitialRouteFinder {
 	}	    	
   }
 	
+  /**
+   * X intersects.
+   *
+   * @param r1 the r1
+   * @param r2 the r2
+   * @return true, if successful
+   */
   public boolean xIntersects(Rectangle r1,Rectangle r2) {
 	if(getXIntersection(r1,r2)!=-1)
 	  return true;
 	else return false;	
   }
 	
+  /**
+   * Y intersects.
+   *
+   * @param r1 the r1
+   * @param r2 the r2
+   * @return true, if successful
+   */
   public boolean yIntersects(Rectangle r1,Rectangle r2) {
 	if(getYIntersection(r1,r2)!=-1)
 	  return true;
 	else return false;	
   }
 	
+  /**
+   * Gets the x intersection.
+   *
+   * @param r1 the r1
+   * @param r2 the r2
+   * @return the x intersection
+   */
   public int getXIntersection(Rectangle r1,Rectangle r2) {
 	Rectangle r1copy = r1.getCopy();
 	Rectangle r2copy = r2.getCopy();
@@ -115,6 +190,13 @@ public class InitialRouteFinder {
 	return -1;  	
   }
 	
+  /**
+   * Gets the y intersection.
+   *
+   * @param r1 the r1
+   * @param r2 the r2
+   * @return the y intersection
+   */
   public int getYIntersection(Rectangle r1,Rectangle r2) {
 	Rectangle r1copy = r1.getCopy();
 	Rectangle r2copy = r2.getCopy();
@@ -125,6 +207,13 @@ public class InitialRouteFinder {
 	return -1;	
   }
   
+  /**
+   * Absolute to local.
+   *
+   * @param p the p
+   * @param port the port
+   * @return the point
+   */
   public Point absoluteToLocal(Point p,Figure port) {
 	port.getParent().translateToRelative(p);
 	Rectangle r = port.getBounds().getCopy();

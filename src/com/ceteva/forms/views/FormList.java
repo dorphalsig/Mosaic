@@ -18,13 +18,28 @@ import uk.ac.mdx.xmf.swt.client.EventHandler;
 import xos.Message;
 import xos.Value;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FormList.
+ */
 class FormList extends FormElement {
 
+	/** The id bindings. */
 	Hashtable idBindings = new Hashtable();
+	
+	/** The binding ids. */
 	Hashtable bindingIds = new Hashtable();
 
+	/** The list. */
 	private List list = null;
 
+	/**
+	 * Instantiates a new form list.
+	 *
+	 * @param parent the parent
+	 * @param identity the identity
+	 * @param handler the handler
+	 */
 	public FormList(Composite parent, String identity, EventHandler handler) {
 		super(identity);
 		list = new List(parent, SWT.BORDER | SWT.SINGLE | SWT.V_SCROLL
@@ -33,16 +48,28 @@ class FormList extends FormElement {
 		addListener();
 	}
 
+	/**
+	 * Adds the item.
+	 *
+	 * @param identity the identity
+	 * @param text the text
+	 */
 	public void addItem(String identity, String text) {
 		idBindings.put(new Integer(list.getItemCount()), identity);
 		bindingIds.put(identity, text);
 		list.add(text);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.ComponentWithControl#getControl()
+	 */
 	public Control getControl() {
 		return list;
 	}
 
+	/**
+	 * Adds the listener.
+	 */
 	public void addListener() {
 		list.addListener(SWT.MouseDoubleClick, new Listener() {
 			public void handleEvent(Event e) {
@@ -79,14 +106,28 @@ class FormList extends FormElement {
 		});
 	}
 
+	/**
+	 * Sets the bounds.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param width the width
+	 * @param height the height
+	 */
 	public void setBounds(int x, int y, int width, int height) {
 		list.setBounds(x, y, width, height);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Commandable#processCall(xos.Message)
+	 */
 	public Value processCall(Message message) {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ceteva.forms.views.FormElement#processMessage(xos.Message)
+	 */
 	public boolean processMessage(Message message) {
 		if (message.arity >= 1) {
 			if (message.args[0].hasStrValue(getIdentity())) {
@@ -108,6 +149,12 @@ class FormList extends FormElement {
 		return super.processMessage(message);
 	}
 
+	/**
+	 * Check list items.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean checkListItems(Message message) {
 		if (message.hasName("removeItem") && message.arity == 1) {
 			String target = message.args[0].strValue();
@@ -137,6 +184,11 @@ class FormList extends FormElement {
 		return false;
 	}
 
+	/**
+	 * Refresh id bindings.
+	 *
+	 * @param removedIndex the removed index
+	 */
 	void refreshIdBindings(int removedIndex) {
 		idBindings.remove(new Integer(removedIndex));
 		Hashtable dummyTable = new Hashtable();
@@ -153,12 +205,18 @@ class FormList extends FormElement {
 		idBindings = dummyTable;
 	}
 
+	/**
+	 * Removes the all items.
+	 */
 	public void removeAllItems() {
 		list.removeAll();
 		idBindings.clear();
 		bindingIds.clear();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ceteva.forms.views.FormElement#dragSetData(org.eclipse.swt.dnd.DragSourceEvent)
+	 */
 	public void dragSetData(DragSourceEvent event) {
 		if (TextTransfer.getInstance().isSupportedType(event.dataType)) {
 			int count = list.getSelectionIndex();
@@ -173,6 +231,9 @@ class FormList extends FormElement {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ceteva.forms.views.FormElement#drop(org.eclipse.swt.dnd.DropTargetEvent)
+	 */
 	public void drop(DropTargetEvent event) {
 		if (TextTransfer.getInstance().isSupportedType(event.currentDataType)) {
 			int count = list.getSelectionIndex();

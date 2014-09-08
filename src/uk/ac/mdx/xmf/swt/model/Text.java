@@ -8,16 +8,47 @@ import uk.ac.mdx.xmf.swt.client.EventHandler;
 import xos.Message;
 import xos.Value;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Text.
+ */
 public class Text extends DisplayWithPosition {
 
+	/** The text string. */
 	private String textString; // the text to be displayed
+	
+	/** The editable. */
 	private final boolean editable; // denotes whether the text can be edited
+	
+	/** The underline. */
 	private boolean underline;
+	
+	/** The italicise. */
 	private boolean italicise;
+	
+	/** The edit. */
 	private boolean edit = false;
+	
+	/** The color. */
 	private RGB color;
+	
+	/** The font. */
 	private String font = "";
 
+	/**
+	 * Instantiates a new text.
+	 *
+	 * @param parent the parent
+	 * @param handler the handler
+	 * @param identity the identity
+	 * @param location the location
+	 * @param textString the text string
+	 * @param editable the editable
+	 * @param underline the underline
+	 * @param italicise the italicise
+	 * @param color the color
+	 * @param font the font
+	 */
 	public Text(ClientElement parent, EventHandler handler, String identity,
 			Point location, String textString, boolean editable,
 			boolean underline, boolean italicise, RGB color, String font) {
@@ -30,6 +61,21 @@ public class Text extends DisplayWithPosition {
 		this.font = font;
 	}
 
+	/**
+	 * Instantiates a new text.
+	 *
+	 * @param parent the parent
+	 * @param handler the handler
+	 * @param identity the identity
+	 * @param x the x
+	 * @param y the y
+	 * @param textString the text string
+	 * @param editable the editable
+	 * @param underline the underline
+	 * @param italicise the italicise
+	 * @param color the color
+	 * @param font the font
+	 */
 	public Text(ClientElement parent, EventHandler handler, String identity,
 			int x, int y, String textString, boolean editable,
 			boolean underline, boolean italicise, RGB color, String font) {
@@ -37,6 +83,20 @@ public class Text extends DisplayWithPosition {
 				underline, italicise, color, font);
 	}
 
+	/**
+	 * Instantiates a new text.
+	 *
+	 * @param parent the parent
+	 * @param handler the handler
+	 * @param identity the identity
+	 * @param x the x
+	 * @param y the y
+	 * @param textString the text string
+	 * @param editable the editable
+	 * @param underline the underline
+	 * @param italicise the italicise
+	 * @param font the font
+	 */
 	public Text(ClientElement parent, EventHandler handler, String identity,
 			int x, int y, String textString, boolean editable,
 			boolean underline, boolean italicise, String font) {
@@ -44,24 +104,47 @@ public class Text extends DisplayWithPosition {
 				underline, italicise, null, font);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.ClientElement#delete()
+	 */
 	@Override
 	public void delete() {
 		super.delete();
 		((Container) parent).removeDisplay(this);
 	}
 
+	/**
+	 * Gets the color.
+	 *
+	 * @return the color
+	 */
 	public RGB getColor() {
 		return color;
 	}
 
+	/**
+	 * Gets the font.
+	 *
+	 * @return the font
+	 */
 	public String getFont() {
 		return font;
 	}
 
+	/**
+	 * Gets the text.
+	 *
+	 * @return the text
+	 */
 	public String getText() {
 		return textString;
 	}
 
+	/**
+	 * Change text.
+	 *
+	 * @param text the text
+	 */
 	public void changeText(String text) {
 		Message m = handler.newMessage("textChanged", 2);
 		Value v1 = new Value(identity);
@@ -71,22 +154,45 @@ public class Text extends DisplayWithPosition {
 		handler.raiseEvent(m);
 	}
 
+	/**
+	 * Checks if is editable.
+	 *
+	 * @return true, if is editable
+	 */
 	public boolean isEditable() {
 		return editable;
 	}
 
+	/**
+	 * Edits the.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean edit() {
 		return edit;
 	}
 
+	/**
+	 * Gets the underline.
+	 *
+	 * @return the underline
+	 */
 	public boolean getUnderline() {
 		return underline;
 	}
 
+	/**
+	 * Gets the italicise.
+	 *
+	 * @return the italicise
+	 */
 	public boolean getItalicise() {
 		return italicise;
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.model.DisplayWithPosition#processMessage(xos.Message)
+	 */
 	@Override
 	public boolean processMessage(Message message) {
 		if (message.hasName("editText")
@@ -140,10 +246,22 @@ public class Text extends DisplayWithPosition {
 		return super.processMessage(message);
 	}
 
+	/**
+	 * Sets the edits the.
+	 *
+	 * @param edit the new edits the
+	 */
 	public void setEdit(boolean edit) {
 		this.edit = edit;
 	}
 
+	/**
+	 * Sets the color.
+	 *
+	 * @param red the red
+	 * @param green the green
+	 * @param blue the blue
+	 */
 	public void setColor(int red, int green, int blue) {
 		color = ModelFactory.getColor(red, green, blue);
 		if (isRendering())

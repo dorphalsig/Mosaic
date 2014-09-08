@@ -8,16 +8,18 @@ package com.ceteva.mosaic.util;
 
 import java.io.ByteArrayOutputStream;
 
+// TODO: Auto-generated Javadoc
 /**
- * Utility class for converting byte arrays to and from a Hex string
+ * Utility class for converting byte arrays to and from a Hex string.
  *
  * @author Samuel Chen
  * @version $Revision: 1.1 $
  * created:  2-10-2001
- * @since 1.0 
+ * @since 1.0
  */
 public final class ByteHex {
 
+  /** The Constant hexs. */
   private static final char[] hexs = {
                         '0', '1', '2', '3', '4', '5', '6', '7', '8',
                         '9', 'A', 'B', 'C', 'D', 'E', 'F' };

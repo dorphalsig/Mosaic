@@ -19,16 +19,29 @@ import org.eclipse.gef.tools.DragEditPartsTracker;
 import uk.ac.mdx.xmf.swt.editPart.EdgeEditPart;
 import uk.ac.mdx.xmf.swt.editPart.NodeEditPart;
 
+// TODO: Auto-generated Javadoc
 //import uk.ac.mdx.xmf.swt.editPolicy.EdgePolicy;
 
+/**
+ * The Class NodeSelectionTracker.
+ */
 public class NodeSelectionTracker extends DragEditPartsTracker {
 
+	/** The debug. */
 	public boolean debug = false;
 
+	/**
+	 * Instantiates a new node selection tracker.
+	 *
+	 * @param sourceEditPart the source edit part
+	 */
 	public NodeSelectionTracker(EditPart sourceEditPart) {
 		super(sourceEditPart);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.tools.DragEditPartsTracker#getCommand()
+	 */
 	@Override
 	public Command getCommand() {
 		CompoundCommand command = new CompoundCommand();
@@ -83,6 +96,12 @@ public class NodeSelectionTracker extends DragEditPartsTracker {
 		return command;
 	}
 
+	/**
+	 * Calculate edges to delta.
+	 *
+	 * @param selectedEditParts the selected edit parts
+	 * @return the list
+	 */
 	public List calculateEdgesToDelta(List selectedEditParts) {
 		List edgesToDelta = new ArrayList();
 
@@ -107,6 +126,13 @@ public class NodeSelectionTracker extends DragEditPartsTracker {
 	// moved then the following method ensures that the edge's waypoints and
 	// refpoint are moved similarly
 
+	/**
+	 * Check waypoints.
+	 *
+	 * @param request the request
+	 * @param edgesToDelta the edges to delta
+	 * @param command the command
+	 */
 	protected void checkWaypoints(Request request, List edgesToDelta,
 			CompoundCommand command) {
 		for (int i = 0; i < edgesToDelta.size(); i++) {
@@ -149,6 +175,11 @@ public class NodeSelectionTracker extends DragEditPartsTracker {
 		}
 	}
 
+	/**
+	 * Ctrl is pressed.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean ctrlIsPressed() {
 		return isCloneActive();
 	}

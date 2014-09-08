@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+// TODO: Auto-generated Javadoc
 /**
  * This class deals with Date related issues.
  *
@@ -20,17 +21,34 @@ import java.util.Date;
  */
 public class DateParser {
 
+  /** The calendar. */
   private Calendar calendar;
 
+  /**
+   * Instantiates a new date parser.
+   *
+   * @param date the date
+   */
   public DateParser(Date date) {
     calendar = Calendar.getInstance();
     calendar.setTime(date);
   }
   
+  /**
+   * Instantiates a new date parser.
+   *
+   * @param dateStr the date str
+   */
   public DateParser(String dateStr) {
     this(DateParser.toUtilDate(dateStr));
   }
 
+  /**
+   * To util date.
+   *
+   * @param dateStr the date str
+   * @return the java.util. date
+   */
   public static java.util.Date toUtilDate(String dateStr) {
     Date date = null;
     DateFormat formater;
@@ -51,7 +69,9 @@ public class DateParser {
   }
 
   /**
-   * @param java.util.Date
+   * To sql date.
+   *
+   * @param date the date
    * @return java.sql.Date
    * Convert a java.util.Date to java.sql.Date
    */
@@ -63,11 +83,19 @@ public class DateParser {
     }
   }
   
+  /**
+   * To sql date.
+   *
+   * @param dateStr the date str
+   * @return the java.sql. date
+   */
   public static java.sql.Date toSqlDate(String dateStr) {
     return DateParser.toSqlDate(DateParser.toUtilDate(dateStr));
   }
   
   /**
+   * Gets the year.
+   *
    * @return string year
    */
   public String getYear() {
@@ -76,6 +104,8 @@ public class DateParser {
   }
   
   /**
+   * Gets the XX year.
+   *
    * @return last two digital part of the year
    */
   public String getXXYear() {
@@ -83,6 +113,8 @@ public class DateParser {
   }
 
   /**
+   * Gets the month.
+   *
    * @return the month of the year
    */
   public int getMonth(){
@@ -90,6 +122,8 @@ public class DateParser {
   }
 
   /**
+   * Gets the day of month.
+   *
    * @return the day of the month
    */
   public int getDayOfMonth() {
@@ -97,12 +131,19 @@ public class DateParser {
   }
 
   /**
+   * Gets the day of week.
+   *
    * @return the day of the month
    */
   public int getDayOfWeek() {
     return calendar.get(Calendar.DAY_OF_WEEK);
   }
   
+  /**
+   * The main method.
+   *
+   * @param args the arguments
+   */
   public static void main (String[] args) {
     DateParser parser = new DateParser(args[0]);
     System.out.println("year="+parser.getYear());

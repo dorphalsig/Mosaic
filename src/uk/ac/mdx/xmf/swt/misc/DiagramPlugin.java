@@ -8,18 +8,36 @@ import org.eclipse.swt.widgets.Display;
 import uk.ac.mdx.xmf.swt.diagram.preferences.IPreferenceConstants;
 import uk.ac.mdx.xmf.swt.model.ImageManager;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DiagramPlugin.
+ */
 public class DiagramPlugin {
 
+	/** The plugin. */
 	private static DiagramPlugin plugin;
 
+	/**
+	 * Instantiates a new diagram plugin.
+	 */
 	public DiagramPlugin() {
 		plugin = this;
 	}
 
+	/**
+	 * Gets the default.
+	 *
+	 * @return the default
+	 */
 	public static DiagramPlugin getDefault() {
 		return plugin;
 	}
 
+	/**
+	 * Initialize default preferences.
+	 *
+	 * @param store the store
+	 */
 	protected void initializeDefaultPreferences(IPreferenceStore store) {
 		// colors
 		store.setDefault(IPreferenceConstants.GRADIENT_FILL, false);
@@ -50,16 +68,29 @@ public class DiagramPlugin {
 		store.setDefault(IPreferenceConstants.PALETTE_WIDTH, 110);
 	}
 
+	/**
+	 * Early startup.
+	 */
 	public void earlyStartup() {
 		// DiagramClient client = new DiagramClient();
 		// XmfPlugin.xos.newMessageClient("com.ceteva.diagram", client);
 	}
 
+	/**
+	 * Stop.
+	 *
+	 * @throws Exception the exception
+	 */
 	public void stop() throws Exception {
 		// super.stop( );
 		ImageManager.dispose();
 	}
 
+	/**
+	 * Gets the preference store.
+	 *
+	 * @return the preference store
+	 */
 	public IPreferenceStore getPreferenceStore() {
 		// TODO Auto-generated method stub
 		return null;

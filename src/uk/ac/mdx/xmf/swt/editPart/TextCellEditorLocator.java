@@ -7,14 +7,27 @@ import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Text;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TextCellEditorLocator.
+ */
 final public class TextCellEditorLocator implements CellEditorLocator {
 
+  /** The label. */
   private Label label;
 
+  /**
+   * Instantiates a new text cell editor locator.
+   *
+   * @param label the label
+   */
   public TextCellEditorLocator(Label label) {
 	setLabel(label);
   }
 
+  /* (non-Javadoc)
+   * @see org.eclipse.gef.tools.CellEditorLocator#relocate(org.eclipse.jface.viewers.CellEditor)
+   */
   public void relocate(CellEditor celleditor) {
 	  	Text text = (Text)celleditor.getControl();
 		Point sel = text.getSelection();
@@ -26,10 +39,20 @@ final public class TextCellEditorLocator implements CellEditorLocator {
         text.setSelection(sel);
   }
 
+  /**
+   * Gets the label.
+   *
+   * @return the label
+   */
   protected Label getLabel() {
 	return label;
   }
 
+  /**
+   * Sets the label.
+   *
+   * @param label the new label
+   */
   protected void setLabel(Label label) {
 	this.label = label;
   }

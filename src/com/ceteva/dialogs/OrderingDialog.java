@@ -14,18 +14,40 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Shell;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class OrderingDialog.
+ */
 public class OrderingDialog extends Dialog {
 
     // This dialog allows a list of elements to be ordered.
 	
+    /** The text. */
     private String text;
+    
+    /** The message. */
     private String message;
+    
+    /** The sources. */
     private String[] sources;
+    
+    /** The targets. */
     private String[] targets;
 
+    /** The source list. */
     private List sourceList;
+    
+    /** The target list. */
     private List targetList;
 
+    /**
+     * Instantiates a new ordering dialog.
+     *
+     * @param shell the shell
+     * @param text the text
+     * @param message the message
+     * @param sources the sources
+     */
     public OrderingDialog(Shell shell, String text, String message,
             String[] sources) {
 
@@ -40,17 +62,26 @@ public class OrderingDialog extends Dialog {
         this.sources = sources;
     }
     
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.window.Window#configureShell(org.eclipse.swt.widgets.Shell)
+	 */
 	protected void configureShell(Shell shell) {
 		super.configureShell(shell);
 		shell.setText(text);
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.dialogs.Dialog#okPressed()
+	 */
 	public void okPressed() {
 		targets = targetList.getItems();
 		super.okPressed();
 		
 	}
 
+    /* (non-Javadoc)
+     * @see org.eclipse.jface.dialogs.Dialog#createDialogArea(org.eclipse.swt.widgets.Composite)
+     */
     protected Control createDialogArea(Composite parent) {
     	Composite container = new Composite(parent, SWT.NONE);
         GridLayout layout = new GridLayout();
@@ -69,6 +100,12 @@ public class OrderingDialog extends Dialog {
         return parent;
     }
 
+    /**
+     * Creates the scroll area.
+     *
+     * @param parent the parent
+     * @return the composite
+     */
     private Composite createScrollArea(Composite parent){
         Group container = new Group(parent, SWT.NONE);
         GridLayout layout = new GridLayout(2,false);
@@ -90,6 +127,12 @@ public class OrderingDialog extends Dialog {
         return container;
     }
 
+    /**
+     * Creates the source list.
+     *
+     * @param parent the parent
+     * @return the composite
+     */
     private Composite createSourceList(Composite parent) {
         Composite container = new Composite(parent, SWT.NONE);
         GridLayout layout = new GridLayout();
@@ -108,6 +151,12 @@ public class OrderingDialog extends Dialog {
         return container;
     }
 
+    /**
+     * Creates the target list.
+     *
+     * @param parent the parent
+     * @return the composite
+     */
     protected Composite createTargetList(Composite parent) {
         Composite container = new Composite(parent, SWT.NONE);
         GridLayout layout = new GridLayout();
@@ -125,6 +174,12 @@ public class OrderingDialog extends Dialog {
         return container;
     }
 
+    /**
+     * Creates the button area.
+     *
+     * @param parent the parent
+     * @return the composite
+     */
     private Composite createButtonArea(Composite parent) {
         Composite comp = new Composite(parent, SWT.NONE);
         GridLayout layout = new GridLayout();
@@ -200,6 +255,11 @@ public class OrderingDialog extends Dialog {
         return container;
     }
     
+    /**
+     * Gets the choice.
+     *
+     * @return the choice
+     */
     public String[] getChoice() {
       return targets;	
     }

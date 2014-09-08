@@ -17,18 +17,36 @@ import xos.Value;
 
 import com.ceteva.forms.views.FormView;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FormsClient.
+ */
 public class FormsClient extends XMLClient {
+	
+	/** The handler. */
 	public EventHandler handler = null;
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Client#setEventHandler(uk.ac.mdx.xmf.swt.client.EventHandler)
+	 */
 	@Override
 	public void setEventHandler(EventHandler eventsOut) {
 		handler = eventsOut;
 	}
 
+	/**
+	 * Instantiates a new forms client.
+	 */
 	public FormsClient() {
 		super("com.ceteva.forms");
 	}
 
+	/**
+	 * Gets the form.
+	 *
+	 * @param identity the identity
+	 * @return the form
+	 */
 	public FormView getForm(String identity) {
 		Vector forms = getAllForms();
 		for (int i = 0; i < forms.size(); i++) {
@@ -39,6 +57,12 @@ public class FormsClient extends XMLClient {
 		return null;
 	}
 
+	/**
+	 * Gets the form type.
+	 *
+	 * @param identity the identity
+	 * @return the form type
+	 */
 	public String getFormType(String identity) {
 		Vector forms = getAllForms();
 		for (int i = 0; i < forms.size(); i++) {
@@ -49,6 +73,12 @@ public class FormsClient extends XMLClient {
 		return null;
 	}
 
+	/**
+	 * Gets the text dimension.
+	 *
+	 * @param text the text
+	 * @return the text dimension
+	 */
 	public Value getTextDimension(String text) {
 		Font f = Display.getDefault().getSystemFont();
 		Dimension d = FigureUtilities.getTextExtents(text, f);
@@ -66,6 +96,11 @@ public class FormsClient extends XMLClient {
 	 * return page.getViewReferences(); }
 	 */
 
+	/**
+	 * Gets the all forms.
+	 *
+	 * @return the all forms
+	 */
 	public Vector getAllForms() {
 		Vector forms = new Vector();
 		// IWorkbenchPage page = FormsPlugin.getDefault().getWorkbench()
@@ -82,6 +117,12 @@ public class FormsClient extends XMLClient {
 		return forms;
 	}
 
+	/**
+	 * Broadcast call.
+	 *
+	 * @param message the message
+	 * @return the value
+	 */
 	public Value broadcastCall(Message message) {
 		Vector forms = getAllForms();
 		for (int i = 0; i < forms.size(); i++) {
@@ -93,6 +134,12 @@ public class FormsClient extends XMLClient {
 		return new Value(false);
 	}
 
+	/**
+	 * New form.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean newForm(Message message) {
 		String identity = message.args[0].strValue();
 		String type = message.args[1].strValue();
@@ -100,6 +147,14 @@ public class FormsClient extends XMLClient {
 		return newForm(identity, type, name) != null;
 	}
 
+	/**
+	 * New form.
+	 *
+	 * @param identity the identity
+	 * @param type the type
+	 * @param name the name
+	 * @return the form view
+	 */
 	public FormView newForm(String identity, String type, String name) {
 
 		// IWorkbenchPage page = FormsPlugin.getDefault().getWorkbench()
@@ -131,6 +186,9 @@ public class FormsClient extends XMLClient {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Client#processCall(xos.Message)
+	 */
 	public Value processCall(Message message) {
 		if (message.hasName("getTextDimension")) {
 			String text = message.args[0].strValue();
@@ -139,6 +197,9 @@ public class FormsClient extends XMLClient {
 		return broadcastCall(message);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.XMLClient#processMessage(xos.Message)
+	 */
 	public boolean processMessage(Message message) {
 		if (super.processMessage(message))
 			return true;
@@ -159,11 +220,20 @@ public class FormsClient extends XMLClient {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.XMLClient#processXML(uk.ac.mdx.xmf.swt.client.xml.Document)
+	 */
 	public void processXML(Document xml) {
 		// xml.printString();
 		synchroniseForms(xml);
 	}
 
+	/**
+	 * Sets the focus.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean setFocus(Message message) {
 		// String identity = message.args[0].strValue();
 		// IWorkbenchPage page = FormsPlugin.getDefault().getWorkbench()
@@ -182,6 +252,12 @@ public class FormsClient extends XMLClient {
 		return true;
 	}
 
+	/**
+	 * Sets the visible.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean setVisible(Message message) {
 		// String identity = message.args[0].strValue();
 		// IWorkbenchPage page = FormsPlugin.getDefault().getWorkbench()
@@ -203,6 +279,11 @@ public class FormsClient extends XMLClient {
 		return false;
 	}
 
+	/**
+	 * Synchronise forms.
+	 *
+	 * @param xml the xml
+	 */
 	public void synchroniseForms(Element xml) {
 
 		// check that there is a form for each of the document's forms

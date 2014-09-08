@@ -10,20 +10,40 @@ import xos.Message;
 import xos.Value;
 import xos.XData;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class XMLClient.
+ */
 public abstract class XMLClient extends Client {
 
+	/** The xml. */
 	Stack xml = new Stack();
 
+	/**
+	 * Instantiates a new XML client.
+	 *
+	 * @param name the name
+	 */
 	public XMLClient(String name) {
 		super(name);
 	}
 
+	/**
+	 * End document.
+	 *
+	 * @param message the message
+	 */
 	public void endDocument(Message message) {
 		XML element = popXML();
 		if (element instanceof Document)
 			processXML((Document) element);
 	}
 
+	/**
+	 * End element.
+	 *
+	 * @param message the message
+	 */
 	public void endElement(Message message) {
 		XML element = popXML();
 		XML owner = popXML();
@@ -31,6 +51,12 @@ public abstract class XMLClient extends Client {
 		pushXML(owner);
 	}
 
+	/**
+	 * Parses the xml.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean parseXML(Message message) {
 		if (message.hasName(XMLData.START_DOCUMENT)) {
 			startDocument(message);
@@ -48,30 +74,63 @@ public abstract class XMLClient extends Client {
 		return false;
 	}
 
+	/**
+	 * Peek xml.
+	 *
+	 * @return the xml
+	 */
 	public XML peekXML() {
 		return (XML) xml.peek();
 	}
 
+	/**
+	 * Pop xml.
+	 *
+	 * @return the xml
+	 */
 	public XML popXML() {
 		return (XML) xml.pop();
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Client#processMessage(xos.Message)
+	 */
 	@Override
 	public boolean processMessage(Message message) {
 		return parseXML(message);
 	}
 
+	/**
+	 * Process xml.
+	 *
+	 * @param xml the xml
+	 */
 	public abstract void processXML(Document xml);
 
+	/**
+	 * Push xml.
+	 *
+	 * @param element the element
+	 */
 	public void pushXML(XML element) {
 		xml.push(element);
 	}
 
+	/**
+	 * Start document.
+	 *
+	 * @param message the message
+	 */
 	public void startDocument(Message message) {
 		xml.clear();
 		pushXML(new Document());
 	}
 
+	/**
+	 * Start element.
+	 *
+	 * @param message the message
+	 */
 	public void startElement(Message message) {
 		String name = message.args[0].strValue();
 		Element element = new Element();

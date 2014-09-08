@@ -10,11 +10,21 @@ import org.eclipse.ui.internal.WorkbenchWindow;
 import com.ceteva.dialogs.progress.model.Job;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BackgroundJobs.
+ */
 public class BackgroundJobs {
 	
+	/** The monitor. */
 	private IProgressMonitor monitor;
+	
+	/** The current job. */
 	private Job currentJob = null;
 		
+	/**
+	 * Done.
+	 */
 	public void done() {
 	    if(currentJob != null) {
 		  currentJob = null;
@@ -22,6 +32,12 @@ public class BackgroundJobs {
 	    }
 	}
 	
+	/**
+	 * Gets the latest background job.
+	 *
+	 * @param jobs the jobs
+	 * @return the latest background job
+	 */
 	public Job getLatestBackgroundJob(Vector jobs) {
 		Job latest = null;
 		for(int i=0;i<jobs.size();i++) {
@@ -32,6 +48,11 @@ public class BackgroundJobs {
 		return latest;
 	}
 	
+	/**
+	 * Gets the progress monitor.
+	 *
+	 * @return the progress monitor
+	 */
 	public IProgressMonitor getProgressMonitor() {
 		if(monitor == null) {
 		  WorkbenchWindow window = (WorkbenchWindow)PlatformUI.getWorkbench().getActiveWorkbenchWindow();
@@ -41,6 +62,11 @@ public class BackgroundJobs {
 		return monitor;
 	}
 	
+	/**
+	 * Refresh.
+	 *
+	 * @param jobs the jobs
+	 */
 	public void refresh(Vector jobs) {
 		Job latest = getLatestBackgroundJob(jobs);
 		if(latest != null) {
@@ -54,6 +80,11 @@ public class BackgroundJobs {
 		}
 	}
 	
+	/**
+	 * Show.
+	 *
+	 * @param job the job
+	 */
 	public void show(Job job) {
 		currentJob = job;
 		getProgressMonitor().beginTask(job.getName(),IProgressMonitor.UNKNOWN);

@@ -10,11 +10,21 @@ import uk.ac.mdx.xmf.swt.figure.LineFigure;
 import uk.ac.mdx.xmf.swt.misc.ColorManager;
 import uk.ac.mdx.xmf.swt.model.Line;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LineEditPart.
+ */
 public class LineEditPart extends DisplayEditPart {
 
+	/** The model. */
 	Line model;
+	
+	/** The line. */
 	LineFigure line;
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
+	 */
 	protected IFigure createFigure() {
 		model = (Line) getModel();
 		Point start = model.getStart();
@@ -23,9 +33,17 @@ public class LineEditPart extends DisplayEditPart {
 		return line;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#createEditPolicies()
+	 */
 	protected void createEditPolicies() {
 	}
 
+	/**
+	 * Gets the color.
+	 *
+	 * @return the color
+	 */
 	public RGB getColor() {
 		RGB lineColor = ((Line) getModel()).getColor();
 		if (lineColor != null)
@@ -37,10 +55,16 @@ public class LineEditPart extends DisplayEditPart {
 		// IPreferenceConstants.EDGE_COLOR);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#isSelectable()
+	 */
 	public boolean isSelectable() {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
+	 */
 	public void propertyChange(PropertyChangeEvent evt) {
 		String prop = evt.getPropertyName();
 		if (prop.equals("startRender"))
@@ -56,6 +80,9 @@ public class LineEditPart extends DisplayEditPart {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#refreshVisuals()
+	 */
 	protected void refreshVisuals() {
 		Point start = ((Line) getModel()).getStart();
 		Point end = ((Line) getModel()).getEnd();
@@ -64,6 +91,9 @@ public class LineEditPart extends DisplayEditPart {
 		refreshColor();
 	}
 
+	/**
+	 * Refresh color.
+	 */
 	public void refreshColor() {
 		getFigure().setForegroundColor(ColorManager.getColor(getColor()));
 	}

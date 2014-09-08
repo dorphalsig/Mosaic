@@ -25,17 +25,25 @@ import org.eclipse.gef.editparts.ZoomManager;
 
 import uk.ac.mdx.xmf.swt.diagram.geometry.LineSeg;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class AnimatableZoomManager.
+ *
  * @author sshaw
  * 
  *         Overriden to fully support animated zoom.
  */
 public class AnimatableZoomManager extends ZoomManager {
 
+	/** The zoom animation style. */
 	private int zoomAnimationStyle = ANIMATE_NEVER;
+	
+	/** The animation listeners. */
 	private List animationListeners = new ArrayList();
 
 	/**
+	 * Gets the zoom animation style.
+	 *
 	 * @return Returns the zoomAnimationStyle.
 	 */
 	public int getZoomAnimationStyle() {
@@ -43,8 +51,10 @@ public class AnimatableZoomManager extends ZoomManager {
 	}
 
 	/**
-	 * @param pane
-	 * @param viewport
+	 * Instantiates a new animatable zoom manager.
+	 *
+	 * @param pane the pane
+	 * @param viewport the viewport
 	 */
 	public AnimatableZoomManager(ScalableFigure pane, Viewport viewport) {
 		super(pane, viewport);
@@ -126,6 +136,7 @@ public class AnimatableZoomManager extends ZoomManager {
 		zoomTo(zoom, rect.getCenter());
 	}
 
+	/** The Constant DURATION_INCREMENT. */
 	private static final int DURATION_INCREMENT = 400;
 
 	/**
@@ -142,8 +153,8 @@ public class AnimatableZoomManager extends ZoomManager {
 	/**
 	 * Calculate the animation duration based on the number of zoom increments
 	 * being traversed.
-	 * 
-	 * @param zoom
+	 *
+	 * @param zoom the zoom
 	 * @return <code>AnimationModel</code> that is appropriate for the zoom
 	 *         difference between requested and the current zoom level.
 	 */
@@ -159,9 +170,9 @@ public class AnimatableZoomManager extends ZoomManager {
 
 	/**
 	 * Sets the zoom level to the given value. Min-max range check is not done.
-	 * 
-	 * @param zoom
-	 *            the new zoom level
+	 *
+	 * @param zoom            the new zoom level
+	 * @param finalCenterAbs the final center abs
 	 */
 	private void primSetZoom(double zoom, Point finalCenterAbs) {
 		primAnimateSetZoom(
@@ -173,10 +184,10 @@ public class AnimatableZoomManager extends ZoomManager {
 
 	/**
 	 * Performs the zoom with animation.
-	 * 
-	 * @param zoom
-	 * @param finalCenter
-	 * @param animationModel
+	 *
+	 * @param zoom the zoom
+	 * @param finalCenter the final center
+	 * @param animationModel the animation model
 	 */
 	private void primAnimateSetZoom(double zoom, Point finalCenter,
 			AnimationModel animationModel) {

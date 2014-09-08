@@ -4,8 +4,19 @@ import org.eclipse.swt.widgets.Control;
 
 import xos.Message;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ComponentCommandHandler.
+ */
 class ComponentCommandHandler {
 
+	/**
+	 * Process message.
+	 *
+	 * @param control the control
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public static boolean processMessage(Control control, Message message) {
 		// if (message.hasName("delete") && message.arity == 1) {
 		// control.dispose();
@@ -36,6 +47,11 @@ class ComponentCommandHandler {
 		return true;
 	}
 
+	/**
+	 * Maximise to canvas.
+	 *
+	 * @param control the control
+	 */
 	public static void maximiseToCanvas(final Control control) {
 		// final Composite formContentsHolder = control.getParent();
 		// final Composite scrollable = formContentsHolder.getParent();

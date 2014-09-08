@@ -8,21 +8,46 @@ import uk.ac.mdx.xmf.swt.client.ExampleClient;
 import xos.Message;
 import xos.Value;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ExampleCreateNodeCommand.
+ */
 public class ExampleCreateNodeCommand {
 
+	/** The tool identity. */
 	String toolIdentity = "Class";
+	
+	/** The model identity. */
 	String modelIdentity = "161";
+	
+	/** The location. */
 	Point location = null;
+	
+	/** The handler. */
 	ExampleClient handler = new ExampleClient();
 
+	/**
+	 * Instantiates a new example create node command.
+	 */
 	public ExampleCreateNodeCommand() {
 
 	}
 
+	/**
+	 * Sets the location.
+	 *
+	 * @param position the new location
+	 */
 	public void setLocation(Point position) {
 		this.location = position;
 	}
 
+	/**
+	 * Instantiates a new example create node command.
+	 *
+	 * @param toolIdentity the tool identity
+	 * @param location the location
+	 */
 	public ExampleCreateNodeCommand(String toolIdentity, Point location) {
 		this.toolIdentity = toolIdentity;
 		this.location = location;
@@ -36,6 +61,9 @@ public class ExampleCreateNodeCommand {
 	//
 	// }
 
+	/**
+	 * Execute.
+	 */
 	public void execute() {
 		Message mes = new Message("focusGained", 1);
 		Value v1 = new Value(modelIdentity);
@@ -57,6 +85,11 @@ public class ExampleCreateNodeCommand {
 		handler.sendMessage(ms);
 	}
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		Point location = new Point(236, 114);
 		// ExampleCreateNodeCommand c = new ExampleCreateNodeCommand(location);

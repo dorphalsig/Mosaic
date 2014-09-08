@@ -27,13 +27,28 @@ import uk.ac.mdx.xmf.swt.figure.DiagramFigure;
 import uk.ac.mdx.xmf.swt.model.AbstractDiagram;
 import uk.ac.mdx.xmf.swt.model.Diagram;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ImageProducer.
+ */
 public class ImageProducer {
 
+	/** The border size. */
 	public static int borderSize = 20; // the border to add to the bottom and
 										// right of the exported figure
-	public static Clipboard clipboard = null;
+	/** The clipboard. */
+										public static Clipboard clipboard = null;
+	
+	/** The image loader. */
 	public static ImageLoader imageLoader = new ImageLoader();
 
+	/**
+	 * Creates the image.
+	 *
+	 * @param filename the filename
+	 * @param diagram the diagram
+	 * @param format the format
+	 */
 	public static void createImage(String filename, AbstractDiagram diagram,
 			String format) {
 		ClientElement parent = diagram;
@@ -59,6 +74,13 @@ public class ImageProducer {
 
 	}
 
+	/**
+	 * Creates the image.
+	 *
+	 * @param filename the filename
+	 * @param figure the figure
+	 * @param format the format
+	 */
 	public static void createImage(String filename, IFigure figure,
 			String format) {
 		int swtFormat = SWT.IMAGE_JPEG; // default
@@ -76,11 +98,10 @@ public class ImageProducer {
 	/**
 	 * Returns the bytes of an encoded image for the specified IFigure in the
 	 * specified format.
-	 * 
-	 * @param figure
-	 *            the Figure to create an image for.
-	 * @param format
-	 *            one of SWT.IMAGE_BMP, SWT.IMAGE_BMP_RLE, SWT.IMAGE_GIF
+	 *
+	 * @param filename the filename
+	 * @param figure            the Figure to create an image for.
+	 * @param format            one of SWT.IMAGE_BMP, SWT.IMAGE_BMP_RLE, SWT.IMAGE_GIF
 	 *            SWT.IMAGE_ICO, SWT.IMAGE_JPEG, or SWT.IMAGE_PNG
 	 * @return the bytes of an encoded image for the specified Figure
 	 */
@@ -98,6 +119,11 @@ public class ImageProducer {
 		}
 	}
 
+	/**
+	 * Copy to clipboard.
+	 *
+	 * @param figure the figure
+	 */
 	public static void copyToClipboard(IFigure figure) {
 		if (clipboard != null)
 			clipboard.dispose();
@@ -107,6 +133,13 @@ public class ImageProducer {
 				new Transfer[] { ImageDataTransfer.getInstance() });
 	}
 
+	/**
+	 * Gets the image data.
+	 *
+	 * @param figure the figure
+	 * @param format the format
+	 * @return the image data
+	 */
 	public static ImageData getImageData(IFigure figure, int format) {
 		Device device = Display.getDefault();
 		Rectangle client = figure.getClientArea();
@@ -140,6 +173,12 @@ public class ImageProducer {
 		}
 	}
 
+	/**
+	 * Find figure bounds.
+	 *
+	 * @param figure the figure
+	 * @return the point
+	 */
 	public static Point findFigureBounds(IFigure figure) {
 		Point p = new Point();
 		IFigure diagramFigure = getDiagramFigure(figure);
@@ -157,6 +196,12 @@ public class ImageProducer {
 		return p;
 	}
 
+	/**
+	 * Gets the diagram figure.
+	 *
+	 * @param figure the figure
+	 * @return the diagram figure
+	 */
 	public static IFigure getDiagramFigure(IFigure figure) {
 		if (!(figure instanceof DiagramFigure)) {
 			List children = figure.getChildren();
@@ -169,6 +214,13 @@ public class ImageProducer {
 		return figure;
 	}
 
+	/**
+	 * Write image.
+	 *
+	 * @param filename the filename
+	 * @param diagram the diagram
+	 * @param format the format
+	 */
 	private static void writeImage(String filename, AbstractDiagram diagram,
 			String format) {
 		// int style = PlatformUI.getWorkbench().getActiveWorkbenchWindow()

@@ -20,7 +20,17 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ScreenCaptureTest.
+ */
 public class ScreenCaptureTest {
+	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		String[] names = { "Harry", "Sally", "Jhon", "Tim", "Scott" };
 		String[] msg = { "Hello World!", "Today is a nice day to walk",

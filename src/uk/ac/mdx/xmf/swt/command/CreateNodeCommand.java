@@ -7,12 +7,28 @@ import uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart;
 import xos.Message;
 import xos.Value;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CreateNodeCommand.
+ */
 public class CreateNodeCommand extends org.eclipse.gef.commands.Command {
 
+	/** The parent. */
 	CommandEventEditPart parent;
+	
+	/** The tool identity. */
 	String toolIdentity;
+	
+	/** The location. */
 	Point location;
 
+	/**
+	 * Instantiates a new creates the node command.
+	 *
+	 * @param parent the parent
+	 * @param toolIdentity the tool identity
+	 * @param location the location
+	 */
 	public CreateNodeCommand(CommandEventEditPart parent, String toolIdentity,
 			Point location) {
 		this.parent = parent;
@@ -20,6 +36,9 @@ public class CreateNodeCommand extends org.eclipse.gef.commands.Command {
 		this.location = location;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.commands.Command#execute()
+	 */
 	@Override
 	public void execute() {
 		EventHandler handler = parent.getModel().handler;

@@ -19,28 +19,67 @@ import org.eclipse.swt.widgets.Listener;
 
 import uk.ac.mdx.xmf.swt.demo.Main;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Palette.
+ */
 public class Palette {
+	
+	/** The parent. */
 	Composite parent;
+	
+	/** The image name. */
 	private String imageName = "";
+	
+	/** The tools. */
 	ArrayList<String> tools = new ArrayList<String>();
+	
+	/** The point. */
 	Point point = null;
+	
+	/** The tool size. */
 	Point toolSize = new Point(30, 5);
+	
+	/** The display. */
 	Display display;
 
+	/** The models. */
 	Vector<String> models = new Vector<String>();
+	
+	/** The groups. */
 	Vector<String> groups = new Vector<String>();
 
+	/** The transfer class. */
 	private String transferClass = "";
+	
+	/** The canvas. */
 	Canvas canvas;
+	
+	/** The is focus. */
 	private boolean isFocus = false;
+	
+	/** The is initial. */
 	private boolean isInitial = false;
 
+	/** The images. */
 	private Image[] images;
+	
+	/** The label images. */
 	private Label[] labelImages;
+	
+	/** The label texts. */
 	private Label[] labelTexts;
+	
+	/** The color select. */
 	private Color colorSelect;
+	
+	/** The color. */
 	private Color color;
+	
+	/** The color section. */
 	private Color colorSection;
+	
+	/** The _palettes. */
 	Vector<Palette> _palettes = new Vector<Palette>();
 
 	// uk.ac.mdx.xmf.swt.model.AbstractDiagram diagram;
@@ -56,6 +95,13 @@ public class Palette {
 	// return instance;
 	// }
 
+	/**
+	 * Instantiates a new palette.
+	 *
+	 * @param parent the parent
+	 * @param style the style
+	 * @param display the display
+	 */
 	public Palette(Composite parent, int style, Display display) {
 		this.parent = parent;
 		this.display = display;
@@ -69,6 +115,11 @@ public class Palette {
 		colorSection = display.getSystemColor(SWT.COLOR_GRAY);
 	}
 
+	/**
+	 * Adds the drawer.
+	 *
+	 * @param group the group
+	 */
 	public void addDrawer(String group) {
 		boolean exist = false;
 		for (String g : groups) {
@@ -79,24 +130,51 @@ public class Palette {
 			groups.add(group);
 	}
 
+	/**
+	 * Adds the entry.
+	 *
+	 * @param parent the parent
+	 * @param label the label
+	 * @param identity the identity
+	 * @param connection the connection
+	 * @param icon the icon
+	 */
 	public void addEntry(String parent, String label, String identity,
 			boolean connection, String icon) {
 		tools.add(label);
 		tools.add(parent);
 	}
 
+	/**
+	 * Gets the select class.
+	 *
+	 * @return the select class
+	 */
 	public String getSelectClass() {
 		return transferClass;
 	}
 
+	/**
+	 * Sets the initial.
+	 *
+	 * @param initial the new initial
+	 */
 	public void setInitial(boolean initial) {
 		isFocus = initial;
 	}
 
+	/**
+	 * Gets the initial.
+	 *
+	 * @return the initial
+	 */
 	public boolean getInitial() {
 		return isInitial;
 	}
 
+	/**
+	 * Creates the part control.
+	 */
 	public void createPartControl() {
 
 		canvas = new Canvas(parent, SWT.BORDER);
@@ -265,31 +343,58 @@ public class Palette {
 		isInitial = true; // make use this function only run once
 	}
 
+	/**
+	 * Gets the select image.
+	 *
+	 * @return the select image
+	 */
 	public String getSelectImage() {
 
 		return imageName;
 	}
 
+	/**
+	 * Checks if is focus.
+	 *
+	 * @return true, if is focus
+	 */
 	public boolean isFocus() {
 		return isFocus;
 	}
 
+	/**
+	 * Sets the focus.
+	 *
+	 * @param focus the focus
+	 * @param palettes the palettes
+	 */
 	public void setFocus(boolean focus, Vector<Palette> palettes) {
 		_palettes = palettes;
 		setAllFocus();
 		isFocus = focus;
 	}
 
+	/**
+	 * Sets the all focus.
+	 */
 	public void setAllFocus() {
 		for (Palette palettes : _palettes) {
 			palettes.setFocus(false);
 		}
 	}
 
+	/**
+	 * Sets the focus.
+	 *
+	 * @param focus the new focus
+	 */
 	public void setFocus(boolean focus) {
 		isFocus = focus;
 	}
 
+	/**
+	 * Sets the select image.
+	 */
 	public void setSelectImage() {
 		imageName = "";
 

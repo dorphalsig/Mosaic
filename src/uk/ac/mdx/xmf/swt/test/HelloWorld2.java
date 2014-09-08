@@ -27,7 +27,17 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class HelloWorld2.
+ */
 public class HelloWorld2 {
+	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String args[]) {
 		Shell shell = new Shell();
 		shell.setText("Draw2d Hello World");
@@ -43,6 +53,11 @@ public class HelloWorld2 {
 		}
 	}
 
+	/**
+	 * Creates the content4 shell.
+	 *
+	 * @param shell the shell
+	 */
 	private static void createContent4Shell(Shell shell) {
 		Panel rootFigure = new Panel();
 		rootFigure.setLayoutManager(new XYLayout());

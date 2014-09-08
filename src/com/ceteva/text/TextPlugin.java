@@ -12,31 +12,59 @@ import uk.ac.mdx.xmf.swt.misc.ColorManager;
 
 import com.ceteva.text.preferences.IPreferenceConstants;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TextPlugin.
+ */
 public class TextPlugin {
 
+	/** The plugin. */
 	private static TextPlugin plugin;
 
+	/** The partitioner. */
 	public static String PARTITIONER = "default_partitioner";
 
+	/** The red. */
 	public static Color RED = ColorManager.getColor(new RGB(255, 0, 0));
 	//public static Color GREEN = ColorManager.getColor(new RGB(63, 127, 95));
+	/** The green. */
 	public static Color GREEN = ColorManager.getColor(new RGB(0, 147, 0));
+	
+	/** The blue. */
 	public static Color BLUE = ColorManager.getColor(new RGB(0, 0, 255));
+	
+	/** The black. */
 	public static Color BLACK = ColorManager.getColor(new RGB(0, 0, 0));
 
+	/**
+	 * Instantiates a new text plugin.
+	 */
 	public TextPlugin() {
 		plugin = this;
 	}
 
+	/**
+	 * Gets the default.
+	 *
+	 * @return the default
+	 */
 	public static TextPlugin getDefault() {
 		return plugin;
 	}
 
+	/**
+	 * Early startup.
+	 */
 	public void earlyStartup() {
 		EditorClient client = new EditorClient();
 		// XmfPlugin.xos.newMessageClient("com.ceteva.text", client);
 	}
 
+	/**
+	 * Initialize default preferences.
+	 *
+	 * @param store the store
+	 */
 	protected void initializeDefaultPreferences(IPreferenceStore store) {
 		// font
 		PreferenceConverter.setDefault(store, JFaceResources.TEXT_FONT,

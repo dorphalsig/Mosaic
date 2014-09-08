@@ -5,10 +5,20 @@ import org.eclipse.swt.custom.CTabFolder;
 
 import uk.ac.mdx.xmf.swt.client.IconManager;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ClearForms.
+ */
 public class ClearForms extends Action {
 
+	/** The forms. */
 	CTabFolder forms;
 
+	/**
+	 * Instantiates a new clear forms.
+	 *
+	 * @param forms the forms
+	 */
 	public ClearForms(CTabFolder forms) {
 		setId("com.ceteva.forms.actions.ClearForms");
 		setText("Clear Forms");
@@ -18,6 +28,9 @@ public class ClearForms extends Action {
 		this.forms = forms;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.action.Action#run()
+	 */
 	public void run() {
 		/*
 		 * if(forms != null) { CTabItem[] fs = forms.getItems(); for(int
@@ -27,6 +40,9 @@ public class ClearForms extends Action {
 		 */
 	}
 
+	/**
+	 * Update.
+	 */
 	public void update() {
 		this.setEnabled(forms.getItemCount() > 0);
 	}

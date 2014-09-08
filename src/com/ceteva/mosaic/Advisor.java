@@ -19,22 +19,42 @@ import com.ceteva.mosaic.misc.XmfPlugin;
 import com.ceteva.mosaic.perspectives.PerspectiveManager;
 import com.ceteva.mosaic.splash.Splash;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Advisor.
+ */
 public class Advisor extends WorkbenchAdvisor {
 
+	/** The icon path. */
 	public static String iconPath = "icons/";
+	
+	/** The icon name. */
 	public static String iconName = "mosiacSmall.gif";
+	
+	/** The product. */
 	public static IProduct product = Platform.getProduct();
+	
+	/** The splash. */
 	public static Splash splash = null;
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.application.WorkbenchAdvisor#createWorkbenchWindowAdvisor(org.eclipse.ui.application.IWorkbenchWindowConfigurer)
+	 */
 	public WorkbenchWindowAdvisor createWorkbenchWindowAdvisor(
 			IWorkbenchWindowConfigurer configurer) {
 		return new WindowAdvisor(configurer);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.application.WorkbenchAdvisor#getInitialWindowPerspectiveId()
+	 */
 	public String getInitialWindowPerspectiveId() {
 		return PerspectiveManager.standardPerspective;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.application.WorkbenchAdvisor#initialize(org.eclipse.ui.application.IWorkbenchConfigurer)
+	 */
 	public void initialize(IWorkbenchConfigurer configurer) {
 		super.initialize(configurer);
 		System.out.println("[ Application Initialize ]");
@@ -52,6 +72,9 @@ public class Advisor extends WorkbenchAdvisor {
 			xmfplugin.setImage(imagedefault);
 	}
 
+	/**
+	 * Sets the curved look.
+	 */
 	public void setCurvedLook() {
 		IPreferenceStore store = PlatformUI.getPreferenceStore();
 		store.setValue(
@@ -61,6 +84,9 @@ public class Advisor extends WorkbenchAdvisor {
 				IWorkbenchPreferenceConstants.TOP_RIGHT);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.application.WorkbenchAdvisor#postStartup()
+	 */
 	public void postStartup() {
 		// PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell().setMaximized(true);
 		/*
@@ -70,6 +96,9 @@ public class Advisor extends WorkbenchAdvisor {
 		 */
 	}
 
+	/**
+	 * Report invalid license.
+	 */
 	public static void reportInvalidLicense() {
 		splash.dispose();
 		String text = "Mosaic License is invalid";
@@ -80,10 +109,20 @@ public class Advisor extends WorkbenchAdvisor {
 		System.exit(0);
 	}
 
+	/**
+	 * Gets the shell.
+	 *
+	 * @return the shell
+	 */
 	public Shell getShell() {
 		return Display.getCurrent().getActiveShell();
 	}
 
+	/**
+	 * Splash path.
+	 *
+	 * @return the string
+	 */
 	public String splashPath() {
 		// URL installURL =
 		// MosaicPlugin.getDefault().getBundle().getEntry("/");;

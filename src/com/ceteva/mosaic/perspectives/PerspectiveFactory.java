@@ -12,14 +12,28 @@ import org.eclipse.ui.IPerspectiveDescriptor;
 import org.eclipse.ui.IPerspectiveFactory;
 import org.eclipse.ui.IViewLayout;
 
+// TODO: Auto-generated Javadoc
+/**
+ * A factory for creating Perspective objects.
+ */
 public class PerspectiveFactory implements IPerspectiveFactory {
 
+	/**
+	 * Instantiates a new perspective factory.
+	 */
 	public PerspectiveFactory() {
 
 	}
 
+	/** The Constant layouts. */
 	protected final static Map<IPerspectiveDescriptor, IPageLayout> layouts = new HashMap<IPerspectiveDescriptor, IPageLayout>();
 
+	/**
+	 * Creates a new Perspective object.
+	 *
+	 * @param layout the layout
+	 * @param holders the holders
+	 */
 	public static void createInitialLayout(IPageLayout layout, Hashtable holders) {
 		System.err.println("Refreshing perspective with id:"
 				+ layout.getDescriptor().getId() + " with " + holders.size()
@@ -51,6 +65,9 @@ public class PerspectiveFactory implements IPerspectiveFactory {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.IPerspectiveFactory#createInitialLayout(org.eclipse.ui.IPageLayout)
+	 */
 	public void createInitialLayout(IPageLayout layout) {
 		if (PerspectiveFactory.layouts != null)
 			layouts.put(layout.getDescriptor(), layout);
@@ -59,6 +76,13 @@ public class PerspectiveFactory implements IPerspectiveFactory {
 		PerspectiveFactory.createInitialLayout(layout, holders);
 	}
 
+	/**
+	 * Adds the type to folder.
+	 *
+	 * @param layout the layout
+	 * @param folder the folder
+	 * @param type the type
+	 */
 	public static void addTypeToFolder(IPageLayout layout,
 			IFolderLayout folder, String type) {
 		if (type.equals("com.ceteva.console")) {

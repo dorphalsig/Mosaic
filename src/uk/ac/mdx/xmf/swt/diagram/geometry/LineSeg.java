@@ -17,6 +17,7 @@ import org.eclipse.draw2d.geometry.Ray;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.draw2d.geometry.Translatable;
 
+// TODO: Auto-generated Javadoc
 /**
  * This is a geometric utility class that allows for manipulation of line
  * segments. A line segment is defined as a set of two points where one point is
@@ -27,10 +28,16 @@ import org.eclipse.draw2d.geometry.Translatable;
  */
 public class LineSeg implements Cloneable, java.io.Serializable, Translatable {
 
+	/** The Constant DEFAULT_INTERSECTION_TOLERANCE. */
 	final private static int DEFAULT_INTERSECTION_TOLERANCE = 1;
 
+	/** The origin. */
 	private Point origin;
+	
+	/** The terminus. */
 	private Point terminus;
+	
+	/** The Constant serialVersionUID. */
 	static final long serialVersionUID = 1;
 
 	/**
@@ -39,12 +46,22 @@ public class LineSeg implements Cloneable, java.io.Serializable, Translatable {
 	 * <code>TERMINUS</code>.
 	 */
 	static public class KeyPoint {
+		
+		/** The name. */
 		private final String name;
 
+		/**
+		 * Instantiates a new key point.
+		 *
+		 * @param name the name
+		 */
 		private KeyPoint(String name) {
 			this.name = name;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Object#toString()
+		 */
 		public String toString() {
 			return name;
 		}
@@ -71,12 +88,22 @@ public class LineSeg implements Cloneable, java.io.Serializable, Translatable {
 	 * <code>NEGATIVE</code>.
 	 */
 	static public class Sign {
+		
+		/** The name. */
 		private final String name;
 
+		/**
+		 * Instantiates a new sign.
+		 *
+		 * @param name the name
+		 */
 		private Sign(String name) {
 			this.name = name;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Object#toString()
+		 */
 		public String toString() {
 			return name;
 		}
@@ -95,12 +122,10 @@ public class LineSeg implements Cloneable, java.io.Serializable, Translatable {
 	}
 
 	/**
-	 * Constructor
-	 * 
-	 * @param ptStart
-	 *            Point indicating the start of the line segment
-	 * @param ptEnd
-	 *            Point indicating the end of the line segment
+	 * Constructor.
+	 *
+	 * @param ptStart            Point indicating the start of the line segment
+	 * @param ptEnd            Point indicating the end of the line segment
 	 */
 	public LineSeg(Point ptStart, Point ptEnd) {
 		origin = new Point(ptStart);
@@ -214,10 +239,9 @@ public class LineSeg implements Cloneable, java.io.Serializable, Translatable {
 	}
 
 	/**
-	 * Sets the origin point of the line segment
-	 * 
-	 * @param origin
-	 *            Point to set as origin
+	 * Sets the origin point of the line segment.
+	 *
+	 * @param origin            Point to set as origin
 	 */
 	public void setOrigin(Point origin) {
 		this.origin = new Point(origin);
@@ -255,8 +279,8 @@ public class LineSeg implements Cloneable, java.io.Serializable, Translatable {
 	}
 
 	/**
-	 * Determines if this a horizontal segment
-	 * 
+	 * Determines if this a horizontal segment.
+	 *
 	 * @return <code>boolean</code> <code>true</code> if horizontal,
 	 *         <code>false</code> otherwise.
 	 */
@@ -265,8 +289,8 @@ public class LineSeg implements Cloneable, java.io.Serializable, Translatable {
 	}
 
 	/**
-	 * Determines if this a vertical segment
-	 * 
+	 * Determines if this a vertical segment.
+	 *
 	 * @return <code>boolean</code> <code>true</code> if vertical,
 	 *         <code>false</code> otherwise.
 	 */
@@ -280,8 +304,8 @@ public class LineSeg implements Cloneable, java.io.Serializable, Translatable {
 	private static final float BIGSLOPE = 9999;
 
 	/**
-	 * Calculates the slope of this line segment (y=mx+b)
-	 * 
+	 * Calculates the slope of this line segment (y=mx+b).
+	 *
 	 * @return <code>float</code> the slope of this segment. If the slope is not
 	 *         defined such as when the line segment is vertical, then the
 	 *         constant <code>BIGSLOPE</code> is returned to avoid divide by
@@ -691,15 +715,13 @@ public class LineSeg implements Cloneable, java.io.Serializable, Translatable {
 	}
 
 	/**
-	 * Structure to hold onto trig values that represent an angle
-	 * 
+	 * Structure to hold onto trig values that represent an angle.
+	 *
 	 * @author sshaw
 	 */
 	static public class TrigValues {
 
-		/**
-		 * Sin theta value
-		 */
+		/** Sin theta value. */
 		public double sinTheta;
 
 		/**
@@ -786,16 +808,12 @@ public class LineSeg implements Cloneable, java.io.Serializable, Translatable {
 	/**
 	 * Returns the coefficients of the generalized equation of the line passing
 	 * through points (x1,y1) and (x2,y2) Generalized line equation: ax+by=c =>
-	 * a==result[0], b==result[1], c==result[2]
-	 * 
-	 * @param x1
-	 *            - x coordinate of the 1st point
-	 * @param y1
-	 *            - y coordinate of the 1st point
-	 * @param x2
-	 *            - x coordinate of the 2nd point
-	 * @param y2
-	 *            - y coordinate of the 2nd point
+	 * a==result[0], b==result[1], c==result[2].
+	 *
+	 * @param x1            - x coordinate of the 1st point
+	 * @param y1            - y coordinate of the 1st point
+	 * @param x2            - x coordinate of the 2nd point
+	 * @param y2            - y coordinate of the 2nd point
 	 * @return the coefficients of the generalized equation of the line passing
 	 *         through points (x1,y1) and (x2,y2)
 	 */
@@ -824,8 +842,8 @@ public class LineSeg implements Cloneable, java.io.Serializable, Translatable {
 	/**
 	 * Returns array with 3 numbers in it, which are the coefficients of the
 	 * generalized line equation of the line corresponding to this line segment
-	 * a*x+b*y=c is the equation => result[0]=a, result[1]=b, result[2]=c
-	 * 
+	 * a*x+b*y=c is the equation => result[0]=a, result[1]=b, result[2]=c.
+	 *
 	 * @return an array with 3 numbers in it, which are the coefficients of the
 	 *         generalized line equation
 	 */
@@ -875,10 +893,9 @@ public class LineSeg implements Cloneable, java.io.Serializable, Translatable {
 
 	/**
 	 * Calculates intersection points of the line of the line segment and
-	 * ellipse
-	 * 
-	 * @param ellipseBounds
-	 *            - width and height of the ellipse
+	 * ellipse.
+	 *
+	 * @param ellipseBounds            - width and height of the ellipse
 	 * @return - <Code>PointList</Code> containing all intersection points
 	 */
 	public PointList getLineIntersectionsWithEllipse(Rectangle ellipseBounds) {
@@ -1007,6 +1024,13 @@ public class LineSeg implements Cloneable, java.io.Serializable, Translatable {
 		setTerminus(getTerminus().translate(dx, dy));
 	}
 
+	/**
+	 * Move point on seq.
+	 *
+	 * @param p the p
+	 * @param units the units
+	 * @return the point
+	 */
 	public Point movePointOnSeq(Point p, int units) {
 		Point origin = getOrigin();
 		Point terminus = getTerminus();

@@ -8,14 +8,27 @@ import org.eclipse.swt.widgets.Text;
 
 import uk.ac.mdx.xmf.swt.figure.MultilineTextFigure;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MultilineCellEditorLocator.
+ */
 final public class MultilineCellEditorLocator implements CellEditorLocator {
 
+	/** The multiline text figure. */
 	private MultilineTextFigure multilineTextFigure;
 
+	/**
+	 * Instantiates a new multiline cell editor locator.
+	 *
+	 * @param stickyNote the sticky note
+	 */
 	public MultilineCellEditorLocator(MultilineTextFigure stickyNote) {
 		setLabel(stickyNote);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.tools.CellEditorLocator#relocate(org.eclipse.jface.viewers.CellEditor)
+	 */
 	public void relocate(CellEditor celleditor) {
 		Text text = (Text) celleditor.getControl();
 		Point sel = text.getSelection();
@@ -27,10 +40,20 @@ final public class MultilineCellEditorLocator implements CellEditorLocator {
 		text.setSelection(sel);
 	}
 
+	/**
+	 * Gets the label.
+	 *
+	 * @return the label
+	 */
 	protected MultilineTextFigure getLabel() {
 		return multilineTextFigure;
 	}
 
+	/**
+	 * Sets the label.
+	 *
+	 * @param stickyNote the new label
+	 */
 	protected void setLabel(MultilineTextFigure stickyNote) {
 		this.multilineTextFigure = stickyNote;
 	}

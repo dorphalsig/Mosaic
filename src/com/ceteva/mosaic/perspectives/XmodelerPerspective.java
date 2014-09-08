@@ -5,14 +5,30 @@ import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;
 import org.eclipse.ui.IViewLayout;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class XmodelerPerspective.
+ */
 public class XmodelerPerspective implements IPerspectiveFactory {
 
+	/** The Constant ModelBrowserViewID. */
 	private static final String ModelBrowserViewID = "com.ceteva.modelBrowser.view";
+	
+	/** The Constant PRODUCTBOTTOM. */
 	private static final String PRODUCTBOTTOM = "ProductBottom";
+	
+	/** The Constant LEFTBAR. */
 	private static final String LEFTBAR = "LeftBar";
+	
+	/** The Constant BOTTOMLEFT. */
 	private static final String BOTTOMLEFT = "BottomLeft";
+	
+	/** The Constant BOTTOMRIGHT. */
 	private static final String BOTTOMRIGHT = "BottomRight";
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.IPerspectiveFactory#createInitialLayout(org.eclipse.ui.IPageLayout)
+	 */
 	public void createInitialLayout(IPageLayout layout) {
 
 		layout.setEditorAreaVisible(true);

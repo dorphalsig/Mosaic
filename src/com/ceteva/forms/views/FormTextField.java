@@ -31,16 +31,39 @@ import com.ceteva.menus.MenuBuilder;
 import com.ceteva.menus.MenuListener;
 import com.ceteva.menus.MenuManager;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FormTextField.
+ */
 class FormTextField extends FormElement implements MenuListener,
 		DisposeListener {
 
+	/** The site. */
 	IWorkbenchPartSite site;
+	
+	/** The menu items. */
 	Hashtable menuItems = new Hashtable();
+	
+	/** The text. */
 	Text text = null;
+	
+	/** The changes made. */
 	boolean changesMade = false;
+	
+	/** The menu. */
 	Menu menu = null;
+	
+	/** The owning form. */
 	Composite owningForm;
 
+	/**
+	 * Instantiates a new form text field.
+	 *
+	 * @param parent the parent
+	 * @param identity the identity
+	 * @param handler the handler
+	 * @param site the site
+	 */
 	public FormTextField(Composite parent, String identity,
 			EventHandler handler, IWorkbenchPartSite site) {
 		super(identity);
@@ -53,10 +76,16 @@ class FormTextField extends FormElement implements MenuListener,
 		text.addDisposeListener(this);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.ComponentWithControl#getControl()
+	 */
 	public Control getControl() {
 		return text;
 	}
 
+	/**
+	 * Calculate menu.
+	 */
 	public void calculateMenu() {
 		Menu m = text.getMenu();
 		if (m != null)
@@ -67,6 +96,14 @@ class FormTextField extends FormElement implements MenuListener,
 		text.setMenu(menu.createContextMenu(text));
 	}
 
+	/**
+	 * Sets the bounds.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param width the width
+	 * @param height the height
+	 */
 	public void setBounds(int x, int y, int width, int height) {
 		text.setBounds(x, y, width, height);
 	}
@@ -78,6 +115,11 @@ class FormTextField extends FormElement implements MenuListener,
 	 * }
 	 */
 
+	/**
+	 * Sets the text.
+	 *
+	 * @param textString the new text
+	 */
 	public void setText(String textString) {
 		text.setText(textString);
 		text.setToolTipText(textString);
@@ -86,10 +128,20 @@ class FormTextField extends FormElement implements MenuListener,
 		changesMade(false);
 	}
 
+	/**
+	 * Changes made.
+	 *
+	 * @param b the b
+	 */
 	public void changesMade(boolean b) {
 		changesMade = b;
 	}
 
+	/**
+	 * Inits the text.
+	 *
+	 * @param parent the parent
+	 */
 	public void initText(Composite parent) {
 		text = new Text(parent, SWT.SINGLE);
 		Menu menu = new Menu(text);
@@ -99,6 +151,11 @@ class FormTextField extends FormElement implements MenuListener,
 		changesMade(false);
 	}
 
+	/**
+	 * Sets the editable.
+	 *
+	 * @param editable the new editable
+	 */
 	public void setEditable(boolean editable) {
 		text.setEditable(editable);
 		if (editable) {
@@ -109,10 +166,20 @@ class FormTextField extends FormElement implements MenuListener,
 		}
 	}
 
+	/**
+	 * Sets the background.
+	 *
+	 * @param red the red
+	 * @param green the green
+	 * @param blue the blue
+	 */
 	public void setBackground(int red, int green, int blue) {
 		text.setBackground(ColorManager.getColor(new RGB(red, green, blue)));
 	}
 
+	/**
+	 * Adds the change listener.
+	 */
 	public void addChangeListener() {
 		text.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
@@ -168,6 +235,9 @@ class FormTextField extends FormElement implements MenuListener,
 
 	}
 
+	/**
+	 * Adds the click listener.
+	 */
 	public void addClickListener() {
 		text.addListener(SWT.MouseDoubleClick, new Listener() {
 			public void handleEvent(Event e) {
@@ -190,10 +260,16 @@ class FormTextField extends FormElement implements MenuListener,
 		});
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Commandable#processCall(xos.Message)
+	 */
 	public Value processCall(Message message) {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ceteva.forms.views.FormElement#processMessage(xos.Message)
+	 */
 	public boolean processMessage(Message message) {
 		if (message.arity >= 1) {
 			/*
@@ -228,6 +304,11 @@ class FormTextField extends FormElement implements MenuListener,
 		return super.processMessage(message);
 	}
 
+	/**
+	 * Gets the text.
+	 *
+	 * @return the text
+	 */
 	public void getText() {
 		Message m = handler.newMessage("text", 2);
 		Value v1 = new Value(getIdentity());
@@ -237,6 +318,11 @@ class FormTextField extends FormElement implements MenuListener,
 		raiseEvent(m);
 	}
 
+	/**
+	 * Gets the editable text.
+	 *
+	 * @return the editable text
+	 */
 	public void getEditableText() {
 		Message m = handler.newMessage("getEditableText", 1);
 		Value v1 = new Value(getIdentity());
@@ -244,11 +330,21 @@ class FormTextField extends FormElement implements MenuListener,
 		raiseEvent(m);
 	}
 
+	/**
+	 * Sets the text.
+	 *
+	 * @param message the new text
+	 */
 	public void setText(Message message) {
 		String textString = message.args[1].strValue();
 		setText(textString);
 	}
 
+	/**
+	 * Sets the background.
+	 *
+	 * @param message the new background
+	 */
 	public void setBackground(Message message) {
 		int red = message.args[1].intValue;
 		int green = message.args[2].intValue;
@@ -256,10 +352,16 @@ class FormTextField extends FormElement implements MenuListener,
 		setBackground(red, green, blue);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ceteva.menus.MenuListener#newMenuAdded()
+	 */
 	public void newMenuAdded() {
 		calculateMenu();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.swt.events.DisposeListener#widgetDisposed(org.eclipse.swt.events.DisposeEvent)
+	 */
 	public void widgetDisposed(DisposeEvent e) {
 		MenuManager.removeMenuListener(this);
 		MenuBuilder.dispose(site);

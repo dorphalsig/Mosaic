@@ -9,8 +9,20 @@ import org.eclipse.swt.graphics.FontData;
 
 import uk.ac.mdx.xmf.swt.misc.FontManager;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LabelFigure.
+ */
 public class LabelFigure extends Label {
 
+	/**
+	 * Instantiates a new label figure.
+	 *
+	 * @param position the position
+	 * @param labelText the label text
+	 * @param underline the underline
+	 * @param italicise the italicise
+	 */
 	public LabelFigure(Point position, String labelText, boolean underline,
 			boolean italicise) {
 		super(labelText);
@@ -23,6 +35,11 @@ public class LabelFigure extends Label {
 			setItalicise(true);
 	}
 
+	/**
+	 * Sets the font.
+	 *
+	 * @param font the new font
+	 */
 	public void setFont(String font) {
 		if (!font.equals("")) {
 			FontData fd = new FontData(font);
@@ -34,6 +51,11 @@ public class LabelFigure extends Label {
 
 	// the following method is platform dependent
 
+	/**
+	 * Sets the underline.
+	 *
+	 * @param underline the new underline
+	 */
 	public void setUnderline(boolean underline) {
 		Font f = this.getFont();
 		FontData fd = f.getFontData()[0];
@@ -47,6 +69,11 @@ public class LabelFigure extends Label {
 		this.repaint();
 	}
 
+	/**
+	 * Sets the italicise.
+	 *
+	 * @param italicise the new italicise
+	 */
 	public void setItalicise(boolean italicise) {
 		Font f = this.getFont();
 		FontData fd = f.getFontData()[0];
@@ -58,15 +85,26 @@ public class LabelFigure extends Label {
 		this.repaint();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.draw2d.Figure#useLocalCoordinates()
+	 */
 	@Override
 	protected boolean useLocalCoordinates() {
 		return true;
 	}
 
+	/**
+	 * Preference update.
+	 */
 	public void preferenceUpdate() {
 		getPreferences();
 	}
 
+	/**
+	 * Gets the preferences.
+	 *
+	 * @return the preferences
+	 */
 	public void getPreferences() {
 		// IPreferenceStore preferences =
 		// DiagramPlugin.getDefault().getPreferenceStore();

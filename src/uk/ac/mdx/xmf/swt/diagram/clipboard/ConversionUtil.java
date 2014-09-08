@@ -2,11 +2,26 @@ package uk.ac.mdx.xmf.swt.diagram.clipboard;
 
 import uk.ac.mdx.xmf.swt.diagram.stubs.BITMAPINFOHEADER;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ConversionUtil.
+ */
 public class ConversionUtil {
+	
+	/**
+	 * Instantiates a new conversion util.
+	 */
 	private ConversionUtil() {
 		// non-instantiable
 	}
 
+	/**
+	 * Bytes to int.
+	 *
+	 * @param bytes the bytes
+	 * @param start the start
+	 * @return the int
+	 */
 	public static int bytesToInt(byte[] bytes, int start) {
 		int a = 0xff & bytes[start + 0];
 		int b = 0xff00 & (bytes[start + 1] << 8);
@@ -15,12 +30,26 @@ public class ConversionUtil {
 		return a + b + c + d;
 	}
 
+	/**
+	 * Bytes to short.
+	 *
+	 * @param bytes the bytes
+	 * @param start the start
+	 * @return the short
+	 */
 	public static short bytesToShort(byte[] bytes, int start) {
 		short a = (short) (0xff & bytes[start + 0]);
 		short b = (short) (0xff00 & (bytes[start + 1] << 8));
 		return (short) (a + b);
 	}
 
+	/**
+	 * Int to bytes.
+	 *
+	 * @param val the val
+	 * @param bytes the bytes
+	 * @param start the start
+	 */
 	public static void intToBytes(int val, byte[] bytes, int start) {
 		bytes[start + 0] = (byte) val;
 		bytes[start + 1] = (byte) (0xff & (val >> 8));
@@ -28,11 +57,25 @@ public class ConversionUtil {
 		bytes[start + 3] = (byte) (0xff & (val >> 24));
 	}
 
+	/**
+	 * Short to bytes.
+	 *
+	 * @param val the val
+	 * @param bytes the bytes
+	 * @param start the start
+	 */
 	public static void shortToBytes(short val, byte[] bytes, int start) {
 		bytes[start + 0] = (byte) val;
 		bytes[start + 1] = (byte) (0xff & (val >> 8));
 	}
 
+	/**
+	 * From bytes.
+	 *
+	 * @param dest the dest
+	 * @param src the src
+	 * @param start the start
+	 */
 	public static void fromBytes(BITMAPINFOHEADER dest, byte[] src, int start) {
 		dest.biSize = bytesToInt(src, start + 0);
 		dest.biWidth = bytesToInt(src, start + 4);
@@ -52,6 +95,13 @@ public class ConversionUtil {
 					"incorrect size. cannot do v4 or v5 bitmaps yet");
 	}
 
+	/**
+	 * To bytes.
+	 *
+	 * @param src the src
+	 * @param dest the dest
+	 * @param start the start
+	 */
 	public static void toBytes(BITMAPINFOHEADER src, byte[] dest, int start) {
 		intToBytes(src.biSize, dest, start);
 		intToBytes(src.biWidth, dest, start + 4);

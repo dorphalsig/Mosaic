@@ -5,8 +5,15 @@ import org.eclipse.gef.RequestConstants;
 
 import uk.ac.mdx.xmf.swt.model.Display;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DisplayEditPart.
+ */
 public abstract class DisplayEditPart extends CommandEventEditPart {
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#performRequest(org.eclipse.gef.Request)
+	 */
 	@Override
 	public void performRequest(Request req) {
 		Display display = (Display) getModel();

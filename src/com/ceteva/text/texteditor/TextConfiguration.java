@@ -16,32 +16,71 @@ import com.ceteva.text.TextPlugin;
 import com.ceteva.text.highlighting.ScannerTokens;
 import com.ceteva.text.highlighting.SinglelineScanner;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TextConfiguration.
+ */
 class TextConfiguration extends SourceViewerConfiguration {
 
+  /** The reconciler. */
   private PresentationReconciler reconciler = new PresentationReconciler();
+  
+  /** The partition types. */
   private Vector partitionTypes = new Vector();	
+  
+  /** The scanner. */
   private SinglelineScanner scanner = null;
+  
+  /** The identity. */
   private String identity = "";
   // private CustomUndoManager undoManager;
   
 	
+  /**
+   * The Class SingleTokenScanner.
+   */
   static class SingleTokenScanner extends BufferedRuleBasedScanner {
+    
+    /**
+     * Instantiates a new single token scanner.
+     *
+     * @param attribute the attribute
+     */
     public SingleTokenScanner(TextAttribute attribute) {
 	  setDefaultReturnToken(new Token(attribute));
 	}
   }
 
+  /**
+   * Instantiates a new text configuration.
+   *
+   * @param identity the identity
+   */
   public TextConfiguration(String identity) {
   	partitionTypes.add(IDocument.DEFAULT_CONTENT_TYPE);
   	this.identity = identity;
   }
   
+  /**
+   * Gets the tag scanner.
+   *
+   * @return the tag scanner
+   */
   protected SinglelineScanner getTagScanner() {
   	if(scanner == null)
   	  scanner = new SinglelineScanner();
   	return scanner;
   }
   
+  /**
+   * Adds the partition.
+   *
+   * @param document the document
+   * @param id the id
+   * @param start the start
+   * @param end the end
+   * @param color the color
+   */
   public void addPartition(IDocument document,String id,String start,String end,String color) {
   	if(reconciler!=null) {
   	  partitionTypes.addElement(id);
@@ -52,6 +91,9 @@ class TextConfiguration extends SourceViewerConfiguration {
   	}
   }
   
+  /* (non-Javadoc)
+   * @see org.eclipse.jface.text.source.SourceViewerConfiguration#getPresentationReconciler(org.eclipse.jface.text.source.ISourceViewer)
+   */
   public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceView) {
   	reconciler.setDocumentPartitioning(getConfiguredDocumentPartitioning(sourceView));
   	DefaultDamagerRepairer dr = new DefaultDamagerRepairer(getTagScanner());
@@ -60,10 +102,16 @@ class TextConfiguration extends SourceViewerConfiguration {
   	return reconciler;
   }
   
+  /* (non-Javadoc)
+   * @see org.eclipse.jface.text.source.SourceViewerConfiguration#getConfiguredDocumentPartitioning(org.eclipse.jface.text.source.ISourceViewer)
+   */
   public String getConfiguredDocumentPartitioning(ISourceViewer sourceViewer) {
     return TextPlugin.PARTITIONER;
   }
   
+  /* (non-Javadoc)
+   * @see org.eclipse.jface.text.source.SourceViewerConfiguration#getConfiguredContentTypes(org.eclipse.jface.text.source.ISourceViewer)
+   */
   public String[] getConfiguredContentTypes(ISourceViewer sourceViewer) {
   	String[] s = new String[partitionTypes.size()];
   	for(int i=0;i<partitionTypes.size();i++) {

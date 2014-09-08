@@ -15,16 +15,32 @@ import org.eclipse.swt.graphics.RGB;
 
 import uk.ac.mdx.xmf.swt.misc.FontManager;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MultilineEdgeTextFigure.
+ */
 public class MultilineEdgeTextFigure extends Figure {
 
+	/** The text flow. */
 	public TextFlow textFlow;
 
+	/**
+	 * Instantiates a new multiline edge text figure.
+	 *
+	 * @param position the position
+	 * @param forecolor the forecolor
+	 */
 	public MultilineEdgeTextFigure(Point position, RGB forecolor) {
 		this.setBounds(new Rectangle(position, new Dimension(-1, -1)));
 		buildFlowpage(0);
 		textFlow.setBackgroundColor(ColorConstants.black);
 	}
 
+	/**
+	 * Builds the flowpage.
+	 *
+	 * @param border the border
+	 */
 	public void buildFlowpage(int border) {
 		setBorder(new MarginBorder(border));
 		FlowPage flowPage = new FlowPage();
@@ -36,6 +52,11 @@ public class MultilineEdgeTextFigure extends Figure {
 		add(flowPage);
 	}
 
+	/**
+	 * Gets the preferences.
+	 *
+	 * @return the preferences
+	 */
 	public void getPreferences() {
 		// IPreferenceStore preferences =
 		// DiagramPlugin.getDefault().getPreferenceStore();
@@ -44,14 +65,27 @@ public class MultilineEdgeTextFigure extends Figure {
 		// setFont(FontManager.getFont(fontData));
 	}
 
+	/**
+	 * Gets the text.
+	 *
+	 * @return the text
+	 */
 	public String getText() {
 		return textFlow.getText();
 	}
 
+	/**
+	 * Preference update.
+	 */
 	public void preferenceUpdate() {
 		getPreferences();
 	}
 
+	/**
+	 * Sets the font.
+	 *
+	 * @param font the new font
+	 */
 	public void setFont(String font) {
 		if (!font.equals("")) {
 			FontData fd = new FontData(font);
@@ -59,10 +93,18 @@ public class MultilineEdgeTextFigure extends Figure {
 		}
 	}
 
+	/**
+	 * Sets the text.
+	 *
+	 * @param text the new text
+	 */
 	public void setText(String text) {
 		textFlow.setText(text);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.draw2d.Figure#useLocalCoordinates()
+	 */
 	@Override
 	protected boolean useLocalCoordinates() {
 		return true;

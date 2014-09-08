@@ -26,18 +26,48 @@ import uk.ac.mdx.xmf.swt.client.IconManager;
 
 import com.ceteva.menus.MenuBuilder;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FormTreeWrapper.
+ */
 public class FormTreeWrapper {
 
+	/** The identity. */
 	private String identity;
+	
+	/** The handler. */
 	private FormTreeHandler handler;
+	
+	/** The tree. */
 	private Tree tree = null;
+	
+	/** The all nodes. */
 	private Vector allNodes = new Vector();
+	
+	/** The all menus. */
 	private Vector allMenus = new Vector();
+	
+	/** The non editable nodes. */
 	private Vector nonEditableNodes;
+	
+	/** The tool tip table. */
 	private Hashtable toolTipTable = new Hashtable();
+	
+	/** The edit text. */
 	private Text editText;
+	
+	/** The current selection. */
 	private TreeItem currentSelection = null;
 
+	/**
+	 * Instantiates a new form tree wrapper.
+	 *
+	 * @param parent the parent
+	 * @param identity the identity
+	 * @param handler the handler
+	 * @param editable the editable
+	 * @param multiSelect the multi select
+	 */
 	public FormTreeWrapper(Composite parent, String identity,
 			FormTreeHandler handler, boolean editable, boolean multiSelect) {
 		int multiMode = multiSelect ? SWT.MULTI : SWT.SINGLE;
@@ -53,6 +83,9 @@ public class FormTreeWrapper {
 		// parent.getBounds().height);
 	}
 
+	/**
+	 * Adds the expansion listener.
+	 */
 	private void addExpansionListener() {
 		tree.addTreeListener(new TreeListener() {
 			public void treeExpanded(TreeEvent e) {
@@ -65,6 +98,9 @@ public class FormTreeWrapper {
 		});
 	}
 
+	/**
+	 * Adds the focus listener.
+	 */
 	private void addFocusListener() {
 		tree.addListener(SWT.FocusIn, new Listener() {
 			public void handleEvent(Event e) {
@@ -78,6 +114,9 @@ public class FormTreeWrapper {
 		});
 	}
 
+	/**
+	 * Adds the mouse listener.
+	 */
 	private void addMouseListener() {
 		tree.addListener(SWT.MouseDoubleClick, new Listener() {
 			public void handleEvent(Event e) {
@@ -104,6 +143,20 @@ public class FormTreeWrapper {
 		});
 	}
 
+	/**
+	 * Adds the node.
+	 *
+	 * @param parentId the parent id
+	 * @param index the index
+	 * @param nodeId the node id
+	 * @param icon the icon
+	 * @param text the text
+	 * @param toolTipText the tool tip text
+	 * @param editable the editable
+	 * @param expanded the expanded
+	 * @param selected the selected
+	 * @return true, if successful
+	 */
 	public boolean addNode(String parentId, int index, String nodeId,
 			String icon, String text, String toolTipText, boolean editable,
 			boolean expanded, boolean selected) {
@@ -115,6 +168,17 @@ public class FormTreeWrapper {
 					icon, index) != null;
 	}
 
+	/**
+	 * Adds the node.
+	 *
+	 * @param parent the parent
+	 * @param identity the identity
+	 * @param text the text
+	 * @param toolTipText the tool tip text
+	 * @param editableString the editable string
+	 * @param index the index
+	 * @return the tree item
+	 */
 	private TreeItem addNode(Widget parent, String identity, String text,
 			String toolTipText, boolean editableString, int index) {
 		TreeItem item;
@@ -141,6 +205,18 @@ public class FormTreeWrapper {
 		return item;
 	}
 
+	/**
+	 * Adds the node with icon.
+	 *
+	 * @param parent the parent
+	 * @param identity the identity
+	 * @param text the text
+	 * @param toolTipText the tool tip text
+	 * @param editable the editable
+	 * @param icon the icon
+	 * @param indexString the index string
+	 * @return the tree item
+	 */
 	private TreeItem addNodeWithIcon(Widget parent, String identity,
 			String text, String toolTipText, boolean editable, String icon,
 			int indexString) {
@@ -154,6 +230,9 @@ public class FormTreeWrapper {
 		return item;
 	}
 
+	/**
+	 * Adds the selection listener.
+	 */
 	private void addSelectionListener() {
 		tree.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
@@ -174,6 +253,9 @@ public class FormTreeWrapper {
 		});
 	}
 
+	/**
+	 * Adds the tree listener.
+	 */
 	private void addTreeListener() {
 		addFocusListener();
 		addSelectionListener();
@@ -181,6 +263,12 @@ public class FormTreeWrapper {
 		addExpansionListener();
 	}
 
+	/**
+	 * Deselect node.
+	 *
+	 * @param identity the identity
+	 * @return true, if successful
+	 */
 	public boolean deselectNode(String identity) {
 		TreeItem node = getNode(identity);
 		if (node != null) {
@@ -193,6 +281,12 @@ public class FormTreeWrapper {
 		return false;
 	}
 
+	/**
+	 * Enable drag.
+	 *
+	 * @param identity the identity
+	 * @return true, if successful
+	 */
 	public boolean enableDrag(String identity) {
 		TreeItem node = getNode(identity);
 		if (node != null) {
@@ -202,6 +296,12 @@ public class FormTreeWrapper {
 		return false;
 	}
 
+	/**
+	 * Enable drop.
+	 *
+	 * @param identity the identity
+	 * @return true, if successful
+	 */
 	public boolean enableDrop(String identity) {
 		TreeItem node = getNode(identity);
 		if (node != null) {
@@ -211,6 +311,13 @@ public class FormTreeWrapper {
 		return false;
 	}
 
+	/**
+	 * Expand node.
+	 *
+	 * @param identity the identity
+	 * @param expand the expand
+	 * @return true, if successful
+	 */
 	public boolean expandNode(String identity, boolean expand) {
 		TreeItem node = getNode(identity);
 		if (node != null) {
@@ -220,6 +327,12 @@ public class FormTreeWrapper {
 		return false;
 	}
 
+	/**
+	 * Gets the children.
+	 *
+	 * @param identity the identity
+	 * @return the children
+	 */
 	public Vector getChildren(String identity) {
 		Vector children = new Vector();
 		TreeItem[] items = null;
@@ -236,10 +349,22 @@ public class FormTreeWrapper {
 		return children;
 	}
 
+	/**
+	 * Gets the editable text.
+	 *
+	 * @param identity the identity
+	 * @return the editable text
+	 */
 	public void getEditableText(String identity) {
 		handler.getEditableText(identity);
 	}
 
+	/**
+	 * Gets the node.
+	 *
+	 * @param identity the identity
+	 * @return the node
+	 */
 	private TreeItem getNode(String identity) {
 		for (int i = 0; i < allNodes.size(); i++) {
 			TreeItem item = (TreeItem) allNodes.elementAt(i);
@@ -250,12 +375,25 @@ public class FormTreeWrapper {
 		return null;
 	}
 
+	/**
+	 * Gets the node identity.
+	 *
+	 * @param item the item
+	 * @return the node identity
+	 */
 	public String getNodeIdentity(TreeItem item) {
 		if (item != null)
 			return (String) item.getData();
 		return null;
 	}
 
+	/**
+	 * Gets the node identity at.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @return the node identity at
+	 */
 	public String getNodeIdentityAt(int x, int y) {
 		TreeItem item = tree.getItem(new Point(x, y));
 		if (item != null)
@@ -263,6 +401,12 @@ public class FormTreeWrapper {
 		return null;
 	}
 
+	/**
+	 * Gets the parent.
+	 *
+	 * @param identity the identity
+	 * @return the parent
+	 */
 	private Widget getParent(String identity) {
 		if (identity.equals(this.identity))
 			return tree;
@@ -270,6 +414,12 @@ public class FormTreeWrapper {
 			return getNode(identity);
 	}
 
+	/**
+	 * Gets the parent id.
+	 *
+	 * @param identity the identity
+	 * @return the parent id
+	 */
 	public String getParentId(String identity) {
 		TreeItem node = getNode(identity);
 		if (node != null) {
@@ -283,6 +433,12 @@ public class FormTreeWrapper {
 		return null;
 	}
 
+	/**
+	 * Gets the selected identity.
+	 *
+	 * @param selection the selection
+	 * @return the selected identity
+	 */
 	private Vector getSelectedIdentity(List selection) {
 		Vector selected = new Vector();
 
@@ -301,6 +457,11 @@ public class FormTreeWrapper {
 		return selected;
 	}
 
+	/**
+	 * Gets the selected node.
+	 *
+	 * @return the selected node
+	 */
 	private TreeItem getSelectedNode() {
 		TreeItem[] selected = tree.getSelection();
 		if (selected.length > 0)
@@ -308,12 +469,22 @@ public class FormTreeWrapper {
 		return null;
 	}
 
+	/**
+	 * Gets the selected node identities string.
+	 *
+	 * @return the selected node identities string
+	 */
 	public String getSelectedNodeIdentitiesString() {
 		List items = Arrays.asList(getSelectedNodes());
 		Vector ids = getSelectedIdentity(items);
 		return ids.toString();
 	}
 
+	/**
+	 * Gets the selected node identity.
+	 *
+	 * @return the selected node identity
+	 */
 	public String getSelectedNodeIdentity() {
 		TreeItem item = getSelectedNode();
 		if (item != null) {
@@ -323,14 +494,30 @@ public class FormTreeWrapper {
 		return null;
 	}
 
+	/**
+	 * Gets the selected nodes.
+	 *
+	 * @return the selected nodes
+	 */
 	private TreeItem[] getSelectedNodes() {
 		return tree.getSelection();
 	}
 
+	/**
+	 * Gets the tree.
+	 *
+	 * @return the tree
+	 */
 	public Control getTree() {
 		return tree;
 	}
 
+	/**
+	 * Index of node.
+	 *
+	 * @param identity the identity
+	 * @return the int
+	 */
 	public int indexOfNode(String identity) {
 		TreeItem node = getNode(identity);
 		if (node != null) {
@@ -344,6 +531,19 @@ public class FormTreeWrapper {
 		return -1;
 	}
 
+	/**
+	 * Move node.
+	 *
+	 * @param node the node
+	 * @param index the index
+	 * @param identity the identity
+	 * @param icon the icon
+	 * @param text the text
+	 * @param toolTipText the tool tip text
+	 * @param editable the editable
+	 * @param expanded the expanded
+	 * @param selected the selected
+	 */
 	public void moveNode(TreeItem node, int index, String identity,
 			String icon, String text, String toolTipText, boolean editable,
 			boolean expanded, boolean selected) {
@@ -355,6 +555,13 @@ public class FormTreeWrapper {
 		}
 	}
 
+	/**
+	 * Parent has child.
+	 *
+	 * @param parentId the parent id
+	 * @param childId the child id
+	 * @return true, if successful
+	 */
 	public boolean parentHasChild(String parentId, String childId) {
 		TreeItem[] children;
 		if (parentId.equals(identity))
@@ -369,6 +576,12 @@ public class FormTreeWrapper {
 		return false;
 	}
 
+	/**
+	 * Removes the node.
+	 *
+	 * @param identity the identity
+	 * @return true, if successful
+	 */
 	public boolean removeNode(String identity) {
 		TreeItem node = getNode(identity);
 		if (node != null) {
@@ -378,6 +591,11 @@ public class FormTreeWrapper {
 		return false;
 	}
 
+	/**
+	 * Removes the node.
+	 *
+	 * @param item the item
+	 */
 	private void removeNode(TreeItem item) {
 		item.dispose();
 		Iterator ns = allNodes.iterator();
@@ -398,6 +616,9 @@ public class FormTreeWrapper {
 		FormTreeEditListener.setLastItem(null);
 	}
 
+	/**
+	 * Selection changed.
+	 */
 	private void selectionChanged() {
 		MenuBuilder.resetKeyBindings(null);
 		List items = Arrays.asList(getSelectedNodes());
@@ -410,6 +631,13 @@ public class FormTreeWrapper {
 		tree.setMenu(menu.createContextMenu(tree));
 	}
 
+	/**
+	 * Select node.
+	 *
+	 * @param identity the identity
+	 * @param expand the expand
+	 * @return true, if successful
+	 */
 	public boolean selectNode(String identity, boolean expand) {
 		TreeItem node = getNode(identity);
 		if (node != null) {
@@ -422,14 +650,34 @@ public class FormTreeWrapper {
 		return false;
 	}
 
+	/**
+	 * Sets the bounds.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param width the width
+	 * @param height the height
+	 */
 	public void setBounds(int x, int y, int width, int height) {
 		tree.setBounds(x, y, width, height);
 	}
 
+	/**
+	 * Sets the edits the text.
+	 *
+	 * @param text the new edits the text
+	 */
 	public void setEditText(Text text) {
 		editText = text;
 	}
 
+	/**
+	 * Sets the editable.
+	 *
+	 * @param identity the identity
+	 * @param editable the editable
+	 * @return true, if successful
+	 */
 	public boolean setEditable(String identity, boolean editable) {
 		TreeItem node = getNode(identity);
 		if (node != null) {
@@ -442,6 +690,13 @@ public class FormTreeWrapper {
 		return false;
 	}
 
+	/**
+	 * Sets the editable text.
+	 *
+	 * @param identity the identity
+	 * @param text the text
+	 * @return true, if successful
+	 */
 	public boolean setEditableText(String identity, String text) {
 		TreeItem node = getNode(identity);
 		if (node != null) {
@@ -454,14 +709,29 @@ public class FormTreeWrapper {
 		return false;
 	}
 
+	/**
+	 * Sets the focus.
+	 */
 	public void setFocus() {
 		tree.setFocus();
 	}
 
+	/**
+	 * Sets the identity.
+	 *
+	 * @param identity the new identity
+	 */
 	public void setIdentity(String identity) {
 		this.identity = identity;
 	}
 
+	/**
+	 * Sets the icon.
+	 *
+	 * @param identity the identity
+	 * @param icon the icon
+	 * @return true, if successful
+	 */
 	public boolean setIcon(String identity, String icon) {
 		TreeItem node = getNode(identity);
 		if (node != null) {
@@ -473,6 +743,13 @@ public class FormTreeWrapper {
 		return false;
 	}
 
+	/**
+	 * Sets the text.
+	 *
+	 * @param identity the identity
+	 * @param text the text
+	 * @return true, if successful
+	 */
 	public boolean setText(String identity, String text) {
 		TreeItem node = getNode(identity);
 		if (node != null) {
@@ -482,6 +759,13 @@ public class FormTreeWrapper {
 		return false;
 	}
 
+	/**
+	 * Sets the tool tip text.
+	 *
+	 * @param identity the identity
+	 * @param text the text
+	 * @return true, if successful
+	 */
 	public boolean setToolTipText(String identity, String text) {
 		TreeItem node = getNode(identity);
 		if (node != null) {
@@ -491,10 +775,28 @@ public class FormTreeWrapper {
 		return false;
 	}
 
+	/**
+	 * Text changed.
+	 *
+	 * @param identity the identity
+	 * @param text the text
+	 */
 	public void textChanged(String identity, String text) {
 		handler.textChanged(identity, text);
 	}
 
+	/**
+	 * Update node.
+	 *
+	 * @param identity the identity
+	 * @param index the index
+	 * @param icon the icon
+	 * @param text the text
+	 * @param toolTipText the tool tip text
+	 * @param editable the editable
+	 * @param expanded the expanded
+	 * @param selected the selected
+	 */
 	public void updateNode(String identity, int index, String icon,
 			String text, String toolTipText, boolean editable,
 			boolean expanded, boolean selected) {

@@ -9,18 +9,37 @@ import uk.ac.mdx.xmf.swt.model.Waypoint;
 import xos.Message;
 import xos.Value;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MoveWaypointCommand.
+ */
 public class MoveWaypointCommand extends Command {
 
+	/** The edge. */
 	private Edge edge = null;
+	
+	/** The index. */
 	private final int index;
+	
+	/** The new location. */
 	private final Point newLocation;
 
+	/**
+	 * Instantiates a new move waypoint command.
+	 *
+	 * @param edge the edge
+	 * @param index the index
+	 * @param newLocation the new location
+	 */
 	public MoveWaypointCommand(Edge edge, int index, Point newLocation) {
 		this.edge = edge;
 		this.index = index;
 		this.newLocation = newLocation;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.commands.Command#execute()
+	 */
 	@Override
 	public void execute() {
 		String waypointID = edge.getWaypointIdentity(index);

@@ -17,19 +17,40 @@ import org.eclipse.ui.texteditor.AbstractDocumentProvider;
 import com.ceteva.text.TextPlugin;
 import com.ceteva.text.highlighting.PartitionScanner;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DocumentProvider.
+ */
 class DocumentProvider extends AbstractDocumentProvider {
 	
+	/** The partitioner. */
 	private FastPartitioner partitioner;
+	
+	/** The document. */
 	private Document document = new Document();
+	
+	/** The scanner. */
 	private PartitionScanner scanner = new PartitionScanner();
+	
+	/** The partition types. */
 	private Vector partitionTypes = new Vector();
 	
+	/**
+	 * Adds the rule.
+	 *
+	 * @param id the id
+	 * @param start the start
+	 * @param end the end
+	 */
 	public void addRule(String id,String start,String end) {
 		partitionTypes.addElement(id);
 		setDocumentPartitioner();
 		scanner.addRule(id,start,end);
 	}
 	
+	/**
+	 * Sets the document partitioner.
+	 */
 	public void setDocumentPartitioner() {
 		if (document instanceof IDocumentExtension3) {
 		  IDocumentExtension3 extension3= (IDocumentExtension3) document;
@@ -44,22 +65,34 @@ class DocumentProvider extends AbstractDocumentProvider {
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.texteditor.AbstractDocumentProvider#createDocument(java.lang.Object)
+	 */
 	protected IDocument createDocument(Object element) {
 		partitionTypes.add(IDocument.DEFAULT_CONTENT_TYPE);
 		setDocumentPartitioner();
 		return document;
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.texteditor.AbstractDocumentProvider#getOperationRunner(org.eclipse.core.runtime.IProgressMonitor)
+	 */
 	protected IRunnableContext getOperationRunner(IProgressMonitor monitor) {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.texteditor.AbstractDocumentProvider#doSaveDocument(org.eclipse.core.runtime.IProgressMonitor, java.lang.Object, org.eclipse.jface.text.IDocument, boolean)
+	 */
 	protected void doSaveDocument(IProgressMonitor monitor,
 		Object element,
         IDocument document,
         boolean overwrite) {
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.texteditor.AbstractDocumentProvider#createAnnotationModel(java.lang.Object)
+	 */
 	protected IAnnotationModel createAnnotationModel(Object element) {
 		AnnotationModel model = new AnnotationModel(); 
 		Annotation a = new Annotation("com.ceteva.text.marker", true, "com.ceteva.text.marker");

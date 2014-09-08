@@ -20,27 +20,54 @@ import uk.ac.mdx.xmf.swt.client.EventHandler;
 import xos.Message;
 import xos.Value;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FormElement.
+ */
 abstract class FormElement implements Commandable, ComponentWithControl,
 		Draggable, Droppable {
 
+	/** The identity. */
 	private String identity = "";
+	
+	/** The handler. */
 	public EventHandler handler = null;
+	
+	/** The events enabled. */
 	boolean eventsEnabled = true;
+	
+	/** The drag enabled. */
 	boolean dragEnabled = false;
+	
+	/** The drop enabled. */
 	boolean dropEnabled = false;
 
+	/**
+	 * Instantiates a new form element.
+	 *
+	 * @param identity the identity
+	 */
 	public FormElement(String identity) {
 		setIdentity(identity);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.ComponentWithIdentity#getIdentity()
+	 */
 	public String getIdentity() {
 		return identity;
 	}
 
+	/**
+	 * Disable events.
+	 */
 	public void disableEvents() {
 		eventsEnabled = false;
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Commandable#processMessage(xos.Message)
+	 */
 	public boolean processMessage(Message message) {
 		if (message.args[0].hasStrValue(identity)) {
 			if (message.hasName("enableDrag") && message.arity == 1) {
@@ -57,6 +84,11 @@ abstract class FormElement implements Commandable, ComponentWithControl,
 		return false;
 	}
 
+	/**
+	 * Raise event.
+	 *
+	 * @param m the m
+	 */
 	void raiseEvent(Message m) {
 		if (eventsEnabled)
 			handler.raiseEvent(m);
@@ -64,16 +96,25 @@ abstract class FormElement implements Commandable, ComponentWithControl,
 
 	// DRAG
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Draggable#dragEnabled()
+	 */
 	public boolean dragEnabled() {
 		return dragEnabled;
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Draggable#enableDrag()
+	 */
 	public void enableDrag() {
 		if (!dragEnabled()) {
 			setDraggable();
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Draggable#setDraggable()
+	 */
 	public void setDraggable() {
 		dragEnabled = true;
 		final FormElement formElement = this;
@@ -97,10 +138,20 @@ abstract class FormElement implements Commandable, ComponentWithControl,
 		});
 	}
 
+	/**
+	 * Drag start.
+	 *
+	 * @param event the event
+	 */
 	public void dragStart(DragSourceEvent event) {
 		// System.out.println("dragStart: '" + getIdentity() + "'");
 	}
 
+	/**
+	 * Drag set data.
+	 *
+	 * @param event the event
+	 */
 	public void dragSetData(DragSourceEvent event) {
 		// System.out.println("dragSetData: '" + getIdentity() + "'");
 		if (TextTransfer.getInstance().isSupportedType(event.dataType)) {
@@ -111,22 +162,36 @@ abstract class FormElement implements Commandable, ComponentWithControl,
 		}
 	}
 
+	/**
+	 * Drag finished.
+	 *
+	 * @param event the event
+	 */
 	public void dragFinished(DragSourceEvent event) {
 		// System.out.println("dragFinished: '" + getIdentity() + "'");
 	}
 
 	// DROP
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Droppable#dropEnabled()
+	 */
 	public boolean dropEnabled() {
 		return dropEnabled;
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Droppable#enableDrop()
+	 */
 	public void enableDrop() {
 		if (!dropEnabled()) {
 			setDroppable();
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Droppable#setDroppable()
+	 */
 	public void setDroppable() {
 		dropEnabled = true;
 		final FormElement formElement = this;
@@ -162,26 +227,56 @@ abstract class FormElement implements Commandable, ComponentWithControl,
 		});
 	}
 
+	/**
+	 * Drag enter.
+	 *
+	 * @param event the event
+	 */
 	public void dragEnter(DropTargetEvent event) {
 		// System.out.println("dragEnter: '" + getIdentity() + "'");
 	}
 
+	/**
+	 * Drag over.
+	 *
+	 * @param event the event
+	 */
 	public void dragOver(DropTargetEvent event) {
 		// System.out.println("dragOver: '" + getIdentity() + "'");
 	}
 
+	/**
+	 * Drag operation changed.
+	 *
+	 * @param event the event
+	 */
 	public void dragOperationChanged(DropTargetEvent event) {
 		// System.out.println("dragOperationChanged: '" + getIdentity() + "'");
 	}
 
+	/**
+	 * Drag leave.
+	 *
+	 * @param event the event
+	 */
 	public void dragLeave(DropTargetEvent event) {
 		// System.out.println("dragLeave: '" + getIdentity() + "'");
 	}
 
+	/**
+	 * Drop accept.
+	 *
+	 * @param event the event
+	 */
 	public void dropAccept(DropTargetEvent event) {
 		// System.out.println("dropAccept: '" + getIdentity() + "'");
 	}
 
+	/**
+	 * Drop.
+	 *
+	 * @param event the event
+	 */
 	public void drop(DropTargetEvent event) {
 		// System.out.println("drop: '" + getIdentity() + "'");
 		if (TextTransfer.getInstance().isSupportedType(event.currentDataType)) {
@@ -194,6 +289,12 @@ abstract class FormElement implements Commandable, ComponentWithControl,
 		}
 	}
 
+	/**
+	 * Gets the drop operation.
+	 *
+	 * @param eventDetail the event detail
+	 * @return the drop operation
+	 */
 	public String getDropOperation(int eventDetail) {
 		if (eventDetail == DND.DROP_COPY)
 			return "copy";
@@ -202,6 +303,13 @@ abstract class FormElement implements Commandable, ComponentWithControl,
 		return "default";
 	}
 
+	/**
+	 * Raise drag and drop event.
+	 *
+	 * @param dropId the drop id
+	 * @param operation the operation
+	 * @param dragIdsString the drag ids string
+	 */
 	public void raiseDragAndDropEvent(String dropId, String operation,
 			String dragIdsString) {
 		Message m = handler.newMessage("dragAndDrop", 3);
@@ -214,6 +322,13 @@ abstract class FormElement implements Commandable, ComponentWithControl,
 		raiseEvent(m);
 	}
 
+	/**
+	 * Raise accept drop event.
+	 *
+	 * @param dropId the drop id
+	 * @param operation the operation
+	 * @param dragIdsString the drag ids string
+	 */
 	public void raiseAcceptDropEvent(String dropId, String operation,
 			String dragIdsString) {
 		Message m = handler.newMessage("acceptDrop", 3);
@@ -226,6 +341,11 @@ abstract class FormElement implements Commandable, ComponentWithControl,
 		raiseEvent(m);
 	}
 
+	/**
+	 * Sets the identity.
+	 *
+	 * @param identity the new identity
+	 */
 	public void setIdentity(String identity) {
 		this.identity = identity;
 	}

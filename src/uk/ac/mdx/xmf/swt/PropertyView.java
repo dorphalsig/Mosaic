@@ -18,19 +18,39 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PropertyView.
+ */
 public class PropertyView extends View {
+	
+	/** The parent. */
 	Composite parent;
+	
+	/** The image. */
 	Image image = null;
 	// Enable a label as a Drag Source
+	/** The drag label. */
 	Label dragLabel = null;
+	
+	/** The tree. */
 	Tree tree;
 
+	/**
+	 * Instantiates a new property view.
+	 *
+	 * @param parent the parent
+	 * @param style the style
+	 */
 	public PropertyView(Composite parent, int style) {
 		super(parent, style);
 		this.parent = parent;
 		// TODO Auto-generated constructor stub
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.View#display()
+	 */
 	@Override
 	public void display() {
 		tree = new Tree(parent, SWT.BORDER);
@@ -47,6 +67,9 @@ public class PropertyView extends View {
 
 	}
 
+	/**
+	 * Creates the part control.
+	 */
 	public void createPartControl() {
 		dragLabel = new Label(this, SWT.BORDER);
 		dragLabel.setText("class");

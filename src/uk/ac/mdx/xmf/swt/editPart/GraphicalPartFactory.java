@@ -17,8 +17,15 @@ import uk.ac.mdx.xmf.swt.model.Node;
 import uk.ac.mdx.xmf.swt.model.Shape;
 import uk.ac.mdx.xmf.swt.model.Text;
 
+// TODO: Auto-generated Javadoc
+/**
+ * A factory for creating GraphicalPart objects.
+ */
 public class GraphicalPartFactory implements EditPartFactory {
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.EditPartFactory#createEditPart(org.eclipse.gef.EditPart, java.lang.Object)
+	 */
 	public EditPart createEditPart(EditPart iContext, Object iModel) {
 		EditPart editPart = null;
 		if (iModel instanceof Diagram)

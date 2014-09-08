@@ -36,6 +36,7 @@ import uk.ac.mdx.xmf.swt.client.EventHandler;
 import xos.Message;
 import xos.Value;
 
+// TODO: Auto-generated Javadoc
 // unfortunately it was necessary to copy this implementation over from Eclipse
 // since many of the methods we need to access are protected and cannot be
 // overridden in sub classes.  This should be reviewed in future Eclipse
@@ -64,13 +65,16 @@ public class CustomUndoManager implements IUndoManager {
 	 */
 	class TextCommand {
 
-		/** The start index of the replaced text */
+		/**  The start index of the replaced text. */
 		protected int fStart = -1;
-		/** The end index of the replaced text */
+		
+		/**  The end index of the replaced text. */
 		protected int fEnd = -1;
-		/** The newly inserted text */
+		
+		/**  The newly inserted text. */
 		protected String fText;
-		/** The replaced text */
+		
+		/**  The replaced text. */
 		protected String fPreservedText;
 
 		/**
@@ -158,6 +162,9 @@ public class CustomUndoManager implements IUndoManager {
 			fCommandCounter = fCommandStack.size() - 1;
 		}
 
+		/**
+		 * Broadcast undo.
+		 */
 		public void broadcastUndo() {
 			if (handler != null) {
 				Message m = handler.newMessage("undoStacked", 1);
@@ -205,7 +212,7 @@ public class CustomUndoManager implements IUndoManager {
 	 */
 	class CompoundTextCommand extends TextCommand {
 
-		/** The list of individual commands */
+		/**  The list of individual commands. */
 		private List fCommands = new ArrayList();
 
 		/**
@@ -220,6 +227,9 @@ public class CustomUndoManager implements IUndoManager {
 
 		/*
 		 * @see org.eclipse.jface.text.DefaultUndoManager2.TextCommand#undo()
+		 */
+		/* (non-Javadoc)
+		 * @see com.ceteva.text.texteditor.CustomUndoManager.TextCommand#undo()
 		 */
 		protected void undo() {
 			ITextViewerExtension extension = null;
@@ -253,6 +263,9 @@ public class CustomUndoManager implements IUndoManager {
 
 		/*
 		 * @see org.eclipse.jface.text.DefaultUndoManager2.TextCommand#redo()
+		 */
+		/* (non-Javadoc)
+		 * @see com.ceteva.text.texteditor.CustomUndoManager.TextCommand#redo()
 		 */
 		protected void redo() {
 
@@ -288,6 +301,9 @@ public class CustomUndoManager implements IUndoManager {
 		/*
 		 * @see TextCommand#updateCommandStack
 		 */
+		/* (non-Javadoc)
+		 * @see com.ceteva.text.texteditor.CustomUndoManager.TextCommand#updateCommandStack()
+		 */
 		protected void updateCommandStack() {
 			TextCommand c = new TextCommand();
 			c.fStart = fStart;
@@ -304,6 +320,9 @@ public class CustomUndoManager implements IUndoManager {
 		/*
 		 * @see TextCommand#createCurrent
 		 */
+		/* (non-Javadoc)
+		 * @see com.ceteva.text.texteditor.CustomUndoManager.TextCommand#createCurrent()
+		 */
 		protected TextCommand createCurrent() {
 
 			if (!fFoldingIntoCompoundChange)
@@ -315,6 +334,9 @@ public class CustomUndoManager implements IUndoManager {
 
 		/*
 		 * @see org.eclipse.jface.text.DefaultUndoManager.TextCommand#commit()
+		 */
+		/* (non-Javadoc)
+		 * @see com.ceteva.text.texteditor.CustomUndoManager.TextCommand#commit()
 		 */
 		protected void commit() {
 			if (fStart < 0) {
@@ -332,19 +354,26 @@ public class CustomUndoManager implements IUndoManager {
 	 * Represents pretended <code>UndoManager</code> state.
 	 */
 	class PretendedUndoManagerState {
-		/** The counter in the undo stack */
+		
+		/**  The counter in the undo stack. */
 		protected int cmdCounter = -1;
-		/** The size of the undo stack */
+		
+		/**  The size of the undo stack. */
 		protected int stackSize = -1;
 	}
 
 	/**
 	 * Internal listener to mouse and key events.
+	 *
+	 * @see KeyAndMouseEvent
 	 */
 	class KeyAndMouseListener implements MouseListener, KeyListener {
 
 		/*
 		 * @see MouseListener#mouseDoubleClick
+		 */
+		/* (non-Javadoc)
+		 * @see org.eclipse.swt.events.MouseListener#mouseDoubleClick(org.eclipse.swt.events.MouseEvent)
 		 */
 		public void mouseDoubleClick(MouseEvent e) {
 		}
@@ -355,6 +384,9 @@ public class CustomUndoManager implements IUndoManager {
 		 * 
 		 * @see MouseListener#mouseDown
 		 */
+		/* (non-Javadoc)
+		 * @see org.eclipse.swt.events.MouseListener#mouseDown(org.eclipse.swt.events.MouseEvent)
+		 */
 		public void mouseDown(MouseEvent e) {
 			if (e.button == 1)
 				commit();
@@ -363,11 +395,17 @@ public class CustomUndoManager implements IUndoManager {
 		/*
 		 * @see MouseListener#mouseUp
 		 */
+		/* (non-Javadoc)
+		 * @see org.eclipse.swt.events.MouseListener#mouseUp(org.eclipse.swt.events.MouseEvent)
+		 */
 		public void mouseUp(MouseEvent e) {
 		}
 
 		/*
 		 * @see KeyListener#keyPressed
+		 */
+		/* (non-Javadoc)
+		 * @see org.eclipse.swt.events.KeyListener#keyReleased(org.eclipse.swt.events.KeyEvent)
 		 */
 		public void keyReleased(KeyEvent e) {
 		}
@@ -376,6 +414,9 @@ public class CustomUndoManager implements IUndoManager {
 		 * On cursor keys, the current editing command is closed
 		 * 
 		 * @see KeyListener#keyPressed
+		 */
+		/* (non-Javadoc)
+		 * @see org.eclipse.swt.events.KeyListener#keyPressed(org.eclipse.swt.events.KeyEvent)
 		 */
 		public void keyPressed(KeyEvent e) {
 			switch (e.keyCode) {
@@ -391,15 +432,21 @@ public class CustomUndoManager implements IUndoManager {
 
 	/**
 	 * Internal listener to document changes.
+	 *
+	 * @see DocumentEvent
 	 */
 	class DocumentListener implements IDocumentListener {
 
+		/** The replaced text. */
 		private String fReplacedText;
 
 		/*
 		 * @see
 		 * org.eclipse.jface.text.IDocumentListener#documentAboutToBeChanged
 		 * (org.eclipse.jface.text.DocumentEvent)
+		 */
+		/* (non-Javadoc)
+		 * @see org.eclipse.jface.text.IDocumentListener#documentAboutToBeChanged(org.eclipse.jface.text.DocumentEvent)
 		 */
 		public void documentAboutToBeChanged(DocumentEvent event) {
 			try {
@@ -415,6 +462,9 @@ public class CustomUndoManager implements IUndoManager {
 		 * org.eclipse.jface.text.IDocumentListener#documentChanged(org.eclipse
 		 * .jface.text.DocumentEvent)
 		 */
+		/* (non-Javadoc)
+		 * @see org.eclipse.jface.text.IDocumentListener#documentChanged(org.eclipse.jface.text.DocumentEvent)
+		 */
 		public void documentChanged(DocumentEvent event) {
 			processChange(event.getOffset(),
 					event.getOffset() + event.getLength(), event.getText(),
@@ -424,6 +474,8 @@ public class CustomUndoManager implements IUndoManager {
 
 	/**
 	 * Internal text input listener.
+	 *
+	 * @see TextInputEvent
 	 */
 	class TextInputListener implements ITextInputListener {
 
@@ -431,6 +483,9 @@ public class CustomUndoManager implements IUndoManager {
 		 * @see
 		 * org.eclipse.jface.text.ITextInputListener#inputDocumentAboutToBeChanged
 		 * (org.eclipse.jface.text.IDocument, org.eclipse.jface.text.IDocument)
+		 */
+		/* (non-Javadoc)
+		 * @see org.eclipse.jface.text.ITextInputListener#inputDocumentAboutToBeChanged(org.eclipse.jface.text.IDocument, org.eclipse.jface.text.IDocument)
 		 */
 		public void inputDocumentAboutToBeChanged(IDocument oldInput,
 				IDocument newInput) {
@@ -445,6 +500,9 @@ public class CustomUndoManager implements IUndoManager {
 		 * org.eclipse.jface.text.ITextInputListener#inputDocumentChanged(org
 		 * .eclipse.jface.text.IDocument, org.eclipse.jface.text.IDocument)
 		 */
+		/* (non-Javadoc)
+		 * @see org.eclipse.jface.text.ITextInputListener#inputDocumentChanged(org.eclipse.jface.text.IDocument, org.eclipse.jface.text.IDocument)
+		 */
 		public void inputDocumentChanged(IDocument oldInput, IDocument newInput) {
 			if (newInput != null) {
 				if (fDocumentListener == null)
@@ -455,49 +513,63 @@ public class CustomUndoManager implements IUndoManager {
 
 	}
 
-	/** Text buffer to collect text which is inserted into the viewer */
+	/**  Text buffer to collect text which is inserted into the viewer. */
 	private StringBuffer fTextBuffer = new StringBuffer();
-	/** Text buffer to collect viewer content which has been replaced */
+	
+	/**  Text buffer to collect viewer content which has been replaced. */
 	private StringBuffer fPreservedTextBuffer = new StringBuffer();
-	/** Pretended undo manager state */
+	
+	/**  Pretended undo manager state. */
 	private PretendedUndoManagerState fPretendedState = new PretendedUndoManagerState();
-	/** The internal key and mouse event listener */
+	
+	/**  The internal key and mouse event listener. */
 	private KeyAndMouseListener fKeyAndMouseListener;
-	/** The internal document listener */
+	
+	/**  The internal document listener. */
 	private DocumentListener fDocumentListener;
-	/** The internal text input listener */
+	
+	/**  The internal text input listener. */
 	private TextInputListener fTextInputListener;
 
-	/** Indicates inserting state */
+	/**  Indicates inserting state. */
 	private boolean fInserting = false;
-	/** Indicates overwriting state */
+	
+	/**  Indicates overwriting state. */
 	private boolean fOverwriting = false;
-	/** Indicates whether the current change belongs to a compound change */
+	
+	/**  Indicates whether the current change belongs to a compound change. */
 	private boolean fFoldingIntoCompoundChange = false;
 
-	/** The text viewer the undo manager is connected to */
+	/**  The text viewer the undo manager is connected to. */
 	private ITextViewer fTextViewer;
 
-	/** Supported undo level */
+	/**  Supported undo level. */
 	private int fUndoLevel;
-	/** The list of undo-able edit commands */
+	
+	/**  The list of undo-able edit commands. */
 	private List fCommandStack;
-	/** The currently constructed edit command */
+	
+	/**  The currently constructed edit command. */
 	private TextCommand fCurrent;
-	/** The last delete edit command */
+	
+	/**  The last delete edit command. */
 	private TextCommand fPreviousDelete;
-	/** Command counter into the edit command stack */
+	
+	/**  Command counter into the edit command stack. */
 	private int fCommandCounter = -1;
 
+	/** The identity. */
 	private String identity = "";
+	
+	/** The handler. */
 	private EventHandler handler;
 
 	/**
 	 * Creates a new undo manager who remembers the specified number of edit
 	 * commands.
-	 * 
-	 * @param undoLevel
-	 *            the length of this manager's history
+	 *
+	 * @param undoLevel            the length of this manager's history
+	 * @param identity the identity
 	 */
 	public CustomUndoManager(int undoLevel, String identity) {
 		setMaximalUndoLevel(undoLevel);
@@ -507,6 +579,9 @@ public class CustomUndoManager implements IUndoManager {
 	/*
 	 * @see IUndoManager#beginCompoundChange
 	 */
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.text.IUndoManager#beginCompoundChange()
+	 */
 	public void beginCompoundChange() {
 		fFoldingIntoCompoundChange = true;
 		commit();
@@ -515,11 +590,19 @@ public class CustomUndoManager implements IUndoManager {
 	/*
 	 * @see IUndoManager#endCompoundChange
 	 */
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.text.IUndoManager#endCompoundChange()
+	 */
 	public void endCompoundChange() {
 		fFoldingIntoCompoundChange = false;
 		commit();
 	}
 
+	/**
+	 * Sets the event handler.
+	 *
+	 * @param handler the new event handler
+	 */
 	public void setEventHandler(EventHandler handler) {
 		this.handler = handler;
 	}
@@ -671,6 +754,14 @@ public class CustomUndoManager implements IUndoManager {
 		return fPretendedState;
 	}
 
+	/**
+	 * Process change.
+	 *
+	 * @param modelStart the model start
+	 * @param modelEnd the model end
+	 * @param insertedText the inserted text
+	 * @param replacedText the replaced text
+	 */
 	private void processChange(int modelStart, int modelEnd,
 			String insertedText, String replacedText) {
 
@@ -806,6 +897,9 @@ public class CustomUndoManager implements IUndoManager {
 	/*
 	 * @see org.eclipse.jface.text.IUndoManager#setMaximalUndoLevel(int)
 	 */
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.text.IUndoManager#setMaximalUndoLevel(int)
+	 */
 	public void setMaximalUndoLevel(int undoLevel) {
 		fUndoLevel = undoLevel;
 	}
@@ -813,6 +907,9 @@ public class CustomUndoManager implements IUndoManager {
 	/*
 	 * @see org.eclipse.jface.text.IUndoManager#connect(org.eclipse.jface.text.
 	 * ITextViewer)
+	 */
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.text.IUndoManager#connect(org.eclipse.jface.text.ITextViewer)
 	 */
 	public void connect(ITextViewer textViewer) {
 		if (fTextViewer == null) {
@@ -825,6 +922,9 @@ public class CustomUndoManager implements IUndoManager {
 	}
 
 	/*
+	 * @see org.eclipse.jface.text.IUndoManager#disconnect()
+	 */
+	/* (non-Javadoc)
 	 * @see org.eclipse.jface.text.IUndoManager#disconnect()
 	 */
 	public void disconnect() {
@@ -846,6 +946,9 @@ public class CustomUndoManager implements IUndoManager {
 	/*
 	 * @see org.eclipse.jface.text.IUndoManager#reset()
 	 */
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.text.IUndoManager#reset()
+	 */
 	public void reset() {
 		if (fCommandStack != null)
 			fCommandStack.clear();
@@ -862,6 +965,9 @@ public class CustomUndoManager implements IUndoManager {
 	/*
 	 * @see org.eclipse.jface.text.IUndoManager#redoable()
 	 */
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.text.IUndoManager#redoable()
+	 */
 	public boolean redoable() {
 		if (fCommandStack != null) {
 			PretendedUndoManagerState s = pretendCommit();
@@ -871,6 +977,9 @@ public class CustomUndoManager implements IUndoManager {
 	}
 
 	/*
+	 * @see org.eclipse.jface.text.IUndoManager#undoable()
+	 */
+	/* (non-Javadoc)
 	 * @see org.eclipse.jface.text.IUndoManager#undoable()
 	 */
 	public boolean undoable() {
@@ -884,6 +993,9 @@ public class CustomUndoManager implements IUndoManager {
 	/*
 	 * @see org.eclipse.jface.text.IUndoManager#redo()
 	 */
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.text.IUndoManager#redo()
+	 */
 	public void redo() {
 		if (redoable()) {
 			commit();
@@ -892,6 +1004,9 @@ public class CustomUndoManager implements IUndoManager {
 	}
 
 	/*
+	 * @see org.eclipse.jface.text.IUndoManager#undo()
+	 */
+	/* (non-Javadoc)
 	 * @see org.eclipse.jface.text.IUndoManager#undo()
 	 */
 	public void undo() {

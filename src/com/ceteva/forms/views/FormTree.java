@@ -16,13 +16,29 @@ import xos.Value;
 
 import com.ceteva.forms.XMLBindings;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FormTree.
+ */
 public class FormTree extends FormElement implements FormTreeHandler {
 
+	/** The expanded. */
 	Vector expanded = new Vector();
+	
+	/** The tree. */
 	FormTreeWrapper tree;
 
 	// IWorkbenchPartSite site;
 
+	/**
+	 * Instantiates a new form tree.
+	 *
+	 * @param parent the parent
+	 * @param identity the identity
+	 * @param handler the handler
+	 * @param editable the editable
+	 * @param multiSelect the multi select
+	 */
 	public FormTree(Composite parent, String identity, EventHandler handler,
 			boolean editable, boolean multiSelect) {
 		super(identity);
@@ -32,6 +48,12 @@ public class FormTree extends FormElement implements FormTreeHandler {
 		this.setEventHandler(handler);
 	}
 
+	/**
+	 * Adds the node.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean addNode(Message message) {
 		String parentID = message.args[0].strValue();
 		String nodeID = message.args[1].strValue();
@@ -43,6 +65,12 @@ public class FormTree extends FormElement implements FormTreeHandler {
 				false);
 	}
 
+	/**
+	 * Adds the node with icon.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean addNodeWithIcon(Message message) {
 		String parentID = message.args[0].strValue();
 		String nodeID = message.args[1].strValue();
@@ -56,6 +84,12 @@ public class FormTree extends FormElement implements FormTreeHandler {
 				false, false);
 	}
 
+	/**
+	 * Broadcast to nodes.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean broadcastToNodes(Message message) {
 		if (message.hasName("addNode")
 				&& (message.arity == 3 || message.arity == 4))
@@ -88,6 +122,9 @@ public class FormTree extends FormElement implements FormTreeHandler {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ceteva.forms.views.FormTreeHandler#getEditableText(java.lang.String)
+	 */
 	public void getEditableText(String identity) {
 		Message m = handler.newMessage("getEditableText", 1);
 		Value v1 = new Value(identity);
@@ -99,6 +136,9 @@ public class FormTree extends FormElement implements FormTreeHandler {
 	// return FormsPlugin.getDefault();
 	// }
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.ComponentWithControl#getControl()
+	 */
 	public Control getControl() {
 		return tree.getTree();
 	}
@@ -127,14 +167,28 @@ public class FormTree extends FormElement implements FormTreeHandler {
 	 * (String)item.getData(); return identity; } return null; }
 	 */
 
+	/**
+	 * Sets the bounds.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param width the width
+	 * @param height the height
+	 */
 	public void setBounds(int x, int y, int width, int height) {
 		tree.setBounds(x, y, width, height);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Commandable#processCall(xos.Message)
+	 */
 	public Value processCall(Message message) {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ceteva.forms.views.FormElement#processMessage(xos.Message)
+	 */
 	public boolean processMessage(Message message) {
 		if (message.args[0].hasStrValue(getIdentity())) {
 			if (message.hasName("addNode") && message.arity == 3) {
@@ -181,27 +235,54 @@ public class FormTree extends FormElement implements FormTreeHandler {
 		return super.processMessage(message);
 	}
 
+	/**
+	 * Removes the node.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean removeNode(Message message) {
 		String nodeId = message.args[0].strValue();
 		return tree.removeNode(nodeId);
 	}
 
+	/**
+	 * Expand node.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean expandNode(Message message) {
 		String target = message.args[0].strValue();
 		return tree.expandNode(target, true);
 	}
 
+	/**
+	 * Select node.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean selectNode(Message message) {
 		String identity = message.args[0].strValue();
 		boolean expand = message.args[1].boolValue;
 		return tree.selectNode(identity, expand);
 	}
 
+	/**
+	 * Deselect node.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean deselectNode(Message message) {
 		String target = message.args[0].strValue();
 		return tree.deselectNode(target);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ceteva.forms.views.FormElement#setIdentity(java.lang.String)
+	 */
 	public void setIdentity(String identity) {
 		super.setIdentity(identity);
 		if (tree != null)
@@ -223,6 +304,9 @@ public class FormTree extends FormElement implements FormTreeHandler {
 	 * //raiseDragAndDropEvent(dropId,operation,dragIdsString);
 	 * //currentDropTarget = item; } //} } }
 	 */
+	/* (non-Javadoc)
+	 * @see com.ceteva.forms.views.FormElement#dragSetData(org.eclipse.swt.dnd.DragSourceEvent)
+	 */
 	public void dragSetData(DragSourceEvent event) {
 		if (TextTransfer.getInstance().isSupportedType(event.dataType)) {
 			String dragIdsString = tree.getSelectedNodeIdentitiesString();
@@ -230,6 +314,9 @@ public class FormTree extends FormElement implements FormTreeHandler {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ceteva.forms.views.FormElement#drop(org.eclipse.swt.dnd.DropTargetEvent)
+	 */
 	public void drop(DropTargetEvent event) {
 		if (TextTransfer.getInstance().isSupportedType(event.currentDataType)) {
 			String dropId = tree.getNodeIdentity((TreeItem) event.item);
@@ -243,54 +330,107 @@ public class FormTree extends FormElement implements FormTreeHandler {
 		}
 	}
 
+	/**
+	 * Sets the icon.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean setIcon(Message message) {
 		String identity = message.args[0].strValue();
 		String icon = message.args[1].strValue();
 		return tree.setIcon(identity, icon);
 	}
 
+	/**
+	 * Sets the text.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean setText(Message message) {
 		String identity = message.args[0].strValue();
 		String text = message.args[1].strValue();
 		return tree.setText(identity, text);
 	}
 
+	/**
+	 * Sets the editable text.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean setEditableText(Message message) {
 		String identity = message.args[0].strValue();
 		String text = message.args[1].strValue();
 		return tree.setEditableText(identity, text);
 	}
 
+	/**
+	 * Sets the tool tip text.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean setToolTipText(Message message) {
 		String identity = message.args[0].strValue();
 		String text = message.args[1].strValue();
 		return tree.setToolTipText(identity, text);
 	}
 
+	/**
+	 * Sets the focus.
+	 */
 	public void setFocus() {
 		tree.setFocus();
 	}
 
+	/**
+	 * Sets the editable.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean setEditable(Message message) {
 		String identity = message.args[0].strValue();
 		String editable = message.args[1].strValue().trim().toLowerCase();
 		return tree.setEditableText(identity, editable);
 	}
 
+	/**
+	 * Enable drag.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean enableDrag(Message message) {
 		String identity = message.args[0].strValue();
 		return tree.enableDrag(identity);
 	}
 
+	/**
+	 * Enable drop.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean enableDrop(Message message) {
 		String identity = message.args[0].strValue();
 		return tree.enableDrop(identity);
 	}
 
+	/**
+	 * Gets the handler.
+	 *
+	 * @return the handler
+	 */
 	public EventHandler getHandler() {
 		return handler;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ceteva.forms.views.FormTreeHandler#deselected(java.lang.String)
+	 */
 	public void deselected(String identity) {
 		Message m = handler.newMessage("deselected", 1);
 		Value v1 = new Value(identity);
@@ -298,6 +438,9 @@ public class FormTree extends FormElement implements FormTreeHandler {
 		handler.raiseEvent(m);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ceteva.forms.views.FormTreeHandler#doubleSelected(java.lang.String)
+	 */
 	public void doubleSelected(String identity) {
 		Message m = handler.newMessage("doubleSelected", 1);
 		Value v1 = new Value(identity);
@@ -309,6 +452,9 @@ public class FormTree extends FormElement implements FormTreeHandler {
 	// return site;
 	// }
 
+	/* (non-Javadoc)
+	 * @see com.ceteva.forms.views.FormTreeHandler#selected(java.lang.String)
+	 */
 	public void selected(String identity) {
 		Message m = handler.newMessage("selected", 1);
 		Value v1 = new Value(identity);
@@ -316,10 +462,18 @@ public class FormTree extends FormElement implements FormTreeHandler {
 		handler.raiseEvent(m);
 	}
 
+	/**
+	 * Sets the event handler.
+	 *
+	 * @param handler the new event handler
+	 */
 	public void setEventHandler(EventHandler handler) {
 		this.handler = handler;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ceteva.forms.views.FormTreeHandler#treeExpanded(java.lang.String)
+	 */
 	public void treeExpanded(String identity) {
 		Message m = handler.newMessage("expanded", 1);
 		Value v1 = new Value(identity);
@@ -327,6 +481,9 @@ public class FormTree extends FormElement implements FormTreeHandler {
 		handler.raiseEvent(m);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ceteva.forms.views.FormTreeHandler#textChanged(java.lang.String, java.lang.String)
+	 */
 	public void textChanged(String identity, String text) {
 		Message m = handler.newMessage("textChanged", 2);
 		Value v1 = new Value(identity);
@@ -342,6 +499,11 @@ public class FormTree extends FormElement implements FormTreeHandler {
 	 * dragDelayTimer = currentTime; return true; } return false; }
 	 */
 
+	/**
+	 * Synchronise.
+	 *
+	 * @param browser the browser
+	 */
 	public void synchronise(Element browser) {
 		expanded = new Vector();
 		synchronise(browser, getIdentity());
@@ -351,6 +513,12 @@ public class FormTree extends FormElement implements FormTreeHandler {
 		}
 	}
 
+	/**
+	 * Synchronise.
+	 *
+	 * @param doctree the doctree
+	 * @param parentId the parent id
+	 */
 	public void synchronise(Element doctree, String parentId) {
 
 		// Check that there is a node for each of the document nodes

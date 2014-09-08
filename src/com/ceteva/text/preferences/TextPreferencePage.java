@@ -8,9 +8,16 @@ import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TextPreferencePage.
+ */
 public class TextPreferencePage extends FieldEditorPreferencePage implements
 		IWorkbenchPreferencePage {
 
+	/**
+	 * Instantiates a new text preference page.
+	 */
 	public TextPreferencePage() {
 		super(FieldEditorPreferencePage.GRID);
 		// IPreferenceStore store =
@@ -18,6 +25,9 @@ public class TextPreferencePage extends FieldEditorPreferencePage implements
 		// setPreferenceStore(store);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.preference.FieldEditorPreferencePage#createFieldEditors()
+	 */
 	protected void createFieldEditors() {
 		FontFieldEditor font = new FontFieldEditor(JFaceResources.TEXT_FONT,
 				"Editor text font", getFieldEditorParent());
@@ -39,6 +49,9 @@ public class TextPreferencePage extends FieldEditorPreferencePage implements
 		addField(highlightlinecolor);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.IWorkbenchPreferencePage#init(org.eclipse.ui.IWorkbench)
+	 */
 	public void init(IWorkbench workbench) {
 	}
 }

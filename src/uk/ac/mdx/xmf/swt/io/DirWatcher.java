@@ -7,16 +7,39 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.TimerTask;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DirWatcher.
+ */
 public abstract class DirWatcher extends TimerTask {
+	
+	/** The path. */
 	private String path;
+	
+	/** The files array. */
 	private File filesArray[];
+	
+	/** The dir. */
 	private HashMap dir = new HashMap();
+	
+	/** The dfw. */
 	private DirFilterWatcher dfw;
 
+	/**
+	 * Instantiates a new dir watcher.
+	 *
+	 * @param path the path
+	 */
 	public DirWatcher(String path) {
 		this(path, "");
 	}
 
+	/**
+	 * Instantiates a new dir watcher.
+	 *
+	 * @param path the path
+	 * @param filter the filter
+	 */
 	public DirWatcher(String path, String filter) {
 		this.path = path;
 		dfw = new DirFilterWatcher(filter);
@@ -29,6 +52,9 @@ public abstract class DirWatcher extends TimerTask {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.TimerTask#run()
+	 */
 	public final void run() {
 		HashSet checkedFiles = new HashSet();
 		filesArray = new File(path).listFiles(dfw);
@@ -59,5 +85,11 @@ public abstract class DirWatcher extends TimerTask {
 		}
 	}
 
+	/**
+	 * On change.
+	 *
+	 * @param file the file
+	 * @param action the action
+	 */
 	protected abstract void onChange(File file, String action);
 }

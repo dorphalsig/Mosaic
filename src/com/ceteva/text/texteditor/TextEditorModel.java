@@ -5,20 +5,38 @@ import uk.ac.mdx.xmf.swt.client.EventHandler;
 import xos.Message;
 import xos.Value;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TextEditorModel.
+ */
 public class TextEditorModel extends ClientElement {
 
+	/** The editor. */
 	private TextEditor editor;
 
+	/**
+	 * Instantiates a new text editor model.
+	 *
+	 * @param identity the identity
+	 * @param handler the handler
+	 * @param editor the editor
+	 */
 	public TextEditorModel(String identity, EventHandler handler,
 			TextEditor editor) {
 		super(null, handler, identity);
 		this.editor = editor;
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.ClientElement#delete()
+	 */
 	public void delete() {
 		editor.delete();
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.ClientElement#processCall(xos.Message)
+	 */
 	public Value processCall(Message message) {
 		if (message.arity > 0) {
 			if (message.args[0].hasStrValue(getIdentity())) {
@@ -41,6 +59,9 @@ public class TextEditorModel extends ClientElement {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.ClientElement#processMessage(xos.Message)
+	 */
 	public boolean processMessage(Message message) {
 		if (message.arity > 0) {
 			if (message.args[0].hasStrValue(getIdentity())) {
@@ -66,16 +87,16 @@ public class TextEditorModel extends ClientElement {
 					editor.setToolTip(tooltip);
 					return true;
 				} else if (message.hasName("addWordRule") && message.arity == 3) {
-					// String word = message.args[1].strValue();
-					// String color = message.args[2].strValue();
-					// editor.addWordRule(word, color);
+					 String word = message.args[1].strValue();
+					 String color = message.args[2].strValue();
+					 editor.addWordRule(word, color);
 					return true;
 				} else if (message.hasName("addMultilineRule")
 						&& message.arity == 4) {
 					String start = message.args[1].strValue();
 					String end = message.args[2].strValue();
 					String color = message.args[3].strValue();
-					// editor.addMultilineRule(start, end, color);
+					 editor.addMultilineRule(start, end, color);
 					return true;
 				} else if (message.hasName("clearRules") && message.arity == 1) {
 					editor.clearRules();

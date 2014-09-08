@@ -9,8 +9,18 @@ import org.eclipse.swt.graphics.RGB;
 
 import uk.ac.mdx.xmf.swt.misc.ColorManager;
 
+// TODO: Auto-generated Javadoc
+/**
+ * A factory for creating Head objects.
+ */
 class HeadFactory {
 
+	/**
+	 * Gets the head.
+	 *
+	 * @param head the head
+	 * @return the head
+	 */
 	public static RotatableDecoration getHead(int head) {
 		switch (head) {
 		case 1:
@@ -35,6 +45,11 @@ class HeadFactory {
 		return null;
 	}
 
+	/**
+	 * Arrow.
+	 *
+	 * @return the rotatable decoration
+	 */
 	private static RotatableDecoration arrow() {
 		PolylineDecoration decoration = new PolylineDecoration();
 		PointList decorationPointList = new PointList();
@@ -46,6 +61,11 @@ class HeadFactory {
 		return decoration;
 	}
 
+	/**
+	 * Ball.
+	 *
+	 * @return the rotatable decoration
+	 */
 	private static RotatableDecoration ball() {
 		PolygonDecoration decoration = new PolygonDecoration();
 		PointList decorationPointList = new PointList();
@@ -63,6 +83,11 @@ class HeadFactory {
 		return decoration;
 	}
 
+	/**
+	 * Black diamond.
+	 *
+	 * @return the rotatable decoration
+	 */
 	private static RotatableDecoration blackDiamond() {
 		PolygonDecoration decoration = new PolygonDecoration();
 		PointList decorationPointList = new PointList();
@@ -74,6 +99,11 @@ class HeadFactory {
 		return decoration;
 	}
 
+	/**
+	 * White diamond.
+	 *
+	 * @return the rotatable decoration
+	 */
 	private static RotatableDecoration whiteDiamond() {
 		PolygonDecoration decoration = (PolygonDecoration) blackDiamond();
 		RGB color = new RGB(255, 255, 255);
@@ -81,6 +111,11 @@ class HeadFactory {
 		return decoration;
 	}
 
+	/**
+	 * Black inheritance.
+	 *
+	 * @return the rotatable decoration
+	 */
 	public static RotatableDecoration blackInheritance() {
 		PolygonDecoration decoration = new PolygonDecoration();
 		PointList decorationPointList = new PointList();
@@ -91,6 +126,11 @@ class HeadFactory {
 		return decoration;
 	}
 
+	/**
+	 * White inheritance.
+	 *
+	 * @return the rotatable decoration
+	 */
 	public static RotatableDecoration whiteInheritance() {
 		PolygonDecoration decoration = (PolygonDecoration) blackInheritance();
 		RGB color = new RGB(255, 255, 255);
@@ -98,6 +138,11 @@ class HeadFactory {
 		return decoration;
 	}
 
+	/**
+	 * Black box.
+	 *
+	 * @return the rotatable decoration
+	 */
 	private static RotatableDecoration blackBox() {
 		PolygonDecoration decoration = new PolygonDecoration();
 		PointList decorationPointList = new PointList();
@@ -110,6 +155,11 @@ class HeadFactory {
 		return decoration;
 	}
 
+	/**
+	 * White box.
+	 *
+	 * @return the rotatable decoration
+	 */
 	private static RotatableDecoration whiteBox() {
 		PolygonDecoration decoration = (PolygonDecoration) blackBox();
 		RGB color = new RGB(255, 255, 255);
@@ -117,6 +167,11 @@ class HeadFactory {
 		return decoration;
 	}
 
+	/**
+	 * Claw.
+	 *
+	 * @return the rotatable decoration
+	 */
 	private static RotatableDecoration claw() {
 		/*
 		 * PolylineDecoration decoration = new PolylineDecoration(); PointList

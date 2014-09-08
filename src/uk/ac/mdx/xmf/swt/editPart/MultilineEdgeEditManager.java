@@ -16,10 +16,22 @@ import org.eclipse.swt.widgets.Text;
 import uk.ac.mdx.xmf.swt.figure.MultilineEdgeTextFigure;
 import uk.ac.mdx.xmf.swt.misc.FontManager;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MultilineEdgeEditManager.
+ */
 public class MultilineEdgeEditManager extends DirectEditManager {
 
+	/** The scaled font. */
 	Font scaledFont;
 
+	/**
+	 * Instantiates a new multiline edge edit manager.
+	 *
+	 * @param source the source
+	 * @param editorType the editor type
+	 * @param locator the locator
+	 */
 	public MultilineEdgeEditManager(GraphicalEditPart source, Class editorType,
 			CellEditorLocator locator) {
 		super(source, editorType, locator);
@@ -31,6 +43,9 @@ public class MultilineEdgeEditManager extends DirectEditManager {
 	 * }
 	 */
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.tools.DirectEditManager#initCellEditor()
+	 */
 	protected void initCellEditor() {
 		Text text = (Text) getCellEditor().getControl();
 		MultilineEdgeTextFigure stickyNote = (MultilineEdgeTextFigure) getEditPart()
@@ -49,6 +64,9 @@ public class MultilineEdgeEditManager extends DirectEditManager {
 		text.selectAll();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.tools.DirectEditManager#createCellEditorOn(org.eclipse.swt.widgets.Composite)
+	 */
 	protected CellEditor createCellEditorOn(Composite composite) {
 		return new TextCellEditor(composite, SWT.MULTI | SWT.WRAP);
 	}

@@ -35,33 +35,81 @@ import com.ceteva.menus.MenuBuilder;
 import com.ceteva.menus.MenuListener;
 import com.ceteva.menus.MenuManager;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FormView.
+ */
 public class FormView implements MenuListener {
 
+	/** The composite. */
 	Composite composite;
 
+	/**
+	 * Instantiates a new form view.
+	 *
+	 * @param parent the parent
+	 * @param style the style
+	 * @param tabItemProperty the tab item property
+	 */
 	public FormView(Composite parent, int style, CTabItem tabItemProperty) {
 		composite = parent;
 		_tabItemProperty = tabItemProperty;
 	}
 
+	/** The type. */
 	String type = "";
+	
+	/** The identity. */
 	String identity = "";
+	
+	/** The tab name. */
 	String tabName = "";
+	
+	/** The scrollable. */
 	ScrolledComposite scrollable;
+	
+	/** The form contents holder. */
 	Composite formContentsHolder;
+	
+	/** The canvas. */
 	Composite canvas;
+	
+	/** The components. */
 	Vector components = new Vector();
+	
+	/** The text boxes. */
 	Vector textBoxes = new Vector();
+	
+	/** The handler. */
 	EventHandler handler = null;
+	
+	/** The changes pending. */
 	boolean changesPending = false;
+	
+	/** The locked. */
 	boolean locked = false;
+	
+	/** The lock action. */
 	LockForm lockAction = null;
+	
+	/** The tool bar manager. */
 	IToolBarManager toolBarManager = null;
+	
+	/** The listeners. */
 	Vector listeners = new Vector();
+	
+	/** The xmfclose. */
 	boolean xmfclose = false;
 
+	/** The _tab item property. */
 	CTabItem _tabItemProperty;
 
+	/**
+	 * Adds the component.
+	 *
+	 * @param component the component
+	 * @return true, if successful
+	 */
 	public boolean addComponent(FormElement component) {
 		if (component != null) {
 			components.add(component);
@@ -75,6 +123,9 @@ public class FormView implements MenuListener {
 		return false;
 	}
 
+	/**
+	 * Register as listener.
+	 */
 	public void registerAsListener() {
 		// IWorkbenchPage page = PlatformUI.getWorkbench()
 		// .getActiveWorkbenchWindow().getActivePage();
@@ -83,6 +134,9 @@ public class FormView implements MenuListener {
 		MenuManager.addMenuListener(this);
 	}
 
+	/**
+	 * Unregister as listener.
+	 */
 	public void unregisterAsListener() {
 		// IWorkbenchPage page = PlatformUI.getWorkbench()
 		// .getActiveWorkbenchWindow().getActivePage();
@@ -91,6 +145,11 @@ public class FormView implements MenuListener {
 		MenuManager.removeMenuListener(this);
 	}
 
+	/**
+	 * Creates the part control.
+	 *
+	 * @param parent the parent
+	 */
 	public void createPartControl(Composite parent) {
 
 		Composite c1 = new Composite(parent, SWT.BORDER);
@@ -119,6 +178,12 @@ public class FormView implements MenuListener {
 		registerAsListener();
 	}
 
+	/**
+	 * Gets the component.
+	 *
+	 * @param identity the identity
+	 * @return the component
+	 */
 	public FormElement getComponent(String identity) {
 		for (int i = 0; i < components.size(); i++) {
 			FormElement element = (FormElement) components.elementAt(i);
@@ -128,6 +193,11 @@ public class FormView implements MenuListener {
 		return null;
 	}
 
+	/**
+	 * Sets the lock tool.
+	 *
+	 * @param isLocked the new lock tool
+	 */
 	private void setLockTool(boolean isLocked) {
 		if (toolBarManager.find("com.ceteva.forms.actions.LockForm") == null) {
 			lockAction = new LockForm(this);
@@ -143,6 +213,9 @@ public class FormView implements MenuListener {
 		}
 	}
 
+	/**
+	 * Sets the history tools.
+	 */
 	private void setHistoryTools() {
 		if (toolBarManager.find("com.ceteva.forms.actions.ClearHistory") == null) {
 			ClearHistory clearHistory = new ClearHistory(this);
@@ -156,6 +229,11 @@ public class FormView implements MenuListener {
 		}
 	}
 
+	/**
+	 * Sets the next in history tool.
+	 *
+	 * @param enabled the new next in history tool
+	 */
 	private void setNextInHistoryTool(boolean enabled) {
 		if (toolBarManager.find("com.ceteva.forms.actions.NextInHistory") == null) {
 			NextInHistory nextInHistory = new NextInHistory(this, enabled);
@@ -170,6 +248,11 @@ public class FormView implements MenuListener {
 		}
 	}
 
+	/**
+	 * Sets the previous in history tool.
+	 *
+	 * @param enabled the new previous in history tool
+	 */
 	private void setPreviousInHistoryTool(boolean enabled) {
 		if (toolBarManager.find("com.ceteva.forms.actions.PreviousInHistory") == null) {
 			PreviousInHistory previousInHistory = new PreviousInHistory(this,
@@ -186,6 +269,9 @@ public class FormView implements MenuListener {
 		}
 	}
 
+	/**
+	 * Removes the canvas event listeners.
+	 */
 	private void removeCanvasEventListeners() {
 		Iterator ls = listeners.iterator();
 		while (ls.hasNext()) {
@@ -195,6 +281,9 @@ public class FormView implements MenuListener {
 		}
 	}
 
+	/**
+	 * Inits the.
+	 */
 	public void init() {
 		removeCanvasEventListeners();
 		components = new Vector();
@@ -206,6 +295,9 @@ public class FormView implements MenuListener {
 		buildMenu();
 	}
 
+	/**
+	 * Builds the menu.
+	 */
 	public void buildMenu() {
 		Menu m = formContentsHolder.getMenu();
 		if (m != null)
@@ -225,6 +317,9 @@ public class FormView implements MenuListener {
 		// formContentsHolder.setMenu(menu.createContextMenu(formContentsHolder));
 	}
 
+	/**
+	 * Clear form.
+	 */
 	public void clearForm() {
 		for (int i = 0; i < components.size(); i++) {
 			FormElement component = (FormElement) components.elementAt(i);
@@ -233,6 +328,12 @@ public class FormView implements MenuListener {
 		init();
 	}
 
+	/**
+	 * Delete.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean delete(Message message) {
 		String id = message.args[0].strValue();
 		for (int i = 0; i < components.size(); i++) {
@@ -244,32 +345,67 @@ public class FormView implements MenuListener {
 		return false;
 	}
 
+	/**
+	 * Gets the handler.
+	 *
+	 * @return the handler
+	 */
 	public EventHandler getHandler() {
 		return handler;
 	}
 
+	/**
+	 * Gets the type.
+	 *
+	 * @return the type
+	 */
 	public String getType() {
 		return type;
 	}
 
+	/**
+	 * Sets the name.
+	 *
+	 * @param name the new name
+	 */
 	public void setName(String name) {
 		this.tabName = name;
 		// this.setPartName(name);
 		// this.setTitleToolTip(name);
 	}
 
+	/**
+	 * Sets the identity.
+	 *
+	 * @param identity the new identity
+	 */
 	public void setIdentity(String identity) {
 		this.identity = identity;
 	}
 
+	/**
+	 * Sets the type.
+	 *
+	 * @param type the new type
+	 */
 	public void setType(String type) {
 		this.type = type;
 	}
 
+	/**
+	 * Register event handler.
+	 *
+	 * @param handler the handler
+	 */
 	public void registerEventHandler(EventHandler handler) {
 		this.handler = handler;
 	}
 
+	/**
+	 * Sets the focus.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean setFocus() {
 		return formContentsHolder.setFocus();
 	}
@@ -285,6 +421,9 @@ public class FormView implements MenuListener {
 	 * (dialog.open() == 1) return false; else return true; }
 	 */
 
+	/**
+	 * Focus gained.
+	 */
 	public void focusGained() {
 		if (handler != null) {
 			Message m = handler.newMessage("focusGained", 1);
@@ -294,6 +433,9 @@ public class FormView implements MenuListener {
 		}
 	}
 
+	/**
+	 * Focus lost.
+	 */
 	public void focusLost() {
 		if (handler != null) {
 			Message m = handler.newMessage("focusLost", 1);
@@ -303,6 +445,9 @@ public class FormView implements MenuListener {
 		}
 	}
 
+	/**
+	 * Form closed.
+	 */
 	public void formClosed() {
 		if (handler != null) {
 			Message m = handler.newMessage("formClosed", 1);
@@ -312,6 +457,11 @@ public class FormView implements MenuListener {
 		}
 	}
 
+	/**
+	 * Changes pending.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean changesPending() {
 		return changesPending;
 	}
@@ -322,22 +472,45 @@ public class FormView implements MenuListener {
 	 * }
 	 */
 
+	/**
+	 * Enable render.
+	 */
 	public void enableRender() {
 		// scrollable.setVisible(true);
 	}
 
+	/**
+	 * Disable render.
+	 */
 	public void disableRender() {
 		// scrollable.setVisible(false);
 	}
 
+	/**
+	 * Gets the identity.
+	 *
+	 * @return the identity
+	 */
 	public String getIdentity() {
 		return identity;
 	}
 
+	/**
+	 * Process call.
+	 *
+	 * @param message the message
+	 * @return the value
+	 */
 	public Value processCall(Message message) {
 		return broadcastCall(message);
 	}
 
+	/**
+	 * Process message.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean processMessage(Message message) {
 		boolean processed = false;
 		if (message.args[0].hasStrValue(identity)) {
@@ -384,6 +557,12 @@ public class FormView implements MenuListener {
 		return processed;
 	}
 
+	/**
+	 * Broadcast command.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean broadcastCommand(Message message) {
 		for (int i = 0; i < components.size(); i++) {
 			FormElement component = (FormElement) components.elementAt(i);
@@ -393,6 +572,12 @@ public class FormView implements MenuListener {
 		return false;
 	}
 
+	/**
+	 * Broadcast call.
+	 *
+	 * @param message the message
+	 * @return the value
+	 */
 	public Value broadcastCall(Message message) {
 		for (int i = 0; i < components.size(); i++) {
 			FormElement component = (FormElement) components.elementAt(i);
@@ -403,6 +588,12 @@ public class FormView implements MenuListener {
 		return null;
 	}
 
+	/**
+	 * New button.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean newButton(Message message) {
 		String identity = message.args[1].strValue();
 		String text = message.args[2].strValue();
@@ -414,6 +605,17 @@ public class FormView implements MenuListener {
 		return addComponent(button);
 	}
 
+	/**
+	 * New button.
+	 *
+	 * @param identity the identity
+	 * @param text the text
+	 * @param x the x
+	 * @param y the y
+	 * @param width the width
+	 * @param height the height
+	 * @return the form button
+	 */
 	public FormButton newButton(String identity, String text, int x, int y,
 			int width, int height) {
 		FormButton button = new FormButton(formContentsHolder, identity,
@@ -423,6 +625,12 @@ public class FormView implements MenuListener {
 		return button;
 	}
 
+	/**
+	 * New text.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean newText(Message message) {
 		String identity = message.args[1].strValue();
 		String label = message.args[2].strValue();
@@ -432,6 +640,15 @@ public class FormView implements MenuListener {
 		return addComponent(text);
 	}
 
+	/**
+	 * New text.
+	 *
+	 * @param identity the identity
+	 * @param label the label
+	 * @param x the x
+	 * @param y the y
+	 * @return the form text
+	 */
 	public FormText newText(String identity, String label, int x, int y) {
 		FormText text = new FormText(formContentsHolder, identity, handler);
 		text.setText(label);
@@ -440,6 +657,12 @@ public class FormView implements MenuListener {
 		return text;
 	}
 
+	/**
+	 * New text field.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean newTextField(Message message) {
 		String identity = message.args[1].strValue();
 		String text = "";
@@ -468,6 +691,18 @@ public class FormView implements MenuListener {
 		return addComponent(textField);
 	}
 
+	/**
+	 * New text field.
+	 *
+	 * @param identity the identity
+	 * @param text the text
+	 * @param x the x
+	 * @param y the y
+	 * @param width the width
+	 * @param height the height
+	 * @param editable the editable
+	 * @return the form text field
+	 */
 	public FormTextField newTextField(String identity, String text, int x,
 			int y, int width, int height, boolean editable) {
 		FormTextField field = new FormTextField(formContentsHolder, identity,
@@ -478,6 +713,12 @@ public class FormView implements MenuListener {
 		return field;
 	}
 
+	/**
+	 * New combo box.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean newComboBox(Message message) {
 		String identity = message.args[1].strValue();
 		int x = message.args[2].intValue;
@@ -489,6 +730,16 @@ public class FormView implements MenuListener {
 		return addComponent(comboBox);
 	}
 
+	/**
+	 * New combo box.
+	 *
+	 * @param identity the identity
+	 * @param x the x
+	 * @param y the y
+	 * @param width the width
+	 * @param height the height
+	 * @return the form combo box
+	 */
 	public FormComboBox newComboBox(String identity, int x, int y, int width,
 			int height) {
 		FormComboBox combo = new FormComboBox(formContentsHolder, identity,
@@ -497,6 +748,12 @@ public class FormView implements MenuListener {
 		return combo;
 	}
 
+	/**
+	 * New list.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean newList(Message message) {
 		String identity = message.args[1].strValue();
 		int x = message.args[2].intValue;
@@ -508,12 +765,28 @@ public class FormView implements MenuListener {
 		return addComponent(list);
 	}
 
+	/**
+	 * New list.
+	 *
+	 * @param identity the identity
+	 * @param x the x
+	 * @param y the y
+	 * @param width the width
+	 * @param height the height
+	 * @return the form list
+	 */
 	public FormList newList(String identity, int x, int y, int width, int height) {
 		FormList list = new FormList(formContentsHolder, identity, handler);
 		list.setBounds(x, y, width, height);
 		return list;
 	}
 
+	/**
+	 * New check box.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean newCheckBox(Message message) {
 		String identity = message.args[1].strValue();
 		int x = message.args[2].intValue;
@@ -523,6 +796,15 @@ public class FormView implements MenuListener {
 		return addComponent(checkBox);
 	}
 
+	/**
+	 * New check box.
+	 *
+	 * @param identity the identity
+	 * @param x the x
+	 * @param y the y
+	 * @param value the value
+	 * @return the form check box
+	 */
 	public FormCheckBox newCheckBox(String identity, int x, int y, boolean value) {
 		FormCheckBox checkbox = new FormCheckBox(formContentsHolder, identity,
 				handler);
@@ -531,6 +813,12 @@ public class FormView implements MenuListener {
 		return checkbox;
 	}
 
+	/**
+	 * New tree.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean newTree(Message message) {
 		String identity = message.args[1].strValue();
 		int x = message.args[2].intValue;
@@ -542,6 +830,17 @@ public class FormView implements MenuListener {
 		return addComponent(tree);
 	}
 
+	/**
+	 * New tree.
+	 *
+	 * @param identity the identity
+	 * @param x the x
+	 * @param y the y
+	 * @param width the width
+	 * @param height the height
+	 * @param editable the editable
+	 * @return the form tree
+	 */
 	public FormTree newTree(String identity, int x, int y, int width,
 			int height, boolean editable) {
 		FormTree tree = new FormTree(formContentsHolder, identity, handler,
@@ -550,6 +849,12 @@ public class FormView implements MenuListener {
 		return tree;
 	}
 
+	/**
+	 * New text box.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean newTextBox(Message message) {
 		String identity = message.args[1].strValue();
 		;
@@ -563,6 +868,18 @@ public class FormView implements MenuListener {
 		return addComponent(textBox);
 	}
 
+	/**
+	 * New text box.
+	 *
+	 * @param identity the identity
+	 * @param text the text
+	 * @param x the x
+	 * @param y the y
+	 * @param width the width
+	 * @param height the height
+	 * @param editable the editable
+	 * @return the form text box
+	 */
 	public FormTextBox newTextBox(String identity, String text, int x, int y,
 			int width, int height, boolean editable) {
 		FormTextBox box = new FormTextBox(formContentsHolder, identity,
@@ -577,6 +894,12 @@ public class FormView implements MenuListener {
 		return box;
 	}
 
+	/**
+	 * New table.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean newTable(Message message) {
 		String tableID = message.args[1].strValue();
 		int x = message.args[2].intValue;
@@ -592,17 +915,33 @@ public class FormView implements MenuListener {
 		return addComponent(table);
 	}
 
+	/**
+	 * Gets the tool tip text.
+	 *
+	 * @return the tool tip text
+	 */
 	public String getToolTipText() {
 		// return getTitle();
 		return "";
 	}
 
+	/**
+	 * Sets the text.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean setText(Message message) {
 		String text = message.args[1].strValue();
 		changeText(text);
 		return true;
 	}
 
+	/**
+	 * Maximise to canvas.
+	 *
+	 * @param message the message
+	 */
 	public void maximiseToCanvas(Message message) {
 		String componentId = message.args[1].strValue();
 		for (int i = 0; i < components.size(); i++) {
@@ -616,6 +955,12 @@ public class FormView implements MenuListener {
 		}
 	}
 
+	/**
+	 * Sets the tool.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean setTool(Message message) {
 		String toolText = message.args[1].strValue();
 		boolean value = message.args[2].boolValue;
@@ -638,11 +983,22 @@ public class FormView implements MenuListener {
 		return false;
 	}
 
+	/**
+	 * Change text.
+	 *
+	 * @param s the s
+	 */
 	public void changeText(String s) {
 		tabName = s;
 		// this.setPartName(s);
 	}
 
+	/**
+	 * Sets the changes pending.
+	 *
+	 * @param b the b
+	 * @param targetBox the target box
+	 */
 	public void setChangesPending(boolean b, FormTextBox targetBox) {
 		changesPending = b;
 		if (b) {
@@ -662,11 +1018,19 @@ public class FormView implements MenuListener {
 		}
 	}
 
+	/**
+	 * Sets the locked.
+	 *
+	 * @param locked the new locked
+	 */
 	public void setLocked(boolean locked) {
 		this.locked = locked;
 		lockAction.update();
 	}
 
+	/**
+	 * Toggle lock.
+	 */
 	public void toggleLock() {
 		setLocked(!locked);
 		Message m = handler.newMessage("lockForm", 2);
@@ -675,10 +1039,18 @@ public class FormView implements MenuListener {
 		handler.raiseEvent(m);
 	}
 
+	/**
+	 * Checks if is locked.
+	 *
+	 * @return true, if is locked
+	 */
 	public boolean isLocked() {
 		return locked;
 	}
 
+	/**
+	 * Dispose.
+	 */
 	public void dispose() {
 		// super.dispose();
 		unregisterAsListener();
@@ -687,6 +1059,11 @@ public class FormView implements MenuListener {
 		// MenuBuilder.dispose(getSite());
 	}
 
+	/**
+	 * Close form.
+	 *
+	 * @param xmfclose the xmfclose
+	 */
 	public void closeForm(boolean xmfclose) {
 		this.xmfclose = xmfclose;
 		// IWorkbenchPage page = FormsPlugin.getDefault().getWorkbench()
@@ -694,23 +1071,48 @@ public class FormView implements MenuListener {
 		// page.hideView(this);
 	}
 
+	/**
+	 * Property change.
+	 *
+	 * @param event the event
+	 */
 	public void propertyChange(PropertyChangeEvent event) {
 	}
 
+	/**
+	 * Part activated.
+	 *
+	 * @param partRef the part ref
+	 */
 	public void partActivated(IWorkbenchPartReference partRef) {
 		if (partRef.getPart(false).equals(this) && handler != null)
 			focusGained();
 	}
 
+	/**
+	 * Part brought to top.
+	 *
+	 * @param partRef the part ref
+	 */
 	public void partBroughtToTop(IWorkbenchPartReference partRef) {
 	}
 
+	/**
+	 * Part closed.
+	 *
+	 * @param partRef the part ref
+	 */
 	public void partClosed(IWorkbenchPartReference partRef) {
 		if (partRef.getPart(false).equals(this) && handler != null)
 			if (!xmfclose)
 				formClosed();
 	}
 
+	/**
+	 * Part deactivated.
+	 *
+	 * @param partRef the part ref
+	 */
 	public void partDeactivated(IWorkbenchPartReference partRef) {
 		if (partRef.getPart(false) != null) {
 			if (partRef.getPart(false).equals(this) && handler != null)
@@ -718,26 +1120,59 @@ public class FormView implements MenuListener {
 		}
 	}
 
+	/**
+	 * Part opened.
+	 *
+	 * @param partRef the part ref
+	 */
 	public void partOpened(IWorkbenchPartReference partRef) {
 	}
 
+	/**
+	 * Part hidden.
+	 *
+	 * @param partRef the part ref
+	 */
 	public void partHidden(IWorkbenchPartReference partRef) {
 	}
 
+	/**
+	 * Part visible.
+	 *
+	 * @param partRef the part ref
+	 */
 	public void partVisible(IWorkbenchPartReference partRef) {
 	}
 
+	/**
+	 * Part input changed.
+	 *
+	 * @param partRef the part ref
+	 */
 	public void partInputChanged(IWorkbenchPartReference partRef) {
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ceteva.menus.MenuListener#newMenuAdded()
+	 */
 	public void newMenuAdded() {
 		buildMenu();
 	}
 
+	/**
+	 * Adds the canvas event listener.
+	 *
+	 * @param listener the listener
+	 */
 	public void addCanvasEventListener(EventListener listener) {
 		listeners.add(listener);
 	}
 
+	/**
+	 * Synchronise.
+	 *
+	 * @param xml the xml
+	 */
 	public void synchronise(Element xml) {
 
 		// Check that all elements in the document are represented on the form
@@ -768,6 +1203,11 @@ public class FormView implements MenuListener {
 
 	}
 
+	/**
+	 * Synchronise button.
+	 *
+	 * @param xml the xml
+	 */
 	public void synchroniseButton(Element xml) {
 		String identity = xml.getString("identity");
 		String label = xml.getString("label");
@@ -784,6 +1224,11 @@ public class FormView implements MenuListener {
 			addComponent(newButton(identity, label, x, y, width, height));
 	}
 
+	/**
+	 * Synchronise checkbox.
+	 *
+	 * @param xml the xml
+	 */
 	public void synchroniseCheckbox(Element xml) {
 		String identity = xml.getString("identity");
 		boolean value = xml.getBoolean("value");
@@ -800,6 +1245,11 @@ public class FormView implements MenuListener {
 			addComponent(newCheckBox(identity, x, y, value));
 	}
 
+	/**
+	 * Synchronise combobox.
+	 *
+	 * @param xml the xml
+	 */
 	public void synchroniseCombobox(Element xml) {
 		String identity = xml.getString("identity");
 		int x = xml.getInteger("x");
@@ -822,6 +1272,12 @@ public class FormView implements MenuListener {
 		}
 	}
 
+	/**
+	 * Synchronise combobox values.
+	 *
+	 * @param xml the xml
+	 * @param combobox the combobox
+	 */
 	public void synchroniseComboboxValues(Element xml, FormComboBox combobox) {
 		for (int i = 0; i < xml.childrenSize(); i++) {
 			Element child = xml.getChild(i);
@@ -832,6 +1288,11 @@ public class FormView implements MenuListener {
 		}
 	}
 
+	/**
+	 * Synchronise label.
+	 *
+	 * @param xml the xml
+	 */
 	public void synchroniseLabel(Element xml) {
 		String identity = xml.getString("identity");
 		int x = xml.getInteger("x");
@@ -846,6 +1307,11 @@ public class FormView implements MenuListener {
 			addComponent(newText(identity, text, x, y));
 	}
 
+	/**
+	 * Synchronise list.
+	 *
+	 * @param xml the xml
+	 */
 	public void synchroniseList(Element xml) {
 		String identity = xml.getString("identity");
 		int x = xml.getInteger("x");
@@ -864,6 +1330,12 @@ public class FormView implements MenuListener {
 		}
 	}
 
+	/**
+	 * Synchronise list values.
+	 *
+	 * @param xml the xml
+	 * @param listbox the listbox
+	 */
 	public void synchroniseListValues(Element xml, FormList listbox) {
 		for (int i = 0; i < xml.childrenSize(); i++) {
 			Element child = xml.getChild(i);
@@ -875,6 +1347,11 @@ public class FormView implements MenuListener {
 		}
 	}
 
+	/**
+	 * Synchronise textbox.
+	 *
+	 * @param xml the xml
+	 */
 	public void synchroniseTextbox(Element xml) {
 		String identity = xml.getString("identity");
 		int x = xml.getInteger("x");
@@ -894,6 +1371,11 @@ public class FormView implements MenuListener {
 					editable));
 	}
 
+	/**
+	 * Synchronise textfield.
+	 *
+	 * @param xml the xml
+	 */
 	public void synchroniseTextfield(Element xml) {
 		String identity = xml.getString("identity");
 		int x = xml.getInteger("x");
@@ -913,6 +1395,11 @@ public class FormView implements MenuListener {
 					editable));
 	}
 
+	/**
+	 * Synchronise tree.
+	 *
+	 * @param xml the xml
+	 */
 	public void synchroniseTree(Element xml) {
 		String identity = xml.getString("identity");
 		int x = xml.getInteger("x");
@@ -932,6 +1419,12 @@ public class FormView implements MenuListener {
 		}
 	}
 
+	/**
+	 * Update component.
+	 *
+	 * @param xml the xml
+	 * @param element the element
+	 */
 	public void updateComponent(Element xml, FormElement element) {
 	}
 }

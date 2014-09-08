@@ -17,6 +17,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 
 
+// TODO: Auto-generated Javadoc
 /**
  * Action to invoke the Update configuration manager.
  * 
@@ -24,6 +25,7 @@ import org.eclipse.ui.IWorkbenchWindowActionDelegate;
  */
 public class ConfigurationManagerAction implements IWorkbenchWindowActionDelegate {
 
+	/** The window. */
 	private IWorkbenchWindow window;
 	
 	/**
@@ -34,7 +36,9 @@ public class ConfigurationManagerAction implements IWorkbenchWindowActionDelegat
 	}
 
 	/**
-	 * Runs the action when selected
+	 * Runs the action when selected.
+	 *
+	 * @param action the action
 	 */
 	public void run(IAction action) {
 		BusyIndicator
@@ -45,13 +49,16 @@ public class ConfigurationManagerAction implements IWorkbenchWindowActionDelegat
 		});
 	}
 
-	/**
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.IActionDelegate#selectionChanged(org.eclipse.jface.action.IAction, org.eclipse.jface.viewers.ISelection)
 	 */
 	public void selectionChanged(IAction action, ISelection selection) {
 	    // do nothing
 	}
 
 	/**
+	 * Dispose.
+	 *
 	 * @see IWorkbenchWindowActionDelegate#dispose
 	 */
 	public void dispose() {
@@ -59,6 +66,9 @@ public class ConfigurationManagerAction implements IWorkbenchWindowActionDelegat
 	}
 
 	/**
+	 * Inits the.
+	 *
+	 * @param window the window
 	 * @see IWorkbenchWindowActionDelegate#init
 	 */
 	public void init(IWorkbenchWindow window) {

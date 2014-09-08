@@ -22,32 +22,54 @@ import xos.Value;
 
 import com.ceteva.dialogs.progress.model.JobManager;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DialogsClient.
+ */
 public class DialogsClient extends Client {
 
+	/** The jobmanager. */
 	private JobManager jobmanager = new JobManager();
 
 	// The following are used to cache file and directory dialogs
 	// so that they remember the last location.
 
+	/** The open dialog. */
 	private static FileDialog openDialog = null;
 
+	/** The save dialog. */
 	private static FileDialog saveDialog = null;
 
+	/** The dir dialog. */
 	private static DirectoryDialog dirDialog = null;
 
+	/** The last path. */
 	private static String lastPath = "";
 
+	/** The handler. */
 	public EventHandler handler = null;
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Client#setEventHandler(uk.ac.mdx.xmf.swt.client.EventHandler)
+	 */
 	@Override
 	public void setEventHandler(EventHandler eventsOut) {
 		handler = eventsOut;
 	}
 
+	/**
+	 * Instantiates a new dialogs client.
+	 */
 	public DialogsClient() {
 		super("com.ceteva.dialogs");
 	}
 
+	/**
+	 * Input dialog.
+	 *
+	 * @param message the message
+	 * @return the value
+	 */
 	public Value inputDialog(Message message) {
 		String title = message.args[0].strValue();
 		String question = message.args[1].strValue();
@@ -61,11 +83,22 @@ public class DialogsClient extends Client {
 			return new Value("-1");
 	}
 
+	/**
+	 * Message dialog.
+	 *
+	 * @param message the message
+	 */
 	public void messageDialog(Message message) {
 		String text = message.args[1].strValue();
 		MessageDialog.openInformation(getShell(), "Information", text);
 	}
 
+	/**
+	 * Ordering dialog.
+	 *
+	 * @param message the message
+	 * @return the value
+	 */
 	public Value orderingDialog(Message message) {
 		String text = message.args[0].strValue();
 		String message_ = message.args[1].strValue();
@@ -82,6 +115,12 @@ public class DialogsClient extends Client {
 		return new Value("");
 	}
 
+	/**
+	 * Ordering dialog2.
+	 *
+	 * @param message the message
+	 * @return the value
+	 */
 	public Value orderingDialog2(Message message) {
 		String title = message.args[0].strValue();
 		Object[] objs = message.args[1].values;
@@ -94,6 +133,12 @@ public class DialogsClient extends Client {
 		return new Value("");
 	}
 
+	/**
+	 * Question dialog.
+	 *
+	 * @param message the message
+	 * @return the value
+	 */
 	public Value questionDialog(Message message) {
 		String question = message.args[0].strValue();
 		boolean reply = MessageDialog.openQuestion(getShell(), "Question",
@@ -106,11 +151,21 @@ public class DialogsClient extends Client {
 		return value;
 	}
 
+	/**
+	 * Error dialog.
+	 *
+	 * @param message the message
+	 */
 	public void errorDialog(Message message) {
 		String text = message.args[1].strValue();
 		MessageDialog.openError(getShell(), "Error", text);
 	}
 
+	/**
+	 * Text area dialog.
+	 *
+	 * @param message the message
+	 */
 	public void textAreaDialog(Message message) {
 		String type = message.args[1].strValue();
 		String message_ = message.args[2].strValue();
@@ -122,6 +177,12 @@ public class DialogsClient extends Client {
 		tad.open();
 	}
 
+	/**
+	 * Gets the image type.
+	 *
+	 * @param type the type
+	 * @return the image type
+	 */
 	public int getImageType(String type) {
 		if (type.equals("error"))
 			return MessageDialog.ERROR;
@@ -134,11 +195,22 @@ public class DialogsClient extends Client {
 		return MessageDialog.NONE;
 	}
 
+	/**
+	 * Warning dialog.
+	 *
+	 * @param message the message
+	 */
 	public void warningDialog(Message message) {
 		String text = message.args[1].strValue();
 		MessageDialog.openWarning(getShell(), "Warning", text);
 	}
 
+	/**
+	 * Color dialog.
+	 *
+	 * @param message the message
+	 * @return the value
+	 */
 	public Value colorDialog(Message message) {
 		String text = message.args[0].strValue();
 		int red = message.args[1].intValue;
@@ -164,6 +236,12 @@ public class DialogsClient extends Client {
 		}
 	}
 
+	/**
+	 * Confirm dialog.
+	 *
+	 * @param message the message
+	 * @return the value
+	 */
 	public Value confirmDialog(Message message) {
 		String question = message.args[0].strValue();
 		boolean reply = MessageDialog.openQuestion(getShell(), "Confirm",
@@ -176,6 +254,12 @@ public class DialogsClient extends Client {
 		return value;
 	}
 
+	/**
+	 * File dialog.
+	 *
+	 * @param message the message
+	 * @return the value
+	 */
 	public Value fileDialog(Message message) {
 		String saveOpen = message.args[0].strValue();
 		String path = message.args[1].strValue();
@@ -192,6 +276,12 @@ public class DialogsClient extends Client {
 		return value;
 	}
 
+	/**
+	 * Font dialog.
+	 *
+	 * @param message the message
+	 * @return the value
+	 */
 	public Value fontDialog(Message message) {
 		String def = message.args[0].strValue();
 		FontDialog fd = new FontDialog(getShell());
@@ -207,6 +297,15 @@ public class DialogsClient extends Client {
 		return new Value(datas);
 	}
 
+	/**
+	 * Gets the file dialog.
+	 *
+	 * @param style the style
+	 * @param path the path
+	 * @param extension the extension
+	 * @param initName the init name
+	 * @return the file dialog
+	 */
 	public FileDialog getFileDialog(String style, String path,
 			String extension, String initName) {
 		if (style.equals("open")) {
@@ -235,6 +334,12 @@ public class DialogsClient extends Client {
 		return saveDialog;
 	}
 
+	/**
+	 * Directory dialog.
+	 *
+	 * @param message the message
+	 * @return the value
+	 */
 	public Value directoryDialog(Message message) {
 		String path = message.args[0].strValue();
 		if (dirDialog == null) {
@@ -255,6 +360,12 @@ public class DialogsClient extends Client {
 		return value;
 	}
 
+	/**
+	 * Selection dialog.
+	 *
+	 * @param message the message
+	 * @return the value
+	 */
 	public Value selectionDialog(Message message) {
 		boolean multi = message.args[0].boolValue;
 		String title = message.args[1].strValue();
@@ -268,6 +379,12 @@ public class DialogsClient extends Client {
 					options, handler);
 	}
 
+	/**
+	 * Gets the result array.
+	 *
+	 * @param strings the strings
+	 * @return the result array
+	 */
 	public Value getResultArray(Object[] strings) {
 		Value[] values = new Value[strings.length];
 		for (int i = 0; i < strings.length; i++)
@@ -275,6 +392,12 @@ public class DialogsClient extends Client {
 		return new Value(values);
 	}
 
+	/**
+	 * Raise event.
+	 *
+	 * @param identity the identity
+	 * @param value the value
+	 */
 	public void raiseEvent(String identity, String value) {
 		Message m = handler.newMessage("dialogReply", 2);
 		Value v1 = new Value(identity);
@@ -284,10 +407,18 @@ public class DialogsClient extends Client {
 		handler.raiseEvent(m);
 	}
 
+	/**
+	 * Gets the shell.
+	 *
+	 * @return the shell
+	 */
 	public Shell getShell() {
 		return Display.getCurrent().getActiveShell();
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Client#processCall(xos.Message)
+	 */
 	public Value processCall(Message message) {
 		if (message.hasName("newColorDialog") && message.arity == 4)
 			return colorDialog(message);
@@ -319,6 +450,9 @@ public class DialogsClient extends Client {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Client#processMessage(xos.Message)
+	 */
 	public boolean processMessage(Message message) {
 		if (message.hasName("newMessageDialog") && message.arity == 2) {
 			messageDialog(message);
@@ -340,6 +474,15 @@ public class DialogsClient extends Client {
 	// a tree is represented as a pair A | B where A is the node and
 	// B are the children of A
 
+	/**
+	 * Builds the tree.
+	 *
+	 * @param tree the tree
+	 * @param expand the expand
+	 * @param disable the disable
+	 * @param select the select
+	 * @return the tree element
+	 */
 	public TreeElement buildTree(Value[] tree, Vector expand, Vector disable,
 			Vector select) {
 		TreeElement root = new TreeElement(null, "Root");
@@ -347,6 +490,15 @@ public class DialogsClient extends Client {
 		return root;
 	}
 
+	/**
+	 * Builds the tree.
+	 *
+	 * @param parent the parent
+	 * @param tree the tree
+	 * @param expand the expand
+	 * @param disable the disable
+	 * @param select the select
+	 */
 	public void buildTree(TreeElement parent, Value[] tree, Vector expand,
 			Vector disable, Vector select) {
 		// A
@@ -392,6 +544,12 @@ public class DialogsClient extends Client {
 		}
 	}
 
+	/**
+	 * Multi tree dialog.
+	 *
+	 * @param message the message
+	 * @return the value
+	 */
 	public Value multiTreeDialog(Message message) {
 		// String title = message.args[0].strValue();
 		// Value[] tree = message.args[1].values;
@@ -429,6 +587,12 @@ public class DialogsClient extends Client {
 		return new Value("");
 	}
 
+	/**
+	 * Simple tree dialog.
+	 *
+	 * @param message the message
+	 * @return the value
+	 */
 	public Value simpleTreeDialog(Message message) {
 		// String title = message.args[0].strValue();
 		// Value[] tree = message.args[1].values;
@@ -462,6 +626,13 @@ public class DialogsClient extends Client {
 		return new Value("");
 	}
 
+	/**
+	 * String contains.
+	 *
+	 * @param string the string
+	 * @param c the c
+	 * @return true, if successful
+	 */
 	public boolean stringContains(String string, char c) {
 		for (int i = 0; i < string.length(); i++) {
 			char sc = string.charAt(i);
@@ -471,6 +642,13 @@ public class DialogsClient extends Client {
 		return false;
 	}
 
+	/**
+	 * String remove.
+	 *
+	 * @param string the string
+	 * @param c the c
+	 * @return the string
+	 */
 	public String stringRemove(String string, char c) {
 		String newString = "";
 		for (int i = 0; i < string.length(); i++) {

@@ -15,17 +15,35 @@ import xos.Message;
 
 import com.google.gson.Gson;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CommandClient.
+ */
 public class CommandClient implements Runnable, Observer {
 
+	/** The out. */
 	OutputStream out;
 
+	/** The in. */
 	InputStream in;
+	
+	/** The socket. */
 	Socket socket;
+	
+	/** The id. */
 	String id;
+	
+	/** The flag. */
 	boolean flag = false;
 
+	/** The port. */
 	static int port = 9999;// default
 
+	/**
+	 * Local host.
+	 *
+	 * @return the inet address
+	 */
 	public static InetAddress localHost() {
 		try {
 			return InetAddress.getLocalHost();
@@ -34,6 +52,12 @@ public class CommandClient implements Runnable, Observer {
 		}
 	}
 
+	/**
+	 * Address.
+	 *
+	 * @param address the address
+	 * @return the inet address
+	 */
 	public static InetAddress address(String address) {
 		try {
 			return InetAddress.getByName(address);
@@ -43,10 +67,20 @@ public class CommandClient implements Runnable, Observer {
 		}
 	}
 
+	/**
+	 * Sets the port.
+	 *
+	 * @param port the new port
+	 */
 	public void setPort(int port) {
 		this.port = port;
 	}
 
+	/**
+	 * Sets the id.
+	 *
+	 * @param mes the new id
+	 */
 	public void setId(ArrayList<Message> mes) {
 
 		String str = "";
@@ -60,6 +94,13 @@ public class CommandClient implements Runnable, Observer {
 		flag = true;
 	}
 
+	/**
+	 * Connect.
+	 *
+	 * @param address the address
+	 * @param port the port
+	 * @return true, if successful
+	 */
 	public boolean connect(InetAddress address, int port) {
 
 		BufferedReader input;
@@ -81,6 +122,9 @@ public class CommandClient implements Runnable, Observer {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
@@ -91,6 +135,9 @@ public class CommandClient implements Runnable, Observer {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub

@@ -13,6 +13,7 @@ package uk.ac.mdx.xmf.swt.diagram.zoom;
 
 import java.util.Date;
 
+// TODO: Auto-generated Javadoc
 /**
  * Holds the count information, and notifies interested figures of changes in
  * animation. Created by a root, which loops through the animation process.
@@ -24,14 +25,21 @@ import java.util.Date;
  */
 public class AnimationModel {
 
+	/** The start time. */
 	private long startTime = new Date().getTime();
+	
+	/** The duration. */
 	private long duration = 0;
 
+	/** The ascending. */
 	private boolean ascending;
 
 	/**
 	 * Default constructor taking in number of milliseconds the animation should
 	 * take.
+	 *
+	 * @param duration the duration
+	 * @param ascending the ascending
 	 */
 	public AnimationModel(long duration, boolean ascending) {
 		this.duration = duration;
@@ -48,6 +56,8 @@ public class AnimationModel {
 
 	/**
 	 * Returns (0.0<=value<=1.0), of current position
+	 *
+	 * @return the progress
 	 */
 	public float getProgress() {
 		long presentTime = new Date().getTime();
@@ -58,6 +68,11 @@ public class AnimationModel {
 		return progress;
 	}
 
+	/**
+	 * Checks if is finished.
+	 *
+	 * @return true, if is finished
+	 */
 	public boolean isFinished() {
 		return (new Date().getTime() - startTime) > duration;
 	}

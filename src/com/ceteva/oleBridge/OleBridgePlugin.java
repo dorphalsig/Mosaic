@@ -1,10 +1,18 @@
 package com.ceteva.oleBridge;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class OleBridgePlugin.
+ */
 public class OleBridgePlugin {
 
+	/** The plugin. */
 	private static OleBridgePlugin plugin;
 
+	/**
+	 * Instantiates a new ole bridge plugin.
+	 */
 	public OleBridgePlugin() {
 		plugin = this;
 	}
@@ -18,6 +26,11 @@ public class OleBridgePlugin {
 	// plugin = null;
 	// }
 
+	/**
+	 * Gets the default.
+	 *
+	 * @return the default
+	 */
 	public static OleBridgePlugin getDefault() {
 		return plugin;
 	}

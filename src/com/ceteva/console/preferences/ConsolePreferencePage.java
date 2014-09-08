@@ -5,8 +5,15 @@ import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.FontFieldEditor;
 import org.eclipse.jface.preference.IntegerFieldEditor;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ConsolePreferencePage.
+ */
 public class ConsolePreferencePage extends FieldEditorPreferencePage {
 
+	/**
+	 * Instantiates a new console preference page.
+	 */
 	public ConsolePreferencePage() {
 		super(FieldEditorPreferencePage.GRID);
 		// IPreferenceStore store = ConsolePlugin.getDefault()
@@ -14,6 +21,9 @@ public class ConsolePreferencePage extends FieldEditorPreferencePage {
 		// setPreferenceStore(store);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.preference.FieldEditorPreferencePage#createFieldEditors()
+	 */
 	protected void createFieldEditors() {
 		FontFieldEditor font = new FontFieldEditor(
 				IPreferenceConstants.CONSOLE_FONT, "Font",
@@ -43,6 +53,9 @@ public class ConsolePreferencePage extends FieldEditorPreferencePage {
 		addField(commandHistoryLimit);
 	}
 
+	/**
+	 * Inits the.
+	 */
 	public void init() {
 	}
 }

@@ -15,10 +15,23 @@ import org.eclipse.swt.graphics.RGB;
 
 import uk.ac.mdx.xmf.swt.misc.FontManager;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MultilineTextFigure.
+ */
 public class MultilineTextFigure extends Figure {
 
+	/** The text flow. */
 	public TextFlow textFlow;
 
+	/**
+	 * Instantiates a new multiline text figure.
+	 *
+	 * @param position the position
+	 * @param size the size
+	 * @param forecolor the forecolor
+	 * @param backcolor the backcolor
+	 */
 	public MultilineTextFigure(Point position, Dimension size, RGB forecolor,
 			RGB backcolor) {
 		this.setBounds(new Rectangle(position, size));
@@ -26,6 +39,11 @@ public class MultilineTextFigure extends Figure {
 		textFlow.setBackgroundColor(ColorConstants.black);
 	}
 
+	/**
+	 * Builds the flowpage.
+	 *
+	 * @param border the border
+	 */
 	public void buildFlowpage(int border) {
 		setBorder(new MarginBorder(border));
 		FlowPage flowPage = new FlowPage();
@@ -37,10 +55,20 @@ public class MultilineTextFigure extends Figure {
 		add(flowPage);
 	}
 
+	/**
+	 * Gets the figure.
+	 *
+	 * @return the figure
+	 */
 	public Figure getFigure() {
 		return textFlow;
 	}
 
+	/**
+	 * Gets the preferences.
+	 *
+	 * @return the preferences
+	 */
 	public void getPreferences() {
 		// IPreferenceStore preferences =
 		// DiagramPlugin.getDefault().getPreferenceStore();
@@ -49,14 +77,27 @@ public class MultilineTextFigure extends Figure {
 		// setFont(FontManager.getFont(fontData));
 	}
 
+	/**
+	 * Gets the text.
+	 *
+	 * @return the text
+	 */
 	public String getText() {
 		return textFlow.getText();
 	}
 
+	/**
+	 * Preference update.
+	 */
 	public void preferenceUpdate() {
 		getPreferences();
 	}
 
+	/**
+	 * Sets the font.
+	 *
+	 * @param font the new font
+	 */
 	public void setFont(String font) {
 		if (!font.equals("")) {
 			FontData fd = new FontData(font);
@@ -64,10 +105,18 @@ public class MultilineTextFigure extends Figure {
 		}
 	}
 
+	/**
+	 * Sets the text.
+	 *
+	 * @param text the new text
+	 */
 	public void setText(String text) {
 		textFlow.setText(text);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.draw2d.Figure#useLocalCoordinates()
+	 */
 	@Override
 	protected boolean useLocalCoordinates() {
 		return true;

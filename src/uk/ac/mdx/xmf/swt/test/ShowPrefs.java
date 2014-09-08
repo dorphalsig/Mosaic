@@ -24,12 +24,14 @@ import uk.ac.mdx.xmf.swt.demo.Main;
 
 import com.ceteva.console.preferences.IPreferenceConstants;
 
+// TODO: Auto-generated Javadoc
 /**
- * This class demonstrates JFace preferences
+ * This class demonstrates JFace preferences.
  */
 public class ShowPrefs {
+	
 	/**
-	 * Runs the application
+	 * Runs the application.
 	 */
 	public void run() {
 		Display display = Main.display;
@@ -73,10 +75,9 @@ public class ShowPrefs {
 	}
 
 	/**
-	 * The application entry point
-	 * 
-	 * @param args
-	 *            the command line arguments
+	 * The application entry point.
+	 *
+	 * @param args            the command line arguments
 	 */
 	public static void main(String[] args) {
 		Display.getDefault().asyncExec(new Runnable() {

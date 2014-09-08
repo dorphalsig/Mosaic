@@ -4,8 +4,18 @@ import java.util.Vector;
 
 import uk.ac.mdx.xmf.swt.client.xml.Element;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContainerSynchroniser.
+ */
 public class ContainerSynchroniser {
 
+	/**
+	 * Synchronise boxes.
+	 *
+	 * @param container the container
+	 * @param element the element
+	 */
 	private static void synchroniseBoxes(Container container, Element element) {
 
 		// check that the display container has a box for each of the boxes in
@@ -32,6 +42,12 @@ public class ContainerSynchroniser {
 		}
 	}
 
+	/**
+	 * Synchronise ellipses.
+	 *
+	 * @param container the container
+	 * @param element the element
+	 */
 	private static void synchroniseEllipses(Container container, Element element) {
 
 		// check that the display container has a ellipse for each of the
@@ -58,6 +74,14 @@ public class ContainerSynchroniser {
 		}
 	}
 
+	/**
+	 * Synchronise display with document.
+	 *
+	 * @param container the container
+	 * @param element the element
+	 * @param identity the identity
+	 * @return true, if successful
+	 */
 	private static boolean synchroniseDisplayWithDocument(Container container,
 			Element element, String identity) {
 		Vector displays = container.displays;
@@ -71,6 +95,14 @@ public class ContainerSynchroniser {
 		return false;
 	}
 
+	/**
+	 * Synchronise document with display.
+	 *
+	 * @param display the display
+	 * @param element the element
+	 * @param name the name
+	 * @return true, if successful
+	 */
 	private static boolean synchroniseDocumentWithDisplay(Display display,
 			Element element, String name) {
 		for (int z = 0; z < element.childrenSize(); z++) {
@@ -83,6 +115,12 @@ public class ContainerSynchroniser {
 		return false;
 	}
 
+	/**
+	 * Synchronise.
+	 *
+	 * @param container the container
+	 * @param element the element
+	 */
 	public static void synchronise(Container container, Element element) {
 
 		// Synchronisation for image and shape needs to be implemented
@@ -95,6 +133,12 @@ public class ContainerSynchroniser {
 		synchroniseTexts(container, element);
 	}
 
+	/**
+	 * Synchronise groups.
+	 *
+	 * @param container the container
+	 * @param element the element
+	 */
 	private static void synchroniseGroups(Container container, Element element) {
 
 		// check that the display container has a ellipse for each of the
@@ -121,6 +165,12 @@ public class ContainerSynchroniser {
 		}
 	}
 
+	/**
+	 * Synchronise lines.
+	 *
+	 * @param container the container
+	 * @param element the element
+	 */
 	private static void synchroniseLines(Container container, Element element) {
 
 		// check that the display container has a ellipse for each of the
@@ -147,6 +197,12 @@ public class ContainerSynchroniser {
 		}
 	}
 
+	/**
+	 * Synchronise multiline texts.
+	 *
+	 * @param container the container
+	 * @param element the element
+	 */
 	private static void synchroniseMultilineTexts(Container container,
 			Element element) {
 
@@ -174,6 +230,12 @@ public class ContainerSynchroniser {
 		}
 	}
 
+	/**
+	 * Synchronise texts.
+	 *
+	 * @param container the container
+	 * @param element the element
+	 */
 	private static void synchroniseTexts(Container container, Element element) {
 
 		// check that the display container has a ellipse for each of the

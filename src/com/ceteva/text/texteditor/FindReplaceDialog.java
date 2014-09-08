@@ -29,35 +29,55 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 
+// TODO: Auto-generated Javadoc
 /**
- * This class displays a find/replace dialog
+ * This class displays a find/replace dialog.
  */
 public class FindReplaceDialog extends TrayDialog {
 
   // The adapter that does the finding/replacing
+  /** The frda. */
   private FindReplaceDocumentAdapter frda;
+  
+  /** The changable component list. */
   private static List<Control> changableComponentList = new ArrayList<Control>();
   // The associated viewer
+  /** The viewer. */
   private ITextViewer viewer;
+  
+  /** The scroll. */
   private ScrollBar scroll; 
   // The find and replace buttons
+  /** The do find. */
   private Button doFind;
+  
+  /** The do replace. */
   private Button doReplace;
+  
+  /** The do replace find. */
   private Button doReplaceFind;
+  
+  /** The display. */
   Display display;
+  
+  /** The parent shell. */
   private Shell parentShell;
+  
+  /** The document. */
   private IDocument document;
+  
+  /** The f. */
   public static int f = -1;
+  
+  /** The list value. */
   List<Integer> listValue = new ArrayList<Integer>();
+  
   /**
-   * FindReplaceDialog constructor
-   * 
-   * @param shell
-   *            the parent shell
-   * @param document
-   *            the associated document
-   * @param viewer
-   *            the associated viewer
+   * FindReplaceDialog constructor.
+   *
+   * @param shell            the parent shell
+   * @param document            the associated document
+   * @param viewer            the associated viewer
    */
   public FindReplaceDialog(Shell shell, IDocument document, ITextViewer viewer) {
     super(shell);
@@ -68,7 +88,7 @@ public class FindReplaceDialog extends TrayDialog {
   }
 
   /**
-   * Opens the dialog box
+   * Opens the dialog box.
    */
   public void openUp() {
     System.out.println("Find/Replace");
@@ -89,18 +109,14 @@ public class FindReplaceDialog extends TrayDialog {
   }
 
   /**
-   * Performs a find
-   * 
-   * @param find
-   *            the find string
-   * @param forward
-   *            whether to search forward
-   * @param matchCase
-   *            whether to match case
-   * @param wholeWord
-   *            whether to search on whole word
-   * @param regexp
-   *            whether find string is a regular expression
+   * Performs a find.
+   *
+   * @param find            the find string
+   * @param forward            whether to search forward
+   * @param matchCase            whether to match case
+   * @param wholeWord            whether to search on whole word
+   * @param regexp            whether find string is a regular expression
+   * @param wrap the wrap
    */
   protected void doFind(String find, boolean forward, boolean matchCase,
     boolean wholeWord, boolean regexp, boolean wrap) {
@@ -220,10 +236,9 @@ public class FindReplaceDialog extends TrayDialog {
   }
 
   /**
-   * Performs a replace
-   * 
-   * @param replaceText
-   *            the replacement text
+   * Performs a replace.
+   *
+   * @param replaceText            the replacement text
    */
   protected void doReplace(String replaceText) {
     try {
@@ -235,9 +250,10 @@ public class FindReplaceDialog extends TrayDialog {
   }
 
   /**
-   * Creates the dialog's contents
-   * 
-   * @param shell
+   * Creates the dialog's contents.
+   *
+   * @param parent the parent
+   * @return the control
    */
   protected Control createContents(Composite parent) {
     Composite composite = new Composite(parent, SWT.NONE);
@@ -362,10 +378,9 @@ public class FindReplaceDialog extends TrayDialog {
   }
 
   /**
-   * Enables/disables the Replace and Replace/Find buttons
-   * 
-   * @param enable
-   *            whether to enable or disable
+   * Enables/disables the Replace and Replace/Find buttons.
+   *
+   * @param enable            whether to enable or disable
    */
   protected void enableReplaceButtons(boolean enable) {
       doReplace.setEnabled(enable);
@@ -373,10 +388,9 @@ public class FindReplaceDialog extends TrayDialog {
   }
 
   /**
-   * Shows an error
-   * 
-   * @param message
-   *            the error message
+   * Shows an error.
+   *
+   * @param message            the error message
    */
   protected void showError(String message) {
       MessageDialog.openError(parentShell, "Error", message);

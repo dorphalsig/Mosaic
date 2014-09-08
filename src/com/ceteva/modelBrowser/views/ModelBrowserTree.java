@@ -6,8 +6,20 @@ import uk.ac.mdx.xmf.swt.client.EventHandler;
 
 import com.ceteva.forms.views.FormTree;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ModelBrowserTree.
+ */
 public class ModelBrowserTree extends FormTree {
 
+	/**
+	 * Instantiates a new model browser tree.
+	 *
+	 * @param parent the parent
+	 * @param identity the identity
+	 * @param handler the handler
+	 * @param editable the editable
+	 */
 	public ModelBrowserTree(Composite parent, String identity,
 			EventHandler handler, boolean editable) {
 		super(parent, identity, handler, editable, true);

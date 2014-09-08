@@ -13,34 +13,62 @@ import java.util.Hashtable;
 
 import xos.OperatingSystem;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class XmfPlugin.
+ */
 public class XmfPlugin {
 
+	/** The Constant COMMAND_LINE_ARGS. */
 	public static final String COMMAND_LINE_ARGS = "startup.txt";
 
+	/** The plugin. */
 	public static XmfPlugin plugin = null;
 
+	/** The xos. */
 	public OperatingSystem xos = new OperatingSystem();
 
+	/** The version. */
 	public static String version = "undefined";
 
+	/** The image file. */
 	public static String imageFile = null;
 
+	/**
+	 * Instantiates a new xmf plugin.
+	 */
 	public XmfPlugin() {
 		plugin = this;
 		MosaicRun.runningMosaic();
 	}
 
 	// public
+	/**
+	 * Gets the default.
+	 *
+	 * @return the default
+	 */
 	public static XmfPlugin getDefault() {
 		return plugin;
 	}
 
+	/**
+	 * Gets the install directory.
+	 *
+	 * @return the install directory
+	 */
 	public String getInstallDirectory() {
 		return null;
 		// URL installUrl = Platform.getInstallLocation().getURL();
 		// return installUrl.getFile().toString();
 	}
 
+	/**
+	 * Gets the env var.
+	 *
+	 * @param name the name
+	 * @return the env var
+	 */
 	public static String getEnvVar(String name) {
 
 		String value = "";
@@ -67,6 +95,11 @@ public class XmfPlugin {
 		return value;
 	}
 
+	/**
+	 * Gets the runtime directory.
+	 *
+	 * @return the runtime directory
+	 */
 	public String getRuntimeDirectory() {
 		URL installUrl = null;
 		// try {
@@ -86,12 +119,20 @@ public class XmfPlugin {
 		return installUrl.getFile();
 	}
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		XmfPlugin xmf = new XmfPlugin();
 		System.out.println("start");
 		xmf.earlyStartup();
 	}
 
+	/**
+	 * Early startup.
+	 */
 	public void earlyStartup() {
 		System.out.println("[ Early Startup XmfPlugin ]");
 		Thread t = new Thread() {
@@ -127,6 +168,18 @@ public class XmfPlugin {
 		t.start();
 	}
 
+	/**
+	 * Read startup args.
+	 *
+	 * @param home the home
+	 * @param user the user
+	 * @param projDir the proj dir
+	 * @param demoDir the demo dir
+	 * @param imagesDir the images dir
+	 * @param initFile the init file
+	 * @param image the image
+	 * @return the string[]
+	 */
 	public String[] readStartupArgs(String home, String user, String projDir,
 			String demoDir, String imagesDir, String initFile, String image) {
 		String[] args = null;
@@ -182,6 +235,9 @@ public class XmfPlugin {
 		return args;
 	}
 
+	/**
+	 * Register escape handler.
+	 */
 	public void registerEscapeHandler() {
 		try {
 
@@ -213,12 +269,22 @@ public class XmfPlugin {
 		}
 	}
 
+	/**
+	 * Gets the default image.
+	 *
+	 * @return the default image
+	 */
 	public String getDefaultImage() {
 		String dirSlash = getRuntimeDirectory();
 		String dir = dirSlash.substring(0, dirSlash.length() - 1);
 		return dir + "/Images/mosaic.img";
 	}
 
+	/**
+	 * Gets the images.
+	 *
+	 * @return the images
+	 */
 	public Hashtable getImages() {
 		String imagesDir = getEnvVar("XMFIMAGES");
 		final Hashtable fileTable = new Hashtable();
@@ -246,10 +312,20 @@ public class XmfPlugin {
 		return fileTable;
 	}
 
+	/**
+	 * Sets the image.
+	 *
+	 * @param image the new image
+	 */
 	public void setImage(String image) {
 		imageFile = image;
 	}
 
+	/**
+	 * Stop.
+	 *
+	 * @throws Exception the exception
+	 */
 	public void stop() throws Exception {
 		if (xos != null)
 			xos.closeAll();

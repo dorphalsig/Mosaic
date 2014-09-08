@@ -10,18 +10,35 @@ import org.eclipse.gef.requests.SelectionRequest;
 import uk.ac.mdx.xmf.swt.editPart.NodeEditPart;
 import uk.ac.mdx.xmf.swt.editPart.TextEditPart;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DisplaySelectionTracker.
+ */
 public class DisplaySelectionTracker extends NodeSelectionTracker {
 
 	// a tracker that selects its parent node as well as the display
 
+	/** The owner. */
 	EditPart owner;
+	
+	/** The debug. */
 	boolean debug = false;
 
+	/**
+	 * Instantiates a new display selection tracker.
+	 *
+	 * @param owner the owner
+	 */
 	public DisplaySelectionTracker(EditPart owner) {
 		super(owner);
 		findOwner(owner);
 	}
 
+	/**
+	 * Find owner.
+	 *
+	 * @param owner the owner
+	 */
 	public void findOwner(EditPart owner) {
 		// if(owner!=null) {
 		if (owner instanceof NodeEditPart)
@@ -31,6 +48,9 @@ public class DisplaySelectionTracker extends NodeSelectionTracker {
 		// }
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.tools.SelectEditPartTracker#performSelection()
+	 */
 	protected void performSelection() {
 		if (hasSelectionOccurred())
 			return;
@@ -54,12 +74,18 @@ public class DisplaySelectionTracker extends NodeSelectionTracker {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.tools.SelectEditPartTracker#handleDragStarted()
+	 */
 	public boolean handleDragStarted() {
 		if (owner != null)
 			setSourceEditPart(owner);
 		return super.handleDragStarted();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.tools.SelectEditPartTracker#performDirectEdit()
+	 */
 	protected void performDirectEdit() {
 		EditPartViewer viewer = getCurrentViewer();
 		List selectedObjects = viewer.getSelectedEditParts();
@@ -82,6 +108,9 @@ public class DisplaySelectionTracker extends NodeSelectionTracker {
 		super.performDirectEdit();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.tools.SelectEditPartTracker#performOpen()
+	 */
 	protected void performOpen() {
 		SelectionRequest request = new SelectionRequest();
 		request.setLocation(getLocation());

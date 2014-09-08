@@ -26,23 +26,57 @@ import xos.Value;
 import com.ceteva.forms.FormsPlugin;
 import com.ceteva.menus.MenuBuilder;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FormTextBox.
+ */
 class FormTextBox extends FormElement {
 
+	/** The ok. */
 	final int OK = 0;
+	
+	/** The cancel. */
 	final int CANCEL = 1;
 
 	// private CustomSourceViewer textBox = null;
+	/** The text box. */
 	private Text textBox = null;
+	
+	/** The document. */
 	Document document = null;
+	
+	/** The owning view. */
 	FormView owningView = null;
+	
+	/** The scanner. */
 	Scanner scanner = null;
+	
+	/** The changes made. */
 	boolean changesMade = false;
+	
+	/** The menumanager. */
 	MenuManager menumanager;
+	
+	/** The menu listener. */
 	IMenuListener fMenuListener;
+	
+	/** The undo. */
 	IAction undo;
+	
+	/** The redo. */
 	IAction redo;
+	
+	/** The old text. */
 	String oldText = "";
 
+	/**
+	 * Instantiates a new form text box.
+	 *
+	 * @param parent the parent
+	 * @param identity the identity
+	 * @param handler the handler
+	 * @param owningView the owning view
+	 */
 	public FormTextBox(Composite parent, String identity, EventHandler handler,
 			FormView owningView) {
 		super(identity);
@@ -51,11 +85,19 @@ class FormTextBox extends FormElement {
 		init(parent);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.ComponentWithControl#getControl()
+	 */
 	public Control getControl() {
 		// return textBox.getControl();
 		return null;
 	}
 
+	/**
+	 * Inits the.
+	 *
+	 * @param parent the parent
+	 */
 	public void init(Composite parent) {
 		textBox = new Text(parent, SWT.SINGLE);
 
@@ -80,6 +122,9 @@ class FormTextBox extends FormElement {
 		changesMade(false);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Commandable#processCall(xos.Message)
+	 */
 	public Value processCall(Message message) {
 		if (message.args[0].hasStrValue(getIdentity())
 				&& message.hasName("getText")) {
@@ -88,6 +133,9 @@ class FormTextBox extends FormElement {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ceteva.forms.views.FormElement#processMessage(xos.Message)
+	 */
 	public boolean processMessage(Message message) {
 		if (message.arity >= 1) {
 			if (message.args[0].hasStrValue(getIdentity())) {
@@ -120,23 +168,42 @@ class FormTextBox extends FormElement {
 		return super.processMessage(message);
 	}
 
+	/**
+	 * Sets the bounds.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param width the width
+	 * @param height the height
+	 */
 	public void setBounds(int x, int y, int width, int height) {
 		// Control c = textBox.getControl();
 		textBox.setBounds(x, y, width, height);
 	}
 
+	/**
+	 * Sets the editable.
+	 *
+	 * @param editable the new editable
+	 */
 	public void setEditable(boolean editable) {
 		textBox.setEditable(editable);
 		if (editable)
 			addChangeListener();
 	}
 
+	/**
+	 * Force focus.
+	 */
 	public void forceFocus() {
 		// textBox.getTextWidget().forceFocus();
 		textBox.forceFocus();
 		changesMade(true);
 	}
 
+	/**
+	 * Adds the change listener.
+	 */
 	public void addChangeListener() {
 		textBox.addListener(SWT.KeyDown, new Listener() {
 			@Override
@@ -150,6 +217,11 @@ class FormTextBox extends FormElement {
 		});
 	}
 
+	/**
+	 * Text changed dialog.
+	 *
+	 * @return the int
+	 */
 	public int textChangedDialog() {
 		MessageDialog dialog = new MessageDialog(Display.getCurrent()
 				.getActiveShell(), "Text has changed", null,
@@ -158,6 +230,11 @@ class FormTextBox extends FormElement {
 		return dialog.open();
 	}
 
+	/**
+	 * Changes made.
+	 *
+	 * @param b the b
+	 */
 	public void changesMade(boolean b) {
 		changesMade = b;
 		owningView.setChangesPending(b, this);
@@ -167,16 +244,31 @@ class FormTextBox extends FormElement {
 			textBox.setBackground(FormsPlugin.getInstance().normalBackgroundColor);
 	}
 
+	/**
+	 * Gets the text.
+	 *
+	 * @return the text
+	 */
 	public String getText() {
 		return textBox.getText();
 	}
 
+	/**
+	 * Sets the text.
+	 *
+	 * @param text the new text
+	 */
 	public void setText(String text) {
 		textBox.setText(text);
 		oldText = text;
 		changesMade(false);
 	}
 
+	/**
+	 * Adds the rule.
+	 *
+	 * @param message the message
+	 */
 	public void addRule(Message message) {
 		// String word = message.args[1].strValue();
 		// String color = message.args[2].strValue();
@@ -184,10 +276,18 @@ class FormTextBox extends FormElement {
 		// document.set(document.get());
 	}
 
+	/**
+	 * Clear rules.
+	 */
 	public void clearRules() {
 		scanner.clearRules();
 	}
 
+	/**
+	 * Gets the context menu listener.
+	 *
+	 * @return the context menu listener
+	 */
 	protected final IMenuListener getContextMenuListener() {
 		if (fMenuListener == null) {
 			fMenuListener = new IMenuListener() {
@@ -202,6 +302,9 @@ class FormTextBox extends FormElement {
 		return fMenuListener;
 	}
 
+	/**
+	 * Sets the menu listener.
+	 */
 	public void setMenuListener() {
 		menumanager = new MenuManager();
 		menumanager.setRemoveAllWhenShown(true);
@@ -210,6 +313,11 @@ class FormTextBox extends FormElement {
 		textBox.setMenu(menu);
 	}
 
+	/**
+	 * Sets the enabled.
+	 *
+	 * @param b the new enabled
+	 */
 	public void setEnabled(boolean b) {
 		textBox.setEnabled(b);
 		Color c = b ? FormsPlugin.getInstance().normalBackgroundColor
@@ -217,6 +325,12 @@ class FormTextBox extends FormElement {
 		textBox.setBackground(c);
 	}
 
+	/**
+	 * Maximise to canvas.
+	 *
+	 * @param scrollable the scrollable
+	 * @param formContentsHolder the form contents holder
+	 */
 	public void maximiseToCanvas(final Composite scrollable,
 			final Composite formContentsHolder) {
 		final Composite canvas = owningView.canvas;

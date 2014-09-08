@@ -6,24 +6,49 @@ import java.util.Vector;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.geometry.Point;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EdgeShapeFigure.
+ */
 public class EdgeShapeFigure extends org.eclipse.draw2d.PolylineShape {
 
+	/** The points. */
 	Vector points;
+	
+	/** The drag points. */
 	Vector dragPoints;
+	
+	/** The outline. */
 	boolean outline;
 
+	/**
+	 * Instantiates a new edge shape figure.
+	 *
+	 * @param points the points
+	 * @param dragPoints the drag points
+	 * @param outline the outline
+	 */
 	public EdgeShapeFigure(Vector points, Vector dragPoints, boolean outline) {
 		this.points = points;
 		this.dragPoints = dragPoints;
 		this.outline = outline;
 	}
 
+	/**
+	 * Refresh.
+	 *
+	 * @param points the points
+	 * @param outline the outline
+	 */
 	public void refresh(Vector points, boolean outline) {
 		this.points = points;
 		this.outline = outline;
 		// this.repaint();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.draw2d.PolylineShape#fillShape(org.eclipse.draw2d.Graphics)
+	 */
 	@Override
 	protected void fillShape(Graphics graphics) {
 		// // PointList list = new PointList();
@@ -34,6 +59,9 @@ public class EdgeShapeFigure extends org.eclipse.draw2d.PolylineShape {
 		// // graphics.fillPolygon(list);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.draw2d.PolylineShape#outlineShape(org.eclipse.draw2d.Graphics)
+	 */
 	@Override
 	protected void outlineShape(Graphics graphics) {
 		if (outline) {

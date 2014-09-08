@@ -18,10 +18,30 @@ import org.eclipse.swt.widgets.TreeItem;
 
 import com.ceteva.forms.FormsPlugin;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The listener interface for receiving formTreeEdit events.
+ * The class that is interested in processing a formTreeEdit
+ * event implements this interface, and the object created
+ * with that class is registered with a component using the
+ * component's <code>addFormTreeEditListener<code> method. When
+ * the formTreeEdit event occurs, that object's appropriate
+ * method is invoked.
+ *
+ * @see FormTreeEditEvent
+ */
 public class FormTreeEditListener {
    
+   /** The Constant lastItem. */
    static final TreeItem [] lastItem = new TreeItem [1];
 
+   /**
+    * Adds the listener.
+    *
+    * @param tree the tree
+    * @param nonEditableNodes the non editable nodes
+    * @param formtree the formtree
+    */
    public static void addListener(final Tree tree,final Vector nonEditableNodes,final FormTreeWrapper formtree) {
     
 	  tree.addListener (SWT.Selection, new Listener () {
@@ -110,20 +130,45 @@ public class FormTreeEditListener {
       });
    }
   
+  /**
+   * Sets the last item.
+   *
+   * @param item the new last item
+   */
   public static void setLastItem(TreeItem item) {
      lastItem [0] = item;
   }
    
+  /**
+   * Calculate identity.
+   *
+   * @param item the item
+   * @return the string
+   */
   public static String calculateIdentity(TreeItem item) {
   	 return (String)item.getData();
   }
   
+  /**
+   * Text changed.
+   *
+   * @param item the item
+   * @param text the text
+   * @param formtree the formtree
+   */
   public static void textChanged(TreeItem item,String text,FormTreeWrapper formtree) {
   	item.setText(text);
   	String identity = calculateIdentity(item);
   	formtree.textChanged(identity, text);
   }
 
+  /**
+   * Gets the editable text.
+   *
+   * @param item the item
+   * @param formtree the formtree
+   * @return the editable text
+   */
   public static void getEditableText(TreeItem item,FormTreeWrapper formtree) {
   	String identity = calculateIdentity(item);
   	formtree.getEditableText(identity);

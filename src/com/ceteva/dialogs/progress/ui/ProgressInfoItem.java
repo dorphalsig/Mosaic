@@ -16,18 +16,43 @@ import org.eclipse.swt.widgets.ToolItem;
 
 import com.ceteva.dialogs.progress.model.Job;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ProgressInfoItem.
+ */
 class ProgressInfoItem extends Composite {
 	
+	/** The progress bar. */
 	ProgressIndicator progressBar;
+	
+	/** The progress label. */
 	Label progressLabel;
+	
+	/** The action bar. */
 	ToolBar actionBar;
+	
+	/** The action button. */
 	ToolItem actionButton;
+	
+	/** The job. */
 	Job job;
+	
+	/** The start time. */
 	long startTime;
+	
+	/** The up time. */
 	long upTime = 800;
 	
+	/** The Constant MAX_PROGRESS_HEIGHT. */
 	static final int MAX_PROGRESS_HEIGHT = 12;
 
+	/**
+	 * Instantiates a new progress info item.
+	 *
+	 * @param job the job
+	 * @param parent the parent
+	 * @param style the style
+	 */
 	public ProgressInfoItem(Job job,Composite parent, int style) {
 		super(parent, style);
 		this.job = job;
@@ -37,6 +62,9 @@ class ProgressInfoItem extends Composite {
 		startTime = System.currentTimeMillis();
 	}
 	
+	/**
+	 * Delay.
+	 */
 	public void delay() {
 		long endTime = System.currentTimeMillis();
 	    while(endTime-startTime < upTime) {
@@ -49,6 +77,9 @@ class ProgressInfoItem extends Composite {
 	    }
 	}
 	
+	/**
+	 * Creates the children.
+	 */
 	protected void createChildren() {
 		FormLayout layout = new FormLayout();
 		setLayout(layout);
@@ -76,6 +107,11 @@ class ProgressInfoItem extends Composite {
 		progressLabel.setLayoutData(progressData);
 	}
 	
+	/**
+	 * Creates the progress bar.
+	 *
+	 * @param style the style
+	 */
 	void createProgressBar(int style) {
 		FormData buttonData = new FormData();
 		buttonData.top = new FormAttachment(progressLabel, 0);
@@ -95,6 +131,11 @@ class ProgressInfoItem extends Composite {
 		progressBar.beginAnimatedTask();
 	}
 	
+	/**
+	 * Gets the job.
+	 *
+	 * @return the job
+	 */
 	public Job getJob() {
 		return job;
 	}

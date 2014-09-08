@@ -7,7 +7,13 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ReadText.
+ */
 class ReadText {
+	
+	/** The test. */
 	static String[] test = { "-arg", "user:XModeler", "-arg",
 			"home:/F:/xmf/XMF-GUI/com.ceteva.xmf", "-image",
 			"/F:/xmf/XMF-GUI/com.ceteva.xmf/Images/mosaic.img", "-arg",
@@ -22,6 +28,13 @@ class ReadText {
 			"com.ceteva.console.ConsoleClient:com.ceteva.console", "-debug",
 			"-heapSize", "80000", "-freeHeap", "800" };
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws UnsupportedEncodingException the unsupported encoding exception
+	 */
 	public static void main(String[] args) throws FileNotFoundException,
 			UnsupportedEncodingException {
 		// PrintWriter writer = new PrintWriter("ini.txt", "UTF-8");

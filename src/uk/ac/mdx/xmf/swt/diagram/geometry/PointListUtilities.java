@@ -20,9 +20,10 @@ import org.eclipse.draw2d.geometry.Ray;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.draw2d.geometry.Transform;
 
+// TODO: Auto-generated Javadoc
 /**
- * A set of utility methods around manipulating PointList objects
- * 
+ * A set of utility methods around manipulating PointList objects.
+ *
  * @author sshaw
  */
 public class PointListUtilities {
@@ -77,6 +78,13 @@ public class PointListUtilities {
 		return changed;
 	}
 
+	/**
+	 * Removes the point.
+	 *
+	 * @param points the points
+	 * @param index the index
+	 * @return the point
+	 */
 	static private Point removePoint(PointList points, int index) {
 		Point removedPt = points.getPoint(index);
 		for (int i = index; i < points.size() - 1; i++) {
@@ -184,10 +192,9 @@ public class PointListUtilities {
 	}
 
 	/**
-	 * createPointsFromRect
-	 * 
-	 * @param rBox
-	 *            Rectangle to base the PointList from
+	 * createPointsFromRect.
+	 *
+	 * @param rBox            Rectangle to base the PointList from
 	 * @return PointList that is equivalent to the Rectangle
 	 */
 	static public PointList createPointsFromRect(Rectangle rBox) {
@@ -353,7 +360,10 @@ public class PointListUtilities {
 		return lines;
 	}
 
+	/** The Constant INTERSECT_TOLERANCE. */
 	final static int INTERSECT_TOLERANCE = 1;
+	
+	/** The Constant MIN_LINE_LENGTH. */
 	final static int MIN_LINE_LENGTH = 5;
 
 	/**
@@ -362,6 +372,7 @@ public class PointListUtilities {
 	 */
 	public final static int DEFAULT_BEZIERLINES = 16;
 
+	/** The Constant MAX_BEZIERLINES. */
 	final static int MAX_BEZIERLINES = 32;
 
 	/**
@@ -519,8 +530,8 @@ public class PointListUtilities {
 	 * getCopy() routine of PointList class. It is initializing the copy based
 	 * on size but then making the copy based on the array allocation which may
 	 * be different causing an ArrayIndexOutOfBounds exception.
-	 * 
-	 * @param pointsFrom
+	 *
+	 * @param pointsFrom the points from
 	 * @return PointList
 	 */
 	static public PointList copyPoints(PointList pointsFrom) {
@@ -529,6 +540,12 @@ public class PointListUtilities {
 		return points;
 	}
 
+	/**
+	 * Copy from.
+	 *
+	 * @param pointsTo the points to
+	 * @param pointsFrom the points from
+	 */
 	static private void copyFrom(PointList pointsTo, PointList pointsFrom) {
 		pointsTo.removeAllPoints();
 		for (int i = 0; i < pointsFrom.size(); i++)
@@ -538,13 +555,13 @@ public class PointListUtilities {
 	/**
 	 * Method addRoutedPoints. Utility function used by getRoutedPoints to add
 	 * the new "detour" route to the existing polyline.
-	 * 
-	 * @param routePoints
-	 * @param pCurBoxSeg1
-	 * @param pCurBoxSeg2
-	 * @param routePoly
-	 * @param bForward
-	 * @param nBuffer
+	 *
+	 * @param routePoints the route points
+	 * @param pCurBoxSeg1 the cur box seg1
+	 * @param pCurBoxSeg2 the cur box seg2
+	 * @param routePoly the route poly
+	 * @param bForward the b forward
+	 * @param nBuffer the n buffer
 	 * @return int
 	 */
 	static private int addRoutedPoints(PointList routePoints,
@@ -610,20 +627,21 @@ public class PointListUtilities {
 	/**
 	 * Method getRoutedPoints. Utility function for the routing functions to
 	 * created a new routed polyline.
-	 * 
-	 * @param points
-	 * @param newRoutePoints
-	 * @param ptIntersect1
-	 * @param ptIntersect2
-	 * @param ptPrev
-	 * @param ptNext
-	 * @param pCurBoxSeg1
-	 * @param pCurBoxSeg2
-	 * @param routePoly
-	 * @param nSmoothFactor
-	 * @param bShortestDistance
-	 * @param bIncludeIntersectionPoints
-	 * @param nBuffer
+	 *
+	 * @param points the points
+	 * @param newRoutePoints the new route points
+	 * @param ptIntersect1 the pt intersect1
+	 * @param ptIntersect2 the pt intersect2
+	 * @param ptPrev the pt prev
+	 * @param ptNext the pt next
+	 * @param pCurBoxSeg1 the cur box seg1
+	 * @param pCurBoxSeg2 the cur box seg2
+	 * @param routePoly the route poly
+	 * @param nSmoothFactor the n smooth factor
+	 * @param bShortestDistance the b shortest distance
+	 * @param bIncludeIntersectionPoints the b include intersection points
+	 * @param nBuffer the n buffer
+	 * @return the routed points
 	 */
 	static private void getRoutedPoints(PointList points,
 			PointList newRoutePoints, final Point ptIntersect1,
@@ -970,13 +988,13 @@ public class PointListUtilities {
 	/**
 	 * Method BezierToLines. Utility function that takes a set of bezier points
 	 * and calculates a polyline approximation.
-	 * 
-	 * @param thePolyPoints
-	 * @param ptCtl1
-	 * @param ptCtl2
-	 * @param ptCtl3
-	 * @param ptCtl4
-	 * @param nSteps
+	 *
+	 * @param thePolyPoints the the poly points
+	 * @param ptCtl1 the pt ctl1
+	 * @param ptCtl2 the pt ctl2
+	 * @param ptCtl3 the pt ctl3
+	 * @param ptCtl4 the pt ctl4
+	 * @param nSteps the n steps
 	 * @return boolean
 	 */
 	private static boolean BezierToLines(PointList thePolyPoints, Point ptCtl1,
@@ -1130,6 +1148,7 @@ public class PointListUtilities {
 		return theLength;
 	}
 
+	/** The Constant BIGDISTANCE. */
 	private final static int BIGDISTANCE = 32766;
 
 	/**
@@ -1174,15 +1193,12 @@ public class PointListUtilities {
 
 	/**
 	 * Method pointOn. Static utility function used by <code>pointOn</code>.
-	 * 
-	 * @param mySegments
-	 * @param theDistance
-	 *            the <code>long</code> x coordinate of the point
-	 * @param fromKeyPoint
-	 *            the <code>int</code> constant value indicating the key point
+	 *
+	 * @param mySegments the my segments
+	 * @param theDistance            the <code>long</code> x coordinate of the point
+	 * @param fromKeyPoint            the <code>int</code> constant value indicating the key point
 	 *            Origin, Terminus, Midpoint
-	 * @param ptResult
-	 *            the <code>Point</code> where the resulting point value is set.
+	 * @param ptResult            the <code>Point</code> where the resulting point value is set.
 	 * @return Point the calculated point residing on the polyline.
 	 */
 	protected static Point pointOn(List mySegments, final long theDistance,
@@ -1240,11 +1256,12 @@ public class PointListUtilities {
 		}
 	}
 
+	/**
+	 * The Class LocateInfo.
+	 */
 	static private class LocateInfo {
 
-		/**
-		 * remainin distance
-		 */
+		/** remainin distance. */
 		public long remainingDist;
 
 		/**
@@ -1260,14 +1277,12 @@ public class PointListUtilities {
 	 * complete the distance of the total length. The pctDist must be between
 	 * 0.0 and 1.0 if the keypoint is either the origin or the terminus; pctDist
 	 * must be between 0.0 and 0.5 if the keypoint is the midpoint.
-	 * 
-	 * @param mySegments
-	 * @param pctDist
-	 * @param fromKeyPoint
-	 *            the <code>int</code> constant value indicating the key point
+	 *
+	 * @param mySegments the my segments
+	 * @param pctDist the pct dist
+	 * @param fromKeyPoint            the <code>int</code> constant value indicating the key point
 	 *            Origin, Terminus, Midpoint
-	 * @param locateInfo
-	 *            LocateInfo where the calculated info is stored for return.
+	 * @param locateInfo            LocateInfo where the calculated info is stored for return.
 	 * @return boolean true if the segment could be located, false otherwise.
 	 */
 	private static boolean locateSegment(List mySegments, final double pctDist,
@@ -1339,10 +1354,9 @@ public class PointListUtilities {
 	/**
 	 * Method distanceAlong. Static utility function to calculate the
 	 * distanceAlong a series of line segments a given point is on the line.
-	 * 
-	 * @param mySegments
-	 * @param aPoint
-	 *            Point to calculate the distance along the polyline of.
+	 *
+	 * @param mySegments the my segments
+	 * @param aPoint            Point to calculate the distance along the polyline of.
 	 * @return double value of the distance along the polyline of the given
 	 *         point.
 	 */
@@ -1370,10 +1384,10 @@ public class PointListUtilities {
 	 * the keypoint is Midpoint, then half of the length will be included; if
 	 * the keypoint is Terminus, the the whole length will be included. The
 	 * segment must be a segment of this polyline.
-	 * 
-	 * @param mySegments
-	 * @param theSegment
-	 * @param uptoKeyPoint
+	 *
+	 * @param mySegments the my segments
+	 * @param theSegment the the segment
+	 * @param uptoKeyPoint the upto key point
 	 * @return double
 	 */
 	protected static double segmentDistance(List mySegments,
@@ -1741,10 +1755,11 @@ public class PointListUtilities {
 
 	/**
 	 * Method sameOrientation.
-	 * 
-	 * @param pt1
-	 * @param pt2
-	 * @param pt3
+	 *
+	 * @param pt1 the pt1
+	 * @param pt2 the pt2
+	 * @param pt3 the pt3
+	 * @param straightLineTolerance the straight line tolerance
 	 * @return boolean true if the line connecting all three points are
 	 *         straight, false otherwise.
 	 */

@@ -18,21 +18,41 @@ import org.eclipse.ui.application.IActionBarConfigurer;
 
 import com.ceteva.mosaic.actions.Exit;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ActionAdvisor.
+ */
 public class ActionAdvisor extends ActionBarAdvisor {
 
+	/** The print. */
 	static IWorkbenchAction print;
+	
+	/** The help. */
 	static IWorkbenchAction help;
+	
+	/** The preferences. */
 	static IWorkbenchAction preferences;
+	
+	/** The about. */
 	static IWorkbenchAction about;
 	// static IWorkbenchAction move;
 	// static IWorkbenchAction view;
 
+	/** The exit. */
 	static Exit exit;
 
+	/**
+	 * Instantiates a new action advisor.
+	 *
+	 * @param configurer the configurer
+	 */
 	public ActionAdvisor(IActionBarConfigurer configurer) {
 		super(configurer);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.application.ActionBarAdvisor#fillMenuBar(org.eclipse.jface.action.IMenuManager)
+	 */
 	protected void fillMenuBar(IMenuManager menuBar) {
 		addFileMenus(menuBar);
 		// addEditMenus(menuBar);
@@ -40,6 +60,11 @@ public class ActionAdvisor extends ActionBarAdvisor {
 		addHelpMenus(menuBar);
 	}
 
+	/**
+	 * Adds the file menus.
+	 *
+	 * @param menuBar the menu bar
+	 */
 	public void addFileMenus(IMenuManager menuBar) {
 		MenuManager filemenu = new MenuManager("&File",
 				IWorkbenchActionConstants.M_FILE);
@@ -51,6 +76,11 @@ public class ActionAdvisor extends ActionBarAdvisor {
 
 	}
 
+	/**
+	 * Adds the edit menus.
+	 *
+	 * @param menuBar the menu bar
+	 */
 	public void addEditMenus(IMenuManager menuBar) {
 		MenuManager editmenu = new MenuManager("&Edit",
 				IWorkbenchActionConstants.M_EDIT);
@@ -60,6 +90,11 @@ public class ActionAdvisor extends ActionBarAdvisor {
 
 	}
 
+	/**
+	 * Adds the window menus.
+	 *
+	 * @param menuBar the menu bar
+	 */
 	public void addWindowMenus(IMenuManager menuBar) {
 		MenuManager winmenu = new MenuManager("&Window",
 				IWorkbenchActionConstants.M_WINDOW);
@@ -68,6 +103,11 @@ public class ActionAdvisor extends ActionBarAdvisor {
 
 	}
 
+	/**
+	 * Adds the help menus.
+	 *
+	 * @param menuBar the menu bar
+	 */
 	public void addHelpMenus(IMenuManager menuBar) {
 		MenuManager helpmenu = new MenuManager("&Help",
 				IWorkbenchActionConstants.M_HELP);
@@ -83,6 +123,9 @@ public class ActionAdvisor extends ActionBarAdvisor {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.application.ActionBarAdvisor#fillCoolBar(org.eclipse.jface.action.ICoolBarManager)
+	 */
 	protected void fillCoolBar(ICoolBarManager coolBar) {
 		// IToolBarManager editToolBar = new ToolBarManager(coolBar.getStyle());
 		IToolBarManager editToolBar = new ToolBarManager(SWT.FLAT | SWT.RIGHT);
@@ -95,6 +138,9 @@ public class ActionAdvisor extends ActionBarAdvisor {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.application.ActionBarAdvisor#makeActions(org.eclipse.ui.IWorkbenchWindow)
+	 */
 	protected void makeActions(final IWorkbenchWindow window) {
 		print = ActionFactory.PRINT.create(window);
 		// Don't register exit, never

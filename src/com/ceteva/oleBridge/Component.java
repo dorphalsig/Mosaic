@@ -9,18 +9,37 @@ import com.jacob.activeX.ActiveXComponent;
 import com.jacob.com.Dispatch;
 import com.jacob.com.Variant;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Component.
+ */
 public class Component {
 
 	// call, invoke, get, getProperty, setProperty, put
 
+	/** The id dispatch. */
 	private static Hashtable idDispatch = new Hashtable();
 
+	/**
+	 * New top level.
+	 *
+	 * @param id the id
+	 * @param target the target
+	 */
 	public static void newTopLevel(String id, String target) {
 		ActiveXComponent ax = new ActiveXComponent(target);
 		store(id, ax.getObject());
 		Dispatch.put(ax, "Visible", true);
 	}
 
+	/**
+	 * Call.
+	 *
+	 * @param targetId the target id
+	 * @param call the call
+	 * @param args the args
+	 * @throws DispatchException the dispatch exception
+	 */
 	public static void call(String targetId, String call, Value[] args)
 			throws DispatchException {
 		if (idDispatch.containsKey(targetId)) {
@@ -41,6 +60,15 @@ public class Component {
 		}
 	}
 
+	/**
+	 * Call and store.
+	 *
+	 * @param targetId the target id
+	 * @param storeId the store id
+	 * @param call the call
+	 * @param args the args
+	 * @throws DispatchException the dispatch exception
+	 */
 	public static void callAndStore(String targetId, String storeId,
 			String call, Value[] args) throws DispatchException {
 		if (idDispatch.containsKey(targetId)) {
@@ -65,6 +93,14 @@ public class Component {
 		}
 	}
 
+	/**
+	 * Gets the.
+	 *
+	 * @param targetId the target id
+	 * @param property the property
+	 * @return the value
+	 * @throws DispatchException the dispatch exception
+	 */
 	public static Value get(String targetId, String property)
 			throws DispatchException {
 		if (idDispatch.containsKey(targetId)) {
@@ -75,6 +111,15 @@ public class Component {
 		throw new DispatchException("No such dispatch: " + targetId);
 	}
 
+	/**
+	 * Gets the object.
+	 *
+	 * @param targetId the target id
+	 * @param property the property
+	 * @param id the id
+	 * @return the object
+	 * @throws DispatchException the dispatch exception
+	 */
 	public static void getObject(String targetId, String property, String id)
 			throws DispatchException {
 		if (idDispatch.containsKey(targetId)) {
@@ -91,6 +136,14 @@ public class Component {
 		}
 	}
 
+	/**
+	 * Sets the.
+	 *
+	 * @param targetId the target id
+	 * @param property the property
+	 * @param value the value
+	 * @throws DispatchException the dispatch exception
+	 */
 	public static void set(String targetId, String property, Value value)
 			throws DispatchException {
 		if (idDispatch.containsKey(targetId)) {
@@ -113,6 +166,14 @@ public class Component {
 		}
 	}
 
+	/**
+	 * Sets the to dispatch.
+	 *
+	 * @param targetId the target id
+	 * @param property the property
+	 * @param id the id
+	 * @throws DispatchException the dispatch exception
+	 */
 	public static void setToDispatch(String targetId, String property, String id)
 			throws DispatchException {
 		if (idDispatch.containsKey(targetId) && idDispatch.containsKey(id)) {
@@ -124,10 +185,22 @@ public class Component {
 		}
 	}
 
+	/**
+	 * Store.
+	 *
+	 * @param storeid the storeid
+	 * @param value the value
+	 */
 	public static void store(String storeid, Object value) {
 		idDispatch.put(storeid, value);
 	}
 
+	/**
+	 * Variant to value.
+	 *
+	 * @param v the v
+	 * @return the value
+	 */
 	public static Value variantToValue(Variant v) {
 		if (v.getvt() == Variant.VariantString)
 			return new Value(v.getString());
@@ -138,6 +211,12 @@ public class Component {
 		return null;
 	}
 
+	/**
+	 * Value to variant.
+	 *
+	 * @param v the v
+	 * @return the variant
+	 */
 	public static Variant valueToVariant(Value v) {
 		if (v.type == Value.STRING)
 			return new Variant(v.strValue());
@@ -148,6 +227,12 @@ public class Component {
 		return null;
 	}
 
+	/**
+	 * Values to variants.
+	 *
+	 * @param values the values
+	 * @return the object[]
+	 */
 	public static Object[] valuesToVariants(Value[] values) {
 		Object[] objects = new Object[values.length];
 		for (int i = 0; i < values.length; i++) {

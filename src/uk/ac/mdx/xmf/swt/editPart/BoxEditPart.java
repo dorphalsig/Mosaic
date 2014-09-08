@@ -19,8 +19,15 @@ import uk.ac.mdx.xmf.swt.figure.RoundedBoxFigure;
 import uk.ac.mdx.xmf.swt.model.AbstractDiagram;
 import uk.ac.mdx.xmf.swt.model.Box;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BoxEditPart.
+ */
 public class BoxEditPart extends DisplayEditPart {
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart#activate()
+	 */
 	public void activate() {
 		super.activate();
 		// Text model = (Text) getModel();
@@ -28,6 +35,9 @@ public class BoxEditPart extends DisplayEditPart {
 		// this.editText();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
+	 */
 	@Override
 	public IFigure createFigure() {
 		// Box box = (Box) getModel();
@@ -80,6 +90,11 @@ public class BoxEditPart extends DisplayEditPart {
 		return rectangle;
 	}
 
+	/**
+	 * Gets the fill color.
+	 *
+	 * @return the fill color
+	 */
 	public RGB getFillColor() {
 		RGB fillColor = new RGB(160, 240, 199);
 		return fillColor;
@@ -91,6 +106,11 @@ public class BoxEditPart extends DisplayEditPart {
 		// IPreferenceConstants.FILL_COLOR);
 	}
 
+	/**
+	 * Gets the foreground color.
+	 *
+	 * @return the foreground color
+	 */
 	public RGB getForegroundColor() {
 		RGB lineColor = new RGB(160, 240, 199);
 		return lineColor;
@@ -102,6 +122,11 @@ public class BoxEditPart extends DisplayEditPart {
 		// IPreferenceConstants.FOREGROUND_COLOR);
 	}
 
+	/**
+	 * Gets the gradient.
+	 *
+	 * @return the gradient
+	 */
 	public boolean getGradient() {
 		return false;
 		// Preferences preferences = DiagramPlugin.getDefault()
@@ -109,20 +134,32 @@ public class BoxEditPart extends DisplayEditPart {
 		// return preferences.getBoolean(IPreferenceConstants.GRADIENT_FILL);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#getModelChildren()
+	 */
 	@Override
 	protected List getModelChildren() {
 		return ((Box) getModel()).getContents();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#getDragTracker(org.eclipse.gef.Request)
+	 */
 	@Override
 	public DragTracker getDragTracker(Request request) {
 		return new DisplaySelectionTracker(this);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#createEditPolicies()
+	 */
 	@Override
 	protected void createEditPolicies() {
 	}
 
+	/* (non-Javadoc)
+	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
+	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		String prop = evt.getPropertyName();
@@ -141,10 +178,16 @@ public class BoxEditPart extends DisplayEditPart {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart#refreshChildren()
+	 */
 	public void refreshChildren() {
 		// System.out.println("boxeditpart refreshchildren");
 	}
 
+	/**
+	 * Refresh color.
+	 */
 	public void refreshColor() {
 		IFigure f = getFigure();
 		if (f != null) {
@@ -159,6 +202,9 @@ public class BoxEditPart extends DisplayEditPart {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#refreshVisuals()
+	 */
 	@Override
 	protected void refreshVisuals() {
 		Box model = (Box) getModel();
@@ -210,12 +256,18 @@ public class BoxEditPart extends DisplayEditPart {
 			refreshColor();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#isSelectable()
+	 */
 	@Override
 	public boolean isSelectable() {
 		Box box = (Box) getModel();
 		return !(box.parent instanceof AbstractDiagram);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart#preferenceUpdate()
+	 */
 	@Override
 	public void preferenceUpdate() {
 		// IFigure figure = getFigure();

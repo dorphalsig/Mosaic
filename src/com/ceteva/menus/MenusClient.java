@@ -22,8 +22,13 @@ import xos.Value;
 
 import com.ceteva.menus.actions.MenuAction;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MenusClient.
+ */
 public class MenusClient extends Client {
 
+	/** The menu id binding. */
 	Hashtable<MenuManager, String> menuIdBinding = new Hashtable<MenuManager, String>(); // used
 																							// for
 																							// defining
@@ -31,20 +36,39 @@ public class MenusClient extends Client {
 																							// on
 																							// menus
 	// added by the system
-	public static EventHandler handler = null;
+	/** The handler. */
+																							public static EventHandler handler = null;
+	
+	/** The file menu. */
 	Menu fileMenu;
+	
+	/** The mi file. */
 	MenuItem miFile;
+	
+	/** The mi copy. */
 	MenuItem miCopy;
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Client#setEventHandler(uk.ac.mdx.xmf.swt.client.EventHandler)
+	 */
 	@Override
 	public void setEventHandler(EventHandler eventsOut) {
 		handler = eventsOut;
 	}
 
+	/**
+	 * Instantiates a new menus client.
+	 */
 	public MenusClient() {
 		super("com.ceteva.menus");
 	}
 
+	/**
+	 * Delete.
+	 *
+	 * @param id the id
+	 * @return true, if successful
+	 */
 	public boolean delete(String id) {
 		IContributionItem item = findParent(getMenu(), id);
 		if (item != null) {
@@ -68,6 +92,13 @@ public class MenusClient extends Client {
 		return false;
 	}
 
+	/**
+	 * New menu.
+	 *
+	 * @param parent the parent
+	 * @param identity the identity
+	 * @param title the title
+	 */
 	public void newMenu(String parent, String identity, String title) {
 		if (parent.equals("root"))
 			newRootMenu(identity, title);
@@ -75,6 +106,13 @@ public class MenusClient extends Client {
 			newChildMenu(parent, identity, title);
 	}
 
+	/**
+	 * New menu item.
+	 *
+	 * @param parent the parent
+	 * @param identity the identity
+	 * @param title the title
+	 */
 	public void newMenuItem(String parent, String identity, String title) {
 		IContributionItem owner = findParent(getMenu(), parent);
 		MenuAction action = new MenuAction(title, identity, handler);
@@ -89,6 +127,12 @@ public class MenusClient extends Client {
 		}
 	}
 
+	/**
+	 * New group marker.
+	 *
+	 * @param menuId the menu id
+	 * @param groupId the group id
+	 */
 	public void newGroupMarker(String menuId, String groupId) {
 		IContributionItem menu = findParent(getMenu(), menuId);
 		if (menu instanceof MenuManager) {
@@ -108,6 +152,12 @@ public class MenusClient extends Client {
 		}
 	}
 
+	/**
+	 * New root menu.
+	 *
+	 * @param identity the identity
+	 * @param title the title
+	 */
 	public void newRootMenu(String identity, String title) {
 
 		// IMenuManager menu = getMenu();
@@ -132,6 +182,13 @@ public class MenusClient extends Client {
 
 	}
 
+	/**
+	 * New child menu.
+	 *
+	 * @param parent the parent
+	 * @param identity the identity
+	 * @param title the title
+	 */
 	public void newChildMenu(String parent, String identity, String title) {
 
 		IContributionItem owner = findParent(getMenu(), parent);
@@ -148,11 +205,19 @@ public class MenusClient extends Client {
 		Main.getInstance().shell.setMaximized(true);
 	}
 
+	/**
+	 * Refresh menus.
+	 */
 	public void refreshMenus() {
 		IMenuManager menu = getMenu();
 		menu.updateAll(true);
 	}
 
+	/**
+	 * Gets the menu.
+	 *
+	 * @return the menu
+	 */
 	public IMenuManager getMenu() {
 		// WorkbenchWindow window = (WorkbenchWindow) MenusPlugin.getDefault()
 		// .getWorkbench().getActiveWorkbenchWindow();
@@ -163,10 +228,23 @@ public class MenusClient extends Client {
 		return Main.mb;
 	}
 
+	/**
+	 * Xmf id.
+	 *
+	 * @param id the id
+	 * @return true, if successful
+	 */
 	public boolean xmfId(String id) {
 		return id.length() > 0 && id.charAt(0) >= '0' && id.charAt(0) <= '9';
 	}
 
+	/**
+	 * Find parent.
+	 *
+	 * @param it the it
+	 * @param identity the identity
+	 * @return the i contribution item
+	 */
 	public IContributionItem findParent(IContributionItem it, String identity) {
 
 		if (it instanceof MenuManager) {
@@ -210,6 +288,12 @@ public class MenusClient extends Client {
 		// return null;
 	}
 
+	/**
+	 * Adds the menu listener.
+	 *
+	 * @param identity the identity
+	 * @param item the item
+	 */
 	public void addMenuListener(final String identity, MenuItem item) {
 		item.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
@@ -221,10 +305,24 @@ public class MenusClient extends Client {
 		});
 	}
 
+	/**
+	 * Root menu item exists.
+	 *
+	 * @param menu the menu
+	 * @param text the text
+	 * @return true, if successful
+	 */
 	public boolean rootMenuItemExists(IMenuManager menu, String text) {
 		return getRootMenuItem(menu, text) != null;
 	}
 
+	/**
+	 * Gets the root menu item.
+	 *
+	 * @param menu the menu
+	 * @param text the text
+	 * @return the root menu item
+	 */
 	public MenuManager getRootMenuItem(IMenuManager menu, String text) {
 		IContributionItem[] items = menu.getItems();
 		for (int i = 0; i < items.length; i++) {
@@ -237,6 +335,9 @@ public class MenusClient extends Client {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Client#processMessage(xos.Message)
+	 */
 	public boolean processMessage(Message message) {
 		if (message.name().equals("newMenu")) {
 			String parent = message.args[0].strValue();
@@ -285,11 +386,20 @@ public class MenusClient extends Client {
 		return false;
 	}
 
+	/**
+	 * Reset.
+	 */
 	public void reset() {
 		getMenu().removeAll();
 		refreshMenus();
 	}
 
+	/**
+	 * Sets the global menu.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean setGlobalMenu(Message message) {
 		String globalMenuId = message.args[0].strValue();
 		String targetId = message.args[1].strValue();

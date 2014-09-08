@@ -8,7 +8,17 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ClientNet.
+ */
 public class ClientNet {
+	
+	/**
+	 * Local host.
+	 *
+	 * @return the inet address
+	 */
 	public static InetAddress localHost() {
 		try {
 			return InetAddress.getLocalHost();
@@ -17,6 +27,12 @@ public class ClientNet {
 		}
 	}
 
+	/**
+	 * Address.
+	 *
+	 * @param address the address
+	 * @return the inet address
+	 */
 	public static InetAddress address(String address) {
 		try {
 			return InetAddress.getByName(address);
@@ -26,6 +42,11 @@ public class ClientNet {
 		}
 	}
 
+	/**
+	 * Send message.
+	 *
+	 * @param message the message
+	 */
 	public void sendMessage(String message) {
 		try {
 			Socket s = new Socket(localHost(), 9999);
@@ -62,6 +83,11 @@ public class ClientNet {
 
 	}
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		try {
 			Socket s = new Socket(localHost(), 9999);

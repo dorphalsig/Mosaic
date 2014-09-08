@@ -9,10 +9,21 @@ import org.eclipse.swt.graphics.FontData;
 
 import uk.ac.mdx.xmf.swt.demo.Main;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FontManager.
+ */
 public class FontManager {
 
+	/** The fontbinding. */
 	private static Hashtable fontbinding = new Hashtable();
 
+	/**
+	 * Gets the font.
+	 *
+	 * @param data the data
+	 * @return the font
+	 */
 	public static Font getFont(FontData data) {
 		// String name = data.getName() + data.getStyle() +
 		// data.data.lfUnderline;
@@ -29,12 +40,22 @@ public class FontManager {
 		return classFont;
 	}
 
+	/**
+	 * Gets the font.
+	 *
+	 * @param data the data
+	 * @param flag the flag
+	 * @return the font
+	 */
 	public static Font getFont(FontData data, boolean flag) {
 
 		return new Font(Main.getInstance().display, data);
 
 	}
 
+	/**
+	 * Dispose.
+	 */
 	public static void dispose() {
 		Enumeration e = fontbinding.elements();
 		while (e.hasMoreElements()) {

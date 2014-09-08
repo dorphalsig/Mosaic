@@ -14,16 +14,34 @@ import uk.ac.mdx.xmf.swt.command.MultilineTextChangeCommand;
 import uk.ac.mdx.xmf.swt.command.TextChangeCommand;
 import uk.ac.mdx.xmf.swt.demo.Main;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TextEditManager.
+ */
 public class TextEditManager {
 
+	/** The scaled font. */
 	Font scaledFont;
+	
+	/** The text. */
 	private Text text;
+	
+	/** The label. */
 	Label label;
+	
+	/** The mouse enter. */
 	boolean mouseEnter = false;
+	
+	/** The model. */
 	uk.ac.mdx.xmf.swt.model.Text model = null;
+	
+	/** The model edge text. */
 	uk.ac.mdx.xmf.swt.model.EdgeText modelEdgeText = null;
+	
+	/** The model multiline text. */
 	uk.ac.mdx.xmf.swt.model.MultilineText modelMultilineText = null;
 
+	/** The choice. */
 	String choice = "";
 
 	// public TextEditManager(GraphicalEditPart source, Class editorType,
@@ -36,6 +54,9 @@ public class TextEditManager {
 	// bringDown();
 	// }
 
+	/**
+	 * Inits the cell editor.
+	 */
 	protected void initCellEditor() {
 		// text = (Text) getCellEditor().getControl();
 		// label = (Label) getEditPart().getFigure();
@@ -52,6 +73,13 @@ public class TextEditManager {
 		// text.selectAll();
 	}
 
+	/**
+	 * Show.
+	 *
+	 * @param object the object
+	 * @param p the p
+	 * @param d the d
+	 */
 	public void show(Object object, org.eclipse.swt.graphics.Point p,
 			Dimension d) {
 		choice = "";
@@ -109,6 +137,9 @@ public class TextEditManager {
 		});
 	}
 
+	/**
+	 * Fire change text.
+	 */
 	private void fireChangeText() {
 		// System.out.println("text area changed model id:" +
 		// model.getIdentity());
@@ -119,6 +150,9 @@ public class TextEditManager {
 		text.dispose();
 	}
 
+	/**
+	 * Fire change edge text.
+	 */
 	private void fireChangeEdgeText() {
 		// System.out.println("text area changed model id:"
 		// + modelEdgeText.getIdentity());
@@ -130,6 +164,9 @@ public class TextEditManager {
 		text.dispose();
 	}
 
+	/**
+	 * Fire change multiline text.
+	 */
 	private void fireChangeMultilineText() {
 		// System.out.println("text area changed model id:"
 		// + modelEdgeText.getIdentity());

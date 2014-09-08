@@ -20,13 +20,23 @@ import uk.ac.mdx.xmf.swt.figure.NodeFigure;
 import uk.ac.mdx.xmf.swt.misc.FontManager;
 import uk.ac.mdx.xmf.swt.model.Text;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TextEditPart.
+ */
 public class TextEditPart extends DisplayEditPart {
 
+	/** The manager. */
 	private TextEditManager manager = null;
+	
+	/** The model. */
 	private Text model = null;
 
 	// private TextSelectionPolicy textSelectionPolicy = null;
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart#activate()
+	 */
 	public void activate() {
 		super.activate();
 		Text model = (Text) getModel();
@@ -34,6 +44,9 @@ public class TextEditPart extends DisplayEditPart {
 			this.editText();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
+	 */
 	public IFigure createFigure() {
 		model = (Text) getModel();
 		String text = model.getText();
@@ -75,11 +88,19 @@ public class TextEditPart extends DisplayEditPart {
 		// return label;
 	}
 
+	/**
+	 * Edits the text.
+	 */
 	public void editText() {
 		// if (model.isEditable())
 		performDirectEdit();
 	}
 
+	/**
+	 * Gets the color.
+	 *
+	 * @return the color
+	 */
 	public RGB getColor() {
 		RGB lineColor = ((Text) getModel()).getColor();
 		if (lineColor != null)
@@ -91,6 +112,9 @@ public class TextEditPart extends DisplayEditPart {
 		// PreferenceConverter.getColor(preferences,IPreferenceConstants.UNSELECTED_FONT_COLOR);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
+	 */
 	public void propertyChange(PropertyChangeEvent evt) {
 		String prop = evt.getPropertyName();
 		if (prop.equals("editText"))
@@ -109,10 +133,16 @@ public class TextEditPart extends DisplayEditPart {
 		}
 	}
 
+	/**
+	 * Refresh color.
+	 */
 	public void refreshColor() {
 		// getFigure().setForegroundColor(ColorManager.getColor(getColor()));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#refreshVisuals()
+	 */
 	protected void refreshVisuals() {
 		LabelFigure figure = (LabelFigure) getFigure();
 		Text text = (Text) getModel();
@@ -141,6 +171,9 @@ public class TextEditPart extends DisplayEditPart {
 		refreshColor();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#createEditPolicies()
+	 */
 	protected void createEditPolicies() {
 		// textSelectionPolicy = new TextSelectionPolicy();
 		// installEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE,
@@ -149,6 +182,9 @@ public class TextEditPart extends DisplayEditPart {
 		// installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new TextEditPolicy());
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.editPart.DisplayEditPart#performRequest(org.eclipse.gef.Request)
+	 */
 	public void performRequest(Request request) {
 		Object type = request.getType();
 		if (type == RequestConstants.REQ_DIRECT_EDIT
@@ -162,11 +198,17 @@ public class TextEditPart extends DisplayEditPart {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#getDragTracker(org.eclipse.gef.Request)
+	 */
 	public DragTracker getDragTracker(Request request) {
 		// return new DisplaySelectionTracker(this);
 		return null;
 	}
 
+	/**
+	 * Perform direct edit.
+	 */
 	private void performDirectEdit() {
 		// if (manager != null) {
 		// manager.cancel();
@@ -179,6 +221,13 @@ public class TextEditPart extends DisplayEditPart {
 		// manager.show(model);
 	}
 
+	/**
+	 * Perform direct edit.
+	 *
+	 * @param model the model
+	 * @param p the p
+	 * @param d the d
+	 */
 	public void performDirectEdit(Text model, org.eclipse.swt.graphics.Point p,
 			Dimension d) {
 		// if (manager != null) {
@@ -192,6 +241,9 @@ public class TextEditPart extends DisplayEditPart {
 		manager.show(model, p, d);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart#preferenceUpdate()
+	 */
 	public void preferenceUpdate() {
 
 		// preference changes are only observed if the font

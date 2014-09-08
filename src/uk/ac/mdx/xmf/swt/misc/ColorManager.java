@@ -7,12 +7,23 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ColorManager.
+ */
 public class ColorManager {
 	
 	// keys are the colour's RGB value
 	
+	/** The colorbinding. */
 	private static Hashtable colorbinding = new Hashtable();
 	
+	/**
+	 * Gets the color.
+	 *
+	 * @param rgb the rgb
+	 * @return the color
+	 */
 	public static Color getColor(RGB rgb) {
 	  if(colorbinding.containsKey(rgb))
 	  	return (Color)colorbinding.get(rgb);
@@ -23,6 +34,9 @@ public class ColorManager {
 	  }
 	}
 	
+	/**
+	 * Dispose.
+	 */
 	public static void dispose() {
 	  Enumeration e = colorbinding.elements();
 	  while(e.hasMoreElements()) {

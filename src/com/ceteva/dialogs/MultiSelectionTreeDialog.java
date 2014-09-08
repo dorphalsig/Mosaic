@@ -8,12 +8,26 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.dialogs.CheckedTreeSelectionDialog;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MultiSelectionTreeDialog.
+ */
 class MultiSelectionTreeDialog extends CheckedTreeSelectionDialog {
 	
+	/**
+	 * Instantiates a new multi selection tree dialog.
+	 *
+	 * @param shell the shell
+	 * @param labelProvider the label provider
+	 * @param content the content
+	 */
 	public MultiSelectionTreeDialog(Shell shell,ILabelProvider labelProvider,ITreeContentProvider content) {
 		super(shell,labelProvider,content);
 	}
 	
+    /* (non-Javadoc)
+     * @see org.eclipse.ui.dialogs.CheckedTreeSelectionDialog#updateOKStatus()
+     */
     protected void updateOKStatus() {
     	super.updateOKStatus();
     	CheckboxTreeViewer viewer = getTreeViewer();
@@ -25,6 +39,11 @@ class MultiSelectionTreeDialog extends CheckedTreeSelectionDialog {
 		}
     }
 	
+	/**
+	 * Disable nodes.
+	 *
+	 * @param nodes the nodes
+	 */
 	public void disableNodes(Vector nodes) {
 		for(int i=0;i<nodes.size();i++) {
 			TreeElement te = (TreeElement)nodes.elementAt(i);
@@ -34,6 +53,11 @@ class MultiSelectionTreeDialog extends CheckedTreeSelectionDialog {
 		getTreeViewer().addCheckStateListener(csl);
 	}
 	
+	/**
+	 * Expand tree.
+	 *
+	 * @param nodes the nodes
+	 */
 	public void expandTree(Vector nodes) {
 		for(int i=0;i<nodes.size();i++) {
 		   TreeElement te = (TreeElement)nodes.elementAt(i);
@@ -41,6 +65,11 @@ class MultiSelectionTreeDialog extends CheckedTreeSelectionDialog {
 		}
 	}
 	
+	/**
+	 * Select nodes.
+	 *
+	 * @param nodes the nodes
+	 */
 	public void selectNodes(Vector nodes) {
 		for(int i=0;i<nodes.size();i++) {
 		  TreeElement te = (TreeElement)nodes.elementAt(i);

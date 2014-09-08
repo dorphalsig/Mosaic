@@ -66,43 +66,95 @@ import com.ceteva.menus.MenuManager;
 import com.ceteva.text.TextPlugin;
 import com.ceteva.text.highlighting.SinglelineScanner;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TextEditor.
+ */
 public class TextEditor implements MenuListener, IPropertyChangeListener,
 		IPartListener2 {
 
+	/** The partition number. */
 	public int partitionNumber = 0;
 
+	/** The model. */
 	TextEditorModel model;
+	
+	/** The identity. */
 	String identity = "";
+	
+	/** The tooltip. */
 	String tooltip = "";
+	
+	/** The editable. */
 	boolean editable = true;
+	
+	/** The changed. */
 	boolean changed = false;
+	
+	/** The original name. */
 	String originalName = "";
+	
+	/** The dprovider. */
 	DocumentProvider dprovider;
+	
+	/** The viewer. */
 	SourceViewer viewer;
+	
+	/** The cursor painter. */
 	CursorLinePainter cursorPainter;
+	
+	/** The configuration. */
 	TextConfiguration configuration;
+	
+	/** The source viewer decoration support. */
 	SourceViewerDecorationSupport fSourceViewerDecorationSupport;
+	
+	/** The scanner. */
 	SinglelineScanner scanner;
+	
+	/** The handler. */
 	private EventHandler handler;
+	
+	/** The highlights. */
 	Vector highlights = new Vector();
+	
+	/** The text. */
 	public StyledText text;
 
+	/** The show numbers. */
 	boolean showNumbers = false;
+	
+	/** The current line color. */
 	Color currentLineColor = null;
+	
+	/** The highlighted line color. */
 	Color highlightedLineColor = null;
+	
+	/** The tab item. */
 	public static CTabItem tabItem;
 
+	/** The parent. */
 	Composite parent;
+	
+	/** The length. */
 	private int length = 0;
+	
+	/** The default font. */
 	static FontData defaultFont = new FontData(
 			"1|Courier New|9|0|WINDOWS|1|-13|0|0|0|400|0|0|0|0|3|2|1|49|Courier New");
 
+	/**
+	 * Instantiates a new text editor.
+	 */
 	public TextEditor() {
 		getPreferences();
 		// registerAsListener();
 
 	}
 
+	/**
+	 * Delete.
+	 */
 	public void delete() {
 		TextPlugin textManager = TextPlugin.getDefault();
 		// IWorkbenchPage page = textManager.getWorkbench()
@@ -110,6 +162,9 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		// page.closeEditor(this, false);
 	}
 
+	/**
+	 * Register as listener.
+	 */
 	public void registerAsListener() {
 		MenuManager.addMenuListener(this);
 		addClickListener();
@@ -121,6 +176,9 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		// preference.addPropertyChangeListener(this);
 	}
 
+	/**
+	 * Adds the click listener.
+	 */
 	public void addClickListener() {
 		// Action: copy selected text.
 		final Action actionCut = new Action("&Cut",
@@ -209,17 +267,32 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		}
 	}
 
+	/**
+	 * Adds the action.
+	 *
+	 * @param menu the menu
+	 * @param groupCopy the group copy
+	 * @param cut the cut
+	 */
 	protected void addAction(org.eclipse.jface.action.MenuManager menu,
 			String groupCopy, String cut) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Raise event.
+	 *
+	 * @param m the m
+	 */
 	void raiseEvent(Message m) {
 		if (true)
 			handler.raiseEvent(m);
 	}
 
+	/**
+	 * Removes the listener.
+	 */
 	public void removeListener() {
 		// getSite().getPage().removePartListener(this);
 		// IPreferenceStore preference = TextPlugin.getDefault()
@@ -227,6 +300,11 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		// preference.removePropertyChangeListener(this);
 	}
 
+	/**
+	 * Gets the preferences.
+	 *
+	 * @return the preferences
+	 */
 	public void getPreferences() {
 		// IPreferenceStore preference = TextPlugin.getDefault()
 		// .getPreferenceStore();
@@ -242,6 +320,14 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		// highlightedLineColor = new Color(Display.getDefault(), color);
 	}
 
+	/**
+	 * Inits the.
+	 *
+	 * @param paren the paren
+	 * @param iInput the i input
+	 * @param name the name
+	 * @throws PartInitException the part init exception
+	 */
 	public void init(Composite paren, IEditorInput iInput, String name)
 			throws PartInitException {
 		// super.init(iSite, iInput);
@@ -278,7 +364,8 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 					spec.verticalAlignment = GridData.FILL;
 					spec.grabExcessVerticalSpace = true;
 					text.setLayoutData(spec);
-					text.addLineStyleListener(lineStyler);
+				
+//					text.addLineStyleListener(lineStyler);
 					text.setEditable(true);
 					text.setFont(FontManager.getFont(defaultFont, true));
 					Color bg = Display.getDefault().getSystemColor(
@@ -309,10 +396,18 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		registerAsListener();
 	}
 
+	/**
+	 * Gets the event handler.
+	 *
+	 * @return the event handler
+	 */
 	public EventHandler getEventHandler() {
 		return handler;
 	}
 
+	/**
+	 * Sets the dirty.
+	 */
 	public void setDirty() {
 		if (!changed) {
 			changed = true;
@@ -327,6 +422,9 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		}
 	}
 
+	/**
+	 * Sets the clean.
+	 */
 	public void setClean() {
 		if (changed) {
 			changed = false;
@@ -342,6 +440,11 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		}
 	}
 
+	/**
+	 * Adds the highlight.
+	 *
+	 * @param line the line
+	 */
 	public void addHighlight(int line) {
 		int lines = viewer.getTextWidget().getLineCount();
 		if (line >= 0 && line < lines) {
@@ -353,17 +456,32 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		}
 	}
 
+	/**
+	 * Sets the cursor pos.
+	 *
+	 * @param position the new cursor pos
+	 */
 	public void setCursorPos(int position) {
 		StyledText textWidget = viewer.getTextWidget();
 		textWidget.setCaretOffset(position);
 	}
 
+	/**
+	 * Gets the cursor pos.
+	 *
+	 * @return the cursor pos
+	 */
 	public int getCursorPos() {
 		StyledText textWidget = viewer.getTextWidget();
 		int pos = textWidget.getCaretOffset();
 		return pos;
 	}
 
+	/**
+	 * Show line.
+	 *
+	 * @param line the line
+	 */
 	public void showLine(int line) {
 		StyledText textWidget = viewer.getTextWidget();
 		int lines = textWidget.getLineCount();
@@ -373,6 +491,9 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		}
 	}
 
+	/**
+	 * Clear highlights.
+	 */
 	public void clearHighlights() {
 		// removeCursorPainter();
 		for (int i = 0; i < highlights.size(); i++) {
@@ -395,6 +516,14 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 	 * (ITextViewerExtension2)viewer; // cursorPainter.deactivate(true); }
 	 */
 
+	/**
+	 * Creates the source viewer.
+	 *
+	 * @param parent the parent
+	 * @param ruler the ruler
+	 * @param styles the styles
+	 * @return the i source viewer
+	 */
 	protected ISourceViewer createSourceViewer(Composite parent,
 			IVerticalRuler ruler, int styles) {
 		viewer = new SourceViewer(parent, ruler, styles);
@@ -414,6 +543,12 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		return viewer;
 	}
 
+	/**
+	 * Gets the source viewer decoration support.
+	 *
+	 * @param viewer the viewer
+	 * @return the source viewer decoration support
+	 */
 	protected SourceViewerDecorationSupport getSourceViewerDecorationSupport(
 			ISourceViewer viewer) {
 		if (fSourceViewerDecorationSupport == null) {
@@ -424,11 +559,21 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		return fSourceViewerDecorationSupport;
 	}
 
+	/**
+	 * Configure source viewer decoration support.
+	 *
+	 * @param support the support
+	 */
 	protected void configureSourceViewerDecorationSupport(
 			SourceViewerDecorationSupport support) {
 		// support.setSymbolicFontName(getFontPropertyPreferenceKey());
 	}
 
+	/**
+	 * Creates the vertical ruler.
+	 *
+	 * @return the i vertical ruler
+	 */
 	protected IVerticalRuler createVerticalRuler() {
 		CompositeRuler ruler = new CompositeRuler();
 		if (showNumbers)
@@ -438,17 +583,30 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		return ruler;
 	}
 
+	/**
+	 * Adds the line number ruler.
+	 *
+	 * @param ruler the ruler
+	 */
 	public void addLineNumberRuler(CompositeRuler ruler) {
 		// LineNumberRulerColumn fLineNumberRulerColumn = new
 		// LineNumberRulerColumn();
 		// ruler.addDecorator(1, fLineNumberRulerColumn);
 	}
 
+	/**
+	 * Adds the dummy ruler.
+	 *
+	 * @param ruler the ruler
+	 */
 	public void addDummyRuler(CompositeRuler ruler) {
 		// AnnotationRulerColumn ann = new AnnotationRulerColumn(10);
 		// ruler.addDecorator(1, ann);
 	}
 
+	/**
+	 * Show line number ruler.
+	 */
 	private void showLineNumberRuler() {
 		// IVerticalRuler v = getVerticalRuler();
 		// if (v instanceof CompositeRuler) {
@@ -458,6 +616,9 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		// }
 	}
 
+	/**
+	 * Hide line number ruler.
+	 */
 	private void hideLineNumberRuler() {
 		// IVerticalRuler v = getVerticalRuler();
 		// if (v instanceof CompositeRuler) {
@@ -467,6 +628,9 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		// }
 	}
 
+	/**
+	 * Sets the line numbers.
+	 */
 	public void setLineNumbers() {
 		if (showNumbers)
 			showLineNumberRuler();
@@ -474,6 +638,9 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 			hideLineNumberRuler();
 	}
 
+	/**
+	 * Sets the line color.
+	 */
 	public void setLineColor() {
 		if (cursorPainter != null) {
 			// cursorPainter.setHighlightColor(currentLineColor);
@@ -481,6 +648,9 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		}
 	}
 
+	/**
+	 * Sets the highlight color.
+	 */
 	public void setHighlightColor() {
 		// removeCursorPainter();
 		for (int i = 0; i < highlights.size(); i++) {
@@ -490,56 +660,118 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		// addCursorPainter();
 	}
 
+	/**
+	 * Gets the document provider.
+	 *
+	 * @return the document provider
+	 */
 	public IDocumentProvider getDocumentProvider() {
 		if (dprovider == null)
 			dprovider = new DocumentProvider();
 		return dprovider;
 	}
 
+	/**
+	 * Checks if is editor input modifiable.
+	 *
+	 * @return true, if is editor input modifiable
+	 */
 	public boolean isEditorInputModifiable() {
 		return editable;
 	}
 
+	/**
+	 * Checks if is editor input read only.
+	 *
+	 * @return true, if is editor input read only
+	 */
 	public boolean isEditorInputReadOnly() {
 		return false;
 	}
 
+	/**
+	 * Checks if is editable.
+	 *
+	 * @return true, if is editable
+	 */
 	public boolean isEditable() {
 		return editable;
 	}
 
+	/**
+	 * Checks if is dirty.
+	 *
+	 * @return true, if is dirty
+	 */
 	public boolean isDirty() {
 		return changed;
 	}
 
+	/**
+	 * Sets the name.
+	 *
+	 * @param name the new name
+	 */
 	public void setName(String name) {
 		// setPartName(name);
 	}
 
+	/**
+	 * Sets the tool tip.
+	 *
+	 * @param tooltip the new tool tip
+	 */
 	public void setToolTip(String tooltip) {
 		this.tooltip = tooltip;
 		// this.setTitleToolTip(tooltip);
 	}
 
+	/**
+	 * Gets the title tool tip.
+	 *
+	 * @return the title tool tip
+	 */
 	public String getTitleToolTip() {
 		return tooltip;
 	}
 
+	/**
+	 * Sets the editable.
+	 *
+	 * @param editable the new editable
+	 */
 	public void setEditable(boolean editable) {
 		this.editable = editable;
 		// this.validateEditorInputState();
 	}
 
+	/**
+	 * Sets the event handler.
+	 *
+	 * @param handler the new event handler
+	 */
 	public void setEventHandler(EventHandler handler) {
 		this.handler = handler;
 		// configuration.setEventHandler(handler); // for undo events
 		model.setEventHandler(handler);
 	}
 
+	/**
+	 * Sets the image.
+	 *
+	 * @param icon the new image
+	 */
 	public void setImage(Image icon) {
 		// setTitleImage(icon);
 	}
 
+	/**
+	 * Sets the text at.
+	 *
+	 * @param text the text
+	 * @param cursorPosition the cursor position
+	 * @param length the length
+	 */
 	public void setTextAt(String text, int cursorPosition, int length) {
 		if (viewer != null) {
 			Document document = (Document) viewer.getDocument();
@@ -551,8 +783,14 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		}
 	}
 
+	/**
+	 * Sets the text.
+	 *
+	 * @param txt the new text
+	 */
 	public void setText(String txt) {
 		text.setText(txt);
+//		scanner.
 		// if (viewer != null) {
 		// Document document = (Document) viewer.getDocument();
 		// try {
@@ -564,33 +802,65 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		// }
 	}
 
+	/**
+	 * Gets the identity.
+	 *
+	 * @return the identity
+	 */
 	public String getIdentity() {
 		return identity;
 	}
 
+	/**
+	 * Gets the scanner.
+	 *
+	 * @return the scanner
+	 */
 	public SinglelineScanner getScanner() {
+		configuration = new TextConfiguration(identity);
 		if (scanner == null)
 			scanner = configuration.getTagScanner();
 		return scanner;
 	}
 
+	/**
+	 * Adds the word rule.
+	 *
+	 * @param word the word
+	 * @param color the color
+	 */
 	public void addWordRule(String word, String color) {
 		getScanner().addRule(word, color);
 	}
 
+	/**
+	 * Adds the multiline rule.
+	 *
+	 * @param start the start
+	 * @param end the end
+	 * @param color the color
+	 */
 	public void addMultilineRule(String start, String end, String color) {
-		if (configuration != null) {
-			String id = "partition" + (partitionNumber++);
-			configuration.addPartition(viewer.getDocument(), id, start, end,
-					color);
-			dprovider.addRule(id, start, end);
-		}
+//		if (configuration != null) {
+//			String id = "partition" + (partitionNumber++);
+//			configuration.addPartition(viewer.getDocument(), id, start, end,
+//					color);
+//			dprovider.addRule(id, start, end);
+//		}
 	}
 
+	/**
+	 * Clear rules.
+	 */
 	public void clearRules() {
 		getScanner().clearRules();
 	}
 
+	/**
+	 * Editor context menu about to show.
+	 *
+	 * @param menu the menu
+	 */
 	protected void editorContextMenuAboutToShow(IMenuManager menu) {
 		// IWorkbenchPartSite iwps = this.getSite();
 		MenuBuilder.calculateMenu(identity, menu, null);
@@ -613,6 +883,11 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		// ITextEditorActionConstants.FIND_PREVIOUS);
 	}
 
+	/**
+	 * Do save.
+	 *
+	 * @param progressMonitor the progress monitor
+	 */
 	public void doSave(org.eclipse.core.runtime.IProgressMonitor progressMonitor) {
 		Message m = handler.newMessage("saveText", 2);
 		Value v1 = new Value(getIdentity());
@@ -622,6 +897,9 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		handler.raiseEvent(m);
 	}
 
+	/**
+	 * Dispose.
+	 */
 	public void dispose() {
 		removeListener();
 		Message m = handler.newMessage("textClosed", 1);
@@ -633,16 +911,25 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		// super.dispose();
 	}
 
+	/**
+	 * Undo.
+	 */
 	public void undo() {
 		// IAction action = getAction(ITextEditorActionConstants.UNDO);
 		// action.run();
 	}
 
+	/**
+	 * Redo.
+	 */
 	public void redo() {
 		// IAction action = getAction(ITextEditorActionConstants.REDO);
 		// action.run();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.IPartListener2#partActivated(org.eclipse.ui.IWorkbenchPartReference)
+	 */
 	public void partActivated(IWorkbenchPartReference ref) {
 		if (ref.getPart(false).equals(this) && handler != null) {
 			Message m = handler.newMessage("focusGained", 1);
@@ -652,12 +939,21 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.IPartListener2#partBroughtToTop(org.eclipse.ui.IWorkbenchPartReference)
+	 */
 	public void partBroughtToTop(IWorkbenchPartReference ref) {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.IPartListener2#partClosed(org.eclipse.ui.IWorkbenchPartReference)
+	 */
 	public void partClosed(IWorkbenchPartReference partRef) {
 	}
 
+	/**
+	 * Part deactivated.
+	 */
 	public void partDeactivated() {
 
 		if (handler != null) {
@@ -668,35 +964,59 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.IPartListener2#partOpened(org.eclipse.ui.IWorkbenchPartReference)
+	 */
 	public void partOpened(IWorkbenchPartReference partRef) {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.IPartListener2#partHidden(org.eclipse.ui.IWorkbenchPartReference)
+	 */
 	public void partHidden(IWorkbenchPartReference partRef) {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.IPartListener2#partVisible(org.eclipse.ui.IWorkbenchPartReference)
+	 */
 	public void partVisible(IWorkbenchPartReference partRef) {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.IPartListener2#partInputChanged(org.eclipse.ui.IWorkbenchPartReference)
+	 */
 	public void partInputChanged(IWorkbenchPartReference partRef) {
 	}
 
+	/**
+	 * Sets the focus internal.
+	 */
 	public void setFocusInternal() {
 		// PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
 		// .activate(this);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.util.IPropertyChangeListener#propertyChange(org.eclipse.jface.util.PropertyChangeEvent)
+	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ceteva.menus.MenuListener#newMenuAdded()
+	 */
 	@Override
 	public void newMenuAdded() {
 		// calculateMenu();
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.IPartListener2#partDeactivated(org.eclipse.ui.IWorkbenchPartReference)
+	 */
 	@Override
 	public void partDeactivated(IWorkbenchPartReference arg0) {
 		// TODO Auto-generated method stub
@@ -939,14 +1259,14 @@ class JavaLineStyler implements LineStyleListener {
 
 		protected boolean fEofSeen = false;
 
-		private String[] fgKeywords = { "abstract", "boolean", "break", "byte",
+		private String[] fgKeywords = { "abstract","Attribute", "boolean", "break", "byte","context",
 				"case", "catch", "char", "class", "continue", "default", "do",
-				"double", "else", "extends", "false", "final", "finally",
-				"float", "for", "if", "implements", "import", "instanceof",
-				"int", "interface", "long", "native", "new", "null", "package",
-				"private", "protected", "public", "return", "short", "static",
+				"double", "else", "extends","end", "false", "final", "finally",
+				"float", "for", "if", "implements", "import","in", "instanceof",
+				"int", "interface", "let","long", "native", "new", "null","Operation", "package",
+				"private", "protected", "public", "return","Seq", "short", "static",
 				"super", "switch", "synchronized", "this", "throw", "throws",
-				"transient", "true", "try", "void", "volatile", "while" };
+				"transient", "true", "try", "void", "volatile", "while","@" };
 
 		public JavaScanner() {
 			initialize();

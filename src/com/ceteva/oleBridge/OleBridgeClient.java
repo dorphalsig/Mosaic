@@ -5,18 +5,33 @@ import uk.ac.mdx.xmf.swt.client.EventHandler;
 import xos.Message;
 import xos.Value;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class OleBridgeClient.
+ */
 public class OleBridgeClient extends Client {
+	
+	/** The handler. */
 	public EventHandler handler = null;
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Client#setEventHandler(uk.ac.mdx.xmf.swt.client.EventHandler)
+	 */
 	@Override
 	public void setEventHandler(EventHandler eventsOut) {
 		handler = eventsOut;
 	}
 
+	/**
+	 * Instantiates a new ole bridge client.
+	 */
 	public OleBridgeClient() {
 		super("com.ceteva.oleBridge");
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Client#processCall(xos.Message)
+	 */
 	public Value processCall(Message message) {
 		if (message.hasName("getProperty") && message.arity == 2) {
 			String id = message.args[0].strValue();
@@ -93,6 +108,9 @@ public class OleBridgeClient extends Client {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Client#processMessage(xos.Message)
+	 */
 	public boolean processMessage(Message message) {
 		return false;
 	}

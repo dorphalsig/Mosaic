@@ -17,15 +17,30 @@ import uk.ac.mdx.xmf.swt.figure.EdgeFigure;
 import uk.ac.mdx.xmf.swt.figure.FixedAnchor;
 import uk.ac.mdx.xmf.swt.model.Edge;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EdgeRouter.
+ */
 public class EdgeRouter extends AbstractRouter {
 
+	/** The model. */
 	private final Edge model;
+	
+	/** The constraints. */
 	private final Map constraints = new HashMap(11);
 
+	/**
+	 * Instantiates a new edge router.
+	 *
+	 * @param model the model
+	 */
 	public EdgeRouter(Edge model) {
 		this.model = model;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.draw2d.ConnectionRouter#route(org.eclipse.draw2d.Connection)
+	 */
 	@Override
 	public void route(Connection conn) {
 		Rectangle start = findStartRectangle(conn);
@@ -36,21 +51,38 @@ public class EdgeRouter extends AbstractRouter {
 		plotRoute((EdgeFigure) conn, start, end, bendpoints);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.draw2d.AbstractRouter#getConstraint(org.eclipse.draw2d.Connection)
+	 */
 	@Override
 	public Object getConstraint(Connection connection) {
 		return constraints.get(connection);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.draw2d.AbstractRouter#setConstraint(org.eclipse.draw2d.Connection, java.lang.Object)
+	 */
 	@Override
 	public void setConstraint(Connection connection, Object constraint) {
 		constraints.put(connection, constraint);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.draw2d.AbstractRouter#remove(org.eclipse.draw2d.Connection)
+	 */
 	@Override
 	public void remove(Connection connection) {
 		constraints.remove(connection);
 	}
 
+	/**
+	 * Plot route.
+	 *
+	 * @param conn the conn
+	 * @param start the start
+	 * @param end the end
+	 * @param bendpoints the bendpoints
+	 */
 	public void plotRoute(EdgeFigure conn, Rectangle start, Rectangle end,
 			List bendpoints) {
 		Point ref = new Point();
@@ -112,6 +144,15 @@ public class EdgeRouter extends AbstractRouter {
 		conn.setPoints(points);
 	}
 
+	/**
+	 * Valid horizontal reference.
+	 *
+	 * @param ref the ref
+	 * @param conn the conn
+	 * @param start the start
+	 * @param end the end
+	 * @return true, if successful
+	 */
 	public boolean validHorizontalReference(Point ref, EdgeFigure conn,
 			Rectangle start, Rectangle end) {
 		conn.translateToRelative(start);
@@ -119,6 +160,15 @@ public class EdgeRouter extends AbstractRouter {
 		return start.contains(start.x, ref.y) && end.contains(end.x, ref.y);
 	}
 
+	/**
+	 * Valid vertical reference.
+	 *
+	 * @param ref the ref
+	 * @param conn the conn
+	 * @param start the start
+	 * @param end the end
+	 * @return true, if successful
+	 */
 	public boolean validVerticalReference(Point ref, EdgeFigure conn,
 			Rectangle start, Rectangle end) {
 		conn.translateToRelative(start);
@@ -126,6 +176,13 @@ public class EdgeRouter extends AbstractRouter {
 		return start.contains(ref.x, start.y) && end.contains(ref.x, end.y);
 	}
 
+	/**
+	 * Find reference point.
+	 *
+	 * @param r the r
+	 * @param point the point
+	 * @return the point
+	 */
 	public Point findReferencePoint(Rectangle r, Point point) {
 		Point p = point.getCopy();
 		if (p.x < r.x)
@@ -139,6 +196,14 @@ public class EdgeRouter extends AbstractRouter {
 		return p;
 	}
 
+	/**
+	 * Find reference point2.
+	 *
+	 * @param r the r
+	 * @param p1 the p1
+	 * @param p2 the p2
+	 * @return the point
+	 */
 	public Point findReferencePoint2(Rectangle r, Point p1, Point p2) {
 		Point p = p1.getCopy();
 
@@ -165,6 +230,12 @@ public class EdgeRouter extends AbstractRouter {
 		return p;
 	}
 
+	/**
+	 * Find start rectangle.
+	 *
+	 * @param conn the conn
+	 * @return the rectangle
+	 */
 	public Rectangle findStartRectangle(Connection conn) {
 		ConnectionAnchor sourceAnchor = conn.getSourceAnchor();
 		ConnectionAnchor targetAnchor = conn.getTargetAnchor();
@@ -181,6 +252,12 @@ public class EdgeRouter extends AbstractRouter {
 		}
 	}
 
+	/**
+	 * Find end rectangle.
+	 *
+	 * @param conn the conn
+	 * @return the rectangle
+	 */
 	public Rectangle findEndRectangle(Connection conn) {
 		ConnectionAnchor sourceAnchor = conn.getSourceAnchor();
 		ConnectionAnchor targetAnchor = conn.getTargetAnchor();
@@ -197,6 +274,13 @@ public class EdgeRouter extends AbstractRouter {
 		}
 	}
 
+	/**
+	 * Find centre point.
+	 *
+	 * @param r1 the r1
+	 * @param r2 the r2
+	 * @return the point
+	 */
 	public Point findCentrePoint(Rectangle r1, Rectangle r2) {
 		if (r1.contains(r2)) {
 			int x1 = r2.x;

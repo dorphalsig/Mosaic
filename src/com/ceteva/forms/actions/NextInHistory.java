@@ -9,11 +9,24 @@ import xos.Value;
 
 import com.ceteva.forms.views.FormView;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NextInHistory.
+ */
 public class NextInHistory extends Action {
 
+	/** The form. */
 	FormView form = null;
+	
+	/** The enabled. */
 	public boolean enabled = false;
 
+	/**
+	 * Instantiates a new next in history.
+	 *
+	 * @param form the form
+	 * @param enabled the enabled
+	 */
 	public NextInHistory(FormView form, boolean enabled) {
 		setId("com.ceteva.forms.actions.NextInHistory");
 		setText("Next in History");
@@ -25,6 +38,9 @@ public class NextInHistory extends Action {
 		update();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.action.Action#run()
+	 */
 	public void run() {
 		EventHandler handler = form.getHandler();
 		if (enabled && handler != null) {
@@ -35,6 +51,9 @@ public class NextInHistory extends Action {
 		}
 	}
 
+	/**
+	 * Update.
+	 */
 	public void update() {
 		String icon = enabled ? "icons/Forward.gif"
 				: "icons/ForwardDisabled.gif";

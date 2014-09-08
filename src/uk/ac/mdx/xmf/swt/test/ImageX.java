@@ -13,19 +13,34 @@ import org.eclipse.swt.widgets.Shell;
 import uk.ac.mdx.xmf.swt.Palette;
 import uk.ac.mdx.xmf.swt.View;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ImageX.
+ */
 public class ImageX {
 
+	/** The sash form. */
 	private static SashForm sashForm = null;
+	
+	/** The sash form1. */
 	private static SashForm sashForm1 = null;
+	
+	/** The view. */
 	private final View view = null;
 	// private Overview overview = null;
+	/** The palette. */
 	private static Palette palette = null;
+	
+	/** The display. */
 	static Display display = new Display();
+	
+	/** The screen height. */
 	private int screenWidth, screenHeight;
 
 	/**
-	 * This method initializes sashForm1
-	 * 
+	 * This method initializes sashForm1.
+	 *
+	 * @param display the display
 	 */
 	private static void createSashForm1(Display display) {
 		sashForm1 = new SashForm(sashForm, SWT.BORDER);
@@ -49,8 +64,7 @@ public class ImageX {
 	}
 
 	/**
-	 * This method initializes Palette
-	 * 
+	 * This method initializes Palette.
 	 */
 	private static void createPalette() {
 		// palette = new Palette(sashForm1, SWT.V_SCROLL, display);
@@ -59,6 +73,11 @@ public class ImageX {
 		// 50));
 	}
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 
 		Shell shell = new Shell(display, SWT.SHELL_TRIM | SWT.DOUBLE_BUFFERED);

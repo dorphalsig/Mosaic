@@ -10,8 +10,19 @@ import uk.ac.mdx.xmf.swt.client.EventHandler;
 import uk.ac.mdx.xmf.swt.demo.Main;
 import xos.Value;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SelectionDialog.
+ */
 public class SelectionDialog {
 
+	/**
+	 * Contained in default.
+	 *
+	 * @param string the string
+	 * @param defaults the defaults
+	 * @return true, if successful
+	 */
 	private static boolean containedInDefault(String string, Object[] defaults) {
 		for (int i = 0; i < defaults.length; i++) {
 			String def = (String) defaults[i];
@@ -21,6 +32,12 @@ public class SelectionDialog {
 		return false;
 	}
 
+	/**
+	 * Count all options.
+	 *
+	 * @param declaredOptions the declared options
+	 * @return the int
+	 */
 	private static int countAllOptions(Object[] declaredOptions) {
 		int count = 0;
 		for (int i = 0; i < declaredOptions.length; i++) {
@@ -31,6 +48,13 @@ public class SelectionDialog {
 		return count;
 	}
 
+	/**
+	 * Gets the result array.
+	 *
+	 * @param strings the strings
+	 * @param defaults the defaults
+	 * @return the result array
+	 */
 	private static Value[] getResultArray(Object[] strings, Object[] defaults) {
 		Value[] values = new Value[strings.length];
 		for (int i = 0; i < strings.length; i++) {
@@ -42,10 +66,24 @@ public class SelectionDialog {
 		return values;
 	}
 
+	/**
+	 * Gets the shell.
+	 *
+	 * @return the shell
+	 */
 	private static Shell getShell() {
 		return Main.getInstance().shell;
 	}
 
+	/**
+	 * Open multi selection dialog.
+	 *
+	 * @param title the title
+	 * @param message the message
+	 * @param options the options
+	 * @param handler the handler
+	 * @return the value
+	 */
 	public static Value openMultiSelectionDialog(String title, String message,
 			Object[] options, EventHandler handler) {
 		// String[] stringOptions = objectsToStrings(options);
@@ -84,6 +122,15 @@ public class SelectionDialog {
 		return new Value("-1");
 	}
 
+	/**
+	 * Open selection dialog.
+	 *
+	 * @param title the title
+	 * @param message the message
+	 * @param options the options
+	 * @param handler the handler
+	 * @return the value
+	 */
 	public static Value openSelectionDialog(String title, String message,
 			Object[] options, EventHandler handler) {
 		String[] stringOptions = objectsToStrings(options);
@@ -105,6 +152,12 @@ public class SelectionDialog {
 		return new Value("");
 	}
 
+	/**
+	 * Objects to strings.
+	 *
+	 * @param options the options
+	 * @return the string[]
+	 */
 	private static String[] objectsToStrings(Object[] options) {
 		if (options == null) {
 			return new String[0];
@@ -117,6 +170,12 @@ public class SelectionDialog {
 		}
 	}
 
+	/**
+	 * Process all options.
+	 *
+	 * @param declaredOptions the declared options
+	 * @return the object[]
+	 */
 	private static Object[] processAllOptions(Object[] declaredOptions) {
 		if (declaredOptions == null) {
 			return new Object[0];
@@ -134,6 +193,12 @@ public class SelectionDialog {
 		}
 	}
 
+	/**
+	 * Process default options.
+	 *
+	 * @param declaredOptions the declared options
+	 * @return the object[]
+	 */
 	private static Object[] processDefaultOptions(Object[] declaredOptions) {
 		if (declaredOptions == null) {
 			return new Object[0];

@@ -8,20 +8,48 @@ import uk.ac.mdx.xmf.swt.editPart.ConnectionLayerManager;
 import xos.Message;
 import xos.Value;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Diagram.
+ */
 public class Diagram extends AbstractDiagram {
 
+	/** The name. */
 	private String name;
+	
+	/** The owner. */
 	private uk.ac.mdx.xmf.swt.DiagramView owner;
+	
+	/** The displayed diagram. */
 	private AbstractDiagram displayedDiagram;
+	
+	/** The connection manager. */
 	private final ConnectionLayerManager connectionManager = new ConnectionLayerManager();
+	
+	/** The tool groups. */
 	private Vector toolGroups = new Vector();
 
+	/**
+	 * Instantiates a new diagram.
+	 *
+	 * @param handler the handler
+	 * @param identity the identity
+	 */
 	public Diagram(EventHandler handler, String identity) {
 		super(null, handler, identity);
 		displayedDiagram = this;
 		connectionManager.setDiagramId(identity);
 	}
 
+	/**
+	 * Adds the tool.
+	 *
+	 * @param parent the parent
+	 * @param name the name
+	 * @param identity the identity
+	 * @param connection the connection
+	 * @param icon the icon
+	 */
 	public void addTool(String parent, String name, String identity,
 			boolean connection, String icon) {
 		PaletteTool tool = new PaletteTool(name, identity, connection, icon);
@@ -34,6 +62,11 @@ public class Diagram extends AbstractDiagram {
 		}
 	}
 
+	/**
+	 * Adds the tool group.
+	 *
+	 * @param name the name
+	 */
 	public void addToolGroup(String name) {
 		toolGroups.add(new PaletteToolGroup(name));
 		if (owner != null) {
@@ -41,6 +74,9 @@ public class Diagram extends AbstractDiagram {
 		}
 	}
 
+	/**
+	 * Clear tool palette.
+	 */
 	public void clearToolPalette() {
 		toolGroups = new Vector();
 		if (owner != null) {
@@ -48,6 +84,9 @@ public class Diagram extends AbstractDiagram {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.ClientElement#delete()
+	 */
 	@Override
 	public void delete() {
 		/*
@@ -58,39 +97,75 @@ public class Diagram extends AbstractDiagram {
 			owner.delete();
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.model.CommandEvent#getConnectionManager()
+	 */
 	@Override
 	public ConnectionLayerManager getConnectionManager() {
 		// return owner.getConnectionManager();
 		return connectionManager;
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.model.Container#getDisplayedDiagram()
+	 */
 	@Override
 	public AbstractDiagram getDisplayedDiagram() {
 		return displayedDiagram;
 	}
 
+	/**
+	 * Gets the owner.
+	 *
+	 * @return the owner
+	 */
 	public uk.ac.mdx.xmf.swt.DiagramView getOwner() {
 		return owner;
 	}
 
+	/**
+	 * Gets the tool groups.
+	 *
+	 * @return the tool groups
+	 */
 	public Vector getToolGroups() {
 		return toolGroups;
 	}
 
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * New tool.
+	 *
+	 * @param groupID the group id
+	 * @param label the label
+	 * @param toolID the tool id
+	 * @param connection the connection
+	 * @param icon the icon
+	 */
 	public void newTool(String groupID, String label, String toolID,
 			boolean connection, String icon) {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.model.CommandEvent#processCall(xos.Message)
+	 */
 	@Override
 	public Value processCall(Message message) {
 		return owner.processCall(message);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.model.AbstractDiagram#processMessage(xos.Message)
+	 */
 	@Override
 	public boolean processMessage(Message message) {
 		if (super.processMessage(message))
@@ -125,24 +200,47 @@ public class Diagram extends AbstractDiagram {
 		return false;
 	}
 
+	/**
+	 * Sets the displayed diagram.
+	 *
+	 * @param diagram the new displayed diagram
+	 */
 	public void setDisplayedDiagram(AbstractDiagram diagram) {
 		displayedDiagram = diagram;
 	}
 
+	/**
+	 * Sets the owner.
+	 *
+	 * @param owner the new owner
+	 */
 	public void setOwner(uk.ac.mdx.xmf.swt.DiagramView owner) {
 		this.owner = owner;
 	}
 
+	/**
+	 * Sets the name.
+	 *
+	 * @param name the new name
+	 */
 	public void setName(String name) {
 		this.name = name;
 		if (owner != null)
 			owner.setName(name);
 	}
 
+	/**
+	 * Shown.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean shown() {
 		return owner != null;
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.model.AbstractDiagram#setDroppable()
+	 */
 	@Override
 	public void setDroppable() {
 		super.setDroppable();
@@ -150,6 +248,9 @@ public class Diagram extends AbstractDiagram {
 			owner.setDroppable();
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.model.AbstractDiagram#synchronise(uk.ac.mdx.xmf.swt.client.xml.Element)
+	 */
 	@Override
 	public void synchronise(Element element) {
 		String name = element.getString("name");
@@ -157,11 +258,21 @@ public class Diagram extends AbstractDiagram {
 		super.synchronise(element);
 	}
 
+	/**
+	 * Zoom in.
+	 */
 	public void zoomIn() {
 		if (zoomTo(this, true))
 			refreshZoom();
 	}
 
+	/**
+	 * Zoom to.
+	 *
+	 * @param newDiagram the new diagram
+	 * @param swap the swap
+	 * @return true, if successful
+	 */
 	public boolean zoomTo(AbstractDiagram newDiagram, boolean swap) {
 		if (newDiagram != displayedDiagram) {
 			connectionManager.setDiagramId(newDiagram.getIdentity());

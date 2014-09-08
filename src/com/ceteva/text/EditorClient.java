@@ -21,18 +21,36 @@ import com.ceteva.text.texteditor.TextEditor;
 import com.ceteva.text.texteditor.TextEditorInput;
 import com.ceteva.text.texteditor.TextStorage;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EditorClient.
+ */
 public class EditorClient extends Client {
+	
+	/** The handler. */
 	public EventHandler handler = null;
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Client#setEventHandler(uk.ac.mdx.xmf.swt.client.EventHandler)
+	 */
 	@Override
 	public void setEventHandler(EventHandler eventsOut) {
 		handler = eventsOut;
 	}
 
+	/**
+	 * Instantiates a new editor client.
+	 */
 	public EditorClient() {
 		super("com.ceteva.text");
 	}
 
+	/**
+	 * New browser.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean newBrowser(Message message) {
 		String identity = message.args[0].strValue();
 		String name = message.args[1].strValue();
@@ -42,6 +60,12 @@ public class EditorClient extends Client {
 		return true;
 	}
 
+	/**
+	 * New ole editor.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean newOleEditor(Message message) {
 		// TextPlugin textManager = TextPlugin.getDefault();
 		// IWorkbenchPage page = textManager.getWorkbench()
@@ -60,6 +84,14 @@ public class EditorClient extends Client {
 		return true;
 	}
 
+	/**
+	 * Show browser.
+	 *
+	 * @param identity the identity
+	 * @param title the title
+	 * @param tooltip the tooltip
+	 * @param urls the urls
+	 */
 	public void showBrowser(String identity, String title, String tooltip,
 			String urls) {
 		// // Create a web browser
@@ -86,6 +118,11 @@ public class EditorClient extends Client {
 		}
 	}
 
+	/**
+	 * Show browser.
+	 *
+	 * @param url the url
+	 */
 	public void showBrowser(String url) {
 		// Create a web browser
 
@@ -104,6 +141,12 @@ public class EditorClient extends Client {
 		Main.sectionTopMiddle.setFocus();
 	}
 
+	/**
+	 * New text editor.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean newTextEditor(Message message) {
 		if (message.arity == 4 || message.arity == 5) {
 			String identity = message.args[0].strValue();
@@ -144,6 +187,9 @@ public class EditorClient extends Client {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Client#processCall(xos.Message)
+	 */
 	public Value processCall(Message message) {
 		if (message.hasName("getWelcomePage")) {
 
@@ -160,6 +206,9 @@ public class EditorClient extends Client {
 		return IdManager.processCall(message);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Client#processMessage(xos.Message)
+	 */
 	public boolean processMessage(Message message) {
 		if (message.hasName("newTextEditor"))
 			return newTextEditor(message);

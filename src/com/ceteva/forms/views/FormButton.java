@@ -11,10 +11,22 @@ import uk.ac.mdx.xmf.swt.client.EventHandler;
 import xos.Message;
 import xos.Value;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FormButton.
+ */
 class FormButton extends FormElement {
 
+	/** The button. */
 	Button button = null;
 
+	/**
+	 * Instantiates a new form button.
+	 *
+	 * @param parent the parent
+	 * @param identity the identity
+	 * @param handler the handler
+	 */
 	public FormButton(Composite parent, String identity, EventHandler handler) {
 		super(identity);
 		button = new Button(parent, SWT.PUSH);
@@ -22,18 +34,37 @@ class FormButton extends FormElement {
 		this.handler = handler;
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.ComponentWithControl#getControl()
+	 */
 	public Control getControl() {
 		return button;
 	}
 
+	/**
+	 * Sets the text.
+	 *
+	 * @param text the new text
+	 */
 	public void setText(String text) {
 		button.setText(text);
 	}
 
+	/**
+	 * Sets the bounds.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param width the width
+	 * @param height the height
+	 */
 	public void setBounds(int x, int y, int width, int height) {
 		button.setBounds(x, y, width, height);
 	}
 
+	/**
+	 * Adds the event handler.
+	 */
 	public void addEventHandler() {
 		button.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
@@ -45,10 +76,16 @@ class FormButton extends FormElement {
 		});
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Commandable#processCall(xos.Message)
+	 */
 	public Value processCall(Message message) {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ceteva.forms.views.FormElement#processMessage(xos.Message)
+	 */
 	public boolean processMessage(Message message) {
 		if (message.arity >= 1) {
 			if (message.args[0].hasStrValue(getIdentity()))

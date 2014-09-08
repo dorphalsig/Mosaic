@@ -11,9 +11,22 @@ import uk.ac.mdx.xmf.swt.client.EventHandler;
 import xos.Message;
 import xos.Value;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FormTableComboBox.
+ */
 class FormTableComboBox extends FormElement {
+	
+	/** The combo. */
 	CCombo combo = null;
 
+	/**
+	 * Instantiates a new form table combo box.
+	 *
+	 * @param parent the parent
+	 * @param identity the identity
+	 * @param handler the handler
+	 */
 	public FormTableComboBox(Composite parent, String identity,
 			EventHandler handler) {
 		super(identity);
@@ -22,10 +35,16 @@ class FormTableComboBox extends FormElement {
 		addListener();
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.ComponentWithControl#getControl()
+	 */
 	public Control getControl() {
 		return combo;
 	}
 
+	/**
+	 * Adds the listener.
+	 */
 	public void addListener() {
 		combo.addSelectionListener(new SelectionListener() {
 			public void widgetSelected(SelectionEvent e) {
@@ -42,14 +61,28 @@ class FormTableComboBox extends FormElement {
 		});
 	}
 
+	/**
+	 * Sets the bounds.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param width the width
+	 * @param height the height
+	 */
 	public void setBounds(int x, int y, int width, int height) {
 		combo.setBounds(x, y, width, height);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Commandable#processCall(xos.Message)
+	 */
 	public Value processCall(Message message) {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ceteva.forms.views.FormElement#processMessage(xos.Message)
+	 */
 	public boolean processMessage(Message message) {
 		if (message.arity >= 1) {
 			if (message.args[0].hasStrValue(getIdentity())) {

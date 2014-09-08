@@ -19,15 +19,36 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 
+  // TODO: Auto-generated Javadoc
+/**
+   * The Class Splash.
+   */
   public class Splash {
 	  
+	/** The image chooser height. */
 	private static int imageChooserHeight = 30; 
+	
+	/** The choosen image. */
 	private String choosenImage = "";
+	
+	/** The tool image. */
 	private Image toolImage;
+	
+	/** The shell. */
 	private Shell shell;
+	
+	/** The display. */
 	private Display display;
+	
+	/** The get image. */
 	private boolean getImage;
 	
+	/**
+	 * Instantiates a new splash.
+	 *
+	 * @param toolimage the toolimage
+	 * @param images the images
+	 */
 	public Splash(String toolimage,Hashtable images) {
 		
 		this.getImage = (images.size() != 0);
@@ -63,10 +84,22 @@ import org.eclipse.swt.widgets.Shell;
 				ibounds.width, ibounds.height);
 	}
 	
+	/**
+	 * Choosen image.
+	 *
+	 * @return the string
+	 */
 	public String choosenImage() {
 		return choosenImage;
 	}
 	
+	/**
+	 * Creates the image chooser.
+	 *
+	 * @param main the main
+	 * @param y the y
+	 * @param images the images
+	 */
 	public void createImageChooser(Composite main,int y,final Hashtable images) {
 		
 		// label
@@ -115,6 +148,13 @@ import org.eclipse.swt.widgets.Shell;
 		 
 	}
 	
+	/**
+	 * Creates the tool image.
+	 *
+	 * @param main the main
+	 * @param toolImage the tool image
+	 * @param getImage the get image
+	 */
 	public void createToolImage(Composite main,Image toolImage,boolean getImage) {
 	    Canvas c = new Canvas(main,SWT.NONE);
 	    c.addPaintListener(new ImageCanvas(toolImage));
@@ -130,6 +170,9 @@ import org.eclipse.swt.widgets.Shell;
 	    }
 	}
 	
+	/**
+	 * Show.
+	 */
 	public void show() {
 		shell.open();
 		if(getImage) {
@@ -143,6 +186,11 @@ import org.eclipse.swt.widgets.Shell;
 		
 	}
 	
+	/**
+	 * Wait.
+	 *
+	 * @param timeout the timeout
+	 */
 	public void wait(final int timeout) {
 		Thread t = new Thread() {
 		  public void run() {	
@@ -162,6 +210,9 @@ import org.eclipse.swt.widgets.Shell;
 		t.start();
 	}
 	
+	/**
+	 * Dispose.
+	 */
 	public void dispose() {
 		Display.getDefault().asyncExec (new Runnable () {
 	    public void run () {

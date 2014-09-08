@@ -2,6 +2,9 @@ package com.ceteva.text.actions;
 
 import org.eclipse.ui.part.EditorActionBarContributor;
 
+/**
+ * The Class BrowserWorkbenchContributions.
+ */
 public class BrowserWorkbenchContributions extends EditorActionBarContributor {
 	
 	/* private void doSetActiveEditor(IEditorPart part) {

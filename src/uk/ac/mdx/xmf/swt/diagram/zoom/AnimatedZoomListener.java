@@ -13,6 +13,7 @@ package uk.ac.mdx.xmf.swt.diagram.zoom;
 
 import org.eclipse.gef.editparts.ZoomListener;
 
+// TODO: Auto-generated Javadoc
 /**
  * Listens to animated zoom changes.
  * 

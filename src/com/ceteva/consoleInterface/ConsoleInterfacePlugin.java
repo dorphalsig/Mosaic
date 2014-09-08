@@ -1,13 +1,21 @@
 package com.ceteva.consoleInterface;
 
+// TODO: Auto-generated Javadoc
 //import org.osgi.framework.BundleContext;
 
+/**
+ * The Class ConsoleInterfacePlugin.
+ */
 public class ConsoleInterfacePlugin
 // extends Plugin
 {
 
+	/** The plugin. */
 	private static ConsoleInterfacePlugin plugin;
 
+	/**
+	 * Instantiates a new console interface plugin.
+	 */
 	public ConsoleInterfacePlugin() {
 		plugin = this;
 	}
@@ -21,6 +29,11 @@ public class ConsoleInterfacePlugin
 	// plugin = null;
 	// }
 
+	/**
+	 * Gets the default.
+	 *
+	 * @return the default
+	 */
 	public static ConsoleInterfacePlugin getDefault() {
 		return plugin;
 	}

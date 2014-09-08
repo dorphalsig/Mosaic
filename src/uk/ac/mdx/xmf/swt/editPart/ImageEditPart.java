@@ -15,8 +15,15 @@ import uk.ac.mdx.xmf.swt.figure.ImageFigure;
 import uk.ac.mdx.xmf.swt.model.Display;
 import uk.ac.mdx.xmf.swt.model.Image;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ImageEditPart.
+ */
 public class ImageEditPart extends DisplayEditPart {
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
+	 */
 	public IFigure createFigure() {
 		Image image = (Image) getModel();
 		org.eclipse.swt.graphics.Image i = image.getImage();
@@ -28,10 +35,16 @@ public class ImageEditPart extends DisplayEditPart {
 		return imageFigure;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#getDragTracker(org.eclipse.gef.Request)
+	 */
 	public DragTracker getDragTracker(Request request) {
 		return new DisplaySelectionTracker(this);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
+	 */
 	public void propertyChange(PropertyChangeEvent evt) {
 		String prop = evt.getPropertyName();
 		if (prop.equals("startRender"))
@@ -45,6 +58,9 @@ public class ImageEditPart extends DisplayEditPart {
 		this.getViewer().deselectAll();
 	}
 
+	/**
+	 * Image changed.
+	 */
 	public void imageChanged() {
 		ImageFigure figure = (ImageFigure) getFigure();
 		Image image = (Image) getModel();
@@ -52,10 +68,16 @@ public class ImageEditPart extends DisplayEditPart {
 		figure.setImage(i);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#isSelectable()
+	 */
 	public boolean isSelectable() {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#refreshVisuals()
+	 */
 	protected void refreshVisuals() {
 		Image image = (Image) getModel();
 		Point location = image.getLocation();
@@ -73,6 +95,9 @@ public class ImageEditPart extends DisplayEditPart {
 				getFigure(), r);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#createEditPolicies()
+	 */
 	protected void createEditPolicies() {
 	}
 }

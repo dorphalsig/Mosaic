@@ -16,6 +16,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.Properties;
 
+// TODO: Auto-generated Javadoc
 /**
  * This is utility class to load a file.
  * 
@@ -25,8 +26,14 @@ import java.util.Properties;
  */
 public class FileUtil {
 
+	/** The is. */
 	private InputStream is;
 
+	/**
+	 * Gets the runtime directory.
+	 *
+	 * @return the runtime directory
+	 */
 	public String getRuntimeDirectory() {
 		URL installUrl = null;
 		// installUrl = Platform.getInstallLocation().getURL();
@@ -34,8 +41,10 @@ public class FileUtil {
 	}
 
 	/**
-	 * @param filename
-	 *            the file name
+	 * Instantiates a new file util.
+	 *
+	 * @param filename            the file name
+	 * @throws FileNotFoundException the file not found exception
 	 */
 	public FileUtil(String filename) throws FileNotFoundException {
 		String directory = getRuntimeDirectory();
@@ -43,8 +52,9 @@ public class FileUtil {
 	}
 
 	/**
-	 * @param is
-	 *            InputStream to be read.
+	 * Instantiates a new file util.
+	 *
+	 * @param is            InputStream to be read.
 	 */
 	public FileUtil(InputStream is) {
 		this.is = is;
@@ -54,11 +64,10 @@ public class FileUtil {
 	 * The method loads the file (properties file) into a property names List
 	 * object and a Properties object. Both objects have to be initialized. This
 	 * is used when one wants to keep the properties names in order.
-	 * 
-	 * @param names
-	 *            the properties name list.
-	 * @param prop
-	 *            the Properties itself.
+	 *
+	 * @param names            the properties name list.
+	 * @param prop            the Properties itself.
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public void read(List names, Properties prop) throws IOException {
 

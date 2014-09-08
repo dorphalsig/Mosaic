@@ -57,65 +57,164 @@ import xos.Message;
 import xos.Value;
 
 import com.ceteva.menus.MenuBuilder;
+// TODO: Auto-generated Javadoc
 
+/**
+ * listeners to the views of diagram.
+ *
+ * @author yongjun1
+ */
 public class DiagramView extends View {
+	
+	/** The parent. */
 	Composite parent;
+	
+	/** The canvas. */
 	public FigureCanvas canvas;
+	
+	/** The root figure. */
 	public Figure rootFigure;
+	
+	/** The figure. */
 	public Figure figure;
 
+	/** The palette. */
 	Palette palette;
+	
+	/** The display. */
 	Display display;
+	
+	/** The tool identity. */
 	String toolIdentity;
+	
+	/** The model identity. */
 	String modelIdentity;
+	
+	/** The create node command. */
 	CreateNodeCommand createNodeCommand;
+	
+	/** The select icon name. */
 	String selectIconName = "";
 
+	/** The display figure. */
 	Figure displayFigure = new Figure();
+	
+	/** The provider. */
 	Provider provider;
+	
+	/** The contents. */
 	Vector contents = new Vector();
+	
+	/** The nodes. */
 	Vector nodes = new Vector();
+	
+	/** The edges. */
 	Vector edges = new Vector();
+	
+	/** The ports. */
 	Vector<Node> ports = new Vector<Node>();
 
+	/** The text edit part. */
 	TextEditPart textEditPart;
+	
+	/** The node edit part. */
 	NodeEditPart nodeEditPart;
+	
+	/** The box edit part. */
 	BoxEditPart boxEditPart;
+	
+	/** The multiline text edit part. */
 	MultilineTextEditPart multilineTextEditPart;
+	
+	/** The edge edge text edit. */
 	EdgeTextEditPart edgeEdgeTextEdit;
+	
+	/** The shape edit part. */
 	ShapeEditPart shapeEditPart;
+	
+	/** The image edit part. */
 	ImageEditPart imageEditPart;
 
+	/** The edge edit part. */
 	EdgeEditPart edgeEditPart;
+	
+	/** The diagram edit part. */
 	DiagramEditPart diagramEditPart;
 
+	/** The source anchor. */
 	private ChopboxAnchor sourceAnchor;
+	
+	/** The target anchor. */
 	private ChopboxAnchor targetAnchor;
 
+	/** The _edit part. */
 	CommandEventEditPart _editPart;
 
+	/** The identity. */
 	String identity;
+	
+	/** The is focus. */
 	boolean isFocus = false;
+	
+	/** The _tab item. */
 	CTabItem _tabItem;
+	
+	/** The _views. */
 	Vector<DiagramView> _views;
 
+	/** The _diagram. */
 	AbstractDiagram _diagram;
+	
+	/** The rect shape. */
 	RectangleFigure rectShape = new RectangleFigure();
 
+	/** The mouse down. */
 	private boolean mouseDown = false;
+	
+	/** The node is selected. */
 	private boolean nodeIsSelected = false;
+	
+	/** The node select. */
 	private String nodeSelect = "";
+	
+	/** The edge select. */
 	private String edgeSelect = "";
+	
+	/** The get point. */
 	private String getPoint = "";
+	
+	/** The get edge point. */
 	private String getEdgePoint = "";
+	
+	/** The get point index. */
 	private int getPointIndex = 0;
+	
+	/** The resize shape. */
 	private boolean resizeShape = false;
+	
+	/** The resize edge shape. */
 	private boolean resizeEdgeShape = false;
+	
+	/** The drag points. */
 	private Vector dragPoints = new Vector();
 
+	/** The set drag point once. */
 	private boolean setDragPointOnce = true;
+	
+	/** The edge drage shape. */
 	Figure edgeDrageShape = new Figure();
 
+/**
+ * Instantiates a new diagram view.
+ *
+ * @param parent section of the main shell
+ * @param style display style
+ * @param palette different palette mapping to differnt views
+ * @param display SWT display
+ * @param diagramClient client register into xmf
+ * @param diagram diagram instance of each view
+ * @param tabItem tabItem to be shown into the shell
+ */
 	public DiagramView(Composite parent, int style, Palette palette,
 			Display display, DiagramClient diagramClient,
 			AbstractDiagram diagram, CTabItem tabItem) {
@@ -153,35 +252,67 @@ public class DiagramView extends View {
 		// canvas.addMouseListener(this);
 	}
 
+	/**
+	 * Sets the identity.
+	 *
+	 * @param identity the new identity
+	 */
 	public void setIdentity(String identity) {
 		this.identity = identity;
 	}
 
+	/**
+	 * Sets the focus.
+	 *
+	 * @param focus the focus
+	 * @param views the views
+	 */
 	public void setFocus(boolean focus, Vector<DiagramView> views) {
 		_views = views;
 		setAllFocus();
 		isFocus = focus;
 	}
 
+	/**
+	 * Sets the focus.
+	 *
+	 * @param focus the new focus
+	 */
 	public void setFocus(boolean focus) {
 
 		isFocus = focus;
 	}
 
+	/**
+	 * Sets the all focus.
+	 */
 	public void setAllFocus() {
 		for (DiagramView view : _views) {
 			view.setFocus(false);
 		}
 	}
 
+	/**
+	 * Checks if is focus.
+	 *
+	 * @return true, if is focus
+	 */
 	public boolean isFocus() {
 		return isFocus;
 	}
 
+	/**
+	 * Gets the identtity.
+	 *
+	 * @return the identtity
+	 */
 	public String getIdenttity() {
 		return identity;
 	}
 
+	/**
+	 * Ini editpart.
+	 */
 	public void iniEditpart() {
 
 		// nodeEditPart.activate();
@@ -193,6 +324,9 @@ public class DiagramView extends View {
 
 	}
 
+	/**
+	 * Register listener.
+	 */
 	public void registerListener() {
 
 		canvas.addListener(SWT.MouseDown, new Listener() {
@@ -938,10 +1072,19 @@ public class DiagramView extends View {
 		});
 	}
 
+	/**
+	 * Clear ports.
+	 */
 	public void clearPorts() {
 		ports.clear();
 	}
 
+	/**
+	 * Rest shape.
+	 *
+	 * @param location the location
+	 * @param size the size
+	 */
 	public void restShape(org.eclipse.draw2d.geometry.Point location,
 			Dimension size) {
 		Node node = nodeModels.get(nodeSelect);
@@ -955,6 +1098,14 @@ public class DiagramView extends View {
 		nodeShapes.get(nodeSelect).setLocation(location);
 	}
 
+	/**
+	 * Check edge is clicked.
+	 *
+	 * @param topRef the top ref
+	 * @param bottomRef the bottom ref
+	 * @param location2 the location2
+	 * @return true, if successful
+	 */
 	public boolean checkEdgeIsClicked(org.eclipse.draw2d.geometry.Point topRef,
 			org.eclipse.draw2d.geometry.Point bottomRef,
 			org.eclipse.draw2d.geometry.Point location2) {
@@ -967,6 +1118,12 @@ public class DiagramView extends View {
 		return isInside;
 	}
 
+	/**
+	 * Translate to relative location.
+	 *
+	 * @param location the location
+	 * @return the org.eclipse.draw2d.geometry. point
+	 */
 	public org.eclipse.draw2d.geometry.Point translateToRelativeLocation(
 			Point location) {
 		org.eclipse.draw2d.geometry.Point point = null;
@@ -976,6 +1133,9 @@ public class DiagramView extends View {
 		return point;
 	}
 
+	/**
+	 * Raise focus gained.
+	 */
 	public void raiseFocusGained() {
 		Message m = _diagram.handler.newMessage("focusGained", 1);
 		Value v1 = new Value(_diagram.identity);
@@ -983,11 +1143,19 @@ public class DiagramView extends View {
 		_diagram.handler.raiseEvent(m);
 	}
 
+	/**
+	 * Adds the edit part.
+	 *
+	 * @param editPart the edit part
+	 */
 	public void addEditPart(CommandEventEditPart editPart) {
 		_editPart = editPart;
 		_editPart.setDiagramView(this);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.View#display()
+	 */
 	public void display() {
 		canvas.redraw();
 
@@ -1004,38 +1172,87 @@ public class DiagramView extends View {
 		// this.redraw();
 	}
 
+	/**
+	 * Gets the figure nodes.
+	 *
+	 * @return the figure nodes
+	 */
 	public Map<String, Figure> getFigureNodes() {
 		return figureNodes;
 	}
 
+	/**
+	 * Gets the figure labels.
+	 *
+	 * @return the figure labels
+	 */
 	public Map<String, Label> getFigureLabels() {
 		return figureLabels;
 	}
 
+	/**
+	 * Gets the figure mulit line text labels.
+	 *
+	 * @return the figure mulit line text labels
+	 */
 	public Map<String, MultilineTextFigure> getfigureMulitLineTextLabels() {
 		return figureMulitLineTextLabels;
 	}
 
+	/**
+	 * Gets the figure boxs.
+	 *
+	 * @return the figure boxs
+	 */
 	public Map<String, BoxFigure> getFigureBoxs() {
 		return figureBoxs;
 	}
 
+	/**
+	 * Gets the edge figure.
+	 *
+	 * @return the edge figure
+	 */
 	public Map<String, EdgeFigure> getEdgeFigure() {
 		return edgeFigures;
 	}
 
+	/**
+	 * Gets the edge label figure.
+	 *
+	 * @return the edge label figure
+	 */
 	public Map<String, EdgeLabelFigure> getEdgeLabelFigure() {
 		return edgeLabelFigures;
 	}
 
+	/**
+	 * Gets the edge parts.
+	 *
+	 * @return the edge parts
+	 */
 	public Map<String, EdgeEditPart> getEdgeParts() {
 		return edgeEditParts;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.swt.widgets.Control#update()
+	 */
 	public void update() {
 		display();
 	}
 
+	/**
+	 * Check rectangle boundary.
+	 *
+	 * @param pointX the point x
+	 * @param pointY the point y
+	 * @param rectangleX the rectangle x
+	 * @param rectangleY the rectangle y
+	 * @param width the width
+	 * @param height the height
+	 * @return true, if successful
+	 */
 	private boolean checkRectangleBoundary(float pointX, float pointY,
 			float rectangleX, float rectangleY, float width, float height) {
 		boolean isInside = ((pointX > rectangleX)
@@ -1044,6 +1261,11 @@ public class DiagramView extends View {
 		return isInside;
 	}
 
+	/**
+	 * Refresh.
+	 *
+	 * @param displays the displays
+	 */
 	public void refresh(Vector displays) {
 		this.contents = displays;
 		Object iModel;
@@ -1202,41 +1424,86 @@ public class DiagramView extends View {
 		contents.clear();
 	}
 
+	/**
+	 * Refresh children.
+	 *
+	 * @param child the child
+	 */
 	public void refreshChildren(IFigure child) {
 		figure.add(child);
 	}
 
+	/**
+	 * Sets the source anchor.
+	 *
+	 * @param sourceAnchor the new source anchor
+	 */
 	public void setSourceAnchor(ChopboxAnchor sourceAnchor) {
 		this.sourceAnchor = sourceAnchor;
 	}
 
+	/**
+	 * Sets the target anchor.
+	 *
+	 * @param targetAnchor the new target anchor
+	 */
 	public void setTargetAnchor(ChopboxAnchor targetAnchor) {
 		this.targetAnchor = targetAnchor;
 	}
 
+	/**
+	 * New tool.
+	 *
+	 * @param parent the parent
+	 * @param label the label
+	 * @param identity the identity
+	 * @param connection the connection
+	 * @param icon the icon
+	 */
 	public void newTool(String parent, String label, String identity,
 			boolean connection, String icon) {
 		palette.addEntry(parent, label, identity, connection, icon);
 	}
 
+	/**
+	 * New tool group.
+	 *
+	 * @param name the name
+	 */
 	public void newToolGroup(String name) {
 		palette.addDrawer(name);
 	}
 
+	/**
+	 * Gets the pallete.
+	 *
+	 * @return the pallete
+	 */
 	public Palette getPallete() {
 		return palette;
 	}
 
+	/**
+	 * Clear tool palette.
+	 */
 	public void clearToolPalette() {
 		// Palette.clearPalette(getPaletteRoot());
 		// this.createPalettePage();
 		// this.createPaletteViewerProvider();
 	}
 
+	/**
+	 * Gets the canvas.
+	 *
+	 * @return the canvas
+	 */
 	public FigureCanvas getCanvas() {
 		return canvas;
 	}
 
+	/**
+	 * Delete.
+	 */
 	public void delete() {
 		// DiagramPlugin diagramManager = DiagramPlugin.getDefault();
 		// IWorkbenchPage page = diagramManager.getWorkbench()
@@ -1244,22 +1511,46 @@ public class DiagramView extends View {
 		// page.closeEditor(this, false);
 	}
 
+	/**
+	 * Process call.
+	 *
+	 * @param message the message
+	 * @return the value
+	 */
 	public Value processCall(Message message) {
 		return null;
 	}
 
+	/**
+	 * Sets the name.
+	 *
+	 * @param name the new name
+	 */
 	public void setName(String name) {
 		// setPartName(name);
 	}
 
+	/**
+	 * Sets the droppable.
+	 */
 	public void setDroppable() {
 		setDroppable(true);
 	}
 
+	/**
+	 * Sets the droppable.
+	 *
+	 * @param enabled the new droppable
+	 */
 	public void setDroppable(boolean enabled) {
 		// dropTargetListener.setEnabled(enabled);
 	}
 
+	/**
+	 * Sets the viewer model.
+	 *
+	 * @param newDiagram the new viewer model
+	 */
 	public void setViewerModel(AbstractDiagram newDiagram) {
 	}
 

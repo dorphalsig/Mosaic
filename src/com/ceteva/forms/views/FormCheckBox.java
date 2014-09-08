@@ -12,10 +12,22 @@ import uk.ac.mdx.xmf.swt.client.EventHandler;
 import xos.Message;
 import xos.Value;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FormCheckBox.
+ */
 class FormCheckBox extends FormElement {
 
+	/** The check. */
 	Button check = null;
 
+	/**
+	 * Instantiates a new form check box.
+	 *
+	 * @param parent the parent
+	 * @param identity the identity
+	 * @param handler the handler
+	 */
 	public FormCheckBox(Composite parent, String identity, EventHandler handler) {
 		super(identity);
 		check = new Button(parent, SWT.CHECK);
@@ -25,10 +37,16 @@ class FormCheckBox extends FormElement {
 		addListener();
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.ComponentWithControl#getControl()
+	 */
 	public Control getControl() {
 		return check;
 	}
 
+	/**
+	 * Adds the listener.
+	 */
 	public void addListener() {
 		check.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
@@ -43,18 +61,34 @@ class FormCheckBox extends FormElement {
 		});
 	}
 
+	/**
+	 * Sets the location.
+	 *
+	 * @param position the new location
+	 */
 	public void setLocation(Point position) {
 		check.setLocation(position);
 	}
 
+	/**
+	 * Sets the selected.
+	 *
+	 * @param selected the new selected
+	 */
 	public void setSelected(boolean selected) {
 		check.setSelection(selected);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Commandable#processCall(xos.Message)
+	 */
 	public Value processCall(Message message) {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ceteva.forms.views.FormElement#processMessage(xos.Message)
+	 */
 	public boolean processMessage(Message message) {
 		if (message.arity >= 1) {
 			if (message.args[0].hasStrValue(getIdentity())) {

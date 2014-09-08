@@ -8,16 +8,29 @@ import org.eclipse.swt.graphics.RGB;
 
 import uk.ac.mdx.xmf.swt.misc.ColorManager;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DiagramFigure.
+ */
 public class DiagramFigure extends FreeformLayer {
 
+	/** The gridlines. */
 	boolean gridlines = false;
+	
+	/** The distance. */
 	int distance = 20;
+	
+	/** The grid color. */
 	Color gridColor = ColorManager.getColor(new RGB(206, 206, 206));
 
+	/**
+	 * Instantiates a new diagram figure.
+	 */
 	public DiagramFigure() {
 		getPreferences();
 	}
 
+	/** The image. */
 	org.eclipse.swt.graphics.Image image = null;
 
 	/*
@@ -29,6 +42,9 @@ public class DiagramFigure extends FreeformLayer {
 	 * canvas.drawRectangle(30,30,200,200); } return image; }
 	 */
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.draw2d.Figure#paintFigure(org.eclipse.draw2d.Graphics)
+	 */
 	@Override
 	protected void paintFigure(Graphics g) {
 		// if(Diagram.antialias)
@@ -39,6 +55,12 @@ public class DiagramFigure extends FreeformLayer {
 			drawGridlines(distance, g);
 	}
 
+	/**
+	 * Draw gridlines.
+	 *
+	 * @param distance the distance
+	 * @param g the g
+	 */
 	public void drawGridlines(int distance, Graphics g) {
 		g.setForegroundColor(gridColor);
 		Rectangle region = new Rectangle();
@@ -53,10 +75,18 @@ public class DiagramFigure extends FreeformLayer {
 				g.drawLine(region.x - 2, i, region.right() + 2, i);
 	}
 
+	/**
+	 * Preference update.
+	 */
 	public void preferenceUpdate() {
 		getPreferences();
 	}
 
+	/**
+	 * Gets the preferences.
+	 *
+	 * @return the preferences
+	 */
 	public void getPreferences() {
 		// Preferences preferences =
 		// DiagramPlugin.getDefault().getPluginPreferences();

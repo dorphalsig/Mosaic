@@ -14,42 +14,42 @@ package uk.ac.mdx.xmf.swt.diagram.zoom;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Interface ZoomableEditPart.
+ *
  * @author sshaw
  * @canBeSeenBy org.eclipse.gmf.runtime.diagram.ui.*
  * 
  *              Interface that abstracts the methods needed to perform zoom
  *              within a specific EditPart.
- * 
  */
 public interface ZoomableEditPart {
 
 	/**
-	 * zoomOut Method will zoom out the EditPart to the next available level
+	 * zoomOut Method will zoom out the EditPart to the next available level.
 	 */
 	public void zoomOut();
 
 	/**
-	 * zoomIn Method will zoom in the EditPart to the next available level
+	 * zoomIn Method will zoom in the EditPart to the next available level.
 	 */
 	public void zoomIn();
 
 	/**
 	 * zoomOut Method will zoom out the EditPart to the next available level
-	 * centered around a given point
-	 * 
-	 * @param center
-	 *            Point around which the zoom will be centered in absolute
+	 * centered around a given point.
+	 *
+	 * @param center            Point around which the zoom will be centered in absolute
 	 *            coordinates
 	 */
 	public void zoomOut(Point center);
 
 	/**
 	 * zoomIn Method will zoom in the EditPart to the next available level
-	 * centered around a given point
-	 * 
-	 * @param center
-	 *            Point around which the zoom will be centered in absolute
+	 * centered around a given point.
+	 *
+	 * @param center            Point around which the zoom will be centered in absolute
 	 *            coordinates
 	 */
 	public void zoomIn(Point center);

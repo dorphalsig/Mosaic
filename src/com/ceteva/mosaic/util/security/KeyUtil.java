@@ -17,6 +17,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
+// TODO: Auto-generated Javadoc
 /**
  * This is a utility class encode and decode keys.
  *
@@ -27,7 +28,10 @@ import java.security.spec.X509EncodedKeySpec;
  */
 public class KeyUtil {
 
+  /** The kpg. */
   private static KeyPairGenerator kpg;
+  
+  /** The kf. */
   private static KeyFactory kf;
   static {
     try {
@@ -43,7 +47,10 @@ public class KeyUtil {
   /**
    * The method gets the public key from the encoded byte.
    * The bytes can be recovered from a Hex string saved in a file etc.
+   *
    * @param encodedKey the encoded public key in bytes.
+   * @return the public
+   * @throws InvalidKeySpecException the invalid key spec exception
    */
   public static PublicKey getPublic(byte[] encodedKey) 
     throws InvalidKeySpecException {
@@ -53,7 +60,10 @@ public class KeyUtil {
   /**
    * This method gets the private key from the encoded byte.
    * The bytes can be recovered from a Hex string saved in a file etc.
+   *
    * @param encodedKey the encoded private key in bytes.
+   * @return the private
+   * @throws InvalidKeySpecException the invalid key spec exception
    */
   public static PrivateKey getPrivate(byte[] encodedKey) 
     throws InvalidKeySpecException {

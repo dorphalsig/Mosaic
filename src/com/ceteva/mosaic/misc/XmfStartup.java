@@ -7,10 +7,18 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.IStartup;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class XmfStartup.
+ */
 public class XmfStartup implements IStartup {
 
+	/** The Constant XMF_EXTENSION_ID. */
 	private static final String XMF_EXTENSION_ID = "com.ceteva.xmf.extensions.BootLoader";
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.IStartup#earlyStartup()
+	 */
 	public void earlyStartup() {
 		System.out.println("[ Early Startup XmfPlugin ]");
 		Thread t = new Thread() {
@@ -43,6 +51,11 @@ public class XmfStartup implements IStartup {
 		t.start();
 	}
 
+	/**
+	 * Receive extensions.
+	 *
+	 * @return the list
+	 */
 	private List<String> receiveExtensions() {
 		IConfigurationElement[] config = Platform.getExtensionRegistry()
 				.getConfigurationElementsFor(XMF_EXTENSION_ID);

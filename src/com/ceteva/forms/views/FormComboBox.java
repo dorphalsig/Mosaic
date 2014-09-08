@@ -11,10 +11,22 @@ import uk.ac.mdx.xmf.swt.client.EventHandler;
 import xos.Message;
 import xos.Value;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FormComboBox.
+ */
 class FormComboBox extends FormElement {
 
+	/** The combo. */
 	private Combo combo = null;
 
+	/**
+	 * Instantiates a new form combo box.
+	 *
+	 * @param parent the parent
+	 * @param identity the identity
+	 * @param handler the handler
+	 */
 	public FormComboBox(Composite parent, String identity, EventHandler handler) {
 		super(identity);
 		combo = new Combo(parent, SWT.DROP_DOWN | SWT.READ_ONLY);
@@ -22,16 +34,28 @@ class FormComboBox extends FormElement {
 		addListener();
 	}
 
+	/**
+	 * Adds the item.
+	 *
+	 * @param item the item
+	 * @param select the select
+	 */
 	public void addItem(String item, boolean select) {
 		combo.add(item);
 		if (select)
 			combo.select(combo.getItemCount() - 1);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.ComponentWithControl#getControl()
+	 */
 	public Control getControl() {
 		return combo;
 	}
 
+	/**
+	 * Adds the listener.
+	 */
 	public void addListener() {
 		combo.addSelectionListener(new SelectionListener() {
 			public void widgetSelected(SelectionEvent e) {
@@ -48,14 +72,28 @@ class FormComboBox extends FormElement {
 		});
 	}
 
+	/**
+	 * Sets the bounds.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param width the width
+	 * @param height the height
+	 */
 	public void setBounds(int x, int y, int width, int height) {
 		combo.setBounds(x, y, width, height);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Commandable#processCall(xos.Message)
+	 */
 	public Value processCall(Message message) {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ceteva.forms.views.FormElement#processMessage(xos.Message)
+	 */
 	public boolean processMessage(Message message) {
 		if (message.arity >= 1) {
 			if (message.args[0].hasStrValue(getIdentity())) {
@@ -79,10 +117,18 @@ class FormComboBox extends FormElement {
 		return super.processMessage(message);
 	}
 
+	/**
+	 * Removes the all items.
+	 */
 	public void removeAllItems() {
 		combo.removeAll();
 	}
 
+	/**
+	 * Select item.
+	 *
+	 * @param index the index
+	 */
 	public void selectItem(int index) {
 		combo.select(index);
 	}

@@ -11,8 +11,15 @@ import uk.ac.mdx.xmf.swt.figure.ShapeFigure;
 import uk.ac.mdx.xmf.swt.misc.ColorManager;
 import uk.ac.mdx.xmf.swt.model.Shape;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ShapeEditPart.
+ */
 public class ShapeEditPart extends DisplayEditPart {
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
+	 */
 	public IFigure createFigure() {
 		Shape model = (Shape) getModel();
 		boolean outline = model.outline();
@@ -25,6 +32,11 @@ public class ShapeEditPart extends DisplayEditPart {
 		return figure;
 	}
 
+	/**
+	 * Gets the fill color.
+	 *
+	 * @return the fill color
+	 */
 	public RGB getFillColor() {
 		RGB fillColor = ((Shape) getModel()).getFillColor();
 		if (fillColor != null)
@@ -37,6 +49,11 @@ public class ShapeEditPart extends DisplayEditPart {
 		// IPreferenceConstants.FILL_COLOR);
 	}
 
+	/**
+	 * Gets the foreground color.
+	 *
+	 * @return the foreground color
+	 */
 	public RGB getForegroundColor() {
 		RGB lineColor = ((Shape) getModel()).getForegroundColor();
 		if (lineColor != null)
@@ -49,13 +66,22 @@ public class ShapeEditPart extends DisplayEditPart {
 		return lineColor;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#isSelectable()
+	 */
 	public boolean isSelectable() {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#createEditPolicies()
+	 */
 	protected void createEditPolicies() {
 	}
 
+	/* (non-Javadoc)
+	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
+	 */
 	public void propertyChange(PropertyChangeEvent evt) {
 		String prop = evt.getPropertyName();
 		if (prop.equals("startRender"))
@@ -72,12 +98,18 @@ public class ShapeEditPart extends DisplayEditPart {
 		}
 	}
 
+	/**
+	 * Refresh color.
+	 */
 	public void refreshColor() {
 		getFigure().setForegroundColor(
 				ColorManager.getColor(getForegroundColor()));
 		getFigure().setBackgroundColor(ColorManager.getColor(getFillColor()));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#refreshVisuals()
+	 */
 	public void refreshVisuals() {
 		Shape model = (Shape) getModel();
 		ShapeFigure figure = (ShapeFigure) getFigure();
@@ -89,6 +121,9 @@ public class ShapeEditPart extends DisplayEditPart {
 		refreshColor();
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart#preferenceUpdate()
+	 */
 	public void preferenceUpdate() {
 		refreshColor();
 	}

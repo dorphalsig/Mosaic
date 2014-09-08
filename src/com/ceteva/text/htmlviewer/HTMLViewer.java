@@ -15,15 +15,33 @@ import uk.ac.mdx.xmf.swt.client.EventHandler;
 import xos.Message;
 import xos.Value;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class HTMLViewer.
+ */
 public class HTMLViewer {
 
+	/** The model. */
 	HTMLViewerModel model;
+	
+	/** The identity. */
 	String identity = "";
+	
+	/** The ignore url. */
 	boolean ignoreURL = true;
+	
+	/** The browser. */
 	Browser browser = null;
+	
+	/** The handler. */
 	EventHandler handler = null;
+	
+	/** The tooltip. */
 	String tooltip = "";
 
+	/**
+	 * Delete.
+	 */
 	public void delete() {
 		// TextPlugin textManager = TextPlugin.getDefault();
 		// IWorkbenchPage page =
@@ -31,12 +49,24 @@ public class HTMLViewer {
 		// page.closeEditor(this,false);
 	}
 
+	/**
+	 * Do save.
+	 */
 	public void doSave() {
 	}
 
+	/**
+	 * Do save as.
+	 */
 	public void doSaveAs() {
 	}
 
+	/**
+	 * Independent type.
+	 *
+	 * @param event the event
+	 * @return true, if successful
+	 */
 	public boolean independentType(LocationEvent event) {
 		if (event.location.endsWith("php")) {
 			ignoreURL = true;
@@ -56,19 +86,39 @@ public class HTMLViewer {
 	// }
 	// }
 
+	/**
+	 * Inits the.
+	 *
+	 * @param identity the identity
+	 */
 	public void init(String identity) {
 
 		model = new HTMLViewerModel(identity, null, this);
 	}
 
+	/**
+	 * Checks if is dirty.
+	 *
+	 * @return true, if is dirty
+	 */
 	public boolean isDirty() {
 		return false;
 	}
 
+	/**
+	 * Checks if is save as allowed.
+	 *
+	 * @return true, if is save as allowed
+	 */
 	public boolean isSaveAsAllowed() {
 		return false;
 	}
 
+	/**
+	 * Close.
+	 *
+	 * @param save the save
+	 */
 	public void close(final boolean save) {
 		// Display display = getSite().getShell().getDisplay();
 		// display.asyncExec(new Runnable() {
@@ -78,6 +128,11 @@ public class HTMLViewer {
 		// });
 	}
 
+	/**
+	 * Creates the part control.
+	 *
+	 * @param parent the parent
+	 */
 	public void createPartControl(Composite parent) {
 		parent.setLayout(new FillLayout());
 		browser = new Browser(parent, SWT.NONE);
@@ -107,6 +162,9 @@ public class HTMLViewer {
 		browser.addLocationListener(locationListener);
 	}
 
+	/**
+	 * Dispose.
+	 */
 	public void dispose() {
 		Message m = handler.newMessage("textClosed", 1);
 		Value v1 = new Value(identity);
@@ -117,21 +175,39 @@ public class HTMLViewer {
 		// super.dispose();
 	}
 
+	/**
+	 * Sets the event handler.
+	 *
+	 * @param handler the new event handler
+	 */
 	public void setEventHandler(EventHandler handler) {
 		this.handler = handler;
 		model.setEventHandler(handler);
 	}
 
+	/**
+	 * Sets the focus internal.
+	 */
 	public void setFocusInternal() {
 		// PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
 		// .activate(this);
 	}
 
+	/**
+	 * Sets the html.
+	 *
+	 * @param html the new html
+	 */
 	public void setHTML(String html) {
 		ignoreURL = false;
 		browser.setText(html);
 	}
 
+	/**
+	 * Sets the url.
+	 *
+	 * @param url the new url
+	 */
 	public void setURL(String url) {
 		if (browser != null) {
 			if (!url.startsWith("<")) {
@@ -154,22 +230,45 @@ public class HTMLViewer {
 		}
 	}
 
+	/**
+	 * Sets the name.
+	 *
+	 * @param title the new name
+	 */
 	public void setName(String title) {
 		// setPartName(title);
 	}
 
+	/**
+	 * Sets the tool tip.
+	 *
+	 * @param tooltip the new tool tip
+	 */
 	public void setToolTip(String tooltip) {
 		this.tooltip = tooltip;
 		// this.setTitleToolTip(tooltip);
 	}
 
+	/**
+	 * Gets the title tool tip.
+	 *
+	 * @return the title tool tip
+	 */
 	public String getTitleToolTip() {
 		return tooltip;
 	}
 
+	/**
+	 * Sets the focus.
+	 */
 	public void setFocus() {
 	}
 
+	/**
+	 * Sets the browser.
+	 *
+	 * @param browser2 the new browser
+	 */
 	public void setBrowser(Browser browser2) {
 		browser = browser2;
 	}

@@ -4,6 +4,10 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Boot.
+ */
 public class Boot {
 
 	// public Object start(IApplicationContext arg0) throws Exception {
@@ -22,6 +26,9 @@ public class Boot {
 	//
 	// }
 
+	/**
+	 * Stop.
+	 */
 	public void stop() {
 		System.out.println("[ Application Stop ]");
 		final IWorkbench workbench = PlatformUI.getWorkbench();

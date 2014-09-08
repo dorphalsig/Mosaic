@@ -9,19 +9,50 @@ import uk.ac.mdx.xmf.swt.client.xml.Element;
 import xos.Message;
 import xos.Value;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MultilineEdgeText.
+ */
 public class MultilineEdgeText extends DisplayWithPosition {
 
 	// This type need combining with EdgeText
 
+	/** The text. */
 	private String text;
+	
+	/** The editable. */
 	private boolean editable;
+	
+	/** The position. */
 	private String position; // the position of the text relative to the edge
 								// (start,middle,end)
-	private boolean underline;
+	/** The underline. */
+								private boolean underline;
+	
+	/** The truncate. */
 	private int truncate;
+	
+	/** The color. */
 	private final RGB color;
+	
+	/** The font. */
 	private String font;
 
+	/**
+	 * Instantiates a new multiline edge text.
+	 *
+	 * @param parent the parent
+	 * @param handler the handler
+	 * @param identity the identity
+	 * @param position the position
+	 * @param location the location
+	 * @param text the text
+	 * @param editable the editable
+	 * @param underline the underline
+	 * @param condense the condense
+	 * @param color the color
+	 * @param font the font
+	 */
 	public MultilineEdgeText(ClientElement parent, EventHandler handler,
 			String identity, String position, Point location, String text,
 			boolean editable, boolean underline, int condense, RGB color,
@@ -36,6 +67,22 @@ public class MultilineEdgeText extends DisplayWithPosition {
 		this.font = font;
 	}
 
+	/**
+	 * Instantiates a new multiline edge text.
+	 *
+	 * @param parent the parent
+	 * @param handler the handler
+	 * @param identity the identity
+	 * @param position the position
+	 * @param x the x
+	 * @param y the y
+	 * @param textString the text string
+	 * @param editable the editable
+	 * @param underline the underline
+	 * @param condense the condense
+	 * @param color the color
+	 * @param font the font
+	 */
 	public MultilineEdgeText(ClientElement parent, EventHandler handler,
 			String identity, String position, int x, int y, String textString,
 			boolean editable, boolean underline, int condense, RGB color,
@@ -44,6 +91,21 @@ public class MultilineEdgeText extends DisplayWithPosition {
 				editable, underline, condense, color, font);
 	}
 
+	/**
+	 * Instantiates a new multiline edge text.
+	 *
+	 * @param parent the parent
+	 * @param handler the handler
+	 * @param identity the identity
+	 * @param position the position
+	 * @param x the x
+	 * @param y the y
+	 * @param textString the text string
+	 * @param editable the editable
+	 * @param underline the underline
+	 * @param condense the condense
+	 * @param font the font
+	 */
 	public MultilineEdgeText(ClientElement parent, EventHandler handler,
 			String identity, String position, int x, int y, String textString,
 			boolean editable, boolean underline, int condense, String font) {
@@ -51,6 +113,11 @@ public class MultilineEdgeText extends DisplayWithPosition {
 				underline, condense, null, font);
 	}
 
+	/**
+	 * Change text.
+	 *
+	 * @param text the text
+	 */
 	public void changeText(String text) {
 		Message m = handler.newMessage("textChanged", 2);
 		Value v1 = new Value(identity);
@@ -60,18 +127,36 @@ public class MultilineEdgeText extends DisplayWithPosition {
 		handler.raiseEvent(m);
 	}
 
+	/**
+	 * Gets the font.
+	 *
+	 * @return the font
+	 */
 	public String getFont() {
 		return font;
 	}
 
+	/**
+	 * Gets the text.
+	 *
+	 * @return the text
+	 */
 	public String getText() {
 		return text;
 	}
 
+	/**
+	 * Checks if is editable.
+	 *
+	 * @return true, if is editable
+	 */
 	public boolean isEditable() {
 		return editable;
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.model.DisplayWithPosition#processMessage(xos.Message)
+	 */
 	@Override
 	public boolean processMessage(Message message) {
 		if (message.hasName("setText") && message.args[0].hasStrValue(identity)
@@ -91,22 +176,47 @@ public class MultilineEdgeText extends DisplayWithPosition {
 		return super.processMessage(message);
 	}
 
+	/**
+	 * Gets the color.
+	 *
+	 * @return the color
+	 */
 	public RGB getColor() {
 		return color;
 	}
 
+	/**
+	 * Gets the condense.
+	 *
+	 * @return the condense
+	 */
 	public int getCondense() {
 		return truncate;
 	}
 
+	/**
+	 * Gets the underline.
+	 *
+	 * @return the underline
+	 */
 	public boolean getUnderline() {
 		return underline;
 	}
 
+	/**
+	 * Gets the position.
+	 *
+	 * @return the position
+	 */
 	public String getPosition() {
 		return position;
 	}
 
+	/**
+	 * Raise move event.
+	 *
+	 * @param location the location
+	 */
 	public void raiseMoveEvent(Point location) {
 		Message m = handler.newMessage("move", 3);
 		Value v1 = new Value(getIdentity());
@@ -118,6 +228,9 @@ public class MultilineEdgeText extends DisplayWithPosition {
 		handler.raiseEvent(m);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.model.DisplayWithPosition#synchronise(uk.ac.mdx.xmf.swt.client.xml.Element)
+	 */
 	@Override
 	public void synchronise(Element edgeText) {
 		text = edgeText.getString("text");

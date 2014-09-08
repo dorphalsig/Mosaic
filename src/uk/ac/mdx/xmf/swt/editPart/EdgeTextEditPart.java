@@ -17,22 +17,40 @@ import uk.ac.mdx.xmf.swt.figure.EdgeFigure;
 import uk.ac.mdx.xmf.swt.figure.EdgeLabelFigure;
 import uk.ac.mdx.xmf.swt.model.EdgeText;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EdgeTextEditPart.
+ */
 public class EdgeTextEditPart extends CommandEventEditPart implements
 		MouseListener {
 
+	/** The manager. */
 	private TextEditManager manager = null;
+	
+	/** The model. */
 	private EdgeText model = null;
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#getDragTracker(org.eclipse.gef.Request)
+	 */
 	@Override
 	public DragTracker getDragTracker(Request request) {
 		return getDragTracker();
 	}
 
+	/**
+	 * Gets the drag tracker.
+	 *
+	 * @return the drag tracker
+	 */
 	public DragTracker getDragTracker() {
 		return null;
 		// return new EdgeTextDragTracker(this, (EdgeEditPart) getParent());
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
+	 */
 	@Override
 	public IFigure createFigure() {
 		model = (EdgeText) getModel();
@@ -43,6 +61,11 @@ public class EdgeTextEditPart extends CommandEventEditPart implements
 		return label;
 	}
 
+	/**
+	 * Gets the color.
+	 *
+	 * @return the color
+	 */
 	public RGB getColor() {
 		RGB color = ((EdgeText) getModel()).getColor();
 		return color;
@@ -54,10 +77,20 @@ public class EdgeTextEditPart extends CommandEventEditPart implements
 		// IPreferenceConstants.UNSELECTED_FONT_COLOR);
 	}
 
+	/**
+	 * Gets the condense size.
+	 *
+	 * @return the condense size
+	 */
 	public int getCondenseSize() {
 		return model.getCondenseSize();
 	}
 
+	/**
+	 * Gets the edge position.
+	 *
+	 * @return the edge position
+	 */
 	public Point getEdgePosition() {
 		EdgeText model = (EdgeText) getModel();
 		EdgeFigure edgeFigure = _diagramView.getEdgeFigure().get(
@@ -71,10 +104,18 @@ public class EdgeTextEditPart extends CommandEventEditPart implements
 			return edgeFigure.getPoints().getMidpoint();
 	}
 
+	/**
+	 * Gets the edge edit part.
+	 *
+	 * @return the edge edit part
+	 */
 	public EdgeEditPart getEdgeEditPart() {
 		return (EdgeEditPart) getParent();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
+	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		String prop = evt.getPropertyName();
@@ -92,10 +133,16 @@ public class EdgeTextEditPart extends CommandEventEditPart implements
 		}
 	}
 
+	/**
+	 * Refresh color.
+	 */
 	public void refreshColor() {
 		// getFigure().setForegroundColor(ColorManager.getColor(getColor()));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#refreshVisuals()
+	 */
 	@Override
 	protected void refreshVisuals() {
 		EdgeLabelFigure figure = (EdgeLabelFigure) getFigure();
@@ -115,6 +162,9 @@ public class EdgeTextEditPart extends CommandEventEditPart implements
 		refreshColor();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#createEditPolicies()
+	 */
 	@Override
 	protected void createEditPolicies() {
 		// installEditPolicy(EditPolicy.GRAPHICAL_NODE_ROLE,
@@ -126,6 +176,9 @@ public class EdgeTextEditPart extends CommandEventEditPart implements
 		// new EdgeTextEditPolicy());
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart#preferenceUpdate()
+	 */
 	@Override
 	public void preferenceUpdate() {
 		refreshColor();
@@ -134,6 +187,9 @@ public class EdgeTextEditPart extends CommandEventEditPart implements
 		figure.repaint();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#performRequest(org.eclipse.gef.Request)
+	 */
 	@Override
 	public void performRequest(Request request) {
 		// Object type = request.getType();
@@ -144,6 +200,13 @@ public class EdgeTextEditPart extends CommandEventEditPart implements
 		// }
 	}
 
+	/**
+	 * Perform direct edit.
+	 *
+	 * @param model the model
+	 * @param p the p
+	 * @param d the d
+	 */
 	public void performDirectEdit(EdgeText model,
 			org.eclipse.swt.graphics.Point p, Dimension d) {
 		// if (manager == null)
@@ -154,22 +217,36 @@ public class EdgeTextEditPart extends CommandEventEditPart implements
 		manager.show(model, p, d);
 	}
 
+	/**
+	 * Gets the edge figure.
+	 *
+	 * @return the edge figure
+	 */
 	public EdgeLabelFigure getEdgeFigure() {
 		return (EdgeLabelFigure) getFigure();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.draw2d.MouseListener#mouseDoubleClicked(org.eclipse.draw2d.MouseEvent)
+	 */
 	@Override
 	public void mouseDoubleClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.draw2d.MouseListener#mousePressed(org.eclipse.draw2d.MouseEvent)
+	 */
 	@Override
 	public void mousePressed(MouseEvent me) {
 		me.consume();
 		performRequest(new Request(RequestConstants.REQ_DIRECT_EDIT));
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.draw2d.MouseListener#mouseReleased(org.eclipse.draw2d.MouseEvent)
+	 */
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub

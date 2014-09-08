@@ -11,11 +11,23 @@ import uk.ac.mdx.xmf.swt.client.xml.Element;
 import xos.Message;
 import xos.Value;
 
+// TODO: Auto-generated Javadoc
 // this class is intended to be used as a utility for existing
 // model elements to create new model elements
 
+/**
+ * A factory for creating Model objects.
+ */
 public class ModelFactory {
 
+	/**
+	 * Gets the color.
+	 *
+	 * @param red the red
+	 * @param green the green
+	 * @param blue the blue
+	 * @return the color
+	 */
 	public static RGB getColor(int red, int green, int blue) {
 		if ((red >= 0 && red <= 255) && (green >= 0 && green <= 255)
 				&& (blue >= 0 && blue <= 255))
@@ -24,6 +36,14 @@ public class ModelFactory {
 			return null;
 	}
 
+	/**
+	 * New box.
+	 *
+	 * @param parent the parent
+	 * @param handler the handler
+	 * @param message the message
+	 * @return the box
+	 */
 	public static Box newBox(ClientElement parent, EventHandler handler,
 			Message message) {
 		String identity = message.args[1].strValue();
@@ -48,6 +68,12 @@ public class ModelFactory {
 						fillGreen, fillBlue));
 	}
 
+	/**
+	 * New box.
+	 *
+	 * @param parent the parent
+	 * @param box the box
+	 */
 	public static void newBox(Container parent, Element box) {
 		String identity = box.getString("identity");
 		int x = box.getInteger("x");
@@ -65,6 +91,14 @@ public class ModelFactory {
 		b.synchronise(box);
 	}
 
+	/**
+	 * New text.
+	 *
+	 * @param parent the parent
+	 * @param handler the handler
+	 * @param message the message
+	 * @return the text
+	 */
 	public static Text newText(ClientElement parent, EventHandler handler,
 			Message message) {
 		String identity = message.args[1].strValue();
@@ -88,6 +122,12 @@ public class ModelFactory {
 				underline, italicise, getColor(red, green, blue), font);
 	}
 
+	/**
+	 * New text.
+	 *
+	 * @param parent the parent
+	 * @param text the text
+	 */
 	public static void newText(Container parent, Element text) {
 		String id = text.getString("identity");
 		String label = text.getString("text");
@@ -103,6 +143,14 @@ public class ModelFactory {
 		t.synchronise(text);
 	}
 
+	/**
+	 * New multiline text.
+	 *
+	 * @param parent the parent
+	 * @param handler the handler
+	 * @param message the message
+	 * @return the multiline text
+	 */
 	public static MultilineText newMultilineText(ClientElement parent,
 			EventHandler handler, Message message) {
 		String identity = message.args[1].strValue();
@@ -124,6 +172,12 @@ public class ModelFactory {
 				getColor(fillRed, fillGreen, fillBlue), font);
 	}
 
+	/**
+	 * New multiline text.
+	 *
+	 * @param parent the parent
+	 * @param multiline the multiline
+	 */
 	public static void newMultilineText(Container parent, Element multiline) {
 		String id = multiline.getString("identity");
 		String label = multiline.getString("text");
@@ -139,6 +193,14 @@ public class ModelFactory {
 		t.synchronise(multiline);
 	}
 
+	/**
+	 * New multiline edge text.
+	 *
+	 * @param parent the parent
+	 * @param handler the handler
+	 * @param message the message
+	 * @return the multiline edge text
+	 */
 	public static MultilineEdgeText newMultilineEdgeText(ClientElement parent,
 			EventHandler handler, Message message) {
 		String identity = message.args[1].strValue();
@@ -158,6 +220,14 @@ public class ModelFactory {
 				getColor(red, green, blue), font);
 	}
 
+	/**
+	 * New edge text.
+	 *
+	 * @param parent the parent
+	 * @param handler the handler
+	 * @param message the message
+	 * @return the edge text
+	 */
 	public static EdgeText newEdgeText(ClientElement parent,
 			EventHandler handler, Message message) {
 		String identity = message.args[1].strValue();
@@ -176,6 +246,14 @@ public class ModelFactory {
 				editable, underline, condense, getColor(red, green, blue), font);
 	}
 
+	/**
+	 * New group.
+	 *
+	 * @param parent the parent
+	 * @param handler the handler
+	 * @param message the message
+	 * @return the group
+	 */
 	public static Group newGroup(ClientElement parent, EventHandler handler,
 			Message message) {
 		String identity = message.args[1].strValue();
@@ -186,6 +264,12 @@ public class ModelFactory {
 		return new Group(parent, handler, identity, x, y, width, height);
 	}
 
+	/**
+	 * New group.
+	 *
+	 * @param parent the parent
+	 * @param group the group
+	 */
 	public static void newGroup(Container parent, Element group) {
 		String id = group.getString("identity");
 		int x = group.getInteger("x");
@@ -197,6 +281,14 @@ public class ModelFactory {
 		g.synchronise(group);
 	}
 
+	/**
+	 * New line.
+	 *
+	 * @param parent the parent
+	 * @param handler the handler
+	 * @param message the message
+	 * @return the line
+	 */
 	public static Line newLine(ClientElement parent, EventHandler handler,
 			Message message) {
 		String identity = message.args[1].strValue();
@@ -211,6 +303,12 @@ public class ModelFactory {
 				red, green, blue));
 	}
 
+	/**
+	 * New line.
+	 *
+	 * @param parent the parent
+	 * @param line the line
+	 */
 	public static void newLine(Container parent, Element line) {
 		String id = line.getString("identity");
 		int x1 = line.getInteger("x1");
@@ -222,6 +320,14 @@ public class ModelFactory {
 		l.synchronise(line);
 	}
 
+	/**
+	 * New ellipse.
+	 *
+	 * @param parent the parent
+	 * @param handler the handler
+	 * @param message the message
+	 * @return the ellipse
+	 */
 	public static Ellipse newEllipse(ClientElement parent,
 			EventHandler handler, Message message) {
 		String identity = message.args[1].strValue();
@@ -242,6 +348,12 @@ public class ModelFactory {
 				outline, lineColor, fillColor);
 	}
 
+	/**
+	 * New ellipse.
+	 *
+	 * @param parent the parent
+	 * @param ellipse the ellipse
+	 */
 	public static void newEllipse(Container parent, Element ellipse) {
 		String id = ellipse.getString("identity");
 		int x = ellipse.getInteger("x");
@@ -255,6 +367,14 @@ public class ModelFactory {
 		e.synchronise(ellipse);
 	}
 
+	/**
+	 * New image.
+	 *
+	 * @param parent the parent
+	 * @param handler the handler
+	 * @param message the message
+	 * @return the image
+	 */
 	public static Image newImage(ClientElement parent, EventHandler handler,
 			Message message) {
 		String identity = message.args[1].strValue();
@@ -267,6 +387,14 @@ public class ModelFactory {
 				height);
 	}
 
+	/**
+	 * New shape.
+	 *
+	 * @param parent the parent
+	 * @param handler the handler
+	 * @param message the message
+	 * @return the shape
+	 */
 	public static Shape newShape(ClientElement parent, EventHandler handler,
 			Message message) {
 		String identity = message.args[1].strValue();

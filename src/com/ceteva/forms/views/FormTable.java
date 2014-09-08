@@ -19,17 +19,43 @@ import uk.ac.mdx.xmf.swt.client.EventHandler;
 import xos.Message;
 import xos.Value;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FormTable.
+ */
 class FormTable extends FormElement {
 
+	/** The Constant ROW_HEIGHT. */
 	static final int ROW_HEIGHT = 15;
 
+	/** The site. */
 	IWorkbenchPartSite site;
+	
+	/** The table. */
 	Table table;
+	
+	/** The cols. */
 	int cols;
+	
+	/** The rows. */
 	int rows;
+	
+	/** The components. */
 	Vector components = new Vector();
+	
+	/** The editors. */
 	Hashtable editors = new Hashtable();
 
+	/**
+	 * Instantiates a new form table.
+	 *
+	 * @param parent the parent
+	 * @param identity the identity
+	 * @param handler the handler
+	 * @param site the site
+	 * @param cols the cols
+	 * @param rows the rows
+	 */
 	public FormTable(Composite parent, String identity, EventHandler handler,
 			IWorkbenchPartSite site, int cols, int rows) {
 		super(identity);
@@ -39,10 +65,18 @@ class FormTable extends FormElement {
 		createTable(parent);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.ComponentWithControl#getControl()
+	 */
 	public Control getControl() {
 		return table;
 	}
 
+	/**
+	 * Creates the table.
+	 *
+	 * @param parent the parent
+	 */
 	public void createTable(Composite parent) {
 
 		table = new Table(parent, SWT.BORDER | SWT.SINGLE);
@@ -66,12 +100,22 @@ class FormTable extends FormElement {
 			initRowHeight();
 	}
 
+	/**
+	 * Inits the row height.
+	 */
 	private void initRowHeight() {
 		TableItem item = table.getItem(0);
 		Image image = new Image(null, 1, ROW_HEIGHT);
 		item.setImage(image);
 	}
 
+	/**
+	 * Gets the editor.
+	 *
+	 * @param col the col
+	 * @param row the row
+	 * @return the editor
+	 */
 	private TableEditor getEditor(int col, int row) {
 		TableItem item = table.getItem(row);
 		TableEditor[] editorArray = (TableEditor[]) editors.get(item);
@@ -83,14 +127,30 @@ class FormTable extends FormElement {
 		return editor;
 	}
 
+	/**
+	 * Sets the bounds.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param width the width
+	 * @param height the height
+	 */
 	public void setBounds(int x, int y, int width, int height) {
 		table.setBounds(x, y, width, height);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Commandable#processCall(xos.Message)
+	 */
 	public Value processCall(Message message) {
 		return null;
 	}
 
+	/**
+	 * Delete.
+	 *
+	 * @param message the message
+	 */
 	public void delete(Message message) {
 		String id = message.args[0].strValue();
 		for (int i = 0; i < components.size(); i++) {
@@ -100,6 +160,11 @@ class FormTable extends FormElement {
 		}
 	}
 
+	/**
+	 * Adds the row.
+	 *
+	 * @param message the message
+	 */
 	public void addRow(Message message) {
 		int row = message.args[1].intValue;
 		TableItem item = new TableItem(table, SWT.NONE, row);
@@ -120,6 +185,11 @@ class FormTable extends FormElement {
 		this.rows = rows + 1;
 	}
 
+	/**
+	 * Delete row.
+	 *
+	 * @param message the message
+	 */
 	public void deleteRow(Message message) {
 		int row = message.args[1].intValue;
 		TableItem item = table.getItem(row);
@@ -144,6 +214,9 @@ class FormTable extends FormElement {
 		this.rows = rows - 1;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ceteva.forms.views.FormElement#processMessage(xos.Message)
+	 */
 	public boolean processMessage(Message message) {
 		boolean processed = false;
 		if (message.args[0].hasStrValue(getIdentity())) {
@@ -212,6 +285,12 @@ class FormTable extends FormElement {
 		return super.processMessage(message);
 	}
 
+	/**
+	 * Broadcast command.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean broadcastCommand(Message message) {
 		for (int i = 0; i < components.size(); i++) {
 			FormElement component = (FormElement) components.elementAt(i);
@@ -221,6 +300,12 @@ class FormTable extends FormElement {
 		return false;
 	}
 
+	/**
+	 * Broadcast call.
+	 *
+	 * @param message the message
+	 * @return the value
+	 */
 	public Value broadcastCall(Message message) {
 		for (int i = 0; i < components.size(); i++) {
 			FormElement component = (FormElement) components.elementAt(i);
@@ -231,6 +316,12 @@ class FormTable extends FormElement {
 		return null;
 	}
 
+	/**
+	 * Sets the table item.
+	 *
+	 * @param component the component
+	 * @param message the message
+	 */
 	public void setTableItem(FormElement component, Message message) {
 		int col = message.args[2].intValue;
 		int row = message.args[3].intValue;
@@ -244,18 +335,34 @@ class FormTable extends FormElement {
 		editor.setEditor(control, item, col);
 	}
 
+	/**
+	 * Sets the table column width.
+	 *
+	 * @param message the new table column width
+	 */
 	public void setTableColumnWidth(Message message) {
 		int col = message.args[1].intValue;
 		int width = message.args[2].intValue;
 		table.getColumn(col).setWidth(width);
 	}
 
+	/**
+	 * Sets the table column title.
+	 *
+	 * @param message the new table column title
+	 */
 	public void setTableColumnTitle(Message message) {
 		int col = message.args[1].intValue;
 		String title = message.args[2].strValue();
 		table.getColumn(col).setText(title);
 	}
 
+	/**
+	 * New button.
+	 *
+	 * @param message the message
+	 * @return the form button
+	 */
 	public FormButton newButton(Message message) {
 		String buttonID = message.args[1].strValue();
 		String text = message.args[2].strValue();
@@ -269,6 +376,12 @@ class FormTable extends FormElement {
 		return button;
 	}
 
+	/**
+	 * New text.
+	 *
+	 * @param message the message
+	 * @return the form text
+	 */
 	public FormText newText(Message message) {
 		String textID = message.args[1].strValue();
 		String textString = message.args[2].strValue();
@@ -281,6 +394,12 @@ class FormTable extends FormElement {
 		return text;
 	}
 
+	/**
+	 * New text field.
+	 *
+	 * @param message the message
+	 * @return the form text field
+	 */
 	public FormTextField newTextField(Message message) {
 		String fieldID = message.args[1].strValue();
 		String text = "";
@@ -310,6 +429,12 @@ class FormTable extends FormElement {
 		return field;
 	}
 
+	/**
+	 * New combo box.
+	 *
+	 * @param message the message
+	 * @return the form table combo box
+	 */
 	public FormTableComboBox newComboBox(Message message) {
 		String comboID = message.args[1].strValue();
 		int x = message.args[2].intValue;
@@ -322,6 +447,12 @@ class FormTable extends FormElement {
 		return combo;
 	}
 
+	/**
+	 * New list.
+	 *
+	 * @param message the message
+	 * @return the form list
+	 */
 	public FormList newList(Message message) {
 		String listID = message.args[1].strValue();
 		int x = message.args[2].intValue;
@@ -334,6 +465,12 @@ class FormTable extends FormElement {
 		return list;
 	}
 
+	/**
+	 * New check box.
+	 *
+	 * @param message the message
+	 * @return the form check box
+	 */
 	public FormCheckBox newCheckBox(Message message) {
 		String boxID = message.args[1].strValue();
 		int x = message.args[2].intValue;
@@ -345,6 +482,12 @@ class FormTable extends FormElement {
 		return checkbox;
 	}
 
+	/**
+	 * New tree.
+	 *
+	 * @param message the message
+	 * @return the form tree
+	 */
 	public FormTree newTree(Message message) {
 		String treeID = message.args[1].strValue();
 		int x = message.args[2].intValue;
@@ -357,6 +500,12 @@ class FormTable extends FormElement {
 		return tree;
 	}
 
+	/**
+	 * New table.
+	 *
+	 * @param message the message
+	 * @return the form table
+	 */
 	public FormTable newTable(Message message) {
 		String tableID = message.args[1].strValue();
 		int x = message.args[2].intValue;

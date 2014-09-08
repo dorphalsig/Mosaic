@@ -8,21 +8,37 @@ import xos.Message;
 
 import com.ceteva.mosaic.perspectives.PerspectiveManager;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WorkbenchClient.
+ */
 public class WorkbenchClient extends Client {
 
+	/** The perspective manager. */
 	PerspectiveManager perspectiveManager = PerspectiveManager
 			.getDefaultManager();
+	
+	/** The handler. */
 	public EventHandler handler = null;
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Client#setEventHandler(uk.ac.mdx.xmf.swt.client.EventHandler)
+	 */
 	@Override
 	public void setEventHandler(EventHandler eventsOut) {
 		handler = eventsOut;
 	}
 
+	/**
+	 * Instantiates a new workbench client.
+	 */
 	public WorkbenchClient() {
 		super("com.ceteva.mosaic");
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Client#processMessage(xos.Message)
+	 */
 	public boolean processMessage(Message message) {
 		if (message.hasName("shutdown")) {
 			Display.getDefault().close();
@@ -31,6 +47,12 @@ public class WorkbenchClient extends Client {
 		return processPerspectiveMessage(message);
 	}
 
+	/**
+	 * Process perspective message.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean processPerspectiveMessage(Message message) {
 		if (message.hasName("newPerspective")) {
 			String id = message.args[0].strValue();

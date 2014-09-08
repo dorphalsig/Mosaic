@@ -4,17 +4,28 @@ import uk.ac.mdx.xmf.swt.client.Client;
 import uk.ac.mdx.xmf.swt.client.EventHandler;
 import xos.Message;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UndoClient.
+ */
 public class UndoClient extends Client {
 
 	// public static UndoAction undo = new UndoAction();
 	// public static RedoAction redo = new RedoAction();
+	/** The handler. */
 	public EventHandler handler = null;
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Client#setEventHandler(uk.ac.mdx.xmf.swt.client.EventHandler)
+	 */
 	@Override
 	public void setEventHandler(EventHandler eventsOut) {
 		handler = eventsOut;
 	}
 
+	/**
+	 * Instantiates a new undo client.
+	 */
 	public UndoClient() {
 		super("com.ceteva.undo");
 	}
@@ -25,6 +36,9 @@ public class UndoClient extends Client {
 	// // redo.registerEventHandler(handler);
 	// }
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Client#processMessage(xos.Message)
+	 */
 	public boolean processMessage(Message message) {
 		// if (message.hasName("enableUndo")) {
 		// undo.setEnabled(true);

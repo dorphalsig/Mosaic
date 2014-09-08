@@ -17,29 +17,62 @@ import xos.Value;
 
 import com.ceteva.modelBrowser.views.ModelBrowserView;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ModelBrowserClient.
+ */
 public class ModelBrowserClient extends XMLClient {
 
+	/** The view. */
 	ModelBrowserView view = null;
+	
+	/** The open browsers. */
 	Hashtable openBrowsers = new Hashtable();
+	
+	/** The handler. */
 	public EventHandler handler = null;
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Client#setEventHandler(uk.ac.mdx.xmf.swt.client.EventHandler)
+	 */
 	@Override
 	public void setEventHandler(EventHandler eventsOut) {
 		handler = eventsOut;
 	}
 
+	/**
+	 * Instantiates a new model browser client.
+	 */
 	public ModelBrowserClient() {
 		super("com.ceteva.modelBrowser");
 	}
 
+	/**
+	 * Browser added.
+	 *
+	 * @param id the id
+	 * @param browser the browser
+	 */
 	public void browserAdded(String id, ModelBrowserView browser) {
 		openBrowsers.put(id, browser);
 	}
 
+	/**
+	 * Browser closed.
+	 *
+	 * @param id the id
+	 * @param browser the browser
+	 */
 	public void browserClosed(String id, ModelBrowserView browser) {
 		openBrowsers.remove(id);
 	}
 
+	/**
+	 * Browser exists.
+	 *
+	 * @param id the id
+	 * @return true, if successful
+	 */
 	public boolean browserExists(String id) {
 		return openBrowsers.containsKey(id);
 	}
@@ -48,6 +81,12 @@ public class ModelBrowserClient extends XMLClient {
 	// return getPage().getViewReferences();
 	// }
 
+	/**
+	 * New browser.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean newBrowser(Message message) {
 		String identity = message.args[0].strValue();
 		String type = message.args[1].strValue();
@@ -58,8 +97,19 @@ public class ModelBrowserClient extends XMLClient {
 			return false;
 	}
 
+	/** The Constant ID_DIV. */
 	private static final String ID_DIV = ".";
 
+	/**
+	 * New browser.
+	 *
+	 * @param identity the identity
+	 * @param type the type
+	 * @param name the name
+	 * @param closable the closable
+	 * @param hasFocus the has focus
+	 * @return the model browser view
+	 */
 	public ModelBrowserView newBrowser(String identity, String type,
 			String name, boolean closable, boolean hasFocus) {
 		String id = type + ID_DIV + identity;
@@ -88,6 +138,9 @@ public class ModelBrowserClient extends XMLClient {
 		return browser;
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.Client#processCall(xos.Message)
+	 */
 	public Value processCall(Message message) {
 		Enumeration e = openBrowsers.elements();
 		while (e.hasMoreElements()) {
@@ -99,6 +152,9 @@ public class ModelBrowserClient extends XMLClient {
 		return new Value(false);
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.XMLClient#processMessage(xos.Message)
+	 */
 	public boolean processMessage(Message message) {
 		if (super.processMessage(message))
 			return true;
@@ -119,11 +175,20 @@ public class ModelBrowserClient extends XMLClient {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see uk.ac.mdx.xmf.swt.client.XMLClient#processXML(uk.ac.mdx.xmf.swt.client.xml.Document)
+	 */
 	public void processXML(Document xml) {
 		// xml.printString();
 		synchroniseBrowsers(xml);
 	}
 
+	/**
+	 * Sets the focus.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean setFocus(Message message) {
 		// String identity = message.args[0].strValue();
 		// if (openBrowsers.containsKey(identity)) {
@@ -142,6 +207,12 @@ public class ModelBrowserClient extends XMLClient {
 		return false;
 	}
 
+	/**
+	 * Sets the visible.
+	 *
+	 * @param message the message
+	 * @return true, if successful
+	 */
 	public boolean setVisible(Message message) {
 		// String identity = message.args[0].strValue();
 		// if (browserExists(identity)) {
@@ -161,6 +232,11 @@ public class ModelBrowserClient extends XMLClient {
 		return false;
 	}
 
+	/**
+	 * Synchronise browsers.
+	 *
+	 * @param xml the xml
+	 */
 	public void synchroniseBrowsers(Element xml) {
 
 		// check that there is a browser for each of the document's browsers

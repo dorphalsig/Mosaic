@@ -15,22 +15,42 @@ import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.commands.ICommandService;
 import org.eclipse.ui.keys.IBindingService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class KeyBindingBuilder.
+ */
 public class KeyBindingBuilder {
 
+	/** The context. */
 	private static String context = "org.eclipse.ui.contexts.window";
+	
+	/** The command count. */
 	private static int commandCount = 0;
+	
+	/** The binding service. */
 	private static IBindingService bindingService = null;
+	
+	/** The command service. */
 	private static ICommandService commandService = null;
+	
+	/** The commandbindings. */
 	private static Hashtable commandbindings = new Hashtable(); // binding
 																// between
 																// keybindings
 																// and commands
-	private static Hashtable actionbindings = new Hashtable(); // binding
+	/** The actionbindings. */
+																private static Hashtable actionbindings = new Hashtable(); // binding
 																// between
 																// actions and
 																// sites
 
-	private static String addCommandBinding(String keybinding) {
+	/**
+																 * Adds the command binding.
+																 *
+																 * @param keybinding the keybinding
+																 * @return the string
+																 */
+																private static String addCommandBinding(String keybinding) {
 
 		// create a command
 
@@ -56,6 +76,12 @@ public class KeyBindingBuilder {
 		return identity;
 	}
 
+	/**
+	 * Adds the key binding.
+	 *
+	 * @param site the site
+	 * @param action the action
+	 */
 	public static void addKeyBinding(IWorkbenchPartSite site, IAction action) {
 		if (KeyBindingManager.hasBinding(action.getId())) {
 			String keybinding = KeyBindingManager.getBinding(action.getId());
@@ -73,6 +99,12 @@ public class KeyBindingBuilder {
 		}
 	}
 
+	/**
+	 * Check for platform binding.
+	 *
+	 * @param keybinding the keybinding
+	 * @return the string
+	 */
 	private static String checkForPlatformBinding(String keybinding) {
 		// // Binding[] bindings = getBindingService().getBindings();
 		// for (int i = 0; i < bindings.length; i++) {
@@ -110,6 +142,11 @@ public class KeyBindingBuilder {
 	 * } } } }
 	 */
 
+	/**
+	 * Reset key bindings.
+	 *
+	 * @param site the site
+	 */
 	public static void resetKeyBindings(IWorkbenchPartSite site) {
 		Enumeration e = actionbindings.keys();
 		while (e.hasMoreElements()) {
@@ -123,6 +160,12 @@ public class KeyBindingBuilder {
 		}
 	}
 
+	/**
+	 * Creates the parameterized command.
+	 *
+	 * @param id the id
+	 * @return the parameterized command
+	 */
 	private static ParameterizedCommand createParameterizedCommand(String id) {
 		// org.eclipse.core.commands.Command c = getCommandService()
 		// .getCommand(id);
@@ -133,6 +176,11 @@ public class KeyBindingBuilder {
 		return null;
 	}
 
+	/**
+	 * Gets the command service.
+	 *
+	 * @return the command service
+	 */
 	private static ICommandService getCommandService() {
 		// if (commandService == null)
 		// commandService = (ICommandService) getWorkbench().getAdapter(
@@ -141,6 +189,11 @@ public class KeyBindingBuilder {
 		return null;
 	}
 
+	/**
+	 * Gets the binding service.
+	 *
+	 * @return the binding service
+	 */
 	private static IBindingService getBindingService() {
 		// if (bindingService == null)
 		// bindingService = (IBindingService) getWorkbench().getAdapter(
@@ -149,11 +202,21 @@ public class KeyBindingBuilder {
 		return null;
 	}
 
+	/**
+	 * Gets the workbench.
+	 *
+	 * @return the workbench
+	 */
 	private static IWorkbench getWorkbench() {
 		return null;
 		// return MenusPlugin.getDefault().getWorkbench();
 	}
 
+	/**
+	 * Save binding.
+	 *
+	 * @param binding the binding
+	 */
 	private static void saveBinding(KeyBinding binding) {
 		Binding[] oldBindings = getBindingService().getBindings();
 		int length = 1;

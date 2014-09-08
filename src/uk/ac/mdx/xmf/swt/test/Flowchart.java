@@ -39,17 +39,42 @@ import uk.ac.mdx.xmf.swt.io.Provider;
 import uk.ac.mdx.xmf.swt.misc.DisplayHelper;
 import xos.Message;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Flowchart.
+ */
 public class Flowchart {
+	
+	/** The sash form. */
 	private static SashForm sashForm = null;
+	
+	/** The sash form1. */
 	private final SashForm sashForm1 = null;
+	
+	/** The view. */
 	private final DiagramView view = null;
+	
+	/** The nodes. */
 	static ArrayList<ProcessFigure> nodes = new ArrayList<ProcessFigure>();
 	// private Overview overview = null;
+	/** The palette. */
 	private final Palette palette = null;
+	
+	/** The overview. */
 	private final Overview overview = null;
+	
+	/** The screen width. */
 	private static int screenWidth;
+	
+	/** The screen height. */
 	private static int screenHeight;
 
+	/**
+	 * Process message.
+	 *
+	 * @param ms the ms
+	 * @return true, if successful
+	 */
 	public static boolean processMessage(ArrayList<Message> ms) {
 		ProcessFigure node;
 		int i = 0;
@@ -74,6 +99,11 @@ public class Flowchart {
 		return false;
 	}
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String args[]) {
 		Shell shell = new Shell();
 		screenWidth = DisplayHelper.getScreenWidth();

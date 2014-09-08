@@ -22,7 +22,10 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class AddToolbarToTabFolder.
+ *
  * @author qingkangxu
  * 
  *         TODO To change the template for this generated type comment go to
@@ -30,6 +33,11 @@ import org.eclipse.swt.widgets.ToolItem;
  */
 public class AddToolbarToTabFolder {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		Display display = new Display();
 		Shell shell = new Shell(display, SWT.SHELL_TRIM);

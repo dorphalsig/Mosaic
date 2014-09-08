@@ -2,13 +2,26 @@ package com.ceteva.console.views;
 
 import java.util.Vector;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class History.
+ */
 public class History extends Vector {
 	
+  /** The Constant serialVersionUID. */
   static final long serialVersionUID = 0;
 
+  /** The history size. */
   public static int historySize = 10;
+  
+  /** The command pointer. */
   public int commandPointer = 0;
 
+  /**
+   * Adds the.
+   *
+   * @param input the input
+   */
   public void add(String input) {
     
     // if the new command is the same as the one just pushed
@@ -33,6 +46,11 @@ public class History extends Vector {
     
   }
   
+  /**
+   * Gets the previous.
+   *
+   * @return the previous
+   */
   public String getPrevious() {
       
     // if there is a previous command  
@@ -52,6 +70,11 @@ public class History extends Vector {
     return "";
   }
   
+  /**
+   * Gets the next.
+   *
+   * @return the next
+   */
   public String getNext() {
       
     // if there is a next command
@@ -71,6 +94,9 @@ public class History extends Vector {
   	return "";
   }
   
+  /**
+   * Prints the state.
+   */
   public void printState() {
     for(int i=0;i<size();i++) {
       String command = i + " : " + (String)elementAt(i);
@@ -80,10 +106,16 @@ public class History extends Vector {
     }
   }
   
+  /**
+   * Reset command pointer.
+   */
   public void resetCommandPointer() {
     commandPointer = size();  
   }
   
+  /* (non-Javadoc)
+   * @see java.util.Vector#setSize(int)
+   */
   public void setSize(int size) {
   	historySize = size;
   }
