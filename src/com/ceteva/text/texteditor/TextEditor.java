@@ -22,9 +22,11 @@ import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.Bullet;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.LineStyleEvent;
 import org.eclipse.swt.custom.LineStyleListener;
+import org.eclipse.swt.custom.ST;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.DisposeEvent;
@@ -33,6 +35,7 @@ import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.graphics.GlyphMetrics;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.layout.GridData;
@@ -120,14 +123,33 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 
 	public void addClickListener() {
 		// Action: copy selected text.
+		final Action actionCut = new Action("&Cut",
+				null) {
+			public void run() {
+				text.cut();
+			}
+		};
+		actionCut.setAccelerator(SWT.CTRL + 'X');
+		
 		final Action actionCopy = new Action("&Copy",
-				ImageDescriptor.createFromImage(ImageManager
-						.getImage("icons/State.gif"))) {
+				null) {
 			public void run() {
 				text.copy();
 			}
 		};
 		actionCopy.setAccelerator(SWT.CTRL + 'C');
+		
+		final Action actionPast = new Action("&Past",
+				null) {
+			public void run() {
+				text.paste();
+			}
+		};
+		actionPast.setAccelerator(SWT.CTRL + 'P');
+		
+		actionCopy.setAccelerator(SWT.CTRL + 'C');
+		
+		actionPast.setAccelerator(SWT.CTRL + 'P');
 
 		if (text != null) {
 			text.addListener(SWT.MouseMove, new Listener() {
@@ -138,7 +160,9 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 					MenuBuilder.calculateMenu(getIdentity(), menu, null);
 					menu.add(new Separator("DocumentManagement"));
 
+					menu.add(actionCut);
 					menu.add(actionCopy);
+					menu.add(actionPast);
 					text.setMenu(menu.createContextMenu(text));
 				}
 			});
@@ -165,6 +189,22 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 						tabItem.setImage(null);
 					}
 				}
+			});
+			// add line number
+			text.addLineStyleListener(new LineStyleListener()
+			{
+			    public void lineGetStyle(LineStyleEvent e)
+			    {
+			        //Set the line number
+			        e.bulletIndex = text.getLineAtOffset(e.lineOffset);
+
+			        //Set the style, 12 pixles wide for each digit
+			        StyleRange style = new StyleRange();
+			        style.metrics = new GlyphMetrics(0, 0, Integer.toString(text.getLineCount()+1).length()*12);
+
+			        //Create and set the bullet
+			        e.bullet = new Bullet(ST.BULLET_NUMBER,style);
+			    }
 			});
 		}
 	}
