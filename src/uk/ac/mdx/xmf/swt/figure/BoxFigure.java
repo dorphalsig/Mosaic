@@ -6,6 +6,9 @@ import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.swt.graphics.RGB;
+
+import uk.ac.mdx.xmf.swt.misc.ColorManager;
 
 // TODO: Auto-generated Javadoc
 // public class BoxFigure extends Shape { // RectangleFigure {
@@ -48,7 +51,7 @@ public class BoxFigure extends RectangleFigure {
 		this.bottom = bottom;
 		this.left = left;
 
-		this.setBackgroundColor(ColorConstants.lightBlue);
+		this.setBackgroundColor(ColorManager.getColor(new RGB(189,189,255)));
 	}
 
 	/* (non-Javadoc)

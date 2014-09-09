@@ -39,6 +39,7 @@ import uk.ac.mdx.xmf.swt.editPart.TextEditPart;
 import uk.ac.mdx.xmf.swt.figure.BoxFigure;
 import uk.ac.mdx.xmf.swt.figure.EdgeFigure;
 import uk.ac.mdx.xmf.swt.figure.EdgeLabelFigure;
+import uk.ac.mdx.xmf.swt.figure.EdgeShapeFigure;
 import uk.ac.mdx.xmf.swt.figure.ImageFigure;
 import uk.ac.mdx.xmf.swt.figure.LabelFigure;
 import uk.ac.mdx.xmf.swt.figure.MultilineTextFigure;
@@ -401,7 +402,9 @@ public class DiagramView extends View {
 					org.eclipse.draw2d.geometry.Point bottomRef = edgeFigure
 							.getTargetAnchor().getReferencePoint();
 
-					if (checkEdgeIsClicked(topRef, bottomRef, location2)) {
+//					if (checkEdgeIsClicked(topRef, bottomRef, location2)) 
+					if (((EdgeShapeFigure) edgeShapes.get(key)).isClicked(location2))
+					{
 						edgeShapes.get(key).setVisible(true);
 						edgeFigures.get(key).setVisible(false);
 						edgeSelect = key;
@@ -1038,7 +1041,7 @@ public class DiagramView extends View {
 					restShape(p, node.getSize());
 				}
 
-				Figure edgeShape = edgeShapes.get(edgeSelect);
+				EdgeShapeFigure edgeShape = edgeShapes.get(edgeSelect);
 				Edge edge = edgeModels.get(edgeSelect);
 				EdgeEditPart edit = edgeEditPartFigures.get(edgeSelect);
 
@@ -1047,7 +1050,7 @@ public class DiagramView extends View {
 								.equalsIgnoreCase(VisualElementEvents.wayPointEdgePoint)) {
 					edge.setDragPoints(location2, getPointIndex);
 
-					edgeShape = (Figure) edit.createFigure(true);
+					edgeShape = (EdgeShapeFigure) edit.createFigure(true);
 
 					edgeShape.setVisible(true);
 
@@ -1365,9 +1368,9 @@ public class DiagramView extends View {
 
 					((Edge) iModel).setPoints(location1, location2);
 
-					Figure shape = (Figure) edgeEditPart.createFigure(true);
+					EdgeShapeFigure shape = (EdgeShapeFigure) edgeEditPart.createFigure(false);
 
-					shape.setVisible(false);
+					shape.setVisible(true);
 					edgeShapes.put(((Edge) iModel).getIdentity(), shape);
 					rootFigure.add(shape);
 
@@ -1394,6 +1397,7 @@ public class DiagramView extends View {
 
 				EdgeFigure edgeFigure = edgeFigures.get(id);
 				edgeFigure.add(label);
+				label.setVisible(true);
 
 				edgeLabelFigures.put(text.getIdentity(), label);
 				edgeTexts.put(text.getIdentity(), text);

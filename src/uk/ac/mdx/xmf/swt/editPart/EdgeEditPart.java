@@ -82,7 +82,7 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 	 * @param flag the flag
 	 * @return the i figure
 	 */
-	public IFigure createFigure(boolean flag) {
+	public EdgeShapeFigure createFigure(boolean flag) {
 		Edge edge = (Edge) getModel();
 		Vector points = edge.getPoints();
 		Vector dragPoint = edge.getDragPoints();
@@ -91,7 +91,9 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 		Rectangle rec = new Rectangle(Main.getInstance().getView()
 				.getCanvas().getBounds());
 		shape.setBounds(rec);
-		shape.setLineWidth(2);
+		shape.setLineWidth(1);
+		shape.setOpaque(false);
+		
 		// shape.setBackgroundColor(ColorConstants.lightGray);
 		// shape.setVisible(false);
 

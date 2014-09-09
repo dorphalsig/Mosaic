@@ -35,6 +35,7 @@ import uk.ac.mdx.xmf.swt.editPart.TextEditPart;
 import uk.ac.mdx.xmf.swt.figure.BoxFigure;
 import uk.ac.mdx.xmf.swt.figure.EdgeFigure;
 import uk.ac.mdx.xmf.swt.figure.EdgeLabelFigure;
+import uk.ac.mdx.xmf.swt.figure.EdgeShapeFigure;
 import uk.ac.mdx.xmf.swt.figure.MultilineTextFigure;
 import uk.ac.mdx.xmf.swt.model.Edge;
 import uk.ac.mdx.xmf.swt.model.EdgeText;
@@ -61,7 +62,7 @@ public abstract class View extends Composite implements KeyListener,
 	static Map<String, Figure> nodeShapes = new HashMap<String, Figure>();
 	
 	/** The edge shapes. */
-	static Map<String, Figure> edgeShapes = new HashMap<String, Figure>();
+	static Map<String, EdgeShapeFigure> edgeShapes = new HashMap<String, EdgeShapeFigure>();
 	
 	/** The figure nodes. */
 	static Map<String, Figure> figureNodes = new HashMap<String, Figure>();

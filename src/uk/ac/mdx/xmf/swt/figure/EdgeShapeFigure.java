@@ -84,4 +84,34 @@ public class EdgeShapeFigure extends org.eclipse.draw2d.PolylineShape {
 
 		}
 	}
+	public boolean isClicked(org.eclipse.draw2d.geometry.Point point){
+		boolean isClicked=false;
+		
+		Point firstPoint = (Point) points.elementAt(0);
+		Point lastPoint = firstPoint;
+		Iterator it = points.subList(1, points.size()).iterator();
+		while (it.hasNext()) {
+			Point nextPoint = (Point) it.next();
+			if (lastPoint.x != 0 && nextPoint.x != 0){
+				isClicked=isOnLine(lastPoint, nextPoint, point);
+				if (isClicked)
+				return isClicked;
+			}
+			lastPoint = nextPoint;
+		}
+		return isClicked;
+	}
+	private boolean isOnLine(Point p1,Point p2, Point p3){
+		boolean isOnLine=false;
+		if ((p1.y==p2.y)&&(p2.y==p3.y))
+		return true;
+		
+		double s1= (p1.x -p2.x)/(p1.y-p2.y);
+		double s2=(p2.x -p3.x)/(p2.y-p3.y);
+		
+		if (s1==s2)
+			return true;
+		
+		return isOnLine;
+	}
 }
