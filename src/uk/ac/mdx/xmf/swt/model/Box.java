@@ -56,6 +56,7 @@ public class Box extends Container {
 		this.left = left;
 		this.bottom = bottom;
 		this.right = right;
+		
 	}
 
 	/**

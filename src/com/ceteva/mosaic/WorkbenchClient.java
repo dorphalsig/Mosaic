@@ -58,8 +58,8 @@ public class WorkbenchClient extends Client {
 			String id = message.args[0].strValue();
 			String title = message.args[1].strValue();
 			String image = message.args[2].strValue();
-			System.out.println("newPerspective:" + id + ":" + title + ":"
-					+ image);
+//			System.out.println("newPerspective:" + id + ":" + title + ":"
+//					+ image);
 			perspectiveManager.addNewPerspective(id, title, image);
 			return true;
 		}

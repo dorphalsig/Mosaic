@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
 
+import org.eclipse.draw2d.Border;
 import org.eclipse.draw2d.ChopboxAnchor;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Figure;
@@ -1289,7 +1290,7 @@ public class DiagramView extends View {
 				Figure shape = (Figure) nodeEditPart.createFigure(true, rect);
 				shape.setVisible(false);
 				rootFigure.add(shape);
-
+                figure.setBorder(null);
 				String identity = ((Node) iModel).getIdentity();
 				// System.out.println("node identity" + identity);
 				nodeEditParts.put(identity, nodeEditPart);
@@ -1304,6 +1305,7 @@ public class DiagramView extends View {
 				BoxFigure boxFigure = (BoxFigure) boxEditPart.createFigure();
 				if (boxFigure != null) {
 					String id = ((Box) iModel).identity;
+//					boxFigure.setLineStyle(0);;
 					figure.add(boxFigure);
 					figureBoxs.put(id, boxFigure);
 				}

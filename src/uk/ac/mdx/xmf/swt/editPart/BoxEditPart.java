@@ -85,7 +85,6 @@ public class BoxEditPart extends DisplayEditPart {
 		// rectangle.setBackgroundColor(ColorConstants.lightBlue);
 		// rectangle.setForegroundColor(ColorConstants.black);
 		// rectangle.repaint();
-		// rectangle.setOpaque(true);
 		setFigure(rectangle);
 		return rectangle;
 	}

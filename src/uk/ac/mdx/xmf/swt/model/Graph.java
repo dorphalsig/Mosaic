@@ -145,8 +145,8 @@ class Graph {
 				int width = message.args[4].intValue;
 				int height = message.args[5].intValue;
 				boolean isSelectable = message.args[6].boolValue;
-				System.out.println("new node:" + parent.identity + "-"
-						+ identity + "     " + width + "      " + height);
+//				System.out.println("new node:" + parent.identity + "-"
+//						+ identity + "     " + width + "      " + height);
 				newNode(identity, x, y, width, height, isSelectable);
 				return true;
 			} else if (message.hasName("newEdge")) {

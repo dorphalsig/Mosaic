@@ -147,9 +147,9 @@ public class Container extends DisplayWithDimension {
 				&& message.args[0].hasStrValue(identity)) {
 			MultilineText multilineText = ModelFactory.newMultilineText(this,
 					handler, message);
-			System.out.println("new  multilinetext:parent.identity-"
-					+ parent.identity + "-" + identity + "-"
-					+ "multilinetext identity:" + multilineText.identity);
+//			System.out.println("new  multilinetext:parent.identity-"
+//					+ parent.identity + "-" + identity + "-"
+//					+ "multilinetext identity:" + multilineText.identity);
 			addDisplay(multilineText);
 			return true;
 		} else if (message.hasName("newImage")
