@@ -15,3 +15,7 @@ for Mac
 for linux
 1. use swt-linux.jar
 
+
+Doc folder: Java API documents
+package.doc: description for Java GUI as well as the communication between XMF
+
