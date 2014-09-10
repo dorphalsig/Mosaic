@@ -217,7 +217,6 @@ public class FormTree extends FormElement implements FormTreeHandler {
 			}
 			if (message.hasName("addNodeWithIcon") && message.arity == 6) {
 				String nodeId = message.args[1].strValue();
-				;
 				String text = message.args[2].strValue();
 				boolean editable = message.args[3].boolValue;
 				String icon = message.args[4].strValue();

@@ -22,6 +22,7 @@ import org.eclipse.ui.IWorkbenchPartReference;
 
 import uk.ac.mdx.xmf.swt.client.EventHandler;
 import uk.ac.mdx.xmf.swt.client.xml.Element;
+import uk.ac.mdx.xmf.swt.demo.Main;
 import xos.Message;
 import xos.Value;
 
@@ -845,6 +846,9 @@ public class FormView implements MenuListener {
 			int height, boolean editable) {
 		FormTree tree = new FormTree(formContentsHolder, identity, handler,
 				editable, false);
+		width=Main.getInstance().tabFolderProperty.getSize().x;
+		height=Main.getInstance().tabFolderProperty.getSize().y;
+		
 		tree.setBounds(x, y, width, height);
 		return tree;
 	}
