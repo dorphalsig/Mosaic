@@ -233,10 +233,10 @@ public class Main {
 			public void itemClosed(CTabFolderEvent event) {
 			}
 		});
-		CTabItem tabItemProperty = new CTabItem(tabFolderProperty, SWT.BORDER);
-		tabItemProperty.setText("Property");
-		propertyView = new FormView(tabFolderProperty, SWT.BORDER,
-				tabItemProperty);
+//		CTabItem tabItemProperty = new CTabItem(tabFolderProperty, SWT.BORDER);
+//		tabItemProperty.setText("Property");
+//		propertyView = new FormView(tabFolderProperty, SWT.BORDER,
+//				tabItemProperty);
 		tabFolderProperty.setVisible(true);// set invisiable for debug
 		tabFolderProperty.setSimple(false);
 		// create console view

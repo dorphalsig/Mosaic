@@ -4,6 +4,8 @@ import java.util.Vector;
 
 import org.eclipse.draw2d.FigureUtilities;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.widgets.Display;
 
@@ -40,7 +42,7 @@ public class FormsClient extends XMLClient {
 	public FormsClient() {
 		super("com.ceteva.forms");
 	}
-
+	Vector forms = new Vector();
 	/**
 	 * Gets the form.
 	 *
@@ -102,7 +104,7 @@ public class FormsClient extends XMLClient {
 	 * @return the all forms
 	 */
 	public Vector getAllForms() {
-		Vector forms = new Vector();
+		
 		// IWorkbenchPage page = FormsPlugin.getDefault().getWorkbench()
 		// .getActiveWorkbenchWindow().getActivePage();
 		// IViewReference[] vreferences = page.getViewReferences();
@@ -113,7 +115,7 @@ public class FormsClient extends XMLClient {
 		// forms.add(view);
 		// }
 
-		forms.add(Main.propertyView);
+//		forms.add(Main.propertyView);
 		return forms;
 	}
 
@@ -174,14 +176,19 @@ public class FormsClient extends XMLClient {
 		// e.printStackTrace();
 		// return null;
 		// }
-		FormView form = null;
-		form = Main.propertyView;
+		CTabItem tabItemProperty = new CTabItem(Main.getInstance().tabFolderProperty, SWT.BORDER);
+		tabItemProperty.setText("Property");
+		FormView form = new FormView(Main.getInstance().tabFolderProperty, SWT.BORDER,
+				tabItemProperty);
+		
 		form.setName(name);
 		form.setType(type);
 		form.setIdentity(identity);
 		form.registerEventHandler(handler);
-
 		form.createPartControl(Main.tabFolderProperty);
+		Main.getInstance().tabFolderProperty.setSelection(tabItemProperty);
+		
+		forms.add(form);
 		return form;
 
 	}
