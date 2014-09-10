@@ -83,6 +83,7 @@ public class BoxFigure extends RectangleFigure {
 		// int h = r.height - lineWidth;
 		int w = r.width - Math.max(1, lineWidth);
 		int h = r.height - Math.max(1, lineWidth);
+		
 		if (top)
 			graphics.drawLine(x, y, x + w, y);
 		if (left)

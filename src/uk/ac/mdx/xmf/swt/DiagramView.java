@@ -361,8 +361,11 @@ public class DiagramView extends View {
 					node.isClicked(location2);
 
 					if (node.isClicked()) {
-						nodeShapes.get(node.getIdentity()).setVisible(true);
 						nodeSelect = node.getIdentity();
+						restShape(node.getLocation(), node.getSize());
+						nodeShapes.get(node.getIdentity()).setVisible(true);
+						nodeShapes.get(node.getIdentity()).setOpaque(false);
+						
 						ports.add(node);
 						node.selectNode();
 						nodeContains = true;
@@ -1094,9 +1097,9 @@ public class DiagramView extends View {
 		Node node = nodeModels.get(nodeSelect);
 		nodeEditPart = nodeEditParts.get(nodeSelect);
 		node.reSetPoints(location, size);
-
+        
+		
 		Rectangle rect = new Rectangle(location, size);
-		Figure shape = (Figure) nodeEditPart.createFigure(true, rect);
 
 		nodeShapes.get(nodeSelect).setBounds(rect);
 		nodeShapes.get(nodeSelect).setLocation(location);
@@ -1305,7 +1308,8 @@ public class DiagramView extends View {
 				BoxFigure boxFigure = (BoxFigure) boxEditPart.createFigure();
 				if (boxFigure != null) {
 					String id = ((Box) iModel).identity;
-//					boxFigure.setLineStyle(0);;
+//					boxFigure.setOpaque(false);
+//					boxFigure.setOutline(false);
 					figure.add(boxFigure);
 					figureBoxs.put(id, boxFigure);
 				}

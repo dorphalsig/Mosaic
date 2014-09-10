@@ -96,7 +96,7 @@ public class Node extends Container {
 	 */
 	public void reSetPoints(Point location, Dimension size) {
 		points.clear();
-
+		
 		points.addElement(new Point(0, 0));
 		points.addElement(new Point(location.x, location.y));
 		points.addElement(new Point(location.x + gap, location.y));

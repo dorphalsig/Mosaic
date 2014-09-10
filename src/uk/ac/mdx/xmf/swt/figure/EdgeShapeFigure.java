@@ -106,10 +106,19 @@ public class EdgeShapeFigure extends org.eclipse.draw2d.PolylineShape {
 		if ((p1.y==p2.y)&&(p2.y==p3.y))
 		return true;
 		
-		double s1= (p1.x -p2.x)/(p1.y-p2.y);
-		double s2=(p2.x -p3.x)/(p2.y-p3.y);
+		double a=Math.sqrt((p1.x-p2.x)^2+(p1.y-p2.y)^2);
+		double b=Math.sqrt((p3.x-p2.x)^2+(p3.y-p2.y)^2);
+		double c=Math.sqrt((p3.x-p1.x)^2+(p3.y-p1.y)^2);
 		
-		if (s1==s2)
+		double s=a*a+b*b-c*c;
+		s=s/a;
+		s=s/2;
+		s=b*b-s*s;
+		
+		double distance=Math.sqrt(s);
+		System.out.println("distance:"+distance);
+		
+		if (distance<10)
 			return true;
 		
 		return isOnLine;
