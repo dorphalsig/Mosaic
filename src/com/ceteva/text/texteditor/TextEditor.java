@@ -446,6 +446,7 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 	 * @param line the line
 	 */
 	public void addHighlight(int line) {
+		if (viewer!=null){
 		int lines = viewer.getTextWidget().getLineCount();
 		if (line >= 0 && line < lines) {
 			// removeCursorPainter();
@@ -453,6 +454,7 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 					highlightedLineColor);
 			highlights.add(h);
 			// addCursorPainter();
+		}
 		}
 	}
 
@@ -483,11 +485,13 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 	 * @param line the line
 	 */
 	public void showLine(int line) {
+		if (viewer!=null){
 		StyledText textWidget = viewer.getTextWidget();
 		int lines = textWidget.getLineCount();
 		if (line >= 0 && line < lines) {
 			int offset = textWidget.getOffsetAtLine(line);
 			// this.selectAndReveal(offset, 0);
+		}
 		}
 	}
 
