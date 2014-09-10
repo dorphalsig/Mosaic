@@ -99,7 +99,8 @@ class FormTextBox extends FormElement {
 	 * @param parent the parent
 	 */
 	public void init(Composite parent) {
-		textBox = new Text(parent, SWT.SINGLE);
+		textBox = new Text(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
+		
 
 		// FormTextBoxConfiguration ftbc = new FormTextBoxConfiguration();
 		// textBox.configure(ftbc);
