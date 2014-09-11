@@ -223,8 +223,11 @@ public class FormTreeWrapper {
 		TreeItem item = addNode(parent, identity, text, toolTipText, editable,
 				indexString);
 		if (item != null) {
+			// The icons directory should be set via a command line argument...
 			if (!icon.endsWith(".gif"))
-				icon = "icons/" + icon + ".gif";
+				icon = icon + ".gif";
+			if(!icon.startsWith("icons"))
+				icon = "icons/" + icon;
 			item.setImage(new Image(parent.getDisplay(), icon));
 		}
 		return item;
