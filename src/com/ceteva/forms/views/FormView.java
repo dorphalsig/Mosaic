@@ -1056,7 +1056,7 @@ public class FormView implements MenuListener {
 	 * Dispose.
 	 */
 	public void dispose() {
-		// super.dispose();
+//		 super.dispose();
 		unregisterAsListener();
 		formContentsHolder.dispose();
 		scrollable.dispose();

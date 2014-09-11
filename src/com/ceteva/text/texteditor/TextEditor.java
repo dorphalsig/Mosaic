@@ -189,7 +189,6 @@ public class TextEditor   implements MenuListener, IPropertyChangeListener,
 				text.cut();
 			}
 		};
-		actionCut.setAccelerator(SWT.CTRL + 'X');
 		
 		final Action actionCopy = new Action("&Copy",
 				null) {
@@ -197,19 +196,18 @@ public class TextEditor   implements MenuListener, IPropertyChangeListener,
 				text.copy();
 			}
 		};
-		actionCopy.setAccelerator(SWT.CTRL + 'C');
 		
+		actionCopy.setAccelerator(SWT.CTRL + 'C');
 		final Action actionPast = new Action("&Past",
 				null) {
 			public void run() {
 				text.paste();
 			}
 		};
-		actionPast.setAccelerator(SWT.CTRL + 'P');
 		
+		actionCut.setAccelerator(SWT.CTRL + 'X');
 		actionCopy.setAccelerator(SWT.CTRL + 'C');
-		
-		actionPast.setAccelerator(SWT.CTRL + 'P');
+		actionPast.setAccelerator(SWT.CTRL + 'V');
 
 		if (text != null) {
 			text.addListener(SWT.MouseMove, new Listener() {
@@ -219,10 +217,12 @@ public class TextEditor   implements MenuListener, IPropertyChangeListener,
 					org.eclipse.jface.action.MenuManager menu = new org.eclipse.jface.action.MenuManager();
 					MenuBuilder.calculateMenu(getIdentity(), menu, null);
 					menu.add(new Separator("DocumentManagement"));
-
+					
 					menu.add(actionCut);
 					menu.add(actionCopy);
 					menu.add(actionPast);
+					
+					
 //					addAction(menu, ITextEditorActionConstants.GROUP_FIND, ITextEditorActionConstants.FIND);
 //					addAction(menu, ITextEditorActionConstants.GROUP_FIND, ITextEditorActionConstants.FIND_NEXT);
 //					addAction(menu, ITextEditorActionConstants.GROUP_FIND, ITextEditorActionConstants.FIND_PREVIOUS);
@@ -862,32 +862,32 @@ public class TextEditor   implements MenuListener, IPropertyChangeListener,
 		getScanner().clearRules();
 	}
 
-	/**
-	 * Editor context menu about to show.
-	 *
-	 * @param menu the menu
-	 */
-	protected void editorContextMenuAboutToShow(IMenuManager menu) {
-		// IWorkbenchPartSite iwps = this.getSite();
-		MenuBuilder.calculateMenu(identity, menu, null);
-		menu.add(new Separator("DocumentManagement"));
-		menu.add(new Separator(ITextEditorActionConstants.GROUP_COPY));
-		menu.add(new Separator(ITextEditorActionConstants.GROUP_FIND));
-		menu.add(new Separator(ITextEditorActionConstants.GROUP_ADD));
-		menu.add(new Separator(ITextEditorActionConstants.MB_ADDITIONS));
-		// addAction(menu, ITextEditorActionConstants.GROUP_COPY,
-		// ITextEditorActionConstants.CUT);
-		// addAction(menu, ITextEditorActionConstants.GROUP_COPY,
-		// ITextEditorActionConstants.COPY);
-		// addAction(menu, ITextEditorActionConstants.GROUP_COPY,
-		// ITextEditorActionConstants.PASTE);
-		// addAction(menu, ITextEditorActionConstants.GROUP_FIND,
-		// ITextEditorActionConstants.FIND);
-		// addAction(menu, ITextEditorActionConstants.GROUP_FIND,
-		// ITextEditorActionConstants.FIND_NEXT);
-		// addAction(menu, ITextEditorActionConstants.GROUP_FIND,
-		// ITextEditorActionConstants.FIND_PREVIOUS);
-	}
+//	/**
+//	 * Editor context menu about to show.
+//	 *
+//	 * @param menu the menu
+//	 */
+//	protected void editorContextMenuAboutToShow(IMenuManager menu) {
+//		// IWorkbenchPartSite iwps = this.getSite();
+//		MenuBuilder.calculateMenu(identity, menu, null);
+//		menu.add(new Separator("DocumentManagement"));
+//		menu.add(new Separator(ITextEditorActionConstants.GROUP_COPY));
+//		menu.add(new Separator(ITextEditorActionConstants.GROUP_FIND));
+//		menu.add(new Separator(ITextEditorActionConstants.GROUP_ADD));
+//		menu.add(new Separator(ITextEditorActionConstants.MB_ADDITIONS));
+//		// addAction(menu, ITextEditorActionConstants.GROUP_COPY,
+//		// ITextEditorActionConstants.CUT);
+//		// addAction(menu, ITextEditorActionConstants.GROUP_COPY,
+//		// ITextEditorActionConstants.COPY);
+//		// addAction(menu, ITextEditorActionConstants.GROUP_COPY,
+//		// ITextEditorActionConstants.PASTE);
+//		// addAction(menu, ITextEditorActionConstants.GROUP_FIND,
+//		// ITextEditorActionConstants.FIND);
+//		// addAction(menu, ITextEditorActionConstants.GROUP_FIND,
+//		// ITextEditorActionConstants.FIND_NEXT);
+//		// addAction(menu, ITextEditorActionConstants.GROUP_FIND,
+//		// ITextEditorActionConstants.FIND_PREVIOUS);
+//	}
 
 	/**
 	 * Do save.

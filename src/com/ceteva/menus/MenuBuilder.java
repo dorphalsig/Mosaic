@@ -2,10 +2,13 @@ package com.ceteva.menus;
 
 import java.util.Vector;
 
+import org.eclipse.draw2d.InputEvent;
 import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
@@ -311,6 +314,14 @@ public class MenuBuilder {
 		} else {
 			GlobalMenuAction action = new GlobalMenuAction(m.getName(),
 					m.getIdentities(), identities, m.getEnabled());
+			if (!identities.isEmpty()) {
+				String identity = (String) m.getIdentities().elementAt(0);
+				
+//				if (identity.equalsIgnoreCase("56")) {
+//					action.setAccelerator(SWT.CTRL+'S');
+//					action.setEnabled(true);
+//				}
+			}
 			parent.add(action);
 		}
 	}
