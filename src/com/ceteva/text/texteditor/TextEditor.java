@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Vector;
 
@@ -11,7 +12,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.Separator;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.CursorLinePainter;
 import org.eclipse.jface.text.Document;
@@ -49,6 +49,7 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IPartListener2;
 import org.eclipse.ui.IWorkbenchPartReference;
 import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.texteditor.AbstractTextEditor;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
@@ -65,12 +66,13 @@ import com.ceteva.menus.MenuListener;
 import com.ceteva.menus.MenuManager;
 import com.ceteva.text.TextPlugin;
 import com.ceteva.text.highlighting.SinglelineScanner;
+import com.ceteva.text.texteditor.JavaLineStyler.JavaScanner;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class TextEditor.
  */
-public class TextEditor implements MenuListener, IPropertyChangeListener,
+public class TextEditor   implements MenuListener, IPropertyChangeListener,
 		IPartListener2 {
 
 	/** The partition number. */
@@ -221,6 +223,10 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 					menu.add(actionCut);
 					menu.add(actionCopy);
 					menu.add(actionPast);
+//					addAction(menu, ITextEditorActionConstants.GROUP_FIND, ITextEditorActionConstants.FIND);
+//					addAction(menu, ITextEditorActionConstants.GROUP_FIND, ITextEditorActionConstants.FIND_NEXT);
+//					addAction(menu, ITextEditorActionConstants.GROUP_FIND, ITextEditorActionConstants.FIND_PREVIOUS);
+					
 					text.setMenu(menu.createContextMenu(text));
 				}
 			});
@@ -274,11 +280,6 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 	 * @param groupCopy the group copy
 	 * @param cut the cut
 	 */
-	protected void addAction(org.eclipse.jface.action.MenuManager menu,
-			String groupCopy, String cut) {
-		// TODO Auto-generated method stub
-
-	}
 
 	/**
 	 * Raise event.
@@ -338,7 +339,7 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 		GridLayout layout = new GridLayout();
 		layout.numColumns = 1;
 		parent.setLayout(layout);
-		JavaLineStyler lineStyler = new JavaLineStyler();
+		
 
 		int styles = SWT.V_SCROLL | SWT.H_SCROLL | SWT.MULTI | SWT.BORDER
 				| SWT.FULL_SELECTION;
@@ -364,8 +365,6 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 					spec.verticalAlignment = GridData.FILL;
 					spec.grabExcessVerticalSpace = true;
 					text.setLayoutData(spec);
-				
-//					text.addLineStyleListener(lineStyler);
 					text.setEditable(true);
 					text.setFont(FontManager.getFont(defaultFont, true));
 					Color bg = Display.getDefault().getSystemColor(
@@ -835,6 +834,7 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 	 */
 	public void addWordRule(String word, String color) {
 		getScanner().addRule(word, color);
+		JavaScanner.setKeywords(word, color);
 	}
 
 	/**
@@ -845,6 +845,8 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 	 * @param color the color
 	 */
 	public void addMultilineRule(String start, String end, String color) {
+		JavaLineStyler lineStyler = new JavaLineStyler();
+		text.addLineStyleListener(lineStyler);
 //		if (configuration != null) {
 //			String id = "partition" + (partitionNumber++);
 //			configuration.addPartition(viewer.getDocument(), id, start, end,
@@ -1247,7 +1249,7 @@ class JavaLineStyler implements LineStyleListener {
 	/**
 	 * A simple fuzzy scanner for Java
 	 */
-	public class JavaScanner {
+	public static class JavaScanner {
 
 		protected Hashtable fgKeys = null;
 
@@ -1263,19 +1265,22 @@ class JavaLineStyler implements LineStyleListener {
 
 		protected boolean fEofSeen = false;
 
-		private String[] fgKeywords = { "abstract","Attribute", "boolean", "break", "byte","context",
-				"case", "catch", "char", "class", "continue", "default", "do",
-				"double", "else", "extends","end", "false", "final", "finally",
-				"float", "for", "if", "implements", "import","in", "instanceof",
-				"int", "interface", "let","long", "native", "new", "null","Operation", "package",
-				"private", "protected", "public", "return","Seq", "short", "static",
-				"super", "switch", "synchronized", "this", "throw", "throws",
-				"transient", "true", "try", "void", "volatile", "while","@" };
+//		private String[] fgKeywords = { "abstract","Attribute", "boolean", "break", "byte","context",
+//				"case", "catch", "char", "class", "continue", "default", "do",
+//				"double", "else", "extends","end", "false", "final", "finally",
+//				"float", "for", "if", "implements", "import","in", "instanceof",
+//				"int", "interface", "let","long", "native", "new", "null","Operation", "package",
+//				"private", "protected", "public", "return","Seq", "short", "static",
+//				"super", "switch", "synchronized", "this", "throw", "throws",
+//				"transient", "true", "try", "void", "volatile", "while","@" };
+		private static final ArrayList<String> fgKeywords=new ArrayList<String>();
 
 		public JavaScanner() {
 			initialize();
 		}
-
+        public static void setKeywords(String word, String color){
+        	   fgKeywords.add(word);
+        }
 		/**
 		 * Returns the ending location of the current token in the document.
 		 */
@@ -1289,8 +1294,8 @@ class JavaLineStyler implements LineStyleListener {
 		void initialize() {
 			fgKeys = new Hashtable();
 			Integer k = new Integer(KEY);
-			for (int i = 0; i < fgKeywords.length; i++)
-				fgKeys.put(fgKeywords[i], k);
+			for (int i = 0; i < fgKeywords.size(); i++)
+				fgKeys.put(fgKeywords.get(i), k);
 		}
 
 		/**
