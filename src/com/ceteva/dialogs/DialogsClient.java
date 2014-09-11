@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
@@ -594,35 +595,35 @@ public class DialogsClient extends Client {
 	 * @return the value
 	 */
 	public Value simpleTreeDialog(Message message) {
-		// String title = message.args[0].strValue();
-		// Value[] tree = message.args[1].values;
-		// Vector expand = new Vector();
-		// Vector disable = new Vector();
-		// Vector selected = new Vector();
-		// TreeElement root = buildTree(tree, expand, disable, selected);
-		// TreeDialog treeDialog = new TreeDialog(getShell(), new
-		// LabelProvider(),
-		// new TreeElementProvider());
-		// treeDialog.setTitle(title);
-		// treeDialog.setInput(root);
-		// treeDialog.create();
-		// treeDialog.expandTree(expand);
-		// int returncode = treeDialog.open();
-		// if (returncode != 1) {
-		// Object[] result = treeDialog.getResult();
-		// // if(result != null) {
-		// if (result.length > 0) {
-		// TreeElement te = (TreeElement) result[0];
-		// Vector path = new Vector();
-		// te.getPath(path);
-		// Value[] value = new Value[path.size()];
-		// for (int i = path.size(); i > 0; i--) {
-		// String s = (String) path.elementAt(i - 1);
-		// value[path.size() - i] = new Value(s);
-		// }
-		// return new Value(value);
-		// }
-		// }
+		 String title = message.args[0].strValue();
+		 Value[] tree = message.args[1].values;
+		 Vector expand = new Vector();
+		 Vector disable = new Vector();
+		 Vector selected = new Vector();
+		 TreeElement root = buildTree(tree, expand, disable, selected);
+		 TreeDialog treeDialog = new TreeDialog(getShell(), new
+		 LabelProvider(),
+		 new TreeElementProvider());
+		 treeDialog.setTitle(title);
+		 treeDialog.setInput(root);
+		 treeDialog.create();
+		 treeDialog.expandTree(expand);
+		 int returncode = treeDialog.open();
+		 if (returncode != 1) {
+		 Object[] result = treeDialog.getResult();
+		 // if(result != null) {
+		 if (result.length > 0) {
+		 TreeElement te = (TreeElement) result[0];
+		 Vector path = new Vector();
+		 te.getPath(path);
+		 Value[] value = new Value[path.size()];
+		 for (int i = path.size(); i > 0; i--) {
+		 String s = (String) path.elementAt(i - 1);
+		 value[path.size() - i] = new Value(s);
+		 }
+		 return new Value(value);
+		 }
+		 }
 		return new Value("");
 	}
 
