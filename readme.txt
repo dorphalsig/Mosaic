@@ -18,3 +18,7 @@ for linux
 Doc folder: Java API documents
 package.doc: description for Java GUI as well as the communication between XMF
 
+Duplicate icons:
+there are a few duplicate icons as well as icon's folder, because the icon's path is sent back by XMF, and the original structure of the icons which 
+spread out different projects; we can modify the XMF and tiny the icons folder later.
+
