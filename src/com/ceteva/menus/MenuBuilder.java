@@ -62,7 +62,7 @@ public class MenuBuilder {
 	 */
 	public static void calculateKeyBindings(IMenuManager manager,
 			IWorkbenchPartSite site) {
-		// if (site != null)
+//		 if (site != null)
 		{
 			IContributionItem[] ici = manager.getItems();
 			for (int i = 0; i < ici.length; i++) {
@@ -85,11 +85,13 @@ public class MenuBuilder {
 	 */
 	public static void calculateMenu(Vector identities, GlobalMenu menu,
 			IMenuManager manager) {
+		if ( menu!=null){
 		Vector menus = menu.getSubMenus();
 		for (int i = 0; i < menus.size(); i++) {
 			com.ceteva.menus.Menu m = (com.ceteva.menus.Menu) menus
 					.elementAt(i);
 			calculateMenu(identities, manager, m);
+		}
 		}
 	}
 
