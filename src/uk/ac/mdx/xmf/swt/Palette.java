@@ -1,6 +1,8 @@
 package uk.ac.mdx.xmf.swt;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 
 import org.eclipse.draw2d.ColorConstants;
@@ -34,6 +36,7 @@ public class Palette {
 	/** The tools. */
 	ArrayList<String> tools = new ArrayList<String>();
 	ArrayList<String> icons = new ArrayList<String>();
+	HashMap<String,Boolean> connections=new HashMap<String,Boolean>();
 	
 	/** The point. */
 	Point point = null;
@@ -145,8 +148,11 @@ public class Palette {
 		tools.add(label);
 		tools.add(parent);
 		icons.add(icon);
+		connections.put(label,connection);
 	}
-
+    public HashMap<String,Boolean> getConnections(){
+    	return  connections;
+    }
 	/**
 	 * Gets the select class.
 	 *

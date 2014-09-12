@@ -1,5 +1,6 @@
 package uk.ac.mdx.xmf.swt;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
@@ -343,6 +344,10 @@ public class DiagramView extends View {
 				MenuManager manager = new MenuManager();
 				MenuBuilder.calculateMenu(identities, manager, null);
 				canvas.setMenu(manager.createContextMenu(canvas));
+				
+				String s = Main.getInstance().getPalette().getSelectImage();
+				HashMap<String,Boolean> connections=new HashMap<String,Boolean>();
+				connections=Main.getInstance().getPalette().getConnections();
 
 				// setAllFocus();
 				// isFocus = true;
@@ -366,7 +371,9 @@ public class DiagramView extends View {
 						nodeShapes.get(node.getIdentity()).setVisible(true);
 						nodeShapes.get(node.getIdentity()).setOpaque(false);
 						
+						if (connections.get(s))
 						ports.add(node);
+						
 						node.selectNode();
 						nodeContains = true;
 
@@ -433,7 +440,48 @@ public class DiagramView extends View {
 
 				}
 
-				String s = Main.getInstance().getPalette().getSelectImage();
+				
+				 
+				if (s.length()>1){
+//					boolean label=connections.get(s);
+					if (connections.get(s)) //connection
+					{
+						if (ports.size() > 1){
+						raiseFocusGained();
+
+						String toolIdentity = s;
+
+						ConnectionCommand connectionCommand = new ConnectionCommand();
+						connectionCommand.setParent(_diagram);
+						connectionCommand.setToolIdentity(toolIdentity);
+						String source = (String) ports.get(0).getIdentity();
+						String target = (String) ports.get(1).getIdentity();
+						connectionCommand.setSource(String.valueOf(Integer
+								.valueOf(source) + 1));
+						connectionCommand.setTarget(String.valueOf(Integer
+								.valueOf(target) + 1));
+						connectionCommand.execute();
+						ports.clear();
+
+						Main.getInstance().palette.setSelectImage();
+						}
+					}else{                  //node
+						raiseFocusGained();
+
+						String toolIdentity = s;
+						NodeEditPart nodeEditPart = new NodeEditPart();
+						nodeEditPart.setModel(_diagram);
+						createNodeCommand = new CreateNodeCommand(nodeEditPart,
+								toolIdentity, location2);
+						createNodeCommand.execute();
+
+						selectIconName = "";
+
+						Main.getInstance().palette.setSelectImage();
+					}
+				}
+				 
+				/*
 				if (s.equalsIgnoreCase("Class")) {
 					raiseFocusGained();
 
@@ -629,6 +677,7 @@ public class DiagramView extends View {
 
 					// GUIDemo.getInstance().palette.setSelectImage();
 				}
+				*/
 
 			}
 		});
