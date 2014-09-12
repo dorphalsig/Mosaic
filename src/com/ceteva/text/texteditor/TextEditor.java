@@ -1099,7 +1099,7 @@ class JavaLineStyler implements LineStyleListener {
 		Display display = Display.getDefault();
 		colors = new Color[] { new Color(display, new RGB(0, 0, 0)), // black
 				new Color(display, new RGB(255, 0, 0)), // red
-				new Color(display, new RGB(0, 255, 0)), // green
+				new Color(display, new RGB(0, 55, 0)), // green
 				new Color(display, new RGB(0, 0, 255)) // blue
 		};
 		tokenColors = new int[MAXIMUM_TOKEN];
