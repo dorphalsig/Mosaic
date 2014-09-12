@@ -144,7 +144,7 @@ public class TextEditor   implements MenuListener, IPropertyChangeListener,
 	/** The default font. */
 	static FontData defaultFont = new FontData(
 			"1|Courier New|9|0|WINDOWS|1|-13|0|0|0|400|0|0|0|0|3|2|1|49|Courier New");
-
+	JavaLineStyler lineStyler ;
 	/**
 	 * Instantiates a new text editor.
 	 */
@@ -791,8 +791,18 @@ public class TextEditor   implements MenuListener, IPropertyChangeListener,
 	 *
 	 * @param txt the new text
 	 */
-	public void setText(String txt) {
-		text.setText(txt);
+	public void setText(final String txt) {
+		
+		Main.display.asyncExec( new java.lang.Runnable(){
+            public void run()
+            {
+                text.setText( txt );
+            }
+        } );
+		
+//		text.setText(txt);
+//		String textt=text.getText();
+		lineStyler.parseBlockComments(txt);
 //		scanner.
 		// if (viewer != null) {
 		// Document document = (Document) viewer.getDocument();
@@ -845,7 +855,7 @@ public class TextEditor   implements MenuListener, IPropertyChangeListener,
 	 * @param color the color
 	 */
 	public void addMultilineRule(String start, String end, String color) {
-		JavaLineStyler lineStyler = new JavaLineStyler();
+		lineStyler= new JavaLineStyler();
 		text.addLineStyleListener(lineStyler);
 //		if (configuration != null) {
 //			String id = "partition" + (partitionNumber++);
@@ -1218,6 +1228,32 @@ class JavaLineStyler implements LineStyleListener {
 						cnt++;
 					} else {
 						cnt++;
+					}
+					cnt++;
+					break;
+				}
+				case '@': {
+					ch = buffer.read();
+					if ((ch == 'D') && (!blkComment)) {
+						offsets = new int[2];
+						offsets[0] = cnt;
+						blkComment = true;
+						cnt++;
+					} else {
+						cnt++;
+					}
+					cnt++;
+					break;
+				}
+				case 'n': {
+					if (blkComment) {
+						ch = buffer.read();
+						cnt++;
+						if (ch == 'd') {
+							blkComment = false;
+							offsets[1] = cnt;
+							blockComments.addElement(offsets);
+						}
 					}
 					cnt++;
 					break;
