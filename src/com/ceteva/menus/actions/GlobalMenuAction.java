@@ -3,6 +3,7 @@ package com.ceteva.menus.actions;
 import java.util.Vector;
 
 import org.eclipse.jface.action.Action;
+import org.eclipse.swt.SWT;
 
 import uk.ac.mdx.xmf.swt.client.EventHandler;
 import xos.Message;
@@ -51,6 +52,7 @@ public class GlobalMenuAction extends Action {
 
 			String identity = (String) menuIdentities.elementAt(0);
 			this.setId(identity);
+			
 		}
 	}
 
@@ -66,11 +68,12 @@ public class GlobalMenuAction extends Action {
 			String menuIdentity = (String) menuIdentities.elementAt(i);
 			// hijack the code here, change it later, 56,57,58, magic number for
 			// save,save as and save as and compile,
-			if (menuIdentity.equalsIgnoreCase("54")
-					|| menuIdentity.equalsIgnoreCase("55")
-					|| menuIdentity.equalsIgnoreCase("56")) {
+			if (menuIdentity.equalsIgnoreCase("56")
+					|| menuIdentity.equalsIgnoreCase("57")
+					|| menuIdentity.equalsIgnoreCase("58")) {
 				TextEditor.tabItem.setImage(null);
 			}
+			
 			ids[i * 2] = new Value(menuIdentity);
 			String identity = (String) identities.elementAt(i);
 			ids[i * 2 + 1] = new Value(identity);

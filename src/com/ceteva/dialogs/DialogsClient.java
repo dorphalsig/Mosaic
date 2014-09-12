@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
@@ -426,9 +427,9 @@ public class DialogsClient extends Client {
 			return questionDialog(message);
 		else if (message.hasName("newConfirmDialog") && message.arity == 1)
 			return confirmDialog(message);
-		// else if (message.hasName("newMultioptionDialog") && message.arity >
-		// 4)
-		// return multioptionDialog(message);
+//		 else if (message.hasName("newMultioptionDialog") && message.arity >
+//		 4)
+//		 return multioptionDialog(message);
 		else if (message.hasName("newFileDialog") && message.arity == 4)
 			return fileDialog(message);
 		else if (message.hasName("newFontDialog") && message.arity == 1)
@@ -551,39 +552,39 @@ public class DialogsClient extends Client {
 	 * @return the value
 	 */
 	public Value multiTreeDialog(Message message) {
-		// String title = message.args[0].strValue();
-		// Value[] tree = message.args[1].values;
-		// Vector expand = new Vector();
-		// Vector disable = new Vector();
-		// Vector select = new Vector();
-		// TreeElement root = buildTree(tree, expand, disable, select);
-		// MultiSelectionTreeDialog treeDialog = new MultiSelectionTreeDialog(
-		// getShell(), new LabelProvider(), new TreeElementProvider());
-		// treeDialog.setTitle(title);
-		// treeDialog.setInput(root);
-		// treeDialog.create();
-		// treeDialog.expandTree(expand);
-		// treeDialog.disableNodes(disable);
-		// treeDialog.selectNodes(select);
-		// int returncode = treeDialog.open();
-		// if (returncode != 1) {
-		// Object[] result = treeDialog.getResult();
-		// if (result != null) {
-		// Value[] values = new Value[result.length];
-		// for (int i = 0; i < result.length; i++) {
-		// TreeElement te = (TreeElement) result[i];
-		// Vector path = new Vector();
-		// te.getPath(path);
-		// Value[] value = new Value[path.size()];
-		// for (int z = path.size(); z > 0; z--) {
-		// String s = (String) path.elementAt(z - 1);
-		// value[path.size() - z] = new Value(s);
-		// }
-		// values[i] = new Value(value);
-		// }
-		// return new Value(values);
-		// }
-		// }
+		 String title = message.args[0].strValue();
+		 Value[] tree = message.args[1].values;
+		 Vector expand = new Vector();
+		 Vector disable = new Vector();
+		 Vector select = new Vector();
+		 TreeElement root = buildTree(tree, expand, disable, select);
+		 MultiSelectionTreeDialog treeDialog = new MultiSelectionTreeDialog(
+		 getShell(), new LabelProvider(), new TreeElementProvider());
+		 treeDialog.setTitle(title);
+		 treeDialog.setInput(root);
+		 treeDialog.create();
+		 treeDialog.expandTree(expand);
+		 treeDialog.disableNodes(disable);
+		 treeDialog.selectNodes(select);
+		 int returncode = treeDialog.open();
+		 if (returncode != 1) {
+		 Object[] result = treeDialog.getResult();
+		 if (result != null) {
+		 Value[] values = new Value[result.length];
+		 for (int i = 0; i < result.length; i++) {
+		 TreeElement te = (TreeElement) result[i];
+		 Vector path = new Vector();
+		 te.getPath(path);
+		 Value[] value = new Value[path.size()];
+		 for (int z = path.size(); z > 0; z--) {
+		 String s = (String) path.elementAt(z - 1);
+		 value[path.size() - z] = new Value(s);
+		 }
+		 values[i] = new Value(value);
+		 }
+		 return new Value(values);
+		 }
+		 }
 		return new Value("");
 	}
 
@@ -594,35 +595,35 @@ public class DialogsClient extends Client {
 	 * @return the value
 	 */
 	public Value simpleTreeDialog(Message message) {
-		// String title = message.args[0].strValue();
-		// Value[] tree = message.args[1].values;
-		// Vector expand = new Vector();
-		// Vector disable = new Vector();
-		// Vector selected = new Vector();
-		// TreeElement root = buildTree(tree, expand, disable, selected);
-		// TreeDialog treeDialog = new TreeDialog(getShell(), new
-		// LabelProvider(),
-		// new TreeElementProvider());
-		// treeDialog.setTitle(title);
-		// treeDialog.setInput(root);
-		// treeDialog.create();
-		// treeDialog.expandTree(expand);
-		// int returncode = treeDialog.open();
-		// if (returncode != 1) {
-		// Object[] result = treeDialog.getResult();
-		// // if(result != null) {
-		// if (result.length > 0) {
-		// TreeElement te = (TreeElement) result[0];
-		// Vector path = new Vector();
-		// te.getPath(path);
-		// Value[] value = new Value[path.size()];
-		// for (int i = path.size(); i > 0; i--) {
-		// String s = (String) path.elementAt(i - 1);
-		// value[path.size() - i] = new Value(s);
-		// }
-		// return new Value(value);
-		// }
-		// }
+		 String title = message.args[0].strValue();
+		 Value[] tree = message.args[1].values;
+		 Vector expand = new Vector();
+		 Vector disable = new Vector();
+		 Vector selected = new Vector();
+		 TreeElement root = buildTree(tree, expand, disable, selected);
+		 TreeDialog treeDialog = new TreeDialog(getShell(), new
+		 LabelProvider(),
+		 new TreeElementProvider());
+		 treeDialog.setTitle(title);
+		 treeDialog.setInput(root);
+		 treeDialog.create();
+		 treeDialog.expandTree(expand);
+		 int returncode = treeDialog.open();
+		 if (returncode != 1) {
+		 Object[] result = treeDialog.getResult();
+		 // if(result != null) {
+		 if (result.length > 0) {
+		 TreeElement te = (TreeElement) result[0];
+		 Vector path = new Vector();
+		 te.getPath(path);
+		 Value[] value = new Value[path.size()];
+		 for (int i = path.size(); i > 0; i--) {
+		 String s = (String) path.elementAt(i - 1);
+		 value[path.size() - i] = new Value(s);
+		 }
+		 return new Value(value);
+		 }
+		 }
 		return new Value("");
 	}
 

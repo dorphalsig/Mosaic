@@ -33,6 +33,7 @@ public class Palette {
 	
 	/** The tools. */
 	ArrayList<String> tools = new ArrayList<String>();
+	ArrayList<String> icons = new ArrayList<String>();
 	
 	/** The point. */
 	Point point = null;
@@ -107,8 +108,8 @@ public class Palette {
 		this.display = display;
 
 		addDrawer("Palette");
-		addEntry("Palette", "Select", null, false, null);
-		addEntry("Palette", "Marquee", null, false, null); // default
+		addEntry("Palette", "Select", null, false, "Select.gif");
+		addEntry("Palette", "Marquee", null, false, "Marquee.gif"); // default
 
 		colorSelect = display.getSystemColor(SWT.COLOR_LIST_SELECTION);
 		color = display.getSystemColor(SWT.COLOR_WHITE);
@@ -143,6 +144,7 @@ public class Palette {
 			boolean connection, String icon) {
 		tools.add(label);
 		tools.add(parent);
+		icons.add(icon);
 	}
 
 	/**
@@ -200,7 +202,10 @@ public class Palette {
 		int count = 0;
 
 		for (int m = 0; m < groups.size(); m++) {
-			image = new Image(display, "images/" + groups.get(m) + ".gif");
+			String group=groups.get(m);
+			if (!group.equalsIgnoreCase("Palette"))
+				group="XCore";
+			image = new Image(display, "images/" + group + ".gif");
 
 			label = new Label(canvas, SWT.NO);
 			label.setImage(image);
@@ -216,8 +221,12 @@ public class Palette {
 
 			for (int i = 0; i < size; i++) {
 				if (groups.get(m).equalsIgnoreCase(tools.get(i * 2 + 1))) {
-					images[i] = new Image(display, "images/" + tools.get(i * 2)
-							+ ".gif");
+					if (icons.get(i ).contains(":"))
+						images[i] = new Image(display,icons.get(i )
+								);
+					else
+					images[i] = new Image(display, "icons/" + icons.get(i )
+							);
 
 					labelImages[i] = new Label(canvas, SWT.NO);
 					labelImages[i].setImage(images[i]);
