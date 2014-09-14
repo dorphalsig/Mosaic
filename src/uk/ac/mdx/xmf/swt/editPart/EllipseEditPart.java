@@ -28,13 +28,15 @@ public class EllipseEditPart extends DisplayEditPart {
 	/* (non-Javadoc)
 	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
 	 */
-	protected IFigure createFigure() {
+	public IFigure createFigure() {
 		Ellipse ellipse = (Ellipse) getModel();
 		Point location = ellipse.getLocation();
 		Dimension size = ellipse.getSize();
 		boolean outline = ellipse.getOutline();
 		EllipseFigure ef = new EllipseFigure(location, size, outline);
 		ef.setLayoutManager(new XYLayout());
+		
+		setFigure(ef);
 		return ef;
 	}
 
@@ -129,8 +131,9 @@ public class EllipseEditPart extends DisplayEditPart {
 		EllipseFigure f = (EllipseFigure) getFigure();
 		f.setFill(fill);
 		Rectangle r = new Rectangle(loc, size);
-		((GraphicalEditPart) getParent()).setLayoutConstraint(this,
-				getFigure(), r);
+		f.setBounds(r);
+//		((GraphicalEditPart) getParent()).setLayoutConstraint(this,
+//				getFigure(), r);
 		refreshColor();
 	}
 

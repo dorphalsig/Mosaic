@@ -3,6 +3,7 @@ package uk.ac.mdx.xmf.swt.misc;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
@@ -25,6 +26,9 @@ public class ColorManager {
 	 * @return the color
 	 */
 	public static Color getColor(RGB rgb) {
+	  if (rgb==null){
+		  return ColorConstants.lightBlue;
+	  }
 	  if(colorbinding.containsKey(rgb))
 	  	return (Color)colorbinding.get(rgb);
 	  else {

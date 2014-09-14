@@ -33,6 +33,7 @@ import uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart;
 import uk.ac.mdx.xmf.swt.editPart.DiagramEditPart;
 import uk.ac.mdx.xmf.swt.editPart.EdgeEditPart;
 import uk.ac.mdx.xmf.swt.editPart.EdgeTextEditPart;
+import uk.ac.mdx.xmf.swt.editPart.EllipseEditPart;
 import uk.ac.mdx.xmf.swt.editPart.ImageEditPart;
 import uk.ac.mdx.xmf.swt.editPart.MultilineTextEditPart;
 import uk.ac.mdx.xmf.swt.editPart.NodeEditPart;
@@ -51,6 +52,7 @@ import uk.ac.mdx.xmf.swt.model.AbstractDiagram;
 import uk.ac.mdx.xmf.swt.model.Box;
 import uk.ac.mdx.xmf.swt.model.Edge;
 import uk.ac.mdx.xmf.swt.model.EdgeText;
+import uk.ac.mdx.xmf.swt.model.Ellipse;
 import uk.ac.mdx.xmf.swt.model.Image;
 import uk.ac.mdx.xmf.swt.model.MultilineText;
 import uk.ac.mdx.xmf.swt.model.Node;
@@ -134,6 +136,8 @@ public class DiagramView extends View {
 	
 	/** The shape edit part. */
 	ShapeEditPart shapeEditPart;
+	
+	EllipseEditPart ellipseEditPart;
 	
 	/** The image edit part. */
 	ImageEditPart imageEditPart;
@@ -1466,7 +1470,17 @@ public class DiagramView extends View {
 				if (shapeFigure != null) {
 					figure.add(shapeFigure);
 				}
-			} else if (iModel instanceof Image) {
+			} else if (iModel instanceof Ellipse) {
+				ellipseEditPart = new EllipseEditPart();
+				ellipseEditPart.setModel((Ellipse) iModel);
+				ellipseEditPart.setDiagramView(this);
+				ellipseEditPart.activate();
+				IFigure ellipseFigure = ellipseEditPart.createFigure();
+				if (ellipseFigure != null) {
+					figure.add(ellipseFigure);
+				}
+			}
+			else if (iModel instanceof Image) {
 				imageEditPart = new ImageEditPart();
 				imageEditPart.setModel((Image) iModel);
 				imageEditPart.setDiagramView(this);
