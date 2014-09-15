@@ -148,7 +148,7 @@ public class DialogsClient extends Client {
 		Value value;
 		if (reply){
 			value = new Value("Yes");
-			Main.ClickClose=true;
+//			Main.ClickClose=true;
 		}
 		else
 			value = new Value("No");

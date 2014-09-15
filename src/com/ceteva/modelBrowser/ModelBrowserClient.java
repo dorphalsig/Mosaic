@@ -5,6 +5,8 @@ import java.util.Hashtable;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabItem;
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.widgets.Canvas;
 
 import uk.ac.mdx.xmf.swt.client.EventHandler;
@@ -119,7 +121,7 @@ public class ModelBrowserClient extends XMLClient {
 		Canvas c = new Canvas(Main.tabFolderOutline, SWT.BORDER);
 		tabItem.setControl(c);
 
-		ModelBrowserView browser = new ModelBrowserView();
+		final ModelBrowserView browser = new ModelBrowserView();
 		browser.createPartControl(c);
 		System.err.println("Modelbrowser added with id: "
 				+ browser.getIdentity() + " id:" + id);
@@ -132,7 +134,7 @@ public class ModelBrowserClient extends XMLClient {
 		// if(closable) // Not sure what needs to be done here
 		if (hasFocus)
 			browser.focusGained();
-
+		
 		Main.tabFolderOutline.setSelection(tabItem);
 		Main.sectionTopLeft.setFocus();
 		return browser;

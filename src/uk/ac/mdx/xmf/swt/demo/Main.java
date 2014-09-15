@@ -10,6 +10,8 @@ import org.eclipse.swt.custom.CTabFolderAdapter;
 import org.eclipse.swt.custom.CTabFolderEvent;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
@@ -462,7 +464,7 @@ public class Main {
 	 * @param diagram the diagram
 	 */
 	public void startNewDiagram(String identity,
-			uk.ac.mdx.xmf.swt.model.Diagram diagram) {
+			final uk.ac.mdx.xmf.swt.model.Diagram diagram) {
 		CTabItem tabItem = new CTabItem(tabFolderDiagram, SWT.BORDER);
 		tabItem.setText(diagram.getName());
 
@@ -471,7 +473,17 @@ public class Main {
 		sashFormDiagram.setBounds(0, 0, tabFolderDiagram.getBounds().width,
 				tabFolderDiagram.getBounds().height);
 		sashFormDiagram.setBackground(ColorConstants.white);
+		
 		tabItem.setControl(sashFormDiagram);
+		tabItem.addDisposeListener(new DisposeListener(){
+
+
+			@Override
+			public void widgetDisposed(DisposeEvent arg0) {
+				diagram.close();
+			}
+			
+		});
 
 		palette = new Palette(sashFormDiagram, SWT.BORDER, display);
 		palettes.add(palette);
@@ -585,13 +597,13 @@ public class Main {
 		Main.getInstance().createshell();
 		Main.getInstance();
 		Main.shell.open();
-		while (!ClickClose) {
+		while (!shell.isDisposed()) {
 		    if (!display.readAndDispatch ()) 
 		    	display.sleep ();
 		  }
-		if(ClickClose){
+		 
 		display.dispose();
 		System.exit(0); // exit successful
-		}
+		 
 	}
 }

@@ -10,6 +10,7 @@ import uk.ac.mdx.xmf.swt.client.xml.Element;
 import xos.Message;
 import xos.Value;
 
+import com.ceteva.menus.MenuBuilder;
 import com.ceteva.modelBrowser.ModelBrowserClient;
 import com.ceteva.modelBrowser.actions.CollapseNodes;
 
@@ -69,9 +70,9 @@ public class ModelBrowserView {
 	 */
 	public void dispose() {
 		// super.dispose();
-		// unregisterAsListener();
-		// tree.getControl().dispose();
-		// MenuBuilder.dispose(getSite());
+//		 unregisterAsListener();
+		 tree.getControl().dispose();
+//		 MenuBuilder.dispose(getSite());
 	}
 
 	/**
@@ -178,6 +179,7 @@ public class ModelBrowserView {
 		// IWorkbenchPage page = ModelBrowserPlugin.getDefault().getWorkbench()
 		// .getActiveWorkbenchWindow().getActivePage();
 		// page.hideView(this);
+		treeClosed();
 	}
 
 	/**

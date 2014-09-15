@@ -145,10 +145,12 @@ public class Palette {
 	 */
 	public void addEntry(String parent, String label, String identity,
 			boolean connection, String icon) {
+		if (!connections.containsKey(label)){
+		connections.put(label,connection);
 		tools.add(label);
 		tools.add(parent);
 		icons.add(icon);
-		connections.put(label,connection);
+		}
 	}
     public HashMap<String,Boolean> getConnections(){
     	return  connections;
@@ -184,8 +186,9 @@ public class Palette {
 	 * Creates the part control.
 	 */
 	public void createPartControl() {
-
-		canvas = new Canvas(parent, SWT.BORDER);
+		//enable scroll bar
+//		canvas = new Canvas(parent,SWT.H_SCROLL | SWT.V_SCROLL);
+		canvas = new Canvas(parent,SWT.NO);
 		canvas.setBounds((int) (parent.getBounds().width * 0.8), 0,
 				(int) (parent.getBounds().width * 0.2),
 				parent.getBounds().height);

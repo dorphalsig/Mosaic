@@ -71,6 +71,7 @@ public class GlobalMenuAction extends Action {
 			if (menuIdentity.equalsIgnoreCase("56")
 					|| menuIdentity.equalsIgnoreCase("57")
 					|| menuIdentity.equalsIgnoreCase("58")) {
+				if (TextEditor.tabItem!=null)
 				TextEditor.tabItem.setImage(null);
 			}
 			
