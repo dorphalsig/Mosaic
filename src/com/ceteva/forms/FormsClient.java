@@ -6,8 +6,12 @@ import org.eclipse.draw2d.FigureUtilities;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabItem;
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
 
 import uk.ac.mdx.xmf.swt.client.EventHandler;
 import uk.ac.mdx.xmf.swt.client.XMLClient;
@@ -178,7 +182,7 @@ public class FormsClient extends XMLClient {
 		// }
 		CTabItem tabItemProperty = new CTabItem(Main.getInstance().tabFolderProperty, SWT.BORDER);
 		tabItemProperty.setText("Property");
-		FormView form = new FormView(Main.getInstance().tabFolderProperty, SWT.BORDER,
+		final FormView form = new FormView(Main.getInstance().tabFolderProperty, SWT.BORDER,
 				tabItemProperty);
 		
 		form.setName(name);
@@ -186,6 +190,17 @@ public class FormsClient extends XMLClient {
 		form.setIdentity(identity);
 		form.registerEventHandler(handler);
 		form.createPartControl(Main.tabFolderProperty);
+		
+		tabItemProperty.addDisposeListener(new DisposeListener(){
+
+
+			@Override
+			public void widgetDisposed(DisposeEvent arg0) {
+				form.formClosed();
+			}
+			
+		});
+		
 		Main.getInstance().tabFolderProperty.setSelection(tabItemProperty);
 		
 		forms.add(form);

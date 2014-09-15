@@ -16,6 +16,8 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.ui.IWorkbenchPartReference;
@@ -55,6 +57,8 @@ public class FormView implements MenuListener {
 	public FormView(Composite parent, int style, CTabItem tabItemProperty) {
 		composite = parent;
 		_tabItemProperty = tabItemProperty;
+		
+		
 	}
 
 	/** The type. */
