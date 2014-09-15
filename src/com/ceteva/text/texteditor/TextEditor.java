@@ -844,8 +844,9 @@ public class TextEditor   implements MenuListener, IPropertyChangeListener,
 	 * @param color the color
 	 */
 	public void addWordRule(String word, String color) {
-		getScanner().addRule(word, color);
+//		getScanner().addRule(word, color);
 		JavaScanner.setKeywords(word, color);
+		
 	}
 
 	/**
@@ -856,6 +857,7 @@ public class TextEditor   implements MenuListener, IPropertyChangeListener,
 	 * @param color the color
 	 */
 	public void addMultilineRule(String start, String end, String color) {
+		JavaScanner.initialize();
 		lineStyler= new JavaLineStyler();
 		text.addLineStyleListener(lineStyler);
 //		if (configuration != null) {
@@ -1288,7 +1290,7 @@ class JavaLineStyler implements LineStyleListener {
 	 */
 	public static class JavaScanner {
 
-		protected Hashtable fgKeys = null;
+		protected static Hashtable fgKeys = null;
 
 		protected StringBuffer fBuffer = new StringBuffer();
 
@@ -1302,14 +1304,7 @@ class JavaLineStyler implements LineStyleListener {
 
 		protected boolean fEofSeen = false;
 
-//		private String[] fgKeywords = { "abstract","Attribute", "boolean", "break", "byte","context",
-//				"case", "catch", "char", "class", "continue", "default", "do",
-//				"double", "else", "extends","end", "false", "final", "finally",
-//				"float", "for", "if", "implements", "import","in", "instanceof",
-//				"int", "interface", "let","long", "native", "new", "null","Operation", "package",
-//				"private", "protected", "public", "return","Seq", "short", "static",
-//				"super", "switch", "synchronized", "this", "throw", "throws",
-//				"transient", "true", "try", "void", "volatile", "while","@" };
+//		private static String[] fgKeywords = { "@",":=",":","import"};
 		private static final ArrayList<String> fgKeywords=new ArrayList<String>();
 
 		public JavaScanner() {
@@ -1317,6 +1312,7 @@ class JavaLineStyler implements LineStyleListener {
 		}
         public static void setKeywords(String word, String color){
         	   fgKeywords.add(word);
+        	  
         }
 		/**
 		 * Returns the ending location of the current token in the document.
@@ -1328,7 +1324,7 @@ class JavaLineStyler implements LineStyleListener {
 		/**
 		 * Initialize the lookup table.
 		 */
-		void initialize() {
+		static void initialize() {
 			fgKeys = new Hashtable();
 			Integer k = new Integer(KEY);
 			for (int i = 0; i < fgKeywords.size(); i++)
@@ -1419,20 +1415,42 @@ class JavaLineStyler implements LineStyleListener {
 						unread(c);
 						return WHITE;
 					}
-					if (Character.isJavaIdentifierStart((char) c)) {
+					if (Character.isJavaIdentifierStart((char) c))
+					{
 						fBuffer.setLength(0);
-						do {
+						do 
+						{
 							fBuffer.append((char) c);
 							c = read();
-						} while (Character.isJavaIdentifierPart((char) c));
+						} 
+						while (Character.isJavaIdentifierPart((char) c));
 						unread(c);
 						Integer i = (Integer) fgKeys.get(fBuffer.toString());
 						if (i != null)
 							return i.intValue();
 						return WORD;
 					}
-					return OTHER;
-				}
+//					if (Character.isJavaIdentifierStart((char) c))
+					{
+						fBuffer.setLength(0);
+//						do 
+						{
+							fBuffer.append((char) c);
+							c = read();
+						} 
+//						while (Character.isSpace((char) c));
+						unread(c);
+						Integer i = (Integer) fgKeys.get(fBuffer.toString());
+						if (i != null){
+							return i.intValue();
+//						return WORD;
+					}
+					}
+//					return OTHER;
+					
+					
+//					return OTHER;
+					}
 			}
 		}
 

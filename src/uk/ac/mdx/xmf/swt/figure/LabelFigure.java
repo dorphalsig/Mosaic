@@ -29,10 +29,10 @@ public class LabelFigure extends Label {
 		// getPreferences();
 		setLocation(position);
 		setPreferredSize(new Dimension(-1, -1));
-		if (underline)
-			setUnderline(true);
-		if (italicise)
-			setItalicise(true);
+//		if (underline)
+//			setUnderline(true);
+//		if (italicise)
+//			setItalicise(true);
 	}
 
 	/**

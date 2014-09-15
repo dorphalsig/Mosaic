@@ -90,6 +90,7 @@ public class TextEditorModel extends ClientElement {
 					 String word = message.args[1].strValue();
 					 String color = message.args[2].strValue();
 					 editor.addWordRule(word, color);
+					 
 					return true;
 				} else if (message.hasName("addMultilineRule")
 						&& message.arity == 4) {
