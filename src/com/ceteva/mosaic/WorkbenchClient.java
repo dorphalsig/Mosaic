@@ -19,7 +19,7 @@ public class WorkbenchClient extends Client {
 			.getDefaultManager();
 	
 	/** The handler. */
-	public EventHandler handler = null;
+	public static EventHandler handler = null;
 
 	/* (non-Javadoc)
 	 * @see uk.ac.mdx.xmf.swt.client.Client#setEventHandler(uk.ac.mdx.xmf.swt.client.EventHandler)
@@ -95,6 +95,7 @@ public class WorkbenchClient extends Client {
 		}
 		return true;
 	}
+
 
 	// public void setEventHandler(EventHandler handler) {
 	// this.handler = handler;// change later, yong

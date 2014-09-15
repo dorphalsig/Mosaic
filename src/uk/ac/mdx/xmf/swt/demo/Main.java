@@ -18,6 +18,7 @@ import org.eclipse.swt.widgets.Decorations;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
@@ -39,6 +40,7 @@ import com.ceteva.forms.views.FormView;
 import com.ceteva.menus.MenusClient;
 import com.ceteva.modelBrowser.ModelBrowserClient;
 import com.ceteva.mosaic.WorkbenchClient;
+import com.ceteva.mosaic.actions.Exit;
 import com.ceteva.mosaic.actions.ShowPres;
 import com.ceteva.oleBridge.OleBridgeClient;
 import com.ceteva.text.EditorClient;
@@ -138,7 +140,9 @@ public class Main {
 
 	/** The instance. */
 	private volatile static Main instance = null;
-
+	
+	public static boolean ClickClose=false;
+	
 	/**
 	 * Gets the single instance of Main.
 	 *
@@ -436,6 +440,18 @@ public class Main {
 			}
 
 		});
+		
+		// override swt close window
+		shell.addListener(SWT.Close, new Listener()
+	    {
+	        public void handleEvent(Event event)
+	        {
+	        	 Exit exit = new Exit();
+				 exit.setEventHandler(WorkbenchClient.handler);
+				 exit.run();
+	            event.doit = ClickClose;
+	        }
+	    });
 
 	}
 
@@ -565,16 +581,17 @@ public class Main {
 		display = new Display();
 		// SplashStartup splash = new SplashStartup();
 		// splash.iniSplash(); // make user choose previous work
-
+		
 		Main.getInstance().createshell();
 		Main.getInstance();
 		Main.shell.open();
-		while (!Main.shell.isDisposed()) {
-			if (!display.readAndDispatch()) {
-				display.sleep();
-			}
-		}
+		while (!ClickClose) {
+		    if (!display.readAndDispatch ()) 
+		    	display.sleep ();
+		  }
+		if(ClickClose){
 		display.dispose();
 		System.exit(0); // exit successful
+		}
 	}
 }

@@ -802,6 +802,7 @@ public class TextEditor   implements MenuListener, IPropertyChangeListener,
 		
 //		text.setText(txt);
 //		String textt=text.getText();
+		if (lineStyler!=null)
 		lineStyler.parseBlockComments(txt);
 //		scanner.
 		// if (viewer != null) {

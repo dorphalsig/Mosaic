@@ -13,6 +13,9 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
+import org.eclipse.ui.actions.ActionFactory;
+import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
+import org.eclipse.ui.internal.Workbench;
 
 import uk.ac.mdx.xmf.swt.client.Client;
 import uk.ac.mdx.xmf.swt.client.EventHandler;
@@ -21,6 +24,8 @@ import xos.Message;
 import xos.Value;
 
 import com.ceteva.menus.actions.MenuAction;
+import com.ceteva.mosaic.WorkbenchClient;
+import com.ceteva.mosaic.actions.Exit;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -47,6 +52,11 @@ public class MenusClient extends Client {
 	
 	/** The mi copy. */
 	MenuItem miCopy;
+
+	static Exit exit;
+	
+	/** The print. */
+	static IWorkbenchAction print;
 
 	/* (non-Javadoc)
 	 * @see uk.ac.mdx.xmf.swt.client.Client#setEventHandler(uk.ac.mdx.xmf.swt.client.EventHandler)
@@ -171,8 +181,17 @@ public class MenusClient extends Client {
 		} else {
 			MenuManager newMenu = new MenuManager(title, identity);
 
-			if (title.equalsIgnoreCase("&File"))
+			if (title.equalsIgnoreCase("&File")){
 				menu.insertBefore("&windows", newMenu);
+//				print = ActionFactory.PRINT.create(window);
+				exit = new Exit();
+				exit.setEventHandler(WorkbenchClient.handler);
+				newMenu.add(new Separator("print"));
+				newMenu.add(new Separator("exit"));
+//				newMenu.appendToGroup("print", print);
+				newMenu.appendToGroup("exit", exit);
+				
+			}
 			else
 				menu.insertAfter("&windows", newMenu);
 

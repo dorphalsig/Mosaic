@@ -18,6 +18,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import uk.ac.mdx.xmf.swt.client.Client;
 import uk.ac.mdx.xmf.swt.client.EventHandler;
+import uk.ac.mdx.xmf.swt.demo.Main;
 import xos.Message;
 import xos.Value;
 
@@ -145,8 +146,10 @@ public class DialogsClient extends Client {
 		boolean reply = MessageDialog.openQuestion(getShell(), "Question",
 				question);
 		Value value;
-		if (reply)
+		if (reply){
 			value = new Value("Yes");
+			Main.ClickClose=true;
+		}
 		else
 			value = new Value("No");
 		return value;
