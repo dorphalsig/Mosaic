@@ -1,6 +1,5 @@
 package com.ceteva.forms;
 
-import java.util.HashMap;
 import java.util.Vector;
 
 import org.eclipse.draw2d.FigureUtilities;
@@ -47,8 +46,7 @@ public class FormsClient extends XMLClient {
 	public FormsClient() {
 		super("com.ceteva.forms");
 	}
-	HashMap<String,FormView > formViews = new HashMap<String,FormView >();
-	Vector forms=new Vector();
+	Vector forms = new Vector();
 	/**
 	 * Gets the form.
 	 *
@@ -124,21 +122,7 @@ public class FormsClient extends XMLClient {
 //		forms.add(Main.propertyView);
 		return forms;
 	}
-public HashMap<String,FormView > getAllFormViews() {
-		
-		// IWorkbenchPage page = FormsPlugin.getDefault().getWorkbench()
-		// .getActiveWorkbenchWindow().getActivePage();
-		// IViewReference[] vreferences = page.getViewReferences();
-		// for (int i = 0; i < vreferences.length; i++) {
-		// IViewReference reference = vreferences[i];
-		// IViewPart view = reference.getView(false);
-		// if (view instanceof FormView)
-		// forms.add(view);
-		// }
 
-//		forms.add(Main.propertyView);
-		return formViews;
-	}
 	/**
 	 * Broadcast call.
 	 *
@@ -197,7 +181,7 @@ public HashMap<String,FormView > getAllFormViews() {
 		// return null;
 		// }
 		CTabItem tabItemProperty = new CTabItem(Main.getInstance().tabFolderProperty, SWT.BORDER);
-		tabItemProperty.setText(name);
+		tabItemProperty.setText("Property");
 		final FormView form = new FormView(Main.getInstance().tabFolderProperty, SWT.BORDER,
 				tabItemProperty);
 		
@@ -206,7 +190,6 @@ public HashMap<String,FormView > getAllFormViews() {
 		form.setIdentity(identity);
 		form.registerEventHandler(handler);
 		form.createPartControl(Main.tabFolderProperty);
-		form.focusGained();
 		
 		tabItemProperty.addDisposeListener(new DisposeListener(){
 
@@ -221,7 +204,6 @@ public HashMap<String,FormView > getAllFormViews() {
 		Main.getInstance().tabFolderProperty.setSelection(tabItemProperty);
 		
 		forms.add(form);
-		formViews.put(identity, form);
 		return form;
 
 	}
@@ -275,7 +257,7 @@ public HashMap<String,FormView > getAllFormViews() {
 	 * @return true, if successful
 	 */
 	public boolean setFocus(Message message) {
-		 String identity = message.args[0].strValue();
+		// String identity = message.args[0].strValue();
 		// IWorkbenchPage page = FormsPlugin.getDefault().getWorkbench()
 		// .getActiveWorkbenchWindow().getActivePage();
 		// try {
@@ -288,9 +270,6 @@ public HashMap<String,FormView > getAllFormViews() {
 		// } catch (PartInitException e) {
 		// e.printStackTrace();
 		// }
-		 CTabItem tabItem=formViews.get(identity).getTabItem();
-		 
-		 Main.getInstance().tabFolderProperty.setSelection(tabItem);
 		handler.setCommandMode(false);
 		return true;
 	}

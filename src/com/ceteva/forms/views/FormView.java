@@ -997,10 +997,8 @@ public class FormView implements MenuListener {
 	 * @param s the s
 	 */
 	public void changeText(String s) {
-		
 		tabName = s;
-		_tabItemProperty.setText(s);
-		Main.tabFolderProperty.setSelection(_tabItemProperty);
+		Main.getInstance().tabFolderProperty.setSelection(_tabItemProperty);
 		// this.setPartName(s);
 	}
 
@@ -1437,10 +1435,5 @@ public class FormView implements MenuListener {
 	 * @param element the element
 	 */
 	public void updateComponent(Element xml, FormElement element) {
-	}
-
-	public CTabItem getTabItem() {
-		// TODO Auto-generated method stub
-		return _tabItemProperty;
 	}
 }

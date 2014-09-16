@@ -2,14 +2,11 @@ package com.ceteva.modelBrowser;
 
 import java.util.Enumeration;
 import java.util.Hashtable;
-import java.util.Vector;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
-import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.widgets.Canvas;
 
 import uk.ac.mdx.xmf.swt.client.EventHandler;
@@ -33,7 +30,6 @@ public class ModelBrowserClient extends XMLClient {
 	
 	/** The open browsers. */
 	Hashtable openBrowsers = new Hashtable();
-	Vector <ModelBrowserView> browsers=new Vector<ModelBrowserView>();
 	
 	/** The handler. */
 	public EventHandler handler = null;
@@ -135,19 +131,9 @@ public class ModelBrowserClient extends XMLClient {
 		browser.registerEventHandler(handler);
 		browser.setClient(this);
 		browserAdded(identity, browser);
-		browsers.add(browser);
 		// if(closable) // Not sure what needs to be done here
 		if (hasFocus)
 			browser.focusGained();
-		
-		Main.tabFolderOutline.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(
-					org.eclipse.swt.events.SelectionEvent event) {
-				int index = Main.tabFolderOutline.getSelectionIndex();
-				browsers.get(index).focusLost();
-				browsers.get(index).focusGained();
-			}
-		});
 		
 		Main.tabFolderOutline.setSelection(tabItem);
 		Main.sectionTopLeft.setFocus();
