@@ -122,7 +122,7 @@ public class ModelBrowserClient extends XMLClient {
 		tabItem.setControl(c);
 
 		final ModelBrowserView browser = new ModelBrowserView();
-		browser.createPartControl(c);
+		browser.createPartControl(c, tabItem);
 		System.err.println("Modelbrowser added with id: "
 				+ browser.getIdentity() + " id:" + id);
 		browser.setName(name);

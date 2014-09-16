@@ -1,9 +1,11 @@
 package com.ceteva.modelBrowser.views;
 
 import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TreeItem;
+import org.eclipse.ui.IWorkbenchPage;
 
 import uk.ac.mdx.xmf.swt.client.EventHandler;
 import uk.ac.mdx.xmf.swt.client.xml.Element;
@@ -43,6 +45,7 @@ public class ModelBrowserView {
 	
 	/** The closable. */
 	boolean closable = true;
+	CTabItem _tabItem;
 
 	/**
 	 * Instantiates a new model browser view.
@@ -176,10 +179,11 @@ public class ModelBrowserView {
 	 * Close model browser.
 	 */
 	public void closeModelBrowser() {
-		// IWorkbenchPage page = ModelBrowserPlugin.getDefault().getWorkbench()
-		// .getActiveWorkbenchWindow().getActivePage();
-		// page.hideView(this);
-		treeClosed();
+//		 IWorkbenchPage page = ModelBrowserPlugin.getDefault().getWorkbench()
+//		 .getActiveWorkbenchWindow().getActivePage();
+//		 page.hideView(this);
+//		treeClosed();
+		_tabItem.dispose();
 	}
 
 	/**
@@ -219,8 +223,9 @@ public class ModelBrowserView {
 	 *
 	 * @param parent the parent
 	 */
-	public void createPartControl(Composite parent) {
+	public void createPartControl(Composite parent,CTabItem tabItem) {
 		parent.setLayout(new FillLayout());
+		_tabItem=tabItem;
 
 		if (tree == null)
 			tree = new ModelBrowserTree(parent, identity, handler,
