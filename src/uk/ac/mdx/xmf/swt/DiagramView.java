@@ -275,6 +275,7 @@ public class DiagramView extends View {
 	 * @param views the views
 	 */
 	public void setFocus(boolean focus, Vector<DiagramView> views) {
+		raiseFocusGained();
 		_views = views;
 		setAllFocus();
 		isFocus = focus;
