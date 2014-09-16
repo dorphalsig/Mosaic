@@ -123,8 +123,6 @@ class FormTextField extends FormElement implements MenuListener,
 	public void setText(String textString) {
 		text.setText(textString);
 		text.setToolTipText(textString);
-		Main.getInstance().tabFolderProperty.getSelection().setText(
-				"Property:" + textString);
 		changesMade(false);
 	}
 

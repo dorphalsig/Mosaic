@@ -196,6 +196,8 @@ public class Main {
 			public void itemClosed(CTabFolderEvent event) {
 			}
 		});
+
+		
 		tabFolderOutline.setSimple(false);
 
 		// Create the diagram tabs
