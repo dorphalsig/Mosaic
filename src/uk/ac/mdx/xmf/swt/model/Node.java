@@ -422,7 +422,7 @@ public class Node extends Container {
 		isClicked = checkRectangleBoundary(point.x, point.y, location.x,
 				location.y, size.width, size.height);
 		// if (isClicked) {
-		// System.out.println("node-" + identity + "-clicked");
+		 System.out.println("node-" + identity + "-clicked");
 		// }
 
 	}
@@ -489,6 +489,10 @@ public class Node extends Container {
 	 */
 	private boolean checkRectangleBoundary(float pointX, float pointY,
 			float rectangleX, float rectangleY, float width, float height) {
+		if (width<30)
+			width=30;
+		if (height<30)
+			height=30;
 		boolean isInside = ((pointX > rectangleX)
 				&& (pointX < rectangleX + width) && (pointY > rectangleY) && (pointY < rectangleY
 				+ height));

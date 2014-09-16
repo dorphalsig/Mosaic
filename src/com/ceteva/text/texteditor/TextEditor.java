@@ -379,11 +379,13 @@ public class TextEditor   implements MenuListener, IPropertyChangeListener,
 						public void widgetDisposed(DisposeEvent arg0) {
 							partDeactivated();
 							dispose();
+							Main.numberOfAddingItem--;
 						}
 
 					});
 
 					Main.tabFolderDiagram.setSelection(tabItem);
+					Main.numberOfAddingItem++;
 
 				} catch (IOException io) {
 					System.out.println(io);

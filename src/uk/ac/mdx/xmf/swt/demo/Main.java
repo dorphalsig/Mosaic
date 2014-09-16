@@ -144,6 +144,7 @@ public class Main {
 	private volatile static Main instance = null;
 	
 	public static boolean ClickClose=false;
+	public static int numberOfAddingItem=0;
 	
 	/**
 	 * Gets the single instance of Main.
@@ -208,8 +209,8 @@ public class Main {
 			public void widgetSelected(
 					org.eclipse.swt.events.SelectionEvent event) {
 				int index = tabFolderDiagram.getSelectionIndex();
-				if (views.size() > 0 && index != 0) {
-					views.get(index - 1).setFocus(true, views);
+				if (views.size() > 0 && index != 0&&(index-numberOfAddingItem)>-1) {
+					views.get(index - numberOfAddingItem).setFocus(true, views);
 					palettes.get(index - 1).setFocus(true, palettes);
 				}
 			}

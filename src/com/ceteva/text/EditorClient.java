@@ -5,6 +5,8 @@ import java.net.URL;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.CTabItem;
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.ui.PartInitException;
 
@@ -102,7 +104,8 @@ public class EditorClient extends Client {
 			Canvas c = new Canvas(Main.tabFolderDiagram, SWT.BORDER);
 			tabItem.setControl(c);
 
-			HTMLViewer viewer = new HTMLViewer();
+			final HTMLViewer viewer = new HTMLViewer();
+//			viewer.setEventHandler(handler);
 			viewer.init(identity);
 
 			Browser browser = new Browser(c, SWT.BORDER);
@@ -113,32 +116,20 @@ public class EditorClient extends Client {
 			browser.setBounds(Main.tabFolderDiagram.getBounds());
 			browser.setLocation(0, 0);
 			browser.layout(true, true);
+			
+			tabItem.addDisposeListener(new DisposeListener() {
+
+				@Override
+				public void widgetDisposed(DisposeEvent arg0) {
+//					viewer.dispose();
+					Main.numberOfAddingItem--;
+				}
+
+			});
 
 			Main.tabFolderDiagram.setSelection(tabItem);
+			Main.numberOfAddingItem++;
 		}
-	}
-
-	/**
-	 * Show browser.
-	 *
-	 * @param url the url
-	 */
-	public void showBrowser(String url) {
-		// Create a web browser
-
-		CTabItem tabItem = new CTabItem(Main.tabFolderDiagram, SWT.BORDER);
-		tabItem.setText("Welcome");
-		Canvas c = new Canvas(Main.tabFolderDiagram, SWT.BORDER);
-		tabItem.setControl(c);
-
-		Browser browser = new Browser(c, SWT.BORDER);
-		browser.setUrl(url);
-		browser.setBounds(Main.tabFolderDiagram.getBounds());
-		browser.setLocation(0, 0);
-		browser.layout(true, true);
-
-		Main.sectionTopLeft.setFocus();
-		Main.sectionTopMiddle.setFocus();
 	}
 
 	/**
