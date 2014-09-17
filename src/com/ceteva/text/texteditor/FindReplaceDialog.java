@@ -28,6 +28,8 @@ import org.eclipse.swt.widgets.ScrollBar;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import uk.ac.mdx.xmf.swt.model.ImageManager;
+
 
 // TODO: Auto-generated Javadoc
 /**
@@ -91,9 +93,9 @@ public class FindReplaceDialog extends TrayDialog {
    * Opens the dialog box.
    */
   public void openUp() {
-    System.out.println("Find/Replace");
     Shell shell = new Shell(parentShell);
     shell.setText("Find/Replace");
+    shell.setImage(ImageManager.getImage(DLG_IMG_HELP));
     createContents(shell);
     shell.pack();
     shell.open();

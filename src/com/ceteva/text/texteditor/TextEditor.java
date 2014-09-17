@@ -15,6 +15,10 @@ import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.CursorLinePainter;
 import org.eclipse.jface.text.Document;
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.ITextListener;
+import org.eclipse.jface.text.TextEvent;
+import org.eclipse.jface.text.TextViewer;
 import org.eclipse.jface.text.source.CompositeRuler;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.IVerticalRuler;
@@ -180,6 +184,7 @@ public class TextEditor   implements MenuListener, IPropertyChangeListener,
 	/**
 	 * Adds the click listener.
 	 */
+	private TextViewer textViewer;
 	public void addClickListener() {
 		// Action: copy selected text.
 		final Action actionCut = new Action("&Cut",
@@ -196,7 +201,6 @@ public class TextEditor   implements MenuListener, IPropertyChangeListener,
 			}
 		};
 		
-		actionCopy.setAccelerator(SWT.CTRL + 'C');
 		final Action actionPast = new Action("&Past",
 				null) {
 			public void run() {
@@ -204,9 +208,39 @@ public class TextEditor   implements MenuListener, IPropertyChangeListener,
 			}
 		};
 		
-		actionCut.setAccelerator(SWT.CTRL + 'X');
+		actionCut.setAccelerator(SWT.CTRL + 'h');
 		actionCopy.setAccelerator(SWT.CTRL + 'C');
 		actionPast.setAccelerator(SWT.CTRL + 'V');
+		
+		final Action actionFindAndReplace = new Action("&Find/Replace",
+				null) {
+			public void run() {
+//				viewer = new SourceViewer(parent, null, SWT.NO);
+////				configuration = new TextConfiguration(identity);
+//				// setSourceViewerConfiguration(configuration);
+//				// addCursorPainter();
+//				 viewer.addTextListener(new ITextListener() {
+//					 @Override
+//				 public void textChanged(TextEvent event) {
+//				 String currentText = viewer.getTextWidget().getText();
+//				 if (event.getText() != null) {
+//				 if (!event.getText().equals(currentText)) {
+//				 setDirty();
+//				 }
+//				 }
+//				 }
+//				 });
+//				IDocument document =viewer.getDocument() ;
+//				document.set(text.getText());
+				
+				 textViewer = new TextViewer(parent, SWT.MULTI | SWT.V_SCROLL);
+				 textViewer.setDocument(new Document());
+				 textViewer.getDocument().set(text.getText());
+				 
+				FindReplaceDialog findReplaceDialog=new FindReplaceDialog(Main.shell, textViewer.getDocument(), textViewer);
+				findReplaceDialog.open();
+			}
+		};
 
 		if (text != null) {
 			text.addListener(SWT.MouseMove, new Listener() {
@@ -221,7 +255,7 @@ public class TextEditor   implements MenuListener, IPropertyChangeListener,
 					menu.add(actionCopy);
 					menu.add(actionPast);
 					
-					
+					menu.add(actionFindAndReplace);
 //					addAction(menu, ITextEditorActionConstants.GROUP_FIND, ITextEditorActionConstants.FIND);
 //					addAction(menu, ITextEditorActionConstants.GROUP_FIND, ITextEditorActionConstants.FIND_NEXT);
 //					addAction(menu, ITextEditorActionConstants.GROUP_FIND, ITextEditorActionConstants.FIND_PREVIOUS);
