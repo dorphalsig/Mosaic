@@ -30,14 +30,14 @@ import com.ceteva.text.texteditor.TextStorage;
 public class EditorClient extends Client {
 	
 	/** The handler. */
-	public EventHandler handler = null;
+//	public EventHandler handler = null;
 
 	/* (non-Javadoc)
 	 * @see uk.ac.mdx.xmf.swt.client.Client#setEventHandler(uk.ac.mdx.xmf.swt.client.EventHandler)
 	 */
 	@Override
 	public void setEventHandler(EventHandler eventsOut) {
-		handler = eventsOut;
+//		handler = eventsOut;
 	}
 
 	/**
@@ -104,9 +104,54 @@ public class EditorClient extends Client {
 			Canvas c = new Canvas(Main.tabFolderDiagram, SWT.BORDER);
 			tabItem.setControl(c);
 
-			final HTMLViewer viewer = new HTMLViewer();
-//			viewer.setEventHandler(handler);
+			HTMLViewer viewer = new HTMLViewer();
 			viewer.init(identity);
+			viewer.setEventHandler(handler);
+			viewer.createPartControl(c);
+			viewer.setName(title);
+			viewer.setToolTip(tooltip);
+			if(!urls.equals(""))
+			viewer.setURL(urls);
+
+//			Browser browser = new Browser(c, SWT.BORDER);
+//			viewer.setBrowser(browser);
+//			if (urls.length() > 1)
+//				browser.setUrl(urls);
+//			// browser.setText(urls);
+//			browser.setBounds(Main.tabFolderDiagram.getBounds());
+//			browser.setLocation(0, 0);
+//			browser.layout(true, true);
+			
+			
+			
+			tabItem.addDisposeListener(new DisposeListener() {
+
+				@Override
+				public void widgetDisposed(DisposeEvent arg0) {
+//					viewer.dispose();
+					Main.numberOfAddingItem--;
+				}
+
+			});
+
+			Main.tabFolderDiagram.setSelection(tabItem);
+			Main.numberOfAddingItem++;
+		}
+	}
+	/*
+	public void showBrowser(String identity, String title, String tooltip,
+			String urls) {
+		// // Create a web browser
+		// if (urls.length() > 1)
+		{
+			CTabItem tabItem = new CTabItem(Main.tabFolderDiagram, SWT.BORDER);
+			tabItem.setText(title);
+			Canvas c = new Canvas(Main.tabFolderDiagram, SWT.BORDER);
+			tabItem.setControl(c);
+
+			final HTMLViewer viewer = new HTMLViewer();
+			viewer.init(identity);
+			viewer.setEventHandler(handler);
 
 			Browser browser = new Browser(c, SWT.BORDER);
 			viewer.setBrowser(browser);
@@ -131,7 +176,7 @@ public class EditorClient extends Client {
 			Main.numberOfAddingItem++;
 		}
 	}
-
+*/
 	/**
 	 * New text editor.
 	 *

@@ -92,7 +92,7 @@ public class HTMLViewer {
 	 * @param identity the identity
 	 */
 	public void init(String identity) {
-
+        this.identity=identity;
 		model = new HTMLViewerModel(identity, null, this);
 	}
 
