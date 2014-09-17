@@ -444,12 +444,8 @@ public class DiagramView extends View {
 					}
 
 				}
-
 				
-				 
-				if (s.length()>1){
-//					boolean label=connections.get(s);
-					if (connections.get(s)) //connection
+					if (connections.get(s)!=null&&connections.get(s)) //connection
 					{
 						if (ports.size() > 1){
 						raiseFocusGained();
@@ -484,7 +480,6 @@ public class DiagramView extends View {
 
 						Main.getInstance().palette.setSelectImage();
 					}
-				}
 				 
 				/*
 				if (s.equalsIgnoreCase("Class")) {
