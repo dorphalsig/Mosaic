@@ -315,6 +315,8 @@ public class TextEditor   implements MenuListener, IPropertyChangeListener,
 		// color = PreferenceConverter.getColor(ipreferences,
 		// IPreferenceConstants.HIGHLIGHT_LINE_COLOR);
 		// highlightedLineColor = new Color(Display.getDefault(), color);
+		if (Main.getInstance().newFont!=null)
+			defaultFont=Main.getInstance().newFont;
 	}
 
 	/**

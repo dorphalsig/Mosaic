@@ -12,12 +12,22 @@ import org.eclipse.jface.preference.PreferenceNode;
 import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.jface.preference.PreferenceStore;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.graphics.RGB;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.FontDialog;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import uk.ac.mdx.xmf.swt.demo.Main;
@@ -33,8 +43,49 @@ public class ShowPrefs {
 	/**
 	 * Runs the application.
 	 */
+	Shell s;
 	public void run() {
 		Display display = Main.display;
+		
+		final Display d = display;
+	    s = new Shell(d);
+		s.setSize(400, 400);
+	    
+	    s.setText("A FontDialog Example");
+	    s.setLayout(new FillLayout(SWT.VERTICAL));
+	    
+//	        final Text t = new Text(s, SWT.BORDER | SWT.MULTI);
+		    FontDialog fd = new FontDialog(s, SWT.NONE);
+	        fd.setText("Select Font");
+	        fd.setRGB(new RGB(0, 0, 255));
+	        FontData defaultFont = new FontData("Courier", 10, SWT.BOLD);
+	        fd.setFontData(defaultFont);
+	        FontData newFont = fd.open();
+	        if (newFont == null)
+	          return;
+	        Main.getInstance().newFont=newFont;
+//	        t.setFont(new Font(d, newFont));
+//	        t.setForeground(new Color(d, fd.getRGB()));
+	   
+//	    final Button b = new Button(s, SWT.PUSH | SWT.BORDER);
+//	    b.setText("Change Font");
+//	    b.addSelectionListener(new SelectionAdapter() {
+//	      public void widgetSelected(SelectionEvent e) {
+//	        FontDialog fd = new FontDialog(s, SWT.NONE);
+//	        fd.setText("Select Font");
+//	        fd.setRGB(new RGB(0, 0, 255));
+//	        FontData defaultFont = new FontData("Courier", 10, SWT.BOLD);
+//	        fd.setFontData(defaultFont);
+//	        FontData newFont = fd.open();
+//	        if (newFont == null)
+//	          return;
+//	        t.setFont(new Font(d, newFont));
+//	        t.setForeground(new Color(d, fd.getRGB()));
+//	      }
+//	    });
+	    s.open();
+	    s.setVisible(false);
+		/*
 
 		// Create the preference manager
 		PreferenceManager mgr = new PreferenceManager();
@@ -72,6 +123,8 @@ public class ShowPrefs {
 			e.printStackTrace();
 		}
 		// display.dispose();
+		
+		*/
 	}
 
 	/**

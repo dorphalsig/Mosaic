@@ -13,6 +13,7 @@ import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
@@ -145,6 +146,8 @@ public class Main {
 	
 	public static boolean ClickClose=false;
 	public static int numberOfAddingItem=0;
+	
+	public FontData newFont=null;
 	
 	/**
 	 * Gets the single instance of Main.
