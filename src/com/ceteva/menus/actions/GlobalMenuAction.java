@@ -68,12 +68,12 @@ public class GlobalMenuAction extends Action {
 			String menuIdentity = (String) menuIdentities.elementAt(i);
 			// hijack the code here, change it later, 56,57,58, magic number for
 			// save,save as and save as and compile,
-			if (menuIdentity.equalsIgnoreCase("56")
-					|| menuIdentity.equalsIgnoreCase("57")
-					|| menuIdentity.equalsIgnoreCase("58")) {
-				if (TextEditor.tabItem!=null)
-				TextEditor.tabItem.setImage(null);
-			}
+//			if (menuIdentity.equalsIgnoreCase("56")
+//					|| menuIdentity.equalsIgnoreCase("57")
+//					|| menuIdentity.equalsIgnoreCase("58")) {
+//				if (TextEditor.tabItem!=null)
+//				TextEditor.tabItem.setImage(null);
+//			}
 			
 			ids[i * 2] = new Value(menuIdentity);
 			String identity = (String) identities.elementAt(i);

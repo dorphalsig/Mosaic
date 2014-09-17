@@ -247,11 +247,8 @@ public class TextEditor   implements MenuListener, IPropertyChangeListener,
 
 					// check the input, if user input, thus enable user to save
 					if (e.text.length() > 0 && e.text.length() < length) {
-						tabItem.setImage(ImageManager
-								.getImage("icons/Parser/asterisk.gif"));
-					} else {
-						tabItem.setImage(null);
-					}
+						setDirty();
+					} 
 				}
 			});
 			// add line number
@@ -414,6 +411,8 @@ public class TextEditor   implements MenuListener, IPropertyChangeListener,
 			changed = true;
 			// originalName = getPartName();
 			// setPartName(" " + originalName);
+			tabItem.setImage(ImageManager
+					.getImage("icons/Parser/asterisk.gif"));
 			Message m = handler.newMessage("textDirty", 2);
 			Value v1 = new Value(getIdentity());
 			Value v2 = new Value(true);
