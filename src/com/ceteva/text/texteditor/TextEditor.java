@@ -142,8 +142,7 @@ public class TextEditor   implements MenuListener, IPropertyChangeListener,
 	private int length = 0;
 	
 	/** The default font. */
-	static FontData defaultFont = new FontData(
-			"1|Courier New|9|0|WINDOWS|1|-13|0|0|0|400|0|0|0|0|3|2|1|49|Courier New");
+	static FontData defaultFont = new FontData("Courier New", 16, SWT.NO);
 	JavaLineStyler lineStyler ;
 	/**
 	 * Instantiates a new text editor.
