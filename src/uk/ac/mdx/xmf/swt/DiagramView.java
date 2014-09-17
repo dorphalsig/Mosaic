@@ -376,7 +376,7 @@ public class DiagramView extends View {
 						nodeShapes.get(node.getIdentity()).setVisible(true);
 						nodeShapes.get(node.getIdentity()).setOpaque(false);
 						
-						if (connections.get(s))
+						if (connections.get(s)!=null&&connections.get(s))
 						ports.add(node);
 						
 						node.selectNode();
