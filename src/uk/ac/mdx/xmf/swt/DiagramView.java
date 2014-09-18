@@ -253,6 +253,9 @@ public class DiagramView extends View {
 		rootFigure = new Figure();
 		rootFigure.add(rectShape);
 		rootFigure.add(edgeDrageShape);
+		
+		canvas.setContents(rootFigure);
+		
 		Main.tabFolderDiagram.setSelection(tabItem);
 
 		// addMouseListener(this);
@@ -1218,11 +1221,10 @@ public class DiagramView extends View {
 		canvas.redraw();
 
 		rootFigure.add(figure);
-		canvas.setContents(rootFigure);
+		
 		rootFigure.repaint();
 
-		Main.getInstance();
-		Main.tabFolderDiagram.layout(true);
+		Main.getInstance().tabFolderDiagram.layout(true);;
 
 		// canvas.pack();
 		// canvas.layout(true);
@@ -1291,13 +1293,6 @@ public class DiagramView extends View {
 	 */
 	public Map<String, EdgeEditPart> getEdgeParts() {
 		return edgeEditParts;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.swt.widgets.Control#update()
-	 */
-	public void update() {
-		display();
 	}
 
 	/**
@@ -1493,6 +1488,7 @@ public class DiagramView extends View {
 			}
 		}
 		contents.clear();
+		display();
 	}
 
 	/**
