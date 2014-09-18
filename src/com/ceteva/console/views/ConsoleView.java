@@ -25,6 +25,7 @@ import uk.ac.mdx.xmf.swt.misc.ColorManager;
 
 import com.ceteva.console.ConsolePlugin;
 import com.ceteva.consoleInterface.EscapeHandler;
+import com.ceteva.text.texteditor.ConsoleLineStyler;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -34,10 +35,13 @@ public class ConsoleView {
 
 	/**
 	 * Instantiates a new console view.
-	 *
-	 * @param parent the parent
-	 * @param style the style
-	 * @param tabItemConsole the tab item console
+	 * 
+	 * @param parent
+	 *            the parent
+	 * @param style
+	 *            the style
+	 * @param tabItemConsole
+	 *            the tab item console
 	 */
 	public ConsoleView(Composite parent, int style, TabItem tabItemConsole) {
 		Composite c1 = new Composite(parent, SWT.BORDER);
@@ -55,25 +59,25 @@ public class ConsoleView {
 	// Document document = null;
 	/** The history. */
 	History history = new History();
-	
+
 	/** The input start. */
 	int inputStart = 0;
-	
+
 	/** The text font. */
 	Font textFont = null;
-	
+
 	/** The background color. */
 	Color backgroundColor = ColorManager.getColor(new RGB(221, 171, 160));
-	
+
 	/** The foreground color. */
 	Color foregroundColor = null;
-	
+
 	/** The water mark. */
 	int waterMark = 1000;
-	
+
 	/** The out. */
 	PrintStream out = null;
-	
+
 	/** The escape. */
 	static EscapeHandler escape = null;
 
@@ -82,7 +86,7 @@ public class ConsoleView {
 
 	/** The overflow lock. */
 	private Object overflowLock = new Object();
-	
+
 	/** The waterline job. */
 	private FlushWaterline waterlineJob;
 
@@ -102,8 +106,11 @@ public class ConsoleView {
 			styledTextContent = text.getContent();
 		}
 
-		/* (non-Javadoc)
-		 * @see org.eclipse.core.runtime.jobs.Job#run(org.eclipse.core.runtime.IProgressMonitor)
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.eclipse.core.runtime.jobs.Job#run(org.eclipse.core.runtime.
+		 * IProgressMonitor)
 		 */
 		protected IStatus run(IProgressMonitor monitor) {
 			synchronized (overflowLock) {
@@ -137,8 +144,9 @@ public class ConsoleView {
 
 	/**
 	 * Creates the part control.
-	 *
-	 * @param parent the parent
+	 * 
+	 * @param parent
+	 *            the parent
 	 */
 	public void createPartControl(Composite parent) {
 		// parent.setLayout(new FillLayout());
@@ -162,8 +170,9 @@ public class ConsoleView {
 
 	/**
 	 * Append text.
-	 *
-	 * @param string the string
+	 * 
+	 * @param string
+	 *            the string
 	 */
 	public void appendText(String string) {
 		synchronized (overflowLock) {
@@ -175,7 +184,7 @@ public class ConsoleView {
 
 	/**
 	 * Gets the preferences.
-	 *
+	 * 
 	 * @return the preferences
 	 */
 	public void getPreferences() {
@@ -207,8 +216,9 @@ public class ConsoleView {
 
 	/**
 	 * Push to history.
-	 *
-	 * @param text the text
+	 * 
+	 * @param text
+	 *            the text
 	 * @return the string
 	 */
 	public String pushToHistory(StyledText text) {
@@ -221,7 +231,7 @@ public class ConsoleView {
 
 	/**
 	 * Recall from history forward.
-	 *
+	 * 
 	 * @return the string
 	 */
 	public String recallFromHistoryForward() {
@@ -230,7 +240,7 @@ public class ConsoleView {
 
 	/**
 	 * Recall from history backward.
-	 *
+	 * 
 	 * @return the string
 	 */
 	public String recallFromHistoryBackward() {
@@ -239,9 +249,11 @@ public class ConsoleView {
 
 	/**
 	 * Adds the command.
-	 *
-	 * @param text the text
-	 * @param command the command
+	 * 
+	 * @param text
+	 *            the text
+	 * @param command
+	 *            the command
 	 */
 	public void addCommand(StyledText text, String command) {
 		int length = text.getCharCount() - inputStart;
@@ -251,8 +263,9 @@ public class ConsoleView {
 
 	/**
 	 * Adds the verify listener.
-	 *
-	 * @param text the text
+	 * 
+	 * @param text
+	 *            the text
 	 */
 	public void addVerifyListener(final StyledText text) {
 		text.addVerifyListener(new VerifyListener() {
@@ -301,6 +314,9 @@ public class ConsoleView {
 				}
 			}
 		});
+
+		ConsoleLineStyler consoleLineStyper = new ConsoleLineStyler();
+		text.addLineStyleListener(consoleLineStyper);
 	}
 
 	/**
@@ -314,8 +330,9 @@ public class ConsoleView {
 
 	/**
 	 * Sets the output.
-	 *
-	 * @param out the new output
+	 * 
+	 * @param out
+	 *            the new output
 	 */
 	public void setOutput(PrintStream out) {
 		this.out = out;
@@ -323,8 +340,9 @@ public class ConsoleView {
 
 	/**
 	 * Process input.
-	 *
-	 * @param input the input
+	 * 
+	 * @param input
+	 *            the input
 	 */
 	public void processInput(String input) {
 		appendText(input);
@@ -335,8 +353,9 @@ public class ConsoleView {
 
 	/**
 	 * Property change.
-	 *
-	 * @param event the event
+	 * 
+	 * @param event
+	 *            the event
 	 */
 	public void propertyChange(PropertyChangeEvent event) {
 		getPreferences();
@@ -366,8 +385,9 @@ public class ConsoleView {
 
 	/**
 	 * Sets the escape handler.
-	 *
-	 * @param handler the new escape handler
+	 * 
+	 * @param handler
+	 *            the new escape handler
 	 */
 	public static void setEscapeHandler(EscapeHandler handler) {
 		escape = handler;
