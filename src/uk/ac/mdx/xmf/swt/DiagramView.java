@@ -258,7 +258,9 @@ public class DiagramView extends View {
 		// addMouseListener(this);
 		// canvas.addMouseListener(this);
 	}
-
+    public CTabItem getTabItem(){
+    	return _tabItem;
+    }
 	/**
 	 * Sets the identity.
 	 *

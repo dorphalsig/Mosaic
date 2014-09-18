@@ -212,9 +212,15 @@ public class Main {
 			public void widgetSelected(
 					org.eclipse.swt.events.SelectionEvent event) {
 				int index = tabFolderDiagram.getSelectionIndex();
-				if (views.size() > 0 && index != 0&&(index-numberOfAddingItem)>-1) {
-					views.get(index - numberOfAddingItem).setFocus(true, views);
-					palettes.get(index - 1).setFocus(true, palettes);
+//				if (views.size() > 0 && index != 0&&(index-numberOfAddingItem)>-1) {
+//					views.get(index - numberOfAddingItem).setFocus(true, views);
+//					palettes.get(index - 1).setFocus(true, palettes);
+//				}
+				for (DiagramView view:views){
+				if (tabFolderDiagram.getSelection()==view.getTabItem()){
+					view.setFocus(true, views);
+					view.getPallete().setFocus(true, palettes);
+				}
 				}
 			}
 		});
