@@ -1409,7 +1409,6 @@ class JavaLineStyler implements LineStyleListener {
 
 		public static void setKeywords(String word, String color) {
 			fgKeywords.add(word);
-
 		}
 
 		/**
