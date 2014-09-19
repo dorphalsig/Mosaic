@@ -1,15 +1,16 @@
 -arg
 user:XModeler
 -arg
-home:../../com.ceteva.xmf.system/xmf-src
+home:../../XMF2/com.ceteva.xmf.system/xmf-src
 -image
-../../com.ceteva.xmf.system/xmf-img/mosaic.img
+../../XMF2/com.ceteva.xmf.system/xmf-img/mosaic.img
 -arg
 projects:
 -arg
 demos:
 -arg
 images:
+/Users/tony/Dropbox/MDX_Files/Research/XMF/xmf_images/
 -arg
 saveSource:true
 -message
@@ -38,4 +39,7 @@ com.ceteva.console.ConsoleClient:com.ceteva.console
 15000
 -freeHeap
 80
-
+-arg
+initFile:/Users/tony/Dropbox/MDX_Files/Research/XMF/xmf_projects/init/init.o
+-arg
+projects:/Users/tony/Dropbox/MDX_Files/Research/XMF/xmf_projects
