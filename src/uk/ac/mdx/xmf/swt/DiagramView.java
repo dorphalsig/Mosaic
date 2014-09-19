@@ -211,6 +211,8 @@ public class DiagramView extends View {
 	/** The edge drage shape. */
 	Figure edgeDrageShape = new Figure();
 
+	private Object iModel;
+
 	/**
 	 * Instantiates a new diagram view.
 	 * 
@@ -1329,27 +1331,25 @@ public class DiagramView extends View {
 	 */
 	public void refresh(Vector displays) {
 		this.contents = displays;
-		Object iModel;
 
 		for (int i = 0; i < contents.size(); i++) {
 			iModel = contents.get(i);
 			if (iModel instanceof Node) {
 				figure = new Figure();
 				nodeEditPart = new NodeEditPart();
-				Node node = (Node) iModel;
+				// Node node = (Node) iModel;
 				nodeEditPart.setModel((Node) iModel);
 				nodeEditPart.setDiagramView(this);
 				nodeEditPart.activate();
 				figure = (Figure) nodeEditPart.createFigure();
 
-				Rectangle rect = new Rectangle(node.getLocation(),
-						node.getSize());
+				Rectangle rect = new Rectangle(((Node) iModel).getLocation(),
+						((Node) iModel).getSize());
 				Figure shape = (Figure) nodeEditPart.createFigure(true, rect);
 				shape.setVisible(false);
 				rootFigure.add(shape);
 				figure.setBorder(null);
 				String identity = ((Node) iModel).getIdentity();
-				// System.out.println("node identity" + identity);
 				nodeEditParts.put(identity, nodeEditPart);
 				nodeShapes.put(identity, shape);
 				nodeModels.put(identity, (Node) iModel);
@@ -1359,11 +1359,10 @@ public class DiagramView extends View {
 				boxEditPart.setModel((Box) iModel);
 				boxEditPart.setDiagramView(this);
 				boxEditPart.activate();
+
 				BoxFigure boxFigure = (BoxFigure) boxEditPart.createFigure();
 				if (boxFigure != null) {
 					String id = ((Box) iModel).identity;
-					// boxFigure.setOpaque(false);
-					// boxFigure.setOutline(false);
 					figure.add(boxFigure);
 					figureBoxs.put(id, boxFigure);
 				}
@@ -1393,24 +1392,24 @@ public class DiagramView extends View {
 				figureLabels.put(text.getIdentity(), label);
 			} else if (iModel instanceof MultilineText) {
 				multilineTextEditPart = new MultilineTextEditPart();
-				MultilineText text = (MultilineText) iModel;
-				multilineTextEditPart.setModel(text);
+				// MultilineText text = (MultilineText) iModel;
+				multilineTextEditPart.setModel((MultilineText) iModel);
 				multilineTextEditPart.activate();
 				//
 				multilineTextEditPart.setDiagramView(this);
 				MultilineTextFigure label = (MultilineTextFigure) multilineTextEditPart
 						.createFigure();
-				String s = text.getIdentity();
-				multilineTexts.put(s, text);
+				String s = ((MultilineText) iModel).getIdentity();
+				multilineTexts.put(s, (MultilineText) iModel);
 				figure.add(label);
 				multilineTextEdits.put(s, multilineTextEditPart);
 				figureMulitLineTextLabels.put(s, label);
 
 			} else if (iModel instanceof Edge) {
 				edgeEditPart = new EdgeEditPart();
-				Edge edge = (Edge) iModel;
-				edgeEditPart.setModel(edge);
-				String id = edge.getIdentity();
+				// Edge edge = (Edge) iModel;
+				edgeEditPart.setModel((Edge) iModel);
+				String id = ((Edge) iModel).getIdentity();
 				edgeEditPart.activate();
 
 				EdgeFigure edgeFigure = (EdgeFigure) edgeEditPart
@@ -1441,28 +1440,30 @@ public class DiagramView extends View {
 					edgeFigures.put(((Edge) iModel).getIdentity(), edgeFigure);
 					edgeEditPartFigures.put(((Edge) iModel).getIdentity(),
 							edgeEditPart);
-					edgeModels.put(id, edge);
+					edgeModels.put(id, (Edge) iModel);
 					edgeEditParts.put(id, edgeEditPart);
 				}
 
 			} else if (iModel instanceof EdgeText) {
 				edgeEdgeTextEdit = new EdgeTextEditPart();
-				EdgeText text = (EdgeText) iModel;
-				edgeEdgeTextEdit.setModel(text);
+				// EdgeText text = (EdgeText) iModel;
+				edgeEdgeTextEdit.setModel((EdgeText) iModel);
 				edgeEdgeTextEdit.activate();
 				//
 				edgeEdgeTextEdit.setDiagramView(this);
 				EdgeLabelFigure label = (EdgeLabelFigure) edgeEdgeTextEdit
 						.createFigure();
-				String id = text.parent.identity;
+				String id = ((EdgeText) iModel).parent.identity;
 
 				EdgeFigure edgeFigure = edgeFigures.get(id);
 				edgeFigure.add(label);
 				label.setVisible(true);
 
-				edgeLabelFigures.put(text.getIdentity(), label);
-				edgeTexts.put(text.getIdentity(), text);
-				edgeTextEditParts.put(text.getIdentity(), edgeEdgeTextEdit);
+				edgeLabelFigures.put(((EdgeText) iModel).getIdentity(), label);
+				edgeTexts.put(((EdgeText) iModel).getIdentity(),
+						(EdgeText) iModel);
+				edgeTextEditParts.put(((EdgeText) iModel).getIdentity(),
+						edgeEdgeTextEdit);
 			} else if (iModel instanceof Shape) {
 				shapeEditPart = new ShapeEditPart();
 				shapeEditPart.setModel((Shape) iModel);
