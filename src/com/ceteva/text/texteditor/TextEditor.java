@@ -235,8 +235,8 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 				// textViewer);
 				// findReplaceDialog.open();
 
-				FindUtil findUtil = new FindUtil();
-				findUtil.show(Main.shell, text);
+				FindUtil findUtil = new FindUtil(Main.shell);
+				findUtil.show(text);
 			}
 		};
 
