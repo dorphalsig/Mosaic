@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
 
-import org.eclipse.draw2d.Border;
 import org.eclipse.draw2d.ChopboxAnchor;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Figure;
@@ -62,95 +61,96 @@ import xos.Message;
 import xos.Value;
 
 import com.ceteva.menus.MenuBuilder;
+
 // TODO: Auto-generated Javadoc
 
 /**
  * listeners to the views of diagram.
- *
+ * 
  * @author yongjun1
  */
 public class DiagramView extends View {
-	
+
 	/** The parent. */
 	Composite parent;
-	
+
 	/** The canvas. */
 	public FigureCanvas canvas;
-	
+
 	/** The root figure. */
 	public Figure rootFigure;
-	
+
 	/** The figure. */
 	public Figure figure;
 
 	/** The palette. */
 	Palette palette;
-	
+
 	/** The display. */
 	Display display;
-	
+
 	/** The tool identity. */
 	String toolIdentity;
-	
+
 	/** The model identity. */
 	String modelIdentity;
-	
+
 	/** The create node command. */
 	CreateNodeCommand createNodeCommand;
-	
+
 	/** The select icon name. */
 	String selectIconName = "";
 
 	/** The display figure. */
 	Figure displayFigure = new Figure();
-	
+
 	/** The provider. */
 	Provider provider;
-	
+
 	/** The contents. */
 	Vector contents = new Vector();
-	
+
 	/** The nodes. */
 	Vector nodes = new Vector();
-	
+
 	/** The edges. */
 	Vector edges = new Vector();
-	
+
 	/** The ports. */
 	Vector<Node> ports = new Vector<Node>();
 
 	/** The text edit part. */
 	TextEditPart textEditPart;
-	
+
 	/** The node edit part. */
 	NodeEditPart nodeEditPart;
-	
+
 	/** The box edit part. */
 	BoxEditPart boxEditPart;
-	
+
 	/** The multiline text edit part. */
 	MultilineTextEditPart multilineTextEditPart;
-	
+
 	/** The edge edge text edit. */
 	EdgeTextEditPart edgeEdgeTextEdit;
-	
+
 	/** The shape edit part. */
 	ShapeEditPart shapeEditPart;
-	
+
 	EllipseEditPart ellipseEditPart;
-	
+
 	/** The image edit part. */
 	ImageEditPart imageEditPart;
 
 	/** The edge edit part. */
 	EdgeEditPart edgeEditPart;
-	
+
 	/** The diagram edit part. */
 	DiagramEditPart diagramEditPart;
 
 	/** The source anchor. */
 	private ChopboxAnchor sourceAnchor;
-	
+
 	/** The target anchor. */
 	private ChopboxAnchor targetAnchor;
 
@@ -159,69 +159,76 @@ public class DiagramView extends View {
 
 	/** The identity. */
 	String identity;
-	
+
 	/** The is focus. */
 	boolean isFocus = false;
-	
+
 	/** The _tab item. */
 	CTabItem _tabItem;
-	
+
 	/** The _views. */
 	Vector<DiagramView> _views;
 
 	/** The _diagram. */
 	AbstractDiagram _diagram;
-	
+
 	/** The rect shape. */
 	RectangleFigure rectShape = new RectangleFigure();
 
 	/** The mouse down. */
 	private boolean mouseDown = false;
-	
+
 	/** The node is selected. */
 	private boolean nodeIsSelected = false;
-	
+
 	/** The node select. */
 	private String nodeSelect = "";
-	
+
 	/** The edge select. */
 	private String edgeSelect = "";
-	
+
 	/** The get point. */
 	private String getPoint = "";
-	
+
 	/** The get edge point. */
 	private String getEdgePoint = "";
-	
+
 	/** The get point index. */
 	private int getPointIndex = 0;
-	
+
 	/** The resize shape. */
 	private boolean resizeShape = false;
-	
+
 	/** The resize edge shape. */
 	private boolean resizeEdgeShape = false;
-	
+
 	/** The drag points. */
 	private Vector dragPoints = new Vector();
 
 	/** The set drag point once. */
 	private boolean setDragPointOnce = true;
-	
+
 	/** The edge drage shape. */
 	Figure edgeDrageShape = new Figure();
 
-/**
- * Instantiates a new diagram view.
- *
- * @param parent section of the main shell
- * @param style display style
- * @param palette different palette mapping to differnt views
- * @param display SWT display
- * @param diagramClient client register into xmf
- * @param diagram diagram instance of each view
- * @param tabItem tabItem to be shown into the shell
- */
+	/**
+	 * Instantiates a new diagram view.
+	 * 
+	 * @param parent
+	 *            section of the main shell
+	 * @param style
+	 *            display style
+	 * @param palette
+	 *            different palette mapping to differnt views
+	 * @param display
+	 *            SWT display
+	 * @param diagramClient
+	 *            client register into xmf
+	 * @param diagram
+	 *            diagram instance of each view
+	 * @param tabItem
+	 *            tabItem to be shown into the shell
+	 */
 	public DiagramView(Composite parent, int style, Palette palette,
 			Display display, DiagramClient diagramClient,
 			AbstractDiagram diagram, CTabItem tabItem) {
@@ -253,21 +260,24 @@ public class DiagramView extends View {
 		rootFigure = new Figure();
 		rootFigure.add(rectShape);
 		rootFigure.add(edgeDrageShape);
-		
-		canvas.setContents(rootFigure);
-		
+
+		// canvas.setContents(rootFigure);
+
 		Main.tabFolderDiagram.setSelection(tabItem);
 
 		// addMouseListener(this);
 		// canvas.addMouseListener(this);
 	}
-    public CTabItem getTabItem(){
-    	return _tabItem;
-    }
+
+	public CTabItem getTabItem() {
+		return _tabItem;
+	}
+
 	/**
 	 * Sets the identity.
-	 *
-	 * @param identity the new identity
+	 * 
+	 * @param identity
+	 *            the new identity
 	 */
 	public void setIdentity(String identity) {
 		this.identity = identity;
@@ -275,9 +285,11 @@ public class DiagramView extends View {
 
 	/**
 	 * Sets the focus.
-	 *
-	 * @param focus the focus
-	 * @param views the views
+	 * 
+	 * @param focus
+	 *            the focus
+	 * @param views
+	 *            the views
 	 */
 	public void setFocus(boolean focus, Vector<DiagramView> views) {
 		raiseFocusGained();
@@ -288,8 +300,9 @@ public class DiagramView extends View {
 
 	/**
 	 * Sets the focus.
-	 *
-	 * @param focus the new focus
+	 * 
+	 * @param focus
+	 *            the new focus
 	 */
 	public void setFocus(boolean focus) {
 
@@ -307,7 +320,7 @@ public class DiagramView extends View {
 
 	/**
 	 * Checks if is focus.
-	 *
+	 * 
 	 * @return true, if is focus
 	 */
 	public boolean isFocus() {
@@ -316,7 +329,7 @@ public class DiagramView extends View {
 
 	/**
 	 * Gets the identtity.
-	 *
+	 * 
 	 * @return the identtity
 	 */
 	public String getIdenttity() {
@@ -354,10 +367,10 @@ public class DiagramView extends View {
 				MenuManager manager = new MenuManager();
 				MenuBuilder.calculateMenu(identities, manager, null);
 				canvas.setMenu(manager.createContextMenu(canvas));
-				
+
 				String s = Main.getInstance().getPalette().getSelectImage();
-				HashMap<String,Boolean> connections=new HashMap<String,Boolean>();
-				connections=Main.getInstance().getPalette().getConnections();
+				HashMap<String, Boolean> connections = new HashMap<String, Boolean>();
+				connections = Main.getInstance().getPalette().getConnections();
 
 				// setAllFocus();
 				// isFocus = true;
@@ -380,10 +393,10 @@ public class DiagramView extends View {
 						restShape(node.getLocation(), node.getSize());
 						nodeShapes.get(node.getIdentity()).setVisible(true);
 						nodeShapes.get(node.getIdentity()).setOpaque(false);
-						
-						if (connections.get(s)!=null&&connections.get(s))
-						ports.add(node);
-						
+
+						if (connections.get(s) != null && connections.get(s))
+							ports.add(node);
+
 						node.selectNode();
 						nodeContains = true;
 
@@ -423,9 +436,9 @@ public class DiagramView extends View {
 					org.eclipse.draw2d.geometry.Point bottomRef = edgeFigure
 							.getTargetAnchor().getReferencePoint();
 
-//					if (checkEdgeIsClicked(topRef, bottomRef, location2)) 
-					if (((EdgeShapeFigure) edgeShapes.get(key)).isClicked(location2))
-					{
+					// if (checkEdgeIsClicked(topRef, bottomRef, location2))
+					if (((EdgeShapeFigure) edgeShapes.get(key))
+							.isClicked(location2)) {
 						edgeShapes.get(key).setVisible(true);
 						edgeFigures.get(key).setVisible(false);
 						edgeSelect = key;
@@ -449,10 +462,10 @@ public class DiagramView extends View {
 					}
 
 				}
-				
-					if (connections.get(s)!=null&&connections.get(s)) //connection
-					{
-						if (ports.size() > 1){
+
+				if (connections.get(s) != null && connections.get(s)) // connection
+				{
+					if (ports.size() > 1) {
 						raiseFocusGained();
 
 						String toolIdentity = s;
@@ -470,24 +483,8 @@ public class DiagramView extends View {
 						ports.clear();
 
 						Main.getInstance().palette.setSelectImage();
-						}
-					}else{                  //node
-						raiseFocusGained();
-
-						String toolIdentity = s;
-						NodeEditPart nodeEditPart = new NodeEditPart();
-						nodeEditPart.setModel(_diagram);
-						createNodeCommand = new CreateNodeCommand(nodeEditPart,
-								toolIdentity, location2);
-						createNodeCommand.execute();
-
-						selectIconName = "";
-
-						Main.getInstance().palette.setSelectImage();
 					}
-				 
-				/*
-				if (s.equalsIgnoreCase("Class")) {
+				} else { // node
 					raiseFocusGained();
 
 					String toolIdentity = s;
@@ -500,189 +497,177 @@ public class DiagramView extends View {
 					selectIconName = "";
 
 					Main.getInstance().palette.setSelectImage();
-				} else if (s.equalsIgnoreCase("Package")) {
-					raiseFocusGained();
-
-					String toolIdentity = s;
-					NodeEditPart nodeEditPart = new NodeEditPart();
-					nodeEditPart.setModel(_diagram);
-					createNodeCommand = new CreateNodeCommand(nodeEditPart,
-							toolIdentity, location2);
-					createNodeCommand.execute();
-
-					Main.getInstance().palette.setSelectImage();
-				} else if (s.equalsIgnoreCase("Note")) {
-					raiseFocusGained();
-
-					String toolIdentity = s;
-					NodeEditPart nodeEditPart = new NodeEditPart();
-					nodeEditPart.setModel(_diagram);
-					createNodeCommand = new CreateNodeCommand(nodeEditPart,
-							toolIdentity, location2);
-					createNodeCommand.execute();
-
-					Main.getInstance().palette.setSelectImage();
-					// System.out.println("click diagramView:" + s + ":"
-					// + location2.x + "-" + location2.y);
-				} else if (s.equalsIgnoreCase("Association")
-						&& (ports.size() > 1)) {
-					raiseFocusGained();
-
-					String toolIdentity = "Association";
-
-					ConnectionCommand connectionCommand = new ConnectionCommand();
-					connectionCommand.setParent(_diagram);
-					connectionCommand.setToolIdentity(toolIdentity);
-					String source = (String) ports.get(0).getIdentity();
-					String target = (String) ports.get(1).getIdentity();
-					connectionCommand.setSource(String.valueOf(Integer
-							.valueOf(source) + 1));
-					connectionCommand.setTarget(String.valueOf(Integer
-							.valueOf(target) + 1));
-					connectionCommand.execute();
-					ports.clear();
-
-					Main.getInstance().palette.setSelectImage();
-				} else if (s.equalsIgnoreCase("Inheritance")
-						&& (ports.size() > 1)) {
-					raiseFocusGained();
-
-					String toolIdentity = "Inheritance";
-
-					ConnectionCommand connectionCommand = new ConnectionCommand();
-					connectionCommand.setParent(_diagram);
-					connectionCommand.setToolIdentity(toolIdentity);
-					String source = (String) ports.get(0).getIdentity();
-					String target = (String) ports.get(1).getIdentity();
-					connectionCommand.setSource(String.valueOf(Integer
-							.valueOf(source) + 1));
-					connectionCommand.setTarget(String.valueOf(Integer
-							.valueOf(target) + 1));
-					connectionCommand.execute();
-					ports.clear();
-
-					// GUIDemo.getInstance().palette.setSelectImage();
-				} else if (s.equalsIgnoreCase("Dependency")
-						&& (ports.size() > 1)) {
-					raiseFocusGained();
-
-					String toolIdentity = "Dependency";
-
-					ConnectionCommand connectionCommand = new ConnectionCommand();
-					connectionCommand.setParent(_diagram);
-					connectionCommand.setToolIdentity(toolIdentity);
-					String source = (String) ports.get(0).getIdentity();
-					String target = (String) ports.get(1).getIdentity();
-					connectionCommand.setSource(String.valueOf(Integer
-							.valueOf(source) + 1));
-					connectionCommand.setTarget(String.valueOf(Integer
-							.valueOf(target) + 1));
-					connectionCommand.execute();
-					ports.clear();
-
-					// GUIDemo.getInstance().palette.setSelectImage();
-				} else if (s.equalsIgnoreCase("Attribute")
-						&& (ports.size() > 1)) {
-					raiseFocusGained();
-
-					String toolIdentity = "Attribute";
-
-					ConnectionCommand connectionCommand = new ConnectionCommand();
-					connectionCommand.setParent(_diagram);
-					connectionCommand.setToolIdentity(toolIdentity);
-					String source = (String) ports.get(0).getIdentity();
-					String target = (String) ports.get(1).getIdentity();
-					connectionCommand.setSource(String.valueOf(Integer
-							.valueOf(source) + 1));
-					connectionCommand.setTarget(String.valueOf(Integer
-							.valueOf(target) + 1));
-					connectionCommand.execute();
-					ports.clear();
-
-					Main.getInstance().palette.setSelectImage();
-				} else if (s.equalsIgnoreCase("Slot Value")
-						&& (ports.size() > 3)) {
-					raiseFocusGained();
-
-					String toolIdentity = "Slot Value";
-
-					ConnectionCommand connectionCommand = new ConnectionCommand();
-					connectionCommand.setParent(_diagram);
-					connectionCommand.setToolIdentity(toolIdentity);
-					String source = (String) ports.get(0).getIdentity();
-					String target = (String) ports.get(1).getIdentity();
-					connectionCommand.setSource(String.valueOf(Integer
-							.valueOf(source) + 1));
-					connectionCommand.setTarget(String.valueOf(Integer
-							.valueOf(target) + 1));
-					connectionCommand.execute();
-					ports.clear();
-
-					Main.getInstance().palette.setSelectImage();
-				} else if (s.equalsIgnoreCase("Object")) {
-					raiseFocusGained();
-
-					String toolIdentity = "Object";
-					NodeEditPart nodeEditPart = new NodeEditPart();
-					nodeEditPart.setModel(_diagram);
-					createNodeCommand = new CreateNodeCommand(nodeEditPart,
-							toolIdentity, location2);
-					createNodeCommand.execute();
-
-					Main.getInstance().palette.setSelectImage();
-					// System.out.println("click diagramView:" + s + ":"
-					// + location2.x + "-" + location2.y);
-				} else if (s.equalsIgnoreCase("Mapping")) {
-					raiseFocusGained();
-
-					String toolIdentity = "Mapping";
-					NodeEditPart nodeEditPart = new NodeEditPart();
-					nodeEditPart.setModel(_diagram);
-					createNodeCommand = new CreateNodeCommand(nodeEditPart,
-							toolIdentity, location2);
-					createNodeCommand.execute();
-
-					Main.getInstance().palette.setSelectImage();
-					// System.out.println("click diagramView:" + s + ":"
-					// + location2.x + "-" + location2.y);
-				} else if (s.equalsIgnoreCase("Domain") && (ports.size() > 1)) {
-					raiseFocusGained();
-
-					String toolIdentity = "Domain";
-
-					ConnectionCommand connectionCommand = new ConnectionCommand();
-					connectionCommand.setParent(_diagram);
-					connectionCommand.setToolIdentity(toolIdentity);
-					String source = (String) ports.get(0).getIdentity();
-					String target = (String) ports.get(1).getIdentity();
-					connectionCommand.setSource(String.valueOf(Integer
-							.valueOf(source) + 1));
-					connectionCommand.setTarget(String.valueOf(Integer
-							.valueOf(target) + 1));
-					connectionCommand.execute();
-					ports.clear();
-
-					// GUIDemo.getInstance().palette.setSelectImage();
-				} else if (s.equalsIgnoreCase("Range") && (ports.size() > 1)) {
-					raiseFocusGained();
-
-					String toolIdentity = "Range";
-
-					ConnectionCommand connectionCommand = new ConnectionCommand();
-					connectionCommand.setParent(_diagram);
-					connectionCommand.setToolIdentity(toolIdentity);
-					String source = (String) ports.get(0).getIdentity();
-					String target = (String) ports.get(1).getIdentity();
-					connectionCommand.setSource(String.valueOf(Integer
-							.valueOf(source) + 1));
-					connectionCommand.setTarget(String.valueOf(Integer
-							.valueOf(target) + 1));
-					connectionCommand.execute();
-					ports.clear();
-
-					// GUIDemo.getInstance().palette.setSelectImage();
 				}
-				*/
+
+				/*
+				 * if (s.equalsIgnoreCase("Class")) { raiseFocusGained();
+				 * 
+				 * String toolIdentity = s; NodeEditPart nodeEditPart = new
+				 * NodeEditPart(); nodeEditPart.setModel(_diagram);
+				 * createNodeCommand = new CreateNodeCommand(nodeEditPart,
+				 * toolIdentity, location2); createNodeCommand.execute();
+				 * 
+				 * selectIconName = "";
+				 * 
+				 * Main.getInstance().palette.setSelectImage(); } else if
+				 * (s.equalsIgnoreCase("Package")) { raiseFocusGained();
+				 * 
+				 * String toolIdentity = s; NodeEditPart nodeEditPart = new
+				 * NodeEditPart(); nodeEditPart.setModel(_diagram);
+				 * createNodeCommand = new CreateNodeCommand(nodeEditPart,
+				 * toolIdentity, location2); createNodeCommand.execute();
+				 * 
+				 * Main.getInstance().palette.setSelectImage(); } else if
+				 * (s.equalsIgnoreCase("Note")) { raiseFocusGained();
+				 * 
+				 * String toolIdentity = s; NodeEditPart nodeEditPart = new
+				 * NodeEditPart(); nodeEditPart.setModel(_diagram);
+				 * createNodeCommand = new CreateNodeCommand(nodeEditPart,
+				 * toolIdentity, location2); createNodeCommand.execute();
+				 * 
+				 * Main.getInstance().palette.setSelectImage(); //
+				 * System.out.println("click diagramView:" + s + ":" // +
+				 * location2.x + "-" + location2.y); } else if
+				 * (s.equalsIgnoreCase("Association") && (ports.size() > 1)) {
+				 * raiseFocusGained();
+				 * 
+				 * String toolIdentity = "Association";
+				 * 
+				 * ConnectionCommand connectionCommand = new
+				 * ConnectionCommand(); connectionCommand.setParent(_diagram);
+				 * connectionCommand.setToolIdentity(toolIdentity); String
+				 * source = (String) ports.get(0).getIdentity(); String target =
+				 * (String) ports.get(1).getIdentity();
+				 * connectionCommand.setSource(String.valueOf(Integer
+				 * .valueOf(source) + 1));
+				 * connectionCommand.setTarget(String.valueOf(Integer
+				 * .valueOf(target) + 1)); connectionCommand.execute();
+				 * ports.clear();
+				 * 
+				 * Main.getInstance().palette.setSelectImage(); } else if
+				 * (s.equalsIgnoreCase("Inheritance") && (ports.size() > 1)) {
+				 * raiseFocusGained();
+				 * 
+				 * String toolIdentity = "Inheritance";
+				 * 
+				 * ConnectionCommand connectionCommand = new
+				 * ConnectionCommand(); connectionCommand.setParent(_diagram);
+				 * connectionCommand.setToolIdentity(toolIdentity); String
+				 * source = (String) ports.get(0).getIdentity(); String target =
+				 * (String) ports.get(1).getIdentity();
+				 * connectionCommand.setSource(String.valueOf(Integer
+				 * .valueOf(source) + 1));
+				 * connectionCommand.setTarget(String.valueOf(Integer
+				 * .valueOf(target) + 1)); connectionCommand.execute();
+				 * ports.clear();
+				 * 
+				 * // GUIDemo.getInstance().palette.setSelectImage(); } else if
+				 * (s.equalsIgnoreCase("Dependency") && (ports.size() > 1)) {
+				 * raiseFocusGained();
+				 * 
+				 * String toolIdentity = "Dependency";
+				 * 
+				 * ConnectionCommand connectionCommand = new
+				 * ConnectionCommand(); connectionCommand.setParent(_diagram);
+				 * connectionCommand.setToolIdentity(toolIdentity); String
+				 * source = (String) ports.get(0).getIdentity(); String target =
+				 * (String) ports.get(1).getIdentity();
+				 * connectionCommand.setSource(String.valueOf(Integer
+				 * .valueOf(source) + 1));
+				 * connectionCommand.setTarget(String.valueOf(Integer
+				 * .valueOf(target) + 1)); connectionCommand.execute();
+				 * ports.clear();
+				 * 
+				 * // GUIDemo.getInstance().palette.setSelectImage(); } else if
+				 * (s.equalsIgnoreCase("Attribute") && (ports.size() > 1)) {
+				 * raiseFocusGained();
+				 * 
+				 * String toolIdentity = "Attribute";
+				 * 
+				 * ConnectionCommand connectionCommand = new
+				 * ConnectionCommand(); connectionCommand.setParent(_diagram);
+				 * connectionCommand.setToolIdentity(toolIdentity); String
+				 * source = (String) ports.get(0).getIdentity(); String target =
+				 * (String) ports.get(1).getIdentity();
+				 * connectionCommand.setSource(String.valueOf(Integer
+				 * .valueOf(source) + 1));
+				 * connectionCommand.setTarget(String.valueOf(Integer
+				 * .valueOf(target) + 1)); connectionCommand.execute();
+				 * ports.clear();
+				 * 
+				 * Main.getInstance().palette.setSelectImage(); } else if
+				 * (s.equalsIgnoreCase("Slot Value") && (ports.size() > 3)) {
+				 * raiseFocusGained();
+				 * 
+				 * String toolIdentity = "Slot Value";
+				 * 
+				 * ConnectionCommand connectionCommand = new
+				 * ConnectionCommand(); connectionCommand.setParent(_diagram);
+				 * connectionCommand.setToolIdentity(toolIdentity); String
+				 * source = (String) ports.get(0).getIdentity(); String target =
+				 * (String) ports.get(1).getIdentity();
+				 * connectionCommand.setSource(String.valueOf(Integer
+				 * .valueOf(source) + 1));
+				 * connectionCommand.setTarget(String.valueOf(Integer
+				 * .valueOf(target) + 1)); connectionCommand.execute();
+				 * ports.clear();
+				 * 
+				 * Main.getInstance().palette.setSelectImage(); } else if
+				 * (s.equalsIgnoreCase("Object")) { raiseFocusGained();
+				 * 
+				 * String toolIdentity = "Object"; NodeEditPart nodeEditPart =
+				 * new NodeEditPart(); nodeEditPart.setModel(_diagram);
+				 * createNodeCommand = new CreateNodeCommand(nodeEditPart,
+				 * toolIdentity, location2); createNodeCommand.execute();
+				 * 
+				 * Main.getInstance().palette.setSelectImage(); //
+				 * System.out.println("click diagramView:" + s + ":" // +
+				 * location2.x + "-" + location2.y); } else if
+				 * (s.equalsIgnoreCase("Mapping")) { raiseFocusGained();
+				 * 
+				 * String toolIdentity = "Mapping"; NodeEditPart nodeEditPart =
+				 * new NodeEditPart(); nodeEditPart.setModel(_diagram);
+				 * createNodeCommand = new CreateNodeCommand(nodeEditPart,
+				 * toolIdentity, location2); createNodeCommand.execute();
+				 * 
+				 * Main.getInstance().palette.setSelectImage(); //
+				 * System.out.println("click diagramView:" + s + ":" // +
+				 * location2.x + "-" + location2.y); } else if
+				 * (s.equalsIgnoreCase("Domain") && (ports.size() > 1)) {
+				 * raiseFocusGained();
+				 * 
+				 * String toolIdentity = "Domain";
+				 * 
+				 * ConnectionCommand connectionCommand = new
+				 * ConnectionCommand(); connectionCommand.setParent(_diagram);
+				 * connectionCommand.setToolIdentity(toolIdentity); String
+				 * source = (String) ports.get(0).getIdentity(); String target =
+				 * (String) ports.get(1).getIdentity();
+				 * connectionCommand.setSource(String.valueOf(Integer
+				 * .valueOf(source) + 1));
+				 * connectionCommand.setTarget(String.valueOf(Integer
+				 * .valueOf(target) + 1)); connectionCommand.execute();
+				 * ports.clear();
+				 * 
+				 * // GUIDemo.getInstance().palette.setSelectImage(); } else if
+				 * (s.equalsIgnoreCase("Range") && (ports.size() > 1)) {
+				 * raiseFocusGained();
+				 * 
+				 * String toolIdentity = "Range";
+				 * 
+				 * ConnectionCommand connectionCommand = new
+				 * ConnectionCommand(); connectionCommand.setParent(_diagram);
+				 * connectionCommand.setToolIdentity(toolIdentity); String
+				 * source = (String) ports.get(0).getIdentity(); String target =
+				 * (String) ports.get(1).getIdentity();
+				 * connectionCommand.setSource(String.valueOf(Integer
+				 * .valueOf(source) + 1));
+				 * connectionCommand.setTarget(String.valueOf(Integer
+				 * .valueOf(target) + 1)); connectionCommand.execute();
+				 * ports.clear();
+				 * 
+				 * // GUIDemo.getInstance().palette.setSelectImage(); }
+				 */
 
 			}
 		});
@@ -926,7 +911,6 @@ public class DiagramView extends View {
 		canvas.addListener(SWT.MouseDoubleClick, new Listener() {
 			@Override
 			public void handleEvent(Event arg0) {
-
 				Point location = display.getCursorLocation();
 
 				org.eclipse.draw2d.geometry.Point location2 = translateToRelativeLocation(location);
@@ -1142,17 +1126,18 @@ public class DiagramView extends View {
 
 	/**
 	 * Rest shape.
-	 *
-	 * @param location the location
-	 * @param size the size
+	 * 
+	 * @param location
+	 *            the location
+	 * @param size
+	 *            the size
 	 */
 	public void restShape(org.eclipse.draw2d.geometry.Point location,
 			Dimension size) {
 		Node node = nodeModels.get(nodeSelect);
 		nodeEditPart = nodeEditParts.get(nodeSelect);
 		node.reSetPoints(location, size);
-        
-		
+
 		Rectangle rect = new Rectangle(location, size);
 
 		nodeShapes.get(nodeSelect).setBounds(rect);
@@ -1161,10 +1146,13 @@ public class DiagramView extends View {
 
 	/**
 	 * Check edge is clicked.
-	 *
-	 * @param topRef the top ref
-	 * @param bottomRef the bottom ref
-	 * @param location2 the location2
+	 * 
+	 * @param topRef
+	 *            the top ref
+	 * @param bottomRef
+	 *            the bottom ref
+	 * @param location2
+	 *            the location2
 	 * @return true, if successful
 	 */
 	public boolean checkEdgeIsClicked(org.eclipse.draw2d.geometry.Point topRef,
@@ -1181,8 +1169,9 @@ public class DiagramView extends View {
 
 	/**
 	 * Translate to relative location.
-	 *
-	 * @param location the location
+	 * 
+	 * @param location
+	 *            the location
 	 * @return the org.eclipse.draw2d.geometry. point
 	 */
 	public org.eclipse.draw2d.geometry.Point translateToRelativeLocation(
@@ -1206,25 +1195,29 @@ public class DiagramView extends View {
 
 	/**
 	 * Adds the edit part.
-	 *
-	 * @param editPart the edit part
+	 * 
+	 * @param editPart
+	 *            the edit part
 	 */
 	public void addEditPart(CommandEventEditPart editPart) {
 		_editPart = editPart;
 		_editPart.setDiagramView(this);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see uk.ac.mdx.xmf.swt.View#display()
 	 */
 	public void display() {
-		canvas.redraw();
-
-		rootFigure.add(figure);
-		
-		rootFigure.repaint();
-
-		Main.getInstance().tabFolderDiagram.layout(true);;
+		canvas.setContents(rootFigure);
+		// canvas.redraw();
+		//
+		// // rootFigure.add(figure);
+		//
+		// rootFigure.repaint();
+		//
+		// Main.getInstance().tabFolderDiagram.layout(true);
 
 		// canvas.pack();
 		// canvas.layout(true);
@@ -1232,9 +1225,17 @@ public class DiagramView extends View {
 		// this.redraw();
 	}
 
+	private void updateFigures() {
+		// canvas.redraw();
+		rootFigure.add(figure);
+
+		// canvas.setRedraw(false);
+		// display();
+	}
+
 	/**
 	 * Gets the figure nodes.
-	 *
+	 * 
 	 * @return the figure nodes
 	 */
 	public Map<String, Figure> getFigureNodes() {
@@ -1243,7 +1244,7 @@ public class DiagramView extends View {
 
 	/**
 	 * Gets the figure labels.
-	 *
+	 * 
 	 * @return the figure labels
 	 */
 	public Map<String, Label> getFigureLabels() {
@@ -1252,7 +1253,7 @@ public class DiagramView extends View {
 
 	/**
 	 * Gets the figure mulit line text labels.
-	 *
+	 * 
 	 * @return the figure mulit line text labels
 	 */
 	public Map<String, MultilineTextFigure> getfigureMulitLineTextLabels() {
@@ -1261,7 +1262,7 @@ public class DiagramView extends View {
 
 	/**
 	 * Gets the figure boxs.
-	 *
+	 * 
 	 * @return the figure boxs
 	 */
 	public Map<String, BoxFigure> getFigureBoxs() {
@@ -1270,7 +1271,7 @@ public class DiagramView extends View {
 
 	/**
 	 * Gets the edge figure.
-	 *
+	 * 
 	 * @return the edge figure
 	 */
 	public Map<String, EdgeFigure> getEdgeFigure() {
@@ -1279,7 +1280,7 @@ public class DiagramView extends View {
 
 	/**
 	 * Gets the edge label figure.
-	 *
+	 * 
 	 * @return the edge label figure
 	 */
 	public Map<String, EdgeLabelFigure> getEdgeLabelFigure() {
@@ -1288,7 +1289,7 @@ public class DiagramView extends View {
 
 	/**
 	 * Gets the edge parts.
-	 *
+	 * 
 	 * @return the edge parts
 	 */
 	public Map<String, EdgeEditPart> getEdgeParts() {
@@ -1297,13 +1298,19 @@ public class DiagramView extends View {
 
 	/**
 	 * Check rectangle boundary.
-	 *
-	 * @param pointX the point x
-	 * @param pointY the point y
-	 * @param rectangleX the rectangle x
-	 * @param rectangleY the rectangle y
-	 * @param width the width
-	 * @param height the height
+	 * 
+	 * @param pointX
+	 *            the point x
+	 * @param pointY
+	 *            the point y
+	 * @param rectangleX
+	 *            the rectangle x
+	 * @param rectangleY
+	 *            the rectangle y
+	 * @param width
+	 *            the width
+	 * @param height
+	 *            the height
 	 * @return true, if successful
 	 */
 	private boolean checkRectangleBoundary(float pointX, float pointY,
@@ -1316,8 +1323,9 @@ public class DiagramView extends View {
 
 	/**
 	 * Refresh.
-	 *
-	 * @param displays the displays
+	 * 
+	 * @param displays
+	 *            the displays
 	 */
 	public void refresh(Vector displays) {
 		this.contents = displays;
@@ -1339,7 +1347,7 @@ public class DiagramView extends View {
 				Figure shape = (Figure) nodeEditPart.createFigure(true, rect);
 				shape.setVisible(false);
 				rootFigure.add(shape);
-                figure.setBorder(null);
+				figure.setBorder(null);
 				String identity = ((Node) iModel).getIdentity();
 				// System.out.println("node identity" + identity);
 				nodeEditParts.put(identity, nodeEditPart);
@@ -1354,8 +1362,8 @@ public class DiagramView extends View {
 				BoxFigure boxFigure = (BoxFigure) boxEditPart.createFigure();
 				if (boxFigure != null) {
 					String id = ((Box) iModel).identity;
-//					boxFigure.setOpaque(false);
-//					boxFigure.setOutline(false);
+					// boxFigure.setOpaque(false);
+					// boxFigure.setOutline(false);
 					figure.add(boxFigure);
 					figureBoxs.put(id, boxFigure);
 				}
@@ -1420,7 +1428,8 @@ public class DiagramView extends View {
 
 					((Edge) iModel).setPoints(location1, location2);
 
-					EdgeShapeFigure shape = (EdgeShapeFigure) edgeEditPart.createFigure(false);
+					EdgeShapeFigure shape = (EdgeShapeFigure) edgeEditPart
+							.createFigure(false);
 
 					shape.setVisible(true);
 					edgeShapes.put(((Edge) iModel).getIdentity(), shape);
@@ -1472,8 +1481,7 @@ public class DiagramView extends View {
 				if (ellipseFigure != null) {
 					figure.add(ellipseFigure);
 				}
-			}
-			else if (iModel instanceof Image) {
+			} else if (iModel instanceof Image) {
 				imageEditPart = new ImageEditPart();
 				imageEditPart.setModel((Image) iModel);
 				imageEditPart.setDiagramView(this);
@@ -1488,13 +1496,15 @@ public class DiagramView extends View {
 			}
 		}
 		contents.clear();
-		display();
+		updateFigures();
+		// display();
 	}
 
 	/**
 	 * Refresh children.
-	 *
-	 * @param child the child
+	 * 
+	 * @param child
+	 *            the child
 	 */
 	public void refreshChildren(IFigure child) {
 		figure.add(child);
@@ -1502,8 +1512,9 @@ public class DiagramView extends View {
 
 	/**
 	 * Sets the source anchor.
-	 *
-	 * @param sourceAnchor the new source anchor
+	 * 
+	 * @param sourceAnchor
+	 *            the new source anchor
 	 */
 	public void setSourceAnchor(ChopboxAnchor sourceAnchor) {
 		this.sourceAnchor = sourceAnchor;
@@ -1511,8 +1522,9 @@ public class DiagramView extends View {
 
 	/**
 	 * Sets the target anchor.
-	 *
-	 * @param targetAnchor the new target anchor
+	 * 
+	 * @param targetAnchor
+	 *            the new target anchor
 	 */
 	public void setTargetAnchor(ChopboxAnchor targetAnchor) {
 		this.targetAnchor = targetAnchor;
@@ -1520,12 +1532,17 @@ public class DiagramView extends View {
 
 	/**
 	 * New tool.
-	 *
-	 * @param parent the parent
-	 * @param label the label
-	 * @param identity the identity
-	 * @param connection the connection
-	 * @param icon the icon
+	 * 
+	 * @param parent
+	 *            the parent
+	 * @param label
+	 *            the label
+	 * @param identity
+	 *            the identity
+	 * @param connection
+	 *            the connection
+	 * @param icon
+	 *            the icon
 	 */
 	public void newTool(String parent, String label, String identity,
 			boolean connection, String icon) {
@@ -1534,8 +1551,9 @@ public class DiagramView extends View {
 
 	/**
 	 * New tool group.
-	 *
-	 * @param name the name
+	 * 
+	 * @param name
+	 *            the name
 	 */
 	public void newToolGroup(String name) {
 		palette.addDrawer(name);
@@ -1543,7 +1561,7 @@ public class DiagramView extends View {
 
 	/**
 	 * Gets the pallete.
-	 *
+	 * 
 	 * @return the pallete
 	 */
 	public Palette getPallete() {
@@ -1561,7 +1579,7 @@ public class DiagramView extends View {
 
 	/**
 	 * Gets the canvas.
-	 *
+	 * 
 	 * @return the canvas
 	 */
 	public FigureCanvas getCanvas() {
@@ -1580,8 +1598,9 @@ public class DiagramView extends View {
 
 	/**
 	 * Process call.
-	 *
-	 * @param message the message
+	 * 
+	 * @param message
+	 *            the message
 	 * @return the value
 	 */
 	public Value processCall(Message message) {
@@ -1590,8 +1609,9 @@ public class DiagramView extends View {
 
 	/**
 	 * Sets the name.
-	 *
-	 * @param name the new name
+	 * 
+	 * @param name
+	 *            the new name
 	 */
 	public void setName(String name) {
 		// setPartName(name);
@@ -1606,8 +1626,9 @@ public class DiagramView extends View {
 
 	/**
 	 * Sets the droppable.
-	 *
-	 * @param enabled the new droppable
+	 * 
+	 * @param enabled
+	 *            the new droppable
 	 */
 	public void setDroppable(boolean enabled) {
 		// dropTargetListener.setEnabled(enabled);
@@ -1615,8 +1636,9 @@ public class DiagramView extends View {
 
 	/**
 	 * Sets the viewer model.
-	 *
-	 * @param newDiagram the new viewer model
+	 * 
+	 * @param newDiagram
+	 *            the new viewer model
 	 */
 	public void setViewerModel(AbstractDiagram newDiagram) {
 	}

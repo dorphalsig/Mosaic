@@ -12,6 +12,7 @@ import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editparts.ZoomManager;
 import org.eclipse.swt.graphics.RGB;
 
+import uk.ac.mdx.xmf.swt.demo.Main;
 import uk.ac.mdx.xmf.swt.diagram.tracker.SelectionTracker;
 import uk.ac.mdx.xmf.swt.diagram.zoom.AnimatableZoomManager;
 import uk.ac.mdx.xmf.swt.figure.DiagramFigure;
@@ -23,7 +24,9 @@ import uk.ac.mdx.xmf.swt.model.AbstractDiagram;
  */
 public class DiagramEditPart extends CommandEventEditPart {
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart#activate()
 	 */
 	@Override
@@ -35,7 +38,9 @@ public class DiagramEditPart extends CommandEventEditPart {
 		// DropTargetListener(getViewer(),TextTransfer.getInstance()));;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart#deactivate()
 	 */
 	@Override
@@ -45,7 +50,9 @@ public class DiagramEditPart extends CommandEventEditPart {
 		// azm.removeZoomListener(this);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
 	 */
 	@Override
@@ -61,15 +68,21 @@ public class DiagramEditPart extends CommandEventEditPart {
 		return f;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gef.editparts.AbstractEditPart#getCommand(org.eclipse.gef.Request)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.gef.editparts.AbstractEditPart#getCommand(org.eclipse.gef
+	 * .Request)
 	 */
 	@Override
 	public Command getCommand(Request request) {
 		return super.getCommand(request);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.gef.editparts.AbstractEditPart#getModelChildren()
 	 */
 	@Override
@@ -77,15 +90,21 @@ public class DiagramEditPart extends CommandEventEditPart {
 		return ((AbstractDiagram) getModel()).getContents();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#getDragTracker(org.eclipse.gef.Request)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.gef.editparts.AbstractGraphicalEditPart#getDragTracker(org
+	 * .eclipse.gef.Request)
 	 */
 	@Override
 	public DragTracker getDragTracker(Request req) {
 		return new SelectionTracker();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.gef.editparts.AbstractEditPart#createEditPolicies()
 	 */
 	@Override
@@ -94,8 +113,11 @@ public class DiagramEditPart extends CommandEventEditPart {
 		// installEditPolicy("PopupPalette", new PopupPalette());
 	}
 
-	/* (non-Javadoc)
-	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.
+	 * PropertyChangeEvent)
 	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
@@ -124,14 +146,18 @@ public class DiagramEditPart extends CommandEventEditPart {
 				zoom();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart#refreshChildren()
 	 */
 	public void refreshChildren() {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart#preferenceUpdate()
 	 */
 	@Override
@@ -146,8 +172,12 @@ public class DiagramEditPart extends CommandEventEditPart {
 		figure.repaint();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gef.editparts.AbstractEditPart#performRequest(org.eclipse.gef.Request)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.gef.editparts.AbstractEditPart#performRequest(org.eclipse
+	 * .gef.Request)
 	 */
 	@Override
 	public void performRequest(Request req) {
@@ -161,7 +191,7 @@ public class DiagramEditPart extends CommandEventEditPart {
 
 	/**
 	 * Gets the background color.
-	 *
+	 * 
 	 * @return the background color
 	 */
 	public RGB getBackgroundColor() {
@@ -177,7 +207,7 @@ public class DiagramEditPart extends CommandEventEditPart {
 
 	/**
 	 * Gets the zoom manager.
-	 *
+	 * 
 	 * @return the zoom manager
 	 */
 	public ZoomManager getZoomManager() {
@@ -186,13 +216,16 @@ public class DiagramEditPart extends CommandEventEditPart {
 		// return rep.getZoomManager();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart#refresh()
 	 */
 	@Override
 	public void refresh() {
 		refreshBackgroundColor();
 		refreshZoom();
+		Main.getInstance().getView().display();
 		super.refresh();
 	}
 
@@ -225,8 +258,9 @@ public class DiagramEditPart extends CommandEventEditPart {
 
 	/**
 	 * Zoom changed.
-	 *
-	 * @param zoom the zoom
+	 * 
+	 * @param zoom
+	 *            the zoom
 	 */
 	public void zoomChanged(double zoom) {
 	}

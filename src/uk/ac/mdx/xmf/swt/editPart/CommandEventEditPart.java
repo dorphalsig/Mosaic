@@ -6,7 +6,6 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 
 import uk.ac.mdx.xmf.swt.DiagramView;
-import uk.ac.mdx.xmf.swt.demo.Main;
 import uk.ac.mdx.xmf.swt.model.CommandEvent;
 
 // TODO: Auto-generated Javadoc
@@ -15,17 +14,19 @@ import uk.ac.mdx.xmf.swt.model.CommandEvent;
  */
 public abstract class CommandEventEditPart extends AbstractGraphicalEditPart
 		implements PropertyChangeListener {
-	
+
 	/** The parent. */
 	CommandEvent parent;
-	
+
 	/** The _diagram view. */
 	DiagramView _diagramView;
 
 	/** The figure. */
 	IFigure figure;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#activate()
 	 */
 	@Override
@@ -36,7 +37,9 @@ public abstract class CommandEventEditPart extends AbstractGraphicalEditPart
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#deactivate()
 	 */
 	@Override
@@ -47,15 +50,21 @@ public abstract class CommandEventEditPart extends AbstractGraphicalEditPart
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#setFigure(org.eclipse.draw2d.IFigure)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.gef.editparts.AbstractGraphicalEditPart#setFigure(org.eclipse
+	 * .draw2d.IFigure)
 	 */
 	@Override
 	public void setFigure(IFigure figure) {
 		this.figure = figure;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#getFigure()
 	 */
 	@Override
@@ -63,7 +72,9 @@ public abstract class CommandEventEditPart extends AbstractGraphicalEditPart
 		return figure;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#refresh()
 	 */
 	@Override
@@ -72,10 +83,12 @@ public abstract class CommandEventEditPart extends AbstractGraphicalEditPart
 		// _diagramView.update();
 		// if (_diagramView != null)
 		// _diagramView.display(true);
-		Main.getInstance().getView().rootFigure.repaint();
+		// Main.getInstance().getView().display();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.gef.editparts.AbstractEditPart#refreshChildren()
 	 */
 	@Override
@@ -84,7 +97,7 @@ public abstract class CommandEventEditPart extends AbstractGraphicalEditPart
 
 	/**
 	 * Gets the model identity.
-	 *
+	 * 
 	 * @return the model identity
 	 */
 	public String getModelIdentity() {
@@ -99,14 +112,17 @@ public abstract class CommandEventEditPart extends AbstractGraphicalEditPart
 
 	/**
 	 * Sets the model.
-	 *
-	 * @param parent the new model
+	 * 
+	 * @param parent
+	 *            the new model
 	 */
 	public void setModel(CommandEvent parent) {
 		this.parent = parent;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.gef.editparts.AbstractEditPart#getModel()
 	 */
 	@Override
@@ -116,8 +132,9 @@ public abstract class CommandEventEditPart extends AbstractGraphicalEditPart
 
 	/**
 	 * Sets the diagram view.
-	 *
-	 * @param view the new diagram view
+	 * 
+	 * @param view
+	 *            the new diagram view
 	 */
 	public void setDiagramView(DiagramView view) {
 		_diagramView = view;

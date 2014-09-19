@@ -30,18 +30,22 @@ public class DiagramClient extends XMLClient {
 
 	/** The done. */
 	boolean done = false;
-	
+
 	/** The global render off. */
 	static private int globalRenderOff = 0;
-	
+
 	/** The handler. */
 	public EventHandler handler = null;
-	
+
 	/** The _view. */
 	public static DiagramView _view;
 
-	/* (non-Javadoc)
-	 * @see uk.ac.mdx.xmf.swt.client.Client#setEventHandler(uk.ac.mdx.xmf.swt.client.EventHandler)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * uk.ac.mdx.xmf.swt.client.Client#setEventHandler(uk.ac.mdx.xmf.swt.client
+	 * .EventHandler)
 	 */
 	@Override
 	public void setEventHandler(EventHandler eventsOut) {
@@ -60,7 +64,7 @@ public class DiagramClient extends XMLClient {
 
 	/**
 	 * Close none displayed diagrams.
-	 *
+	 * 
 	 * @return true, if successful
 	 */
 	public boolean closeNoneDisplayedDiagrams() {
@@ -80,8 +84,9 @@ public class DiagramClient extends XMLClient {
 
 	/**
 	 * Display diagram model.
-	 *
-	 * @param diagram the diagram
+	 * 
+	 * @param diagram
+	 *            the diagram
 	 */
 	public void displayDiagramModel(uk.ac.mdx.xmf.swt.model.Diagram diagram) {
 
@@ -105,10 +110,13 @@ public class DiagramClient extends XMLClient {
 
 	/**
 	 * New diagram model.
-	 *
-	 * @param identity the identity
-	 * @param name the name
-	 * @param show the show
+	 * 
+	 * @param identity
+	 *            the identity
+	 * @param name
+	 *            the name
+	 * @param show
+	 *            the show
 	 * @return the uk.ac.mdx.xmf.swt.model. diagram
 	 */
 	public uk.ac.mdx.xmf.swt.model.Diagram newDiagramModel(String identity,
@@ -130,8 +138,9 @@ public class DiagramClient extends XMLClient {
 
 	/**
 	 * Sets the view.
-	 *
-	 * @param view the new view
+	 * 
+	 * @param view
+	 *            the new view
 	 */
 	public void setView(DiagramView view) {
 		_view = view;
@@ -139,7 +148,7 @@ public class DiagramClient extends XMLClient {
 
 	/**
 	 * Gets the diagram.
-	 *
+	 * 
 	 * @return the diagram
 	 */
 	public uk.ac.mdx.xmf.swt.model.Diagram getDiagram() {
@@ -148,8 +157,9 @@ public class DiagramClient extends XMLClient {
 
 	/**
 	 * Sets the focus.
-	 *
-	 * @param message the message
+	 * 
+	 * @param message
+	 *            the message
 	 * @return true, if successful
 	 */
 	public boolean setFocus(Message message) {
@@ -175,8 +185,9 @@ public class DiagramClient extends XMLClient {
 
 	/**
 	 * Broadcast call.
-	 *
-	 * @param message the message
+	 * 
+	 * @param message
+	 *            the message
 	 * @return the value
 	 */
 	public Value broadcastCall(Message message) {
@@ -195,9 +206,11 @@ public class DiagramClient extends XMLClient {
 
 	/**
 	 * Gets the text dimension.
-	 *
-	 * @param text the text
-	 * @param italicise the italicise
+	 * 
+	 * @param text
+	 *            the text
+	 * @param italicise
+	 *            the italicise
 	 * @return the text dimension
 	 */
 	public Value getTextDimension(String text, boolean italicise) {
@@ -219,9 +232,11 @@ public class DiagramClient extends XMLClient {
 
 	/**
 	 * Gets the text dimension with font.
-	 *
-	 * @param text the text
-	 * @param font the font
+	 * 
+	 * @param text
+	 *            the text
+	 * @param font
+	 *            the font
 	 * @return the text dimension with font
 	 */
 	public Value getTextDimensionWithFont(String text, String font) {
@@ -236,14 +251,16 @@ public class DiagramClient extends XMLClient {
 
 	/**
 	 * Checks if is rendering.
-	 *
+	 * 
 	 * @return true, if is rendering
 	 */
 	public static boolean isRendering() {
 		return globalRenderOff == 0;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see uk.ac.mdx.xmf.swt.client.Client#processCall(xos.Message)
 	 */
 	@Override
@@ -251,7 +268,9 @@ public class DiagramClient extends XMLClient {
 		return broadcastCall(message);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see uk.ac.mdx.xmf.swt.client.XMLClient#processMessage(xos.Message)
 	 */
 	@Override
@@ -263,24 +282,27 @@ public class DiagramClient extends XMLClient {
 			String name = message.args[1].strValue();
 			newDiagramModel(identity, name, false);
 			return true;
+		} else if (message.hasName("setFocus"))
+			return setFocus(message);
+		else if (message.hasName("closeNoneDisplayedDiagrams"))
+			return closeNoneDisplayedDiagrams();
+		else if (message.hasName("globalRenderOff"))
+
+			globalRenderOff++;
+		else if (message.hasName("globalRenderOn")) {
+			globalRenderOff--;
+			if (globalRenderOff == 0)
+				refreshDiagrams();
 		}
-		// else if (message.hasName("setFocus"))
-		// return setFocus(message);
-		// else if (message.hasName("closeNoneDisplayedDiagrams"))
-		// return closeNoneDisplayedDiagrams();
-		// else if (message.hasName("globalRenderOff"))
-		//
-		// globalRenderOff++;
-		// else if (message.hasName("globalRenderOn")) {
-		// globalRenderOff--;
-		// if (globalRenderOff == 0)
-		// refreshDiagrams();
-		// }
 		return IdManager.processMessage(message);
 	}
 
-	/* (non-Javadoc)
-	 * @see uk.ac.mdx.xmf.swt.client.XMLClient#processXML(uk.ac.mdx.xmf.swt.client.xml.Document)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * uk.ac.mdx.xmf.swt.client.XMLClient#processXML(uk.ac.mdx.xmf.swt.client
+	 * .xml.Document)
 	 */
 	@Override
 	public void processXML(Document xml) {
@@ -306,8 +328,9 @@ public class DiagramClient extends XMLClient {
 
 	/**
 	 * Synchronise.
-	 *
-	 * @param xml the xml
+	 * 
+	 * @param xml
+	 *            the xml
 	 */
 	public void synchronise(Element xml) {
 		synchroniseDiagrams(xml);
@@ -315,8 +338,9 @@ public class DiagramClient extends XMLClient {
 
 	/**
 	 * Synchronise diagrams.
-	 *
-	 * @param xml the xml
+	 * 
+	 * @param xml
+	 *            the xml
 	 */
 	public void synchroniseDiagrams(Element xml) {
 

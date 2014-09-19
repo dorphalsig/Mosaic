@@ -509,7 +509,7 @@ public class Main {
 		diagram.setDisplayedDiagram(diagram);
 		diagram.setDiagramView(view);
 		diagram.setOwner(view);
-		view.display();
+		// view.display();
 
 		sashFormDiagram.setWeights(new int[] { 15, 85 });
 	}

@@ -23,14 +23,21 @@ public class Container extends DisplayWithDimension {
 
 	/**
 	 * Instantiates a new container.
-	 *
-	 * @param parent the parent
-	 * @param handler the handler
-	 * @param identity the identity
-	 * @param location the location
-	 * @param size the size
-	 * @param lineColor the line color
-	 * @param fillColor the fill color
+	 * 
+	 * @param parent
+	 *            the parent
+	 * @param handler
+	 *            the handler
+	 * @param identity
+	 *            the identity
+	 * @param location
+	 *            the location
+	 * @param size
+	 *            the size
+	 * @param lineColor
+	 *            the line color
+	 * @param fillColor
+	 *            the fill color
 	 */
 	public Container(ClientElement parent, EventHandler handler,
 			String identity, Point location, Dimension size, RGB lineColor,
@@ -40,8 +47,9 @@ public class Container extends DisplayWithDimension {
 
 	/**
 	 * Adds the display.
-	 *
-	 * @param d the d
+	 * 
+	 * @param d
+	 *            the d
 	 */
 	public void addDisplay(Display d) {
 		// displays.addElement(d);
@@ -60,14 +68,16 @@ public class Container extends DisplayWithDimension {
 
 	/**
 	 * Gets the displayed diagram.
-	 *
+	 * 
 	 * @return the displayed diagram
 	 */
 	public AbstractDiagram getDisplayedDiagram() {
 		return null;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see uk.ac.mdx.xmf.swt.model.Display#close()
 	 */
 	@Override
@@ -78,7 +88,9 @@ public class Container extends DisplayWithDimension {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see uk.ac.mdx.xmf.swt.client.ClientElement#dispose()
 	 */
 	@Override
@@ -92,7 +104,7 @@ public class Container extends DisplayWithDimension {
 
 	/**
 	 * Gets the contents.
-	 *
+	 * 
 	 * @return the contents
 	 */
 	public Vector getContents() {
@@ -101,15 +113,18 @@ public class Container extends DisplayWithDimension {
 
 	/**
 	 * Gets the display contents.
-	 *
+	 * 
 	 * @return the display contents
 	 */
 	public Vector getDisplayContents() {
 		return displays;
 	}
 
-	/* (non-Javadoc)
-	 * @see uk.ac.mdx.xmf.swt.model.CommandEvent#identityExists(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * uk.ac.mdx.xmf.swt.model.CommandEvent#identityExists(java.lang.String)
 	 */
 	@Override
 	public boolean identityExists(String identity) {
@@ -123,8 +138,11 @@ public class Container extends DisplayWithDimension {
 		return false;
 	}
 
-	/* (non-Javadoc)
-	 * @see uk.ac.mdx.xmf.swt.model.DisplayWithDimension#processMessage(xos.Message)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * uk.ac.mdx.xmf.swt.model.DisplayWithDimension#processMessage(xos.Message)
 	 */
 	@Override
 	public boolean processMessage(Message message) {
@@ -147,9 +165,9 @@ public class Container extends DisplayWithDimension {
 				&& message.args[0].hasStrValue(identity)) {
 			MultilineText multilineText = ModelFactory.newMultilineText(this,
 					handler, message);
-//			System.out.println("new  multilinetext:parent.identity-"
-//					+ parent.identity + "-" + identity + "-"
-//					+ "multilinetext identity:" + multilineText.identity);
+			// System.out.println("new  multilinetext:parent.identity-"
+			// + parent.identity + "-" + identity + "-"
+			// + "multilinetext identity:" + multilineText.identity);
 			addDisplay(multilineText);
 			return true;
 		} else if (message.hasName("newImage")
@@ -178,8 +196,9 @@ public class Container extends DisplayWithDimension {
 
 	/**
 	 * Removes the display.
-	 *
-	 * @param d the d
+	 * 
+	 * @param d
+	 *            the d
 	 */
 	public void removeDisplay(Display d) {
 		displays.removeElement(d);
@@ -187,7 +206,9 @@ public class Container extends DisplayWithDimension {
 			firePropertyChange("displayChange", null, null);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see uk.ac.mdx.xmf.swt.model.CommandEvent#stopRender()
 	 */
 	@Override
@@ -196,7 +217,9 @@ public class Container extends DisplayWithDimension {
 		render(false);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see uk.ac.mdx.xmf.swt.model.CommandEvent#startRender()
 	 */
 	@Override
@@ -211,8 +234,9 @@ public class Container extends DisplayWithDimension {
 
 	/**
 	 * Render.
-	 *
-	 * @param render the render
+	 * 
+	 * @param render
+	 *            the render
 	 */
 	public void render(boolean render) {
 		for (int i = 0; i < displays.size(); i++) {
@@ -224,7 +248,9 @@ public class Container extends DisplayWithDimension {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see uk.ac.mdx.xmf.swt.model.Display#refreshZoom()
 	 */
 	@Override
@@ -235,8 +261,12 @@ public class Container extends DisplayWithDimension {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see uk.ac.mdx.xmf.swt.client.ClientElement#setEventHandler(uk.ac.mdx.xmf.swt.client.EventHandler)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * uk.ac.mdx.xmf.swt.client.ClientElement#setEventHandler(uk.ac.mdx.xmf.
+	 * swt.client.EventHandler)
 	 */
 	@Override
 	public void setEventHandler(EventHandler handler) {
@@ -246,8 +276,12 @@ public class Container extends DisplayWithDimension {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see uk.ac.mdx.xmf.swt.model.DisplayWithDimension#synchronise(uk.ac.mdx.xmf.swt.client.xml.Element)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * uk.ac.mdx.xmf.swt.model.DisplayWithDimension#synchronise(uk.ac.mdx.xmf
+	 * .swt.client.xml.Element)
 	 */
 	@Override
 	public void synchronise(Element container) {
