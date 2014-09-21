@@ -1,14 +1,11 @@
 package com.ceteva.text.texteditor;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.TrayDialog;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.LineStyleEvent;
-import org.eclipse.swt.custom.LineStyleListener;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.ModifyEvent;
@@ -58,42 +55,53 @@ public class FindUtil extends TrayDialog {
 		});
 		Display display = dialog.getDisplay();
 
-		keywordText = new StyledText(dialog, SWT.SINGLE | SWT.BORDER);
-		keywordText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		keywordText = styledText;
+		// keywordText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		// Font font = new Font(shell.getDisplay(), "Courier New", 12,
 		// SWT.NORMAL);
 
 		doFind = new Button(dialog, SWT.PUSH);
 		doFind.setText("Find");
 
-		doFind.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				keyword = keywordText.getText();
-				styledText.redraw();
-			}
-		});
+		StyleRange style3 = new StyleRange();
+		style3.start = 0;
+		style3.length = 3;
+		style3.underline = true;
+		style3.strikeout = true;
+		style3 = getHighlightStyle(0, 10, shell);
+		styledText.setStyleRange(style3);
 
-		styledText.addLineStyleListener(new LineStyleListener() {
-			public void lineGetStyle(LineStyleEvent event) {
-				if (keyword == null || keyword.length() == 0) {
-					event.styles = new StyleRange[0];
-					return;
-				}
+		// JavaScanner.setKeywords("Diagrams", null);
+		// JavaScanner.initialize();
 
-				String line = event.lineText;
-				int cursor = -1;
+		// styledText.setLineBackground(0, 1,
+		// shell.getDisplay().getSystemColor(SWT.COLOR_GREEN));
+		// styledText.setLineBackground(1, 1,
+		// shell.getDisplay().getSystemColor(SWT.COLOR_YELLOW));
 
-				LinkedList list = new LinkedList();
-				while ((cursor = line.indexOf(keyword, cursor + 1)) >= 0) {
-					list.add(getHighlightStyle(event.lineOffset + cursor,
-							keyword.length(), dialog));
-					System.out.println("cursor = " + cursor + " " + keyword);
-				}
+		styledText.redraw();
 
-				event.styles = (StyleRange[]) list.toArray(new StyleRange[list
-						.size()]);
-			}
-		});
+		// styledText.addLineStyleListener(new LineStyleListener() {
+		// public void lineGetStyle(LineStyleEvent event) {
+		// if (keyword == null || keyword.length() == 0) {
+		// event.styles = new StyleRange[0];
+		// return;
+		// }
+		//
+		// String line = event.lineText;
+		// int cursor = -1;
+		//
+		// LinkedList list = new LinkedList();
+		// while ((cursor = line.indexOf(keyword, cursor + 1)) >= 0) {
+		// list.add(getHighlightStyle(event.lineOffset + cursor,
+		// keyword.length(), dialog));
+		// System.out.println("cursor = " + cursor + " " + keyword);
+		// }
+		//
+		// event.styles = (StyleRange[]) list.toArray(new StyleRange[list
+		// .size()]);
+		// }
+		// });
 
 		open();
 
@@ -237,6 +245,7 @@ public class FindUtil extends TrayDialog {
 				// .getSelection(), wholeWord.getSelection(), regexp
 				// .getSelection(), wrap.getSelection());
 				keyword = findText.getText();
+				keywordText.redraw();
 				System.out.println(keyword);
 			}
 		});
