@@ -441,7 +441,16 @@ public class DiagramView extends View {
 					if (((EdgeShapeFigure) edgeShapes.get(key))
 							.isClicked(location2)) {
 						edgeShapes.get(key).setVisible(true);
-						edgeFigures.get(key).setVisible(false);
+
+						for (int i = 0; i < edgeFigures.get(key).getChildren()
+								.size(); i++) {
+							Figure f = (Figure) edgeFigures.get(key)
+									.getChildren().get(i);
+							if (!(f instanceof EdgeLabelFigure))
+								// f.setForegroundColor(ColorConstants.black);
+								f.setVisible(false);
+						}
+
 						edgeSelect = key;
 
 						// add sub menu
@@ -457,7 +466,14 @@ public class DiagramView extends View {
 
 					} else {
 						edgeShapes.get(key).setVisible(false);
-						edgeFigures.get(key).setVisible(true);
+						for (int i = 0; i < edgeFigures.get(key).getChildren()
+								.size(); i++) {
+							Figure f = (Figure) edgeFigures.get(key)
+									.getChildren().get(i);
+							if (!(f instanceof EdgeLabelFigure))
+								// f.setForegroundColor(ColorConstants.black);
+								f.setVisible(true);
+						}
 
 						dragPoints.clear();
 					}
@@ -1258,12 +1274,14 @@ public class DiagramView extends View {
 					EdgeShapeFigure shape = (EdgeShapeFigure) edgeEditPart
 							.createFigure(false);
 
-					shape.setVisible(true);
-					edgeShapes.put(((Edge) iModel).getIdentity(), shape);
-					// rootFigure.add(shape);
+					shape.setVisible(false);
 
-					if (rootFigure != null)
+					edgeShapes.put(((Edge) iModel).getIdentity(), shape);
+					rootFigure.add(shape);
+
+					if (rootFigure != null) {
 						rootFigure.add(edgeFigure);
+					}
 
 					edgeFigures.put(((Edge) iModel).getIdentity(), edgeFigure);
 					edgeEditPartFigures.put(((Edge) iModel).getIdentity(),
@@ -1274,7 +1292,6 @@ public class DiagramView extends View {
 
 			} else if (iModel instanceof EdgeText) {
 				edgeEdgeTextEdit = new EdgeTextEditPart();
-				// EdgeText text = (EdgeText) iModel;
 				edgeEdgeTextEdit.setModel((EdgeText) iModel);
 				edgeEdgeTextEdit.activate();
 				//

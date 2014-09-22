@@ -96,7 +96,6 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 				.getBounds());
 		shape.setBounds(rec);
 		shape.setLineWidth(1);
-		shape.setOpaque(false);
 
 		// shape.setBackgroundColor(ColorConstants.lightGray);
 		// shape.setVisible(false);
