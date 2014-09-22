@@ -500,177 +500,6 @@ public class DiagramView extends View {
 
 					Main.getInstance().palette.setSelectImage();
 				}
-
-				/*
-				 * if (s.equalsIgnoreCase("Class")) { raiseFocusGained();
-				 * 
-				 * String toolIdentity = s; NodeEditPart nodeEditPart = new
-				 * NodeEditPart(); nodeEditPart.setModel(_diagram);
-				 * createNodeCommand = new CreateNodeCommand(nodeEditPart,
-				 * toolIdentity, location2); createNodeCommand.execute();
-				 * 
-				 * selectIconName = "";
-				 * 
-				 * Main.getInstance().palette.setSelectImage(); } else if
-				 * (s.equalsIgnoreCase("Package")) { raiseFocusGained();
-				 * 
-				 * String toolIdentity = s; NodeEditPart nodeEditPart = new
-				 * NodeEditPart(); nodeEditPart.setModel(_diagram);
-				 * createNodeCommand = new CreateNodeCommand(nodeEditPart,
-				 * toolIdentity, location2); createNodeCommand.execute();
-				 * 
-				 * Main.getInstance().palette.setSelectImage(); } else if
-				 * (s.equalsIgnoreCase("Note")) { raiseFocusGained();
-				 * 
-				 * String toolIdentity = s; NodeEditPart nodeEditPart = new
-				 * NodeEditPart(); nodeEditPart.setModel(_diagram);
-				 * createNodeCommand = new CreateNodeCommand(nodeEditPart,
-				 * toolIdentity, location2); createNodeCommand.execute();
-				 * 
-				 * Main.getInstance().palette.setSelectImage(); //
-				 * System.out.println("click diagramView:" + s + ":" // +
-				 * location2.x + "-" + location2.y); } else if
-				 * (s.equalsIgnoreCase("Association") && (ports.size() > 1)) {
-				 * raiseFocusGained();
-				 * 
-				 * String toolIdentity = "Association";
-				 * 
-				 * ConnectionCommand connectionCommand = new
-				 * ConnectionCommand(); connectionCommand.setParent(_diagram);
-				 * connectionCommand.setToolIdentity(toolIdentity); String
-				 * source = (String) ports.get(0).getIdentity(); String target =
-				 * (String) ports.get(1).getIdentity();
-				 * connectionCommand.setSource(String.valueOf(Integer
-				 * .valueOf(source) + 1));
-				 * connectionCommand.setTarget(String.valueOf(Integer
-				 * .valueOf(target) + 1)); connectionCommand.execute();
-				 * ports.clear();
-				 * 
-				 * Main.getInstance().palette.setSelectImage(); } else if
-				 * (s.equalsIgnoreCase("Inheritance") && (ports.size() > 1)) {
-				 * raiseFocusGained();
-				 * 
-				 * String toolIdentity = "Inheritance";
-				 * 
-				 * ConnectionCommand connectionCommand = new
-				 * ConnectionCommand(); connectionCommand.setParent(_diagram);
-				 * connectionCommand.setToolIdentity(toolIdentity); String
-				 * source = (String) ports.get(0).getIdentity(); String target =
-				 * (String) ports.get(1).getIdentity();
-				 * connectionCommand.setSource(String.valueOf(Integer
-				 * .valueOf(source) + 1));
-				 * connectionCommand.setTarget(String.valueOf(Integer
-				 * .valueOf(target) + 1)); connectionCommand.execute();
-				 * ports.clear();
-				 * 
-				 * // GUIDemo.getInstance().palette.setSelectImage(); } else if
-				 * (s.equalsIgnoreCase("Dependency") && (ports.size() > 1)) {
-				 * raiseFocusGained();
-				 * 
-				 * String toolIdentity = "Dependency";
-				 * 
-				 * ConnectionCommand connectionCommand = new
-				 * ConnectionCommand(); connectionCommand.setParent(_diagram);
-				 * connectionCommand.setToolIdentity(toolIdentity); String
-				 * source = (String) ports.get(0).getIdentity(); String target =
-				 * (String) ports.get(1).getIdentity();
-				 * connectionCommand.setSource(String.valueOf(Integer
-				 * .valueOf(source) + 1));
-				 * connectionCommand.setTarget(String.valueOf(Integer
-				 * .valueOf(target) + 1)); connectionCommand.execute();
-				 * ports.clear();
-				 * 
-				 * // GUIDemo.getInstance().palette.setSelectImage(); } else if
-				 * (s.equalsIgnoreCase("Attribute") && (ports.size() > 1)) {
-				 * raiseFocusGained();
-				 * 
-				 * String toolIdentity = "Attribute";
-				 * 
-				 * ConnectionCommand connectionCommand = new
-				 * ConnectionCommand(); connectionCommand.setParent(_diagram);
-				 * connectionCommand.setToolIdentity(toolIdentity); String
-				 * source = (String) ports.get(0).getIdentity(); String target =
-				 * (String) ports.get(1).getIdentity();
-				 * connectionCommand.setSource(String.valueOf(Integer
-				 * .valueOf(source) + 1));
-				 * connectionCommand.setTarget(String.valueOf(Integer
-				 * .valueOf(target) + 1)); connectionCommand.execute();
-				 * ports.clear();
-				 * 
-				 * Main.getInstance().palette.setSelectImage(); } else if
-				 * (s.equalsIgnoreCase("Slot Value") && (ports.size() > 3)) {
-				 * raiseFocusGained();
-				 * 
-				 * String toolIdentity = "Slot Value";
-				 * 
-				 * ConnectionCommand connectionCommand = new
-				 * ConnectionCommand(); connectionCommand.setParent(_diagram);
-				 * connectionCommand.setToolIdentity(toolIdentity); String
-				 * source = (String) ports.get(0).getIdentity(); String target =
-				 * (String) ports.get(1).getIdentity();
-				 * connectionCommand.setSource(String.valueOf(Integer
-				 * .valueOf(source) + 1));
-				 * connectionCommand.setTarget(String.valueOf(Integer
-				 * .valueOf(target) + 1)); connectionCommand.execute();
-				 * ports.clear();
-				 * 
-				 * Main.getInstance().palette.setSelectImage(); } else if
-				 * (s.equalsIgnoreCase("Object")) { raiseFocusGained();
-				 * 
-				 * String toolIdentity = "Object"; NodeEditPart nodeEditPart =
-				 * new NodeEditPart(); nodeEditPart.setModel(_diagram);
-				 * createNodeCommand = new CreateNodeCommand(nodeEditPart,
-				 * toolIdentity, location2); createNodeCommand.execute();
-				 * 
-				 * Main.getInstance().palette.setSelectImage(); //
-				 * System.out.println("click diagramView:" + s + ":" // +
-				 * location2.x + "-" + location2.y); } else if
-				 * (s.equalsIgnoreCase("Mapping")) { raiseFocusGained();
-				 * 
-				 * String toolIdentity = "Mapping"; NodeEditPart nodeEditPart =
-				 * new NodeEditPart(); nodeEditPart.setModel(_diagram);
-				 * createNodeCommand = new CreateNodeCommand(nodeEditPart,
-				 * toolIdentity, location2); createNodeCommand.execute();
-				 * 
-				 * Main.getInstance().palette.setSelectImage(); //
-				 * System.out.println("click diagramView:" + s + ":" // +
-				 * location2.x + "-" + location2.y); } else if
-				 * (s.equalsIgnoreCase("Domain") && (ports.size() > 1)) {
-				 * raiseFocusGained();
-				 * 
-				 * String toolIdentity = "Domain";
-				 * 
-				 * ConnectionCommand connectionCommand = new
-				 * ConnectionCommand(); connectionCommand.setParent(_diagram);
-				 * connectionCommand.setToolIdentity(toolIdentity); String
-				 * source = (String) ports.get(0).getIdentity(); String target =
-				 * (String) ports.get(1).getIdentity();
-				 * connectionCommand.setSource(String.valueOf(Integer
-				 * .valueOf(source) + 1));
-				 * connectionCommand.setTarget(String.valueOf(Integer
-				 * .valueOf(target) + 1)); connectionCommand.execute();
-				 * ports.clear();
-				 * 
-				 * // GUIDemo.getInstance().palette.setSelectImage(); } else if
-				 * (s.equalsIgnoreCase("Range") && (ports.size() > 1)) {
-				 * raiseFocusGained();
-				 * 
-				 * String toolIdentity = "Range";
-				 * 
-				 * ConnectionCommand connectionCommand = new
-				 * ConnectionCommand(); connectionCommand.setParent(_diagram);
-				 * connectionCommand.setToolIdentity(toolIdentity); String
-				 * source = (String) ports.get(0).getIdentity(); String target =
-				 * (String) ports.get(1).getIdentity();
-				 * connectionCommand.setSource(String.valueOf(Integer
-				 * .valueOf(source) + 1));
-				 * connectionCommand.setTarget(String.valueOf(Integer
-				 * .valueOf(target) + 1)); connectionCommand.execute();
-				 * ports.clear();
-				 * 
-				 * // GUIDemo.getInstance().palette.setSelectImage(); }
-				 */
-
 			}
 		});
 
@@ -1176,13 +1005,17 @@ public class DiagramView extends View {
 	 *            the location
 	 * @return the org.eclipse.draw2d.geometry. point
 	 */
+
 	public org.eclipse.draw2d.geometry.Point translateToRelativeLocation(
 			Point location) {
-		org.eclipse.draw2d.geometry.Point point = null;
-		point = new org.eclipse.draw2d.geometry.Point(location.x
-				- display.getBounds().width * 0.2, location.y
-				- display.getBounds().height * 0.09);
-		return point;
+		Point point = null;
+		point = Main.display.map(null, canvas, location);
+		org.eclipse.draw2d.geometry.Point point2 = new org.eclipse.draw2d.geometry.Point(
+				0, 0);
+		point2.x = point.x;
+		point2.y = point.y;
+
+		return point2;
 	}
 
 	/**
