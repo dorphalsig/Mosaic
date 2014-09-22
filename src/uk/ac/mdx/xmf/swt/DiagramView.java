@@ -388,11 +388,10 @@ public class DiagramView extends View {
 				while (keySetIterator.hasNext()) {
 					String key = keySetIterator.next();
 					Node node = nodeModels.get(key);
-					node.isClicked(location2);
 
-					if (node.isClicked()) {
+					if (figureNodes.get(key).containsPoint(location2)) {
 						nodeSelect = node.getIdentity();
-						restShape(node.getLocation(), node.getSize());
+						// restShape(node.getLocation(), node.getSize());
 						nodeShapes.get(node.getIdentity()).setVisible(true);
 						nodeShapes.get(node.getIdentity()).setOpaque(false);
 
@@ -965,14 +964,14 @@ public class DiagramView extends View {
 	 */
 	public void restShape(org.eclipse.draw2d.geometry.Point location,
 			Dimension size) {
-		Node node = nodeModels.get(nodeSelect);
-		nodeEditPart = nodeEditParts.get(nodeSelect);
-		node.reSetPoints(location, size);
-
-		Rectangle rect = new Rectangle(location, size);
-
-		nodeShapes.get(nodeSelect).setBounds(rect);
-		nodeShapes.get(nodeSelect).setLocation(location);
+		// Node node = nodeModels.get(nodeSelect);
+		// nodeEditPart = nodeEditParts.get(nodeSelect);
+		// node.setRest(true);
+		//
+		// Rectangle rect = new Rectangle(location, size);
+		//
+		// nodeShapes.get(nodeSelect).setBounds(rect);
+		// nodeShapes.get(nodeSelect).setLocation(location);
 	}
 
 	/**

@@ -20,66 +20,78 @@ public class Node extends Container {
 
 	/** The is draggable. */
 	private boolean isDraggable = false;
-	
+
 	/** The ports. */
 	private final Vector ports = new Vector(); // ports associated with this
 												// node
 	/** The source edges. */
-												private final Vector sourceEdges = new Vector(); // all edges for which this
-														// node
+	private final Vector sourceEdges = new Vector(); // all edges for which this
+	// node
 	// is the source
 	/** The target edges. */
-														private final Vector targetEdges = new Vector(); // all edges for which this
-														// node
+	private final Vector targetEdges = new Vector(); // all edges for which this
+	// node
 	// is the target
 
 	/** The is selectable. */
-														private boolean isSelectable = true;
-	
+	private boolean isSelectable = true;
+
 	/** The is clicked. */
 	private boolean isClicked = false;
-	
+
 	/** The points. */
 	private Vector<Point> points;
 
 	/** The distance. */
 	private int distance = 20;
-	
+
 	/** The gap. */
 	private int gap = 3;
 
+	private boolean resetPoint = true;
+
 	/**
 	 * Instantiates a new node.
-	 *
-	 * @param parent the parent
-	 * @param handler the handler
-	 * @param identity the identity
-	 * @param location the location
-	 * @param size the size
-	 * @param isSelectable the is selectable
+	 * 
+	 * @param parent
+	 *            the parent
+	 * @param handler
+	 *            the handler
+	 * @param identity
+	 *            the identity
+	 * @param location
+	 *            the location
+	 * @param size
+	 *            the size
+	 * @param isSelectable
+	 *            the is selectable
 	 */
 	public Node(ClientElement parent, EventHandler handler, String identity,
 			Point location, Dimension size, boolean isSelectable) {
 		super(parent, handler, identity, location, size, null, null);
-
-		points = new Vector();
-
-		reSetPoints(location, size);
 
 		this.isSelectable = isSelectable;
 	}
 
 	/**
 	 * Instantiates a new node.
-	 *
-	 * @param parent the parent
-	 * @param handler the handler
-	 * @param identity the identity
-	 * @param x the x
-	 * @param y the y
-	 * @param width the width
-	 * @param height the height
-	 * @param isSelectable the is selectable
+	 * 
+	 * @param parent
+	 *            the parent
+	 * @param handler
+	 *            the handler
+	 * @param identity
+	 *            the identity
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
+	 * @param width
+	 *            the width
+	 * @param height
+	 *            the height
+	 * @param isSelectable
+	 *            the is selectable
 	 */
 	public Node(ClientElement parent, EventHandler handler, String identity,
 			int x, int y, int width, int height, boolean isSelectable) {
@@ -90,117 +102,31 @@ public class Node extends Container {
 
 	/**
 	 * Re set points.
-	 *
-	 * @param location the location
-	 * @param size the size
+	 * 
+	 * @param location
+	 *            the location
+	 * @param size
+	 *            the size
 	 */
-	public void reSetPoints(Point location, Dimension size) {
-		points.clear();
-		
-		points.addElement(new Point(0, 0));
-		points.addElement(new Point(location.x, location.y));
-		points.addElement(new Point(location.x + gap, location.y));
-
-		points.addElement(new Point(0, 0));
-		points.addElement(new Point(location.x + gap + gap, location.y));
-		points.addElement(new Point(location.x + size.width / 2 - gap,
-				location.y));
-
-		points.addElement(new Point(0, 0));
-		points.addElement(new Point(location.x + size.width / 2, location.y));
-		points.addElement(new Point(location.x + size.width / 2 + gap,
-				location.y));
-
-		points.addElement(new Point(0, 0));
-		points.addElement(new Point(location.x + size.width / 2 + gap + gap,
-				location.y));
-		points.addElement(new Point(location.x + size.width - gap - gap,
-				location.y));
-
-		points.addElement(new Point(0, 0));
-		points.addElement(new Point(location.x + size.width - gap, location.y));
-		points.addElement(new Point(location.x + size.width, location.y));
-
-		// second line
-
-		points.addElement(new Point(0, 0));
-		points.addElement(new Point(location.x + size.width, location.y + gap));
-		points.addElement(new Point(location.x + size.width, location.y
-				+ size.height / 2 - gap));
-
-		points.addElement(new Point(0, 0));
-		points.addElement(new Point(location.x + size.width, location.y
-				+ size.height / 2));
-		points.addElement(new Point(location.x + size.width, location.y
-				+ size.height / 2 + gap));
-
-		points.addElement(new Point(0, 0));
-		points.addElement(new Point(location.x + size.width, location.y
-				+ size.height / 2 + gap + gap));
-		points.addElement(new Point(location.x + size.width, location.y
-				+ size.height - gap - gap));
-
-		points.addElement(new Point(0, 0));
-		points.addElement(new Point(location.x + size.width, location.y
-				+ size.height - gap));
-		points.addElement(new Point(location.x + size.width, location.y
-				+ size.height));
-
-		// third line
-		points.addElement(new Point(0, 0));
-		points.addElement(new Point(location.x + size.width - gap - gap,
-				location.y + size.height));
-		points.addElement(new Point(location.x + size.width / 2 + gap + gap,
-				location.y + size.height));
-
-		points.addElement(new Point(0, 0));
-		points.addElement(new Point(location.x + size.width / 2 + gap,
-				location.y + size.height));
-		points.addElement(new Point(location.x + size.width / 2, location.y
-				+ size.height));
-
-		points.addElement(new Point(0, 0));
-		points.addElement(new Point(location.x + size.width / 2 - gap,
-				location.y + size.height));
-		points.addElement(new Point(location.x + gap + gap, location.y
-				+ size.height));
-
-		points.addElement(new Point(0, 0));
-		points.addElement(new Point(location.x + gap, location.y + size.height));
-		points.addElement(new Point(location.x, location.y + size.height));
-
-		// fouth line
-		points.addElement(new Point(0, 0));
-		points.addElement(new Point(location.x, location.y + size.height - gap));
-		points.addElement(new Point(location.x, location.y + size.height));
-
-		points.addElement(new Point(0, 0));
-		points.addElement(new Point(location.x, location.y + size.height / 2
-				+ gap + gap));
-		points.addElement(new Point(location.x, location.y + size.height - gap
-				- gap));
-
-		points.addElement(new Point(0, 0));
-		points.addElement(new Point(location.x, location.y + size.height / 2));
-		points.addElement(new Point(location.x, location.y + size.height / 2
-				+ gap));
-
-		points.addElement(new Point(0, 0));
-		points.addElement(new Point(location.x, location.y + gap + gap));
-		points.addElement(new Point(location.x, location.y + size.height / 2
-				- gap));
+	public void setRest(boolean resetPoint) {
+		this.resetPoint = resetPoint;
 	}
+
+	Point location = new Point(0, 0);
+	Dimension size = new Dimension();
 
 	/**
 	 * Gets the points.
-	 *
+	 * 
 	 * @return the points
 	 */
 	public Vector getPoints() {
 		return points;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see uk.ac.mdx.xmf.swt.client.ClientElement#delete()
 	 */
 	@Override
@@ -212,7 +138,9 @@ public class Node extends Container {
 			((Group) parent).removeNode(this);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see uk.ac.mdx.xmf.swt.model.Container#dispose()
 	 */
 	@Override
@@ -226,7 +154,7 @@ public class Node extends Container {
 
 	/**
 	 * Gets the ports.
-	 *
+	 * 
 	 * @return the ports
 	 */
 	public Vector getPorts() {
@@ -235,7 +163,7 @@ public class Node extends Container {
 
 	/**
 	 * Gets the source edges.
-	 *
+	 * 
 	 * @return the source edges
 	 */
 	public Vector getSourceEdges() {
@@ -244,7 +172,7 @@ public class Node extends Container {
 
 	/**
 	 * Gets the target edges.
-	 *
+	 * 
 	 * @return the target edges
 	 */
 	public Vector getTargetEdges() {
@@ -253,7 +181,7 @@ public class Node extends Container {
 
 	/**
 	 * Checks if is draggable.
-	 *
+	 * 
 	 * @return true, if is draggable
 	 */
 	public boolean isDraggable() {
@@ -262,7 +190,7 @@ public class Node extends Container {
 
 	/**
 	 * Checks if is selectable.
-	 *
+	 * 
 	 * @return true, if is selectable
 	 */
 	public boolean isSelectable() {
@@ -271,7 +199,7 @@ public class Node extends Container {
 
 	/**
 	 * Source edges.
-	 *
+	 * 
 	 * @return the vector
 	 */
 	public Vector sourceEdges() {
@@ -286,7 +214,7 @@ public class Node extends Container {
 
 	/**
 	 * Target edges.
-	 *
+	 * 
 	 * @return the vector
 	 */
 	public Vector targetEdges() {
@@ -299,7 +227,9 @@ public class Node extends Container {
 		return validEdges;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see uk.ac.mdx.xmf.swt.model.Container#processMessage(xos.Message)
 	 */
 	@Override
@@ -324,12 +254,17 @@ public class Node extends Container {
 
 	/**
 	 * New port.
-	 *
-	 * @param identity the identity
-	 * @param x the x
-	 * @param y the y
-	 * @param width the width
-	 * @param height the height
+	 * 
+	 * @param identity
+	 *            the identity
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
+	 * @param width
+	 *            the width
+	 * @param height
+	 *            the height
 	 * @return the port
 	 */
 	public Port newPort(String identity, int x, int y, int width, int height) {
@@ -347,9 +282,11 @@ public class Node extends Container {
 
 	/**
 	 * Move resize.
-	 *
-	 * @param location the location
-	 * @param size the size
+	 * 
+	 * @param location
+	 *            the location
+	 * @param size
+	 *            the size
 	 */
 	public void moveResize(Point location, Dimension size) {
 		if (!location.equals(this.location)) {
@@ -377,8 +314,9 @@ public class Node extends Container {
 
 	/**
 	 * Move resize.
-	 *
-	 * @param location the location
+	 * 
+	 * @param location
+	 *            the location
 	 */
 	public void moveResize(Point location) {
 		if (!location.equals(this.location)) {
@@ -397,8 +335,9 @@ public class Node extends Container {
 
 	/**
 	 * Move resize.
-	 *
-	 * @param size the size
+	 * 
+	 * @param size
+	 *            the size
 	 */
 	public void moveResize(Dimension size) {
 		if (!size.equals(this.size)) {
@@ -414,48 +353,39 @@ public class Node extends Container {
 	}
 
 	/**
-	 * Checks if is clicked.
-	 *
-	 * @param point the point
-	 */
-	public void isClicked(Point point) {
-		isClicked = checkRectangleBoundary(point.x, point.y, location.x,
-				location.y, size.width, size.height);
-		// if (isClicked) {
-		 System.out.println("node-" + identity + "-clicked");
-		// }
-
-	}
-
-	/**
 	 * Checks if is drag point clicked.
-	 *
-	 * @param point the point
+	 * 
+	 * @param point
+	 *            the point
 	 * @return the string
 	 */
 	public String isDragPointClicked(Point point) {
-		Point topMiddlePoint = points.get(8);
-		Point rightMiddlePoint = points.get(20);
-		Point bottomMiddlePoint = points.get(32);
-		Point leftMiddlePoint = points.get(43);
+		if (points != null && points.size() > 42) {
+			Point topMiddlePoint = points.get(8);
+			Point rightMiddlePoint = points.get(20);
+			Point bottomMiddlePoint = points.get(32);
+			Point leftMiddlePoint = points.get(43);
 
-		if (getDistanceOfPoints(point, topMiddlePoint) < distance)
-			return VisualElementEvents.topMiddlePoint;
-		if (getDistanceOfPoints(point, rightMiddlePoint) < distance)
-			return VisualElementEvents.rightMiddlePoint;
-		if (getDistanceOfPoints(point, bottomMiddlePoint) < distance)
-			return VisualElementEvents.bottomMiddlePoint;
-		if (getDistanceOfPoints(point, leftMiddlePoint) < distance)
-			return VisualElementEvents.leftMiddlePoint;
+			if (getDistanceOfPoints(point, topMiddlePoint) < distance)
+				return VisualElementEvents.topMiddlePoint;
+			if (getDistanceOfPoints(point, rightMiddlePoint) < distance)
+				return VisualElementEvents.rightMiddlePoint;
+			if (getDistanceOfPoints(point, bottomMiddlePoint) < distance)
+				return VisualElementEvents.bottomMiddlePoint;
+			if (getDistanceOfPoints(point, leftMiddlePoint) < distance)
+				return VisualElementEvents.leftMiddlePoint;
+		}
 		return "";
 
 	}
 
 	/**
 	 * Gets the distance of points.
-	 *
-	 * @param p1 the p1
-	 * @param p2 the p2
+	 * 
+	 * @param p1
+	 *            the p1
+	 * @param p2
+	 *            the p2
 	 * @return the distance of points
 	 */
 	public int getDistanceOfPoints(org.eclipse.draw2d.geometry.Point p1,
@@ -469,7 +399,7 @@ public class Node extends Container {
 
 	/**
 	 * Checks if is clicked.
-	 *
+	 * 
 	 * @return true, if is clicked
 	 */
 	public boolean isClicked() {
@@ -478,21 +408,27 @@ public class Node extends Container {
 
 	/**
 	 * Check rectangle boundary.
-	 *
-	 * @param pointX the point x
-	 * @param pointY the point y
-	 * @param rectangleX the rectangle x
-	 * @param rectangleY the rectangle y
-	 * @param width the width
-	 * @param height the height
+	 * 
+	 * @param pointX
+	 *            the point x
+	 * @param pointY
+	 *            the point y
+	 * @param rectangleX
+	 *            the rectangle x
+	 * @param rectangleY
+	 *            the rectangle y
+	 * @param width
+	 *            the width
+	 * @param height
+	 *            the height
 	 * @return true, if successful
 	 */
 	private boolean checkRectangleBoundary(float pointX, float pointY,
 			float rectangleX, float rectangleY, float width, float height) {
-		if (width<30)
-			width=30;
-		if (height<30)
-			height=30;
+		if (width < 30)
+			width = 30;
+		if (height < 30)
+			height = 30;
 		boolean isInside = ((pointX > rectangleX)
 				&& (pointX < rectangleX + width) && (pointY > rectangleY) && (pointY < rectangleY
 				+ height));
@@ -520,7 +456,9 @@ public class Node extends Container {
 		handler.raiseEvent(m);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see uk.ac.mdx.xmf.swt.model.Display#selected(int)
 	 */
 	@Override
@@ -533,8 +471,12 @@ public class Node extends Container {
 		handler.raiseEvent(m);
 	}
 
-	/* (non-Javadoc)
-	 * @see uk.ac.mdx.xmf.swt.model.Container#synchronise(uk.ac.mdx.xmf.swt.client.xml.Element)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * uk.ac.mdx.xmf.swt.model.Container#synchronise(uk.ac.mdx.xmf.swt.client
+	 * .xml.Element)
 	 */
 	@Override
 	public void synchronise(Element node) {
@@ -545,8 +487,9 @@ public class Node extends Container {
 
 	/**
 	 * Synchronise displays.
-	 *
-	 * @param node the node
+	 * 
+	 * @param node
+	 *            the node
 	 */
 	public void synchroniseDisplays(Element node) {
 
@@ -554,8 +497,9 @@ public class Node extends Container {
 
 	/**
 	 * Synchronise ports.
-	 *
-	 * @param node the node
+	 * 
+	 * @param node
+	 *            the node
 	 */
 	public void synchronisePorts(Element node) {
 
@@ -614,8 +558,9 @@ public class Node extends Container {
 
 	/**
 	 * Adds the source edge.
-	 *
-	 * @param edge the edge
+	 * 
+	 * @param edge
+	 *            the edge
 	 */
 	public void addSourceEdge(Edge edge) {
 		sourceEdges.addElement(edge);
@@ -625,8 +570,9 @@ public class Node extends Container {
 
 	/**
 	 * Removes the source edge.
-	 *
-	 * @param edge the edge
+	 * 
+	 * @param edge
+	 *            the edge
 	 */
 	public void removeSourceEdge(Edge edge) {
 		if (!sourceEdges.contains(edge))
@@ -638,8 +584,9 @@ public class Node extends Container {
 
 	/**
 	 * Adds the target edge.
-	 *
-	 * @param edge the edge
+	 * 
+	 * @param edge
+	 *            the edge
 	 */
 	public void addTargetEdge(Edge edge) {
 		targetEdges.addElement(edge);
@@ -649,8 +596,9 @@ public class Node extends Container {
 
 	/**
 	 * Removes the target edge.
-	 *
-	 * @param edge the edge
+	 * 
+	 * @param edge
+	 *            the edge
 	 */
 	public void removeTargetEdge(Edge edge) {
 		if (!targetEdges.contains(edge))

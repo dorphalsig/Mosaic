@@ -34,7 +34,9 @@ import uk.ac.mdx.xmf.swt.model.Node;
 public class NodeEditPart extends CommandEventEditPart implements
 		org.eclipse.gef.NodeEditPart {
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart#activate()
 	 */
 	@Override
@@ -44,7 +46,9 @@ public class NodeEditPart extends CommandEventEditPart implements
 		// new DragRequest(getViewer(), TextTransfer.getInstance(), this));
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
 	 */
 	@Override
@@ -69,15 +73,18 @@ public class NodeEditPart extends CommandEventEditPart implements
 
 	/**
 	 * Creates the figure.
-	 *
-	 * @param flag the flag
-	 * @param rec the rec
+	 * 
+	 * @param flag
+	 *            the flag
+	 * @param rec
+	 *            the rec
 	 * @return the i figure
 	 */
 	public IFigure createFigure(boolean flag, Rectangle rec) {
 		Node node = (Node) getModel();
 		Vector points = node.getPoints();
-		NodeShapeFigure shape = new NodeShapeFigure(points, true);
+		NodeShapeFigure shape = new NodeShapeFigure(true);
+		shape.reSetPoints(node.getLocation(), node.getSize());
 		shape.setBounds(rec);
 		shape.setLineWidth(5);
 		// shape.setVisible(false);
@@ -88,7 +95,9 @@ public class NodeEditPart extends CommandEventEditPart implements
 		return shape;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.gef.editparts.AbstractEditPart#createEditPolicies()
 	 */
 	@Override
@@ -106,7 +115,9 @@ public class NodeEditPart extends CommandEventEditPart implements
 		// installEditPolicy("Popup", new PopupBarEditPolicy());
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.gef.editparts.AbstractEditPart#isSelectable()
 	 */
 	@Override
@@ -114,7 +125,9 @@ public class NodeEditPart extends CommandEventEditPart implements
 		return ((Node) getModel()).isSelectable();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.gef.editparts.AbstractEditPart#getModelChildren()
 	 */
 	@Override
@@ -122,15 +135,21 @@ public class NodeEditPart extends CommandEventEditPart implements
 		return ((Node) getModel()).getContents();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#getDragTracker(org.eclipse.gef.Request)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.gef.editparts.AbstractGraphicalEditPart#getDragTracker(org
+	 * .eclipse.gef.Request)
 	 */
 	@Override
 	public DragTracker getDragTracker(Request request) {
 		return new NodeSelectionTracker(this);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart#refresh()
 	 */
 	@Override
@@ -156,8 +175,11 @@ public class NodeEditPart extends CommandEventEditPart implements
 		// }
 	}
 
-	/* (non-Javadoc)
-	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.
+	 * PropertyChangeEvent)
 	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
@@ -182,8 +204,12 @@ public class NodeEditPart extends CommandEventEditPart implements
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#refreshSourceConnections()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.gef.editparts.AbstractGraphicalEditPart#refreshSourceConnections
+	 * ()
 	 */
 	@Override
 	public void refreshSourceConnections() {
@@ -200,8 +226,12 @@ public class NodeEditPart extends CommandEventEditPart implements
 			_diagramView.setSourceAnchor(sourceAnchor);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#refreshTargetConnections()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.gef.editparts.AbstractGraphicalEditPart#refreshTargetConnections
+	 * ()
 	 */
 	@Override
 	public void refreshTargetConnections() {
@@ -222,7 +252,7 @@ public class NodeEditPart extends CommandEventEditPart implements
 
 	/**
 	 * Gets the fill color.
-	 *
+	 * 
 	 * @return the fill color
 	 */
 	public RGB getFillColor() {
@@ -235,7 +265,7 @@ public class NodeEditPart extends CommandEventEditPart implements
 
 	/**
 	 * Gets the location.
-	 *
+	 * 
 	 * @return the location
 	 */
 	public Point getLocation() {
@@ -244,7 +274,7 @@ public class NodeEditPart extends CommandEventEditPart implements
 
 	/**
 	 * Gets the size.
-	 *
+	 * 
 	 * @return the size
 	 */
 	public Dimension getSize() {
@@ -258,7 +288,9 @@ public class NodeEditPart extends CommandEventEditPart implements
 		this.getFigure().setBackgroundColor(ColorConstants.blue);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.gef.editparts.AbstractEditPart#refreshVisuals()
 	 */
 	@Override
@@ -283,7 +315,7 @@ public class NodeEditPart extends CommandEventEditPart implements
 
 	/**
 	 * Gets the node figure.
-	 *
+	 * 
 	 * @return the node figure
 	 */
 	public NodeFigure getNodeFigure() {
@@ -292,31 +324,43 @@ public class NodeEditPart extends CommandEventEditPart implements
 
 	/**
 	 * Gets the node model.
-	 *
+	 * 
 	 * @return the node model
 	 */
 	public Node getNodeModel() {
 		return (Node) getModel();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#getModelSourceConnections()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.gef.editparts.AbstractGraphicalEditPart#getModelSourceConnections
+	 * ()
 	 */
 	@Override
 	protected List getModelSourceConnections() {
 		return getNodeModel().getSourceEdges();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#getModelTargetConnections()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.gef.editparts.AbstractGraphicalEditPart#getModelTargetConnections
+	 * ()
 	 */
 	@Override
 	protected List getModelTargetConnections() {
 		return getNodeModel().getTargetEdges();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gef.NodeEditPart#getSourceConnectionAnchor(org.eclipse.gef.ConnectionEditPart)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.gef.NodeEditPart#getSourceConnectionAnchor(org.eclipse.gef
+	 * .ConnectionEditPart)
 	 */
 	@Override
 	public ConnectionAnchor getSourceConnectionAnchor(
@@ -325,8 +369,12 @@ public class NodeEditPart extends CommandEventEditPart implements
 		return getNodeFigure().getConnectionAnchor(edge.getSourcePort());
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gef.NodeEditPart#getSourceConnectionAnchor(org.eclipse.gef.Request)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.gef.NodeEditPart#getSourceConnectionAnchor(org.eclipse.gef
+	 * .Request)
 	 */
 	@Override
 	public ConnectionAnchor getSourceConnectionAnchor(Request request) {
@@ -334,8 +382,12 @@ public class NodeEditPart extends CommandEventEditPart implements
 		return ((NodeFigure) getFigure()).getAnchor(pt);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gef.NodeEditPart#getTargetConnectionAnchor(org.eclipse.gef.ConnectionEditPart)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.gef.NodeEditPart#getTargetConnectionAnchor(org.eclipse.gef
+	 * .ConnectionEditPart)
 	 */
 	@Override
 	public ConnectionAnchor getTargetConnectionAnchor(
@@ -344,8 +396,12 @@ public class NodeEditPart extends CommandEventEditPart implements
 		return getNodeFigure().getConnectionAnchor(edge.getTargetPort());
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gef.NodeEditPart#getTargetConnectionAnchor(org.eclipse.gef.Request)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.gef.NodeEditPart#getTargetConnectionAnchor(org.eclipse.gef
+	 * .Request)
 	 */
 	@Override
 	public ConnectionAnchor getTargetConnectionAnchor(Request request) {
@@ -353,8 +409,12 @@ public class NodeEditPart extends CommandEventEditPart implements
 		return ((NodeFigure) getFigure()).getAnchor(pt);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gef.editparts.AbstractEditPart#performRequest(org.eclipse.gef.Request)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.gef.editparts.AbstractEditPart#performRequest(org.eclipse
+	 * .gef.Request)
 	 */
 	@Override
 	public void performRequest(Request req) {
@@ -366,7 +426,9 @@ public class NodeEditPart extends CommandEventEditPart implements
 			node.selected(2);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart#preferenceUpdate()
 	 */
 	@Override
