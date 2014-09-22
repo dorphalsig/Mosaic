@@ -2,7 +2,6 @@ package uk.ac.mdx.xmf.swt;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Vector;
 
 import org.eclipse.draw2d.ColorConstants;
@@ -26,63 +25,63 @@ import uk.ac.mdx.xmf.swt.demo.Main;
  * The Class Palette.
  */
 public class Palette {
-	
+
 	/** The parent. */
 	Composite parent;
-	
+
 	/** The image name. */
 	private String imageName = "";
-	
+
 	/** The tools. */
 	ArrayList<String> tools = new ArrayList<String>();
 	ArrayList<String> icons = new ArrayList<String>();
-	HashMap<String,Boolean> connections=new HashMap<String,Boolean>();
-	
+	HashMap<String, Boolean> connections = new HashMap<String, Boolean>();
+
 	/** The point. */
 	Point point = null;
-	
+
 	/** The tool size. */
 	Point toolSize = new Point(30, 5);
-	
+
 	/** The display. */
 	Display display;
 
 	/** The models. */
 	Vector<String> models = new Vector<String>();
-	
+
 	/** The groups. */
 	Vector<String> groups = new Vector<String>();
 
 	/** The transfer class. */
 	private String transferClass = "";
-	
+
 	/** The canvas. */
 	Canvas canvas;
-	
+
 	/** The is focus. */
 	private boolean isFocus = false;
-	
+
 	/** The is initial. */
 	private boolean isInitial = false;
 
 	/** The images. */
 	private Image[] images;
-	
+
 	/** The label images. */
 	private Label[] labelImages;
-	
+
 	/** The label texts. */
 	private Label[] labelTexts;
-	
+
 	/** The color select. */
 	private Color colorSelect;
-	
+
 	/** The color. */
 	private Color color;
-	
+
 	/** The color section. */
 	private Color colorSection;
-	
+
 	/** The _palettes. */
 	Vector<Palette> _palettes = new Vector<Palette>();
 
@@ -101,10 +100,13 @@ public class Palette {
 
 	/**
 	 * Instantiates a new palette.
-	 *
-	 * @param parent the parent
-	 * @param style the style
-	 * @param display the display
+	 * 
+	 * @param parent
+	 *            the parent
+	 * @param style
+	 *            the style
+	 * @param display
+	 *            the display
 	 */
 	public Palette(Composite parent, int style, Display display) {
 		this.parent = parent;
@@ -121,8 +123,9 @@ public class Palette {
 
 	/**
 	 * Adds the drawer.
-	 *
-	 * @param group the group
+	 * 
+	 * @param group
+	 *            the group
 	 */
 	public void addDrawer(String group) {
 		boolean exist = false;
@@ -136,28 +139,35 @@ public class Palette {
 
 	/**
 	 * Adds the entry.
-	 *
-	 * @param parent the parent
-	 * @param label the label
-	 * @param identity the identity
-	 * @param connection the connection
-	 * @param icon the icon
+	 * 
+	 * @param parent
+	 *            the parent
+	 * @param label
+	 *            the label
+	 * @param identity
+	 *            the identity
+	 * @param connection
+	 *            the connection
+	 * @param icon
+	 *            the icon
 	 */
 	public void addEntry(String parent, String label, String identity,
 			boolean connection, String icon) {
-		if (!connections.containsKey(label)){
-		connections.put(label,connection);
-		tools.add(label);
-		tools.add(parent);
-		icons.add(icon);
+		if (!connections.containsKey(label)) {
+			connections.put(label, connection);
+			tools.add(label);
+			tools.add(parent);
+			icons.add(icon);
 		}
 	}
-    public HashMap<String,Boolean> getConnections(){
-    	return  connections;
-    }
+
+	public HashMap<String, Boolean> getConnections() {
+		return connections;
+	}
+
 	/**
 	 * Gets the select class.
-	 *
+	 * 
 	 * @return the select class
 	 */
 	public String getSelectClass() {
@@ -166,8 +176,9 @@ public class Palette {
 
 	/**
 	 * Sets the initial.
-	 *
-	 * @param initial the new initial
+	 * 
+	 * @param initial
+	 *            the new initial
 	 */
 	public void setInitial(boolean initial) {
 		isFocus = initial;
@@ -175,7 +186,7 @@ public class Palette {
 
 	/**
 	 * Gets the initial.
-	 *
+	 * 
 	 * @return the initial
 	 */
 	public boolean getInitial() {
@@ -186,9 +197,9 @@ public class Palette {
 	 * Creates the part control.
 	 */
 	public void createPartControl() {
-		//enable scroll bar
-//		canvas = new Canvas(parent,SWT.H_SCROLL | SWT.V_SCROLL);
-		canvas = new Canvas(parent,SWT.NO);
+		// enable scroll bar
+		// canvas = new Canvas(parent,SWT.H_SCROLL | SWT.V_SCROLL);
+		canvas = new Canvas(parent, SWT.BORDER);
 		canvas.setBounds((int) (parent.getBounds().width * 0.8), 0,
 				(int) (parent.getBounds().width * 0.2),
 				parent.getBounds().height);
@@ -211,9 +222,9 @@ public class Palette {
 		int count = 0;
 
 		for (int m = 0; m < groups.size(); m++) {
-			String group=groups.get(m);
+			String group = groups.get(m);
 			if (!group.equalsIgnoreCase("Palette"))
-				group="XCore";
+				group = "XCore";
 			image = new Image(display, "images/" + group + ".gif");
 
 			label = new Label(canvas, SWT.NO);
@@ -230,12 +241,10 @@ public class Palette {
 
 			for (int i = 0; i < size; i++) {
 				if (groups.get(m).equalsIgnoreCase(tools.get(i * 2 + 1))) {
-					if (icons.get(i ).contains(":"))
-						images[i] = new Image(display,icons.get(i )
-								);
+					if (icons.get(i).contains(":"))
+						images[i] = new Image(display, icons.get(i));
 					else
-					images[i] = new Image(display, "icons/" + icons.get(i )
-							);
+						images[i] = new Image(display, "icons/" + icons.get(i));
 
 					labelImages[i] = new Label(canvas, SWT.NO);
 					labelImages[i].setImage(images[i]);
@@ -363,7 +372,7 @@ public class Palette {
 
 	/**
 	 * Gets the select image.
-	 *
+	 * 
 	 * @return the select image
 	 */
 	public String getSelectImage() {
@@ -373,7 +382,7 @@ public class Palette {
 
 	/**
 	 * Checks if is focus.
-	 *
+	 * 
 	 * @return true, if is focus
 	 */
 	public boolean isFocus() {
@@ -382,9 +391,11 @@ public class Palette {
 
 	/**
 	 * Sets the focus.
-	 *
-	 * @param focus the focus
-	 * @param palettes the palettes
+	 * 
+	 * @param focus
+	 *            the focus
+	 * @param palettes
+	 *            the palettes
 	 */
 	public void setFocus(boolean focus, Vector<Palette> palettes) {
 		_palettes = palettes;
@@ -403,8 +414,9 @@ public class Palette {
 
 	/**
 	 * Sets the focus.
-	 *
-	 * @param focus the new focus
+	 * 
+	 * @param focus
+	 *            the new focus
 	 */
 	public void setFocus(boolean focus) {
 		isFocus = focus;
