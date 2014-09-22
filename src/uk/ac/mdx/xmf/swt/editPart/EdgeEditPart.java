@@ -34,27 +34,30 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 
 	/** The router. */
 	EdgeRouter router;
-	
+
 	/** The preferred source offset. */
 	Point preferredSourceOffset;
-	
+
 	/** The preferred target offset. */
 	Point preferredTargetOffset;
 
 	/** The parent. */
 	CommandEvent parent;
-	
+
 	/** The _diagram view. */
 	DiagramView _diagramView;
 
 	/** The figure. */
 	IFigure figure;
-	
+
 	/** The connection. */
 	EdgeFigure connection;
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gef.editparts.AbstractConnectionEditPart#activateFigure()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.gef.editparts.AbstractConnectionEditPart#activateFigure()
 	 */
 	@Override
 	protected void activateFigure() {
@@ -78,8 +81,9 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 
 	/**
 	 * Creates the figure.
-	 *
-	 * @param flag the flag
+	 * 
+	 * @param flag
+	 *            the flag
 	 * @return the i figure
 	 */
 	public EdgeShapeFigure createFigure(boolean flag) {
@@ -88,12 +92,12 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 		Vector dragPoint = edge.getDragPoints();
 		EdgeShapeFigure shape = new EdgeShapeFigure(points, dragPoint, true);
 
-		Rectangle rec = new Rectangle(Main.getInstance().getView()
-				.getCanvas().getBounds());
+		Rectangle rec = new Rectangle(Main.getInstance().getView().getCanvas()
+				.getBounds());
 		shape.setBounds(rec);
 		shape.setLineWidth(1);
 		shape.setOpaque(false);
-		
+
 		// shape.setBackgroundColor(ColorConstants.lightGray);
 		// shape.setVisible(false);
 
@@ -103,8 +107,11 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 		return shape;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gef.editparts.AbstractConnectionEditPart#deactivateFigure()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.gef.editparts.AbstractConnectionEditPart#deactivateFigure()
 	 */
 	@Override
 	protected void deactivateFigure() {
@@ -122,7 +129,9 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 			super.deactivateFigure();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.gef.editparts.AbstractConnectionEditPart#createFigure()
 	 */
 	@Override
@@ -142,7 +151,9 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 		return connection;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#getFigure()
 	 */
 	public IFigure getFigure() {
@@ -151,20 +162,24 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 
 	/**
 	 * Sets the route.
-	 *
-	 * @param connection the new route
+	 * 
+	 * @param connection
+	 *            the new route
 	 */
 	public void setRoute(EdgeFigure connection) {
 		// refreshRefPoint();
 		// router = new EdgeRouter(getEdgeModel());
 		// router.route(connection);
 		BendpointConnectionRouter router = new BendpointConnectionRouter();
+		connection.removeAllPoints();
 		connection.setConnectionRouter(router);
-		connection.setConnectionRouter(router);
+		// connection.setConnectionRouter(router);
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#activate()
 	 */
 	@Override
@@ -175,7 +190,9 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#deactivate()
 	 */
 	@Override
@@ -188,14 +205,17 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 
 	/**
 	 * Sets the model.
-	 *
-	 * @param parent the new model
+	 * 
+	 * @param parent
+	 *            the new model
 	 */
 	public void setModel(CommandEvent parent) {
 		this.parent = parent;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.gef.editparts.AbstractEditPart#getModel()
 	 */
 	@Override
@@ -205,14 +225,17 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 
 	/**
 	 * Sets the diagram view.
-	 *
-	 * @param view the new diagram view
+	 * 
+	 * @param view
+	 *            the new diagram view
 	 */
 	public void setDiagramView(DiagramView view) {
 		_diagramView = view;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.gef.editparts.AbstractEditPart#createEditPolicies()
 	 */
 	@Override
@@ -232,8 +255,11 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 		// installEditPolicy("Popup", new PopupBarEditPolicy());
 	}
 
-	/* (non-Javadoc)
-	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.
+	 * PropertyChangeEvent)
 	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
@@ -264,7 +290,7 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 
 	/**
 	 * Gets the color.
-	 *
+	 * 
 	 * @return the color
 	 */
 	public RGB getColor() {
@@ -280,7 +306,7 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 
 	/**
 	 * Gets the connection manager.
-	 *
+	 * 
 	 * @return the connection manager
 	 */
 	public ConnectionLayerManager getConnectionManager() {
@@ -289,7 +315,7 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 
 	/**
 	 * Gets the edge model.
-	 *
+	 * 
 	 * @return the edge model
 	 */
 	public Edge getEdgeModel() {
@@ -298,14 +324,16 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 
 	/**
 	 * Gets the edge figure.
-	 *
+	 * 
 	 * @return the edge figure
 	 */
 	public EdgeFigure getEdgeFigure() {
 		return (EdgeFigure) this.getFigure();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.gef.editparts.AbstractConnectionEditPart#refresh()
 	 */
 	@Override
@@ -359,7 +387,7 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 
 	/**
 	 * Gets the edge router.
-	 *
+	 * 
 	 * @return the edge router
 	 */
 	public EdgeRouter getEdgeRouter() {
@@ -369,7 +397,7 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 
 	/**
 	 * Gets the waypoint count.
-	 *
+	 * 
 	 * @return the waypoint count
 	 */
 	public int getWaypointCount() {
@@ -380,8 +408,9 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 
 	/**
 	 * Gets the waypoint position.
-	 *
-	 * @param index the index
+	 * 
+	 * @param index
+	 *            the index
 	 * @return the waypoint position
 	 */
 	public Point getWaypointPosition(int index) {
@@ -405,7 +434,7 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 
 		Edge edge = (Edge) getModel();
 		Vector<Point> points = edge.getDragPoints();
-		for (int i = 0; i < points.size(); i++) {
+		for (int i = 1; i < points.size() - 2; i++) {
 			// Waypoint wp = (Waypoint) modelConstraint.get(i);
 			Point p = points.get(i);
 			AbsoluteBendpoint abp = new AbsoluteBendpoint(p);
@@ -426,7 +455,9 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 		f.setRefPoint(((Edge) getModel()).getRefPoint());
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.gef.editparts.AbstractEditPart#getModelChildren()
 	 */
 	@Override
@@ -436,8 +467,9 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 
 	/**
 	 * Sets the preferred source offset.
-	 *
-	 * @param preferredSourceOffset the new preferred source offset
+	 * 
+	 * @param preferredSourceOffset
+	 *            the new preferred source offset
 	 */
 	public void setPreferredSourceOffset(Point preferredSourceOffset) {
 		this.preferredSourceOffset = preferredSourceOffset;
@@ -445,15 +477,20 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 
 	/**
 	 * Sets the preferred target offset.
-	 *
-	 * @param preferredTargetOffset the new preferred target offset
+	 * 
+	 * @param preferredTargetOffset
+	 *            the new preferred target offset
 	 */
 	public void setPreferredTargetOffset(Point preferredTargetOffset) {
 		this.preferredTargetOffset = preferredTargetOffset;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gef.editparts.AbstractEditPart#performRequest(org.eclipse.gef.Request)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.gef.editparts.AbstractEditPart#performRequest(org.eclipse
+	 * .gef.Request)
 	 */
 	@Override
 	public void performRequest(Request req) {
@@ -480,7 +517,7 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 
 	/**
 	 * Gets the model identity.
-	 *
+	 * 
 	 * @return the model identity
 	 */
 	public String getModelIdentity() {
@@ -490,7 +527,7 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 
 	/**
 	 * Gets the ref point.
-	 *
+	 * 
 	 * @return the ref point
 	 */
 	public Point getRefPoint() {

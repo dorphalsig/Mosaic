@@ -570,6 +570,38 @@ public class DiagramView extends View {
 						}
 					}
 				}
+
+				// check edge
+
+				Iterator<String> edgeIterator = edgeModels.keySet().iterator();
+
+				while (edgeIterator.hasNext()) {
+					String key = edgeIterator.next();
+					Edge edge = edgeModels.get(key);
+
+					getEdgePoint = edge.getPointElement(location2);
+					getPointIndex = edge.getPointIndex();
+
+					if (getEdgePoint
+							.equalsIgnoreCase(VisualElementEvents.wayPointEdgePoint))
+
+					{
+						canvas.setCursor(Display.getCurrent().getSystemCursor(
+								SWT.CURSOR_SIZEALL));
+
+					} else if (getEdgePoint
+							.equalsIgnoreCase(VisualElementEvents.moveEdgePoint))
+
+					{
+						canvas.setCursor(Display.getCurrent().getSystemCursor(
+								SWT.CURSOR_SIZEALL));
+
+					} else {
+						canvas.setCursor(Display.getCurrent().getSystemCursor(
+								SWT.CURSOR_ARROW));
+					}
+				}
+
 				// -----end check mouse hover
 
 				if (mouseDown && nodeIsSelected) {
@@ -675,49 +707,14 @@ public class DiagramView extends View {
 
 						// node.moveResize(location2);
 					}
-				}
-
-				// -----------
-
-				if (!mouseDown) {
-					Iterator<String> edgeIterator = edgeModels.keySet()
-							.iterator();
-
-					while (edgeIterator.hasNext()) {
-						String key = edgeIterator.next();
-						Edge edge = edgeModels.get(key);
-
-						getEdgePoint = edge.getPointElement(location2);
-						getPointIndex = edge.getPointIndex();
-
-						if (getEdgePoint
-								.equalsIgnoreCase(VisualElementEvents.wayPointEdgePoint))
-
-						{
-							canvas.setCursor(Display.getCurrent()
-									.getSystemCursor(SWT.CURSOR_SIZEALL));
-
-						} else if (getEdgePoint
-								.equalsIgnoreCase(VisualElementEvents.moveEdgePoint))
-
-						{
-							canvas.setCursor(Display.getCurrent()
-									.getSystemCursor(SWT.CURSOR_SIZEALL));
-
-						} else {
-							canvas.setCursor(Display.getCurrent()
-									.getSystemCursor(SWT.CURSOR_ARROW));
-						}
-					}
-				}
-
-				if (mouseDown) {
+				} else if (mouseDown) {
 
 					Edge edge = edgeModels.get(edgeSelect);
 					EdgeEditPart edit = edgeEditPartFigures.get(edgeSelect);
 
-					if (getEdgePoint
-							.equalsIgnoreCase(VisualElementEvents.wayPointEdgePoint)) {
+					if (edge != null
+							&& getEdgePoint
+									.equalsIgnoreCase(VisualElementEvents.wayPointEdgePoint)) {
 
 						if (setDragPointOnce)
 							edge.setDragPoints();
@@ -770,9 +767,8 @@ public class DiagramView extends View {
 								+ model.getLocation().y);
 					else
 						p = new Point(0, 0);
-					// using magic numbe 15 to find the right location
 					if (checkRectangleBoundary(location2.x, location2.y, p.x,
-							p.y + 15, width, height)) {
+							p.y, width, height)) {
 						textEdits.get(key).performDirectEdit(model, p, d);
 					}
 				}
@@ -1264,7 +1260,7 @@ public class DiagramView extends View {
 
 					shape.setVisible(true);
 					edgeShapes.put(((Edge) iModel).getIdentity(), shape);
-					rootFigure.add(shape);
+					// rootFigure.add(shape);
 
 					if (rootFigure != null)
 						rootFigure.add(edgeFigure);
