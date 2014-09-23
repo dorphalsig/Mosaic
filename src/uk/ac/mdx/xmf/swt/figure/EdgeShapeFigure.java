@@ -121,7 +121,7 @@ public class EdgeShapeFigure extends org.eclipse.draw2d.PolylineShape {
 		double distance = Math.abs((P.x - A.x) * (B.y - A.y) - (P.y - A.y)
 				* (B.x - A.x))
 				/ normalLength;
-		System.out.println("distance:" + distance);
+		// System.out.println("distance:" + distance);
 		return (distance <= 6);
 	}
 }

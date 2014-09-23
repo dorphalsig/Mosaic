@@ -729,6 +729,8 @@ public class DiagramView extends View {
 
 						edgeDrageShape.setVisible(true);
 
+						System.out.println(location2);
+
 						setDragPointOnce = false;
 
 						rootFigure.repaint();
@@ -940,7 +942,7 @@ public class DiagramView extends View {
 				mouseDown = false;
 				resizeShape = false;
 				resizeEdgeShape = false;
-				setDragPointOnce = true;
+				// setDragPointOnce = true;
 				update();
 				canvas.setCursor(Display.getCurrent().getSystemCursor(
 						SWT.CURSOR_ARROW));

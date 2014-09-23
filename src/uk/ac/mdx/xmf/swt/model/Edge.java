@@ -281,7 +281,7 @@ public class Edge extends CommandEvent {
 	 */
 	public void setDragPoints(org.eclipse.draw2d.geometry.Point newPoint,
 			int index) {
-		// index = 1;
+		index = 1;
 		if (setDragPointOnce) {
 			org.eclipse.draw2d.geometry.Point before = dragPoints
 					.get(index - 1);
@@ -304,7 +304,6 @@ public class Edge extends CommandEvent {
 			org.eclipse.draw2d.geometry.Point before = dragPoints
 					.get(index - 1);
 			org.eclipse.draw2d.geometry.Point next = null;
-			System.out.println("index:" + index);
 			if (index + 3 < dragPoints.size()) {
 				next = dragPoints.get(index + 3);
 
@@ -323,6 +322,8 @@ public class Edge extends CommandEvent {
 				dragPoints.add(index, m2);
 				dragPoints.add(index, newPoint);
 				dragPoints.add(index, m1);
+
+				System.out.println("size of dragpoint:" + dragPoints.size());
 			}
 		}
 
@@ -333,7 +334,7 @@ public class Edge extends CommandEvent {
 			org.eclipse.draw2d.geometry.Point p2 = dragPoints.get(i + 1);
 			calculateLinePoints(p1, p2);
 		}
-
+		System.out.println("size of dragpoint:" + dragPoints.size());
 		setDragPointOnce = false;
 	}
 
