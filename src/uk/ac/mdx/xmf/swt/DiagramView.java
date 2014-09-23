@@ -442,20 +442,6 @@ public class DiagramView extends View {
 							.isClicked(location2)) {
 						edgeShapes.get(key).setVisible(true);
 						edgeFigures.get(key).setOutline(false);
-						//
-						// for (int i = 0; i <
-						// edgeFigures.get(key).getChildren()
-						// .size(); i++) {
-						// Figure f = (Figure) edgeFigures.get(key)
-						// .getChildren().get(i);
-						// if ((f instanceof EdgeLabelFigure)) {
-						// f.setForegroundColor(ColorConstants.red);
-						// f.setVisible(true);
-						// } else {
-						// f.setVisible(false);
-						// f.setForegroundColor(ColorConstants.white);
-						// }
-						// }
 
 						edgeSelect = key;
 
@@ -722,14 +708,17 @@ public class DiagramView extends View {
 
 						// node.moveResize(location2);
 					}
-				} else if (mouseDown) {
+				}
+
+				if (mouseDown) {
 
 					Edge edge = edgeModels.get(edgeSelect);
 					EdgeEditPart edit = edgeEditPartFigures.get(edgeSelect);
 
-					if (edge != null
-							&& getEdgePoint
-									.equalsIgnoreCase(VisualElementEvents.wayPointEdgePoint)) {
+					if (edge != null && edgeShapes.get(edgeSelect).isVisible())
+					// && getEdgePoint
+					// .equalsIgnoreCase(VisualElementEvents.wayPointEdgePoint))
+					{
 
 						if (setDragPointOnce)
 							edge.setDragPoints();
@@ -928,9 +917,10 @@ public class DiagramView extends View {
 				Edge edge = edgeModels.get(edgeSelect);
 				EdgeEditPart edit = edgeEditPartFigures.get(edgeSelect);
 
-				if (resizeEdgeShape
-						&& getEdgePoint
-								.equalsIgnoreCase(VisualElementEvents.wayPointEdgePoint)) {
+				if (resizeEdgeShape)
+				// && getEdgePoint
+				// .equalsIgnoreCase(VisualElementEvents.wayPointEdgePoint))
+				{
 					edge.setDragPoints(location2, getPointIndex);
 
 					edgeShape = (EdgeShapeFigure) edit.createFigure(true);
@@ -983,29 +973,6 @@ public class DiagramView extends View {
 		//
 		// nodeShapes.get(nodeSelect).setBounds(rect);
 		// nodeShapes.get(nodeSelect).setLocation(location);
-	}
-
-	/**
-	 * Check edge is clicked.
-	 * 
-	 * @param topRef
-	 *            the top ref
-	 * @param bottomRef
-	 *            the bottom ref
-	 * @param location2
-	 *            the location2
-	 * @return true, if successful
-	 */
-	public boolean checkEdgeIsClicked(org.eclipse.draw2d.geometry.Point topRef,
-			org.eclipse.draw2d.geometry.Point bottomRef,
-			org.eclipse.draw2d.geometry.Point location2) {
-		boolean isInside = true;
-		if ((topRef.x < location2.x && bottomRef.x < location2.x)
-				|| (topRef.x > location2.x && bottomRef.x > location2.x)
-				|| (topRef.y < location2.y && bottomRef.y < location2.y)
-				|| (topRef.y > location2.y && bottomRef.y > location2.y))
-			isInside = false;
-		return isInside;
 	}
 
 	/**

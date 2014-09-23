@@ -115,23 +115,12 @@ public class EdgeShapeFigure extends org.eclipse.draw2d.PolylineShape {
 		return isClicked;
 	}
 
-	private boolean isOnLine(Point startPoint, Point endPoint, Point pt) {
-		int width = endPoint.x - startPoint.x;
-		int height = endPoint.y - startPoint.y;
-		int dx = pt.x - startPoint.x;
-		int dy = pt.y = startPoint.y;
-		double distance;
-
-		if (dx != 0 && width != 0) // if both lines are not vertical
-		{
-			double angleToCorner = Math.atan(height / width);
-			double angleToPoint = Math.atan(dy / dx);
-			distance = Math.sqrt(dx * dx + dy * dy)
-					* Math.sin(Math.abs(angleToCorner - angleToPoint));
-		} else // one or both slopes have zero divisor (are vertical)
-		{
-			distance = Math.abs(dx);
-		}
+	private boolean isOnLine(Point A, Point B, Point P) {
+		double normalLength = Math.sqrt((B.x - A.x) * (B.x - A.x) + (B.y - A.y)
+				* (B.y - A.y));
+		double distance = Math.abs((P.x - A.x) * (B.y - A.y) - (P.y - A.y)
+				* (B.x - A.x))
+				/ normalLength;
 		System.out.println("distance:" + distance);
 		return (distance <= 6);
 	}
