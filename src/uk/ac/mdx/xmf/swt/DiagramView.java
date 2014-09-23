@@ -441,21 +441,21 @@ public class DiagramView extends View {
 					if (((EdgeShapeFigure) edgeShapes.get(key))
 							.isClicked(location2)) {
 						edgeShapes.get(key).setVisible(true);
-						edgeFigures.get(key).setVisible(false);
-						;
-
-						for (int i = 0; i < edgeFigures.get(key).getChildren()
-								.size(); i++) {
-							Figure f = (Figure) edgeFigures.get(key)
-									.getChildren().get(i);
-							if ((f instanceof EdgeLabelFigure))
-								// f.setForegroundColor(ColorConstants.black);
-								f.setVisible(true);
-							else {
-								f.setVisible(false);
-								f.setForegroundColor(ColorConstants.white);
-							}
-						}
+						edgeFigures.get(key).setOutline(false);
+						//
+						// for (int i = 0; i <
+						// edgeFigures.get(key).getChildren()
+						// .size(); i++) {
+						// Figure f = (Figure) edgeFigures.get(key)
+						// .getChildren().get(i);
+						// if ((f instanceof EdgeLabelFigure)) {
+						// f.setForegroundColor(ColorConstants.red);
+						// f.setVisible(true);
+						// } else {
+						// f.setVisible(false);
+						// f.setForegroundColor(ColorConstants.white);
+						// }
+						// }
 
 						edgeSelect = key;
 
@@ -472,7 +472,7 @@ public class DiagramView extends View {
 
 					} else {
 						edgeShapes.get(key).setVisible(false);
-						edgeFigures.get(key).setVisible(true);
+						edgeFigures.get(key).setOutline(true);
 
 						dragPoints.clear();
 					}
