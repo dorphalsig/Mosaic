@@ -23,7 +23,7 @@ public class NodeShapeFigure extends Shape {
 	/** The outline. */
 	boolean outline;
 	/** The distance. */
-	private int distance = 5;
+	private int distance = 8;
 
 	/** The gap. */
 	private int gap = 3;

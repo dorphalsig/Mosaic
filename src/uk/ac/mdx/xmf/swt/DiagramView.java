@@ -357,6 +357,7 @@ public class DiagramView extends View {
 	 * Register listener.
 	 */
 	private boolean dragEdge = true;
+	int number = 0;
 
 	public void registerListener() {
 
@@ -467,6 +468,21 @@ public class DiagramView extends View {
 				else
 					nodeIsSelected = false;
 
+				// -----check mouse click
+
+				Iterator<String> nodeShapeItr = nodeShapes.keySet().iterator();
+
+				while (nodeShapeItr.hasNext()) {
+					String key = nodeShapeItr.next();
+					NodeShapeFigure shape = (NodeShapeFigure) nodeShapes
+							.get(key);
+
+					if (shape.isVisible())
+						getPoint = shape.isDragPointClicked(location2);
+					else
+						getPoint = "";
+				}
+
 				// check click Edge line
 
 				Iterator<String> edgeIterator = edgeFigures.keySet().iterator();
@@ -568,64 +584,63 @@ public class DiagramView extends View {
 
 				// -----check mouse hover
 
-				Iterator<String> keySetIterator = nodeShapes.keySet()
-						.iterator();
+				if (!mouseDown) {
 
-				while (keySetIterator.hasNext()) {
-					String key = keySetIterator.next();
-					NodeShapeFigure shape = (NodeShapeFigure) nodeShapes
-							.get(key);
+					Iterator<String> keySetIterator = nodeShapes.keySet()
+							.iterator();
 
-					getPoint = shape.isDragPointClicked(location2);
+					while (keySetIterator.hasNext()) {
+						String key = keySetIterator.next();
+						NodeShapeFigure shape = (NodeShapeFigure) nodeShapes
+								.get(key);
 
-					if (shape.isVisible()) {
-						if (getPoint
-								.equalsIgnoreCase(VisualElementEvents.topMiddlePoint))
+						getPoint = shape.isDragPointClicked(location2);
 
-						{
-							canvas.setCursor(Display.getCurrent()
-									.getSystemCursor(SWT.CURSOR_SIZEN));
-							break;
-						} else if (getPoint
-								.equalsIgnoreCase(VisualElementEvents.rightMiddlePoint))
+						if (shape.isVisible()) {
+							if (getPoint
+									.equalsIgnoreCase(VisualElementEvents.topMiddlePoint))
 
-						{
-							canvas.setCursor(Display.getCurrent()
-									.getSystemCursor(SWT.CURSOR_SIZEE));
-							break;
-						} else if (getPoint
-								.equalsIgnoreCase(VisualElementEvents.bottomMiddlePoint))
+							{
+								canvas.setCursor(Display.getCurrent()
+										.getSystemCursor(SWT.CURSOR_SIZEN));
+							} else if (getPoint
+									.equalsIgnoreCase(VisualElementEvents.rightMiddlePoint))
 
-						{
-							canvas.setCursor(Display.getCurrent()
-									.getSystemCursor(SWT.CURSOR_SIZEN));
-							break;
-						} else if (getPoint
-								.equalsIgnoreCase(VisualElementEvents.leftMiddlePoint))
+							{
+								canvas.setCursor(Display.getCurrent()
+										.getSystemCursor(SWT.CURSOR_SIZEE));
+							} else if (getPoint
+									.equalsIgnoreCase(VisualElementEvents.bottomMiddlePoint))
 
-						{
-							canvas.setCursor(Display.getCurrent()
-									.getSystemCursor(SWT.CURSOR_SIZEE));
-							break;
-						} else if (getPoint
-								.equalsIgnoreCase(VisualElementEvents.leftTopCornerPoint)) {
-							canvas.setCursor(Display.getCurrent()
-									.getSystemCursor(SWT.CURSOR_SIZESE));
-						} else if (getPoint
-								.equalsIgnoreCase(VisualElementEvents.rightTopCornerPoint)) {
-							canvas.setCursor(Display.getCurrent()
-									.getSystemCursor(SWT.CURSOR_SIZENE));
-						} else if (getPoint
-								.equalsIgnoreCase(VisualElementEvents.rightBottomCornerPoint)) {
-							canvas.setCursor(Display.getCurrent()
-									.getSystemCursor(SWT.CURSOR_SIZESE));
-						} else if (getPoint
-								.equalsIgnoreCase(VisualElementEvents.leftBottomCornerPoint)) {
-							canvas.setCursor(Display.getCurrent()
-									.getSystemCursor(SWT.CURSOR_SIZENE));
-						} else {
-							canvas.setCursor(Display.getCurrent()
-									.getSystemCursor(SWT.CURSOR_ARROW));
+							{
+								canvas.setCursor(Display.getCurrent()
+										.getSystemCursor(SWT.CURSOR_SIZEN));
+							} else if (getPoint
+									.equalsIgnoreCase(VisualElementEvents.leftMiddlePoint))
+
+							{
+								canvas.setCursor(Display.getCurrent()
+										.getSystemCursor(SWT.CURSOR_SIZEE));
+							} else if (getPoint
+									.equalsIgnoreCase(VisualElementEvents.leftTopCornerPoint)) {
+								canvas.setCursor(Display.getCurrent()
+										.getSystemCursor(SWT.CURSOR_SIZESE));
+							} else if (getPoint
+									.equalsIgnoreCase(VisualElementEvents.rightTopCornerPoint)) {
+								canvas.setCursor(Display.getCurrent()
+										.getSystemCursor(SWT.CURSOR_SIZENE));
+							} else if (getPoint
+									.equalsIgnoreCase(VisualElementEvents.rightBottomCornerPoint)) {
+								canvas.setCursor(Display.getCurrent()
+										.getSystemCursor(SWT.CURSOR_SIZESE));
+							} else if (getPoint
+									.equalsIgnoreCase(VisualElementEvents.leftBottomCornerPoint)) {
+								canvas.setCursor(Display.getCurrent()
+										.getSystemCursor(SWT.CURSOR_SIZENE));
+							} else {
+								canvas.setCursor(Display.getCurrent()
+										.getSystemCursor(SWT.CURSOR_ARROW));
+							}
 						}
 					}
 				}
@@ -665,8 +680,8 @@ public class DiagramView extends View {
 
 				// -----end check mouse hover
 
-				if (mouseDown && nodeIsSelected) {
-
+				if (mouseDown) {
+					System.out.println("Point:" + getPoint);
 					Figure shape = nodeShapes.get(nodeSelect);
 
 					if (shape != null
@@ -719,15 +734,18 @@ public class DiagramView extends View {
 					} else if (shape != null
 							&& (getPoint
 									.equalsIgnoreCase(VisualElementEvents.topMiddlePoint))) {
+						System.out.println(number++ + "topMiddlePoint:"
+								+ getPoint);
 
 						Node node = nodeModels.get(nodeSelect);
 						Dimension size = new Dimension();
 						size.width = node.getSize().width;
 						size.height = Math.abs(node.getLocation().y
 								- location2.y);
-						if (size != node.getSize()) {
+						{
 							org.eclipse.draw2d.geometry.Point p = new org.eclipse.draw2d.geometry.Point(
 									node.getLocation().x, location2.y);
+
 							rectShape.setLocation(p);
 							rectShape.setSize(size);
 							rectShape
@@ -755,16 +773,22 @@ public class DiagramView extends View {
 							rectShape.setVisible(true);
 							resizeShape = true;
 						}
-					} else if (shape != null) {
-						Node node = nodeModels.get(nodeSelect);
-						Dimension size = new Dimension();
-						size = node.getSize();
+					} else {
+						if (nodeIsSelected
+								&& canvas.getCursor().hashCode() == 65539) {
+							Node node = nodeModels.get(nodeSelect);
+							Dimension size = new Dimension();
+							size = node.getSize();
 
-						rectShape.setLocation(location2);
-						rectShape.setSize(size.width, size.height);
-						rectShape.setBackgroundColor(ColorConstants.lightGray);
-						rectShape.setVisible(true);
-						resizeShape = true;
+							rectShape.setLocation(location2);
+							rectShape.setSize(size.width, size.height);
+							rectShape
+									.setBackgroundColor(ColorConstants.lightGray);
+							rectShape.setVisible(true);
+							resizeShape = true;
+
+							nodeShapes.get(nodeSelect).setLocation(location2);
+						}
 
 						// node.moveResize(location2);
 					}
@@ -906,9 +930,6 @@ public class DiagramView extends View {
 			public void handleEvent(Event arg0) {
 				// gc.dispose();
 				Point location = display.getCursorLocation();
-				// org.eclipse.draw2d.geometry.Point location2 = new
-				// org.eclipse.draw2d.geometry.Point(
-				// location.x, location.y);
 				org.eclipse.draw2d.geometry.Point location2 = translateToRelativeLocation(location);
 				if (resizeShape
 						&& (getPoint
@@ -973,6 +994,18 @@ public class DiagramView extends View {
 					restShape(p, node.getSize());
 				}
 
+				if (resizeShape) {
+					Iterator<String> keySetIterator = nodeShapes.keySet()
+							.iterator();
+
+					while (keySetIterator.hasNext()) {
+						String key = keySetIterator.next();
+						NodeShapeFigure shape = (NodeShapeFigure) nodeShapes
+								.get(key);
+						shape.setVisible(false);
+					}
+				}
+
 				EdgeShapeFigure edgeShape = edgeShapes.get(edgeSelect);
 				Edge edge = edgeModels.get(edgeSelect);
 				EdgeEditPart edit = edgeEditPartFigures.get(edgeSelect);
@@ -997,6 +1030,7 @@ public class DiagramView extends View {
 				getEdgePoint = "";
 				rectShape.setVisible(false);
 				edgeDrageShape.setVisible(false);
+
 				mouseDown = false;
 				resizeShape = false;
 				resizeEdgeShape = false;
@@ -1203,7 +1237,7 @@ public class DiagramView extends View {
 	 * @param displays
 	 *            the displays
 	 */
-	Figure shape;
+	NodeShapeFigure shape;
 
 	public void refresh(Vector displays) {
 		this.contents = displays;
@@ -1222,7 +1256,7 @@ public class DiagramView extends View {
 
 				Rectangle rect = new Rectangle(((Node) iModel).getLocation(),
 						((Node) iModel).getSize());
-				shape = (Figure) nodeEditPart.createFigure(true, rect);
+				shape = (NodeShapeFigure) nodeEditPart.createFigure(true, rect);
 				shape.setVisible(false);
 				rootFigure.add(shape);
 				figure.setBorder(null);
