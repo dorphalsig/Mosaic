@@ -229,7 +229,7 @@ public class Edge extends CommandEvent {
 			bottomPoint.x = x2 - (h2 / 2) * (x2 - x1) / (y2 - y1);
 			bottomPoint.y = y2 - h2 / 2;
 
-			middlePoint.x = topPoint.x + Math.abs((topPoint.x - bottomPoint.x))
+			middlePoint.x = topPoint.x - Math.abs((topPoint.x - bottomPoint.x))
 					/ 2;
 			middlePoint.y = topPoint.y + Math.abs((topPoint.y - bottomPoint.y))
 					/ 2;
