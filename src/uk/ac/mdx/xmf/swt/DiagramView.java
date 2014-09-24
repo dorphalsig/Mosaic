@@ -962,7 +962,6 @@ public class DiagramView extends View {
 		canvas.addListener(SWT.MouseUp, new Listener() {
 			@Override
 			public void handleEvent(Event arg0) {
-				// gc.dispose();
 				Point location = display.getCursorLocation();
 				org.eclipse.draw2d.geometry.Point location2 = translateToRelativeLocation(location);
 				if (resizeShape
@@ -999,8 +998,6 @@ public class DiagramView extends View {
 					org.eclipse.draw2d.geometry.Point p = new org.eclipse.draw2d.geometry.Point(
 							node.getLocation().x, location2.y);
 					node.moveResize(p);
-
-					// restShape(p, size);
 				} else if (resizeShape
 						&& (getPoint
 								.equalsIgnoreCase(VisualElementEvents.bottomMiddlePoint))) {
