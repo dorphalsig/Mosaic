@@ -479,8 +479,6 @@ public class DiagramView extends View {
 
 					if (shape.isVisible())
 						getPoint = shape.isDragPointClicked(location2);
-					else
-						getPoint = "";
 				}
 
 				// check click Edge line
@@ -681,7 +679,7 @@ public class DiagramView extends View {
 				// -----end check mouse hover
 
 				if (mouseDown) {
-					System.out.println("Point:" + getPoint);
+					// System.out.println("Point:" + getPoint);
 					Figure shape = nodeShapes.get(nodeSelect);
 
 					if (shape != null
@@ -692,67 +690,45 @@ public class DiagramView extends View {
 						Dimension size = new Dimension();
 						size.width = Math.abs(location2.x
 								- node.getLocation().x);
-						size.height = Math.abs(location2.y
-								- node.getLocation().y);
-						if (size != node.getSize()) {
-							rectShape
-									.setLocation(new org.eclipse.draw2d.geometry.Point(
-											shape.getLocation().x
-													+ node.getSize().width,
-											shape.getLocation().y));
-							rectShape.setSize(location2.x
-									- shape.getLocation().x,
-									shape.getSize().height);
-							rectShape
-									.setBackgroundColor(ColorConstants.lightGray);
-							rectShape
-									.setForegroundColor(ColorConstants.lightGray);
-							resizeShape = true;
-						}
+						size.height = nodeShapes.get(nodeSelect).getSize().height - 4;
 
+						rectShape.setLocation(node.getLocation());
+						rectShape.setSize(size);
+						rectShape.setBackgroundColor(ColorConstants.lightGray);
+						resizeShape = true;
 						rectShape.setVisible(true);
 					} else if (shape != null
 							&& (getPoint
 									.equalsIgnoreCase(VisualElementEvents.leftMiddlePoint))) {
-
 						Node node = nodeModels.get(nodeSelect);
 						Dimension size = new Dimension();
 						size.width = Math.abs(location2.x
-								- node.getLocation().x)
-								+ node.getSize().width;
-						size.height = node.getSize().height;
-						if (size != node.getSize()) {
-							org.eclipse.draw2d.geometry.Point p = new org.eclipse.draw2d.geometry.Point(
-									location2.x, node.getLocation().y);
-							rectShape.setLocation(p);
-							rectShape.setSize(size);
-							rectShape
-									.setBackgroundColor(ColorConstants.lightGray);
-							rectShape.setVisible(true);
-							resizeShape = true;
-						}
+								- node.getLocation().x);
+						size.height = nodeShapes.get(nodeSelect).getSize().height - 4;
+
+						org.eclipse.draw2d.geometry.Point p = new org.eclipse.draw2d.geometry.Point(
+								location2.x, node.getLocation().y);
+
+						rectShape.setLocation(p);
+						rectShape.setSize(size);
+						rectShape.setBackgroundColor(ColorConstants.lightGray);
+						resizeShape = true;
+						rectShape.setVisible(true);
 					} else if (shape != null
 							&& (getPoint
 									.equalsIgnoreCase(VisualElementEvents.topMiddlePoint))) {
-						System.out.println(number++ + "topMiddlePoint:"
-								+ getPoint);
-
 						Node node = nodeModels.get(nodeSelect);
 						Dimension size = new Dimension();
 						size.width = node.getSize().width;
 						size.height = Math.abs(node.getLocation().y
 								- location2.y);
-						{
-							org.eclipse.draw2d.geometry.Point p = new org.eclipse.draw2d.geometry.Point(
-									node.getLocation().x, location2.y);
-
-							rectShape.setLocation(p);
-							rectShape.setSize(size);
-							rectShape
-									.setBackgroundColor(ColorConstants.lightGray);
-							rectShape.setVisible(true);
-							resizeShape = true;
-						}
+						org.eclipse.draw2d.geometry.Point p = new org.eclipse.draw2d.geometry.Point(
+								node.getLocation().x, location2.y);
+						rectShape.setLocation(p);
+						rectShape.setSize(size);
+						rectShape.setBackgroundColor(ColorConstants.lightGray);
+						rectShape.setVisible(true);
+						resizeShape = true;
 					} else if (shape != null
 							&& (getPoint
 									.equalsIgnoreCase(VisualElementEvents.bottomMiddlePoint))) {
@@ -761,18 +737,81 @@ public class DiagramView extends View {
 						Dimension size = new Dimension();
 						size.width = node.getSize().width;
 						size.height = Math.abs(node.getLocation().y
+								- location2.y);
+						org.eclipse.draw2d.geometry.Point p = new org.eclipse.draw2d.geometry.Point(
+								node.getLocation().x, node.getLocation().y);
+						rectShape.setLocation(p);
+						rectShape.setSize(size.width, size.height);
+						rectShape.setBackgroundColor(ColorConstants.lightGray);
+						rectShape.setVisible(true);
+						resizeShape = true;
+					} else if (shape != null
+							&& (getPoint
+									.equalsIgnoreCase(VisualElementEvents.leftTopCornerPoint))) {
+						Node node = nodeModels.get(nodeSelect);
+						Dimension size = new Dimension();
+						size.width = node.getSize().width - location2.x
+								+ node.getLocation().x;
+						size.height = Math.abs(node.getLocation().y
 								- location2.y)
 								+ node.getSize().height;
-						if (size != node.getSize()) {
-							org.eclipse.draw2d.geometry.Point p = new org.eclipse.draw2d.geometry.Point(
-									node.getLocation().x, node.getLocation().y);
-							rectShape.setLocation(p);
-							rectShape.setSize(size.width, size.height);
-							rectShape
-									.setBackgroundColor(ColorConstants.lightGray);
-							rectShape.setVisible(true);
-							resizeShape = true;
-						}
+						org.eclipse.draw2d.geometry.Point p = new org.eclipse.draw2d.geometry.Point(
+								node.getLocation().x, location2.y);
+						rectShape.setLocation(location2);
+						rectShape.setSize(size);
+						rectShape.setBackgroundColor(ColorConstants.lightGray);
+						rectShape.setVisible(true);
+						resizeShape = true;
+					} else if (shape != null
+							&& (getPoint
+									.equalsIgnoreCase(VisualElementEvents.rightTopCornerPoint))) {
+						Node node = nodeModels.get(nodeSelect);
+						Dimension size = new Dimension();
+						size.width = Math.abs(location2.x
+								- node.getLocation().x);
+						size.height = Math.abs(node.getLocation().y
+								- location2.y)
+								+ node.getSize().height;
+						org.eclipse.draw2d.geometry.Point p = new org.eclipse.draw2d.geometry.Point(
+								node.getLocation().x, location2.y);
+						rectShape.setLocation(p);
+						rectShape.setSize(size);
+						rectShape.setBackgroundColor(ColorConstants.lightGray);
+						rectShape.setVisible(true);
+						resizeShape = true;
+					} else if (shape != null
+							&& (getPoint
+									.equalsIgnoreCase(VisualElementEvents.rightBottomCornerPoint))) {
+						Node node = nodeModels.get(nodeSelect);
+						Dimension size = new Dimension();
+						size.width = Math.abs(location2.x
+								- node.getLocation().x);
+						size.height = Math.abs(node.getLocation().y
+								- location2.y);
+						org.eclipse.draw2d.geometry.Point p = new org.eclipse.draw2d.geometry.Point(
+								node.getLocation().x, location2.y);
+						rectShape.setLocation(node.getLocation());
+						rectShape.setSize(size);
+						rectShape.setBackgroundColor(ColorConstants.lightGray);
+						rectShape.setVisible(true);
+						resizeShape = true;
+					} else if (shape != null
+							&& (getPoint
+									.equalsIgnoreCase(VisualElementEvents.leftBottomCornerPoint))) {
+						Node node = nodeModels.get(nodeSelect);
+						Dimension size = new Dimension();
+						size.width = Math.abs(location2.x
+								- node.getLocation().x)
+								+ node.getSize().width;
+						size.height = Math.abs(node.getLocation().y
+								- location2.y);
+						org.eclipse.draw2d.geometry.Point p = new org.eclipse.draw2d.geometry.Point(
+								location2.x, node.getLocation().y);
+						rectShape.setLocation(p);
+						rectShape.setSize(size);
+						rectShape.setBackgroundColor(ColorConstants.lightGray);
+						rectShape.setVisible(true);
+						resizeShape = true;
 					} else {
 						if (nodeIsSelected
 								&& canvas.getCursor().hashCode() == 65539) {
@@ -970,21 +1009,27 @@ public class DiagramView extends View {
 							node.getLocation().x, location2.y);
 					node.moveResize(p);
 
-					restShape(p, size);
+					// restShape(p, size);
 				} else if (resizeShape
 						&& (getPoint
 								.equalsIgnoreCase(VisualElementEvents.bottomMiddlePoint))) {
 					Node node = nodeModels.get(nodeSelect);
 					Dimension size = new Dimension();
 					size.width = node.getSize().width;
-					size.height = Math.abs(node.getLocation().y - location2.y)
-							+ node.getSize().height;
+					size.height = Math.abs(node.getLocation().y - location2.y);
 					node.moveResize(size);
-
-					org.eclipse.draw2d.geometry.Point p = node.getLocation();
-					node.moveResize(p);
-
-					restShape(p, size);
+				} else if (resizeShape
+						&& getPoint
+								.equalsIgnoreCase(VisualElementEvents.leftTopCornerPoint)
+						|| getPoint
+								.equalsIgnoreCase(VisualElementEvents.rightTopCornerPoint)
+						|| getPoint
+								.equalsIgnoreCase(VisualElementEvents.leftBottomCornerPoint)
+						|| getPoint
+								.equalsIgnoreCase(VisualElementEvents.rightBottomCornerPoint)) {
+					Node node = nodeModels.get(nodeSelect);
+					node.moveResize(rectShape.getLocation());
+					node.moveResize(rectShape.getSize());
 				} else if (resizeShape) {
 					Node node = nodeModels.get(nodeSelect);
 					node.moveResize(location2);
