@@ -62,14 +62,14 @@ public class AddToolbarToTabFolder {
 
 		// final ToolItem item1 = new ToolItem(treeToolBar, SWT.PUSH |
 		// SWT.CENTER);
-		// item1.setImage(new Image(display, "icons/Tools/box.gif"));
+		// item1.setImage(new Image(display, "icons/Tools/Box.gif"));
 
 		// final ToolItem item2 = new ToolItem(treeToolBar, SWT.PUSH |
 		// SWT.CENTER);
-		// item2.setImage(new Image(display, "icons/user/Arrow2Left.gif"));
+		// item2.setImage(new Image(display, "icons/User/Arrow2Left.gif"));
 
 		final ToolItem item3 = new ToolItem(treeToolBar, SWT.PUSH | SWT.CENTER);
-		item3.setImage(new Image(display, "icons/user/Arrow2Left.gif"));
+		item3.setImage(new Image(display, "icons/User/Arrow2Left.gif"));
 
 		treeToolBar.pack();
 		treeToolBar.setLocation(100, 0);

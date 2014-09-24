@@ -169,7 +169,7 @@ public class FormView implements MenuListener {
 		toolBar.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 		// ToolItem item = new ToolItem(toolBar, SWT.PUSH | SWT.CENTER);
 		// item.setImage(new Image(Main.getInstance().display,
-		// "icons/user/Arrow2Left.gif"));
+		// "icons/User/Arrow2Left.gif"));
 		toolBarManager = new ToolBarManager(toolBar);
 
 		double ratio = 0.8;
