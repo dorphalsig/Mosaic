@@ -8,7 +8,6 @@ import org.eclipse.draw2d.geometry.Point;
 import uk.ac.mdx.xmf.swt.client.ClientElement;
 import uk.ac.mdx.xmf.swt.client.EventHandler;
 import uk.ac.mdx.xmf.swt.client.xml.Element;
-import uk.ac.mdx.xmf.swt.misc.VisualElementEvents;
 import xos.Message;
 import xos.Value;
 
@@ -43,7 +42,7 @@ public class Node extends Container {
 	private Vector<Point> points;
 
 	/** The distance. */
-	private int distance = 20;
+	private int distance = 5;
 
 	/** The gap. */
 	private int gap = 3;
@@ -350,33 +349,6 @@ public class Node extends Container {
 			m.args[2] = v3;
 			handler.raiseEvent(m);
 		}
-	}
-
-	/**
-	 * Checks if is drag point clicked.
-	 * 
-	 * @param point
-	 *            the point
-	 * @return the string
-	 */
-	public String isDragPointClicked(Point point) {
-		if (points != null && points.size() > 42) {
-			Point topMiddlePoint = points.get(8);
-			Point rightMiddlePoint = points.get(20);
-			Point bottomMiddlePoint = points.get(32);
-			Point leftMiddlePoint = points.get(43);
-
-			if (getDistanceOfPoints(point, topMiddlePoint) < distance)
-				return VisualElementEvents.topMiddlePoint;
-			if (getDistanceOfPoints(point, rightMiddlePoint) < distance)
-				return VisualElementEvents.rightMiddlePoint;
-			if (getDistanceOfPoints(point, bottomMiddlePoint) < distance)
-				return VisualElementEvents.bottomMiddlePoint;
-			if (getDistanceOfPoints(point, leftMiddlePoint) < distance)
-				return VisualElementEvents.leftMiddlePoint;
-		}
-		return "";
-
 	}
 
 	/**

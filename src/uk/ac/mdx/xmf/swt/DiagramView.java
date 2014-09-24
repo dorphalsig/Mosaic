@@ -444,9 +444,6 @@ public class DiagramView extends View {
 								key).getLocation();
 						Dimension d = figureNodes.get(key).getSize();
 
-						System.out.println("l:" + l);
-						System.out.println("d:" + d);
-
 						// add sub menu
 						Vector<String> identitiesNode = new Vector<String>();
 						NodeEditPart editPart = nodeEditParts.get(nodeSelect);
@@ -570,47 +567,62 @@ public class DiagramView extends View {
 				org.eclipse.draw2d.geometry.Point location2 = translateToRelativeLocation(location);
 
 				// -----check mouse hover
-				// check click node
-				if (!mouseDown) {
-					// String getHoverPoint = "";
 
-					Iterator<String> keySetIterator = nodeModels.keySet()
-							.iterator();
+				Iterator<String> keySetIterator = nodeShapes.keySet()
+						.iterator();
 
-					while (keySetIterator.hasNext()) {
-						String key = keySetIterator.next();
-						Node node = nodeModels.get(key);
+				while (keySetIterator.hasNext()) {
+					String key = keySetIterator.next();
+					NodeShapeFigure shape = (NodeShapeFigure) nodeShapes
+							.get(key);
 
-						getPoint = node.isDragPointClicked(location2);
+					getPoint = shape.isDragPointClicked(location2);
 
+					if (shape.isVisible()) {
 						if (getPoint
 								.equalsIgnoreCase(VisualElementEvents.topMiddlePoint))
 
 						{
 							canvas.setCursor(Display.getCurrent()
-									.getSystemCursor(SWT.CURSOR_SIZEALL));
+									.getSystemCursor(SWT.CURSOR_SIZEN));
 							break;
 						} else if (getPoint
 								.equalsIgnoreCase(VisualElementEvents.rightMiddlePoint))
 
 						{
 							canvas.setCursor(Display.getCurrent()
-									.getSystemCursor(SWT.CURSOR_SIZEALL));
+									.getSystemCursor(SWT.CURSOR_SIZEE));
 							break;
 						} else if (getPoint
 								.equalsIgnoreCase(VisualElementEvents.bottomMiddlePoint))
 
 						{
 							canvas.setCursor(Display.getCurrent()
-									.getSystemCursor(SWT.CURSOR_SIZEALL));
+									.getSystemCursor(SWT.CURSOR_SIZEN));
 							break;
 						} else if (getPoint
 								.equalsIgnoreCase(VisualElementEvents.leftMiddlePoint))
 
 						{
 							canvas.setCursor(Display.getCurrent()
-									.getSystemCursor(SWT.CURSOR_SIZEALL));
+									.getSystemCursor(SWT.CURSOR_SIZEE));
 							break;
+						} else if (getPoint
+								.equalsIgnoreCase(VisualElementEvents.leftTopCornerPoint)) {
+							canvas.setCursor(Display.getCurrent()
+									.getSystemCursor(SWT.CURSOR_SIZESE));
+						} else if (getPoint
+								.equalsIgnoreCase(VisualElementEvents.rightTopCornerPoint)) {
+							canvas.setCursor(Display.getCurrent()
+									.getSystemCursor(SWT.CURSOR_SIZENE));
+						} else if (getPoint
+								.equalsIgnoreCase(VisualElementEvents.rightBottomCornerPoint)) {
+							canvas.setCursor(Display.getCurrent()
+									.getSystemCursor(SWT.CURSOR_SIZESE));
+						} else if (getPoint
+								.equalsIgnoreCase(VisualElementEvents.leftBottomCornerPoint)) {
+							canvas.setCursor(Display.getCurrent()
+									.getSystemCursor(SWT.CURSOR_SIZENE));
 						} else {
 							canvas.setCursor(Display.getCurrent()
 									.getSystemCursor(SWT.CURSOR_ARROW));
@@ -628,23 +640,26 @@ public class DiagramView extends View {
 
 					getEdgePoint = edge.getPointElement(location2);
 
-					if (getEdgePoint
-							.equalsIgnoreCase(VisualElementEvents.wayPointEdgePoint))
+					if (edgeShapes.get(edgeSelect) != null
+							&& edgeShapes.get(edgeSelect).isVisible()) {
+						if (getEdgePoint
+								.equalsIgnoreCase(VisualElementEvents.wayPointEdgePoint))
 
-					{
-						canvas.setCursor(Display.getCurrent().getSystemCursor(
-								SWT.CURSOR_SIZEALL));
+						{
+							canvas.setCursor(Display.getCurrent()
+									.getSystemCursor(SWT.CURSOR_SIZEALL));
 
-					} else if (getEdgePoint
-							.equalsIgnoreCase(VisualElementEvents.moveEdgePoint))
+						} else if (getEdgePoint
+								.equalsIgnoreCase(VisualElementEvents.moveEdgePoint))
 
-					{
-						canvas.setCursor(Display.getCurrent().getSystemCursor(
-								SWT.CURSOR_SIZEALL));
+						{
+							canvas.setCursor(Display.getCurrent()
+									.getSystemCursor(SWT.CURSOR_SIZEALL));
 
-					} else {
-						canvas.setCursor(Display.getCurrent().getSystemCursor(
-								SWT.CURSOR_ARROW));
+						} else {
+							canvas.setCursor(Display.getCurrent()
+									.getSystemCursor(SWT.CURSOR_ARROW));
+						}
 					}
 				}
 
