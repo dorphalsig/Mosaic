@@ -279,8 +279,17 @@ public class Edge extends CommandEvent {
 	 * @param index
 	 *            the index
 	 */
-	public void setDragPoints(org.eclipse.draw2d.geometry.Point newPoint,
-			int index) {
+	private int index = 1;
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setDragPoints(org.eclipse.draw2d.geometry.Point newPoint) {
 		index = 1;
 		if (setDragPointOnce) {
 			org.eclipse.draw2d.geometry.Point before = dragPoints
@@ -389,10 +398,10 @@ public class Edge extends CommandEvent {
 				if (distance < ((gap + 1) * (gap + 1))) {
 					if (i % 2 == 1) {
 						element = VisualElementEvents.wayPointEdgePoint;
-						getPointIndex = i;
+						index = i;
 					} else {
 						element = VisualElementEvents.moveEdgePoint;
-						getPointIndex = i;
+						index = i;
 					}
 				}
 			}

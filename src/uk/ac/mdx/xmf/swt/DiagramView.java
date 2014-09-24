@@ -355,11 +355,16 @@ public class DiagramView extends View {
 	/**
 	 * Register listener.
 	 */
+	private boolean dragEdge = true;
+
 	public void registerListener() {
 
 		canvas.addListener(SWT.MouseDown, new Listener() {
 			public void handleEvent(Event e) {
 				mouseDown = true;
+
+				// conditions for dragEdge
+				dragEdge = true;
 
 				Vector<String> identities = new Vector<String>();
 
@@ -581,7 +586,6 @@ public class DiagramView extends View {
 					Edge edge = edgeModels.get(key);
 
 					getEdgePoint = edge.getPointElement(location2);
-					getPointIndex = edge.getPointIndex();
 
 					if (getEdgePoint
 							.equalsIgnoreCase(VisualElementEvents.wayPointEdgePoint))
@@ -710,7 +714,7 @@ public class DiagramView extends View {
 					}
 				}
 
-				if (mouseDown) {
+				if (dragEdge) {
 
 					Edge edge = edgeModels.get(edgeSelect);
 					EdgeEditPart edit = edgeEditPartFigures.get(edgeSelect);
@@ -723,13 +727,11 @@ public class DiagramView extends View {
 						if (setDragPointOnce)
 							edge.setDragPoints();
 
-						edge.setDragPoints(location2, getPointIndex);
+						edge.setDragPoints(location2);
 
 						edgeDrageShape = (Figure) edit.createFigure(true);
 
 						edgeDrageShape.setVisible(true);
-
-						System.out.println(location2);
 
 						setDragPointOnce = false;
 
@@ -923,7 +925,7 @@ public class DiagramView extends View {
 				// && getEdgePoint
 				// .equalsIgnoreCase(VisualElementEvents.wayPointEdgePoint))
 				{
-					edge.setDragPoints(location2, getPointIndex);
+					edge.setDragPoints(location2);
 
 					edgeShape = (EdgeShapeFigure) edit.createFigure(true);
 
@@ -942,7 +944,11 @@ public class DiagramView extends View {
 				mouseDown = false;
 				resizeShape = false;
 				resizeEdgeShape = false;
-				// setDragPointOnce = true;
+
+				// conditions for dragEdge
+				dragEdge = false;
+				setDragPointOnce = true; // for another edge
+
 				update();
 				canvas.setCursor(Display.getCurrent().getSystemCursor(
 						SWT.CURSOR_ARROW));
