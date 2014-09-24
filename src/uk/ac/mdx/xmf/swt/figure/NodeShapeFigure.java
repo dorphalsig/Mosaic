@@ -47,11 +47,6 @@ public class NodeShapeFigure extends Shape {
 		// if (resetPoint)
 		{
 
-			location.x = location.x - 2;
-			location.y = location.y - 2;
-			size.width = size.width + 4;
-			size.height = size.height + 4;
-
 			points.addElement(new Point(0, 0));
 			points.addElement(new Point(location.x, location.y));
 			points.addElement(new Point(location.x + gap, location.y));

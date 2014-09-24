@@ -45,6 +45,7 @@ import uk.ac.mdx.xmf.swt.figure.EdgeShapeFigure;
 import uk.ac.mdx.xmf.swt.figure.ImageFigure;
 import uk.ac.mdx.xmf.swt.figure.LabelFigure;
 import uk.ac.mdx.xmf.swt.figure.MultilineTextFigure;
+import uk.ac.mdx.xmf.swt.figure.NodeShapeFigure;
 import uk.ac.mdx.xmf.swt.io.Provider;
 import uk.ac.mdx.xmf.swt.misc.VisualElementEvents;
 import uk.ac.mdx.xmf.swt.model.AbstractDiagram;
@@ -405,6 +406,46 @@ public class DiagramView extends View {
 
 						node.selectNode();
 						nodeContains = true;
+
+						//
+						for (int i = 0; i < figureNodes.get(key).getChildren()
+								.size() - 1; i++) {
+							if (figureNodes.get(key).getChildren().get(i) instanceof BoxFigure) {
+								BoxFigure box1 = (BoxFigure) figureNodes
+										.get(key).getChildren().get(i);
+								BoxFigure box2 = (BoxFigure) figureNodes
+										.get(key).getChildren().get(i + 1);
+								BoxFigure box = box1;
+								if (box1.getSize().height < box2.getSize().height) {
+									box = box2;
+								}
+							}
+						}
+
+						org.eclipse.draw2d.geometry.Point p = new org.eclipse.draw2d.geometry.Point(
+								0, 0);
+						p.x = node.getLocation().x - 2;
+						p.y = node.getLocation().y - 2;
+
+						Rectangle shapeRec = new Rectangle();
+						shapeRec.setLocation(p);
+						Dimension dim = new Dimension();
+						dim.width = node.getSize().width + 4;
+						dim.height = node.getSize().height + 4;
+						shapeRec.setSize(dim);
+
+						NodeShapeFigure shape;
+						shape = (NodeShapeFigure) nodeShapes.get(key);
+						shape.reSetPoints(p, dim);
+						shape.setBounds(shapeRec);
+						shape.setLineWidth(5);
+
+						org.eclipse.draw2d.geometry.Point l = figureNodes.get(
+								key).getLocation();
+						Dimension d = figureNodes.get(key).getSize();
+
+						System.out.println("l:" + l);
+						System.out.println("d:" + d);
 
 						// add sub menu
 						Vector<String> identitiesNode = new Vector<String>();
@@ -1147,8 +1188,11 @@ public class DiagramView extends View {
 	 * @param displays
 	 *            the displays
 	 */
+	Figure shape;
+
 	public void refresh(Vector displays) {
 		this.contents = displays;
+		updateFigures();
 
 		for (int i = 0; i < contents.size(); i++) {
 			iModel = contents.get(i);
@@ -1163,7 +1207,7 @@ public class DiagramView extends View {
 
 				Rectangle rect = new Rectangle(((Node) iModel).getLocation(),
 						((Node) iModel).getSize());
-				Figure shape = (Figure) nodeEditPart.createFigure(true, rect);
+				shape = (Figure) nodeEditPart.createFigure(true, rect);
 				shape.setVisible(false);
 				rootFigure.add(shape);
 				figure.setBorder(null);
@@ -1208,6 +1252,7 @@ public class DiagramView extends View {
 				texts.put(text.getIdentity(), text);
 				textEdits.put(text.getIdentity(), textEditPart);
 				figureLabels.put(text.getIdentity(), label);
+
 			} else if (iModel instanceof MultilineText) {
 				multilineTextEditPart = new MultilineTextEditPart();
 				// MultilineText text = (MultilineText) iModel;
@@ -1316,8 +1361,7 @@ public class DiagramView extends View {
 			}
 		}
 		contents.clear();
-		updateFigures();
-		// display();
+
 	}
 
 	/**

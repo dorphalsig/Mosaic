@@ -2,7 +2,6 @@ package uk.ac.mdx.xmf.swt.editPart;
 
 import java.beans.PropertyChangeEvent;
 import java.util.List;
-import java.util.Vector;
 
 import org.eclipse.draw2d.ChopboxAnchor;
 import org.eclipse.draw2d.ColorConstants;
@@ -82,10 +81,20 @@ public class NodeEditPart extends CommandEventEditPart implements
 	 */
 	public IFigure createFigure(boolean flag, Rectangle rec) {
 		Node node = (Node) getModel();
-		Vector points = node.getPoints();
 		NodeShapeFigure shape = new NodeShapeFigure(true);
-		shape.reSetPoints(node.getLocation(), node.getSize());
-		shape.setBounds(rec);
+
+		Point p = new Point();
+		p.x = node.getLocation().x - 2;
+		p.y = node.getLocation().y - 2;
+
+		Rectangle shapeRec = new Rectangle();
+		shapeRec.setLocation(p);
+		Dimension d = new Dimension();
+		d.width = node.getSize().width + 4;
+		d.height = node.getSize().height + 4;
+		shapeRec.setSize(d);
+		shape.reSetPoints(p, d);
+		shape.setBounds(shapeRec);
 		shape.setLineWidth(5);
 		// shape.setVisible(false);
 
