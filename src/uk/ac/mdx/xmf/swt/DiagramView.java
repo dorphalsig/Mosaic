@@ -828,8 +828,6 @@ public class DiagramView extends View {
 
 							nodeShapes.get(nodeSelect).setLocation(location2);
 						}
-
-						// node.moveResize(location2);
 					}
 				}
 
@@ -838,10 +836,7 @@ public class DiagramView extends View {
 					Edge edge = edgeModels.get(edgeSelect);
 					EdgeEditPart edit = edgeEditPartFigures.get(edgeSelect);
 
-					if (edge != null && edgeShapes.get(edgeSelect).isVisible())
-					// && getEdgePoint
-					// .equalsIgnoreCase(VisualElementEvents.wayPointEdgePoint))
-					{
+					if (edge != null && edgeShapes.get(edgeSelect).isVisible()) {
 
 						if (setDragPointOnce)
 							edge.setDragPoints();
@@ -978,8 +973,6 @@ public class DiagramView extends View {
 					size.width = Math.abs(location2.x - node.getLocation().x);
 					size.height = node.getSize().height;
 					node.moveResize(size);
-
-					restShape(node.getLocation(), size);
 				} else if (resizeShape
 						&& (getPoint
 								.equalsIgnoreCase(VisualElementEvents.leftMiddlePoint))) {
@@ -993,8 +986,6 @@ public class DiagramView extends View {
 					org.eclipse.draw2d.geometry.Point p = new org.eclipse.draw2d.geometry.Point(
 							location2.x, node.getLocation().y);
 					node.moveResize(p);
-
-					restShape(p, size);
 				} else if (resizeShape
 						&& (getPoint
 								.equalsIgnoreCase(VisualElementEvents.topMiddlePoint))) {
@@ -1033,10 +1024,7 @@ public class DiagramView extends View {
 				} else if (resizeShape) {
 					Node node = nodeModels.get(nodeSelect);
 					node.moveResize(location2);
-
 					org.eclipse.draw2d.geometry.Point p = node.getLocation();
-
-					restShape(p, node.getSize());
 				}
 
 				if (resizeShape) {
@@ -1096,26 +1084,6 @@ public class DiagramView extends View {
 	 */
 	public void clearPorts() {
 		ports.clear();
-	}
-
-	/**
-	 * Rest shape.
-	 * 
-	 * @param location
-	 *            the location
-	 * @param size
-	 *            the size
-	 */
-	public void restShape(org.eclipse.draw2d.geometry.Point location,
-			Dimension size) {
-		// Node node = nodeModels.get(nodeSelect);
-		// nodeEditPart = nodeEditParts.get(nodeSelect);
-		// node.setRest(true);
-		//
-		// Rectangle rect = new Rectangle(location, size);
-		//
-		// nodeShapes.get(nodeSelect).setBounds(rect);
-		// nodeShapes.get(nodeSelect).setLocation(location);
 	}
 
 	/**
