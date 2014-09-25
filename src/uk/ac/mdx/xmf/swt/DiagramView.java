@@ -222,7 +222,7 @@ public class DiagramView extends View {
 	Cursor[] cursor = new Cursor[3];
 	ImageData image0 = new ImageData("icons/nodeWait.gif");
 	ImageData image1 = new ImageData("icons/connectionWait.gif");
-	ImageData image2 = new ImageData("icons/connectionReady.gif");
+	ImageData image2 = new ImageData("icons/cursor-lifebuoy-icon.gif");
 
 	/**
 	 * Instantiates a new diagram view.
@@ -374,6 +374,9 @@ public class DiagramView extends View {
 				// conditions for dragEdge
 				dragEdge = true;
 				line.setVisible(false);
+
+				canvas.setCursor(Display.getCurrent().getSystemCursor(
+						SWT.CURSOR_ARROW));
 
 				Vector<String> identities = new Vector<String>();
 
@@ -592,18 +595,6 @@ public class DiagramView extends View {
 			}
 		});
 
-		canvas.addListener(SWT.MouseHover, new Listener() {
-			@Override
-			public void handleEvent(Event arg0) {
-				String selectIconName = Main.getInstance().palette
-						.getSelectImage();
-				if (selectIconName.equalsIgnoreCase("Class")) {
-					canvas.setCursor(Display.getCurrent().getSystemCursor(
-							SWT.CURSOR_CROSS));
-				}
-			}
-		});
-
 		canvas.addListener(SWT.MouseMove, new Listener() {
 
 			@Override
@@ -617,6 +608,10 @@ public class DiagramView extends View {
 				HashMap<String, Boolean> connections = new HashMap<String, Boolean>();
 				connections = Main.getInstance().getPalette().getConnections();
 
+				if (connections.get(getTool) != null
+						&& !connections.get(getTool)) {
+					canvas.setCursor(cursor[0]);
+				}
 				if (getTool.length() < 1)
 					getTool = cursorName;
 
@@ -631,20 +626,15 @@ public class DiagramView extends View {
 							NodeShapeFigure shape = (NodeShapeFigure) nodeShapes
 									.get(key);
 							if (shape.containsPoint(location2)) {
-								canvas.setCursor(Display.getCurrent()
-										.getSystemCursor(SWT.CURSOR_ARROW));
+								// canvas.setCursor(Display.getCurrent()
+								// .getSystemCursor(SWT.CURSOR_ARROW));
+								canvas.setCursor(cursor[2]);
 								break;
 							} else {
 								canvas.setCursor(cursor[1]);
 							}
 						}
 
-					} else {
-						if (!mouseDown)
-							canvas.setCursor(cursor[0]);
-						// else
-						// canvas.setCursor(Display.getCurrent().getSystemCursor(
-						// SWT.CURSOR_ARROW));
 					}
 				}
 
