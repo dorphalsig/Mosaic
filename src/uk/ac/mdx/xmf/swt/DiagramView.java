@@ -254,11 +254,6 @@ public class DiagramView extends View {
 		iniEditpart();
 		_tabItem = tabItem;
 
-		// the actual content of the tab
-		// Composite tabComposite = new Composite(this, SWT.NONE);
-		// tabComposite.setLayout(new FillLayout());
-		// _tabItem.setControl(canvas);
-
 		figure = new Figure();
 		rootFigure = new Figure();
 		rootFigure.add(rectShape);
@@ -267,9 +262,6 @@ public class DiagramView extends View {
 		// canvas.setContents(rootFigure);
 
 		Main.tabFolderDiagram.setSelection(tabItem);
-
-		// addMouseListener(this);
-		// canvas.addMouseListener(this);
 	}
 
 	public CTabItem getTabItem() {
@@ -494,6 +486,17 @@ public class DiagramView extends View {
 					if (label.containsPoint(location2)) {
 						getPoint = VisualElementEvents.edgeLabelPoint;
 						edgeTextId = key;
+
+						// add sub menu
+						Vector<String> identitiesEdge = new Vector<String>();
+
+						identitiesEdge.add(key);
+
+						MenuBuilder.resetKeyBindings(null);
+						MenuManager managerEdge = new MenuManager();
+						MenuBuilder.calculateMenu(identitiesEdge, managerEdge,
+								null);
+						canvas.setMenu(managerEdge.createContextMenu(canvas));
 					}
 				}
 
