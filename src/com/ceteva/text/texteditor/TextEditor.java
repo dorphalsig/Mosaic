@@ -201,7 +201,9 @@ public class TextEditor implements MenuListener, IPropertyChangeListener,
 			}
 		};
 
-		actionCut.setAccelerator(SWT.CTRL + 'h');
+		System.out.println(actionCut.getAccelerator());
+		actionCut.setAccelerator(SWT.CTRL + 'd');
+		System.out.println(actionCut.getAccelerator());
 		actionCopy.setAccelerator(SWT.CTRL + 'C');
 		actionPast.setAccelerator(SWT.CTRL + 'V');
 

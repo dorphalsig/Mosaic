@@ -11,12 +11,15 @@ import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.FigureCanvas;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
+import org.eclipse.draw2d.Polyline;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabItem;
+import org.eclipse.swt.graphics.Cursor;
+import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -175,9 +178,11 @@ public class DiagramView extends View {
 
 	/** The rect shape. */
 	RectangleFigure rectShape = new RectangleFigure();
+	Polyline line = new Polyline();
 
 	/** The mouse down. */
 	private boolean mouseDown = false;
+	private String cursorName = "";
 
 	/** The node is selected. */
 	private boolean nodeIsSelected = false;
@@ -213,6 +218,11 @@ public class DiagramView extends View {
 	Figure edgeDrageShape = new Figure();
 
 	private Object iModel;
+
+	Cursor[] cursor = new Cursor[3];
+	ImageData image0 = new ImageData("icons/nodeWait.gif");
+	ImageData image1 = new ImageData("icons/connectionWait.gif");
+	ImageData image2 = new ImageData("icons/connectionReady.gif");
 
 	/**
 	 * Instantiates a new diagram view.
@@ -257,9 +267,12 @@ public class DiagramView extends View {
 		figure = new Figure();
 		rootFigure = new Figure();
 		rootFigure.add(rectShape);
+		rootFigure.add(line);
 		rootFigure.add(edgeDrageShape);
 
-		// canvas.setContents(rootFigure);
+		cursor[0] = new Cursor(display, image0, 0, 0);
+		cursor[1] = new Cursor(display, image1, 0, 0);
+		cursor[2] = new Cursor(display, image2, 0, 0);
 
 		Main.tabFolderDiagram.setSelection(tabItem);
 	}
@@ -360,6 +373,7 @@ public class DiagramView extends View {
 
 				// conditions for dragEdge
 				dragEdge = true;
+				line.setVisible(false);
 
 				Vector<String> identities = new Vector<String>();
 
@@ -373,7 +387,7 @@ public class DiagramView extends View {
 				String s = Main.getInstance().getPalette().getSelectImage();
 				HashMap<String, Boolean> connections = new HashMap<String, Boolean>();
 				connections = Main.getInstance().getPalette().getConnections();
-
+				cursorName = s;
 				// setAllFocus();
 				// isFocus = true;
 				Point location = display.getCursorLocation();
@@ -573,7 +587,6 @@ public class DiagramView extends View {
 					createNodeCommand.execute();
 
 					selectIconName = "";
-
 					Main.getInstance().palette.setSelectImage();
 				}
 			}
@@ -598,6 +611,55 @@ public class DiagramView extends View {
 
 				Point location = display.getCursorLocation();
 				org.eclipse.draw2d.geometry.Point location2 = translateToRelativeLocation(location);
+
+				String getTool = Main.getInstance().getPalette()
+						.getSelectImage();
+				HashMap<String, Boolean> connections = new HashMap<String, Boolean>();
+				connections = Main.getInstance().getPalette().getConnections();
+
+				if (getTool.length() < 1)
+					getTool = cursorName;
+
+				if (connections.get(getTool) != null) {
+					if (connections.get(getTool)) // connection
+					{
+						Iterator<String> keySetIterator = nodeShapes.keySet()
+								.iterator();
+
+						while (keySetIterator.hasNext()) {
+							String key = keySetIterator.next();
+							NodeShapeFigure shape = (NodeShapeFigure) nodeShapes
+									.get(key);
+							if (shape.containsPoint(location2)) {
+								canvas.setCursor(Display.getCurrent()
+										.getSystemCursor(SWT.CURSOR_ARROW));
+								break;
+							} else {
+								canvas.setCursor(cursor[1]);
+							}
+						}
+
+					} else {
+						if (!mouseDown)
+							canvas.setCursor(cursor[0]);
+						// else
+						// canvas.setCursor(Display.getCurrent().getSystemCursor(
+						// SWT.CURSOR_ARROW));
+					}
+				}
+
+				if (connections.get(getTool) != null
+						&& connections.get(getTool)) // connection
+				{
+					if (ports.size() == 1) {
+						line.setStart(ports.get(0).getLocation());
+						line.setBackgroundColor(ColorConstants.black);
+						line.setEnd(location2);
+						line.setVisible(true);
+					} else {
+						line.setVisible(false);
+					}
+				}
 
 				// -----check mouse hover
 
