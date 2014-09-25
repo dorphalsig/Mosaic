@@ -14,12 +14,16 @@ public class EdgeLabelFigure extends Label {
 
 	/** The tooltip. */
 	Label tooltip;
+	/** The distance. */
+	private int distance = 8;
 
 	/**
 	 * Instantiates a new edge label figure.
-	 *
-	 * @param labelText the label text
-	 * @param underline the underline
+	 * 
+	 * @param labelText
+	 *            the label text
+	 * @param underline
+	 *            the underline
 	 */
 	public EdgeLabelFigure(String labelText, boolean underline) {
 		super(labelText);
@@ -44,7 +48,9 @@ public class EdgeLabelFigure extends Label {
 		this.setFont(FontManager.getFont(fd));
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.draw2d.Figure#useLocalCoordinates()
 	 */
 	@Override
@@ -61,8 +67,9 @@ public class EdgeLabelFigure extends Label {
 
 	/**
 	 * Sets the font.
-	 *
-	 * @param font the new font
+	 * 
+	 * @param font
+	 *            the new font
 	 */
 	public void setFont(String font) {
 		if (!font.equals("")) {
@@ -71,7 +78,9 @@ public class EdgeLabelFigure extends Label {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.draw2d.Label#setText(java.lang.String)
 	 */
 	@Override
@@ -85,7 +94,7 @@ public class EdgeLabelFigure extends Label {
 
 	/**
 	 * Gets the preferences.
-	 *
+	 * 
 	 * @return the preferences
 	 */
 	public void getPreferences() {
@@ -97,5 +106,10 @@ public class EdgeLabelFigure extends Label {
 		// PreferenceConverter.getFontData(preferences,IPreferenceConstants.FONT);
 		// setFont(FontManager.getFont(fd));
 		// setForegroundColor(ColorManager.getColor(fontColor));
+	}
+
+	public boolean isClicked(org.eclipse.draw2d.geometry.Point location2) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

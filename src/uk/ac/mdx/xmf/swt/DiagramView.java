@@ -358,6 +358,7 @@ public class DiagramView extends View {
 	 */
 	private boolean dragEdge = true;
 	int number = 0;
+	private String edgeTextId = "";
 
 	public void registerListener() {
 
@@ -477,8 +478,23 @@ public class DiagramView extends View {
 					NodeShapeFigure shape = (NodeShapeFigure) nodeShapes
 							.get(key);
 
-					if (shape.isVisible())
+					if (shape.isVisible()) {
 						getPoint = shape.isDragPointClicked(location2);
+						// shape.setOutline(true);
+					}
+				}
+
+				// check edge label
+				Iterator<String> edgeTextItr = edgeTexts.keySet().iterator();
+
+				while (edgeTextItr.hasNext()) {
+					String key = edgeTextItr.next();
+					EdgeLabelFigure label = edgeLabelFigures.get(key);
+
+					if (label.containsPoint(location2)) {
+						getPoint = VisualElementEvents.edgeLabelPoint;
+						edgeTextId = key;
+					}
 				}
 
 				// check click Edge line
@@ -639,6 +655,22 @@ public class DiagramView extends View {
 								canvas.setCursor(Display.getCurrent()
 										.getSystemCursor(SWT.CURSOR_ARROW));
 							}
+						}
+					}
+
+					// check edge label
+					Iterator<String> edgeTextItr = edgeTexts.keySet()
+							.iterator();
+
+					while (edgeTextItr.hasNext()) {
+						String key = edgeTextItr.next();
+						EdgeLabelFigure label = edgeLabelFigures.get(key);
+
+						if (label.containsPoint(location2)) {
+							canvas.setCursor(Display.getCurrent()
+									.getSystemCursor(SWT.CURSOR_SIZEALL));
+							// getPoint = VisualElementEvents.edgeLabelPoint;
+							// edgeTextId=key;
 						}
 					}
 				}
@@ -814,7 +846,9 @@ public class DiagramView extends View {
 						resizeShape = true;
 					} else {
 						if (nodeIsSelected
-								&& canvas.getCursor().hashCode() == 65539) {
+								&& canvas.getCursor().hashCode() == 65539
+								&& !getPoint
+										.equalsIgnoreCase(VisualElementEvents.edgeLabelPoint)) {
 							Node node = nodeModels.get(nodeSelect);
 							Dimension size = new Dimension();
 							size = node.getSize();
@@ -829,6 +863,21 @@ public class DiagramView extends View {
 							nodeShapes.get(nodeSelect).setLocation(location2);
 						}
 					}
+
+					// move edge label
+					EdgeLabelFigure label = edgeLabelFigures.get(edgeTextId);
+
+					if (label != null
+							&& getPoint
+									.equalsIgnoreCase(VisualElementEvents.edgeLabelPoint)) {
+
+						rectShape.setLocation(location2);
+						rectShape.setSize(label.getSize());
+						rectShape.setBackgroundColor(ColorConstants.lightGray);
+						rectShape.setVisible(true);
+						resizeShape = true;
+					}
+
 				}
 
 				if (dragEdge) {
@@ -1018,6 +1067,15 @@ public class DiagramView extends View {
 					Node node = nodeModels.get(nodeSelect);
 					node.moveResize(rectShape.getLocation());
 					node.moveResize(rectShape.getSize());
+				} else if (resizeShape
+						&& (getPoint
+								.equalsIgnoreCase(VisualElementEvents.edgeLabelPoint))) {
+					EdgeText text = edgeTexts.get(edgeTextId);
+					org.eclipse.draw2d.geometry.Point p1 = edgeLabelFigures
+							.get(edgeTextId).getLocation();
+					org.eclipse.draw2d.geometry.Point p = new org.eclipse.draw2d.geometry.Point(
+							location2.x - p1.x, location2.y - p1.y);
+					text.raiseMoveEvent(p);
 				} else if (resizeShape) {
 					Node node = nodeModels.get(nodeSelect);
 					node.moveResize(location2);

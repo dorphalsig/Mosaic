@@ -35,4 +35,5 @@ public class VisualElementEvents {
 
 	/** The Constant moveEdgePoint. */
 	public static final String moveEdgePoint = "moveEdgePoint";
+	public static final String edgeLabelPoint = "edgeLabelPoint";
 }
