@@ -493,6 +493,16 @@ public class DiagramView extends View {
 					}
 				}
 
+				Iterator<String> edgeDragIterator = edgeModels.keySet()
+						.iterator();
+
+				while (edgeDragIterator.hasNext()) {
+					String key = edgeDragIterator.next();
+					Edge edge = edgeModels.get(key);
+
+					getEdgePoint = edge.getPointElement(location2);
+				}
+
 				// check edge label
 				Iterator<String> edgeTextItr = edgeTexts.keySet().iterator();
 
@@ -530,7 +540,6 @@ public class DiagramView extends View {
 					org.eclipse.draw2d.geometry.Point bottomRef = edgeFigure
 							.getTargetAnchor().getReferencePoint();
 
-					// if (checkEdgeIsClicked(topRef, bottomRef, location2))
 					if (((EdgeShapeFigure) edgeShapes.get(key))
 							.isClicked(location2)) {
 						edgeShapes.get(key).setVisible(true);
@@ -731,38 +740,39 @@ public class DiagramView extends View {
 				}
 
 				// check edge
+				if (!mouseDown) {
+					Iterator<String> edgeIterator = edgeModels.keySet()
+							.iterator();
 
-				Iterator<String> edgeIterator = edgeModels.keySet().iterator();
+					while (edgeIterator.hasNext()) {
+						String key = edgeIterator.next();
+						Edge edge = edgeModels.get(key);
 
-				while (edgeIterator.hasNext()) {
-					String key = edgeIterator.next();
-					Edge edge = edgeModels.get(key);
+						getEdgePoint = edge.getPointElement(location2);
 
-					getEdgePoint = edge.getPointElement(location2);
+						if (edgeShapes.get(edgeSelect) != null
+								&& edgeShapes.get(edgeSelect).isVisible()) {
+							if (getEdgePoint
+									.equalsIgnoreCase(VisualElementEvents.wayPointEdgePoint))
 
-					if (edgeShapes.get(edgeSelect) != null
-							&& edgeShapes.get(edgeSelect).isVisible()) {
-						if (getEdgePoint
-								.equalsIgnoreCase(VisualElementEvents.wayPointEdgePoint))
+							{
+								canvas.setCursor(Display.getCurrent()
+										.getSystemCursor(SWT.CURSOR_SIZEALL));
 
-						{
-							canvas.setCursor(Display.getCurrent()
-									.getSystemCursor(SWT.CURSOR_SIZEALL));
+							} else if (getEdgePoint
+									.equalsIgnoreCase(VisualElementEvents.moveEdgePoint))
 
-						} else if (getEdgePoint
-								.equalsIgnoreCase(VisualElementEvents.moveEdgePoint))
+							{
+								canvas.setCursor(Display.getCurrent()
+										.getSystemCursor(SWT.CURSOR_SIZEALL));
 
-						{
-							canvas.setCursor(Display.getCurrent()
-									.getSystemCursor(SWT.CURSOR_SIZEALL));
-
-						} else {
-							canvas.setCursor(Display.getCurrent()
-									.getSystemCursor(SWT.CURSOR_ARROW));
+							} else {
+								canvas.setCursor(Display.getCurrent()
+										.getSystemCursor(SWT.CURSOR_ARROW));
+							}
 						}
 					}
 				}
-
 				// -----end check mouse hover
 
 				if (mouseDown) {

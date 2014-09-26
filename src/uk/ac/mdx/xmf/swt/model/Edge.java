@@ -290,7 +290,7 @@ public class Edge extends CommandEvent {
 	}
 
 	public void setDragPoints(org.eclipse.draw2d.geometry.Point newPoint) {
-		index = 1;
+		// index = 1;
 		if (setDragPointOnce) {
 			org.eclipse.draw2d.geometry.Point before = dragPoints
 					.get(index - 1);
