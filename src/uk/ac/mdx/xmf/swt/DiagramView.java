@@ -418,21 +418,6 @@ public class DiagramView extends View {
 						node.selectNode();
 						nodeContains = true;
 
-						//
-						for (int i = 0; i < figureNodes.get(key).getChildren()
-								.size() - 1; i++) {
-							if (figureNodes.get(key).getChildren().get(i) instanceof BoxFigure) {
-								BoxFigure box1 = (BoxFigure) figureNodes
-										.get(key).getChildren().get(i);
-								BoxFigure box2 = (BoxFigure) figureNodes
-										.get(key).getChildren().get(i + 1);
-								BoxFigure box = box1;
-								if (box1.getSize().height < box2.getSize().height) {
-									box = box2;
-								}
-							}
-						}
-
 						org.eclipse.draw2d.geometry.Point p = new org.eclipse.draw2d.geometry.Point(
 								0, 0);
 						p.x = node.getLocation().x - 2;

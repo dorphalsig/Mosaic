@@ -156,8 +156,9 @@ public class Edge extends CommandEvent {
 		if ((location1 != null) && (location2 != null)) {
 			if (location1.y < location2.y)
 				calculatePoints(location1, location2);
-			else
-				calculatePoints(location2, location1);
+			else {
+				calculatePoints2(location2, location1);
+			}
 		}
 	}
 
@@ -243,6 +244,103 @@ public class Edge extends CommandEvent {
 			endLine1.y = middlePoint.y - gap;
 
 			startLine2.x = middlePoint.x + gap * (x2 - x1) / (y2 - y1);
+			startLine2.y = middlePoint.y + gap;
+
+			endLine2.x = startLine2.x
+					+ ((bottomPoint.y - topPoint.y) / 2 - gap - gap)
+					* (x2 - x1) / (y2 - y1);
+			endLine2.y = bottomPoint.y - gap;
+		}
+
+		dragPoints.add(new Point(topPoint.x, topPoint.y));
+		dragPoints.add(new Point(middlePoint.x, middlePoint.y));
+		dragPoints.add(new Point(bottomPoint.x, bottomPoint.y));
+
+		points.add(startLine1);
+		points.add(endLine1);
+
+		points.addElement(new Point(0, 0));
+		points.add(startLine2);
+		points.add(endLine2);
+
+	}
+
+	public void calculatePoints2(Point location1, Point location2) {
+		int x1 = location1.x;
+		int y1 = location1.y;
+		int x2 = location2.x;
+		int y2 = location2.y;
+		int h1 = sourceNode.getSize().height;
+		int w1 = sourceNode.getSize().width;
+		int h2 = targetNode.getSize().height;
+		int w2 = targetNode.getSize().width;
+
+		Point topPoint = new Point();
+		Point middlePoint = new Point();
+		Point bottomPoint = new Point();
+
+		Point startLine1 = new Point();
+		Point endLine1 = new Point();
+		Point startLine2 = new Point();
+		Point endLine2 = new Point();
+
+		// avoid y2-y1=0 divided by zero;
+		if (y2 == y1) {
+			y2 = y1 + 1;
+			x2 = x1;
+		}
+
+		if (x1 < x2) {
+			topPoint.x = x1 + (h1 / 2) * (x2 - x1) / Math.abs((y2 - y1));
+			topPoint.y = y1 - h1 / 2;
+
+			bottomPoint.x = x2 + (h2 / 2) * (x2 - x1) / Math.abs((y2 - y1));
+			bottomPoint.y = y2 + h2 / 2;
+
+			middlePoint.x = topPoint.x + Math.abs((topPoint.x - bottomPoint.x))
+					/ 2;
+			middlePoint.y = topPoint.y + Math.abs((topPoint.y - bottomPoint.y))
+					/ 2;
+
+			startLine1.x = topPoint.x + gap * (x2 - x1) / Math.abs((y2 - y1));
+			startLine1.y = topPoint.y + gap;
+
+			endLine1.x = startLine1.x
+					+ ((bottomPoint.y - topPoint.y) / 2 - gap - gap)
+					* (x2 - x1) / (y2 - y1);
+			endLine1.y = middlePoint.y - gap;
+
+			startLine2.x = middlePoint.x + gap * (x2 - x1)
+					/ Math.abs((y2 - y1));
+			startLine2.y = middlePoint.y + gap;
+
+			endLine2.x = startLine2.x
+					+ ((bottomPoint.y - topPoint.y) / 2 - gap - gap)
+					* (x2 - x1) / (y2 - y1);
+			endLine2.y = bottomPoint.y - gap;
+
+		} else {
+			topPoint.x = x1 + (h1 / 2) * (x2 - x1) / Math.abs((y2 - y1));
+			topPoint.y = y1 + h1 / 2;
+
+			bottomPoint.x = x2 - (h2 / 2) * (x2 - x1) / Math.abs((y2 - y1));
+			bottomPoint.y = y2 - h2 / 2;
+
+			middlePoint.x = topPoint.x - Math.abs((topPoint.x - bottomPoint.x))
+					/ 2;
+			middlePoint.y = topPoint.y + Math.abs((topPoint.y - bottomPoint.y))
+					/ 2;
+
+			startLine1.x = topPoint.x + gap * (x2 - x1) / Math.abs((y2 - y1));
+			startLine1.y = topPoint.y + gap;
+
+			endLine1.x = startLine1.x
+					+ ((bottomPoint.y - topPoint.y) / 2 - gap - gap)
+					* (x2 - x1) / (y2 - y1);
+			endLine1.y = middlePoint.y - gap;
+
+			startLine2.x = middlePoint.x + gap * (x2 - x1)
+					/ Math.abs((y2 - y1));
 			startLine2.y = middlePoint.y + gap;
 
 			endLine2.x = startLine2.x
