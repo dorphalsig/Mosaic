@@ -348,9 +348,9 @@ public class Edge extends CommandEvent {
 			endLine2.y = bottomPoint.y - gap;
 		}
 
-		dragPoints.add(new Point(topPoint.x, topPoint.y));
-		dragPoints.add(new Point(middlePoint.x, middlePoint.y));
 		dragPoints.add(new Point(bottomPoint.x, bottomPoint.y));
+		dragPoints.add(new Point(middlePoint.x, middlePoint.y));
+		dragPoints.add(new Point(topPoint.x, topPoint.y));
 
 		points.add(startLine1);
 		points.add(endLine1);
