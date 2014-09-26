@@ -291,7 +291,7 @@ public class Edge extends CommandEvent {
 
 	public void setDragPoints(org.eclipse.draw2d.geometry.Point newPoint) {
 		// index = 1;
-		if (setDragPointOnce) {
+		if (setDragPointOnce && index > 0) {
 			org.eclipse.draw2d.geometry.Point before = dragPoints
 					.get(index - 1);
 			org.eclipse.draw2d.geometry.Point next = dragPoints.get(index + 1);
@@ -310,29 +310,30 @@ public class Edge extends CommandEvent {
 			dragPoints.add(index, m1);
 			dragPoints.add(index + 2, m2);
 		} else {
-			org.eclipse.draw2d.geometry.Point before = dragPoints
-					.get(index - 1);
-			org.eclipse.draw2d.geometry.Point next = null;
-			if (index + 3 < dragPoints.size()) {
-				next = dragPoints.get(index + 3);
+			if (index > 0) {
+				org.eclipse.draw2d.geometry.Point before = dragPoints
+						.get(index - 1);
+				org.eclipse.draw2d.geometry.Point next = null;
+				if (index + 3 < dragPoints.size()) {
+					next = dragPoints.get(index + 3);
 
-				dragPoints.remove(index); // remove old one
-				dragPoints.remove(index); //
-				dragPoints.remove(index); //
+					dragPoints.remove(index); // remove old one
+					dragPoints.remove(index); //
+					dragPoints.remove(index); //
 
-				org.eclipse.draw2d.geometry.Point m1 = new org.eclipse.draw2d.geometry.Point();
-				org.eclipse.draw2d.geometry.Point m2 = new org.eclipse.draw2d.geometry.Point();
+					org.eclipse.draw2d.geometry.Point m1 = new org.eclipse.draw2d.geometry.Point();
+					org.eclipse.draw2d.geometry.Point m2 = new org.eclipse.draw2d.geometry.Point();
 
-				m1.x = (before.x + newPoint.x) / 2;
-				m1.y = (before.y + newPoint.y) / 2;
-				m2.x = (next.x + newPoint.x) / 2;
-				m2.y = (next.y + newPoint.y) / 2;
+					m1.x = (before.x + newPoint.x) / 2;
+					m1.y = (before.y + newPoint.y) / 2;
+					m2.x = (next.x + newPoint.x) / 2;
+					m2.y = (next.y + newPoint.y) / 2;
 
-				dragPoints.add(index, m2);
-				dragPoints.add(index, newPoint);
-				dragPoints.add(index, m1);
-
-				System.out.println("size of dragpoint:" + dragPoints.size());
+					dragPoints.add(index, m2);
+					dragPoints.add(index, newPoint);
+					dragPoints.add(index, m1);
+				}
+				// System.out.println("size of dragpoint:" + dragPoints.size());
 			}
 		}
 
@@ -343,7 +344,7 @@ public class Edge extends CommandEvent {
 			org.eclipse.draw2d.geometry.Point p2 = dragPoints.get(i + 1);
 			calculateLinePoints(p1, p2);
 		}
-		System.out.println("size of dragpoint:" + dragPoints.size());
+		// System.out.println("size of dragpoint:" + dragPoints.size());
 		setDragPointOnce = false;
 	}
 
@@ -406,7 +407,29 @@ public class Edge extends CommandEvent {
 				}
 			}
 		}
-		// System.out.println("getPointIndex:" + getPointIndex);
+		// index = 0;
+		// System.out.println("getPointIndex:" + index);
+		return element;
+	}
+
+	public String getEdgePointElement(org.eclipse.draw2d.geometry.Point location) {
+		String element = "";
+		if (dragPoints.size() > 0) {
+			for (int i = 1; i < dragPoints.size() - 1; i++) {
+				int distance = (getDistanceOfPoints(dragPoints.get(i), location));
+				if (distance < ((gap + 1) * (gap + 1))) {
+					if (i % 2 == 1) {
+						element = VisualElementEvents.wayPointEdgePoint;
+						// index = i;
+					} else {
+						element = VisualElementEvents.moveEdgePoint;
+						// index = i;
+					}
+				}
+			}
+		}
+		// index = 0;
+		// System.out.println("getPointIndex:" + index);
 		return element;
 	}
 

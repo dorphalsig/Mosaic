@@ -748,7 +748,7 @@ public class DiagramView extends View {
 						String key = edgeIterator.next();
 						Edge edge = edgeModels.get(key);
 
-						getEdgePoint = edge.getPointElement(location2);
+						getEdgePoint = edge.getEdgePointElement(location2);
 
 						if (edgeShapes.get(edgeSelect) != null
 								&& edgeShapes.get(edgeSelect).isVisible()) {
