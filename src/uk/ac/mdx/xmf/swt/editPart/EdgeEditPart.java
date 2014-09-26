@@ -433,7 +433,7 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 
 		Edge edge = (Edge) getModel();
 		Vector<Point> points = edge.getDragPoints();
-		for (int i = 1; i < points.size() - 2; i++) {
+		for (int i = 0; i < points.size(); i++) {
 			// Waypoint wp = (Waypoint) modelConstraint.get(i);
 			Point p = points.get(i);
 			AbsoluteBendpoint abp = new AbsoluteBendpoint(p);

@@ -171,6 +171,7 @@ public class Edge extends CommandEvent {
 	 *            the location2
 	 */
 	public void calculatePoints(Point location1, Point location2) {
+
 		int x1 = location1.x;
 		int y1 = location1.y;
 		int x2 = location2.x;
@@ -291,18 +292,18 @@ public class Edge extends CommandEvent {
 		}
 
 		if (x1 < x2) {
-			topPoint.x = x1 + (h1 / 2) * (x2 - x1) / Math.abs((y2 - y1));
-			topPoint.y = y1 - h1 / 2;
+			topPoint.x = x1 + (h1 / 2) * (x2 - x1) / (y2 - y1);
+			topPoint.y = y1 + h1 / 2;
 
-			bottomPoint.x = x2 + (h2 / 2) * (x2 - x1) / Math.abs((y2 - y1));
-			bottomPoint.y = y2 + h2 / 2;
+			bottomPoint.x = x2 - (h2 / 2) * (x2 - x1) / (y2 - y1);
+			bottomPoint.y = y2 - h2 / 2;
 
 			middlePoint.x = topPoint.x + Math.abs((topPoint.x - bottomPoint.x))
 					/ 2;
 			middlePoint.y = topPoint.y + Math.abs((topPoint.y - bottomPoint.y))
 					/ 2;
 
-			startLine1.x = topPoint.x + gap * (x2 - x1) / Math.abs((y2 - y1));
+			startLine1.x = topPoint.x + gap * (x2 - x1) / (y2 - y1);
 			startLine1.y = topPoint.y + gap;
 
 			endLine1.x = startLine1.x
@@ -310,8 +311,7 @@ public class Edge extends CommandEvent {
 					* (x2 - x1) / (y2 - y1);
 			endLine1.y = middlePoint.y - gap;
 
-			startLine2.x = middlePoint.x + gap * (x2 - x1)
-					/ Math.abs((y2 - y1));
+			startLine2.x = middlePoint.x + gap * (x2 - x1) / (y2 - y1);
 			startLine2.y = middlePoint.y + gap;
 
 			endLine2.x = startLine2.x
@@ -320,10 +320,10 @@ public class Edge extends CommandEvent {
 			endLine2.y = bottomPoint.y - gap;
 
 		} else {
-			topPoint.x = x1 + (h1 / 2) * (x2 - x1) / Math.abs((y2 - y1));
+			topPoint.x = x1 + (h1 / 2) * (x2 - x1) / (y2 - y1);
 			topPoint.y = y1 + h1 / 2;
 
-			bottomPoint.x = x2 - (h2 / 2) * (x2 - x1) / Math.abs((y2 - y1));
+			bottomPoint.x = x2 - (h2 / 2) * (x2 - x1) / (y2 - y1);
 			bottomPoint.y = y2 - h2 / 2;
 
 			middlePoint.x = topPoint.x - Math.abs((topPoint.x - bottomPoint.x))
@@ -331,7 +331,7 @@ public class Edge extends CommandEvent {
 			middlePoint.y = topPoint.y + Math.abs((topPoint.y - bottomPoint.y))
 					/ 2;
 
-			startLine1.x = topPoint.x + gap * (x2 - x1) / Math.abs((y2 - y1));
+			startLine1.x = topPoint.x + gap * (x2 - x1) / (y2 - y1);
 			startLine1.y = topPoint.y + gap;
 
 			endLine1.x = startLine1.x
@@ -339,8 +339,7 @@ public class Edge extends CommandEvent {
 					* (x2 - x1) / (y2 - y1);
 			endLine1.y = middlePoint.y - gap;
 
-			startLine2.x = middlePoint.x + gap * (x2 - x1)
-					/ Math.abs((y2 - y1));
+			startLine2.x = middlePoint.x + gap * (x2 - x1) / (y2 - y1);
 			startLine2.y = middlePoint.y + gap;
 
 			endLine2.x = startLine2.x
