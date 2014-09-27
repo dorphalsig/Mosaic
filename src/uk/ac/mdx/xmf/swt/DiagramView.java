@@ -1063,6 +1063,11 @@ public class DiagramView extends View {
 			public void handleEvent(Event arg0) {
 				Point location = display.getCursorLocation();
 				org.eclipse.draw2d.geometry.Point location2 = translateToRelativeLocation(location);
+
+				EdgeShapeFigure edgeShape = edgeShapes.get(edgeSelect);
+				Edge edge = edgeModels.get(edgeSelect);
+				EdgeEditPart edit = edgeEditPartFigures.get(edgeSelect);
+
 				if (resizeShape
 						&& (getPoint
 								.equalsIgnoreCase(VisualElementEvents.rightMiddlePoint))) {
@@ -1130,6 +1135,11 @@ public class DiagramView extends View {
 					Node node = nodeModels.get(nodeSelect);
 					node.moveResize(location2);
 					org.eclipse.draw2d.geometry.Point p = node.getLocation();
+
+					// if (edge != null) {
+					// edge.setDragPoints(location2, true);
+					// edgeShape = (EdgeShapeFigure) edit.createFigure(true);
+					// }
 				}
 
 				if (resizeShape) {
@@ -1142,11 +1152,8 @@ public class DiagramView extends View {
 								.get(key);
 						shape.setVisible(false);
 					}
-				}
 
-				EdgeShapeFigure edgeShape = edgeShapes.get(edgeSelect);
-				Edge edge = edgeModels.get(edgeSelect);
-				EdgeEditPart edit = edgeEditPartFigures.get(edgeSelect);
+				}
 
 				if (resizeEdgeShape)
 				// && getEdgePoint

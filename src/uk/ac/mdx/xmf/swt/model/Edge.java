@@ -386,6 +386,33 @@ public class Edge extends CommandEvent {
 		return index;
 	}
 
+	// node move
+	public void setDragPoints(org.eclipse.draw2d.geometry.Point newPoint,
+			boolean isLastPoint) {
+		int size = dragPoints.size();
+
+		if (size > 0) {
+			org.eclipse.draw2d.geometry.Point before = dragPoints.get(size - 1);
+
+			org.eclipse.draw2d.geometry.Point m1 = new org.eclipse.draw2d.geometry.Point();
+
+			m1.x = (before.x + newPoint.x) / 2;
+			m1.y = (before.y + newPoint.y) / 2;
+
+			dragPoints.add(size, newPoint);
+			dragPoints.add(size, m1);
+
+		}
+
+		points.clear();
+
+		for (int i = 0; i < dragPoints.size() - 1; i++) {
+			org.eclipse.draw2d.geometry.Point p1 = dragPoints.get(i);
+			org.eclipse.draw2d.geometry.Point p2 = dragPoints.get(i + 1);
+			calculateLinePoints(p1, p2);
+		}
+	}
+
 	public void setDragPoints(org.eclipse.draw2d.geometry.Point newPoint) {
 		// index = 1;
 		if (setDragPointOnce && index > 0) {

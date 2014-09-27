@@ -280,8 +280,8 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 		if (prop.equals("headsChange") || prop.equals("styleChange"))
 			refresh();
 		if (prop.equals("visibilityChange")) {
-			this.getFigure().setVisible(!getEdgeModel().hidden());
-			this.getViewer().deselectAll();
+			// this.getFigure().setVisible(!getEdgeModel().hidden());
+			// this.getViewer().deselectAll();
 		}
 		if (prop.equals("typeChange"))
 			refresh();
@@ -433,7 +433,7 @@ public class EdgeEditPart extends AbstractConnectionEditPart implements
 
 		Edge edge = (Edge) getModel();
 		Vector<Point> points = edge.getDragPoints();
-		for (int i = 0; i < points.size(); i++) {
+		for (int i = 0; i < points.size() - 3; i++) {
 			// Waypoint wp = (Waypoint) modelConstraint.get(i);
 			Point p = points.get(i);
 			AbsoluteBendpoint abp = new AbsoluteBendpoint(p);
