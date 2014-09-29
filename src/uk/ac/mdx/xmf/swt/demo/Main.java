@@ -48,8 +48,6 @@ import com.ceteva.oleBridge.OleBridgeClient;
 import com.ceteva.text.EditorClient;
 import com.ceteva.undo.UndoClient;
 
-// TODO: Auto-generated Javadoc
-
 /**
  * The Class Main.
  * 
@@ -220,21 +218,6 @@ public class Main {
 			}
 		});
 		tabFolderDiagram.setSimple(false);
-		// create overview
-		// tabFolderOverview = new CTabFolder(sectionBottomLeft, SWT.BORDER);
-		// tabFolderOverview.setBorderVisible(true);
-		// tabFolderOverview.addCTabFolderListener(new CTabFolderAdapter() {
-		// public void itemClosed(CTabFolderEvent event) {
-		// sectionBottom.setWeights(new int[] { 0, 50, 50 });
-		// }
-		// });
-		// dynamic show the contents of overview after the discussion with users
-
-		// CTabItem tabItemOverview = new CTabItem(tabFolderOverview,
-		// SWT.BORDER);
-		// tabItemOverview.setText("");
-		// overview = new Overview(tabFolderOverview, SWT.BORDER,
-		// tabItemOverview);
 
 		// create propertyView
 		// Create the tabs
@@ -244,11 +227,6 @@ public class Main {
 			public void itemClosed(CTabFolderEvent event) {
 			}
 		});
-		// CTabItem tabItemProperty = new CTabItem(tabFolderProperty,
-		// SWT.BORDER);
-		// tabItemProperty.setText("Property");
-		// propertyView = new FormView(tabFolderProperty, SWT.BORDER,
-		// tabItemProperty);
 		tabFolderProperty.setVisible(true);// set invisiable for debug
 		tabFolderProperty.setSimple(false);
 		// create console view
@@ -433,12 +411,6 @@ public class Main {
 
 		final ToolItem item1 = new ToolItem(treeToolBar, SWT.PUSH | SWT.CENTER);
 		item1.setImage(new Image(display, "icons/Tools/Box.gif"));
-
-		final ToolItem item2 = new ToolItem(treeToolBar, SWT.PUSH | SWT.CENTER);
-		item2.setImage(new Image(display, "icons/User/Arrow2Left.gif"));
-
-		final ToolItem item3 = new ToolItem(treeToolBar, SWT.PUSH | SWT.CENTER);
-		item3.setImage(new Image(display, "icons/User/Arrow2Left.gif"));
 
 		treeToolBar.pack();
 		//
