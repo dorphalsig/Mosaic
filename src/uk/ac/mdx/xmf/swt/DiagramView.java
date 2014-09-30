@@ -1135,11 +1135,6 @@ public class DiagramView extends View {
 					Node node = nodeModels.get(nodeSelect);
 					node.moveResize(location2);
 					org.eclipse.draw2d.geometry.Point p = node.getLocation();
-
-					// if (edge != null) {
-					// edge.setDragPoints(location2, true);
-					// edgeShape = (EdgeShapeFigure) edit.createFigure(true);
-					// }
 				}
 
 				if (resizeShape) {
@@ -1155,10 +1150,7 @@ public class DiagramView extends View {
 
 				}
 
-				if (resizeEdgeShape)
-				// && getEdgePoint
-				// .equalsIgnoreCase(VisualElementEvents.wayPointEdgePoint))
-				{
+				if (resizeEdgeShape) {
 					edge.setDragPoints(location2);
 
 					edgeShape = (EdgeShapeFigure) edit.createFigure(true);
