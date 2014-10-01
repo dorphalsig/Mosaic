@@ -16,10 +16,10 @@ class Graph {
 
 	/** The parent. */
 	private final CommandEvent parent;
-	
+
 	/** The nodes. */
 	private final Vector nodes = new Vector();
-	
+
 	/** The edges. */
 	private final Vector edges = new Vector();
 
@@ -34,8 +34,9 @@ class Graph {
 
 	/**
 	 * Instantiates a new graph.
-	 *
-	 * @param parent the parent
+	 * 
+	 * @param parent
+	 *            the parent
 	 */
 	public Graph(CommandEvent parent) {
 		this.parent = parent;
@@ -67,7 +68,7 @@ class Graph {
 
 	/**
 	 * Gets the nodes.
-	 *
+	 * 
 	 * @return the nodes
 	 */
 	public Vector getNodes() {
@@ -76,7 +77,7 @@ class Graph {
 
 	/**
 	 * Gets the edges.
-	 *
+	 * 
 	 * @return the edges
 	 */
 	public Vector getEdges() {
@@ -100,6 +101,10 @@ class Graph {
 
 		if (!Main.getInstance().getView().getPallete().getInitial()) {
 			Main.getInstance().getView().getPallete().createPartControl();
+		} else {
+			if (Main.getInstance().getView().getPallete().getInitialOnce()) {
+				Main.getInstance().getView().getPallete().createPartControl();
+			}
 		}
 		if (parent.isRendering()) {
 			parent.firePropertyChange("startRender", null, null);
@@ -110,8 +115,9 @@ class Graph {
 
 	/**
 	 * Render.
-	 *
-	 * @param render the render
+	 * 
+	 * @param render
+	 *            the render
 	 */
 	public void render(boolean render) {
 		for (int i = 0; i < nodes.size(); i++) {
@@ -132,8 +138,9 @@ class Graph {
 
 	/**
 	 * Process message.
-	 *
-	 * @param message the message
+	 * 
+	 * @param message
+	 *            the message
 	 * @return true, if successful
 	 */
 	public boolean processMessage(Message message) {
@@ -145,8 +152,8 @@ class Graph {
 				int width = message.args[4].intValue;
 				int height = message.args[5].intValue;
 				boolean isSelectable = message.args[6].boolValue;
-//				System.out.println("new node:" + parent.identity + "-"
-//						+ identity + "     " + width + "      " + height);
+				// System.out.println("new node:" + parent.identity + "-"
+				// + identity + "     " + width + "      " + height);
 				newNode(identity, x, y, width, height, isSelectable);
 				return true;
 			} else if (message.hasName("newEdge")) {
@@ -185,13 +192,19 @@ class Graph {
 
 	/**
 	 * New node.
-	 *
-	 * @param identity the identity
-	 * @param x the x
-	 * @param y the y
-	 * @param width the width
-	 * @param height the height
-	 * @param isSelectable the is selectable
+	 * 
+	 * @param identity
+	 *            the identity
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
+	 * @param width
+	 *            the width
+	 * @param height
+	 *            the height
+	 * @param isSelectable
+	 *            the is selectable
 	 * @return the node
 	 */
 	public Node newNode(String identity, int x, int y, int width, int height,
@@ -207,16 +220,25 @@ class Graph {
 
 	/**
 	 * New edge.
-	 *
-	 * @param identity the identity
-	 * @param sourcePort the source port
-	 * @param targetPort the target port
-	 * @param xRef the x ref
-	 * @param yRef the y ref
-	 * @param sourceHead the source head
-	 * @param targetHead the target head
-	 * @param dotStyle the dot style
-	 * @param color the color
+	 * 
+	 * @param identity
+	 *            the identity
+	 * @param sourcePort
+	 *            the source port
+	 * @param targetPort
+	 *            the target port
+	 * @param xRef
+	 *            the x ref
+	 * @param yRef
+	 *            the y ref
+	 * @param sourceHead
+	 *            the source head
+	 * @param targetHead
+	 *            the target head
+	 * @param dotStyle
+	 *            the dot style
+	 * @param color
+	 *            the color
 	 * @return the edge
 	 */
 	public Edge newEdge(String identity, String sourcePort, String targetPort,
@@ -243,8 +265,9 @@ class Graph {
 
 	/**
 	 * Removes the edge.
-	 *
-	 * @param edge the edge
+	 * 
+	 * @param edge
+	 *            the edge
 	 */
 	public void removeEdge(Edge edge) {
 		if (!edges.contains(edge))
@@ -256,8 +279,9 @@ class Graph {
 
 	/**
 	 * Removes the node.
-	 *
-	 * @param node the node
+	 * 
+	 * @param node
+	 *            the node
 	 */
 	public void removeNode(Node node) {
 		nodes.removeElement(node);
@@ -277,8 +301,9 @@ class Graph {
 
 	/**
 	 * Synchronise.
-	 *
-	 * @param diagram the diagram
+	 * 
+	 * @param diagram
+	 *            the diagram
 	 */
 	public void synchronise(Element diagram) {
 		stopRender();
@@ -289,8 +314,9 @@ class Graph {
 
 	/**
 	 * Synchronise edges.
-	 *
-	 * @param diagram the diagram
+	 * 
+	 * @param diagram
+	 *            the diagram
 	 */
 	public void synchroniseEdges(Element diagram) {
 
@@ -352,8 +378,9 @@ class Graph {
 
 	/**
 	 * Synchronise nodes.
-	 *
-	 * @param diagram the diagram
+	 * 
+	 * @param diagram
+	 *            the diagram
 	 */
 	public void synchroniseNodes(Element diagram) {
 

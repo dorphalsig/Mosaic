@@ -108,6 +108,8 @@ public class Palette {
 	 * @param display
 	 *            the display
 	 */
+	private boolean initialOnce = true;
+
 	public Palette(Composite parent, int style, Display display) {
 		this.parent = parent;
 		this.display = display;
@@ -119,6 +121,7 @@ public class Palette {
 		colorSelect = display.getSystemColor(SWT.COLOR_LIST_SELECTION);
 		color = display.getSystemColor(SWT.COLOR_WHITE);
 		colorSection = display.getSystemColor(SWT.COLOR_GRAY);
+
 	}
 
 	/**
@@ -133,8 +136,13 @@ public class Palette {
 			if (g.equalsIgnoreCase(group))
 				exist = true;
 		}
-		if (!exist)
+		if (!exist) {
 			groups.add(group);
+			initialOnce = true;
+		}
+
+		// if ((!initialOnce))
+		// createPartControl();
 	}
 
 	/**
@@ -158,7 +166,12 @@ public class Palette {
 			tools.add(label);
 			tools.add(parent);
 			icons.add(icon);
+
+			initialOnce = true;
 		}
+
+		// if (!initialOnce)
+		// createPartControl();
 	}
 
 	public HashMap<String, Boolean> getConnections() {
@@ -196,14 +209,25 @@ public class Palette {
 	/**
 	 * Creates the part control.
 	 */
+	public boolean getInitialOnce() {
+		return initialOnce;
+	}
+
+	private boolean iniCanvas = true;
+
 	public void createPartControl() {
 		// enable scroll bar
 		// canvas = new Canvas(parent,SWT.H_SCROLL | SWT.V_SCROLL);
-		canvas = new Canvas(parent, SWT.BORDER);
-		canvas.setBounds((int) (parent.getBounds().width * 0.8), 0,
-				(int) (parent.getBounds().width * 0.2),
-				parent.getBounds().height);
-		canvas.setBackground(ColorConstants.white);
+		initialOnce = false;
+
+		if (iniCanvas) {
+			canvas = new Canvas(parent, SWT.BORDER);
+			canvas.setBounds((int) (parent.getBounds().width * 0.8), 0,
+					(int) (parent.getBounds().width * 0.2),
+					parent.getBounds().height);
+			canvas.setBackground(ColorConstants.white);
+		}
+		iniCanvas = false;
 
 		final int size = tools.size() / 2;
 		int gap = 10;
@@ -241,10 +265,13 @@ public class Palette {
 
 			for (int i = 0; i < size; i++) {
 				if (groups.get(m).equalsIgnoreCase(tools.get(i * 2 + 1))) {
-					if (icons.get(i).contains(":"))
+					if (icons.get(i).length() < 1) {
+						images[i] = null;
+					} else if (icons.get(i).contains(":")) {
 						images[i] = new Image(display, icons.get(i));
-					else
+					} else {
 						images[i] = new Image(display, "icons/" + icons.get(i));
+					}
 
 					labelImages[i] = new Label(canvas, SWT.NO);
 					labelImages[i].setImage(images[i]);
