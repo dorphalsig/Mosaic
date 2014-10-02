@@ -242,7 +242,7 @@ public class Palette {
 		Image[] images;
 
 		/** The label images. */
-		Label[] labelImages;
+		final Label[] labelImages;
 
 		/** The label texts. */
 		final Label[] labelTexts;
@@ -312,17 +312,17 @@ public class Palette {
 
 						@Override
 						public void mouseDown(MouseEvent arg0) {
-							// labelImages[k].setBackground(colorSelect);
-							// labelTexts[k].setBackground(colorSelect);
+							labelImages[k].setBackground(colorSelect);
+							labelTexts[k].setBackground(colorSelect);
 							imageName = tools.get(j);
 							Main.getInstance().getView().clearPorts();
 
-							// for (int a = 0; a < size; a++) {
-							// if (a != k) {
-							// labelImages[a].setBackground(color);
-							// labelTexts[a].setBackground(color);
-							// }
-							// }
+							for (int a = 0; a < size; a++) {
+								if (a != k && labelImages[a] != null) {
+									labelImages[a].setBackground(color);
+									labelTexts[a].setBackground(color);
+								}
+							}
 						}
 
 						@Override
@@ -336,15 +336,15 @@ public class Palette {
 
 						@Override
 						public void handleEvent(Event arg0) {
-							// labelImages[k].setBackground(colorSelect);
-							// labelTexts[k].setBackground(colorSelect);
-							//
-							// for (int a = 0; a < size; a++) {
-							// if (a != k) {
-							// labelImages[a].setBackground(color);
-							// labelTexts[a].setBackground(color);
-							// }
-							// }
+							labelImages[k].setBackground(colorSelect);
+							labelTexts[k].setBackground(colorSelect);
+
+							for (int a = 0; a < size; a++) {
+								if (a != k && labelImages[a] != null) {
+									labelImages[a].setBackground(color);
+									labelTexts[a].setBackground(color);
+								}
+							}
 						}
 					});
 
@@ -364,17 +364,18 @@ public class Palette {
 
 						@Override
 						public void mouseDown(MouseEvent arg0) {
-							// labelImages[k].setBackground(colorSelect);
-							// labelTexts[k].setBackground(colorSelect);
+							labelImages[k].setBackground(colorSelect);
+							labelTexts[k].setBackground(colorSelect);
 							imageName = tools.get(j);
 							Main.getInstance().getView().clearPorts();
 
-							// for (int a = 0; a < size; a++) {
-							// if (a != k) {
-							// labelImages[a].setBackground(color);
-							// labelTexts[a].setBackground(color);
-							// }
-							// }
+							for (int a = 0; a < size; a++) {
+								int test = size;
+								if (a != k && labelImages[a] != null) {
+									labelImages[a].setBackground(color);
+									labelTexts[a].setBackground(color);
+								}
+							}
 						}
 
 						@Override
@@ -389,15 +390,16 @@ public class Palette {
 
 						@Override
 						public void handleEvent(Event arg0) {
-							// labelImages[k].setBackground(colorSelect);
-							// labelTexts[k].setBackground(colorSelect);
-							//
-							// for (int a = 0; a < size; a++) {
-							// if (a != k) {
-							// labelImages[a].setBackground(color);
-							// labelTexts[a].setBackground(color);
-							// }
-							// }
+							labelImages[k].setBackground(colorSelect);
+							labelTexts[k].setBackground(colorSelect);
+
+							for (int a = 0; a < size; a++) {
+
+								if (a != k && labelImages[a] != null) {
+									labelImages[a].setBackground(color);
+									labelTexts[a].setBackground(color);
+								}
+							}
 						}
 					});
 
@@ -436,6 +438,34 @@ public class Palette {
 		isInitial = true; // make use this function only run once
 	}
 
+	public boolean isContains(int x, int y, int x2, int y2, int width,
+			int height) {
+		boolean isInside = false;
+		if (x >= x2 && y >= y2 && x <= x2 + width && y <= y2 + height)
+			isInside = true;
+		return isInside;
+	}
+
+	/**
+	 * Translate to relative location.
+	 * 
+	 * @param location
+	 *            the location
+	 * @return the org.eclipse.draw2d.geometry. point
+	 */
+
+	public org.eclipse.draw2d.geometry.Point translateToRelativeLocation(
+			Point location) {
+		Point point = null;
+		point = Main.display.map(null, canvas, location);
+		org.eclipse.draw2d.geometry.Point point2 = new org.eclipse.draw2d.geometry.Point(
+				0, 0);
+		point2.x = point.x;
+		point2.y = point.y;
+
+		return point2;
+	}
+
 	/**
 	 * Gets the select image.
 	 * 
@@ -445,6 +475,15 @@ public class Palette {
 		for (int i = 0; i < groups.size(); i++) {
 			String s = groups.get(i);
 			if (s.equalsIgnoreCase(toolName)) {
+
+				for (int j = 0; j < tools.size() / 2; j++) {
+					String parent = tools.get(j * 2 + 1);
+					String label = tools.get(j * 2);
+					if (s.equalsIgnoreCase(parent)) {
+						deletTool(label);
+					}
+
+				}
 				groups.remove(i);
 			}
 		}
