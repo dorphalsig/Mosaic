@@ -312,14 +312,14 @@ public class Palette {
 
 						@Override
 						public void mouseDown(MouseEvent arg0) {
-							labelImages[k].setBackground(colorSelect);
+							// labelImages[k].setBackground(colorSelect);
 							labelTexts[k].setBackground(colorSelect);
 							imageName = tools.get(j);
 							Main.getInstance().getView().clearPorts();
 
 							for (int a = 0; a < size; a++) {
 								if (a != k && labelImages[a] != null) {
-									labelImages[a].setBackground(color);
+									// labelImages[a].setBackground(color);
 									labelTexts[a].setBackground(color);
 								}
 							}
@@ -336,12 +336,12 @@ public class Palette {
 
 						@Override
 						public void handleEvent(Event arg0) {
-							labelImages[k].setBackground(colorSelect);
+							// labelImages[k].setBackground(colorSelect);
 							labelTexts[k].setBackground(colorSelect);
 
 							for (int a = 0; a < size; a++) {
 								if (a != k && labelImages[a] != null) {
-									labelImages[a].setBackground(color);
+									// labelImages[a].setBackground(color);
 									labelTexts[a].setBackground(color);
 								}
 							}
@@ -350,7 +350,7 @@ public class Palette {
 
 					labelTexts[i] = new Label(canvas, SWT.NO);
 					labelTexts[i].setText(tools.get(i * 2));
-					labelTexts[i].setBounds(w1 + gap, count * height, w2,
+					labelTexts[i].setBounds(w1 + gap, count * height + 7, w2,
 							height);
 					labelTexts[i].setBackground(color);
 					labelTexts[i].setToolTipText(tools.get(i * 2));
@@ -364,15 +364,14 @@ public class Palette {
 
 						@Override
 						public void mouseDown(MouseEvent arg0) {
-							labelImages[k].setBackground(colorSelect);
+							// labelImages[k].setBackground(colorSelect);
 							labelTexts[k].setBackground(colorSelect);
 							imageName = tools.get(j);
 							Main.getInstance().getView().clearPorts();
 
 							for (int a = 0; a < size; a++) {
-								int test = size;
 								if (a != k && labelImages[a] != null) {
-									labelImages[a].setBackground(color);
+									// labelImages[a].setBackground(color);
 									labelTexts[a].setBackground(color);
 								}
 							}
@@ -390,13 +389,13 @@ public class Palette {
 
 						@Override
 						public void handleEvent(Event arg0) {
-							labelImages[k].setBackground(colorSelect);
+							// labelImages[k].setBackground(colorSelect);
 							labelTexts[k].setBackground(colorSelect);
 
 							for (int a = 0; a < size; a++) {
 
 								if (a != k && labelImages[a] != null) {
-									labelImages[a].setBackground(color);
+									// labelImages[a].setBackground(color);
 									labelTexts[a].setBackground(color);
 								}
 							}
@@ -409,12 +408,17 @@ public class Palette {
 					deleteItem.setText("Delete Node");
 					deleteItem.addSelectionListener(new SelectionAdapter() {
 						public void widgetSelected(SelectionEvent e) {
-							// System.out.println(labelTexts[selectItem].getText()
-							// + " selected");
+							// Main.getInstance()
+							// .getView()
+							// .deleteToolGroup(
+							// labelTexts[selectItem].getText());
 							deletTool(labelTexts[selectItem].getText());
+
 						}
 					});
 					labelTexts[i].setMenu(popupMenu);
+
+					labelTexts[i].pack(true);
 
 					count++;
 

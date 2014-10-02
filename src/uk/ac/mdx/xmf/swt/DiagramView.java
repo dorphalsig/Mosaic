@@ -1221,6 +1221,18 @@ public class DiagramView extends View {
 	}
 
 	/**
+	 * delete tool group
+	 */
+	public void deleteToolGroup(String group) {
+		Message m = _diagram.handler.newMessage("deleteToolGroup", 2);
+		Value v1 = new Value(_diagram.identity);
+		Value v2 = new Value(group);
+		m.args[0] = v1;
+		m.args[1] = v2;
+		_diagram.handler.raiseEvent(m);
+	}
+
+	/**
 	 * Adds the edit part.
 	 * 
 	 * @param editPart
@@ -1587,6 +1599,21 @@ public class DiagramView extends View {
 	 */
 	public void newToolGroup(String name) {
 		palette.addDrawer(name);
+	}
+
+	/**
+	 * delete tool group.
+	 * 
+	 * @param name
+	 *            the name
+	 */
+	public void delToolGroup(String name) {
+		palette.deletTool(name);
+	}
+
+	public void delTool(String parent, String label, String identity,
+			boolean connection, String icon) {
+		palette.deletTool(label);
 	}
 
 	/**

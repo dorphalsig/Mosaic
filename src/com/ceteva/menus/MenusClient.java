@@ -13,9 +13,7 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
-import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
-import org.eclipse.ui.internal.Workbench;
 
 import uk.ac.mdx.xmf.swt.client.Client;
 import uk.ac.mdx.xmf.swt.client.EventHandler;
@@ -42,24 +40,28 @@ public class MenusClient extends Client {
 																							// menus
 	// added by the system
 	/** The handler. */
-																							public static EventHandler handler = null;
-	
+	public static EventHandler handler = null;
+
 	/** The file menu. */
 	Menu fileMenu;
-	
+
 	/** The mi file. */
 	MenuItem miFile;
-	
+
 	/** The mi copy. */
 	MenuItem miCopy;
 
 	static Exit exit;
-	
+
 	/** The print. */
 	static IWorkbenchAction print;
 
-	/* (non-Javadoc)
-	 * @see uk.ac.mdx.xmf.swt.client.Client#setEventHandler(uk.ac.mdx.xmf.swt.client.EventHandler)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * uk.ac.mdx.xmf.swt.client.Client#setEventHandler(uk.ac.mdx.xmf.swt.client
+	 * .EventHandler)
 	 */
 	@Override
 	public void setEventHandler(EventHandler eventsOut) {
@@ -75,8 +77,9 @@ public class MenusClient extends Client {
 
 	/**
 	 * Delete.
-	 *
-	 * @param id the id
+	 * 
+	 * @param id
+	 *            the id
 	 * @return true, if successful
 	 */
 	public boolean delete(String id) {
@@ -104,10 +107,13 @@ public class MenusClient extends Client {
 
 	/**
 	 * New menu.
-	 *
-	 * @param parent the parent
-	 * @param identity the identity
-	 * @param title the title
+	 * 
+	 * @param parent
+	 *            the parent
+	 * @param identity
+	 *            the identity
+	 * @param title
+	 *            the title
 	 */
 	public void newMenu(String parent, String identity, String title) {
 		if (parent.equals("root"))
@@ -118,10 +124,13 @@ public class MenusClient extends Client {
 
 	/**
 	 * New menu item.
-	 *
-	 * @param parent the parent
-	 * @param identity the identity
-	 * @param title the title
+	 * 
+	 * @param parent
+	 *            the parent
+	 * @param identity
+	 *            the identity
+	 * @param title
+	 *            the title
 	 */
 	public void newMenuItem(String parent, String identity, String title) {
 		IContributionItem owner = findParent(getMenu(), parent);
@@ -139,9 +148,11 @@ public class MenusClient extends Client {
 
 	/**
 	 * New group marker.
-	 *
-	 * @param menuId the menu id
-	 * @param groupId the group id
+	 * 
+	 * @param menuId
+	 *            the menu id
+	 * @param groupId
+	 *            the group id
 	 */
 	public void newGroupMarker(String menuId, String groupId) {
 		IContributionItem menu = findParent(getMenu(), menuId);
@@ -164,9 +175,11 @@ public class MenusClient extends Client {
 
 	/**
 	 * New root menu.
-	 *
-	 * @param identity the identity
-	 * @param title the title
+	 * 
+	 * @param identity
+	 *            the identity
+	 * @param title
+	 *            the title
 	 */
 	public void newRootMenu(String identity, String title) {
 
@@ -181,21 +194,23 @@ public class MenusClient extends Client {
 		} else {
 			MenuManager newMenu = new MenuManager(title, identity);
 
-			if (title.equalsIgnoreCase("&File")){
+			if (title.equalsIgnoreCase("&File")) {
 				menu.insertBefore("&windows", newMenu);
-//				print = ActionFactory.PRINT.create(window);
+				// print = ActionFactory.PRINT.create(window);
 				exit = new Exit();
 				exit.setEventHandler(WorkbenchClient.handler);
 				newMenu.add(new Separator("print"));
 				newMenu.add(new Separator("exit"));
-//				newMenu.appendToGroup("print", print);
+				// newMenu.appendToGroup("print", print);
 				newMenu.appendToGroup("exit", exit);
-				
-			}
-			else
+
+			} else
 				menu.insertAfter("&windows", newMenu);
 
 			newMenu.setVisible(true);
+			newMenu.update();
+			newMenu.update(true);
+			newMenu.updateAll(true);
 			refreshMenus();
 		}
 
@@ -203,10 +218,13 @@ public class MenusClient extends Client {
 
 	/**
 	 * New child menu.
-	 *
-	 * @param parent the parent
-	 * @param identity the identity
-	 * @param title the title
+	 * 
+	 * @param parent
+	 *            the parent
+	 * @param identity
+	 *            the identity
+	 * @param title
+	 *            the title
 	 */
 	public void newChildMenu(String parent, String identity, String title) {
 
@@ -229,12 +247,13 @@ public class MenusClient extends Client {
 	 */
 	public void refreshMenus() {
 		IMenuManager menu = getMenu();
+		menu.update(true);
 		menu.updateAll(true);
 	}
 
 	/**
 	 * Gets the menu.
-	 *
+	 * 
 	 * @return the menu
 	 */
 	public IMenuManager getMenu() {
@@ -249,8 +268,9 @@ public class MenusClient extends Client {
 
 	/**
 	 * Xmf id.
-	 *
-	 * @param id the id
+	 * 
+	 * @param id
+	 *            the id
 	 * @return true, if successful
 	 */
 	public boolean xmfId(String id) {
@@ -259,9 +279,11 @@ public class MenusClient extends Client {
 
 	/**
 	 * Find parent.
-	 *
-	 * @param it the it
-	 * @param identity the identity
+	 * 
+	 * @param it
+	 *            the it
+	 * @param identity
+	 *            the identity
 	 * @return the i contribution item
 	 */
 	public IContributionItem findParent(IContributionItem it, String identity) {
@@ -309,9 +331,11 @@ public class MenusClient extends Client {
 
 	/**
 	 * Adds the menu listener.
-	 *
-	 * @param identity the identity
-	 * @param item the item
+	 * 
+	 * @param identity
+	 *            the identity
+	 * @param item
+	 *            the item
 	 */
 	public void addMenuListener(final String identity, MenuItem item) {
 		item.addListener(SWT.Selection, new Listener() {
@@ -326,9 +350,11 @@ public class MenusClient extends Client {
 
 	/**
 	 * Root menu item exists.
-	 *
-	 * @param menu the menu
-	 * @param text the text
+	 * 
+	 * @param menu
+	 *            the menu
+	 * @param text
+	 *            the text
 	 * @return true, if successful
 	 */
 	public boolean rootMenuItemExists(IMenuManager menu, String text) {
@@ -337,9 +363,11 @@ public class MenusClient extends Client {
 
 	/**
 	 * Gets the root menu item.
-	 *
-	 * @param menu the menu
-	 * @param text the text
+	 * 
+	 * @param menu
+	 *            the menu
+	 * @param text
+	 *            the text
 	 * @return the root menu item
 	 */
 	public MenuManager getRootMenuItem(IMenuManager menu, String text) {
@@ -354,7 +382,9 @@ public class MenusClient extends Client {
 		return null;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see uk.ac.mdx.xmf.swt.client.Client#processMessage(xos.Message)
 	 */
 	public boolean processMessage(Message message) {
@@ -415,8 +445,9 @@ public class MenusClient extends Client {
 
 	/**
 	 * Sets the global menu.
-	 *
-	 * @param message the message
+	 * 
+	 * @param message
+	 *            the message
 	 * @return true, if successful
 	 */
 	public boolean setGlobalMenu(Message message) {
