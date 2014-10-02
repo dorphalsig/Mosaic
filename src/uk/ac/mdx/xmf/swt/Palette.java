@@ -8,6 +8,8 @@ import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
@@ -17,6 +19,8 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.MenuItem;
 
 import uk.ac.mdx.xmf.swt.demo.Main;
 
@@ -56,22 +60,13 @@ public class Palette {
 	private String transferClass = "";
 
 	/** The canvas. */
-	Canvas canvas;
+	// Canvas canvas;
 
 	/** The is focus. */
 	private boolean isFocus = false;
 
 	/** The is initial. */
 	private boolean isInitial = false;
-
-	/** The images. */
-	private Image[] images;
-
-	/** The label images. */
-	private Label[] labelImages;
-
-	/** The label texts. */
-	private Label[] labelTexts;
 
 	/** The color select. */
 	private Color colorSelect;
@@ -214,6 +209,9 @@ public class Palette {
 	}
 
 	private boolean iniCanvas = true;
+	private int size;
+	Canvas canvas = null;
+	Label labelText;
 
 	public void createPartControl() {
 		// enable scroll bar
@@ -227,25 +225,35 @@ public class Palette {
 					parent.getBounds().height);
 			canvas.setBackground(ColorConstants.white);
 		}
-		iniCanvas = false;
 
-		final int size = tools.size() / 2;
+		iniCanvas = false;
+		size = tools.size() / 2;
+
 		int gap = 10;
 		int w1 = canvas.getBounds().width / 5;
 		int w2 = canvas.getBounds().width - w1 - gap;
 		int height = canvas.getBounds().height / 20;
 
 		Image image;
-		Label labelText;
+
 		Label label;
+
+		/** The images. */
+		Image[] images;
+
+		/** The label images. */
+		Label[] labelImages;
+
+		/** The label texts. */
+		final Label[] labelTexts;
 
 		images = new Image[size];
 		labelImages = new Label[size];
 		labelTexts = new Label[size];
 
 		int count = 0;
-
 		for (int m = 0; m < groups.size(); m++) {
+			final int selectItemGroup = m;
 			String group = groups.get(m);
 			if (!group.equalsIgnoreCase("Palette"))
 				group = "XCore";
@@ -263,7 +271,20 @@ public class Palette {
 
 			count++;
 
+			// set popup menu
+			Menu popupMenu = new Menu(labelText);
+			MenuItem deleteItem = new MenuItem(popupMenu, SWT.CASCADE);
+			deleteItem.setText("Delete Group");
+			deleteItem.addSelectionListener(new SelectionAdapter() {
+				public void widgetSelected(SelectionEvent e) {
+					System.out.println(labelText.getText() + " selected");
+					deletTool(labelText.getText());
+				}
+			});
+			labelText.setMenu(popupMenu);
+
 			for (int i = 0; i < size; i++) {
+				final int selectItem = i;
 				if (groups.get(m).equalsIgnoreCase(tools.get(i * 2 + 1))) {
 					if (icons.get(i).length() < 1) {
 						images[i] = null;
@@ -291,17 +312,17 @@ public class Palette {
 
 						@Override
 						public void mouseDown(MouseEvent arg0) {
-							labelImages[k].setBackground(colorSelect);
-							labelTexts[k].setBackground(colorSelect);
+							// labelImages[k].setBackground(colorSelect);
+							// labelTexts[k].setBackground(colorSelect);
 							imageName = tools.get(j);
 							Main.getInstance().getView().clearPorts();
 
-							for (int a = 0; a < size; a++) {
-								if (a != k) {
-									labelImages[a].setBackground(color);
-									labelTexts[a].setBackground(color);
-								}
-							}
+							// for (int a = 0; a < size; a++) {
+							// if (a != k) {
+							// labelImages[a].setBackground(color);
+							// labelTexts[a].setBackground(color);
+							// }
+							// }
 						}
 
 						@Override
@@ -315,15 +336,15 @@ public class Palette {
 
 						@Override
 						public void handleEvent(Event arg0) {
-							labelImages[k].setBackground(colorSelect);
-							labelTexts[k].setBackground(colorSelect);
-
-							for (int a = 0; a < size; a++) {
-								if (a != k) {
-									labelImages[a].setBackground(color);
-									labelTexts[a].setBackground(color);
-								}
-							}
+							// labelImages[k].setBackground(colorSelect);
+							// labelTexts[k].setBackground(colorSelect);
+							//
+							// for (int a = 0; a < size; a++) {
+							// if (a != k) {
+							// labelImages[a].setBackground(color);
+							// labelTexts[a].setBackground(color);
+							// }
+							// }
 						}
 					});
 
@@ -343,17 +364,17 @@ public class Palette {
 
 						@Override
 						public void mouseDown(MouseEvent arg0) {
-							labelImages[k].setBackground(colorSelect);
-							labelTexts[k].setBackground(colorSelect);
+							// labelImages[k].setBackground(colorSelect);
+							// labelTexts[k].setBackground(colorSelect);
 							imageName = tools.get(j);
 							Main.getInstance().getView().clearPorts();
 
-							for (int a = 0; a < size; a++) {
-								if (a != k) {
-									labelImages[a].setBackground(color);
-									labelTexts[a].setBackground(color);
-								}
-							}
+							// for (int a = 0; a < size; a++) {
+							// if (a != k) {
+							// labelImages[a].setBackground(color);
+							// labelTexts[a].setBackground(color);
+							// }
+							// }
 						}
 
 						@Override
@@ -368,23 +389,41 @@ public class Palette {
 
 						@Override
 						public void handleEvent(Event arg0) {
-							labelImages[k].setBackground(colorSelect);
-							labelTexts[k].setBackground(colorSelect);
-
-							for (int a = 0; a < size; a++) {
-								if (a != k) {
-									labelImages[a].setBackground(color);
-									labelTexts[a].setBackground(color);
-								}
-							}
+							// labelImages[k].setBackground(colorSelect);
+							// labelTexts[k].setBackground(colorSelect);
+							//
+							// for (int a = 0; a < size; a++) {
+							// if (a != k) {
+							// labelImages[a].setBackground(color);
+							// labelTexts[a].setBackground(color);
+							// }
+							// }
 						}
 					});
+
+					// set popup menu
+					popupMenu = new Menu(labelTexts[i]);
+					deleteItem = new MenuItem(popupMenu, SWT.CASCADE);
+					deleteItem.setText("Delete Node");
+					deleteItem.addSelectionListener(new SelectionAdapter() {
+						public void widgetSelected(SelectionEvent e) {
+							// System.out.println(labelTexts[selectItem].getText()
+							// + " selected");
+							deletTool(labelTexts[selectItem].getText());
+						}
+					});
+					labelTexts[i].setMenu(popupMenu);
 
 					count++;
 
 				}
 			}
 		}
+
+		canvas.layout(true);
+		canvas.pack();
+		canvas.pack(true);
+		canvas.redraw();
 
 		Main.tabFolderDiagram.pack();
 		Main.tabFolderDiagram.layout();
@@ -402,6 +441,28 @@ public class Palette {
 	 * 
 	 * @return the select image
 	 */
+	public void deletTool(String toolName) {
+		for (int i = 0; i < groups.size(); i++) {
+			String s = groups.get(i);
+			if (s.equalsIgnoreCase(toolName)) {
+				groups.remove(i);
+			}
+		}
+
+		for (int i = 0; i < tools.size() / 2; i++) {
+			String s = tools.get(i * 2);
+			if (s.equalsIgnoreCase(toolName)) {
+				// tools.remove(s);
+				tools.remove(i * 2);
+				tools.remove(i * 2);
+				icons.remove(i);
+			}
+		}
+		iniCanvas = true;
+		canvas.dispose();
+		createPartControl();
+	}
+
 	public String getSelectImage() {
 
 		return imageName;
@@ -455,10 +516,10 @@ public class Palette {
 	public void setSelectImage() {
 		imageName = "";
 
-		for (int a = 0; a < labelImages.length; a++) {
-			labelImages[a].setBackground(color);
-			labelTexts[a].setBackground(color);
-		}
+		// for (int a = 0; a < labelImages.length; a++) {
+		// labelImages[a].setBackground(color);
+		// labelTexts[a].setBackground(color);
+		// }
 	}
 
 }
