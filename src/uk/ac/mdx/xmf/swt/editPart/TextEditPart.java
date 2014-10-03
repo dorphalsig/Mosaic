@@ -28,13 +28,15 @@ public class TextEditPart extends DisplayEditPart {
 
 	/** The manager. */
 	private TextEditManager manager = null;
-	
+
 	/** The model. */
 	private Text model = null;
 
 	// private TextSelectionPolicy textSelectionPolicy = null;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart#activate()
 	 */
 	public void activate() {
@@ -44,7 +46,9 @@ public class TextEditPart extends DisplayEditPart {
 			this.editText();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
 	 */
 	public IFigure createFigure() {
@@ -98,7 +102,7 @@ public class TextEditPart extends DisplayEditPart {
 
 	/**
 	 * Gets the color.
-	 *
+	 * 
 	 * @return the color
 	 */
 	public RGB getColor() {
@@ -112,8 +116,11 @@ public class TextEditPart extends DisplayEditPart {
 		// PreferenceConverter.getColor(preferences,IPreferenceConstants.UNSELECTED_FONT_COLOR);
 	}
 
-	/* (non-Javadoc)
-	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.beans.PropertyChangeListener#propertyChange(java.beans.
+	 * PropertyChangeEvent)
 	 */
 	public void propertyChange(PropertyChangeEvent evt) {
 		String prop = evt.getPropertyName();
@@ -140,7 +147,9 @@ public class TextEditPart extends DisplayEditPart {
 		// getFigure().setForegroundColor(ColorManager.getColor(getColor()));
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.gef.editparts.AbstractEditPart#refreshVisuals()
 	 */
 	protected void refreshVisuals() {
@@ -162,6 +171,12 @@ public class TextEditPart extends DisplayEditPart {
 			figure.setSize(nodeFigure.getSize().width / 2, 20);
 		}
 		_diagramView.getFigureLabels().get(text.getIdentity()).setText(string);
+		_diagramView.getFigureLabels().get(text.getIdentity())
+				.setLocation(text.getLocation());
+		FontData fontData = new FontData("Courier", 10, SWT.BOLD);
+		Font f = FontManager.getFont(fontData);
+		Dimension d = FigureUtilities.getTextExtents(string, f);
+		_diagramView.getFigureLabels().get(text.getIdentity()).setSize(d);
 		figure.setFont(text.getFont());
 		// Rectangle r = new Rectangle(loc, new Dimension(-1, -1));
 		// if (getFigure() != null && getParent() != null)
@@ -171,7 +186,9 @@ public class TextEditPart extends DisplayEditPart {
 		refreshColor();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.gef.editparts.AbstractEditPart#createEditPolicies()
 	 */
 	protected void createEditPolicies() {
@@ -182,8 +199,12 @@ public class TextEditPart extends DisplayEditPart {
 		// installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new TextEditPolicy());
 	}
 
-	/* (non-Javadoc)
-	 * @see uk.ac.mdx.xmf.swt.editPart.DisplayEditPart#performRequest(org.eclipse.gef.Request)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * uk.ac.mdx.xmf.swt.editPart.DisplayEditPart#performRequest(org.eclipse
+	 * .gef.Request)
 	 */
 	public void performRequest(Request request) {
 		Object type = request.getType();
@@ -198,8 +219,12 @@ public class TextEditPart extends DisplayEditPart {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#getDragTracker(org.eclipse.gef.Request)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.gef.editparts.AbstractGraphicalEditPart#getDragTracker(org
+	 * .eclipse.gef.Request)
 	 */
 	public DragTracker getDragTracker(Request request) {
 		// return new DisplaySelectionTracker(this);
@@ -223,10 +248,13 @@ public class TextEditPart extends DisplayEditPart {
 
 	/**
 	 * Perform direct edit.
-	 *
-	 * @param model the model
-	 * @param p the p
-	 * @param d the d
+	 * 
+	 * @param model
+	 *            the model
+	 * @param p
+	 *            the p
+	 * @param d
+	 *            the d
 	 */
 	public void performDirectEdit(Text model, org.eclipse.swt.graphics.Point p,
 			Dimension d) {
@@ -241,7 +269,9 @@ public class TextEditPart extends DisplayEditPart {
 		manager.show(model, p, d);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see uk.ac.mdx.xmf.swt.editPart.CommandEventEditPart#preferenceUpdate()
 	 */
 	public void preferenceUpdate() {
