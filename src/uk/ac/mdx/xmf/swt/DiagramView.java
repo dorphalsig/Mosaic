@@ -1,6 +1,6 @@
 package uk.ac.mdx.xmf.swt;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
@@ -388,7 +388,7 @@ public class DiagramView extends View {
 				canvas.setMenu(manager.createContextMenu(canvas));
 
 				String s = Main.getInstance().getPalette().getSelectImage();
-				HashMap<String, Boolean> connections = new HashMap<String, Boolean>();
+				ArrayList connections = new ArrayList<>();
 				connections = Main.getInstance().getPalette().getConnections();
 				cursorName = s;
 				// setAllFocus();
@@ -412,7 +412,15 @@ public class DiagramView extends View {
 						nodeShapes.get(node.getIdentity()).setVisible(true);
 						nodeShapes.get(node.getIdentity()).setOpaque(false);
 
-						if (connections.get(s) != null && connections.get(s))
+						boolean isConnection = false;
+						for (int m = 0; m < connections.size() / 2; m++) {
+							String label = (String) connections.get(m * 2);
+							if (label.equalsIgnoreCase(s))
+								isConnection = (boolean) connections
+										.get(m * 2 + 1);
+						}
+
+						if (isConnection)
 							ports.add(node);
 
 						node.selectNode();
@@ -552,7 +560,14 @@ public class DiagramView extends View {
 
 				}
 
-				if (connections.get(s) != null && connections.get(s)) // connection
+				boolean isConnection = false;
+				for (int m = 0; m < connections.size() / 2; m++) {
+					String label = (String) connections.get(m * 2);
+					if (label.equalsIgnoreCase(s))
+						isConnection = (boolean) connections.get(m * 2 + 1);
+				}
+
+				if (isConnection) // connection
 				{
 					if (ports.size() > 1) {
 						raiseFocusGained();
@@ -599,18 +614,23 @@ public class DiagramView extends View {
 
 				String getTool = Main.getInstance().getPalette()
 						.getSelectImage();
-				HashMap<String, Boolean> connections = new HashMap<String, Boolean>();
+				ArrayList connections = new ArrayList<>();
 				connections = Main.getInstance().getPalette().getConnections();
 
-				if (connections.get(getTool) != null
-						&& !connections.get(getTool)) {
+				boolean isConnection = false;
+				for (int m = 0; m < connections.size() / 2; m++) {
+					String label = (String) connections.get(m * 2);
+					if (label.equalsIgnoreCase(getTool))
+						isConnection = (boolean) connections.get(m * 2 + 1);
+				}
+
+				if (isConnection) {
 					canvas.setCursor(cursor[0]);
 				}
 				if (getTool.length() < 1)
 					getTool = cursorName;
 
-				if (connections.get(getTool) != null) {
-					if (connections.get(getTool)) // connection
+				if (isConnection) {
 					{
 						Iterator<String> keySetIterator = nodeShapes.keySet()
 								.iterator();
@@ -632,8 +652,7 @@ public class DiagramView extends View {
 					}
 				}
 
-				if (connections.get(getTool) != null
-						&& connections.get(getTool)) // connection
+				if (isConnection) // connection
 				{
 					if (ports.size() == 1) {
 						line.setStart(ports.get(0).getLocation());

@@ -1,7 +1,6 @@
 package uk.ac.mdx.xmf.swt;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Vector;
 
 import org.eclipse.draw2d.ColorConstants;
@@ -10,17 +9,20 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
+import org.eclipse.swt.widgets.ScrollBar;
 
 import uk.ac.mdx.xmf.swt.demo.Main;
 
@@ -39,7 +41,7 @@ public class Palette {
 	/** The tools. */
 	ArrayList<String> tools = new ArrayList<String>();
 	ArrayList<String> icons = new ArrayList<String>();
-	HashMap<String, Boolean> connections = new HashMap<String, Boolean>();
+	ArrayList connections = new ArrayList<>();
 
 	/** The point. */
 	Point point = null;
@@ -156,11 +158,14 @@ public class Palette {
 	 */
 	public void addEntry(String parent, String label, String identity,
 			boolean connection, String icon) {
-		if (!connections.containsKey(label)) {
-			connections.put(label, connection);
+		// if (!connections.containsKey(label))
+		{
+			connections.add(label);
+			connections.add(connection);
 			tools.add(label);
 			tools.add(parent);
 			icons.add(icon);
+			// System.out.println(parent + "-" + label);
 
 			initialOnce = true;
 		}
@@ -169,7 +174,7 @@ public class Palette {
 		// createPartControl();
 	}
 
-	public HashMap<String, Boolean> getConnections() {
+	public ArrayList getConnections() {
 		return connections;
 	}
 
@@ -213,17 +218,59 @@ public class Palette {
 	Canvas canvas = null;
 	Label labelText;
 
+	private static final Point origin = new Point(0, 0);
+
 	public void createPartControl() {
 		// enable scroll bar
 		// canvas = new Canvas(parent,SWT.H_SCROLL | SWT.V_SCROLL);
 		initialOnce = false;
 
 		if (iniCanvas) {
-			canvas = new Canvas(parent, SWT.BORDER);
+			canvas = new Canvas(parent, SWT.V_SCROLL | SWT.H_SCROLL);
 			canvas.setBounds((int) (parent.getBounds().width * 0.8), 0,
 					(int) (parent.getBounds().width * 0.2),
 					parent.getBounds().height);
 			canvas.setBackground(ColorConstants.white);
+
+			final ScrollBar hBar = canvas.getHorizontalBar();
+			final ScrollBar vBar = canvas.getVerticalBar();
+
+			// canvas.addKeyListener(new KeyAdapter() {
+			// makes canvas accept focus (according to Veronika)
+			// }); // not required because you have children
+			SelectionListener scrollBarListener = new SelectionAdapter() {
+				public void widgetSelected(SelectionEvent event) {
+					int hSelection = hBar.getSelection();
+					int vSelection = vBar.getSelection();
+					// following lines not needed because composite already does
+					// this part
+					// int destX = -hSelection - origin.x;
+					// int destY = -vSelection - origin.y;
+					// Rectangle rect = FORM_SIZE;
+					// canvas.scroll(destX, destY, 0, 0, rect.width,
+					// rect.height, false);
+					origin.x = -hSelection;
+					origin.y = -vSelection;
+					canvas.notifyListeners(SWT.Resize, new Event());
+				}
+			};
+			hBar.addSelectionListener(scrollBarListener);
+			vBar.addSelectionListener(scrollBarListener);
+
+			// this behaviour is not normal platform behaviour
+			// but it enable steh mousewheel to scroll when
+			// the user clicks anywhere in the composite
+			canvas.addListener(SWT.MouseDown, new Listener() {
+				public void handleEvent(Event event) {
+					Control focus = event.display.getFocusControl();
+					while (focus != null) {
+						if (focus == canvas)
+							return;
+						focus = focus.getParent();
+					}
+					canvas.setFocus();
+				}
+			});
 		}
 
 		iniCanvas = false;

@@ -200,7 +200,8 @@ public class Main {
 		tabFolderOutline.setSimple(false);
 
 		// Create the diagram tabs
-		tabFolderDiagram = new CTabFolder(sectionTopMiddle, SWT.BORDER);
+		tabFolderDiagram = new CTabFolder(sectionTopMiddle, SWT.BORDER
+				| SWT.H_SCROLL);
 		tabFolderDiagram.setBorderVisible(true);
 		tabFolderDiagram.addCTabFolderListener(new CTabFolderAdapter() {
 			public void itemClosed(CTabFolderEvent event) {
@@ -447,7 +448,8 @@ public class Main {
 		tabItem.setText(diagram.getName());
 
 		SashForm sashFormDiagram;
-		sashFormDiagram = new SashForm(tabFolderDiagram, SWT.BORDER);
+		sashFormDiagram = new SashForm(tabFolderDiagram, SWT.BORDER
+				| SWT.H_SCROLL);
 		sashFormDiagram.setBounds(0, 0, tabFolderDiagram.getBounds().width,
 				tabFolderDiagram.getBounds().height);
 		sashFormDiagram.setBackground(ColorConstants.white);

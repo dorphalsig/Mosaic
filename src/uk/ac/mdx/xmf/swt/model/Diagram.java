@@ -231,6 +231,7 @@ public class Diagram extends AbstractDiagram {
 			boolean connection = message.args[4].boolValue;
 			String icon = message.args[5].strValue();
 			addTool(groupID, label, toolID, connection, icon);
+			System.out.println("-" + label);
 			return true;
 		} else if (message.hasName("deleteToolGroup") && message.arity == 2) {
 			String name = message.args[1].strValue();
