@@ -4,12 +4,17 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream.GetField;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.Hashtable;
+import java.util.Properties;
+
+import com.ceteva.mosaic.util.PropertiesCaseInsensitive;
 
 import xos.OperatingSystem;
 
@@ -18,12 +23,26 @@ import xos.OperatingSystem;
  * The Class XmfPlugin.
  */
 public class XmfPlugin {
+	
+	/**
+	 * Possible file names for reading the configuration file from. Lowest priority first.
+	 * @see #getEnvVar(String)
+	 */
+	public static final String[] CONFIGURATION_FILES = new String[] { "/etc/xmodeler.conf", 
+																	  "C:\\ProgramData\\XModeler\\xmodeler.conf", 
+																	  System.getProperty("user.home") + File.separator + ".xmodeler.conf",
+																	  System.getProperty("user.home") + File.separator + "xmodeler.conf" };
 
 	/** The Constant COMMAND_LINE_ARGS. */
 	public static final String COMMAND_LINE_ARGS = "startup.txt";
 
 	/** The plugin. */
 	public static XmfPlugin plugin = null;
+	
+	/**
+	 * Configuration loaded from configuration file, if available.
+	 */
+	public static Properties configuration;
 
 	/** The xos. */
 	public OperatingSystem xos = new OperatingSystem();
@@ -64,18 +83,72 @@ public class XmfPlugin {
 	}
 
 	/**
-	 * Gets the env var.
+	 * Gets the value of a user-configurable parameter from a configuration
+	 * file, or from an environment variable on Windows systems.
+	 * 
+	 * A global configuration file can either be stored in /etc/xmodeler.conf
+	 * or C:\ProgramData\XModeler\xmodeler.conf (on Windows), to set 
+	 * parameters for all users running XModeler on that system.
+	 * 
+	 * Per-user configuration files can be stored in either 
+	 * <home-dir>/.xmodeler.conf or <home-dir>/xmodeler.conf. If a per-user
+	 * configuration file exists, any global configuration file is ignored.
+	 * 
+	 * On Windows operating systems, it is also possible to use
+	 * environment variables for setting the desired configuration parameters.
+	 * However, since environment variables are deprecated and considered 
+	 * anachronistic on any OS, using a configuration file is recommended.
+	 * 
+	 * The format of the configuration file is straight-forward:
+	 * 
+	 * <parameter1>=<value1>
+	 * <parameter2>=<value2>
+	 * ...
+	 * 
+	 * Parameter names are treated case-insensitive to reduce possible 
+	 * configuration mistakes. Blanks in value strings are allowed.
+	 * 
+	 * TODO This mechanism may be consolidated with the configuration of
+	 * startup arguments read from <home>/Mosaic/startup.txt.
 	 *
-	 * @param name the name
-	 * @return the env var
+	 * @param name parameter name to get the configured string value for 
+	 * @return configured value, or null if the parameter has not been set
 	 */
 	public static String getEnvVar(String name) {
-
 		String value = "";
 
+		if (configuration == null) { // lazy init
+			// find conf file
+			File configurationFile = null;
+			for (String filename : CONFIGURATION_FILES) {
+				File file = new File(filename);
+				if (file.exists()) {
+					configurationFile = file; // higher priority would overwrite
+				}
+			}
+			if (configurationFile != null) { // found a conf file
+				System.out.println("Loading configuration from "+configurationFile.getAbsolutePath());
+				Properties conf = new PropertiesCaseInsensitive();
+				try {
+					FileReader reader = new FileReader(configurationFile);
+					conf.load(reader);
+					reader.close();
+					configuration = conf;
+				} catch (IOException ioe) {
+					ioe.printStackTrace(System.err);
+				}
+			}
+		}
+
+		if (configuration != null) {
+			value = configuration.getProperty(name);
+		}
+		
+		// else fall back to deprecated query of Windows environment variable
+		
 		// Only works on the windows platform
 
-		if (System.getProperty("os.name").toLowerCase().startsWith("win")) {
+		else if (System.getProperty("os.name").toLowerCase().startsWith("win")) {
 			// Accesses the Windows environment variable with the given
 			// name. Returns the value of the variable or "" if it is not
 			// defined.
@@ -90,6 +163,7 @@ public class XmfPlugin {
 				br.close();
 				value = myvar.equals(var) ? "" : myvar;
 			} catch (IOException ioe) {
+				ioe.printStackTrace(System.err);
 			}
 		}
 		return value;
