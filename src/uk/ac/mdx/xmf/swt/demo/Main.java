@@ -167,6 +167,8 @@ public class Main {
 	private void createshell() {
 		shell = new Shell(SWT.BORDER | SWT.SHELL_TRIM);
 		shell.setText("GUI2-XMF2");
+		Image windowIcon = new Image(shell.getDisplay(), "icons/shell/mosaic32.gif");
+		shell.setImage(windowIcon);
 		shell.setLayout(new FillLayout());
 
 		shell.setLocation(0, 0);
