@@ -8,9 +8,9 @@ home:../../XMF2/com.ceteva.xmf.system/xmf-src
 projects:
 -arg
 demos:
+images:/Users/tony/Dropbox/MDX_Files/Research/XMF/xmf_images/
 -arg
-images:
-/Users/tony/Dropbox/MDX_Files/Research/XMF/xmf_images/
+docs:/Users/tony/Dropbox/MDX_Files/workspace/XMF2/com.ceteva.xmf.system/xmf-doc
 -arg
 saveSource:true
 -message

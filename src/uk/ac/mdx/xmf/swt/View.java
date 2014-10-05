@@ -126,11 +126,30 @@ public abstract class View extends Composite implements KeyListener,
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * Update view.
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.swt.events.ControlListener#controlMoved(org.eclipse.swt.events
+	 * .ControlEvent)
 	 */
-	public void updateView() {
-		redraw();
+	@Override
+	public void controlMoved(ControlEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.swt.events.ControlListener#controlResized(org.eclipse.swt
+	 * .events.ControlEvent)
+	 */
+	@Override
+	public void controlResized(ControlEvent arg0) {
+		// TODO Auto-generated method stub
+
 	}
 
 	// overvide the functiont to the visualization
@@ -138,6 +157,250 @@ public abstract class View extends Composite implements KeyListener,
 	 * Display.
 	 */
 	public void display() {
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.swt.dnd.DropTargetListener#dragEnter(org.eclipse.swt.dnd.
+	 * DropTargetEvent)
+	 */
+	@Override
+	public void dragEnter(DropTargetEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.swt.dnd.DragSourceListener#dragFinished(org.eclipse.swt.dnd
+	 * .DragSourceEvent)
+	 */
+	@Override
+	public void dragFinished(DragSourceEvent arg0) {
+		// TODO Auto-generated method stub
+		// System.out.println("dragFinished click");
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.swt.dnd.DropTargetListener#dragLeave(org.eclipse.swt.dnd.
+	 * DropTargetEvent)
+	 */
+	@Override
+	public void dragLeave(DropTargetEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.swt.dnd.DropTargetListener#dragOperationChanged(org.eclipse
+	 * .swt.dnd.DropTargetEvent)
+	 */
+	@Override
+	public void dragOperationChanged(DropTargetEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.swt.dnd.DropTargetListener#dragOver(org.eclipse.swt.dnd.
+	 * DropTargetEvent)
+	 */
+	@Override
+	public void dragOver(DropTargetEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.swt.dnd.DragSourceListener#dragSetData(org.eclipse.swt.dnd
+	 * .DragSourceEvent)
+	 */
+	@Override
+	public void dragSetData(DragSourceEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.swt.dnd.DragSourceListener#dragStart(org.eclipse.swt.dnd.
+	 * DragSourceEvent)
+	 */
+	@Override
+	public void dragStart(DragSourceEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.swt.dnd.DropTargetListener#drop(org.eclipse.swt.dnd.
+	 * DropTargetEvent)
+	 */
+	@Override
+	public void drop(DropTargetEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.swt.dnd.DropTargetListener#dropAccept(org.eclipse.swt.dnd
+	 * .DropTargetEvent)
+	 */
+	@Override
+	public void dropAccept(DropTargetEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.swt.events.KeyListener#keyPressed(org.eclipse.swt.events.
+	 * KeyEvent)
+	 */
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.swt.events.KeyListener#keyReleased(org.eclipse.swt.events
+	 * .KeyEvent)
+	 */
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.swt.events.MouseListener#mouseDoubleClick(org.eclipse.swt
+	 * .events.MouseEvent)
+	 */
+	@Override
+	public void mouseDoubleClick(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.swt.events.MouseListener#mouseDown(org.eclipse.swt.events
+	 * .MouseEvent)
+	 */
+	@Override
+	public void mouseDown(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		// System.out.println("view click");
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.swt.events.MouseTrackListener#mouseEnter(org.eclipse.swt.
+	 * events.MouseEvent)
+	 */
+	@Override
+	public void mouseEnter(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.swt.events.MouseTrackListener#mouseExit(org.eclipse.swt.events
+	 * .MouseEvent)
+	 */
+	@Override
+	public void mouseExit(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.swt.events.MouseTrackListener#mouseHover(org.eclipse.swt.
+	 * events.MouseEvent)
+	 */
+	@Override
+	public void mouseHover(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.swt.events.MouseMoveListener#mouseMove(org.eclipse.swt.events
+	 * .MouseEvent)
+	 */
+	@Override
+	public void mouseMove(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.swt.events.MouseListener#mouseUp(org.eclipse.swt.events.
+	 * MouseEvent)
+	 */
+	@Override
+	public void mouseUp(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		// System.out.println("view click");
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.swt.events.PaintListener#paintControl(org.eclipse.swt.events
+	 * .PaintEvent)
+	 */
+	@Override
+	public void paintControl(PaintEvent arg0) {
+		// TODO Auto-generated method stub
 
 	}
 
@@ -206,145 +469,11 @@ public abstract class View extends Composite implements KeyListener,
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.swt.events.ControlListener#controlMoved(org.eclipse.swt.events
-	 * .ControlEvent)
+	/**
+	 * Update view.
 	 */
-	@Override
-	public void controlMoved(ControlEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.swt.events.ControlListener#controlResized(org.eclipse.swt
-	 * .events.ControlEvent)
-	 */
-	@Override
-	public void controlResized(ControlEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.swt.dnd.DropTargetListener#dragEnter(org.eclipse.swt.dnd.
-	 * DropTargetEvent)
-	 */
-	@Override
-	public void dragEnter(DropTargetEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.swt.dnd.DropTargetListener#dragLeave(org.eclipse.swt.dnd.
-	 * DropTargetEvent)
-	 */
-	@Override
-	public void dragLeave(DropTargetEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.swt.dnd.DropTargetListener#dragOperationChanged(org.eclipse
-	 * .swt.dnd.DropTargetEvent)
-	 */
-	@Override
-	public void dragOperationChanged(DropTargetEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.swt.dnd.DropTargetListener#dragOver(org.eclipse.swt.dnd.
-	 * DropTargetEvent)
-	 */
-	@Override
-	public void dragOver(DropTargetEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.swt.dnd.DropTargetListener#drop(org.eclipse.swt.dnd.
-	 * DropTargetEvent)
-	 */
-	@Override
-	public void drop(DropTargetEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.swt.dnd.DropTargetListener#dropAccept(org.eclipse.swt.dnd
-	 * .DropTargetEvent)
-	 */
-	@Override
-	public void dropAccept(DropTargetEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.swt.dnd.DragSourceListener#dragFinished(org.eclipse.swt.dnd
-	 * .DragSourceEvent)
-	 */
-	@Override
-	public void dragFinished(DragSourceEvent arg0) {
-		// TODO Auto-generated method stub
-		// System.out.println("dragFinished click");
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.swt.dnd.DragSourceListener#dragSetData(org.eclipse.swt.dnd
-	 * .DragSourceEvent)
-	 */
-	@Override
-	public void dragSetData(DragSourceEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.swt.dnd.DragSourceListener#dragStart(org.eclipse.swt.dnd.
-	 * DragSourceEvent)
-	 */
-	@Override
-	public void dragStart(DragSourceEvent arg0) {
-		// TODO Auto-generated method stub
-
+	public void updateView() {
+		redraw();
 	}
 
 	/*
@@ -356,32 +485,6 @@ public abstract class View extends Composite implements KeyListener,
 	 */
 	@Override
 	public void widgetDefaultSelected(SelectionEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.swt.events.SelectionListener#widgetSelected(org.eclipse.swt
-	 * .events.SelectionEvent)
-	 */
-	@Override
-	public void widgetSelected(SelectionEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.swt.events.PaintListener#paintControl(org.eclipse.swt.events
-	 * .PaintEvent)
-	 */
-	@Override
-	public void paintControl(PaintEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
@@ -403,114 +506,11 @@ public abstract class View extends Composite implements KeyListener,
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.eclipse.swt.events.MouseTrackListener#mouseEnter(org.eclipse.swt.
-	 * events.MouseEvent)
+	 * org.eclipse.swt.events.SelectionListener#widgetSelected(org.eclipse.swt
+	 * .events.SelectionEvent)
 	 */
 	@Override
-	public void mouseEnter(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.swt.events.MouseTrackListener#mouseExit(org.eclipse.swt.events
-	 * .MouseEvent)
-	 */
-	@Override
-	public void mouseExit(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.swt.events.MouseTrackListener#mouseHover(org.eclipse.swt.
-	 * events.MouseEvent)
-	 */
-	@Override
-	public void mouseHover(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.swt.events.MouseMoveListener#mouseMove(org.eclipse.swt.events
-	 * .MouseEvent)
-	 */
-	@Override
-	public void mouseMove(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.swt.events.MouseListener#mouseDoubleClick(org.eclipse.swt
-	 * .events.MouseEvent)
-	 */
-	@Override
-	public void mouseDoubleClick(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.swt.events.MouseListener#mouseDown(org.eclipse.swt.events
-	 * .MouseEvent)
-	 */
-	@Override
-	public void mouseDown(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		// System.out.println("view click");
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.swt.events.MouseListener#mouseUp(org.eclipse.swt.events.
-	 * MouseEvent)
-	 */
-	@Override
-	public void mouseUp(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		// System.out.println("view click");
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.swt.events.KeyListener#keyPressed(org.eclipse.swt.events.
-	 * KeyEvent)
-	 */
-	@Override
-	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.swt.events.KeyListener#keyReleased(org.eclipse.swt.events
-	 * .KeyEvent)
-	 */
-	@Override
-	public void keyReleased(KeyEvent arg0) {
+	public void widgetSelected(SelectionEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}

@@ -3,6 +3,7 @@
 	<name>GUI-XMF2</name>
 	<comment></comment>
 	<projects>
+		<project>com.ceteva.xmf.machine</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
