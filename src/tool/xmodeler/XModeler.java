@@ -37,6 +37,7 @@ import tool.clients.forms.FormsClient;
 import tool.clients.menus.MenuClient;
 import tool.clients.workbench.WorkbenchClient;
 import tool.console.Console;
+import tool.console.ConsoleClient;
 import xos.OperatingSystem;
 
 import com.ceteva.oleBridge.OleBridgeClient;
@@ -87,6 +88,10 @@ public class XModeler {
       char c = str.charAt(i);
       if (c == '<')
         encoded.append("&lt;");
+      else if (c == '\n')
+        encoded.append("&#13;");
+      else if (c == '\r')
+        encoded.append("&#10;");
       else if (c == '\"')
         encoded.append("&quot;");
       else if (c == '>')
@@ -129,6 +134,8 @@ public class XModeler {
           ModelBrowserClient.theClient().inflateXML(doc);
           DiagramClient.theClient().inflateXML(doc);
           MenuClient.theClient().inflateXML(doc);
+          EditorClient.theClient().inflateXML(doc);
+          ConsoleClient.theConsole().inflateXML(doc);
         }
       }
     } catch (IOException e) {
@@ -192,6 +199,8 @@ public class XModeler {
             ModelBrowserClient.theClient().writeXML(out);
             DiagramClient.theClient().writeXML(out);
             MenuClient.theClient().writeXML(out);
+            EditorClient.theClient().writeXML(out);
+            ConsoleClient.theConsole().writeXML(out);
             out.print("</XModeler>");
             out.close();
           }

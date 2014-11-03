@@ -8,23 +8,29 @@ import org.eclipse.core.runtime.Preferences.PropertyChangeEvent;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.Bullet;
+import org.eclipse.swt.custom.ST;
+import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.custom.StyledTextContent;
 import org.eclipse.swt.custom.VerifyKeyListener;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.GlyphMetrics;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.TabItem;
 
+import tool.xmodeler.XModeler;
 import uk.ac.mdx.xmf.swt.misc.ColorManager;
 
 import com.ceteva.console.ConsolePlugin;
-import com.ceteva.console.views.History;
 import com.ceteva.consoleInterface.EscapeHandler;
 import com.ceteva.text.texteditor.ConsoleLineStyler;
 
@@ -63,39 +69,32 @@ public class ConsoleView {
     }
   }
 
+  protected static final int FONT_INC        = 2;
+  protected static final int MAX_FONT_HEIGHT = 30;
+  protected static final int MIN_FONT_HEIGHT = 4;
+
   public static void setEscapeHandler(EscapeHandler handler) {
     escape = handler;
   }
 
+  boolean                lineNumbers     = true;
   StyledText             text            = null;
-
   History                history         = new History();
-
   int                    inputStart      = 0;
-
   Font                   textFont        = new Font(Display.getCurrent(), "Courier New", 14, SWT.NORMAL);
-
   Color                  backgroundColor = ColorManager.getColor(new RGB(255, 255, 255));
-
-  Color                  foregroundColor = null;
-
+  Color                  foregroundColor = ColorManager.getColor(new RGB(0, 0, 0));
   int                    waterMark       = 1000;
-
-  // Used to synchronise the adding of text to the document with the flushing of waterline.
-
   PrintStream            out             = null;
-
   static EscapeHandler   escape          = null;
-
   private Object         overflowLock    = new Object();
-
   private FlushWaterline waterlineJob;
 
   public ConsoleView(Composite parent, TabItem tabItemConsole) {
     Composite c1 = new Composite(parent, SWT.BORDER);
     c1.setLayout(new FillLayout());
-    text = new StyledText(c1, SWT.MULTI | SWT.V_SCROLL);
-    text.setWordWrap(true);
+    text = new StyledText(c1, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
+    // text.setWordWrap(true);
     text.setBackground(backgroundColor);
     text.setFont(textFont);
     addVerifyListener(text);
@@ -118,8 +117,7 @@ public class ConsoleView {
           appendText(e.text);
           goToEnd();
           e.doit = false;
-        } else
-          e.doit = true;
+        } else e.doit = true;
       }
     });
     text.addVerifyKeyListener(new VerifyKeyListener() {
@@ -131,13 +129,19 @@ public class ConsoleView {
           e.doit = false;
         } else if (e.keyCode == SWT.ARROW_UP) {
           String command = recallFromHistoryForward();
-          if (command != "")
-            addCommand(text, command);
+          if (command != "") addCommand(text, command);
           e.doit = false;
         } else if (e.keyCode == SWT.ARROW_DOWN) {
           String command = recallFromHistoryBackward();
-          if (command != "")
-            addCommand(text, command);
+          if (command != "") addCommand(text, command);
+          e.doit = false;
+        } else if (e.keyCode == '=' && ((e.stateMask & SWT.CTRL) == SWT.CTRL) && ((e.stateMask & SWT.SHIFT) == SWT.SHIFT)) {
+          textFont = new Font(Display.getCurrent(), textFont.getFontData()[0].getName(), Math.min(MAX_FONT_HEIGHT, textFont.getFontData()[0].getHeight() + FONT_INC), SWT.NORMAL);
+          text.setFont(textFont);
+          e.doit = false;
+        } else if (e.keyCode == '-' && ((e.stateMask & SWT.CTRL) == SWT.CTRL) && ((e.stateMask & SWT.SHIFT) == SWT.SHIFT)) {
+          textFont = new Font(Display.getCurrent(), textFont.getFontData()[0].getName(), Math.max(MIN_FONT_HEIGHT, textFont.getFontData()[0].getHeight() - FONT_INC), SWT.NORMAL);
+          text.setFont(textFont);
           e.doit = false;
         } else if (e.keyCode == SWT.CR) {
           goToEnd();
@@ -162,8 +166,7 @@ public class ConsoleView {
 
   public void appendText(String string) {
     synchronized (overflowLock) {
-      if (text != null)
-        ConsolePlugin.writeToFile(string);
+      if (text != null) ConsolePlugin.writeToFile(string);
       text.append(string);
     }
   }
@@ -182,12 +185,9 @@ public class ConsoleView {
   }
 
   public void getPreferences() {
-    if (textFont != null)
-      textFont.dispose();
-    if (backgroundColor != null)
-      backgroundColor.dispose();
-    if (foregroundColor != null)
-      backgroundColor.dispose();
+    if (textFont != null) textFont.dispose();
+    if (backgroundColor != null) backgroundColor.dispose();
+    if (foregroundColor != null) backgroundColor.dispose();
   }
 
   public void goToEnd() {
@@ -229,5 +229,14 @@ public class ConsoleView {
 
   public void setOutput(PrintStream out) {
     this.out = out;
+  }
+
+  public void writeHistory(PrintStream out) {
+    for (String command : history)
+      out.print("<Command text='" + XModeler.encodeXmlAttribute(command) + "'/>");
+  }
+
+  public void addCommand(String command) {
+    history.add(command);
   }
 }

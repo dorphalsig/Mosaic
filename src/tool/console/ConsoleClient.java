@@ -9,7 +9,11 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 
 import org.eclipse.swt.widgets.Display;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
+import tool.xmodeler.XModeler;
 import uk.ac.mdx.xmf.swt.demo.Main;
 
 public class ConsoleClient extends Thread {
@@ -44,8 +48,7 @@ public class ConsoleClient extends Thread {
     while (true) {
       try {
         int size = in.read(buffer);
-        if (size > 0)
-          sendInput(new String(buffer).substring(0, size));
+        if (size > 0) sendInput(new String(buffer).substring(0, size));
       } catch (IOException e) {
         System.out.println(e);
       }
@@ -77,13 +80,34 @@ public class ConsoleClient extends Thread {
           view.processInput(input);
         else if (tryConnecting())
           view.processInput(input);
-        else
-          queueInput(input);
+        else queueInput(input);
       }
     });
   }
 
   public void queueInput(String input) {
     queuedInput.append(input);
+  }
+
+  public void writeXML(PrintStream out) {
+    out.print("<Console>");
+    Console.writeHistory(out);
+    out.print("</Console>");
+  }
+
+  public void inflateXML(Document doc) {
+    NodeList consoleClients = doc.getElementsByTagName("Console");
+    if (consoleClients.getLength() == 1) {
+      Node console = consoleClients.item(0);
+      NodeList list = console.getChildNodes();
+      for (int i = 0; i < list.getLength(); i++) {
+        Node item = list.item(i);
+        inflateConsoleElement(item);
+      }
+    } else System.out.println("expecting exactly 1 console client got: " + consoleClients.getLength());
+  }
+
+  private void inflateConsoleElement(Node item) {
+    if (item.getNodeName().equals("Command")) Console.addCommand(XModeler.attributeValue(item, "text"));
   }
 }

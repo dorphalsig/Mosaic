@@ -1,8 +1,11 @@
 package tool.clients.dialogs;
 
+import java.io.File;
+
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Cursor;
+import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Display;
 
 import tool.clients.Client;
@@ -28,6 +31,21 @@ public class DialogsClient extends Client {
     else if (message.hasName("newMessageDialog"))
       newMessageDialog(message);
     else super.sendMessage(message);
+  }
+
+  private Value newDirectoryDialog(final Message message) {
+    final Value[] result = new Value[1];
+    runOnDisplay(new Runnable() {
+      public void run() {
+        String path = message.args[0].strValue();
+        DirectoryDialog dialog = new DirectoryDialog(XModeler.getXModeler());
+        if (new File(path).exists()) dialog.setFilterPath(path);
+        path = dialog.open();
+        path = path == null ? "" : path;
+        result[0] = new Value(path);
+      }
+    });
+    return result[0];
   }
 
   private void newMessageDialog(final Message message) {
@@ -59,6 +77,8 @@ public class DialogsClient extends Client {
   public Value callMessage(Message message) {
     if (message.hasName("newQuestionDialog"))
       return newQuestionDialog(message);
+    else if (message.hasName("newDirectoryDialog"))
+      return newDirectoryDialog(message);
     else return super.callMessage(message);
   }
 

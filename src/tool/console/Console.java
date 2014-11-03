@@ -1,5 +1,7 @@
 package tool.console;
 
+import java.io.PrintStream;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -28,5 +30,13 @@ public class Console {
 
   public static void setConsoleView(ConsoleView consoleView) {
     Console.consoleView = consoleView;
+  }
+
+  public static void writeHistory(PrintStream out) {
+    consoleView.writeHistory(out);
+  }
+
+  public static void addCommand(String command) {
+    consoleView.addCommand(command);
   }
 }

@@ -56,17 +56,136 @@ public class FormsClient extends Client {
       newList(message);
     else if (message.hasName("addItem"))
       addItem(message);
+    else if (message.hasName("newTextBox"))
+      newTextBox(message);
+    else if (message.hasName("newComboBox"))
+      newComboBox(message);
+    else if (message.hasName("setSelection"))
+      setSelection(message);
+    else if (message.hasName("newCheckBox"))
+      newCheckBox(message);
+    else if (message.hasName("newButton"))
+      newButton(message);
     else super.sendMessage(message);
   }
 
+  private void newButton(Message message) {
+    String parentId = message.args[0].strValue();
+    String id = message.args[1].strValue();
+    String label = message.args[2].strValue();
+    int x = message.args[3].intValue;
+    int y = message.args[4].intValue;
+    int width = message.args[5].intValue;
+    int height = message.args[6].intValue;
+    newButton(parentId, id, label, x, y, width, height);
+  }
+
+  private void newButton(final String parentId, final String id, final String label, final int x, final int y, final int width, final int height) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (Form form : forms.values())
+          form.newButton(parentId, id, label, x, y, width, height);
+      }
+    });
+  }
+
+  private void newCheckBox(Message message) {
+    String parentId = message.args[0].strValue();
+    String id = message.args[1].strValue();
+    int x = message.args[2].intValue;
+    int y = message.args[3].intValue;
+    boolean checked = message.args[4].boolValue;
+    newCheckBox(parentId, id, x, y, checked);
+  }
+
+  private void newCheckBox(final String parentId, final String id, final int x, final int y, final boolean checked) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (Form form : forms.values())
+          form.newCheckBox(parentId, id, x, y, checked);
+      }
+    });
+  }
+
+  private void setSelection(Message message) {
+    String comboId = message.args[0].strValue();
+    int index = message.args[1].intValue;
+    setSelection(comboId, index);
+  }
+
+  private void setSelection(final String comboId, final int index) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (Form form : forms.values())
+          form.setSelection(comboId, index);
+      }
+    });
+  }
+
+  private void newComboBox(Message message) {
+    String parentId = message.args[0].strValue();
+    String id = message.args[1].strValue();
+    int x = message.args[2].intValue;
+    int y = message.args[3].intValue;
+    int width = message.args[4].intValue;
+    int height = message.args[5].intValue;
+    newComboBox(parentId, id, x, y, width, height);
+  }
+
+  private void newTextBox(Message message) {
+    String parentId = message.args[0].strValue();
+    String id = message.args[1].strValue();
+    int x = message.args[2].intValue;
+    int y = message.args[3].intValue;
+    int width = message.args[4].intValue;
+    int height = message.args[5].intValue;
+    boolean editable = message.args[6].boolValue;
+    newTextBox(parentId, id, x, y, width, height, editable);
+  }
+
+  private void newComboBox(final String parentId, final String id, final int x, final int y, final int width, final int height) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (Form form : forms.values())
+          form.newComboBox(parentId, id, x, y, width, height);
+      }
+    });
+  }
+
+  private void newTextBox(final String parentId, final String id, final int x, final int y, final int width, final int height, final boolean editable) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (Form form : forms.values())
+          form.newTextBox(parentId, id, x, y, width, height, editable);
+      }
+    });
+  }
+
   private void addItem(Message message) {
+    if (message.arity == 2)
+      addComboItem(message);
+    else addListItem(message);
+  }
+
+  private void addComboItem(Message message) {
+    final String parentId = message.args[0].strValue();
+    final String value = message.args[1].strValue();
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (Form form : forms.values())
+          form.addComboItem(parentId, value);
+      }
+    });
+  }
+
+  private void addListItem(Message message) {
     final String parentId = message.args[0].strValue();
     final String id = message.args[1].strValue();
     final String value = message.args[2].strValue();
     runOnDisplay(new Runnable() {
       public void run() {
         for (Form form : forms.values())
-          form.addItem(parentId, id, value);
+          form.addListItem(parentId, id, value);
       }
     });
   }

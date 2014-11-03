@@ -10,6 +10,8 @@ import org.eclipse.swt.custom.TreeEditor;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
@@ -20,9 +22,9 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
+import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.swt.widgets.TreeItem;
 import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -51,6 +53,8 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
     return theClient;
   }
 
+  static Font                        labelFont    = new Font(XModeler.getXModeler().getDisplay(), new FontData("Courier New", 10, SWT.BOLD));
+
   final static int                   RIGHT_BUTTON = 3;
   static CTabFolder                  tabFolder;
   static ModelBrowserClient          theClient;
@@ -59,6 +63,7 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
   static Hashtable<String, CTabItem> tabs         = new Hashtable<String, CTabItem>();
   static Hashtable<String, Tree>     trees        = new Hashtable<String, Tree>();
   static Hashtable<String, String>   images       = new Hashtable<String, String>();
+  static Hashtable<Tree, TreeItem>   selections   = new Hashtable<Tree, TreeItem>();
 
   public ModelBrowserClient() {
     super("com.ceteva.modelBrowser");
@@ -91,6 +96,7 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
           item.setText(text);
           item.setImage(image);
           item.setExpanded(expanded);
+          item.setFont(labelFont);
         }
       });
     } else System.out.println("Cannot find node " + parentId);
@@ -108,6 +114,23 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
         item.setText(text);
         item.setImage(image);
         item.setExpanded(expanded);
+        item.setFont(labelFont);
+      }
+    });
+  }
+
+  private void addTree(final String id, final String name) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        CTabItem tabItem = new CTabItem(tabFolder, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL);
+        tabItem.setText(name);
+        tabs.put(id, tabItem);
+        Tree tree = new Tree(tabFolder, SWT.NONE);
+        tabItem.setControl(tree);
+        trees.put(id, tree);
+        tree.addMouseListener(ModelBrowserClient.this);
+        tree.addListener(SWT.Expand, ModelBrowserClient.this);
+        tree.addListener(SWT.Selection, ModelBrowserClient.this);
       }
     });
   }
@@ -178,6 +201,15 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
     text.setFocus();
   }
 
+  private void expand(final String id) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        items.get(id).setExpanded(true);
+        tabFolder.redraw();
+      }
+    });
+  }
+
   public void handleEvent(Event event) {
     if (event.type == SWT.Expand) {
       Message m = getHandler().newMessage("expanded", 1);
@@ -188,6 +220,60 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
       m.args[0] = v1;
       getHandler().raiseEvent(m);
     }
+    if (event.type == SWT.Selection) {
+      Tree tree = (Tree) event.widget;
+      TreeItem item = selections.get(tree);
+      if (tree.getSelectionCount() == 1) {
+        if (item != null && tree.getSelection()[0] == item) {
+          editText(tree, item);
+        } else selections.put(tree, tree.getSelection()[0]);
+      }
+    }
+  }
+
+  private void inflateTree(Node treeNode) {
+    final String id = XModeler.attributeValue(treeNode, "id");
+    boolean selected = XModeler.attributeValue(treeNode, "selected").equals("true");
+    NodeList roots = treeNode.getChildNodes();
+    if (roots.getLength() == 1) {
+      Node root = roots.item(0);
+      String rootId = XModeler.attributeValue(root, "id");
+      String text = XModeler.attributeValue(root, "text");
+      String image = XModeler.attributeValue(root, "image");
+      boolean expanded = XModeler.attributeValue(root, "expanded").equals("true");
+      addTree(id, text);
+      addRootNodeWithIcon(id, rootId, text, true, expanded, image, 0);
+      inflateTreeItem(root);
+      if (selected) select(id);
+      if (expanded) expand(rootId);
+    } else System.out.println("expecting to inflate a tree with 1 root node.");
+  }
+
+  private void inflateTreeItem(Node node) {
+    String id = XModeler.attributeValue(node, "id");
+    NodeList children = node.getChildNodes();
+    for (int i = 0; i < children.getLength(); i++) {
+      Node child = children.item(i);
+      String childId = XModeler.attributeValue(child, "id");
+      String text = XModeler.attributeValue(child, "text");
+      String image = XModeler.attributeValue(child, "image");
+      boolean expanded = XModeler.attributeValue(child, "expanded").equals("true");
+      addNodeWithIcon(id, childId, text, true, expanded, image, i);
+      inflateTreeItem(child);
+      if (expanded) expand(childId);
+    }
+  }
+
+  public void inflateXML(Document doc) {
+    NodeList modelBrowsers = doc.getElementsByTagName("ModelBrowser");
+    if (modelBrowsers.getLength() == 1) {
+      Node modelBrowser = modelBrowsers.item(0);
+      NodeList treeNodes = modelBrowser.getChildNodes();
+      for (int i = 0; i < treeNodes.getLength(); i++) {
+        Node treeNode = treeNodes.item(i);
+        inflateTree(treeNode);
+      }
+    } else System.out.println("expecting exactly 1 model browser got: " + modelBrowsers.getLength());
   }
 
   private boolean isCommand(MouseEvent event) {
@@ -205,10 +291,13 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
   }
 
   public void mouseDoubleClick(MouseEvent event) {
-    Tree tree = (Tree) event.getSource();
+    Tree tree = (Tree) event.widget;
     if (tree.getSelectionCount() == 1) {
       TreeItem item = tree.getSelection()[0];
-      editText(tree, item);
+      String id = itemId(item);
+      Message m = getHandler().newMessage("doubleSelected", 1);
+      m.args[0] = new Value(id);
+      getHandler().raiseEvent(m);
     }
   }
 
@@ -235,21 +324,6 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
     }
   }
 
-  private void addTree(final String id, final String name) {
-    runOnDisplay(new Runnable() {
-      public void run() {
-        CTabItem tabItem = new CTabItem(tabFolder, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL);
-        tabItem.setText(name);
-        tabs.put(id, tabItem);
-        Tree tree = new Tree(tabFolder, SWT.NONE);
-        tabItem.setControl(tree);
-        trees.put(id, tree);
-        tree.addMouseListener(ModelBrowserClient.this);
-        tree.addListener(SWT.Expand, ModelBrowserClient.this);
-      }
-    });
-  }
-
   public boolean processMessage(Message message) {
     System.out.println(this + " <- " + message);
     return false;
@@ -265,6 +339,14 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
         }
       });
     } else System.out.println("cannnot remove node with id " + id);
+  }
+
+  private void select(final String id) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        tabFolder.setSelection(tabs.get(id));
+      }
+    });
   }
 
   private void selectNode(Message message) {
@@ -287,7 +369,7 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
   }
 
   public void sendMessage(final Message message) {
-    //System.err.println(message);
+    // System.err.println(message);
     if (message.hasName("newModelBrowser"))
       newModelBrowser(message);
     else if (message.hasName("addNodeWithIcon"))
@@ -369,8 +451,9 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
   public void writeXML(PrintStream out) {
     out.print("<ModelBrowser>");
     for (String id : trees.keySet()) {
-      out.print("<Tree id='" + id + "'>");
       Tree tree = trees.get(id);
+      CTabItem tab = tabs.get(id);
+      out.print("<Tree id='" + id + "' selected='" + (tabFolder.getSelection() == tab) + "'>");
       writeXMLTreeItems(tree.getItems(), out);
       out.print("</Tree>");
     }
@@ -389,47 +472,5 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
       writeXMLTreeItems(item.getItems(), out);
       out.print("</Item>");
     }
-  }
-
-  public void inflateXML(Document doc) {
-    NodeList modelBrowsers = doc.getElementsByTagName("ModelBrowser");
-    if (modelBrowsers.getLength() == 1) {
-      Node modelBrowser = modelBrowsers.item(0);
-      NodeList treeNodes = modelBrowser.getChildNodes();
-      for (int i = 0; i < treeNodes.getLength(); i++) {
-        Node treeNode = treeNodes.item(i);
-        inflateTree(treeNode);
-      }
-    } else System.out.println("expecting exactly 1 model browser got: " + modelBrowsers.getLength());
-  }
-
-  private void inflateTree(Node treeNode) {
-    String id = XModeler.attributeValue(treeNode, "id");
-    NodeList roots = treeNode.getChildNodes();
-    if (roots.getLength() == 1) {
-      Node root = roots.item(0);
-      String rootId = XModeler.attributeValue(root, "id");
-      String text = XModeler.attributeValue(root, "text");
-      String image = XModeler.attributeValue(root, "image");
-      boolean expanded = XModeler.attributeValue(root, "expanded").equals("true");
-      addTree(id, text);
-      addRootNodeWithIcon(id, rootId, text, true, expanded, image, 0);
-      inflateTreeItem(root);
-    } else System.out.println("expecting to inflate a tree with 1 root node.");
-  }
-
-  private void inflateTreeItem(Node node) {
-    String id = XModeler.attributeValue(node, "id");
-    NodeList children = node.getChildNodes();
-    for (int i = 0; i < children.getLength(); i++) {
-      Node child = children.item(i);
-      String childId = XModeler.attributeValue(child, "id");
-      String text = XModeler.attributeValue(child, "text");
-      String image = XModeler.attributeValue(child, "image");
-      boolean expanded = XModeler.attributeValue(child, "expanded").equals("true");
-      addNodeWithIcon(id, childId, text, true, expanded, image, i);
-      inflateTreeItem(child);
-    }
-
   }
 }

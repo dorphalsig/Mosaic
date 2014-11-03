@@ -1,11 +1,9 @@
 -arg
 user:XModeler
 -arg
-home:../../XMF2/com.ceteva.xmf.system/xmf-src
+home:../XMF2/com.ceteva.xmf.system/xmf-src
 -image
-../../XMF2/com.ceteva.xmf.system/xmf-img/mosaic.img
--arg
-projects:
+../XMF2/com.ceteva.xmf.system/xmf-img/mosaic.img
 -arg
 demos:
 images:/Users/tony/Dropbox/MDX_Files/Research/XMF/xmf_images/
@@ -31,10 +29,11 @@ saveSource:true
 :com.ceteva.text:wait
 -message
 :com.ceteva.oleBridge:wait
--internal
+-arg
 com.ceteva.console.ConsoleClient:com.ceteva.console
+-internal
+tool.console.ConsoleClient:com.ceteva.console
 -workspace ../..
--debug
 -heapSize
 15000
 -freeHeap

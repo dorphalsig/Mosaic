@@ -273,6 +273,10 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     return null;
   }
 
+  public int getZoom() {
+    return zoom;
+  }
+
   private void handleDoubleClick(GC gc) {
     if (mode == MouseMode.DOUBLE_CLICK) {
       mode = MouseMode.NONE;
@@ -352,25 +356,6 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     }
     for (Node node : positions.keySet())
       node.moveEvent();
-  }
-
-  private void scale(MouseEvent event) {
-    float[] points = new float[] { (float) event.x, (float) event.y };
-    transform.invert();
-    transform.transform(points);
-    transform.invert();
-    event.x = (int) points[0];
-    event.y = (int) points[1];
-  }
-
-  public int getZoom() {
-    return zoom;
-  }
-
-  public void setZoom(int zoom) {
-    this.zoom = zoom;
-    transform = new Transform(org.eclipse.swt.widgets.Display.getCurrent());
-    transform.scale((float) (zoom / 100.0), (float) (zoom / 100.0));
   }
 
   private void leftClick(MouseEvent event) {
@@ -690,6 +675,15 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     if (selection.isEmpty()) MenuClient.popup(id, event.x, event.y);
   }
 
+  private void scale(MouseEvent event) {
+    float[] points = new float[] { (float) event.x, (float) event.y };
+    transform.invert();
+    transform.transform(points);
+    transform.invert();
+    event.x = (int) points[0];
+    event.y = (int) points[1];
+  }
+
   private void select(int x, int y) {
     boolean selected = false;
     if (!selected) {
@@ -749,6 +743,12 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     for (Edge edge : edges.values())
       edge.setText(id, text);
     redraw();
+  }
+
+  public void setZoom(int zoom) {
+    this.zoom = zoom;
+    transform = new Transform(org.eclipse.swt.widgets.Display.getCurrent());
+    transform.scale((float) (zoom / 100.0), (float) (zoom / 100.0));
   }
 
   public String toString() {
