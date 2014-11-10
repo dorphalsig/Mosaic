@@ -35,7 +35,7 @@ import xos.Value;
 public class Diagram implements MouseListener, PaintListener, MouseMoveListener, KeyListener {
 
   enum MouseMode {
-    NONE, SELECTED, NEW_EDGE, DOUBLE_CLICK, MOVE_TARGET, MOVE_SOURCE
+    NONE, SELECTED, NEW_EDGE, DOUBLE_CLICK, MOVE_TARGET, MOVE_SOURCE, RESIZE_TOP_LEFT, RESIZE_TOP_RIGHT, RESIZE_BOTTOM_LEFT, RESIZE_BOTTOM_RIGHT
   };
 
   class Polar {
@@ -97,6 +97,7 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
   static final Color      RED                    = new Color(XModeler.getXModeler().getDisplay(), 255, 0, 0);
   static final Color      GREY                   = new Color(XModeler.getXModeler().getDisplay(), 192, 192, 192);
   static final Color      WHITE                  = new Color(XModeler.getXModeler().getDisplay(), 255, 255, 255);
+  static final Color      GREEN                  = new Color(XModeler.getXModeler().getDisplay(), 0, 170, 0);
   static final Color      BLACK                  = new Color(XModeler.getXModeler().getDisplay(), 0, 0, 0);
 
   static double           ATTRACTION_CONSTANT    = 0.1;
@@ -121,6 +122,7 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
   Canvas                  canvas;
   ScrolledComposite       scroller;
   Edge                    selectedEdge           = null;
+  Node                    selectedNode           = null;
   int                     render                 = 0;
   int                     firstX;
   int                     firstY;
@@ -252,6 +254,7 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
   private void deselect() {
     selection.clear();
     selectedEdge = null;
+    selectedNode = null;
   }
 
   public void editText(String id) {
@@ -483,15 +486,36 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
       lastY = event.y;
       redraw();
     }
+    if (mode == MouseMode.RESIZE_BOTTOM_RIGHT) {
+      lastX = event.x;
+      lastY = event.y;
+      redraw();
+    }
+  }
+
+  private void resizeNode(Node node, int width, int height) {
+    EventHandler handler = DiagramClient.theClient().getHandler();
+    Message message = handler.newMessage("resizeNode", 3);
+    message.args[0] = new Value(node.getId());
+    message.args[1] = new Value(width);
+    message.args[2] = new Value(height);
+    handler.raiseEvent(message);
   }
 
   public void mouseUp(MouseEvent event) {
     scale(event);
     if (mode == MouseMode.NEW_EDGE) checkEdgeCreation(event.x, event.y);
     if (mode == MouseMode.SELECTED) sendMoveSelectedEvents();
+    if (mode == MouseMode.RESIZE_BOTTOM_RIGHT) resizeBottomRight();
     if (movingEdgeEnd()) checkMovedEdge();
     mode = MouseMode.NONE;
     redraw();
+  }
+
+  private void resizeBottomRight() {
+    int width = lastX - selectedNode.getX();
+    int height = lastY - selectedNode.getY();
+    if (width >= 10 && height >= 10) resizeNode(selectedNode, width, height);
   }
 
   public void move(String id, int x, int y) {
@@ -649,7 +673,7 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
   private void paintHover(GC gc) {
     if (!movingEdgeEnd()) {
       for (Node node : nodes.values())
-        node.paintHover(gc, lastX, lastY);
+        node.paintHover(gc, lastX, lastY, selection.contains(node));
       for (Edge edge : edges.values())
         edge.paintHover(gc, lastX, lastY);
     }
@@ -709,12 +733,21 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     gc.setTransform(transform);
     clear(gc);
     paintNewEdge(gc);
+    paintResizing(gc);
     paintEdges(gc);
     paintAlignment(gc);
     paintNodes(gc);
     paintHover(gc);
     paintSelected(gc);
     handleDoubleClick(gc);
+  }
+
+  private void paintResizing(GC gc) {
+    if (mode == MouseMode.RESIZE_BOTTOM_RIGHT) {
+      int width = lastX - selectedNode.getX();
+      int height = lastY - selectedNode.getY();
+      if (width >= 10 && height >= 10) gc.drawRectangle(selectedNode.getX(), selectedNode.getY(), width, height);
+    }
   }
 
   private void paintSelected(GC gc) {
@@ -825,7 +858,7 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
         }
       }
     }
-    for (Node node : nodes.values())
+    for (Node node : nodes.values()) {
       if (!selected && node.contains(x, y)) {
         // If all else fails we might be selecting a node.
         // Trying nodes last allows the other elements behind
@@ -834,6 +867,27 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
         selection.add(node);
         selected = true;
       }
+      if (!selected && node.atTopLeftCorner(x, y)) {
+        mode = MouseMode.RESIZE_TOP_LEFT;
+        selectedNode = node;
+        selected = true;
+      }
+      if (!selected && node.atTopRightCorner(x, y)) {
+        mode = MouseMode.RESIZE_TOP_RIGHT;
+        selectedNode = node;
+        selected = true;
+      }
+      if (!selected && node.atBottomLeftCorner(x, y)) {
+        mode = MouseMode.RESIZE_BOTTOM_LEFT;
+        selectedNode = node;
+        selected = true;
+      }
+      if (!selected && node.atBottomRightCorner(x, y)) {
+        mode = MouseMode.RESIZE_BOTTOM_RIGHT;
+        selectedNode = node;
+        selected = true;
+      }
+    }
   }
 
   private void selectAll() {

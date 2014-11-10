@@ -6,6 +6,7 @@ import java.util.Hashtable;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Point;
 
 import tool.clients.menus.MenuClient;
 import tool.xmodeler.XModeler;
@@ -14,14 +15,17 @@ import xos.Value;
 
 public class Node implements Selectable {
 
+  private static final int   SELECTION_GAP = 4;
+  private static final int   EAR_GAP       = SELECTION_GAP + 2;
+  private static final int   EAR_LENGTH    = 6;
   String                     id;
   int                        x;
   int                        y;
   int                        width;
   int                        height;
   boolean                    selectable;
-  Hashtable<String, Port>    ports    = new Hashtable<String, Port>();
-  Hashtable<String, Display> displays = new Hashtable<String, Display>();
+  Hashtable<String, Port>    ports         = new Hashtable<String, Port>();
+  Hashtable<String, Display> displays      = new Hashtable<String, Display>();
 
   public Node(String id, int x, int y, int width, int height, boolean selectable) {
     super();
@@ -147,10 +151,78 @@ public class Node implements Selectable {
     }
   }
 
-  public void paintHover(GC gc, int x, int y) {
-    if (contains(x, y)) paintSelectableOutline(gc);
-    for (Display display : displays.values())
-      display.paintHover(gc, x, y, getX(), getY());
+  public void paintHover(GC gc, int x, int y, boolean selected) {
+    if (contains(x, y)) {
+      paintSelectableOutline(gc);
+      for (Display display : displays.values())
+        display.paintHover(gc, x, y, getX(), getY());
+    }
+    if (!selected && !contains(x, y) && atCorner(x, y)) paintResizeHover(gc, x, y);
+  }
+
+  public boolean atCorner(int x, int y) {
+    return atBottomLeftCorner(x, y) || atBottomRightCorner(x, y) || atTopLeftCorner(x, y) || atTopRightCorner(x, y);
+  }
+
+  public boolean atTopLeftCorner(int x, int y) {
+    return distance(new Point(getX(), getY()), new Point(x, y)) < 5;
+  }
+
+  public boolean atTopRightCorner(int x, int y) {
+    return distance(new Point(getX() + getWidth(), getY()), new Point(x, y)) < 5;
+  }
+
+  public boolean atBottomLeftCorner(int x, int y) {
+    return distance(new Point(getX(), getY() + getHeight()), new Point(x, y)) < 5;
+  }
+
+  public boolean atBottomRightCorner(int x, int y) {
+    return distance(new Point(getX() + getWidth(), getY() + getHeight()), new Point(x, y)) < 5;
+  }
+
+  private double distance(Point p1, Point p2) {
+    int dx = p1.x - p2.x;
+    int dy = p1.y - p2.y;
+    return Math.sqrt((dx * dx) + (dy * dy));
+  }
+
+  private void paintResizeHover(GC gc, int x, int y) {
+    if (atTopLeftCorner(x, y)) paintResizeTopLeft(gc);
+    if (atTopRightCorner(x, y)) paintResizeTopRight(gc);
+    if (atBottomLeftCorner(x, y)) paintResizeBottomLeft(gc);
+    if (atBottomRightCorner(x, y)) paintResizeBottomRight(gc);
+  }
+
+  private void paintResizeTopLeft(GC gc) {
+    Color c = gc.getForeground();
+    gc.setForeground(Diagram.GREEN);
+    gc.drawLine(getX() - EAR_GAP, getY() - EAR_GAP, getX() + EAR_GAP + EAR_LENGTH, getY() - EAR_GAP);
+    gc.drawLine(getX() - EAR_GAP, getY() - EAR_GAP, getX() - EAR_GAP, getY() + EAR_GAP + EAR_LENGTH);
+    gc.setForeground(c);
+  }
+
+  private void paintResizeBottomLeft(GC gc) {
+    Color c = gc.getForeground();
+    gc.setForeground(Diagram.GREEN);
+    gc.drawLine(getX() - EAR_GAP, getY() + (getHeight() + EAR_GAP), getX() - EAR_GAP, getY() + (getHeight() - EAR_LENGTH));
+    gc.drawLine(getX() - EAR_GAP, getY() + (getHeight() + EAR_GAP), getX() + EAR_GAP + EAR_LENGTH, getY() + (getHeight() + EAR_GAP));
+    gc.setForeground(c);
+  }
+
+  private void paintResizeBottomRight(GC gc) {
+    Color c = gc.getForeground();
+    gc.setForeground(Diagram.GREEN);
+    gc.drawLine(getX() + (getWidth() + EAR_GAP), getY() + (getHeight() + EAR_GAP), getX() + (getWidth() + EAR_GAP), getY() + (getHeight() - EAR_LENGTH));
+    gc.drawLine(getX() + (getWidth() + EAR_GAP), getY() + (getHeight() + EAR_GAP), getX() + (getWidth() - EAR_LENGTH), getY() + (getHeight() + EAR_GAP));
+    gc.setForeground(c);
+  }
+
+  private void paintResizeTopRight(GC gc) {
+    Color c = gc.getForeground();
+    gc.setForeground(Diagram.GREEN);
+    gc.drawLine(getX() + getWidth() + EAR_GAP, getY() - EAR_GAP, getX() + (getWidth() - EAR_LENGTH), getY() - EAR_GAP);
+    gc.drawLine(getX() + getWidth() + EAR_GAP, getY() - EAR_GAP, getX() + getWidth() + EAR_GAP, getY() + EAR_GAP + EAR_LENGTH);
+    gc.setForeground(c);
   }
 
   private void paintSelectableOutline(GC gc) {
@@ -158,7 +230,7 @@ public class Node implements Selectable {
     int width = gc.getLineWidth();
     gc.setLineWidth(1);
     gc.setForeground(XModeler.getXModeler().getDisplay().getSystemColor(SWT.COLOR_RED));
-    gc.drawRectangle(getX() - 4, getY() - 4, getWidth() + 8, getHeight() + 8);
+    gc.drawRectangle(getX() - SELECTION_GAP, getY() - SELECTION_GAP, getWidth() + (SELECTION_GAP * 2), getHeight() + (SELECTION_GAP * 2));
     gc.setForeground(c);
     gc.setLineWidth(width);
   }
@@ -168,7 +240,7 @@ public class Node implements Selectable {
     int width = gc.getLineWidth();
     gc.setLineWidth(2);
     gc.setForeground(XModeler.getXModeler().getDisplay().getSystemColor(SWT.COLOR_RED));
-    gc.drawRectangle(getX() - 4, getY() - 4, getWidth() + 8, getHeight() + 8);
+    gc.drawRectangle(getX() - SELECTION_GAP, getY() - SELECTION_GAP, getWidth() + (SELECTION_GAP * 2), getHeight() + (SELECTION_GAP * 2));
     gc.setForeground(c);
     gc.setLineWidth(width);
   }
