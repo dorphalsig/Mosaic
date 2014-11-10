@@ -6,20 +6,23 @@ import java.util.Hashtable;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.browser.LocationEvent;
+import org.eclipse.swt.browser.LocationListener;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Tree;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import tool.clients.Client;
+import tool.clients.EventHandler;
 import tool.xmodeler.XModeler;
 import xos.Message;
 import xos.Value;
 
-public class EditorClient extends Client {
+public class EditorClient extends Client implements LocationListener {
 
   public static void start(CTabFolder tabFolder, int style) {
     EditorClient.tabFolder = tabFolder;
@@ -29,11 +32,14 @@ public class EditorClient extends Client {
     return theClient;
   }
 
+  static final Color                   LINE_HIGHLIGHT = new Color(XModeler.getXModeler().getDisplay(), 192, 192, 192);
+
   static EditorClient                  theClient;
   static CTabFolder                    tabFolder;
-  static Hashtable<String, CTabItem>   tabs     = new Hashtable<String, CTabItem>();
-  static Hashtable<String, Browser>    browsers = new Hashtable<String, Browser>();
-  static Hashtable<String, TextEditor> editors  = new Hashtable<String, TextEditor>();
+  static boolean                       browserLocked  = true;
+  static Hashtable<String, CTabItem>   tabs           = new Hashtable<String, CTabItem>();
+  static Hashtable<String, Browser>    browsers       = new Hashtable<String, Browser>();
+  static Hashtable<String, TextEditor> editors        = new Hashtable<String, TextEditor>();
 
   public EditorClient() {
     super("com.ceteva.text");
@@ -99,12 +105,33 @@ public class EditorClient extends Client {
       String path = location.toString();
       path = path.substring(0, path.length() - 4); // delete "/bin" from
       // string
-      path += "file/Welcome/welcome.html";
+      path += "web/index.html";
       // showBrowser(path);
       return new Value(path);
     }
     if (message.hasName("getText")) return getText(message);
     return super.callMessage(message);
+  }
+
+  public void changed(LocationEvent event) {
+  }
+
+  public void changing(LocationEvent event) {
+    if (browserLocked) {
+      event.doit = false;
+      Browser browser = (Browser) event.widget;
+      EventHandler handler = getHandler();
+      Message message = handler.newMessage("urlRequest", 2);
+      message.args[0] = new Value(getId(browser));
+      message.args[1] = new Value(event.location);
+      handler.raiseEvent(message);
+    }
+  }
+
+  private String getId(Browser browser) {
+    for (String id : browsers.keySet())
+      if (browsers.get(id) == browser) return id;
+    return null;
   }
 
   private Value getText(final Message message) {
@@ -124,6 +151,15 @@ public class EditorClient extends Client {
 
   private void inflateEditorElement(Node editor) {
     if (editor.getNodeName().equals("TextEditor")) inflateTextEditor(editor);
+    if (editor.getNodeName().equals("Browser")) inflateBrowser(editor);
+  }
+
+  private void inflateBrowser(Node browser) {
+    String id = XModeler.attributeValue(browser, "id");
+    String label = XModeler.attributeValue(browser, "label");
+    String tooltip = XModeler.attributeValue(browser, "toolTip");
+    String url = XModeler.attributeValue(browser, "url");
+    newBrowser(id, label, tooltip, url);
   }
 
   private void inflateTextEditor(Node textEditor) {
@@ -159,20 +195,27 @@ public class EditorClient extends Client {
   }
 
   private void newBrowser(Message message) {
-    final Value id = message.args[0];
-    final Value label = message.args[1];
-    Value tootip = message.args[2];
-    Value url = message.args[3];
-    Display.getDefault().syncExec(new Runnable() {
+    String id = message.args[0].strValue();
+    String label = message.args[1].strValue();
+    String tooltip = message.args[2].strValue();
+    String url = message.args[3].strValue();
+    newBrowser(id, label, tooltip, url);
+  }
+
+  private void newBrowser(final String id, final String label, String tooltip, final String url) {
+    runOnDisplay(new Runnable() {
       public void run() {
         CTabItem tabItem = new CTabItem(tabFolder, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL);
-        tabItem.setText(label.strValue());
-        tabs.put(id.strValue(), tabItem);
+        tabItem.setText(label);
+        tabs.put(id, tabItem);
         Browser browser = new Browser(tabFolder, SWT.BORDER);
         tabItem.setControl(browser);
         browser.setText("<b> Nothing </b>");
-        browsers.put(id.strValue(), browser);
+        if (url.length() != 0) browser.setUrl(url);
+        browsers.put(id, browser);
         browser.setVisible(true);
+        browser.addLocationListener(EditorClient.this);
+        tabFolder.setSelection(tabItem);
       }
     });
   }
@@ -195,6 +238,7 @@ public class EditorClient extends Client {
         TextEditor editor = new TextEditor(id, label, tabFolder, editable, lineNumbers, text);
         tabItem.setControl(editor.getText());
         editors.put(id, editor);
+        tabFolder.setSelection(tabItem);
       }
     });
   }
@@ -221,7 +265,76 @@ public class EditorClient extends Client {
       setDirty(message);
     else if (message.hasName("setClean"))
       setClean(message);
+    else if (message.hasName("showLine"))
+      showLine(message);
+    else if (message.hasName("addLineHighlight"))
+      addLineHighlight(message);
+    else if (message.hasName("clearHighlights"))
+      clearHighlights(message);
     else super.sendMessage(message);
+  }
+
+  private void clearHighlights(Message message) {
+    String id = message.args[0].strValue();
+    clearHighlights(id);
+  }
+
+  private void addLineHighlight(Message message) {
+    String id = message.args[0].strValue();
+    int line = message.args[1].intValue;
+    addLineHighlight(id, line);
+  }
+
+  private void showLine(Message message) {
+    String id = message.args[0].strValue();
+    int line = message.args[1].intValue;
+    showLine(id, line);
+  }
+
+  private void showLine(final String id, final int line) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        if (editors.containsKey(id))
+          editors.get(id).showLine(line);
+        else System.out.println("cannot find editor: " + id);
+      }
+    });
+  }
+
+  private void clearHighlights(final String id) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        if (editors.containsKey(id))
+          editors.get(id).clearHighlights();
+        else System.out.println("cannot find editor: " + id);
+      }
+    });
+  }
+
+  private void addLineHighlight(final String id, final int line) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        if (editors.containsKey(id))
+          editors.get(id).addLineHighlight(line);
+        else System.out.println("cannot find editor: " + id);
+      }
+    });
+  }
+
+  private void setClean(Message message) {
+    String id = message.args[0].strValue();
+    setClean(id);
+  }
+
+  public void setClean(String id) {
+    final CTabItem item = tabs.get(id);
+    final TextEditor editor = editors.get(id);
+    runOnDisplay(new Runnable() {
+      public void run() {
+        editor.setDirty(false);
+        item.setText(editor.getLabel());
+      }
+    });
   }
 
   private void setDirty(Message message) {
@@ -229,9 +342,15 @@ public class EditorClient extends Client {
     setDirty(id);
   }
 
-  private void setClean(Message message) {
-    String id = message.args[0].strValue();
-    setClean(id);
+  public void setDirty(String id) {
+    final CTabItem item = tabs.get(id);
+    final TextEditor editor = editors.get(id);
+    runOnDisplay(new Runnable() {
+      public void run() {
+        editor.setDirty(true);
+        item.setText("*" + editor.getLabel());
+      }
+    });
   }
 
   private void setText(Message message) {
@@ -256,7 +375,9 @@ public class EditorClient extends Client {
       final Browser browser = browsers.get(id.strValue());
       Display.getDefault().syncExec(new Runnable() {
         public void run() {
+          browserLocked = false;
           browser.setUrl(url.strValue());
+          browserLocked = true;
           tabFolder.setFocus();
           tabFolder.setSelection(tabs.get(id.strValue()));
         }
@@ -271,29 +392,15 @@ public class EditorClient extends Client {
       TextEditor editor = editors.get(id);
       editor.writeXML(out, tabFolder.getSelection() == item, item.getText(), item.getToolTipText());
     }
+    for (String id : browsers.keySet()) {
+      CTabItem tab = tabs.get(id);
+      String label = tab.getText();
+      String tooltip = tab.getToolTipText();
+      Browser browser = browsers.get(id);
+      String url = browser.getUrl();
+      out.print("<Browser id='" + id + "' label='" + label + "' tooltip='" + tooltip + "' url='" + url + "'/>");
+    }
     out.print("</Editors>");
-  }
-
-  public void setClean(String id) {
-    final CTabItem item = tabs.get(id);
-    final TextEditor editor = editors.get(id);
-    runOnDisplay(new Runnable() {
-      public void run() {
-        editor.setDirty(false);
-        item.setText(editor.getLabel());
-      }
-    });
-  }
-
-  public void setDirty(String id) {
-    final CTabItem item = tabs.get(id);
-    final TextEditor editor = editors.get(id);
-    runOnDisplay(new Runnable() {
-      public void run() {
-        editor.setDirty(true);
-        item.setText("*" + editor.getLabel());
-      }
-    });
   }
 
 }

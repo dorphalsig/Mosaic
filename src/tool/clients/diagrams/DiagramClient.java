@@ -33,9 +33,7 @@ public class DiagramClient extends Client {
   static DiagramClient               theClient;
   static CTabFolder                  tabFolder;
   static Hashtable<String, CTabItem> tabs        = new Hashtable<String, CTabItem>();
-
   static Hashtable<String, Diagram>  diagrams    = new Hashtable<String, Diagram>();
-
   static Font                        diagramFont = new Font(XModeler.getXModeler().getDisplay(), new FontData("Courier New", 12, SWT.NO));
 
   public DiagramClient() {
@@ -214,7 +212,7 @@ public class DiagramClient extends Client {
     String pos = XModeler.attributeValue(node, "pos");
     int x = Integer.parseInt(XModeler.attributeValue(node, "x"));
     int y = Integer.parseInt(XModeler.attributeValue(node, "y"));
-    boolean editable = XModeler.attributeValue(node, "editable","true").equals("true");
+    boolean editable = XModeler.attributeValue(node, "editable", "true").equals("true");
     boolean underline = XModeler.attributeValue(node, "underline").equals("true");
     boolean condense = XModeler.attributeValue(node, "condense").equals("true");
     int red = Integer.parseInt(XModeler.attributeValue(node, "red"));
@@ -574,6 +572,10 @@ public class DiagramClient extends Client {
       newWaypoint(message);
     else if (message.hasName("delete"))
       delete(message);
+    else if (message.hasName("setEdgeTarget"))
+      setEdgeTarget(message);
+    else if (message.hasName("setEdgeSource"))
+      setEdgeSource(message);
     else super.sendMessage(message);
   }
 
@@ -597,6 +599,22 @@ public class DiagramClient extends Client {
     });
   }
 
+  private void setEdgeSource(Message message) {
+    String edgeId = message.args[0].strValue();
+    String portId = message.args[1].strValue();
+    setEdgeSource(edgeId, portId);
+  }
+
+  private void setEdgeSource(final String edgeId, final String portId) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (Diagram d : diagrams.values()) {
+          d.setEdgeSource(edgeId, portId);
+        }
+      }
+    });
+  }
+
   private void setEdgeStyle(final Message message) {
     runOnDisplay(new Runnable() {
       public void run() {
@@ -608,6 +626,22 @@ public class DiagramClient extends Client {
               edge.setLineStyle(style.intValue);
             }
           }
+        }
+      }
+    });
+  }
+
+  private void setEdgeTarget(Message message) {
+    String edgeId = message.args[0].strValue();
+    String portId = message.args[1].strValue();
+    setEdgeTarget(edgeId, portId);
+  }
+
+  private void setEdgeTarget(final String edgeId, final String portId) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (Diagram d : diagrams.values()) {
+          d.setEdgeTarget(edgeId, portId);
         }
       }
     });

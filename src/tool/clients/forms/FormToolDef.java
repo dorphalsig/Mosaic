@@ -1,5 +1,7 @@
 package tool.clients.forms;
 
+import java.io.PrintStream;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -23,6 +25,18 @@ public class FormToolDef implements SelectionListener {
     this.icon = icon;
   }
 
+  public String getEvent() {
+    return event;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public String getIcon() {
+    return icon;
+  }
+
   public void populateToolBar(ToolBar toolBar) {
     ToolItem item = new ToolItem(toolBar, SWT.PUSH);
     ImageData imageData = new ImageData(icon);
@@ -36,5 +50,9 @@ public class FormToolDef implements SelectionListener {
 
   public void widgetSelected(SelectionEvent event) {
     FormsClient.theClient().toolItemEvent(this.event, id);
+  }
+
+  public void writeXML(PrintStream out) {
+    out.print("<FormToolDef id='" + getId() + "' event='" + getEvent() + "' icon = '" + getIcon() + "'/>");
   }
 }

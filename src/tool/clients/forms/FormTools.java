@@ -1,15 +1,37 @@
 package tool.clients.forms;
 
+import java.io.PrintStream;
 import java.util.Vector;
 
 import org.eclipse.swt.widgets.ToolBar;
 
 public class FormTools {
 
+  String              id;
   Vector<FormToolDef> tools = new Vector<FormToolDef>();
+
+  public FormTools(String id) {
+    super();
+    this.id = id;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public Vector<FormToolDef> getTools() {
+    return tools;
+  }
 
   public void addTool(String toolName, String id) {
     tools.add(new FormToolDef(eventName(toolName), id, iconFile(toolName)));
+  }
+
+  public void writeXML(PrintStream out) {
+    out.print("<FormTools id='" + getId() + "'>");
+    for (FormToolDef def : tools)
+      def.writeXML(out);
+    out.print("</FormTools>");
   }
 
   private String iconFile(String toolName) {

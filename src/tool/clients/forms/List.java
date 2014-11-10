@@ -1,5 +1,6 @@
 package tool.clients.forms;
 
+import java.io.PrintStream;
 import java.util.Hashtable;
 
 import org.eclipse.swt.SWT;
@@ -26,6 +27,17 @@ public class List {
 
   public String getId() {
     return id;
+  }
+
+  public void writeXML(PrintStream out) {
+    out.print("<List id='" + getId() + "'");
+    out.print(" x='" + list.getLocation().x + "'");
+    out.print(" y='" + list.getLocation().y + "'");
+    out.print(" width='" + list.getSize().x + "'");
+    out.print(" height='" + list.getSize().y + "'>");
+    for(String id : items.keySet())
+      out.print("<Item id='" + id + "' value='" + items.get(id) + "'/>");
+    out.print("</List>");
   }
 
 }

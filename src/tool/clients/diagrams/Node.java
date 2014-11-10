@@ -7,6 +7,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.GC;
 
+import tool.clients.menus.MenuClient;
 import tool.xmodeler.XModeler;
 import xos.Message;
 import xos.Value;
@@ -124,7 +125,7 @@ public class Node implements Selectable {
   }
 
   public void newPort(String id, int x, int y, int width, int height) {
-    Port port = new Port(id, x, y, width, height);
+    Port port = new Port(id, x, y, Math.min(width, getWidth()), Math.min(height, getHeight()));
     ports.put(id, port);
   }
 
@@ -179,6 +180,8 @@ public class Node implements Selectable {
     } else {
       for (Display display : displays.values())
         display.resize(id, width, height);
+      for (Port port : ports.values())
+        port.resize(id, width, height);
     }
   }
 
@@ -236,5 +239,15 @@ public class Node implements Selectable {
 
   public int maxX() {
     return getX() + getWidth();
+  }
+
+  public void paintPortHover(GC gc, int x, int y) {
+    for (Port port : ports.values()) {
+      if (port.contains(x - getX(), y - getY())) port.paintHover(gc, getX(), getY());
+    }
+  }
+
+  public void rightClick(int x, int y) {
+    MenuClient.popup(id, x, y);
   }
 }

@@ -62,30 +62,26 @@ public class Edge {
     waypoints.add(new Waypoint("end", this, targetX, targetY));
   }
 
-  public void writeXML(PrintStream out) {
-    out.print("<Edge ");
-    out.print("id='" + getId() + "' ");
-    out.print("refx='" + getRefx() + "' ");
-    out.print("refy='" + getRefy() + "' ");
-    out.print("source='" + sourceNode.getId() + "' ");
-    out.print("target='" + targetNode.getId() + "' ");
-    out.print("sourcePort='" + sourcePort.getId() + "' ");
-    out.print("targetPort='" + targetPort.getId() + "' ");
-    out.print("sourceHead='" + getSourceHead() + "' ");
-    out.print("targetHead='" + getTargetHead() + "' ");
-    out.print("lineStyle='" + getLineStyle() + "' ");
-    out.print("red='" + getRed() + "' ");
-    out.print("green='" + getGreen() + "' ");
-    out.print("blue='" + getBlue() + "'>");
-    for (Waypoint waypoint : waypoints)
-      if (waypoint != start() && waypoint != end()) waypoint.writeXML(out);
-    for (Label label : labels)
-      label.writeXML(out);
-    out.print("</Edge>");
-  }
-
   public void addLabel(String id, String text, String pos, int x, int y, boolean editable, boolean underline, boolean condense, int red, int green, int blue, String font) {
     labels.add(new Label(this, id, text, pos, x, y, editable, underline, condense, red, green, blue, font));
+  }
+
+  private void alignEnd(Waypoint w) {
+    int portx = targetNode.getX() + targetPort.getX();
+    int porty = targetNode.getY() + targetPort.getY();
+    int width = targetPort.getWidth();
+    int height = targetPort.getHeight();
+    if (w.getX() >= portx && w.getX() <= portx + width) end().setX(w.getX());
+    if (w.getY() >= porty && w.getY() <= porty + height) end().setY(w.getY());
+  }
+
+  private void alignStart(Waypoint w) {
+    int portx = sourceNode.getX() + sourcePort.getX();
+    int porty = sourceNode.getY() + sourcePort.getY();
+    int width = sourcePort.getWidth();
+    int height = sourcePort.getHeight();
+    if (w.getX() >= portx && w.getX() <= portx + width) start().setX(w.getX());
+    if (w.getY() >= porty && w.getY() <= porty + height) start().setY(w.getY());
   }
 
   public Point bottomIntercept(Node node) {
@@ -114,6 +110,12 @@ public class Edge {
         DiagramClient.theClient().getHandler().raiseEvent(message);
       }
     }
+  }
+
+  private double distance(int x1, int y1, int x2, int y2) {
+    int dx = x1 - x2;
+    int dy = y1 - y2;
+    return Math.sqrt((dx * dx) + (dy * dy));
   }
 
   private void drawArrow(GC gc, int tipx, int tipy, int tailx, int taily, boolean filled, Color fill) {
@@ -302,12 +304,56 @@ public class Edge {
     }
   }
 
+  public void movedBy(Waypoint justMoved) {
+    if (justMoved != start() && justMoved != end()) {
+      int index = waypoints.indexOf(justMoved);
+      Waypoint w1 = waypoints.elementAt(index - 1);
+      Waypoint w2 = waypoints.elementAt(index + 1);
+      if (w1 == start()) alignStart(justMoved);
+      if (w2 == end()) alignEnd(justMoved);
+    }
+  }
+
   public void moveSourceBy(int dx, int dy) {
     waypoints.elementAt(0).moveBy(dx, dy);
   }
 
   public void moveTargetBy(int dx, int dy) {
     waypoints.elementAt(waypoints.size() - 1).moveBy(dx, dy);
+  }
+
+  public boolean near(Node node, int x, int y) {
+    Point p = topIntercept(node);
+    p = p == null ? leftIntercept(node) : p;
+    p = p == null ? rightIntercept(node) : p;
+    p = p == null ? bottomIntercept(node) : p;
+    if (p != null)
+      return distance(p.x, p.y, x, y) < 10;
+    else return false;
+  }
+
+  public Point intercept(Node node) {
+    Point p = topIntercept(node);
+    p = p == null ? leftIntercept(node) : p;
+    p = p == null ? rightIntercept(node) : p;
+    p = p == null ? bottomIntercept(node) : p;
+    return p;
+  }
+
+  public boolean nearEnd(int x, int y) {
+    return near(targetNode, x, y);
+  }
+
+  public boolean nearStart(int x, int y) {
+    return near(sourceNode, x, y);
+  }
+
+  public Point sourceIntercept() {
+    return intercept(sourceNode);
+  }
+
+  public Point targetIntercept() {
+    return intercept(targetNode);
   }
 
   public boolean newWaypoint(int x, int y) {
@@ -363,6 +409,24 @@ public class Edge {
     gc.setLineWidth(width);
   }
 
+  public void paintAligned(GC gc) {
+    int x = waypoints.elementAt(0).getX();
+    int y = waypoints.elementAt(0).getY();
+    int width = gc.getLineWidth();
+    gc.setLineWidth(LINE_WIDTH + 1);
+    Color c = gc.getForeground();
+    gc.setForeground(Diagram.RED);
+    for (int i = 1; i < waypoints.size(); i++) {
+      Waypoint wp = waypoints.elementAt(i);
+      gc.drawLine(x, y, wp.getX(), wp.getY());
+      if (i < waypoints.size() - 1) gc.fillOval(wp.getX() - 3, wp.getY() - 3, 6, 6);
+      x = wp.getX();
+      y = wp.getY();
+    }
+    gc.setLineWidth(width);
+    gc.setForeground(c);
+  }
+
   private void paintDecorations(GC gc) {
     Point topIntercept = topIntercept(targetNode);
     if (topIntercept != null && topIntercept.x >= 0 && topIntercept.y >= 0) drawTargetDecoration(gc, topIntercept.x, topIntercept.y, penultimate().x, penultimate().y);
@@ -385,6 +449,57 @@ public class Edge {
   public void paintHover(GC gc, int x, int y) {
     for (Label label : labels)
       label.paintHover(gc, x, y);
+  }
+
+  public void paintOrthogonal(GC gc, Waypoint waypoint) {
+    if (waypoint != start() && waypoint != end()) {
+      int index = waypoints.indexOf(waypoint);
+      int length = 30;
+      Waypoint pre = waypoints.elementAt(index - 1);
+      Waypoint post = waypoints.elementAt(index + 1);
+      Color c = gc.getForeground();
+      gc.setForeground(Diagram.RED);
+      if (pre.getX() == waypoint.getX() || post.getX() == waypoint.getX()) {
+        gc.drawOval(waypoint.getX() - length / 2, waypoint.getY() - length / 2, length, length);
+        gc.drawLine(waypoint.getX(), waypoint.getY() - length, waypoint.getX(), waypoint.getY() + length);
+      }
+      if (pre.getY() == waypoint.getY() || post.getY() == waypoint.getY()) {
+        gc.drawOval(waypoint.getX() - length / 2, waypoint.getY() - length / 2, length, length);
+        gc.drawLine(waypoint.getX() - length, waypoint.getY(), waypoint.getX() + length, waypoint.getY());
+      }
+      gc.setForeground(c);
+    }
+  }
+
+  public void paintSourceMoving(GC gc, int x, int y) {
+    paintMovingSourceOrTarget(gc, x, y, end().getX(), end().getY());
+  }
+
+  public void paintTargetMoving(GC gc, int x, int y) {
+    paintMovingSourceOrTarget(gc, start().getX(), start().getY(), x, y);
+  }
+
+  public void paintMovingSourceOrTarget(GC gc, int startX, int startY, int endX, int endY) {
+    int x = startX;
+    int y = startY;
+    int width = gc.getLineWidth();
+    gc.setLineWidth(LINE_WIDTH);
+    Color c = gc.getBackground();
+    gc.setBackground(Diagram.BLACK);
+    for (int i = 1; i < waypoints.size() - 1; i++) {
+      Waypoint wp = waypoints.elementAt(i);
+      gc.drawLine(x, y, wp.getX(), wp.getY());
+      if (i < waypoints.size() - 1) gc.fillOval(wp.getX() - 3, wp.getY() - 3, 6, 6);
+      x = wp.getX();
+      y = wp.getY();
+    }
+    gc.drawLine(x, y, endX, endY);
+    gc.setBackground(c);
+    for (Label label : labels)
+      label.paint(gc);
+    drawSourceDecoration(gc, startX, startY, waypoints.elementAt(1).getX(), waypoints.elementAt(1).getY());
+    drawTargetDecoration(gc, endX, endY, waypoints.elementAt(waypoints.size() - 2).getX(), waypoints.elementAt(waypoints.size() - 2).getY());
+    gc.setLineWidth(width);
   }
 
   private Waypoint penultimate() {
@@ -468,6 +583,19 @@ public class Edge {
       label.setText(id, text);
   }
 
+  public boolean sharesSegment(Edge edge) {
+    for (int i = 0; i < getWaypoints().size() - 1; i++) {
+      Waypoint w11 = getWaypoints().elementAt(i);
+      Waypoint w12 = getWaypoints().elementAt(i + 1);
+      for (int j = 0; j < edge.getWaypoints().size() - 1; j++) {
+        Waypoint w21 = edge.getWaypoints().elementAt(j);
+        Waypoint w22 = edge.getWaypoints().elementAt(j + 1);
+        if (w11.colocated(w21) && w12.colocated(w22)) return true;
+      }
+    }
+    return false;
+  }
+
   public Waypoint start() {
     return waypoints.get(0);
   }
@@ -491,23 +619,44 @@ public class Edge {
     return "Edge(" + waypoints + ")";
   }
 
-  public void paintOrthogonal(GC gc, Waypoint waypoint) {
-    if (waypoint != start() && waypoint != end()) {
-      int index = waypoints.indexOf(waypoint);
-      int length = 30;
-      Waypoint pre = waypoints.elementAt(index - 1);
-      Waypoint post = waypoints.elementAt(index + 1);
-      Color c = gc.getForeground();
-      gc.setForeground(Diagram.RED);
-      if (pre.getX() == waypoint.getX() || post.getX() == waypoint.getX()) {
-        gc.drawOval(waypoint.getX() - length / 2, waypoint.getY() - length / 2, length, length);
-        gc.drawLine(waypoint.getX(), waypoint.getY() - length, waypoint.getX(), waypoint.getY() + length);
-      }
-      if (pre.getY() == waypoint.getY() || post.getY() == waypoint.getY()) {
-        gc.drawOval(waypoint.getX() - length / 2, waypoint.getY() - length / 2, length, length);
-        gc.drawLine(waypoint.getX() - length, waypoint.getY(), waypoint.getX() + length, waypoint.getY());
-      }
-      gc.setForeground(c);
-    }
+  public void writeXML(PrintStream out) {
+    out.print("<Edge ");
+    out.print("id='" + getId() + "' ");
+    out.print("refx='" + getRefx() + "' ");
+    out.print("refy='" + getRefy() + "' ");
+    out.print("source='" + sourceNode.getId() + "' ");
+    out.print("target='" + targetNode.getId() + "' ");
+    out.print("sourcePort='" + sourcePort.getId() + "' ");
+    out.print("targetPort='" + targetPort.getId() + "' ");
+    out.print("sourceHead='" + getSourceHead() + "' ");
+    out.print("targetHead='" + getTargetHead() + "' ");
+    out.print("lineStyle='" + getLineStyle() + "' ");
+    out.print("red='" + getRed() + "' ");
+    out.print("green='" + getGreen() + "' ");
+    out.print("blue='" + getBlue() + "'>");
+    for (Waypoint waypoint : waypoints)
+      if (waypoint != start() && waypoint != end()) waypoint.writeXML(out);
+    for (Label label : labels)
+      label.writeXML(out);
+    out.print("</Edge>");
+  }
+
+  public void reconnectTarget(Node node, Port port) {
+    if (targetPort != null) targetPort.getTargets().remove(this);
+    setTargetNode(node);
+    setTargetPort(port);
+    port.getTargets().add(this);
+    end().setX(node.getX() + port.getX() + (port.getWidth() / 2));
+    end().setY(node.getY() + port.getY() + (port.getHeight() / 2));
+  }
+
+  public void reconnectSource(Node node, Port port) {
+    if (sourcePort != null) sourcePort.getSources().remove(this);
+    setSourceNode(node);
+    setSourcePort(port);
+    port.getSources().add(this);
+    start().setX(node.getX() + port.getX() + (port.getWidth() / 2));
+    start().setY(node.getY() + port.getY() + (port.getHeight() / 2));
+
   }
 }

@@ -3,6 +3,9 @@ package tool.clients.diagrams;
 import java.io.PrintStream;
 import java.util.Vector;
 
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.GC;
+
 public class Port {
 
   Vector<Edge> sources = new Vector<Edge>();
@@ -85,4 +88,17 @@ public class Port {
     out.print("<Port id='" + getId() + "' x='" + getX() + "' y='" + getY() + "' width='" + getWidth() + "' height='" + getHeight() + "'/>");
   }
 
+  public void resize(String id, int width, int height) {
+    if (getId().equals(id)) {
+      this.width = width;
+      this.height = height;
+    }
+  }
+
+  public void paintHover(GC gc, int x, int y) {
+    Color c = gc.getForeground();
+    gc.setForeground(Diagram.RED);
+    gc.drawRectangle(x + getX(), y + getY(), getWidth(), getHeight());
+    gc.setForeground(c);
+  }
 }

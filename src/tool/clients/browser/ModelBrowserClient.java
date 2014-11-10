@@ -7,6 +7,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.TreeEditor;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.graphics.Color;
@@ -14,6 +16,7 @@ import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
@@ -22,7 +25,6 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
-import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.swt.widgets.TreeItem;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -34,12 +36,7 @@ import tool.xmodeler.XModeler;
 import xos.Message;
 import xos.Value;
 
-public class ModelBrowserClient extends Client implements MouseListener, Listener {
-
-  /*
-   * [modelBrowserClosed(modelBrowserId)] [focusGained(modelBrowserId)] [focusLost(modelBrowserId)] [textChanged(nodeId,text)] [getEditableText(nodeId)] [selected(nodeId)]
-   * [doubleSelected(nodeId)] [expanded(nodeId)] [rightClickMenuSelected(ownerId,option)] [undo(diagramId)] [redo{diagramId)]
-   */
+public class ModelBrowserClient extends Client implements MouseListener, Listener, KeyListener {
 
   public static CTabFolder getTabFolder() {
     return tabFolder;
@@ -53,7 +50,7 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
     return theClient;
   }
 
-  static Font                        labelFont    = new Font(XModeler.getXModeler().getDisplay(), new FontData("Courier New", 10, SWT.BOLD));
+  static Font                        labelFont    = new Font(XModeler.getXModeler().getDisplay(), new FontData("Courier New", 12, SWT.NONE));
 
   final static int                   RIGHT_BUTTON = 3;
   static CTabFolder                  tabFolder;
@@ -89,7 +86,8 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
         public void run() {
           TreeItem parent = items.get(parentId);
           String iconFile = "icons/" + icon + ".gif";
-          Image image = new Image(XModeler.getXModeler().getDisplay(), iconFile);
+          ImageData data = new ImageData(iconFile);
+          Image image = new Image(XModeler.getXModeler().getDisplay(), data);
           TreeItem item = new TreeItem(parent, SWT.NONE, (index == -1) ? parent.getItemCount() : index);
           images.put(nodeId, icon);
           items.put(nodeId, item);
@@ -106,7 +104,8 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
     Display.getDefault().syncExec(new Runnable() {
       public void run() {
         String iconFile = "icons/" + icon + ".gif";
-        Image image = new Image(XModeler.getXModeler().getDisplay(), iconFile);
+        ImageData data = new ImageData(iconFile);
+        Image image = new Image(XModeler.getXModeler().getDisplay(), data);
         Tree tree = trees.get(parentId);
         TreeItem item = new TreeItem(tree, SWT.NONE, (index == -1) ? tree.getItemCount() : index);
         images.put(nodeId, icon);
@@ -125,12 +124,14 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
         CTabItem tabItem = new CTabItem(tabFolder, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL);
         tabItem.setText(name);
         tabs.put(id, tabItem);
-        Tree tree = new Tree(tabFolder, SWT.NONE);
+        Tree tree = new Tree(tabFolder, SWT.VIRTUAL);
+        tree.addKeyListener(ModelBrowserClient.this);
         tabItem.setControl(tree);
         trees.put(id, tree);
         tree.addMouseListener(ModelBrowserClient.this);
         tree.addListener(SWT.Expand, ModelBrowserClient.this);
         tree.addListener(SWT.Selection, ModelBrowserClient.this);
+        tabFolder.setSelection(tabItem);
       }
     });
   }
@@ -208,6 +209,18 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
         tabFolder.redraw();
       }
     });
+  }
+
+  private String getId(Tree tree) {
+    for (String id : trees.keySet())
+      if (trees.get(id) == tree) return id;
+    return null;
+  }
+
+  private String getId(TreeItem item) {
+    for (String id : items.keySet())
+      if (items.get(id) == item) return id;
+    return null;
   }
 
   public void handleEvent(Event event) {
@@ -288,6 +301,12 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
     for (String id : items.keySet())
       if (items.get(id) == item) return id;
     return null;
+  }
+
+  public void keyPressed(KeyEvent e) {
+  }
+
+  public void keyReleased(KeyEvent event) {
   }
 
   public void mouseDoubleClick(MouseEvent event) {

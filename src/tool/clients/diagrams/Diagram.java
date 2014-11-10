@@ -35,7 +35,7 @@ import xos.Value;
 public class Diagram implements MouseListener, PaintListener, MouseMoveListener, KeyListener {
 
   enum MouseMode {
-    NONE, SELECTED, NEW_EDGE, DOUBLE_CLICK
+    NONE, SELECTED, NEW_EDGE, DOUBLE_CLICK, MOVE_TARGET, MOVE_SOURCE
   };
 
   class Polar {
@@ -120,6 +120,7 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
   Palette                 palette;
   Canvas                  canvas;
   ScrolledComposite       scroller;
+  Edge                    selectedEdge           = null;
   int                     render                 = 0;
   int                     firstX;
   int                     firstY;
@@ -158,6 +159,37 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
       m.args[1] = new Value(sourceId);
       m.args[2] = new Value(targetId);
       DiagramClient.theClient().getHandler().raiseEvent(m);
+    }
+  }
+
+  private void checkMovedEdge() {
+    // Have we arrived over a port?
+    if (mode == MouseMode.MOVE_SOURCE)
+      checkMovedSourceEdge();
+    else checkMovedTargetEdge();
+  }
+
+  private void checkMovedSourceEdge() {
+    boolean reconnected = false;
+    for (Node n : nodes.values()) {
+      for (Port p : n.getPorts().values()) {
+        if (!reconnected && p.contains(lastX - n.getX(), lastY - n.getY())) {
+          reconnectEdgeSource(selectedEdge, n, p);
+          reconnected = true;
+        }
+      }
+    }
+  }
+
+  private void checkMovedTargetEdge() {
+    boolean reconnected = false;
+    for (Node n : nodes.values()) {
+      for (Port p : n.getPorts().values()) {
+        if (!reconnected && p.contains(lastX - n.getX(), lastY - n.getY())) {
+          reconnectEdgeTarget(selectedEdge, n, p);
+          reconnected = true;
+        }
+      }
     }
   }
 
@@ -212,13 +244,14 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     }
     if (edges.containsKey(id)) {
       Edge edge = edges.get(id);
-      if (edge != null) edges.remove(edge);
+      if (edge != null) edges.remove(id);
     }
     redraw();
   }
 
   private void deselect() {
     selection.clear();
+    selectedEdge = null;
   }
 
   public void editText(String id) {
@@ -364,7 +397,6 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
       select(event.x, event.y);
       lastX = event.x;
       lastY = event.y;
-      mode = MouseMode.SELECTED;
       redraw();
     } else if (palette.currentToolIsEdge()) {
       deselect();
@@ -435,11 +467,18 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
           }
         }
       });
-    } else if (mode == MouseMode.NEW_EDGE) {
+    }
+    if (mode == MouseMode.NEW_EDGE) {
       lastX = event.x;
       lastY = event.y;
       redraw();
-    } else {
+    }
+    if (movingEdgeEnd()) {
+      lastX = event.x;
+      lastY = event.y;
+      redraw();
+    }
+    if (mode == MouseMode.NONE) {
       lastX = event.x;
       lastY = event.y;
       redraw();
@@ -450,6 +489,7 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     scale(event);
     if (mode == MouseMode.NEW_EDGE) checkEdgeCreation(event.x, event.y);
     if (mode == MouseMode.SELECTED) sendMoveSelectedEvents();
+    if (movingEdgeEnd()) checkMovedEdge();
     mode = MouseMode.NONE;
     redraw();
   }
@@ -460,6 +500,10 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     for (Edge edge : edges.values())
       edge.move(id, x, y);
     redraw();
+  }
+
+  private boolean movingEdgeEnd() {
+    return mode == MouseMode.MOVE_SOURCE || mode == MouseMode.MOVE_TARGET;
   }
 
   public void newBox(String parentId, String id, int x, int y, int width, int height, int curve, boolean top, boolean right, boolean bottom, boolean left, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue) {
@@ -561,34 +605,8 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
 
   private void paintAlignment(GC gc) {
     if (mode == MouseMode.SELECTED) {
-      for (Node node1 : nodes.values())
-        for (Node node2 : nodes.values())
-          if (node1 != node2 && (selection.contains(node1) || selection.contains(node2))) {
-            int[] style = gc.getLineDash();
-            Color c = gc.getForeground();
-            gc.setForeground(RED);
-            gc.setLineDash(new int[] { 1, 2 });
-            int x1 = node1.getX();
-            int y1 = node1.getY();
-            int w1 = node1.getWidth();
-            int h1 = node1.getHeight();
-            int x2 = node2.getX();
-            int y2 = node2.getY();
-            int w2 = node2.getWidth();
-            int h2 = node2.getHeight();
-            if (x1 == x2) gc.drawLine(x1, y1, x2, y2);
-            if (x1 + w1 == x2) gc.drawLine(x1 + w1, y1, x2, y2);
-            if (x1 == x2 + w2) gc.drawLine(x1, y1, x2 + w2, y2);
-            if (x1 + w1 == x2 + w2) gc.drawLine(x1 + w1, y1, x2 + w2, y2);
-            if (y1 == y2) gc.drawLine(x1, y1, x2, y2);
-            if (y1 + h1 == y2) gc.drawLine(x1, y1 + h1, x2, y2);
-            if (y1 == y2 + h2) gc.drawLine(x1, y1, x2, y2 + h2);
-            if (y1 + h1 == y2 + h2) gc.drawLine(x1, y1 + h1, x2, y2 + h2);
-            if (x1 + (w1 / 2) == x2 + (w2 / 2)) gc.drawLine(x1 + (w1 / 2), y1, x2 + (w2 / 2), y2);
-            if (y1 + (h1 / 2) == y2 + (h2 / 2)) gc.drawLine(x1, y1 + (h1 / 2), x2, y2 + (h2 / 2));
-            gc.setForeground(c);
-            gc.setLineDash(style);
-          }
+      paintNodeAlignment(gc);
+      paintEdgeAlignment(gc);
     }
   }
 
@@ -599,16 +617,46 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     }
   }
 
+  private void paintEdgeAlignment(GC gc) {
+    for (Edge edge1 : edges.values()) {
+      for (Edge edge2 : edges.values()) {
+        if (edge1 != edge2) {
+          for (Waypoint w : edge1.getWaypoints()) {
+            if (selection.contains(w)) {
+              if (edge1.sharesSegment(edge2)) {
+                edge1.paintAligned(gc);
+                edge2.paintAligned(gc);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
   private void paintEdges(GC gc) {
-    for (Edge edge : edges.values())
-      edge.paint(gc);
+    for (Edge edge : edges.values()) {
+      if ((mode != MouseMode.MOVE_SOURCE && mode != MouseMode.MOVE_TARGET) || (selectedEdge != edge)) {
+        edge.paint(gc);
+      } else {
+        if (mode == MouseMode.MOVE_SOURCE) {
+          edge.paintSourceMoving(gc, lastX, lastY);
+        } else edge.paintTargetMoving(gc, lastX, lastY);
+      }
+    }
   }
 
   private void paintHover(GC gc) {
-    for (Node node : nodes.values())
-      node.paintHover(gc, lastX, lastY);
-    for (Edge edge : edges.values())
-      edge.paintHover(gc, lastX, lastY);
+    if (!movingEdgeEnd()) {
+      for (Node node : nodes.values())
+        node.paintHover(gc, lastX, lastY);
+      for (Edge edge : edges.values())
+        edge.paintHover(gc, lastX, lastY);
+    }
+    if (movingEdgeEnd()) {
+      for (Node node : nodes.values())
+        node.paintPortHover(gc, lastX, lastY);
+    }
   }
 
   private void paintNewEdge(GC gc) {
@@ -617,11 +665,40 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     }
   }
 
+  private void paintNodeAlignment(GC gc) {
+    for (Node node1 : nodes.values())
+      for (Node node2 : nodes.values())
+        if (node1 != node2 && (selection.contains(node1) || selection.contains(node2))) {
+          int[] style = gc.getLineDash();
+          Color c = gc.getForeground();
+          gc.setForeground(RED);
+          gc.setLineDash(new int[] { 1, 2 });
+          int x1 = node1.getX();
+          int y1 = node1.getY();
+          int w1 = node1.getWidth();
+          int h1 = node1.getHeight();
+          int x2 = node2.getX();
+          int y2 = node2.getY();
+          int w2 = node2.getWidth();
+          int h2 = node2.getHeight();
+          if (x1 == x2) gc.drawLine(x1, y1, x2, y2);
+          if (x1 + w1 == x2) gc.drawLine(x1 + w1, y1, x2, y2);
+          if (x1 == x2 + w2) gc.drawLine(x1, y1, x2 + w2, y2);
+          if (x1 + w1 == x2 + w2) gc.drawLine(x1 + w1, y1, x2 + w2, y2);
+          if (y1 == y2) gc.drawLine(x1, y1, x2, y2);
+          if (y1 + h1 == y2) gc.drawLine(x1, y1 + h1, x2, y2);
+          if (y1 == y2 + h2) gc.drawLine(x1, y1, x2, y2 + h2);
+          if (y1 + h1 == y2 + h2) gc.drawLine(x1, y1 + h1, x2, y2 + h2);
+          if (x1 + (w1 / 2) == x2 + (w2 / 2)) gc.drawLine(x1 + (w1 / 2), y1, x2 + (w2 / 2), y2);
+          if (y1 + (h1 / 2) == y2 + (h2 / 2)) gc.drawLine(x1, y1 + (h1 / 2), x2, y2 + (h2 / 2));
+          gc.setForeground(c);
+          gc.setLineDash(style);
+        }
+  }
+
   private void paintNodes(GC gc) {
     for (Node node : nodes.values())
-      if (!selection.contains(node)) node.paint(gc);
-    for (Node node : nodes.values())
-      if (selection.contains(node)) node.paint(gc);
+      node.paint(gc);
   }
 
   private void paintOn(GC gc) {
@@ -632,8 +709,8 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     gc.setTransform(transform);
     clear(gc);
     paintNewEdge(gc);
-    paintAlignment(gc);
     paintEdges(gc);
+    paintAlignment(gc);
     paintNodes(gc);
     paintHover(gc);
     paintSelected(gc);
@@ -641,8 +718,26 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
   }
 
   private void paintSelected(GC gc) {
-    for (Selectable selected : selection)
-      selected.paintSelected(gc);
+    if (!movingEdgeEnd()) {
+      for (Selectable selected : selection)
+        selected.paintSelected(gc);
+    }
+  }
+
+  private void reconnectEdgeSource(Edge edge, Node node, Port port) {
+    EventHandler handler = DiagramClient.theClient().getHandler();
+    Message message = handler.newMessage("edgeSourceReconnected", 2);
+    message.args[0] = new Value(edge.getId());
+    message.args[1] = new Value(port.getId());
+    handler.raiseEvent(message);
+  }
+
+  private void reconnectEdgeTarget(Edge edge, Node node, Port port) {
+    EventHandler handler = DiagramClient.theClient().getHandler();
+    Message message = handler.newMessage("edgeTargetReconnected", 2);
+    message.args[0] = new Value(edge.getId());
+    message.args[1] = new Value(port.getId());
+    handler.raiseEvent(message);
   }
 
   public void redraw() {
@@ -672,7 +767,13 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
   }
 
   public void rightClick(MouseEvent event) {
-    if (selection.isEmpty()) MenuClient.popup(id, event.x, event.y);
+    if (selection.isEmpty())
+      MenuClient.popup(id, event.x, event.y);
+    else {
+      if (selection.size() == 1) {
+        selection.elementAt(0).rightClick(event.x, event.y);
+      }
+    }
   }
 
   private void scale(MouseEvent event) {
@@ -689,15 +790,34 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     if (!selected) {
       for (Edge edge : edges.values()) {
         for (Waypoint waypoint : edge.getWaypoints()) {
-          if (waypoint.nearTo(x, y)) {
+          // Try the existing waypoints. Be careful to exclude the
+          // dummy start and end waypoints...
+          if (waypoint != edge.start() && waypoint != edge.end() && waypoint.nearTo(x, y)) {
+            mode = MouseMode.SELECTED;
             selection.add(waypoint);
             selected = true;
           }
         }
         if (!selected) {
+          // See if we are near an end. If so then we go into
+          // end reconnection mode...
+          if (edge.nearStart(x, y)) {
+            mode = MouseMode.MOVE_SOURCE;
+            selectedEdge = edge;
+            selected = true;
+          } else if (edge.nearEnd(x, y)) {
+            mode = MouseMode.MOVE_TARGET;
+            selectedEdge = edge;
+            selected = true;
+          }
+        }
+        if (!selected) {
+          // See if we are sufficiently near an edge to add a new waypoint...
           selected = edge.newWaypoint(x, y);
           for (Label label : edge.getLabels()) {
+            // See if we are selecting an edge...
             if (!selected && label.contains(x, y)) {
+              mode = MouseMode.SELECTED;
               selection.add(label);
               selected = true;
             }
@@ -707,6 +827,10 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     }
     for (Node node : nodes.values())
       if (!selected && node.contains(x, y)) {
+        // If all else fails we might be selecting a node.
+        // Trying nodes last allows the other elements behind
+        // nodes to be selected...
+        mode = MouseMode.SELECTED;
         selection.add(node);
         selected = true;
       }
@@ -735,6 +859,36 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
   private void sendMoveSelectedEvents() {
     for (Selectable selectable : selection)
       selectable.moveEvent();
+  }
+
+  public void setEdgeSource(String edgeId, String portId) {
+    for (Edge edge : edges.values()) {
+      if (edge.getId().equals(edgeId)) {
+        for (Node node : nodes.values()) {
+          for (Port port : node.getPorts().values()) {
+            if (port.getId().equals(portId)) {
+              edge.reconnectSource(node, port);
+              redraw();
+            }
+          }
+        }
+      }
+    }
+  }
+
+  public void setEdgeTarget(String edgeId, String portId) {
+    for (Edge edge : edges.values()) {
+      if (edge.getId().equals(edgeId)) {
+        for (Node node : nodes.values()) {
+          for (Port port : node.getPorts().values()) {
+            if (port.getId().equals(portId)) {
+              edge.reconnectTarget(node, port);
+              redraw();
+            }
+          }
+        }
+      }
+    }
   }
 
   public void setText(String id, String text) {

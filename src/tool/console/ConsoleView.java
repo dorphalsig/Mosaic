@@ -94,7 +94,7 @@ public class ConsoleView {
     Composite c1 = new Composite(parent, SWT.BORDER);
     c1.setLayout(new FillLayout());
     text = new StyledText(c1, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
-    // text.setWordWrap(true);
+    text.setWordWrap(true);
     text.setBackground(backgroundColor);
     text.setFont(textFont);
     addVerifyListener(text);

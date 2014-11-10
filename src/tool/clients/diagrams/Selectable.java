@@ -10,4 +10,6 @@ public interface Selectable {
 
   void moveBy(int dx, int dy);
 
+  void rightClick(int x, int y);
+
 }

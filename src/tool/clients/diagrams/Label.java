@@ -6,6 +6,7 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Point;
 
+import tool.clients.menus.MenuClient;
 import tool.xmodeler.XModeler;
 import xos.Message;
 import xos.Value;
@@ -139,9 +140,11 @@ public class Label implements Selectable {
       Color c = gc.getForeground();
       gc.setForeground(Diagram.GREY);
       gc.drawRectangle(getAbsoluteX() - 2, getAbsoluteY() - 2, getWidth() + 4, getHeight() + 4);
-      int startX = pos.equals("start") ? edge.start().getX() : pos.equals("end") ? edge.end().getX() : (edge.end().getX() - edge.start().getX()) / 2;
-      int startY = pos.equals("start") ? edge.start().getY() : pos.equals("end") ? edge.end().getY() : (edge.end().getY() - edge.start().getY()) / 2;
-      gc.drawLine(startX, startY, getAbsoluteX(), getAbsoluteY());
+      Point source = edge.sourceIntercept();
+      Point target = edge.targetIntercept();
+      int startX = pos.equals("start") ? source.x : pos.equals("end") ? target.x : (target.x - source.x) / 2;
+      int startY = pos.equals("start") ? source.y : pos.equals("end") ? target.y : (target.y - source.y) / 2;
+      gc.drawLine(startX, startY, getAbsoluteX()-2, getAbsoluteY()-2);
       gc.setForeground(c);
     }
   }
@@ -150,9 +153,11 @@ public class Label implements Selectable {
     Color c = gc.getForeground();
     gc.setForeground(Diagram.RED);
     gc.drawRectangle(getAbsoluteX() - 2, getAbsoluteY() - 2, getWidth() + 4, getHeight() + 4);
-    int startX = pos.equals("start") ? edge.start().getX() : pos.equals("end") ? edge.end().getX() : (edge.end().getX() - edge.start().getX()) / 2;
-    int startY = pos.equals("start") ? edge.start().getY() : pos.equals("end") ? edge.end().getY() : (edge.end().getY() - edge.start().getY()) / 2;
-    gc.drawLine(startX, startY, getAbsoluteX(), getAbsoluteY());
+    Point source = edge.sourceIntercept();
+    Point target = edge.targetIntercept();
+    int startX = pos.equals("start") ? source.x : pos.equals("end") ? target.x : (target.x - source.x) / 2;
+    int startY = pos.equals("start") ? source.y : pos.equals("end") ? target.y : (target.y - source.y) / 2;
+    gc.drawLine(startX, startY, getAbsoluteX()-2, getAbsoluteY()-2);
     gc.setForeground(c);
   }
 
@@ -173,5 +178,9 @@ public class Label implements Selectable {
       this.x = x;
       this.y = y;
     }
+  }
+
+  public void rightClick(int x, int y) {
+    MenuClient.popup(id, x, y);
   }
 }

@@ -5,6 +5,7 @@ import java.io.PrintStream;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.GC;
 
+import tool.clients.menus.MenuClient;
 import xos.Message;
 import xos.Value;
 
@@ -52,6 +53,7 @@ public class Waypoint implements Selectable {
   public void moveBy(int dx, int dy) {
     x = x + dx;
     y = y + dy;
+    edge.movedBy(this);
   }
 
   public void paintSelected(GC gc) {
@@ -86,5 +88,13 @@ public class Waypoint implements Selectable {
 
   public void writeXML(PrintStream out) {
     out.print("<Waypoint id='" + getId() + "' index='" + edge.getWaypoints().indexOf(this) + "' x='" + getX() + "' y='" + getY() + "'/>");
+  }
+
+  public boolean colocated(Waypoint w) {
+    return getX() == w.getX() && getY() == w.getY();
+  }
+
+  public void rightClick(int x, int y) {
+    MenuClient.popup(edge.getId(), x, y);
   }
 }

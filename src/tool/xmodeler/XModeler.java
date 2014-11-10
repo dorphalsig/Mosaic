@@ -86,13 +86,16 @@ public class XModeler {
     StringBuffer encoded = new StringBuffer();
     for (int i = 0; i < len; i++) {
       char c = str.charAt(i);
+      char cc = (i + 1) < (len - 1) ? str.charAt(i + 1) : 0;
       if (c == '<')
         encoded.append("&lt;");
-      else if (c == '\n')
+      else if (c == '\n') {
         encoded.append("&#13;");
-      else if (c == '\r')
+        if (cc == '\r') i++;
+      } else if (c == '\r') {
         encoded.append("&#10;");
-      else if (c == '\"')
+        if (cc == '\n') i++;
+      } else if (c == '\"')
         encoded.append("&quot;");
       else if (c == '>')
         encoded.append("&gt;");
@@ -136,6 +139,7 @@ public class XModeler {
           MenuClient.theClient().inflateXML(doc);
           EditorClient.theClient().inflateXML(doc);
           ConsoleClient.theConsole().inflateXML(doc);
+          FormsClient.theClient().inflateXML(doc);
         }
       }
     } catch (IOException e) {
@@ -201,6 +205,7 @@ public class XModeler {
             MenuClient.theClient().writeXML(out);
             EditorClient.theClient().writeXML(out);
             ConsoleClient.theConsole().writeXML(out);
+            FormsClient.theClient().writeXML(out);
             out.print("</XModeler>");
             out.close();
           }
@@ -295,6 +300,7 @@ public class XModeler {
     DiagramClient.start(editorTabFolder);
     FormsClient.start(propertyTabFolder, propertyToolbar, SWT.BORDER);
     Console.start(rightSash, SWT.BOTTOM);
+    rightSash.setWeights(new int[] { 2, 1 });
     XModeler.open();
   }
 
@@ -319,9 +325,9 @@ public class XModeler {
 
   static int             TOOL_Y          = 100;
 
-  static int             TOOL_WIDTH      = 1000;
+  static int             TOOL_WIDTH      = 1200;
 
-  static int             TOOL_HEIGHT     = 750;
+  static int             TOOL_HEIGHT     = 850;
 
   static OperatingSystem xos             = new OperatingSystem();
 

@@ -6,6 +6,8 @@ import java.util.Vector;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.Bullet;
 import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.LineBackgroundEvent;
+import org.eclipse.swt.custom.LineBackgroundListener;
 import org.eclipse.swt.custom.ST;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
@@ -28,7 +30,7 @@ import tool.xmodeler.XModeler;
 import xos.Message;
 import xos.Value;
 
-public class TextEditor implements ModifyListener, VerifyKeyListener, MouseListener {
+public class TextEditor implements ModifyListener, VerifyKeyListener, MouseListener, LineBackgroundListener {
 
   private static final int ZOOM          = 2;
   private static final int MAX_FONT_SIZE = 40;
@@ -40,6 +42,7 @@ public class TextEditor implements ModifyListener, VerifyKeyListener, MouseListe
   StyledText               text;
   FontData                 fontData      = new FontData("Courier New", 16, SWT.NO);
   Vector<WordRule>         wordRules     = new Vector<WordRule>();
+  Vector<Integer>          highlights    = new Vector<Integer>();
   boolean                  lineNumbers   = true;
   boolean                  dirty         = false;
 
@@ -72,6 +75,7 @@ public class TextEditor implements ModifyListener, VerifyKeyListener, MouseListe
     text.addModifyListener(this);
     text.addVerifyKeyListener(this);
     text.addMouseListener(this);
+    text.addLineBackgroundListener(this);
     new UndoRedoImpl(text);
     addCommentWordRule();
   }
@@ -111,8 +115,7 @@ public class TextEditor implements ModifyListener, VerifyKeyListener, MouseListe
       EditorClient.theClient().getHandler().raiseEvent(message);
       dirty = true;
     }
-    StyleRange[] ranges = styleRanges();
-    text.replaceStyleRanges(0, text.getCharCount() - 1, styleRanges());
+    if (text.getCharCount() > 0) text.replaceStyleRanges(0, text.getCharCount() - 1, styleRanges());
   }
 
   public void addLines(ModifyEvent event) {
@@ -243,5 +246,23 @@ public class TextEditor implements ModifyListener, VerifyKeyListener, MouseListe
     int green = Integer.parseInt(XModeler.attributeValue(item, "green"));
     int blue = Integer.parseInt(XModeler.attributeValue(item, "blue"));
     addMultilineRule(getId(), word, end, red, green, blue);
+  }
+
+  public void showLine(int line) {
+    text.setCaretOffset(text.getOffsetAtLine(line));
+    text.redraw();
+  }
+
+  public void lineGetBackground(LineBackgroundEvent event) {
+    if (highlights.contains(event.lineOffset)) event.lineBackground = EditorClient.LINE_HIGHLIGHT;
+  }
+
+  public void addLineHighlight(int line) {
+    highlights.add(text.getOffsetAtLine(line - 1));
+    text.redraw();
+  }
+
+  public void clearHighlights() {
+    highlights.clear();
   }
 }
