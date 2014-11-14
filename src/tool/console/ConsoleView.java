@@ -1,73 +1,43 @@
 package tool.console;
 
 import java.io.PrintStream;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Vector;
 
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Preferences.PropertyChangeEvent;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.Bullet;
-import org.eclipse.swt.custom.ST;
-import org.eclipse.swt.custom.StyleRange;
+import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.custom.StyledTextContent;
 import org.eclipse.swt.custom.VerifyKeyListener;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.GlyphMetrics;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.TabItem;
 
+import tool.clients.dialogs.notifier.NotificationType;
+import tool.clients.dialogs.notifier.NotifierDialog;
+import tool.clients.workbench.WorkbenchClient;
 import tool.xmodeler.XModeler;
 import uk.ac.mdx.xmf.swt.misc.ColorManager;
+import xos.Message;
+import xos.Value;
 
-import com.ceteva.console.ConsolePlugin;
 import com.ceteva.consoleInterface.EscapeHandler;
 import com.ceteva.text.texteditor.ConsoleLineStyler;
 
 public class ConsoleView {
-
-  private class FlushWaterline extends Job {
-
-    StyledTextContent styledTextContent;
-
-    FlushWaterline() {
-      super("Console Flush Waterline");
-      styledTextContent = text.getContent();
-    }
-
-    protected IStatus run(IProgressMonitor monitor) {
-      synchronized (overflowLock) {
-        Display.getDefault().asyncExec(new Runnable() {
-          public void run() {
-            if (!Display.getDefault().isDisposed()) {
-              if (text != null) {
-                int charCount = styledTextContent.getCharCount();
-                if (charCount > waterMark) {
-                  int difference = charCount - waterMark;
-                  if (difference > 0) {
-                    styledTextContent.replaceTextRange(0, difference, "");
-                    inputStart = inputStart - difference;
-                    goToEnd();
-                  }
-                }
-              }
-            }
-          }
-        });
-      }
-      return Status.OK_STATUS;
-    }
-  }
 
   protected static final int FONT_INC        = 2;
   protected static final int MAX_FONT_HEIGHT = 30;
@@ -77,20 +47,20 @@ public class ConsoleView {
     escape = handler;
   }
 
-  boolean                lineNumbers     = true;
-  StyledText             text            = null;
-  History                history         = new History();
-  int                    inputStart      = 0;
-  Font                   textFont        = new Font(Display.getCurrent(), "Courier New", 14, SWT.NORMAL);
-  Color                  backgroundColor = ColorManager.getColor(new RGB(255, 255, 255));
-  Color                  foregroundColor = ColorManager.getColor(new RGB(0, 0, 0));
-  int                    waterMark       = 1000;
-  PrintStream            out             = null;
-  static EscapeHandler   escape          = null;
-  private Object         overflowLock    = new Object();
-  private FlushWaterline waterlineJob;
+  static EscapeHandler escape          = null;
 
-  public ConsoleView(Composite parent, TabItem tabItemConsole) {
+  StyledText           text            = null;
+  History              history         = new History();
+  int                  inputStart      = 0;
+  Font                 textFont        = new Font(Display.getCurrent(), "Courier New", 14, SWT.NORMAL);
+  Color                backgroundColor = ColorManager.getColor(new RGB(255, 255, 255));
+  Color                foregroundColor = ColorManager.getColor(new RGB(0, 0, 0));
+  int                  waterMark       = 1000;
+  PrintStream          out             = null;
+  Object               overflowLock    = new Object();
+  boolean              autoComplete    = true;
+
+  public ConsoleView(Composite parent, CTabItem tabItem) {
     Composite c1 = new Composite(parent, SWT.BORDER);
     c1.setLayout(new FillLayout());
     text = new StyledText(c1, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
@@ -98,7 +68,7 @@ public class ConsoleView {
     text.setBackground(backgroundColor);
     text.setFont(textFont);
     addVerifyListener(text);
-    tabItemConsole.setControl(c1);
+    tabItem.setControl(c1);
   }
 
   public void addCommand(StyledText text, String command) {
@@ -122,10 +92,11 @@ public class ConsoleView {
     });
     text.addVerifyKeyListener(new VerifyKeyListener() {
       public void verifyKey(VerifyEvent e) {
-        if (e.keyCode == SWT.ESC) {
-          if (escape != null) {
-            escape.interrupt();
-          }
+        if (overwriting(e.character)) {
+          text.setCaretOffset(text.getCaretOffset() + 1);
+          e.doit = false;
+        } else if (e.keyCode == SWT.ESC) {
+          if (escape != null) escape.interrupt();
           e.doit = false;
         } else if (e.keyCode == SWT.ARROW_UP) {
           String command = recallFromHistoryForward();
@@ -143,10 +114,13 @@ public class ConsoleView {
           textFont = new Font(Display.getCurrent(), textFont.getFontData()[0].getName(), Math.max(MIN_FONT_HEIGHT, textFont.getFontData()[0].getHeight() - FONT_INC), SWT.NORMAL);
           text.setFont(textFont);
           e.doit = false;
+        } else if (e.keyCode == 'a' && ((e.stateMask & SWT.CTRL) == SWT.CTRL)) {
+          autoComplete = !autoComplete;
+          showStatus();
+          e.doit = false;
         } else if (e.keyCode == SWT.CR) {
           goToEnd();
           appendText("\n");
-          // waterlineJob.schedule();
           goToEnd();
           e.doit = false;
           String output = pushToHistory(text);
@@ -156,7 +130,45 @@ public class ConsoleView {
           }
           goToEnd();
           inputStart = text.getContent().getCharCount();
-        }
+        } else if (e.keyCode == '.' && ((e.stateMask & SWT.SHIFT) != SWT.SHIFT) && autoComplete) {
+          // Display options based on the type of the input.
+          StyledTextContent content = text.getContent();
+          String command = content.getTextRange(inputStart, text.getCaretOffset() - inputStart);
+          WorkbenchClient.theClient().dotConsole(command);
+        } else if (e.keyCode == ';' && ((e.stateMask & SWT.SHIFT) == SWT.SHIFT) && autoComplete) {
+          // We might have a :: where there is a path to the left ...
+          StyledTextContent content = text.getContent();
+          String command = content.getTextRange(inputStart, text.getCaretOffset()  - inputStart);
+          if (command.endsWith(":")) {
+            WorkbenchClient.theClient().nameLookup(command.substring(0, command.length() - 1));
+          }
+        } else if (e.keyCode == '.' && ((e.stateMask & SWT.SHIFT) == SWT.SHIFT) && autoComplete) {
+          // We might have a -> and can fill in the standard patterns ...
+          StyledTextContent content = text.getContent();
+          String command = content.getTextRange(inputStart, text.getCaretOffset() - inputStart);
+          if (command.endsWith("-")) {
+            completeArrow();
+          }
+        } else if (e.keyCode == '[' && ((e.stateMask & SWT.SHIFT) == SWT.SHIFT) && autoComplete) {
+          // Are we starting a collection?
+          StyledTextContent content = text.getContent();
+          String command = content.getTextRange(inputStart, text.getCaretOffset()  - inputStart);
+          if (command.endsWith("Set") || command.endsWith("Seq")) {
+            insert("{}");
+            backup(1);
+            e.doit = false;
+          }
+        } else if (e.keyCode == '9' && ((e.stateMask & SWT.SHIFT) == SWT.SHIFT) && autoComplete) {
+          // Insert the corresponding parenthesis...
+          insert("()");
+          backup(1);
+          e.doit = false;
+        } else if (e.keyCode == '\'' && ((e.stateMask & SWT.SHIFT) == SWT.SHIFT) && autoComplete) {
+          // Insert the corresponding close string...
+          insert("\"\"");
+          backup(1);
+          e.doit = false;
+        } else prepareTopLevelCommand();
       }
     });
 
@@ -164,10 +176,28 @@ public class ConsoleView {
     text.addLineStyleListener(consoleLineStyper);
   }
 
+  private void showStatus() {
+    String status = "AutoComplete = " + autoComplete;
+    NotifierDialog.notify("Console Status", status, NotificationType.values()[2]);
+  }
+
   public void appendText(String string) {
     synchronized (overflowLock) {
-      if (text != null) ConsolePlugin.writeToFile(string);
       text.append(string);
+    }
+  }
+
+  public void prepareTopLevelCommand() {
+    if (text.getText().length() == text.getCaretOffset() && !text.getText().endsWith(";")) {
+      insert(";");
+      backup(1);
+    }
+  }
+
+  public void insert(String string) {
+    synchronized (overflowLock) {
+      text.insert(string);
+      text.setCaretOffset(text.getCaretOffset() + string.length());
     }
   }
 
@@ -195,9 +225,18 @@ public class ConsoleView {
     text.setSelection(end, end);
   }
 
+  public boolean overwriting(char c) {
+    int end = text.getCharCount();
+    int caret = text.getCaretOffset();
+    return caret < end && text.getText().charAt(caret) == c;
+  }
+
+  public void backup(int backup) {
+    text.setCaretOffset(text.getCaretOffset() - backup);
+  }
+
   public void processInput(String input) {
     appendText(input);
-    // waterlineJob.schedule(250);
     goToEnd();
     inputStart = text.getContent().getCharCount();
   }
@@ -238,5 +277,166 @@ public class ConsoleView {
 
   public void addCommand(String command) {
     history.add(command);
+  }
+
+  private void completeArrow() {
+    Menu menu = new Menu(XModeler.getXModeler(), SWT.POP_UP);
+    SelectionListener listener = new SelectionListener() {
+      public void widgetDefaultSelected(SelectionEvent event) {
+      }
+
+      public void widgetSelected(SelectionEvent event) {
+        MenuItem item = (MenuItem) event.widget;
+        String label = item.getText().substring(2);
+        insert(label);
+      }
+    };
+    Point p = text.getCaret().getLocation();
+    Point displayPoint = text.toDisplay(p);
+    menu.setLocation(displayPoint);
+    MenuItem asSeq = new MenuItem(menu, SWT.NONE);
+    asSeq.setText("->asSeq");
+    asSeq.addSelectionListener(listener);
+    MenuItem asSet = new MenuItem(menu, SWT.NONE);
+    asSet.setText("->asSet");
+    asSet.addSelectionListener(listener);
+    MenuItem collect = new MenuItem(menu, SWT.NONE);
+    collect.setText("->collect(element | exp)");
+    collect.addSelectionListener(listener);
+    MenuItem exists = new MenuItem(menu, SWT.NONE);
+    exists.setText("->exists(element | condition)");
+    exists.addSelectionListener(listener);
+    MenuItem forall = new MenuItem(menu, SWT.NONE);
+    forall.setText("->forall(element | condition)");
+    forall.addSelectionListener(listener);
+    MenuItem isEmpty = new MenuItem(menu, SWT.NONE);
+    isEmpty.setText("->isEmpty");
+    isEmpty.addSelectionListener(listener);
+    MenuItem reject = new MenuItem(menu, SWT.NONE);
+    reject.setText("->reject(element | condition)");
+    reject.addSelectionListener(listener);
+    MenuItem select = new MenuItem(menu, SWT.NONE);
+    select.setText("->select(element | condition)");
+    select.addSelectionListener(listener);
+    MenuItem size = new MenuItem(menu, SWT.NONE);
+    size.setText("->size");
+    size.addSelectionListener(listener);
+    menu.setVisible(true);
+  }
+
+  public void dot(final Message message) {
+    XModeler.getXModeler().getDisplay().syncExec(new Runnable() {
+      public void run() {
+        try {
+          Menu menu = getDotPopup(message);
+          Point p = text.getCaret().getLocation();
+          Point displayPoint = text.toDisplay(p);
+          menu.setLocation(displayPoint);
+          menu.setVisible(true);
+        } catch (Throwable t) {
+          t.printStackTrace();
+        }
+      }
+    });
+  }
+
+  public Menu getDotPopup(Message message) {
+    HashSet<String> labels = new HashSet<String>();
+    Value[] pairs = message.args[0].values;
+    for (Value value : pairs) {
+      Value[] pair = value.values;
+      String type = pair[0].strValue();
+      String label = pair[1].strValue();
+      labels.add(label);
+    }
+    Vector<String> sortedLabels = new Vector<String>(labels);
+    Collections.sort(sortedLabels);
+    if (labels.size() < 26)
+      return getShortDotPopup(sortedLabels);
+    else return getLongDotPopup(sortedLabels);
+  }
+
+  private Menu getLongDotPopup(Vector<String> labels) {
+    Menu mainMenu = new Menu(XModeler.getXModeler(), SWT.POP_UP);
+    for (int i = 0; i < 26; i++) {
+      char c = (char) ('a' + i);
+      MenuItem nestedItem = new MenuItem(mainMenu, SWT.CASCADE);
+      nestedItem.setText("" + c);
+      Menu menu = new Menu(mainMenu);
+      nestedItem.setMenu(menu);
+      for (final String label : labels) {
+        if (label.charAt(0) == c || label.charAt(0) == (c + 26)) {
+          MenuItem item = new MenuItem(menu, SWT.NONE);
+          item.addSelectionListener(new SelectionListener() {
+            public void widgetDefaultSelected(SelectionEvent event) {
+            }
+
+            public void widgetSelected(SelectionEvent event) {
+              insert(label);
+            }
+          });
+          item.setText(label);
+        }
+      }
+      if (menu.getItemCount() == 0) nestedItem.dispose();
+    }
+    return mainMenu;
+  }
+
+  private Menu getShortDotPopup(Vector<String> labels) {
+    Menu menu = new Menu(XModeler.getXModeler(), SWT.POP_UP);
+    for (final String label : labels) {
+      MenuItem item = new MenuItem(menu, SWT.NONE);
+      item.addSelectionListener(new SelectionListener() {
+        public void widgetDefaultSelected(SelectionEvent event) {
+        }
+
+        public void widgetSelected(SelectionEvent event) {
+          insert(label);
+        }
+      });
+      item.setText(label);
+    }
+    return menu;
+  }
+
+  private Menu getNameSpacePopup(Message message) {
+    HashSet<String> unsortedNames = new HashSet<String>();
+    Value[] names = message.args[0].values;
+    for (Value name : names) {
+      unsortedNames.add(name.strValue());
+    }
+    Vector<String> sortedNames = new Vector<String>(unsortedNames);
+    Collections.sort(sortedNames);
+    Menu menu = new Menu(XModeler.getXModeler(), SWT.POP_UP);
+    for (final String label : sortedNames) {
+      MenuItem item = new MenuItem(menu, SWT.NONE);
+      item.addSelectionListener(new SelectionListener() {
+        public void widgetDefaultSelected(SelectionEvent event) {
+        }
+
+        public void widgetSelected(SelectionEvent event) {
+          insert(label);
+        }
+      });
+      item.setText(label);
+    }
+    return menu;
+  }
+
+  public void namespace(final Message message) {
+    XModeler.getXModeler().getDisplay().syncExec(new Runnable() {
+      public void run() {
+        try {
+          Menu menu = getNameSpacePopup(message);
+          Point p = text.getCaret().getLocation();
+          Point displayPoint = text.toDisplay(p);
+          menu.setLocation(displayPoint);
+          menu.setVisible(true);
+        } catch (Throwable t) {
+          t.printStackTrace();
+        }
+      }
+    });
   }
 }

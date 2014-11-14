@@ -15,6 +15,7 @@ import org.w3c.dom.NodeList;
 
 import tool.xmodeler.XModeler;
 import uk.ac.mdx.xmf.swt.demo.Main;
+import xos.Message;
 
 public class ConsoleClient extends Thread {
 
@@ -109,5 +110,13 @@ public class ConsoleClient extends Thread {
 
   private void inflateConsoleElement(Node item) {
     if (item.getNodeName().equals("Command")) Console.addCommand(XModeler.attributeValue(item, "text"));
+  }
+
+  public void dot(Message message) {
+    view.dot(message);
+  }
+
+  public void namespace(Message message) {
+    view.namespace(message);
   }
 }

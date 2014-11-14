@@ -107,7 +107,7 @@ public class TextEditor implements ModifyListener, VerifyKeyListener, MouseListe
   }
 
   public void modifyText(ModifyEvent event) {
-    addLines(event);
+    addLines();
     if (!dirty) {
       Message message = EditorClient.theClient().getHandler().newMessage("textDirty", 2);
       message.args[0] = new Value(getId());
@@ -115,10 +115,14 @@ public class TextEditor implements ModifyListener, VerifyKeyListener, MouseListe
       EditorClient.theClient().getHandler().raiseEvent(message);
       dirty = true;
     }
+    addStyles();
+  }
+
+  private void addStyles() {
     if (text.getCharCount() > 0) text.replaceStyleRanges(0, text.getCharCount() - 1, styleRanges());
   }
 
-  public void addLines(ModifyEvent event) {
+  public void addLines() {
     if (lineNumbers) {
       int maxLine = text.getLineCount();
       int lineCountWidth = Math.max(String.valueOf(maxLine).length(), 3);
@@ -223,6 +227,12 @@ public class TextEditor implements ModifyListener, VerifyKeyListener, MouseListe
     NodeList children = textEditor.getChildNodes();
     for (int i = 0; i < children.getLength(); i++)
       inflateElement(children.item(i));
+    EditorClient.theClient().runOnDisplay(new Runnable() {
+      public void run() {
+        addLines();
+        addStyles();
+      }
+    });
   }
 
   private void inflateElement(Node item) {

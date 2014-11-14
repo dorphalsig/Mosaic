@@ -11,6 +11,8 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 
 import tool.clients.Client;
+import tool.clients.dialogs.notifier.NotificationType;
+import tool.clients.dialogs.notifier.NotifierDialog;
 import tool.xmodeler.XModeler;
 import xos.Message;
 import xos.Value;
@@ -80,7 +82,7 @@ public class DialogsClient extends Client {
       public void run() {
         Value id = message.args[0];
         Value info = message.args[1];
-        MessageDialog.openInformation(XModeler.getXModeler(), "Question", info.strValue());
+        NotifierDialog.notify("Message", info.strValue(), NotificationType.values()[5]);
       }
     });
   }

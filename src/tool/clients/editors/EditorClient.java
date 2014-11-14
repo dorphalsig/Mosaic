@@ -9,6 +9,8 @@ import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.LocationEvent;
 import org.eclipse.swt.browser.LocationListener;
 import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabFolder2Listener;
+import org.eclipse.swt.custom.CTabFolderEvent;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Display;
@@ -22,7 +24,7 @@ import tool.xmodeler.XModeler;
 import xos.Message;
 import xos.Value;
 
-public class EditorClient extends Client implements LocationListener {
+public class EditorClient extends Client implements LocationListener, CTabFolder2Listener {
 
   public static void start(CTabFolder tabFolder, int style) {
     EditorClient.tabFolder = tabFolder;
@@ -33,7 +35,6 @@ public class EditorClient extends Client implements LocationListener {
   }
 
   static final Color                   LINE_HIGHLIGHT = new Color(XModeler.getXModeler().getDisplay(), 192, 192, 192);
-
   static EditorClient                  theClient;
   static CTabFolder                    tabFolder;
   static boolean                       browserLocked  = true;
@@ -44,6 +45,7 @@ public class EditorClient extends Client implements LocationListener {
   public EditorClient() {
     super("com.ceteva.text");
     theClient = this;
+    tabFolder.addCTabFolder2Listener(this);
   }
 
   private void addMultilineRule(Message message) {
@@ -234,6 +236,7 @@ public class EditorClient extends Client implements LocationListener {
         CTabItem tabItem = new CTabItem(tabFolder, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL);
         tabItem.setText(label);
         tabItem.setToolTipText(toolTip);
+        tabItem.setShowClose(true);
         tabs.put(id, tabItem);
         TextEditor editor = new TextEditor(id, label, tabFolder, editable, lineNumbers, text);
         tabItem.setControl(editor.getText());
@@ -271,7 +274,24 @@ public class EditorClient extends Client implements LocationListener {
       addLineHighlight(message);
     else if (message.hasName("clearHighlights"))
       clearHighlights(message);
+    else if (message.hasName("setFocus"))
+      setFocus(message);
     else super.sendMessage(message);
+  }
+
+  private void setFocus(Message message) {
+    String id = message.args[0].strValue();
+    setFocus(id);
+  }
+
+  private void setFocus(final String id) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        if (tabs.containsKey(id))
+          tabFolder.setSelection(tabs.get(id));
+        else System.out.println("cannot set focus to editor: " + id);
+      }
+    });
   }
 
   private void clearHighlights(Message message) {
@@ -376,7 +396,10 @@ public class EditorClient extends Client implements LocationListener {
       Display.getDefault().syncExec(new Runnable() {
         public void run() {
           browserLocked = false;
-          browser.setUrl(url.strValue());
+          String s = url.strValue();
+          if (s.startsWith("<html>"))
+            browser.setText(s);
+          else browser.setUrl(url.strValue());
           browserLocked = true;
           tabFolder.setFocus();
           tabFolder.setSelection(tabs.get(id.strValue()));
@@ -401,6 +424,37 @@ public class EditorClient extends Client implements LocationListener {
       out.print("<Browser id='" + id + "' label='" + label + "' tooltip='" + tooltip + "' url='" + url + "'/>");
     }
     out.print("</Editors>");
+  }
+
+  public void close(CTabFolderEvent event) {
+    CTabItem item = (CTabItem) event.item;
+    String id = getId(item);
+    if (editors.containsKey(id)) {
+      EventHandler handler = getHandler();
+      Message message = handler.newMessage("textClosed", 1);
+      message.args[0] = new Value(id);
+      handler.raiseEvent(message);
+      editors.remove(id);
+      tabs.remove(id);
+    }
+  }
+
+  private String getId(CTabItem item) {
+    for (String id : editors.keySet())
+      if (tabs.get(id) == item) return id;
+    return null;
+  }
+
+  public void maximize(CTabFolderEvent event) {
+  }
+
+  public void minimize(CTabFolderEvent event) {
+  }
+
+  public void restore(CTabFolderEvent event) {
+  }
+
+  public void showList(CTabFolderEvent event) {
   }
 
 }

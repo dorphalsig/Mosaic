@@ -2,6 +2,7 @@ package tool.clients.workbench;
 
 import tool.clients.Client;
 import tool.clients.diagrams.DiagramClient;
+import tool.console.ConsoleClient;
 import tool.xmodeler.XModeler;
 import xos.Message;
 import xos.Value;
@@ -22,7 +23,19 @@ public class WorkbenchClient extends Client {
       saveInflater(message);
     else if (message.hasName("inflate"))
       inflate(message);
+    else if (message.hasName("consoleDot"))
+      consoleDot(message);
+    else if (message.hasName("namespace"))
+      consoleNamespace(message);
     else super.sendMessage(message);
+  }
+
+  private void consoleDot(Message message) {
+    ConsoleClient.theConsole().dot(message);
+  }
+
+  private void consoleNamespace(Message message) {
+    ConsoleClient.theConsole().namespace(message);
   }
 
   private void inflate(Message message) {
@@ -58,5 +71,17 @@ public class WorkbenchClient extends Client {
 
   public static WorkbenchClient theClient() {
     return theClient;
+  }
+
+  public void dotConsole(String command) {
+    Message message = getHandler().newMessage("consoleDot", 1);
+    message.args[0] = new Value(command);
+    getHandler().raiseEvent(message);
+  }
+
+  public void nameLookup(String command) {
+    Message message = getHandler().newMessage("nameLookup", 1);
+    message.args[0] = new Value(command);
+    getHandler().raiseEvent(message);
   }
 }

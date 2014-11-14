@@ -286,20 +286,18 @@ public class XModeler {
     XModeler.addListener(SWT.Close, closeListener());
     menuBar = new Menu(XModeler, SWT.BAR);
     SashForm outerSash = new SashForm(XModeler, SWT.HORIZONTAL);
-    SashForm leftSash = new SashForm(outerSash, SWT.VERTICAL);
-    CTabFolder browserTabFolder = new CTabFolder(leftSash, SWT.BORDER);
-    CTabFolder propertyTabFolder = new CTabFolder(leftSash, SWT.BORDER);
+    CTabFolder browserTabFolder = new CTabFolder(outerSash, SWT.BORDER);
+    SashForm rightSash = new SashForm(outerSash, SWT.VERTICAL);
+    CTabFolder editorTabFolder = new CTabFolder(rightSash, SWT.BORDER);
+    CTabFolder propertyTabFolder = new CTabFolder(rightSash, SWT.BORDER);
     ToolBar propertyToolbar = new ToolBar(propertyTabFolder, SWT.HORIZONTAL | SWT.FLAT);
     propertyTabFolder.setTopRight(propertyToolbar);
-    leftSash.setWeights(new int[] { 3, 1 });
     ModelBrowserClient.start(browserTabFolder, SWT.LEFT);
-    SashForm rightSash = new SashForm(outerSash, SWT.VERTICAL);
     outerSash.setWeights(new int[] { 1, 5 });
-    CTabFolder editorTabFolder = new CTabFolder(rightSash, SWT.BORDER);
     EditorClient.start(editorTabFolder, SWT.BORDER);
     DiagramClient.start(editorTabFolder);
     FormsClient.start(propertyTabFolder, propertyToolbar, SWT.BORDER);
-    Console.start(rightSash, SWT.BOTTOM);
+    Console.start(propertyTabFolder);
     rightSash.setWeights(new int[] { 2, 1 });
     XModeler.open();
   }
