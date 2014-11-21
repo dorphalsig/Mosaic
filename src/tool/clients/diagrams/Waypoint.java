@@ -97,4 +97,12 @@ public class Waypoint implements Selectable {
   public void rightClick(int x, int y) {
     MenuClient.popup(edge.getId(), x, y);
   }
+
+  public boolean isEnd() {
+    return getId().equals("end");
+  }
+
+  public boolean isStart() {
+    return getId().equals("start");
+  }
 }

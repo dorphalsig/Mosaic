@@ -38,6 +38,8 @@ public class DialogsClient extends Client {
       noLongerBusy(message);
     else if (message.hasName("newMessageDialog"))
       newMessageDialog(message);
+    else if (message.hasName("newWarningDialog"))
+      newMessageDialog(message);
     else super.sendMessage(message);
   }
 

@@ -10,24 +10,31 @@ import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.swt.widgets.Widget;
 
+import tool.clients.EventHandler;
+import tool.clients.diagrams.DiagramClient;
 import tool.xmodeler.XModeler;
 import xos.Message;
 import xos.Value;
 
-public class Form implements MouseListener {
+public class Form implements MouseListener, SelectionListener {
 
   static Font                   labelFont  = new Font(XModeler.getXModeler().getDisplay(), new FontData("Courier New", 12, SWT.NONE));
 
@@ -114,6 +121,24 @@ public class Form implements MouseListener {
       child.dispose();
   }
 
+  public void clear(String id) {
+    if (getId().equals(id))
+      clear();
+    else {
+      if (lists.containsKey(id)) {
+        List l = lists.get(id);
+        l.clear();
+      }
+    }
+  }
+
+  private void doubleClick(TreeItem item) {
+    String id = getId(item);
+    Message m = FormsClient.theClient().getHandler().newMessage("doubleSelected", 1);
+    m.args[0] = new Value(id);
+    FormsClient.theClient().getHandler().raiseEvent(m);
+  }
+
   public Hashtable<String, StyledText> getBoxes() {
     return boxes;
   }
@@ -138,6 +163,24 @@ public class Form implements MouseListener {
     return id;
   }
 
+  private String getId(Button b) {
+    for (String id : buttons.keySet())
+      if (buttons.get(id) == b) return id;
+    return null;
+  }
+
+  private String getId(CCombo c) {
+    for (String id : combos.keySet())
+      if (combos.get(id) == c) return id;
+    return null;
+  }
+
+  private String getId(TreeItem item) {
+    for (String id : items.keySet())
+      if (items.get(id) == item) return id;
+    return null;
+  }
+
   public Hashtable<String, TreeItem> getItems() {
     return items;
   }
@@ -158,9 +201,28 @@ public class Form implements MouseListener {
     return trees;
   }
 
+  public void mouseDoubleClick(MouseEvent event) {
+    Widget widget = event.widget;
+    if (widget instanceof Tree) {
+      Tree tree = (Tree) widget;
+      if (tree.getSelectionCount() == 1) {
+        TreeItem item = tree.getSelection()[0];
+        doubleClick(item);
+      }
+    }
+  }
+
+  public void mouseDown(MouseEvent event) {
+  }
+
+  public void mouseUp(MouseEvent arg0) {
+
+  }
+
   public void newButton(String parentId, String id, String label, int x, int y, int width, int height) {
     if (getId().equals(parentId)) {
       Button button = new Button(content, SWT.PUSH);
+      button.addSelectionListener(this);
       button.setLocation(x, y);
       button.setSize(width, height);
       button.setText(label);
@@ -169,9 +231,17 @@ public class Form implements MouseListener {
     }
   }
 
-  public void newCheckBox(String parentId, String id, int x, int y, boolean checked) {
+  public void newCheckBox(String parentId, final String id, int x, int y, boolean checked) {
     if (getId().equals(parentId)) {
-      Button button = new Button(content, SWT.CHECK);
+      final Button button = new Button(content, SWT.CHECK);
+      button.addSelectionListener(new SelectionListener() {
+        public void widgetDefaultSelected(SelectionEvent event) {
+        }
+
+        public void widgetSelected(SelectionEvent event) {
+          setSelection(id, button.getSelection());
+        }
+      });
       button.setLocation(x, y);
       button.setSelection(checked);
       button.setText("");
@@ -180,9 +250,18 @@ public class Form implements MouseListener {
     }
   }
 
+  private void setSelection(String id, boolean state) {
+    EventHandler handler = FormsClient.theClient().getHandler();
+    Message message = handler.newMessage("setBoolean", 2);
+    message.args[0] = new Value(id);
+    message.args[1] = new Value(state);
+    handler.raiseEvent(message);
+  }
+
   public void newComboBox(String parentId, String id, int x, int y, int width, int height) {
     if (getId().equals(parentId)) {
       CCombo combo = new CCombo(content, SWT.READ_ONLY | SWT.DROP_DOWN);
+      combo.addSelectionListener(this);
       combo.setLocation(x, y);
       // combo.setSize(width, height);
       combo.setFont(FormsClient.formLabelFont);
@@ -222,6 +301,7 @@ public class Form implements MouseListener {
   public void newTextBox(String parentId, String id, int x, int y, int width, int height, boolean editable) {
     if (getId().equals(parentId)) {
       StyledText text = new StyledText(content, SWT.BORDER);
+      text.setFont(FormsClient.formLabelFont);
       text.setLocation(x, y);
       text.setSize(width, height);
       text.setEditable(editable);
@@ -229,14 +309,33 @@ public class Form implements MouseListener {
     }
   }
 
-  public void newTextField(String id, int x, int y, int width, int height, boolean editable) {
-    Text text = new Text(content, SWT.BORDER);
+  public void newTextField(final String id, int x, int y, int width, int height, boolean editable) {
+    final Text text = new Text(content, SWT.BORDER);
     text.setEditable(editable);
     text.setBackground(FormsClient.theClient().WHITE);
     text.setFont(FormsClient.getFormTextFieldFont());
     text.setBounds(x, y, width, height);
     // form.setMinSize(content.computeSize(SWT.DEFAULT, SWT.DEFAULT));
     textFields.put(id, text);
+    Listener listener = new Listener() {
+      public void handleEvent(Event event) {
+        switch (event.type) {
+        case SWT.FocusOut:
+          textChangedEvent(id, text.getText());
+          break;
+        case SWT.Traverse:
+          switch (event.detail) {
+          case SWT.TRAVERSE_RETURN:
+          case SWT.TRAVERSE_ESCAPE:
+            textChangedEvent(id, text.getText());
+            break;
+          }
+        }
+      }
+    };
+    text.addListener(SWT.FocusOut, listener);
+    text.addListener(SWT.Verify, listener);
+    text.addListener(SWT.Traverse, listener);
   }
 
   public void newTree(String parentId, String id, int x, int y, int width, int height, boolean editable) {
@@ -247,6 +346,23 @@ public class Form implements MouseListener {
       tree.addMouseListener(this);
       trees.put(id, tree);
     }
+  }
+
+  private void selected(Button b) {
+    String id = getId(b);
+    EventHandler handler = FormsClient.theClient().getHandler();
+    Message message = handler.newMessage("buttonPressed", 1);
+    message.args[0] = new Value(id);
+    handler.raiseEvent(message);
+  }
+
+  private void selected(CCombo c) {
+    String id = getId(c);
+    EventHandler handler = FormsClient.theClient().getHandler();
+    Message message = handler.newMessage("comboBoxSelection", 2);
+    message.args[0] = new Value(id);
+    message.args[1] = new Value(c.getItem(c.getSelectionIndex()));
+    handler.raiseEvent(message);
   }
 
   public void setSelection(String comboId, int index) {
@@ -263,6 +379,33 @@ public class Form implements MouseListener {
       text.setText(string);
       text.pack();
       form.setMinSize(content.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+    }
+    if (boxes.containsKey(id)) {
+      StyledText text = boxes.get(id);
+      text.setText(string);
+      text.pack();
+    }
+  }
+
+  public void textChangedEvent(String id, String text) {
+    Message message = FormsClient.theClient().getHandler().newMessage("textChanged", 2);
+    message.args[0] = new Value(id);
+    message.args[1] = new Value(text);
+    FormsClient.theClient().getHandler().raiseEvent(message);
+  }
+
+  public void widgetDefaultSelected(SelectionEvent event) {
+  }
+
+  public void widgetSelected(SelectionEvent event) {
+    Widget w = event.widget;
+    if (w instanceof Button) {
+      Button b = (Button) w;
+      selected(b);
+    }
+    if (w instanceof CCombo) {
+      CCombo c = (CCombo) w;
+      selected(c);
     }
   }
 
@@ -353,34 +496,13 @@ public class Form implements MouseListener {
     }
   }
 
-  private void doubleClick(TreeItem item) {
-    String id = getId(item);
-    Message m = FormsClient.theClient().getHandler().newMessage("doubleSelected", 1);
-    m.args[0] = new Value(id);
-    FormsClient.theClient().getHandler().raiseEvent(m);
+  public void check(String id) {
+    for (String bid : checks.keySet())
+      if (bid.equals(id) && !checks.get(id).getSelection()) checks.get(id).setSelection(true);
   }
 
-  private String getId(TreeItem item) {
-    for (String id : items.keySet())
-      if (items.get(id) == item) return id;
-    return null;
-  }
-
-  public void mouseDoubleClick(MouseEvent event) {
-    Widget widget = event.widget;
-    if (widget instanceof Tree) {
-      Tree tree = (Tree) widget;
-      if (tree.getSelectionCount() == 1) {
-        TreeItem item = tree.getSelection()[0];
-        doubleClick(item);
-      }
-    }
-  }
-
-  public void mouseDown(MouseEvent event) {
-  }
-
-  public void mouseUp(MouseEvent arg0) {
-
+  public void uncheck(String id) {
+    for (String bid : checks.keySet())
+      if (bid.equals(id) && checks.get(id).getSelection()) checks.get(id).setSelection(false);
   }
 }

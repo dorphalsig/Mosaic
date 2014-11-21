@@ -5,6 +5,8 @@ import java.util.Hashtable;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabFolder2Listener;
+import org.eclipse.swt.custom.CTabFolderEvent;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.TreeEditor;
 import org.eclipse.swt.events.KeyEvent;
@@ -31,12 +33,13 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import tool.clients.Client;
+import tool.clients.EventHandler;
 import tool.clients.menus.MenuClient;
 import tool.xmodeler.XModeler;
 import xos.Message;
 import xos.Value;
 
-public class ModelBrowserClient extends Client implements MouseListener, Listener, KeyListener {
+public class ModelBrowserClient extends Client implements MouseListener, Listener, KeyListener, CTabFolder2Listener {
 
   public static CTabFolder getTabFolder() {
     return tabFolder;
@@ -65,6 +68,7 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
   public ModelBrowserClient() {
     super("com.ceteva.modelBrowser");
     theClient = this;
+    tabFolder.addCTabFolder2Listener(this);
   }
 
   private void addNodeWithIcon(Message message) {
@@ -95,6 +99,9 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
           item.setImage(image);
           item.setExpanded(expanded);
           item.setFont(labelFont);
+          for (String id : trees.keySet())
+            for (TreeItem i : trees.get(id).getItems())
+              if (i == item) tabFolder.setSelection(tabs.get(id));
         }
       });
     } else System.out.println("Cannot find node " + parentId);
@@ -114,6 +121,7 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
         item.setImage(image);
         item.setExpanded(expanded);
         item.setFont(labelFont);
+        tabFolder.setSelection(tabs.get(parentId));
       }
     });
   }
@@ -491,5 +499,24 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
       writeXMLTreeItems(item.getItems(), out);
       out.print("</Item>");
     }
+  }
+
+  public void close(CTabFolderEvent event) {
+  }
+
+  public void maximize(CTabFolderEvent event) {
+
+  }
+
+  public void minimize(CTabFolderEvent event) {
+
+  }
+
+  public void restore(CTabFolderEvent event) {
+
+  }
+
+  public void showList(CTabFolderEvent event) {
+
   }
 }

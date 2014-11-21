@@ -2,9 +2,12 @@ package tool.clients.forms;
 
 import java.io.PrintStream;
 import java.util.Hashtable;
+import java.util.Vector;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabFolder2Listener;
+import org.eclipse.swt.custom.CTabFolderEvent;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -19,11 +22,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import tool.clients.Client;
+import tool.clients.EventHandler;
 import tool.xmodeler.XModeler;
 import xos.Message;
 import xos.Value;
 
-public class FormsClient extends Client {
+public class FormsClient extends Client implements CTabFolder2Listener {
 
   public static Font getFormLabelFont() {
     return formLabelFont;
@@ -68,7 +72,7 @@ public class FormsClient extends Client {
   static ToolBar                      toolBar;
 
   static Hashtable<String, CTabItem>  tabs              = new Hashtable<String, CTabItem>();
-  static Hashtable<String, Form>      forms             = new Hashtable<String, Form>();
+  static Vector<Form>                 forms             = new Vector<Form>();
   static Hashtable<String, FormTools> toolDefs          = new Hashtable<String, FormTools>();
   static Font                         formLabelFont     = new Font(Display.getDefault(), new FontData("Courier New", 12, SWT.NO));
   static Font                         formTextFieldFont = new Font(Display.getDefault(), new FontData("Courier New", 12, SWT.NO));
@@ -76,6 +80,7 @@ public class FormsClient extends Client {
   public FormsClient() {
     super("com.ceteva.forms");
     theClient = this;
+    tabFolder.addCTabFolder2Listener(this);
   }
 
   private void addComboItem(Message message) {
@@ -87,7 +92,7 @@ public class FormsClient extends Client {
   private void addComboItem(final String parentId, final String value) {
     runOnDisplay(new Runnable() {
       public void run() {
-        for (Form form : forms.values())
+        for (Form form : forms)
           form.addComboItem(parentId, value);
       }
     });
@@ -109,7 +114,7 @@ public class FormsClient extends Client {
   private void addListItem(final String parentId, final String id, final String value) {
     runOnDisplay(new Runnable() {
       public void run() {
-        for (Form form : forms.values())
+        for (Form form : forms)
           form.addListItem(parentId, id, value);
       }
     });
@@ -129,21 +134,28 @@ public class FormsClient extends Client {
   private void addNodeWithIcon(final String parentId, final String nodeId, final String text, final boolean editable, final String icon, final int index) {
     runOnDisplay(new Runnable() {
       public void run() {
-        for (Form form : forms.values())
+        for (Form form : forms)
           form.newNodeWithIcon(parentId, nodeId, text, editable, icon, index);
       }
     });
   }
 
   private void clearForm(Message message) {
-    final Value id = message.args[0];
-    if (forms.containsKey(id.strValue())) {
+    String id = message.args[0].strValue();
+    final Form form = getForm(id);
+    if (form != null) {
       Display.getDefault().syncExec(new Runnable() {
         public void run() {
-          forms.get(id.strValue()).clear();
+          form.clear();
         }
       });
     } else System.out.println("cannot find form to clear " + id);
+  }
+
+  private Form getForm(String id) {
+    for (Form form : forms)
+      if (form.getId().equals(id)) return form;
+    return null;
   }
 
   private FormTools getFormTools(String id) {
@@ -245,7 +257,7 @@ public class FormsClient extends Client {
     int x = Integer.parseInt(XModeler.attributeValue(label, "x"));
     int y = Integer.parseInt(XModeler.attributeValue(label, "y"));
     newText(parentId, id, string, x, y);
-    forms.get(parentId).getLabels().get(id).setText(string);
+    getForm(parentId).getLabels().get(id).setText(string);
   }
 
   private void inflateList(String parentId, Node list) {
@@ -272,7 +284,7 @@ public class FormsClient extends Client {
     int height = Integer.parseInt(XModeler.attributeValue(textBox, "height"));
     boolean editable = XModeler.attributeValue(textBox, "editable").equals("true");
     newTextBox(parentId, id, x, y, width, height, editable);
-    forms.get(parentId).getBoxes().get(id).setText(string);
+    getForm(parentId).getBoxes().get(id).setText(string);
   }
 
   private void inflateTextField(String parentId, Node textField) {
@@ -284,7 +296,7 @@ public class FormsClient extends Client {
     int height = Integer.parseInt(XModeler.attributeValue(textField, "height"));
     boolean editable = XModeler.attributeValue(textField, "editable").equals("true");
     newTextField(parentId, id, x, y, width, height, editable);
-    forms.get(parentId).getTextFields().get(id).setText(string);
+    getForm(parentId).getTextFields().get(id).setText(string);
   }
 
   private void inflateTree(String parentId, Node tree) {
@@ -341,7 +353,7 @@ public class FormsClient extends Client {
   private void newButton(final String parentId, final String id, final String label, final int x, final int y, final int width, final int height) {
     runOnDisplay(new Runnable() {
       public void run() {
-        for (Form form : forms.values())
+        for (Form form : forms)
           form.newButton(parentId, id, label, x, y, width, height);
       }
     });
@@ -359,7 +371,7 @@ public class FormsClient extends Client {
   private void newCheckBox(final String parentId, final String id, final int x, final int y, final boolean checked) {
     runOnDisplay(new Runnable() {
       public void run() {
-        for (Form form : forms.values())
+        for (Form form : forms)
           form.newCheckBox(parentId, id, x, y, checked);
       }
     });
@@ -378,7 +390,7 @@ public class FormsClient extends Client {
   private void newComboBox(final String parentId, final String id, final int x, final int y, final int width, final int height) {
     runOnDisplay(new Runnable() {
       public void run() {
-        for (Form form : forms.values())
+        for (Form form : forms)
           form.newComboBox(parentId, id, x, y, width, height);
       }
     });
@@ -399,7 +411,8 @@ public class FormsClient extends Client {
         tabs.put(id, tabItem);
         Form form = new Form(tabFolder, id);
         tabItem.setControl(form.getForm());
-        forms.put(id, form);
+        tabItem.setShowClose(true);
+        forms.add(form);
         if (selected) tabFolder.setSelection(tabItem);
       }
     });
@@ -416,7 +429,7 @@ public class FormsClient extends Client {
   }
 
   private void newList(String parentId, String id, int x, int y, int width, int height) {
-    for (Form form : forms.values())
+    for (Form form : forms)
       form.newList(parentId, id, x, y, width, height);
   }
 
@@ -430,10 +443,10 @@ public class FormsClient extends Client {
   }
 
   private void newText(final String parentId, final String id, final String string, final int x, final int y) {
-    if (forms.containsKey(parentId)) {
+    final Form form = getForm(parentId);
+    if (form != null) {
       Display.getDefault().syncExec(new Runnable() {
         public void run() {
-          Form form = forms.get(parentId);
           form.newText(id, string, x, y);
         }
       });
@@ -454,7 +467,7 @@ public class FormsClient extends Client {
   private void newTextBox(final String parentId, final String id, final int x, final int y, final int width, final int height, final boolean editable) {
     runOnDisplay(new Runnable() {
       public void run() {
-        for (Form form : forms.values())
+        for (Form form : forms)
           form.newTextBox(parentId, id, x, y, width, height, editable);
       }
     });
@@ -472,10 +485,10 @@ public class FormsClient extends Client {
   }
 
   private void newTextField(final String parentId, final String id, final int x, final int y, final int width, final int height, final boolean editable) {
-    if (forms.containsKey(parentId)) {
+    final Form form = getForm(parentId);
+    if (form != null) {
       Display.getDefault().syncExec(new Runnable() {
         public void run() {
-          Form form = forms.get(parentId);
           form.newTextField(id, x, y, width, height, editable);
         }
       });
@@ -496,7 +509,7 @@ public class FormsClient extends Client {
   private void newTree(final String parentId, final String id, final int x, final int y, final int width, final int height, final boolean editable) {
     runOnDisplay(new Runnable() {
       public void run() {
-        for (Form form : forms.values())
+        for (Form form : forms)
           form.newTree(parentId, id, x, y, width, height, editable);
       }
     });
@@ -550,7 +563,56 @@ public class FormsClient extends Client {
       addNodeWithIcon(message);
     else if (message.hasName("setVisible"))
       setVisible(message);
+    else if (message.hasName("clear"))
+      clear(message);
+    else if (message.hasName("check"))
+      check(message);
+    else if (message.hasName("uncheck"))
+      uncheck(message);
     else super.sendMessage(message);
+  }
+
+  private void check(Message message) {
+    String id = message.args[0].strValue();
+    check(id);
+  }
+
+  private void check(final String id) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (Form form : forms)
+          form.check(id);
+      }
+    });
+  }
+
+  private void uncheck(final String id) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (Form form : forms)
+          form.uncheck(id);
+      }
+    });
+  }
+
+  private void uncheck(Message message) {
+    String id = message.args[0].strValue();
+    uncheck(id);
+  }
+
+  private void clear(Message message) {
+    String id = message.args[0].strValue();
+    clear(id);
+  }
+
+  private void clear(final String id) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (Form form : forms) {
+          form.clear(id);
+        }
+      }
+    });
   }
 
   private void setSelection(Message message) {
@@ -562,7 +624,7 @@ public class FormsClient extends Client {
   private void setSelection(final String comboId, final int index) {
     runOnDisplay(new Runnable() {
       public void run() {
-        for (Form form : forms.values())
+        for (Form form : forms)
           form.setSelection(comboId, index);
       }
     });
@@ -573,7 +635,7 @@ public class FormsClient extends Client {
     final Value text = message.args[1];
     runOnDisplay(new Runnable() {
       public void run() {
-        for (Form form : forms.values()) {
+        for (Form form : forms) {
           form.setText(id.strValue(), text.strValue());
         }
       }
@@ -606,10 +668,52 @@ public class FormsClient extends Client {
 
   public void writeXML(PrintStream out) {
     out.print("<Forms>");
-    for (Form form : forms.values())
+    for (Form form : forms)
       form.writeXML(out, tabFolder.getSelection() == tabs.get(form.getId()), tabs.get(form.getId()).getText());
     for (FormTools tools : toolDefs.values())
       tools.writeXML(out);
     out.print("</Forms>");
+  }
+
+  public void close(CTabFolderEvent event) {
+    CTabItem item = (CTabItem) event.item;
+    String id = getId(item);
+    if (id != null && getForm(id) != null) {
+      EventHandler handler = getHandler();
+      Message message = handler.newMessage("formClosed", 1);
+      message.args[0] = new Value(id);
+      handler.raiseEvent(message);
+      forms.remove(id);
+      tabs.remove(id);
+    }
+  }
+
+  private String getId(CTabItem item) {
+    for (String id : tabs.keySet())
+      if (tabs.get(id).equals(item)) return id;
+    return null;
+  }
+
+  public void maximize(CTabFolderEvent event) {
+
+  }
+
+  public void minimize(CTabFolderEvent event) {
+
+  }
+
+  public void restore(CTabFolderEvent event) {
+
+  }
+
+  public void showList(CTabFolderEvent event) {
+
+  }
+
+  public void doubleClick(String id) {
+    EventHandler handler = getHandler();
+    Message message = handler.newMessage("doubleSelected", 1);
+    message.args[0] = new Value(id);
+    handler.raiseEvent(message);
   }
 }

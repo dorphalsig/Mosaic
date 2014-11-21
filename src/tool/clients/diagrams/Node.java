@@ -2,6 +2,7 @@ package tool.clients.diagrams;
 
 import java.io.PrintStream;
 import java.util.Hashtable;
+import java.util.Vector;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
@@ -15,17 +16,17 @@ import xos.Value;
 
 public class Node implements Selectable {
 
-  private static final int   SELECTION_GAP = 4;
-  private static final int   EAR_GAP       = SELECTION_GAP + 2;
-  private static final int   EAR_LENGTH    = 6;
-  String                     id;
-  int                        x;
-  int                        y;
-  int                        width;
-  int                        height;
-  boolean                    selectable;
-  Hashtable<String, Port>    ports         = new Hashtable<String, Port>();
-  Hashtable<String, Display> displays      = new Hashtable<String, Display>();
+  private static final int SELECTION_GAP = 4;
+  private static final int EAR_GAP       = SELECTION_GAP + 2;
+  private static final int EAR_LENGTH    = 6;
+  String                   id;
+  int                      x;
+  int                      y;
+  int                      width;
+  int                      height;
+  boolean                  selectable;
+  Hashtable<String, Port>  ports         = new Hashtable<String, Port>();
+  Vector<Display>          displays      = new Vector<Display>();
 
   public Node(String id, int x, int y, int width, int height, boolean selectable) {
     super();
@@ -50,7 +51,7 @@ public class Node implements Selectable {
   }
 
   public void editText(String id) {
-    for (Display display : displays.values())
+    for (Display display : displays)
       display.editText(id);
   }
 
@@ -86,7 +87,7 @@ public class Node implements Selectable {
     if (getId().equals(id))
       move(x, y);
     else {
-      for (Display display : displays.values())
+      for (Display display : displays)
         display.move(id, x, y);
     }
   }
@@ -120,9 +121,9 @@ public class Node implements Selectable {
   public void newBox(String parentId, String id, int x, int y, int width, int height, int curve, boolean top, boolean right, boolean bottom, boolean left, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue) {
     if (getId().equals(parentId)) {
       Box box = new Box(id, x, y, width, height, curve, top, right, bottom, left, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
-      displays.put(id, box);
+      displays.add(box);
     } else {
-      for (Display display : displays.values()) {
+      for (Display display : displays) {
         display.newBox(parentId, id, x, y, width, height, curve, top, right, bottom, left, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
       }
     }
@@ -135,18 +136,18 @@ public class Node implements Selectable {
 
   private void newText(String id, String s, int x, int y, boolean editable, boolean underline, boolean italicise, int red, int green, int blue) {
     Text text = new Text(id, s, x, y, editable, underline, italicise, red, green, blue);
-    displays.put(id, text);
+    displays.add(text);
   }
 
   public void newText(String parentId, String id, String text, int x, int y, boolean editable, boolean underline, boolean italicise, int red, int green, int blue) {
     if (parentId.equals(getId()))
       newText(id, text, x, y, editable, underline, italicise, red, green, blue);
-    else for (Display display : displays.values())
+    else for (Display display : displays)
       display.newText(parentId, id, text, x, y, editable, underline, italicise, red, green, blue);
   }
 
   public void paint(GC gc) {
-    for (Display display : displays.values()) {
+    for (Display display : displays) {
       display.paint(gc, x, y);
     }
   }
@@ -154,7 +155,7 @@ public class Node implements Selectable {
   public void paintHover(GC gc, int x, int y, boolean selected) {
     if (contains(x, y)) {
       paintSelectableOutline(gc);
-      for (Display display : displays.values())
+      for (Display display : displays)
         display.paintHover(gc, x, y, getX(), getY());
     }
     if (!selected && !contains(x, y) && atCorner(x, y)) paintResizeHover(gc, x, y);
@@ -250,7 +251,7 @@ public class Node implements Selectable {
       this.width = width;
       this.height = height;
     } else {
-      for (Display display : displays.values())
+      for (Display display : displays)
         display.resize(id, width, height);
       for (Port port : ports.values())
         port.resize(id, width, height);
@@ -262,7 +263,7 @@ public class Node implements Selectable {
   }
 
   public void setText(String id, String text) {
-    for (Display display : displays.values())
+    for (Display display : displays)
       display.setText(id, text);
   }
 
@@ -275,22 +276,28 @@ public class Node implements Selectable {
   }
 
   public String toString() {
-    return "Node(" + id + "," + x + "," + y + "," + width + "," + height + "," + displays.values() + ")";
+    return "Node(" + id + "," + x + "," + y + "," + width + "," + height + "," + displays + ")";
+  }
+
+  public Display getDisplay(String id) {
+    for (Display display : displays)
+      if (display.getId().equals(id)) return display;
+    return null;
   }
 
   public void remove(String id) {
-    if (displays.containsKey(id)) {
-      Display display = displays.get(id);
-      displays.remove(id);
+    Display d = getDisplay(id);
+    if (d != null) {
+      displays.remove(d);
     } else {
-      for (Display display : displays.values()) {
+      for (Display display : displays) {
         display.remove(id);
       }
     }
   }
 
   public void doubleClick(GC gc, Diagram diagram, int x, int y) {
-    for (Display display : displays.values()) {
+    for (Display display : displays) {
       display.doubleClick(gc, diagram, getX(), getY(), x, y);
     }
   }
@@ -299,7 +306,7 @@ public class Node implements Selectable {
     out.print("<Node id='" + getId() + "' x = '" + getX() + "' y='" + getY() + "' width='" + getWidth() + "' height='" + getHeight() + "' selectable='" + isSelectable() + "'>");
     for (Port port : ports.values())
       port.writeXML(out);
-    for (Display display : displays.values())
+    for (Display display : displays)
       display.writeXML(out);
     out.print("</Node>");
 
@@ -321,5 +328,15 @@ public class Node implements Selectable {
 
   public void rightClick(int x, int y) {
     MenuClient.popup(id, x, y);
+  }
+
+  public void newMultilineText(String parentId, String id, String text, int x, int y, int width, int height, boolean editable, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue, String font) {
+    if (getId().equals(parentId)) {
+      MultilineText t = new MultilineText(id, text, x, y, width, height, editable, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, font);
+      displays.add(displays.size(), t);
+    } else {
+      for (Display d : displays)
+        d.newMultilineText(parentId, id, text, x, y, width, height, editable, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, font);
+    }
   }
 }

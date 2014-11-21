@@ -9,6 +9,8 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 
+import tool.clients.dialogs.notifier.NotificationType;
+import tool.clients.dialogs.notifier.NotifierDialog;
 import tool.xmodeler.XModeler;
 import xos.Message;
 import xos.Value;
@@ -160,20 +162,20 @@ public class Text implements Display {
 
   public void doubleClick(GC gc, final Diagram diagram, int dx, int dy, int mouseX, int mouseY) {
     if (editable && contains(mouseX - dx, mouseY - dy)) {
-      final org.eclipse.swt.widgets.Text text = new org.eclipse.swt.widgets.Text(diagram.getCanvas(), SWT.NONE);
+      final org.eclipse.swt.widgets.Text text = new org.eclipse.swt.widgets.Text(diagram.getCanvas(), SWT.BORDER);
       text.setFont(DiagramClient.diagramFont);
       text.setText(this.text);
       text.setLocation(dx + getX(), dy + getY());
-      text.setSize(getWidth(), getHeight());
+      text.setSize(getWidth() + 10, getHeight() + 10);
       text.setVisible(true);
       text.setFocus();
+      NotifierDialog.notify("Edit Text", "Type text then RET to update.\nType ESC to cancel.", NotificationType.values()[3]);
       Listener listener = new Listener() {
         public void handleEvent(Event event) {
           org.eclipse.swt.widgets.Text t;
           switch (event.type) {
           case SWT.FocusOut:
             t = (org.eclipse.swt.widgets.Text) event.widget;
-            textChangedEvent(t.getText());
             t.setVisible(false);
             t.dispose();
             diagram.redraw();
@@ -182,18 +184,25 @@ public class Text implements Display {
             t = (org.eclipse.swt.widgets.Text) event.widget;
             GC gc = new GC(t);
             Point size = gc.textExtent(t.getText() + event.text);
-            t.setSize(size.x, size.y);
+            t.setSize(size.x + 10, getHeight() + 10);
             break;
           case SWT.Traverse:
             switch (event.detail) {
             case SWT.TRAVERSE_RETURN:
-            case SWT.TRAVERSE_ESCAPE:
               t = (org.eclipse.swt.widgets.Text) event.widget;
               textChangedEvent(t.getText());
               t.setVisible(false);
               t.dispose();
               diagram.redraw();
               event.doit = false;
+              break;
+            case SWT.TRAVERSE_ESCAPE:
+              t = (org.eclipse.swt.widgets.Text) event.widget;
+              t.setVisible(false);
+              t.dispose();
+              diagram.redraw();
+              event.doit = false;
+              break;
             }
             break;
           }
@@ -210,5 +219,8 @@ public class Text implements Display {
     message.args[0] = new Value(id);
     message.args[1] = new Value(text);
     DiagramClient.theClient().getHandler().raiseEvent(message);
+  }
+
+  public void newMultilineText(String parentId, String id, String text, int x, int y, int width, int height, boolean editable, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue, String font) {
   }
 }

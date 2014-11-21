@@ -20,6 +20,7 @@ import org.w3c.dom.NodeList;
 
 import tool.clients.Client;
 import tool.clients.EventHandler;
+import tool.clients.diagrams.DiagramClient;
 import tool.xmodeler.XModeler;
 import xos.Message;
 import xos.Value;
@@ -46,6 +47,22 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
     super("com.ceteva.text");
     theClient = this;
     tabFolder.addCTabFolder2Listener(this);
+  }
+
+  private void addLineHighlight(Message message) {
+    String id = message.args[0].strValue();
+    int line = message.args[1].intValue;
+    addLineHighlight(id, line);
+  }
+
+  private void addLineHighlight(final String id, final int line) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        if (editors.containsKey(id))
+          editors.get(id).addLineHighlight(line);
+        else System.out.println("cannot find editor: " + id);
+      }
+    });
   }
 
   private void addMultilineRule(Message message) {
@@ -130,9 +147,46 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
     }
   }
 
+  private void clearHighlights(Message message) {
+    String id = message.args[0].strValue();
+    clearHighlights(id);
+  }
+
+  private void clearHighlights(final String id) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        if (editors.containsKey(id))
+          editors.get(id).clearHighlights();
+        else System.out.println("cannot find editor: " + id);
+      }
+    });
+  }
+
+  public void close(CTabFolderEvent event) {
+    // Careful because the diagrams and files share the same tab folder...
+    CTabItem item = (CTabItem) event.item;
+    String id = getId(item);
+    if (id != null && editors.containsKey(id)) {
+      EventHandler handler = getHandler();
+      Message message = handler.newMessage("textClosed", 1);
+      message.args[0] = new Value(id);
+      handler.raiseEvent(message);
+      editors.remove(id);
+      tabs.remove(id);
+    } else {
+      DiagramClient.theClient().close(event);
+    }
+  }
+
   private String getId(Browser browser) {
     for (String id : browsers.keySet())
       if (browsers.get(id) == browser) return id;
+    return null;
+  }
+
+  private String getId(CTabItem item) {
+    for (String id : editors.keySet())
+      if (tabs.get(id) == item) return id;
     return null;
   }
 
@@ -151,17 +205,17 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
     else return result[0];
   }
 
-  private void inflateEditorElement(Node editor) {
-    if (editor.getNodeName().equals("TextEditor")) inflateTextEditor(editor);
-    if (editor.getNodeName().equals("Browser")) inflateBrowser(editor);
-  }
-
   private void inflateBrowser(Node browser) {
     String id = XModeler.attributeValue(browser, "id");
     String label = XModeler.attributeValue(browser, "label");
     String tooltip = XModeler.attributeValue(browser, "toolTip");
     String url = XModeler.attributeValue(browser, "url");
     newBrowser(id, label, tooltip, url);
+  }
+
+  private void inflateEditorElement(Node editor) {
+    if (editor.getNodeName().equals("TextEditor")) inflateTextEditor(editor);
+    if (editor.getNodeName().equals("Browser")) inflateBrowser(editor);
   }
 
   private void inflateTextEditor(Node textEditor) {
@@ -194,6 +248,12 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
         inflateEditorElement(editor);
       }
     } else System.out.println("expecting exactly 1 editor client got: " + editorClients.getLength());
+  }
+
+  public void maximize(CTabFolderEvent event) {
+  }
+
+  public void minimize(CTabFolderEvent event) {
   }
 
   private void newBrowser(Message message) {
@@ -251,6 +311,9 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
     return false;
   }
 
+  public void restore(CTabFolderEvent event) {
+  }
+
   public void sendMessage(final Message message) {
     if (message.hasName("newBrowser"))
       newBrowser(message);
@@ -277,68 +340,6 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
     else if (message.hasName("setFocus"))
       setFocus(message);
     else super.sendMessage(message);
-  }
-
-  private void setFocus(Message message) {
-    String id = message.args[0].strValue();
-    setFocus(id);
-  }
-
-  private void setFocus(final String id) {
-    runOnDisplay(new Runnable() {
-      public void run() {
-        if (tabs.containsKey(id))
-          tabFolder.setSelection(tabs.get(id));
-        else System.out.println("cannot set focus to editor: " + id);
-      }
-    });
-  }
-
-  private void clearHighlights(Message message) {
-    String id = message.args[0].strValue();
-    clearHighlights(id);
-  }
-
-  private void addLineHighlight(Message message) {
-    String id = message.args[0].strValue();
-    int line = message.args[1].intValue;
-    addLineHighlight(id, line);
-  }
-
-  private void showLine(Message message) {
-    String id = message.args[0].strValue();
-    int line = message.args[1].intValue;
-    showLine(id, line);
-  }
-
-  private void showLine(final String id, final int line) {
-    runOnDisplay(new Runnable() {
-      public void run() {
-        if (editors.containsKey(id))
-          editors.get(id).showLine(line);
-        else System.out.println("cannot find editor: " + id);
-      }
-    });
-  }
-
-  private void clearHighlights(final String id) {
-    runOnDisplay(new Runnable() {
-      public void run() {
-        if (editors.containsKey(id))
-          editors.get(id).clearHighlights();
-        else System.out.println("cannot find editor: " + id);
-      }
-    });
-  }
-
-  private void addLineHighlight(final String id, final int line) {
-    runOnDisplay(new Runnable() {
-      public void run() {
-        if (editors.containsKey(id))
-          editors.get(id).addLineHighlight(line);
-        else System.out.println("cannot find editor: " + id);
-      }
-    });
   }
 
   private void setClean(Message message) {
@@ -369,6 +370,21 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       public void run() {
         editor.setDirty(true);
         item.setText("*" + editor.getLabel());
+      }
+    });
+  }
+
+  private void setFocus(Message message) {
+    String id = message.args[0].strValue();
+    setFocus(id);
+  }
+
+  private void setFocus(final String id) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        if (tabs.containsKey(id))
+          tabFolder.setSelection(tabs.get(id));
+        else System.out.println("cannot set focus to editor: " + id);
       }
     });
   }
@@ -408,6 +424,25 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
     } else System.out.println("cannot find browser " + id);
   }
 
+  private void showLine(Message message) {
+    String id = message.args[0].strValue();
+    int line = message.args[1].intValue;
+    showLine(id, line);
+  }
+
+  private void showLine(final String id, final int line) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        if (editors.containsKey(id))
+          editors.get(id).showLine(line);
+        else System.out.println("cannot find editor: " + id);
+      }
+    });
+  }
+
+  public void showList(CTabFolderEvent event) {
+  }
+
   public void writeXML(PrintStream out) {
     out.print("<Editors>");
     for (String id : editors.keySet()) {
@@ -424,37 +459,6 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       out.print("<Browser id='" + id + "' label='" + label + "' tooltip='" + tooltip + "' url='" + url + "'/>");
     }
     out.print("</Editors>");
-  }
-
-  public void close(CTabFolderEvent event) {
-    CTabItem item = (CTabItem) event.item;
-    String id = getId(item);
-    if (editors.containsKey(id)) {
-      EventHandler handler = getHandler();
-      Message message = handler.newMessage("textClosed", 1);
-      message.args[0] = new Value(id);
-      handler.raiseEvent(message);
-      editors.remove(id);
-      tabs.remove(id);
-    }
-  }
-
-  private String getId(CTabItem item) {
-    for (String id : editors.keySet())
-      if (tabs.get(id) == item) return id;
-    return null;
-  }
-
-  public void maximize(CTabFolderEvent event) {
-  }
-
-  public void minimize(CTabFolderEvent event) {
-  }
-
-  public void restore(CTabFolderEvent event) {
-  }
-
-  public void showList(CTabFolderEvent event) {
   }
 
 }

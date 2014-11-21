@@ -6,6 +6,8 @@ import org.eclipse.swt.graphics.GC;
 
 public interface Display {
 
+  String getId();
+
   void paint(GC gc, int x, int y);
 
   void newText(String parentId, String id, String text, int x, int y, boolean editable, boolean underline, boolean italicise, int red, int green, int blue);
@@ -27,5 +29,7 @@ public interface Display {
   void doubleClick(GC gc, Diagram diagram, int dx, int dy, int mouseX, int mouseY);
 
   void writeXML(PrintStream out);
+
+  void newMultilineText(String parentId, String id, String text, int x, int y, int width, int height, boolean editable, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue, String font);
 
 }

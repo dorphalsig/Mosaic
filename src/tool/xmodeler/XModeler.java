@@ -188,14 +188,17 @@ public class XModeler {
   }
 
   public static void removeBusyInformation() {
-    XModeler.setText("XModeler");
+    busyMessage = "";
+    setToolLabel();
   }
 
   public static void saveInflator(final String inflationPath) {
     XModeler.getDisplay().syncExec(new Runnable() {
       public void run() {
         try {
-          if (inflationPath != null && overwrite(inflationPath)) {
+          if (inflationPath != null) {
+            loadedImagePath = inflationPath.substring(0, inflationPath.indexOf('.')) + ".img";
+            setToolLabel();
             File file = new File(inflationPath);
             FileOutputStream fout = new FileOutputStream(file);
             PrintStream out = new PrintStream(fout);
@@ -228,6 +231,7 @@ public class XModeler {
     String selectedImage = dialog.open();
     if (selectedImage != null && !selectedImage.equals(defaultImage)) {
       loadedImagePath = selectedImage;
+      setToolLabel();
       for (int i = 0; i < args.length; i++) {
         if (args[i].equals("-image")) args[i + 1] = loadedImagePath;
       }
@@ -240,7 +244,8 @@ public class XModeler {
   }
 
   public static void showBusyInformation(String info) {
-    XModeler.setText("XModeler[" + info + "]");
+    busyMessage = info;
+    setToolLabel();
   }
 
   public static void shutdown() {
@@ -277,7 +282,7 @@ public class XModeler {
 
   public static void startXModeler() {
     display = Display.getDefault();
-    XModeler.setText("XModeler");
+    setToolLabel();
     Image windowIcon = new Image(XModeler.getDisplay(), "icons/shell/mosaic32.gif");
     XModeler.setImage(windowIcon);
     XModeler.setLayout(new FillLayout());
@@ -302,6 +307,11 @@ public class XModeler {
     XModeler.open();
   }
 
+  public static void setToolLabel() {
+    String path = loadedImagePath == null ? "NO_IMAGE_SET" : loadedImagePath;
+    XModeler.setText(NAME + "[" + path + "]" + busyMessage);
+  }
+
   static void startXOS(String initFile) {
     final String[] args = xos.getInitArgs(initFile);
     setProjectDirectory(args);
@@ -318,6 +328,10 @@ public class XModeler {
     };
     t.start();
   }
+
+  static final String    NAME            = "XModeler";
+
+  static String          busyMessage     = "";
 
   static int             TOOL_X          = 100;
 

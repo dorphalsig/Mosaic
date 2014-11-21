@@ -2,9 +2,12 @@ package tool.clients.diagrams;
 
 import java.io.PrintStream;
 import java.util.Hashtable;
+import java.util.Vector;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabFolder2Listener;
+import org.eclipse.swt.custom.CTabFolderEvent;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
@@ -16,11 +19,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import tool.clients.Client;
+import tool.clients.EventHandler;
 import tool.xmodeler.XModeler;
 import xos.Message;
 import xos.Value;
 
-public class DiagramClient extends Client {
+public class DiagramClient extends Client implements CTabFolder2Listener {
 
   public static void start(CTabFolder tabFolder) {
     DiagramClient.tabFolder = tabFolder;
@@ -33,12 +37,13 @@ public class DiagramClient extends Client {
   static DiagramClient               theClient;
   static CTabFolder                  tabFolder;
   static Hashtable<String, CTabItem> tabs        = new Hashtable<String, CTabItem>();
-  static Hashtable<String, Diagram>  diagrams    = new Hashtable<String, Diagram>();
+  static Vector<Diagram>             diagrams    = new Vector<Diagram>();
   static Font                        diagramFont = new Font(XModeler.getXModeler().getDisplay(), new FontData("Courier New", 12, SWT.NO));
 
   public DiagramClient() {
     super("com.ceteva.diagram");
     theClient = this;
+    tabFolder.addCTabFolder2Listener(this);
   }
 
   public Value callMessage(Message message) {
@@ -47,11 +52,25 @@ public class DiagramClient extends Client {
     else return super.callMessage(message);
   }
 
+  private void copyToClipboard(Message message) {
+    String id = message.args[0].strValue();
+    copyToClipboard(id);
+  }
+
+  private void copyToClipboard(final String id) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (Diagram diagram : diagrams)
+          diagram.copyToClipboard(id);
+      }
+    });
+  }
+
   private void delete(final Message message) {
     runOnDisplay(new Runnable() {
       public void run() {
         Value id = message.args[0];
-        for (Diagram diagram : diagrams.values()) {
+        for (Diagram diagram : diagrams) {
           diagram.delete(id.strValue());
         }
       }
@@ -62,16 +81,22 @@ public class DiagramClient extends Client {
     final Value id = message.args[0];
     runOnDisplay(new Runnable() {
       public void run() {
-        for (Diagram diagram : diagrams.values())
+        for (Diagram diagram : diagrams)
           diagram.editText(id.strValue());
       }
     });
   }
 
+  private Diagram getDiagram(String id) {
+    for (Diagram diagram : diagrams)
+      if (diagram.getId().equals(id)) return diagram;
+    return null;
+  }
+
   private Diagram getSelectedDiagram() {
     CTabItem item = tabFolder.getSelection();
     for (String id : tabs.keySet()) {
-      if (tabs.get(id) == item) { return diagrams.get(id); }
+      if (tabs.get(id) == item) { return getDiagram(id); }
     }
     throw new Error("cannot find the current diagram");
   }
@@ -93,12 +118,12 @@ public class DiagramClient extends Client {
   }
 
   private void globalRenderOff() {
-    for (Diagram diagram : diagrams.values())
+    for (Diagram diagram : diagrams)
       diagram.renderOff();
   }
 
   private void globalRenderOn() {
-    for (Diagram diagram : diagrams.values())
+    for (Diagram diagram : diagrams)
       diagram.renderOn();
   }
 
@@ -138,7 +163,7 @@ public class DiagramClient extends Client {
     String label = XModeler.attributeValue(diagram, "label");
     int zoom = Integer.parseInt(XModeler.attributeValue(diagram, "zoom", "100"));
     newDiagram(id, label);
-    Diagram d = diagrams.get(id);
+    Diagram d = getDiagram(id);
     d.renderOff();
     d.setZoom(zoom);
     NodeList children = diagram.getChildNodes();
@@ -222,6 +247,24 @@ public class DiagramClient extends Client {
     newLabel(edgeId, id, text, pos, x, y, editable, underline, condense, red, green, blue, font);
   }
 
+  private void inflateMultilineText(String parentId, Node node) {
+    String id = XModeler.attributeValue(node, "id");
+    String text = XModeler.attributeValue(node, "text");
+    int x = Integer.parseInt(XModeler.attributeValue(node, "x"));
+    int y = Integer.parseInt(XModeler.attributeValue(node, "y"));
+    int width = Integer.parseInt(XModeler.attributeValue(node, "width"));
+    int height = Integer.parseInt(XModeler.attributeValue(node, "height"));
+    boolean editable = XModeler.attributeValue(node, "editable").equals("true");
+    int lineRed = Integer.parseInt(XModeler.attributeValue(node, "lineRed"));
+    int lineGreen = Integer.parseInt(XModeler.attributeValue(node, "lineGreen"));
+    int lineBlue = Integer.parseInt(XModeler.attributeValue(node, "lineBlue"));
+    int fillRed = Integer.parseInt(XModeler.attributeValue(node, "fillRed"));
+    int fillGreen = Integer.parseInt(XModeler.attributeValue(node, "fillGreen"));
+    int fillBlue = Integer.parseInt(XModeler.attributeValue(node, "fillBlue"));
+    String font = XModeler.attributeValue(node, "font");
+    newMultilineText(parentId, id, text, x, y, width, height, editable, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, font);
+  }
+
   private void inflateNodeElement(String id, Node node) {
     if (node.getNodeName().equals("Port"))
       inflatePort(id, node);
@@ -229,6 +272,8 @@ public class DiagramClient extends Client {
       inflateBox(id, node);
     else if (node.getNodeName().equals("Text"))
       inflateText(id, node);
+    else if (node.getNodeName().equals("MultilineText"))
+      inflateMultilineText(id, node);
     else System.out.println("Unknown type of node element " + node.getNodeName());
   }
 
@@ -285,7 +330,7 @@ public class DiagramClient extends Client {
     Value id = message.args[0];
     Value x = message.args[1];
     Value y = message.args[2];
-    for (Diagram diagram : diagrams.values())
+    for (Diagram diagram : diagrams)
       diagram.move(id.strValue(), x.intValue, y.intValue);
   }
 
@@ -312,7 +357,7 @@ public class DiagramClient extends Client {
   }
 
   private void newBox(String parentId, String id, int x, int y, int width, int height, int curve, boolean top, boolean right, boolean bottom, boolean left, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue) {
-    for (Diagram diagram : diagrams.values()) {
+    for (Diagram diagram : diagrams) {
       diagram.newBox(parentId, id, x, y, width, height, curve, top, right, bottom, left, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
     }
   }
@@ -330,8 +375,9 @@ public class DiagramClient extends Client {
         CTabItem item = new CTabItem(tabFolder, SWT.BORDER);
         item.setControl(diagram.getContainer());
         item.setText(label);
+        item.setShowClose(true);
         tabs.put(id, item);
-        diagrams.put(id, diagram);
+        diagrams.add(diagram);
         tabFolder.setSelection(item);
       }
     });
@@ -354,7 +400,7 @@ public class DiagramClient extends Client {
   }
 
   private void newEdge(String parentId, String id, String sourceId, String targetId, int refx, int refy, int sourceHead, int targetHead, int lineStyle, int red, int green, int blue) {
-    for (Diagram diagram : diagrams.values()) {
+    for (Diagram diagram : diagrams) {
       if (diagram.getId().equals(parentId)) {
         diagram.newEdge(id, sourceId, targetId, refx, refy, sourceHead, targetHead, lineStyle, red, green, blue);
       }
@@ -362,10 +408,10 @@ public class DiagramClient extends Client {
   }
 
   private void newGroup(final String diagramId, final String name) {
-    if (diagrams.containsKey(diagramId)) {
+    if (getDiagram(diagramId) != null) {
       runOnDisplay(new Runnable() {
         public void run() {
-          Diagram diagram = diagrams.get(diagramId);
+          Diagram diagram = getDiagram(diagramId);
           diagram.newGroup(name);
         }
       });
@@ -390,13 +436,41 @@ public class DiagramClient extends Client {
   }
 
   private void newLabel(String parentId, String id, String text, String position, int x, int y, Boolean editable, Boolean underline, Boolean condense, int red, int green, int blue, String font) {
-    for (Diagram diagram : diagrams.values()) {
+    for (Diagram diagram : diagrams) {
       for (Edge edge : diagram.getEdges().values()) {
         if (edge.getId().equals(parentId)) {
           edge.addLabel(id, text, position, x, y, editable, underline, condense, red, green, blue, font);
         }
       }
     }
+  }
+
+  private void newMultilineText(Message message) {
+    String parentId = message.args[0].strValue();
+    String id = message.args[1].strValue();
+    String text = message.args[2].strValue();
+    int x = message.args[3].intValue;
+    int y = message.args[4].intValue;
+    int width = message.args[5].intValue;
+    int height = message.args[6].intValue;
+    boolean editable = message.args[6].boolValue;
+    int lineRed = message.args[7].intValue;
+    int lineGreen = message.args[8].intValue;
+    int lineBlue = message.args[9].intValue;
+    int fillRed = message.args[10].intValue;
+    int fillGreen = message.args[11].intValue;
+    int fillBlue = message.args[12].intValue;
+    String font = message.args[13].strValue();
+    newMultilineText(parentId, id, text, x, y, width, height, editable, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, font);
+  }
+
+  private void newMultilineText(final String parentId, final String id, final String text, final int x, final int y, final int width, final int height, final boolean editable, final int lineRed, final int lineGreen, final int lineBlue, final int fillRed, final int fillGreen, final int fillBlue, final String font) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (Diagram d : diagrams)
+          d.newMultilineText(parentId, id, text, x, y, width, height, editable, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, font);
+      }
+    });
   }
 
   private void newNode(Message message) {
@@ -420,8 +494,8 @@ public class DiagramClient extends Client {
   }
 
   private void newNode(String parentId, String id, int x, int y, int width, int height, boolean selectable) {
-    if (diagrams.containsKey(parentId)) {
-      Diagram diagram = diagrams.get(parentId);
+    if (getDiagram(parentId) != null) {
+      Diagram diagram = getDiagram(parentId);
       diagram.newNode(id, x, y, width, height, selectable);
     } else System.out.println("cannot find diagram " + parentId);
   }
@@ -437,7 +511,7 @@ public class DiagramClient extends Client {
   }
 
   private void newPort(String parentId, String id, int x, int y, int width, int height) {
-    for (Diagram diagram : diagrams.values()) {
+    for (Diagram diagram : diagrams) {
       diagram.newPort(parentId, id, x, y, width, height);
     }
   }
@@ -458,7 +532,7 @@ public class DiagramClient extends Client {
   }
 
   private void newText(final String parentId, final String id, final String text, final int x, final int y, final boolean editable, final boolean underline, final boolean italicise, final int red, final int green, final int blue) {
-    for (Diagram diagram : diagrams.values()) {
+    for (Diagram diagram : diagrams) {
       diagram.newText(parentId, id, text, x, y, editable, underline, italicise, red, green, blue);
     }
   }
@@ -474,10 +548,10 @@ public class DiagramClient extends Client {
   }
 
   private void newTool(final String diagramId, final String groupId, final String label, final String toolId, final boolean isEdge, final String icon) {
-    if (diagrams.containsKey(diagramId)) {
+    if (getDiagram(diagramId) != null) {
       runOnDisplay(new Runnable() {
         public void run() {
-          Diagram diagram = diagrams.get(diagramId);
+          Diagram diagram = getDiagram(diagramId);
           diagram.newTool(groupId, label, toolId, isEdge, icon);
         }
       });
@@ -500,7 +574,7 @@ public class DiagramClient extends Client {
   }
 
   private void newWaypoint(String parentId, String id, int index, int x, int y) {
-    for (Diagram diagram : diagrams.values()) {
+    for (Diagram diagram : diagrams) {
       diagram.newWaypoint(parentId, id, index, x, y);
     }
   }
@@ -516,7 +590,7 @@ public class DiagramClient extends Client {
     final Value height = message.args[2];
     runOnDisplay(new Runnable() {
       public void run() {
-        for (Diagram diagram : diagrams.values())
+        for (Diagram diagram : diagrams)
           diagram.resize(id.strValue(), width.intValue, height.intValue);
       }
     });
@@ -576,6 +650,10 @@ public class DiagramClient extends Client {
       setEdgeTarget(message);
     else if (message.hasName("setEdgeSource"))
       setEdgeSource(message);
+    else if (message.hasName("newMultilineText"))
+      newMultilineText(message);
+    else if (message.hasName("copyToClipboard"))
+      copyToClipboard(message);
     else super.sendMessage(message);
   }
 
@@ -586,7 +664,7 @@ public class DiagramClient extends Client {
         Value red = message.args[1];
         Value green = message.args[2];
         Value blue = message.args[3];
-        for (Diagram diagram : diagrams.values()) {
+        for (Diagram diagram : diagrams) {
           for (Edge edge : diagram.getEdges().values()) {
             if (edge.getId().equals(id.strValue())) {
               edge.setRed(red.intValue);
@@ -608,7 +686,7 @@ public class DiagramClient extends Client {
   private void setEdgeSource(final String edgeId, final String portId) {
     runOnDisplay(new Runnable() {
       public void run() {
-        for (Diagram d : diagrams.values()) {
+        for (Diagram d : diagrams) {
           d.setEdgeSource(edgeId, portId);
         }
       }
@@ -620,7 +698,7 @@ public class DiagramClient extends Client {
       public void run() {
         Value id = message.args[0];
         Value style = message.args[1];
-        for (Diagram diagram : diagrams.values()) {
+        for (Diagram diagram : diagrams) {
           for (Edge edge : diagram.getEdges().values()) {
             if (edge.getId().equals(id.strValue())) {
               edge.setLineStyle(style.intValue);
@@ -640,7 +718,7 @@ public class DiagramClient extends Client {
   private void setEdgeTarget(final String edgeId, final String portId) {
     runOnDisplay(new Runnable() {
       public void run() {
-        for (Diagram d : diagrams.values()) {
+        for (Diagram d : diagrams) {
           d.setEdgeTarget(edgeId, portId);
         }
       }
@@ -677,7 +755,7 @@ public class DiagramClient extends Client {
         Value id = message.args[0];
         Value refx = message.args[1];
         Value refy = message.args[2];
-        for (Diagram diagram : diagrams.values()) {
+        for (Diagram diagram : diagrams) {
           for (Edge edge : diagram.getEdges().values()) {
             if (edge.getId().equals(id.strValue())) {
               edge.setRefx(refx.intValue);
@@ -692,7 +770,7 @@ public class DiagramClient extends Client {
   private void setText(Message message) {
     final Value id = message.args[0];
     final Value text = message.args[1];
-    for (Diagram diagram : diagrams.values())
+    for (Diagram diagram : diagrams)
       diagram.setText(id.strValue(), text.strValue());
   }
 
@@ -700,7 +778,7 @@ public class DiagramClient extends Client {
     runOnDisplay(new Runnable() {
       public void run() {
         Value id = message.args[0];
-        for (Diagram diagram : diagrams.values())
+        for (Diagram diagram : diagrams)
           if (diagram.getId().equals(id.strValue())) diagram.renderOn();
       }
     });
@@ -708,7 +786,7 @@ public class DiagramClient extends Client {
 
   private void stopRender(Message message) {
     Value id = message.args[0];
-    for (Diagram diagram : diagrams.values())
+    for (Diagram diagram : diagrams)
       if (diagram.getId().equals(id.strValue())) diagram.renderOff();
   }
 
@@ -724,8 +802,43 @@ public class DiagramClient extends Client {
 
   public void writeXML(PrintStream out) {
     out.print("<Diagrams>");
-    for (Diagram diagram : diagrams.values())
+    for (Diagram diagram : diagrams)
       diagram.writeXML(tabs.get(diagram.getId()).getText(), out);
     out.print("</Diagrams>");
+  }
+
+  public void close(CTabFolderEvent event) {
+    CTabItem item = (CTabItem) event.item;
+    String id = getId(item);
+    Diagram diagram = getDiagram(id);
+    if (diagram != null) {
+      EventHandler handler = getHandler();
+      Message message = handler.newMessage("diagramClosed", 1);
+      message.args[0] = new Value(id);
+      handler.raiseEvent(message);
+      diagrams.remove(diagram);
+      tabs.remove(id);
+    }
+  }
+
+  private String getId(CTabItem item) {
+    for (String id : tabs.keySet())
+      if (tabs.get(id) == item) return id;
+    return null;
+  }
+
+  public void maximize(CTabFolderEvent event) {
+  }
+
+  public void minimize(CTabFolderEvent event) {
+
+  }
+
+  public void restore(CTabFolderEvent event) {
+
+  }
+
+  public void showList(CTabFolderEvent event) {
+
   }
 }

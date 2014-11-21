@@ -31,7 +31,7 @@ public class Label implements Selectable {
     this.edge = edge;
     this.id = id;
     this.text = text;
-    this.pos = pos;
+    this.pos = pos == null ? "end" : pos;
     this.x = x;
     this.y = y;
     this.editable = editable;
