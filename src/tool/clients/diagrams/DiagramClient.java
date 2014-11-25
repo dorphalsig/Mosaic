@@ -169,6 +169,7 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     NodeList children = diagram.getChildNodes();
     for (int i = 0; i < children.getLength(); i++)
       inflateDiagramElement(id, children.item(i));
+    d.align();
     d.renderOn();
   }
 
@@ -199,7 +200,7 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
       inflateDiagramNode(id, node);
     else if (node.getNodeName().equals("Edge"))
       inflateDiagramEdge(id, node);
-    else System.out.println("Unknown type of diagram node " + node.getNodeName());
+    else System.err.println("Unknown type of diagram node " + node.getNodeName());
   }
 
   private void inflateDiagramNode(String diagramId, Node node) {
@@ -220,7 +221,7 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
       inflateWaypoint(id, node);
     else if (node.getNodeName().equals("Label"))
       inflateLabel(id, node);
-    else System.out.println("Unknown type of edge element " + node.getNodeName());
+    else System.err.println("Unknown type of edge element " + node.getNodeName());
   }
 
   private void inflateGroup(String id, Node group) {
@@ -274,7 +275,7 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
       inflateText(id, node);
     else if (node.getNodeName().equals("MultilineText"))
       inflateMultilineText(id, node);
-    else System.out.println("Unknown type of node element " + node.getNodeName());
+    else System.err.println("Unknown type of node element " + node.getNodeName());
   }
 
   private void inflatePalette(String id, Node node) {
@@ -323,7 +324,7 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
         Node diagram = diagrams.item(i);
         inflateDiagram(diagram);
       }
-    } else System.out.println("expecting exactly 1 diagram client got: " + diagramClients.getLength());
+    } else System.err.println("expecting exactly 1 diagram client got: " + diagramClients.getLength());
   }
 
   private void move(Message message) {
@@ -415,7 +416,7 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
           diagram.newGroup(name);
         }
       });
-    } else System.out.println("cannot find diagram " + diagramId);
+    } else System.err.println("cannot find diagram " + diagramId);
   }
 
   private void newLabel(final Message message) {
@@ -497,7 +498,7 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     if (getDiagram(parentId) != null) {
       Diagram diagram = getDiagram(parentId);
       diagram.newNode(id, x, y, width, height, selectable);
-    } else System.out.println("cannot find diagram " + parentId);
+    } else System.err.println("cannot find diagram " + parentId);
   }
 
   private void newPort(Message message) {
@@ -555,7 +556,7 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
           diagram.newTool(groupId, label, toolId, isEdge, icon);
         }
       });
-    } else System.out.println("cannot find diagram " + diagramId);
+    } else System.err.println("cannot find diagram " + diagramId);
   }
 
   private void newToolGroup(Message message) {
@@ -580,7 +581,6 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
   }
 
   public boolean processMessage(Message message) {
-    System.out.println(this + " <- " + message);
     return false;
   }
 
@@ -597,7 +597,6 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
   }
 
   public void sendMessage(final Message message) {
-    // System.err.println(message);
     if (message.hasName("newDiagram"))
       newDiagram(message);
     else if (message.hasName("newToolGroup"))

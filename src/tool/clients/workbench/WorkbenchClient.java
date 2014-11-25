@@ -53,7 +53,6 @@ public class WorkbenchClient extends Client {
   }
 
   public boolean processMessage(Message message) {
-    System.out.println(this + " <- " + message);
     return false;
   }
 

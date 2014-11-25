@@ -66,6 +66,17 @@ public class Edge {
     labels.add(new Label(this, id, text, pos, x, y, editable, underline, condense, red, green, blue, font));
   }
 
+  public void align() {
+    // Called when there is some jiggling to be done.
+    if (waypoints.size() == 2) {
+      alignStart(end());
+      alignEnd(start());
+    } else {
+      alignStart(waypoints.elementAt(1));
+      alignEnd(waypoints.elementAt(waypoints.size() - 2));
+    }
+  }
+
   private void alignEnd(Waypoint w) {
     int portx = targetNode.getX() + targetPort.getX();
     int porty = targetNode.getY() + targetPort.getY();
@@ -161,7 +172,7 @@ public class Edge {
       drawArrow(gc, x, y, x2, y2, true, Diagram.WHITE);
       break;
     default:
-      System.out.println("unknown type of source decoration: " + sourceHead);
+      System.err.println("unknown type of source decoration: " + sourceHead);
     }
   }
 
@@ -176,7 +187,7 @@ public class Edge {
       drawArrow(gc, x, y, x2, y2, true, Diagram.WHITE);
       break;
     default:
-      System.out.println("unknown type of target decoration: " + targetHead);
+      System.err.println("unknown type of target decoration: " + targetHead);
     }
   }
 
@@ -280,6 +291,14 @@ public class Edge {
     }
   }
 
+  public Point intercept(Node node) {
+    Point p = topIntercept(node);
+    p = p == null ? leftIntercept(node) : p;
+    p = p == null ? rightIntercept(node) : p;
+    p = p == null ? bottomIntercept(node) : p;
+    return p;
+  }
+
   public Point leftIntercept(Node node) {
     int x0 = node.contains(start()) ? start().getX() : end().getX();
     int y0 = node.contains(start()) ? start().getY() : end().getY();
@@ -332,28 +351,12 @@ public class Edge {
     else return false;
   }
 
-  public Point intercept(Node node) {
-    Point p = topIntercept(node);
-    p = p == null ? leftIntercept(node) : p;
-    p = p == null ? rightIntercept(node) : p;
-    p = p == null ? bottomIntercept(node) : p;
-    return p;
-  }
-
   public boolean nearEnd(int x, int y) {
     return near(targetNode, x, y);
   }
 
   public boolean nearStart(int x, int y) {
     return near(sourceNode, x, y);
-  }
-
-  public Point sourceIntercept() {
-    return intercept(sourceNode);
-  }
-
-  public Point targetIntercept() {
-    return intercept(targetNode);
   }
 
   public boolean newWaypoint(int x, int y) {
@@ -451,6 +454,29 @@ public class Edge {
       label.paintHover(gc, x, y);
   }
 
+  public void paintMovingSourceOrTarget(GC gc, int startX, int startY, int endX, int endY) {
+    int x = startX;
+    int y = startY;
+    int width = gc.getLineWidth();
+    gc.setLineWidth(LINE_WIDTH);
+    Color c = gc.getBackground();
+    gc.setBackground(Diagram.BLACK);
+    for (int i = 1; i < waypoints.size() - 1; i++) {
+      Waypoint wp = waypoints.elementAt(i);
+      gc.drawLine(x, y, wp.getX(), wp.getY());
+      if (i < waypoints.size() - 1) gc.fillOval(wp.getX() - 3, wp.getY() - 3, 6, 6);
+      x = wp.getX();
+      y = wp.getY();
+    }
+    gc.drawLine(x, y, endX, endY);
+    gc.setBackground(c);
+    for (Label label : labels)
+      label.paint(gc);
+    drawSourceDecoration(gc, startX, startY, waypoints.elementAt(1).getX(), waypoints.elementAt(1).getY());
+    drawTargetDecoration(gc, endX, endY, waypoints.elementAt(waypoints.size() - 2).getX(), waypoints.elementAt(waypoints.size() - 2).getY());
+    gc.setLineWidth(width);
+  }
+
   public void paintOrthogonal(GC gc, Waypoint waypoint) {
     if (waypoint != start() && waypoint != end()) {
       int index = waypoints.indexOf(waypoint);
@@ -479,29 +505,6 @@ public class Edge {
     paintMovingSourceOrTarget(gc, start().getX(), start().getY(), x, y);
   }
 
-  public void paintMovingSourceOrTarget(GC gc, int startX, int startY, int endX, int endY) {
-    int x = startX;
-    int y = startY;
-    int width = gc.getLineWidth();
-    gc.setLineWidth(LINE_WIDTH);
-    Color c = gc.getBackground();
-    gc.setBackground(Diagram.BLACK);
-    for (int i = 1; i < waypoints.size() - 1; i++) {
-      Waypoint wp = waypoints.elementAt(i);
-      gc.drawLine(x, y, wp.getX(), wp.getY());
-      if (i < waypoints.size() - 1) gc.fillOval(wp.getX() - 3, wp.getY() - 3, 6, 6);
-      x = wp.getX();
-      y = wp.getY();
-    }
-    gc.drawLine(x, y, endX, endY);
-    gc.setBackground(c);
-    for (Label label : labels)
-      label.paint(gc);
-    drawSourceDecoration(gc, startX, startY, waypoints.elementAt(1).getX(), waypoints.elementAt(1).getY());
-    drawTargetDecoration(gc, endX, endY, waypoints.elementAt(waypoints.size() - 2).getX(), waypoints.elementAt(waypoints.size() - 2).getY());
-    gc.setLineWidth(width);
-  }
-
   private Waypoint penultimate() {
     return waypoints.elementAt(waypoints.size() - 2);
   }
@@ -509,6 +512,25 @@ public class Edge {
   private double pointToLineDistance(Waypoint A, Waypoint B, int x, int y) {
     double normalLength = Math.sqrt((B.x - A.x) * (B.x - A.x) + (B.y - A.y) * (B.y - A.y));
     return Math.abs((x - A.x) * (B.y - A.y) - (y - A.y) * (B.x - A.x)) / normalLength;
+  }
+
+  public void reconnectSource(Node node, Port port) {
+    if (sourcePort != null) sourcePort.getSources().remove(this);
+    setSourceNode(node);
+    setSourcePort(port);
+    port.getSources().add(this);
+    start().setX(node.getX() + port.getX() + (port.getWidth() / 2));
+    start().setY(node.getY() + port.getY() + (port.getHeight() / 2));
+
+  }
+
+  public void reconnectTarget(Node node, Port port) {
+    if (targetPort != null) targetPort.getTargets().remove(this);
+    setTargetNode(node);
+    setTargetPort(port);
+    port.getTargets().add(this);
+    end().setX(node.getX() + port.getX() + (port.getWidth() / 2));
+    end().setY(node.getY() + port.getY() + (port.getHeight() / 2));
   }
 
   public Point rightIntercept(Node node) {
@@ -596,8 +618,16 @@ public class Edge {
     return false;
   }
 
+  public Point sourceIntercept() {
+    return intercept(sourceNode);
+  }
+
   public Waypoint start() {
     return waypoints.get(0);
+  }
+
+  public Point targetIntercept() {
+    return intercept(targetNode);
   }
 
   public Point topIntercept(Node node) {
@@ -639,24 +669,5 @@ public class Edge {
     for (Label label : labels)
       label.writeXML(out);
     out.print("</Edge>");
-  }
-
-  public void reconnectTarget(Node node, Port port) {
-    if (targetPort != null) targetPort.getTargets().remove(this);
-    setTargetNode(node);
-    setTargetPort(port);
-    port.getTargets().add(this);
-    end().setX(node.getX() + port.getX() + (port.getWidth() / 2));
-    end().setY(node.getY() + port.getY() + (port.getHeight() / 2));
-  }
-
-  public void reconnectSource(Node node, Port port) {
-    if (sourcePort != null) sourcePort.getSources().remove(this);
-    setSourceNode(node);
-    setSourcePort(port);
-    port.getSources().add(this);
-    start().setX(node.getX() + port.getX() + (port.getWidth() / 2));
-    start().setY(node.getY() + port.getY() + (port.getHeight() / 2));
-
   }
 }

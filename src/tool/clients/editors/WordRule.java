@@ -50,4 +50,8 @@ public class WordRule {
     return "WordRule(" + word + "," + color + ")";
   }
 
+  public boolean starts(char c) {
+    return word.charAt(0) == c;
+  }
+
 }

@@ -38,7 +38,7 @@ public class Palette {
       Group group = groups.get(groupName);
       group.newTool(label, toolId, isEdge, icon);
       groupContainer.layout();
-    } else System.out.println("cannot find group " + groupName);
+    } else System.err.println("cannot find group " + groupName);
   }
 
   public void setCurrentTool(String toolId, boolean isEdge) {

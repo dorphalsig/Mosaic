@@ -20,6 +20,8 @@
 	<classpathentry kind="lib" path="lib/jacob-1.14.3.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.core.runtime_3.7.0.v20110110.jar"/>
 	<classpathentry kind="lib" path="lib/swt-4.4.cocoa-macosx-x86_64.zip.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.nebula.visualization.widgets_1.0.0.201411131833.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.nebula.visualization.xygraph_1.0.0.201411131833.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.gef_3.5.0.jar"/>
 	<classpathentry kind="src" path="src"/>

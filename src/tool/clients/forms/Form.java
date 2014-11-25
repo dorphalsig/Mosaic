@@ -14,10 +14,8 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
-import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
-import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -29,28 +27,29 @@ import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.swt.widgets.Widget;
 
 import tool.clients.EventHandler;
-import tool.clients.diagrams.DiagramClient;
+import tool.clients.menus.MenuClient;
 import tool.xmodeler.XModeler;
 import xos.Message;
 import xos.Value;
 
 public class Form implements MouseListener, SelectionListener {
 
-  static Font                   labelFont  = new Font(XModeler.getXModeler().getDisplay(), new FontData("Courier New", 12, SWT.NONE));
+  static Font                   labelFont    = new Font(XModeler.getXModeler().getDisplay(), new FontData("Courier New", 12, SWT.NONE));
+  final static int              RIGHT_BUTTON = 3;
 
   String                        id;
   ScrolledComposite             form;
   Composite                     content;
-  Hashtable<String, Text>       textFields = new Hashtable<String, Text>();
-  Hashtable<String, Text>       labels     = new Hashtable<String, Text>();
-  Hashtable<String, List>       lists      = new Hashtable<String, List>();
-  Hashtable<String, StyledText> boxes      = new Hashtable<String, StyledText>();
-  Hashtable<String, CCombo>     combos     = new Hashtable<String, CCombo>();
-  Hashtable<String, Button>     checks     = new Hashtable<String, Button>();
-  Hashtable<String, Button>     buttons    = new Hashtable<String, Button>();
-  Hashtable<String, Tree>       trees      = new Hashtable<String, Tree>();
-  Hashtable<String, TreeItem>   items      = new Hashtable<String, TreeItem>();
-  Hashtable<String, String>     images     = new Hashtable<String, String>();
+  Hashtable<String, Text>       textFields   = new Hashtable<String, Text>();
+  Hashtable<String, Text>       labels       = new Hashtable<String, Text>();
+  Hashtable<String, List>       lists        = new Hashtable<String, List>();
+  Hashtable<String, StyledText> boxes        = new Hashtable<String, StyledText>();
+  Hashtable<String, CCombo>     combos       = new Hashtable<String, CCombo>();
+  Hashtable<String, Button>     checks       = new Hashtable<String, Button>();
+  Hashtable<String, Button>     buttons      = new Hashtable<String, Button>();
+  Hashtable<String, Tree>       trees        = new Hashtable<String, Tree>();
+  Hashtable<String, TreeItem>   items        = new Hashtable<String, TreeItem>();
+  Hashtable<String, String>     images       = new Hashtable<String, String>();
 
   public Form(CTabFolder parent, String id) {
     this.id = id;
@@ -89,7 +88,7 @@ public class Form implements MouseListener, SelectionListener {
       item.setImage(image);
       item.setExpanded(expanded);
       item.setFont(labelFont);
-    } else System.out.println("Cannot find node " + parentId);
+    } else System.err.println("Cannot find node " + parentId);
   }
 
   private void addRootNodeWithIcon(final String parentId, final String nodeId, final String text, boolean editable, final boolean expanded, final String icon, final int index) {
@@ -104,6 +103,11 @@ public class Form implements MouseListener, SelectionListener {
     item.setImage(image);
     item.setExpanded(expanded);
     item.setFont(labelFont);
+  }
+
+  public void check(String id) {
+    for (String bid : checks.keySet())
+      if (bid.equals(id) && !checks.get(id).getSelection()) checks.get(id).setSelection(true);
   }
 
   public void clear() {
@@ -133,6 +137,13 @@ public class Form implements MouseListener, SelectionListener {
   }
 
   private void doubleClick(TreeItem item) {
+    String id = getId(item);
+    Message m = FormsClient.theClient().getHandler().newMessage("doubleSelected", 1);
+    m.args[0] = new Value(id);
+    FormsClient.theClient().getHandler().raiseEvent(m);
+  }
+
+  private void doubleClick(Text item) {
     String id = getId(item);
     Message m = FormsClient.theClient().getHandler().newMessage("doubleSelected", 1);
     m.args[0] = new Value(id);
@@ -175,6 +186,18 @@ public class Form implements MouseListener, SelectionListener {
     return null;
   }
 
+  private String getId(StyledText item) {
+    for (String id : boxes.keySet())
+      if (boxes.get(id) == item) return id;
+    return null;
+  }
+
+  private String getId(Text item) {
+    for (String id : textFields.keySet())
+      if (textFields.get(id) == item) return id;
+    return null;
+  }
+
   private String getId(TreeItem item) {
     for (String id : items.keySet())
       if (items.get(id) == item) return id;
@@ -201,6 +224,14 @@ public class Form implements MouseListener, SelectionListener {
     return trees;
   }
 
+  private boolean isCommand(MouseEvent event) {
+    return (event.stateMask & SWT.COMMAND) != 0;
+  }
+
+  private boolean isRightClick(MouseEvent event) {
+    return event.button == RIGHT_BUTTON;
+  }
+
   public void mouseDoubleClick(MouseEvent event) {
     Widget widget = event.widget;
     if (widget instanceof Tree) {
@@ -210,12 +241,23 @@ public class Form implements MouseListener, SelectionListener {
         doubleClick(item);
       }
     }
+    if (widget instanceof Text) {
+      Text text = (Text) widget;
+      doubleClick(text);
+    }
   }
 
   public void mouseDown(MouseEvent event) {
+    if (isRightClick(event) || isCommand(event)) {
+      String id = null;
+      Widget w = event.widget;
+      if (w instanceof StyledText) id = getId((StyledText) w);
+      if (w instanceof Text) id = getId((Text) w);
+      if (id != null) MenuClient.popup(id, event.x, event.y);
+    }
   }
 
-  public void mouseUp(MouseEvent arg0) {
+  public void mouseUp(MouseEvent event) {
 
   }
 
@@ -248,14 +290,6 @@ public class Form implements MouseListener, SelectionListener {
       button.pack();
       checks.put(id, button);
     }
-  }
-
-  private void setSelection(String id, boolean state) {
-    EventHandler handler = FormsClient.theClient().getHandler();
-    Message message = handler.newMessage("setBoolean", 2);
-    message.args[0] = new Value(id);
-    message.args[1] = new Value(state);
-    handler.raiseEvent(message);
   }
 
   public void newComboBox(String parentId, String id, int x, int y, int width, int height) {
@@ -293,6 +327,7 @@ public class Form implements MouseListener, SelectionListener {
     text.setBackground(content.getBackground());
     text.setFont(FormsClient.getFormLabelFont());
     text.setLocation(x, y);
+    text.addMouseListener(this);
     text.pack();
     labels.put(id, text);
     form.setMinSize(content.computeSize(SWT.DEFAULT, SWT.DEFAULT));
@@ -300,11 +335,12 @@ public class Form implements MouseListener, SelectionListener {
 
   public void newTextBox(String parentId, String id, int x, int y, int width, int height, boolean editable) {
     if (getId().equals(parentId)) {
-      StyledText text = new StyledText(content, SWT.BORDER);
+      StyledText text = new StyledText(content, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
       text.setFont(FormsClient.formLabelFont);
       text.setLocation(x, y);
       text.setSize(width, height);
       text.setEditable(editable);
+      text.addMouseListener(this);
       boxes.put(id, text);
     }
   }
@@ -315,7 +351,7 @@ public class Form implements MouseListener, SelectionListener {
     text.setBackground(FormsClient.theClient().WHITE);
     text.setFont(FormsClient.getFormTextFieldFont());
     text.setBounds(x, y, width, height);
-    // form.setMinSize(content.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+    text.addMouseListener(this);
     textFields.put(id, text);
     Listener listener = new Listener() {
       public void handleEvent(Event event) {
@@ -365,6 +401,14 @@ public class Form implements MouseListener, SelectionListener {
     handler.raiseEvent(message);
   }
 
+  private void setSelection(String id, boolean state) {
+    EventHandler handler = FormsClient.theClient().getHandler();
+    Message message = handler.newMessage("setBoolean", 2);
+    message.args[0] = new Value(id);
+    message.args[1] = new Value(state);
+    handler.raiseEvent(message);
+  }
+
   public void setSelection(String comboId, int index) {
     for (String id : combos.keySet()) {
       if (id.equals(comboId)) {
@@ -394,6 +438,11 @@ public class Form implements MouseListener, SelectionListener {
     FormsClient.theClient().getHandler().raiseEvent(message);
   }
 
+  public void uncheck(String id) {
+    for (String bid : checks.keySet())
+      if (bid.equals(id) && checks.get(id).getSelection()) checks.get(id).setSelection(false);
+  }
+
   public void widgetDefaultSelected(SelectionEvent event) {
   }
 
@@ -410,7 +459,7 @@ public class Form implements MouseListener, SelectionListener {
   }
 
   public void writeXML(PrintStream out, boolean selected, String formLabel) {
-    out.print("<Form id='" + getId() + "' selected='" + selected + "' label='" + formLabel + "'>");
+    out.print("<Form id='" + getId() + "' selected='" + selected + "' label='" + XModeler.encodeXmlAttribute(formLabel) + "'>");
     for (String id : textFields.keySet()) {
       Text field = textFields.get(id);
       out.print("<TextField id='" + id + "'");
@@ -488,7 +537,7 @@ public class Form implements MouseListener, SelectionListener {
       for (String itemId : items.keySet()) {
         if (items.get(itemId) == item) id = itemId;
       }
-      if (id == null) System.out.println("error: cannot find tree item " + item);
+      if (id == null) System.err.println("error: cannot find tree item " + item);
       String icon = images.get(id);
       out.print("<Item id='" + id + "' text='" + XModeler.encodeXmlAttribute(item.getText()) + "' image='" + icon + "' expanded='" + item.getExpanded() + "'>");
       writeXMLTreeItems(item.getItems(), out);
@@ -496,13 +545,9 @@ public class Form implements MouseListener, SelectionListener {
     }
   }
 
-  public void check(String id) {
-    for (String bid : checks.keySet())
-      if (bid.equals(id) && !checks.get(id).getSelection()) checks.get(id).setSelection(true);
-  }
-
-  public void uncheck(String id) {
-    for (String bid : checks.keySet())
-      if (bid.equals(id) && checks.get(id).getSelection()) checks.get(id).setSelection(false);
+  public String getText(String id) {
+    if (boxes.containsKey(id))
+      return boxes.get(id).getText();
+    else return null;
   }
 }

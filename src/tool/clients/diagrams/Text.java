@@ -165,7 +165,8 @@ public class Text implements Display {
       final org.eclipse.swt.widgets.Text text = new org.eclipse.swt.widgets.Text(diagram.getCanvas(), SWT.BORDER);
       text.setFont(DiagramClient.diagramFont);
       text.setText(this.text);
-      text.setLocation(dx + getX(), dy + getY());
+      Point p = diagram.scaleinv(dx + getX(), dy + getY());
+      text.setLocation(p.x, p.y);
       text.setSize(getWidth() + 10, getHeight() + 10);
       text.setVisible(true);
       text.setFocus();

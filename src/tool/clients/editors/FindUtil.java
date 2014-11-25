@@ -1,16 +1,27 @@
 package tool.clients.editors;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 
+import net.sf.pisee.swtextedit.GuiWidgets;
+import net.sf.pisee.swtextedit.config.GuiConfigData;
+import net.sf.pisee.swtextedit.dialog.FindReplace;
+
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.*;
 import org.eclipse.swt.custom.LineStyleEvent;
 import org.eclipse.swt.custom.LineStyleListener;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.events.*;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.ShellAdapter;
+import org.eclipse.swt.events.ShellEvent;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.Shell;
 
 public class FindUtil {
 
@@ -19,7 +30,14 @@ public class FindUtil {
   static String     keyword;
   static Button     button;
 
-  public static String show(Shell shell, final StyledText styledText) {
+  public static void show(Shell shell, final StyledText styledText) {
+    Menu menu = new Menu(shell);
+    GuiConfigData config = new GuiConfigData();
+    GuiWidgets widgets = new GuiWidgets(config, new HashSet());
+    FindReplace findReplace = new FindReplace(shell, config, styledText, widgets.getEditMenu());
+  }
+
+  public static String show2(Shell shell, final StyledText styledText) {
 
     final Shell dialog = new Shell(shell, SWT.DIALOG_TRIM);
     dialog.setText("Find Text");

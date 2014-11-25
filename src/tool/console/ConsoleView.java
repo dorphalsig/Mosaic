@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Vector;
 
 import org.eclipse.core.runtime.Preferences.PropertyChangeEvent;
+import org.eclipse.draw2d.LightweightSystem;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.StyledText;
@@ -20,11 +21,11 @@ import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
-import org.eclipse.swt.widgets.TabItem;
 
 import tool.clients.dialogs.notifier.NotificationType;
 import tool.clients.dialogs.notifier.NotifierDialog;
@@ -138,7 +139,7 @@ public class ConsoleView {
         } else if (e.keyCode == ';' && ((e.stateMask & SWT.SHIFT) == SWT.SHIFT) && autoComplete) {
           // We might have a :: where there is a path to the left ...
           StyledTextContent content = text.getContent();
-          String command = content.getTextRange(inputStart, text.getCaretOffset()  - inputStart);
+          String command = content.getTextRange(inputStart, text.getCaretOffset() - inputStart);
           if (command.endsWith(":")) {
             WorkbenchClient.theClient().nameLookup(command.substring(0, command.length() - 1));
           }
@@ -152,7 +153,7 @@ public class ConsoleView {
         } else if (e.keyCode == '[' && ((e.stateMask & SWT.SHIFT) == SWT.SHIFT) && autoComplete) {
           // Are we starting a collection?
           StyledTextContent content = text.getContent();
-          String command = content.getTextRange(inputStart, text.getCaretOffset()  - inputStart);
+          String command = content.getTextRange(inputStart, text.getCaretOffset() - inputStart);
           if (command.endsWith("Set") || command.endsWith("Seq")) {
             insert("{}");
             backup(1);

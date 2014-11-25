@@ -4,11 +4,15 @@ import java.io.File;
 
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.dialogs.ListDialog;
 
 import tool.clients.Client;
 import tool.clients.dialogs.notifier.NotificationType;
@@ -101,7 +105,6 @@ public class DialogsClient extends Client {
   }
 
   public boolean processMessage(Message message) {
-    System.out.println(this + " <- " + message);
     return false;
   }
 
@@ -114,7 +117,132 @@ public class DialogsClient extends Client {
       return newFileDialog(message);
     else if (message.hasName("newInputDialog"))
       return newInputDialog(message);
+    else if (message.hasName("newSelectionDialog"))
+      return selectionDialog(message);
     else return super.callMessage(message);
+  }
+
+  public Value selectionDialog(Message message) {
+    final boolean multi = message.args[0].boolValue;
+    final String title = message.args[1].strValue();
+    final String message_ = message.args[2].strValue();
+    final Value[] options = message.args[3].values;
+    final Value[] result = new Value[1];
+    runOnDisplay(new Runnable() {
+      public void run() {
+        if (multi)
+          result[0] = openMultiSelectionDialog(title, message_, options);
+        else result[0] = openSelectionDialog(title, message_, options);
+      }
+    });
+    return result[0];
+  }
+
+  public static Value openSelectionDialog(String title, String message, Value[] options) {
+    String[] stringOptions = objectsToStrings(options);
+    String[] allOptions = processAllOptions(stringOptions);
+    String[] defaultOptions = processDefaultOptions(stringOptions);
+    Shell shell = XModeler.getXModeler();
+    ListDialog ld = new ListDialog(shell);
+    ld.setInput(allOptions);
+    ld.setContentProvider(new ArrayContentProvider());
+    ld.setLabelProvider(new LabelProvider());
+    ld.setMessage(message);
+    ld.setTitle(title);
+    ld.setInitialSelections(defaultOptions);
+    if (ld.open() != SWT.CANCEL) {
+      Object[] result = ld.getResult();
+      if (result != null && result.length > 0) return getResultArray(result, defaultOptions)[0];
+    }
+    return new Value("");
+  }
+
+  public static Value openMultiSelectionDialog(String title, String message, Value[] options) {
+    String[] stringOptions = objectsToStrings(options);
+    String[] allOptions = processAllOptions(stringOptions);
+    String[] defaultOptions = processDefaultOptions(stringOptions);
+    Shell shell = XModeler.getXModeler();
+    ListDialog ld = new ListDialog(shell);
+    ld.setInput(allOptions);
+    ld.setContentProvider(new ArrayContentProvider());
+    ld.setLabelProvider(new LabelProvider());
+    ld.setMessage(message);
+    ld.setTitle(title);
+    ld.setInitialSelections(defaultOptions);
+    if (ld.open() != SWT.CANCEL) {
+      Object[] result = ld.getResult();
+      if (result != null && result.length > 0) return new Value(getResultArray(result, defaultOptions));
+    }
+    return new Value("-1");
+  }
+
+  private static Value[] getResultArray(Object[] strings, String[] defaults) {
+    Value[] values = new Value[strings.length];
+    for (int i = 0; i < strings.length; i++) {
+      String string = (String) strings[i];
+      if (containedInDefault(string, defaults)) string = "!" + string;
+      values[i] = new Value(string);
+    }
+    return values;
+  }
+
+  private static boolean containedInDefault(String string, String[] defaults) {
+    for (int i = 0; i < defaults.length; i++) {
+      String def = defaults[i];
+      if (def.equals(string)) return true;
+    }
+    return false;
+  }
+
+  private static int countAllOptions(Object[] declaredOptions) {
+    int count = 0;
+    for (int i = 0; i < declaredOptions.length; i++) {
+      String option = (String) declaredOptions[i];
+      if (option.startsWith("!")) count++;
+    }
+    return count;
+  }
+
+  private static String[] processDefaultOptions(String[] declaredOptions) {
+    if (declaredOptions == null) {
+      return new String[0];
+    } else {
+      int oi = 0;
+      String[] setOptions = new String[countAllOptions(declaredOptions)];
+      for (int i = 0; i < declaredOptions.length; i++) {
+        String option = declaredOptions[i];
+        if (option.startsWith("!")) setOptions[oi++] = option.substring(1, option.length());
+      }
+      return setOptions;
+    }
+  }
+
+  private static String[] processAllOptions(String[] declaredOptions) {
+    if (declaredOptions == null) {
+      return new String[0];
+    } else {
+      int oi = 0;
+      String[] options = new String[declaredOptions.length];
+      for (int i = 0; i < declaredOptions.length; i++) {
+        String option = declaredOptions[i];
+        if (option.startsWith("!"))
+          options[oi++] = option.substring(1, option.length());
+        else options[oi++] = declaredOptions[i];
+      }
+      return options;
+    }
+  }
+
+  private static String[] objectsToStrings(Value[] options) {
+    if (options == null) {
+      return new String[0];
+    } else {
+      String[] stringOptions = new String[options.length];
+      for (int i = 0; i < options.length; i++) {
+        stringOptions[i] = (options[i]).strValue();
+      }
+      return stringOptions;
+    }
   }
 
   private Value newInputDialog(Message message) {

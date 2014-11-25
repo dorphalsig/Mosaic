@@ -133,7 +133,18 @@ public class XModeler {
         Document doc = dBuilder.parse(fXmlFile);
         doc.getDocumentElement().normalize();
         String root = doc.getDocumentElement().getNodeName();
+        Node node = doc.getDocumentElement();
         if (root.equals("XModeler")) {
+          final int x = Integer.parseInt(attributeValue(node, "x"));
+          final int y = Integer.parseInt(attributeValue(node, "y"));
+          final int width = Integer.parseInt(attributeValue(node, "width"));
+          final int height = Integer.parseInt(attributeValue(node, "height"));
+          XModeler.getDisplay().syncExec(new Runnable() {
+            public void run() {
+              XModeler.setLocation(x, y);
+              XModeler.setSize(width, height);
+            }
+          });
           ModelBrowserClient.theClient().inflateXML(doc);
           DiagramClient.theClient().inflateXML(doc);
           MenuClient.theClient().inflateXML(doc);
@@ -143,11 +154,13 @@ public class XModeler {
         }
       }
     } catch (IOException e) {
-      e.printStackTrace();
+      e.printStackTrace(System.err);
     } catch (ParserConfigurationException e) {
-      e.printStackTrace();
+      e.printStackTrace(System.err);
     } catch (SAXException e) {
-      e.printStackTrace();
+      e.printStackTrace(System.err);
+    } catch (Throwable t) {
+      t.printStackTrace(System.err);
     }
   }
 
@@ -201,8 +214,12 @@ public class XModeler {
             setToolLabel();
             File file = new File(inflationPath);
             FileOutputStream fout = new FileOutputStream(file);
+            int x = XModeler.getLocation().x;
+            int y = XModeler.getLocation().y;
+            int width = XModeler.getSize().x;
+            int height = XModeler.getSize().y;
             PrintStream out = new PrintStream(fout);
-            out.print("<XModeler>");
+            out.print("<XModeler x='" + x + "' y='" + y + "' width='" + width + "' height = '" + height + "'>");
             ModelBrowserClient.theClient().writeXML(out);
             DiagramClient.theClient().writeXML(out);
             MenuClient.theClient().writeXML(out);
@@ -241,6 +258,11 @@ public class XModeler {
   private static void setProjectDirectory(String[] args) {
     projDir = lookupArg("projects", args);
     if (projDir == null) throw new Error("you have not set the project directory in the initialisation arguments:\n" + Arrays.toString(args));
+  }
+
+  public static void setToolLabel() {
+    String path = loadedImagePath == null ? "NO_IMAGE_SET" : loadedImagePath;
+    XModeler.setText(NAME + "[" + path + "]" + busyMessage);
   }
 
   public static void showBusyInformation(String info) {
@@ -305,11 +327,6 @@ public class XModeler {
     Console.start(propertyTabFolder);
     rightSash.setWeights(new int[] { 2, 1 });
     XModeler.open();
-  }
-
-  public static void setToolLabel() {
-    String path = loadedImagePath == null ? "NO_IMAGE_SET" : loadedImagePath;
-    XModeler.setText(NAME + "[" + path + "]" + busyMessage);
   }
 
   static void startXOS(String initFile) {

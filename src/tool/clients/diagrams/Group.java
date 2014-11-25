@@ -39,9 +39,10 @@ public class Group implements SelectionListener {
     GridLayout layout = new GridLayout(1, true);
     layout.marginHeight = 0;
     layout.horizontalSpacing = 0;
+    layout.verticalSpacing = 0;
     layout.marginWidth = 0;
     buttonContainer.setLayout(layout);
-    GridData buttonData = new GridData(SWT.FILL, SWT.FILL, true, true);
+    GridData buttonData = new GridData(GridData.HORIZONTAL_ALIGN_FILL, GridData.VERTICAL_ALIGN_FILL, true, true);
     buttonData.horizontalSpan = 2;
     buttonContainer.setLayoutData(buttonData);
   }

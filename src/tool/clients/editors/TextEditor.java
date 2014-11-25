@@ -7,6 +7,8 @@ import java.util.Vector;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.Bullet;
 import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.ExtendedModifyEvent;
+import org.eclipse.swt.custom.ExtendedModifyListener;
 import org.eclipse.swt.custom.LineBackgroundEvent;
 import org.eclipse.swt.custom.LineBackgroundListener;
 import org.eclipse.swt.custom.ST;
@@ -31,7 +33,6 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import tool.clients.dialogs.notifier.NotifierDialog;
 import tool.clients.editors.pprint.Indent;
 import tool.clients.editors.pprint.Literal;
 import tool.clients.editors.pprint.NewLine;
@@ -43,7 +44,7 @@ import tool.xmodeler.XModeler;
 import xos.Message;
 import xos.Value;
 
-public class TextEditor implements ModifyListener, VerifyKeyListener, MouseListener, LineBackgroundListener {
+public class TextEditor implements ModifyListener, VerifyKeyListener, MouseListener, LineBackgroundListener, ExtendedModifyListener {
 
   private static final int           ZOOM          = 2;
   private static final int           MAX_FONT_SIZE = 40;
@@ -74,6 +75,7 @@ public class TextEditor implements ModifyListener, VerifyKeyListener, MouseListe
     Color bg = Display.getDefault().getSystemColor(SWT.COLOR_WHITE);
     text.setBackground(bg);
     text.addModifyListener(this);
+    text.addExtendedModifyListener(this);
     text.addVerifyKeyListener(this);
     text.addMouseListener(this);
     text.addLineBackgroundListener(this);
@@ -83,91 +85,20 @@ public class TextEditor implements ModifyListener, VerifyKeyListener, MouseListe
     addCommentWordRule();
   }
 
-  private void populateKeywords() {
-    addKeyword("context", "context (class)", contextClass());
-    addKeyword("context", "context (operation)", contextOperation());
-    addKeyword("if", "if (then)", ifThen());
-    addKeyword("if", "if (then else)", ifThenElse());
-    addKeyword("format", "format", format());
-    addKeyword("let", "let (multiple sequential bindings)", letMultipleSequentialBindings());
-    addKeyword("let", "let (single binding)", letSingleBinding());
-    addKeyword("try", "try", _try());
-    addKeyword("context", "context (package)", contextPackage());
-  }
-
-  private PPrint _try() {
-    return new Seq(new Indent(new Seq(new NewLine(), new Literal("body"))), new NewLine(), new Indent(new Seq(new Literal("catch(exception)"), new NewLine(), new Literal("handler"))), new NewLine(), new Literal("end"));
-  }
-
-  private PPrint format() {
-    return new Literal("(stdout, \"\",Seq{})");
-  }
-
-  private PPrint ifThen() {
-    return new Seq(new Space(), new Literal("exp"), new Space(), new NewLine(), new Literal("then"), new Space(), new Literal("exp"), new NewLine(), new Literal("end"));
-  }
-
-  private PPrint ifThenElse() {
-    return new Seq(new Space(), new Literal("exp"), new Space(), new NewLine(), new Literal("then"), new Space(), new Literal("exp"), new NewLine(), new Literal("then"), new Space(), new Literal("exp"), new NewLine(), new Literal("end"));
-  }
-
-  private PPrint contextClass() {
-    return new Indent(new Seq(new Space(), new Literal("Root"), new NewLine(), _class()));
-  }
-
-  private PPrint contextPackage() {
-    return new Indent(new Seq(new Space(), new Literal("Root"), new NewLine(), _package()));
-  }
-
-  private PPrint _package() {
-    return new Seq(new Indent(new Seq(new Literal("@Package"), new Space(), new Literal("name"), new NewLine(), _class())), new NewLine(), new Literal("end"));
-  }
-
   private PPrint _class() {
     return new Seq(new Indent(new Seq(new Literal("@Class"), new Space(), new Literal("name"), new Space(), new Literal("extends"), new Space(), new Literal("Object"), new NewLine(), attribute(), new NewLine(), operation())), new NewLine(), new Literal("end"));
-  }
-
-  private PPrint attribute() {
-    return new Seq(new Literal("@Attribute"), new Space(), new Literal("name"), new Space(), new Literal(":"), new Space(), new Literal("Type"), new Space(), new Literal("end"));
-  }
-
-  private PPrint contextOperation() {
-    return new Indent(new Seq(new Space(), new Literal("Root"), new NewLine(), operation()));
-  }
-
-  private void populateAt() {
-    atTable.put("Attribute", attribute());
-    atTable.put("Class", _class());
-    atTable.put("Constructor", constructor());
-    atTable.put("For", _for());
-    atTable.put("Operation", operation());
-    atTable.put("TypeCase", typeCase());
-    atTable.put("WithOpenFile (in)", withOpenFileIn());
-    atTable.put("WithOpenFile (out)", withOpenFileOut());
-  }
-
-  private PPrint withOpenFileIn() {
-    return new Seq(new Indent(new Seq(new Literal("@WithOpenFile(fin <- filename)"), new NewLine(), new Literal("body"))), new NewLine(), new Literal("end"));
-  }
-
-  private PPrint withOpenFileOut() {
-    return new Seq(new Indent(new Seq(new Literal("@WithOpenFile(fout -> filename)"), new NewLine(), new Literal("body"))), new NewLine(), new Literal("end"));
   }
 
   private PPrint _for() {
     return new Seq(new Indent(new Seq(new Literal("@For"), new Space(), new Literal("name"), new Space(), new Literal("in"), new Space(), new Literal("collection"), new Space(), new Literal("do"), new NewLine(), new Literal("body"))), new NewLine(), new Literal("end"));
   }
 
-  private PPrint constructor() {
-    return new Literal("@Constructor(slots) ! end");
+  private PPrint _package() {
+    return new Seq(new Indent(new Seq(new Literal("@Package"), new Space(), new Literal("name"), new NewLine(), _class())), new NewLine(), new Literal("end"));
   }
 
-  private PPrint typeCase() {
-    return new Seq(new Indent(new Seq(new Literal("@TypeCase(exp)"), new NewLine(), new Indent(new Seq(new Literal("exp"), new Space(), new Literal("do"), new NewLine(), new Literal("exp"))), new NewLine(), new Literal("end"), new NewLine(), new Literal("else"), new Space(), new Literal("exp"))), new NewLine(), new Literal("end"));
-  }
-
-  private PPrint operation() {
-    return new Seq(new Literal("@Operation name(args)"), new Indent(new Seq(new NewLine(), new Literal("body"))), new NewLine(), new Literal("end"));
+  private PPrint _try() {
+    return new Seq(new Indent(new Seq(new NewLine(), new Literal("body"))), new NewLine(), new Indent(new Seq(new Literal("catch(exception)"), new NewLine(), new Literal("handler"))), new NewLine(), new Literal("end"));
   }
 
   private void addCommentWordRule() {
@@ -207,6 +138,38 @@ public class TextEditor implements ModifyListener, VerifyKeyListener, MouseListe
     if (text.getCharCount() > 0) text.replaceStyleRanges(0, text.getCharCount() - 1, styleRanges());
   }
 
+  private void addStyles(int i, int length) {
+    int start = backupToPossibleStyleStart(i);
+    int end = start + length + (i - start);
+    StyleRange[] ranges = styleRange(start, end);
+    for (StyleRange range : ranges)
+      end = Math.max(end, range.start + range.length);
+    if (ranges.length > 0 && text.getCharCount() > 0) text.replaceStyleRanges(start, end - start, ranges);
+  }
+
+  private int backupToPossibleStyleStart(int start) {
+    String s = text.getText();
+    while (start > 0 && isKeywordChar(s.charAt(start)))
+      start--;
+    return start;
+  }
+
+  private boolean isKeywordChar(char c) {
+    return isAlphaChar(c) || c == '_';
+  }
+
+  private boolean isAlphaChar(char c) {
+    return isLowerAlphaChar(c) || isUpperAlphaChar(c);
+  }
+
+  private boolean isUpperAlphaChar(char c) {
+    return 'A' <= c && 'Z' >= c;
+  }
+
+  private boolean isLowerAlphaChar(char c) {
+    return 'a' <= c && 'z' >= c;
+  }
+
   public void addWordRule(String id, String text, int red, int green, int blue) {
     if (getId().equals(id)) wordRules.add(new WordRule(text, new Color(XModeler.getXModeler().getDisplay(), red, green, blue)));
   }
@@ -230,8 +193,39 @@ public class TextEditor implements ModifyListener, VerifyKeyListener, MouseListe
     } else return false;
   }
 
+  private PPrint attribute() {
+    return new Seq(new Literal("@Attribute"), new Space(), new Literal("name"), new Space(), new Literal(":"), new Space(), new Literal("Type"), new Space(), new Literal("end"));
+  }
+
+  private void checkKeywords() {
+    if (isAlpha(lastChar)) {
+      Vector<Keyword> keys = getKeysAtCurrentPosition();
+      if (keys != null) key(keys);
+    }
+  }
+
   public void clearHighlights() {
     highlights.clear();
+  }
+
+  private PPrint constructor() {
+    return new Literal("@Constructor(slots) ! end");
+  }
+
+  private PPrint contextClass() {
+    return new Indent(new Seq(new Space(), new Literal("Root"), new NewLine(), _class()));
+  }
+
+  private PPrint contextOperation() {
+    return new Indent(new Seq(new Space(), new Literal("Root"), new NewLine(), operation()));
+  }
+
+  private PPrint contextPackage() {
+    return new Indent(new Seq(new Space(), new Literal("Root"), new NewLine(), _package()));
+  }
+
+  private PPrint format() {
+    return new Literal("(stdout, \"\",Seq{})");
   }
 
   protected Menu getAtPopup(final boolean[] result) {
@@ -271,12 +265,30 @@ public class TextEditor implements ModifyListener, VerifyKeyListener, MouseListe
     return id;
   }
 
+  private Vector<Keyword> getKeysAtCurrentPosition() {
+    int index = text.getCaretOffset();
+    String s = text.getText();
+    for (String key : keyTable.keySet()) {
+      int match = s.indexOf(key, index - key.length());
+      if (match != -1 && match == index - key.length()) return keyTable.get(key);
+    }
+    return null;
+  }
+
   public String getLabel() {
     return label;
   }
 
   public StyledText getText() {
     return text;
+  }
+
+  private PPrint ifThen() {
+    return new Seq(new Space(), new Literal("exp"), new Space(), new NewLine(), new Literal("then"), new Space(), new Literal("exp"), new NewLine(), new Literal("end"));
+  }
+
+  private PPrint ifThenElse() {
+    return new Seq(new Space(), new Literal("exp"), new Space(), new NewLine(), new Literal("then"), new Space(), new Literal("exp"), new NewLine(), new Literal("then"), new Space(), new Literal("exp"), new NewLine(), new Literal("end"));
   }
 
   public void inflate(Node textEditor) {
@@ -314,6 +326,10 @@ public class TextEditor implements ModifyListener, VerifyKeyListener, MouseListe
     addWordRule(getId(), word, red, green, blue);
   }
 
+  private boolean isAlpha(char c) {
+    return 'a' <= c && c <= 'z';
+  }
+
   private boolean isCommand(MouseEvent event) {
     return (event.stateMask & SWT.COMMAND) != 0;
   }
@@ -330,16 +346,57 @@ public class TextEditor implements ModifyListener, VerifyKeyListener, MouseListe
     return event.button == RIGHT_BUTTON;
   }
 
-  private PPrint letSingleBinding() {
-    return new Seq(new Space(), new Literal("name = exp"), new NewLine(), new Literal("in"), new Space(), new Literal("body"), new NewLine(), new Literal("end"));
+  private void key(Vector<Keyword> keys) {
+    if (keys.size() == 1) {
+      String s = keys.elementAt(0).toString(getCurrentIndent());
+      autoComplete = false;
+      text.insert(s);
+      autoComplete = true;
+      text.setCaretOffset(text.getCaretOffset() + s.length());
+    }
+    if (keys.size() > 1) {
+      Menu menu = new Menu(XModeler.getXModeler(), SWT.POP_UP);
+      for (final Keyword keyword : keys) {
+        MenuItem item = new MenuItem(menu, SWT.NONE);
+        item.setText(keyword.description);
+        item.addSelectionListener(new SelectionListener() {
+          public void widgetDefaultSelected(SelectionEvent event) {
+          }
+
+          public void widgetSelected(SelectionEvent event) {
+            String s = keyword.toString(getCurrentIndent());
+            autoComplete = false;
+            text.insert(s);
+            autoComplete = true;
+            text.setCaretOffset(text.getCaretOffset() + s.length());
+          }
+        });
+      }
+      menu.setVisible(true);
+      while (!menu.isDisposed() && menu.isVisible()) {
+        if (!Display.getCurrent().readAndDispatch()) Display.getCurrent().sleep();
+      }
+      menu.dispose();
+    }
   }
 
   private PPrint letMultipleSequentialBindings() {
     return new Seq(new Space(), new Indent(new Indent(new Seq(new Literal("name = exp then"), new NewLine(), new Literal("name = exp")))), new NewLine(), new Literal("in"), new Space(), new Literal("body"), new NewLine(), new Literal("end"));
   }
 
+  private PPrint letSingleBinding() {
+    return new Seq(new Space(), new Literal("name = exp"), new NewLine(), new Literal("in"), new Space(), new Literal("body"), new NewLine(), new Literal("end"));
+  }
+
   public void lineGetBackground(LineBackgroundEvent event) {
     if (highlights.contains(event.lineOffset)) event.lineBackground = EditorClient.LINE_HIGHLIGHT;
+  }
+
+  public void modifyText(ExtendedModifyEvent event) {
+    int start = event.start;
+    int length = event.length;
+    String text = event.replacedText;
+    if (length > 0) addStyles(start, length);
   }
 
   public void modifyText(ModifyEvent event) {
@@ -351,19 +408,7 @@ public class TextEditor implements ModifyListener, VerifyKeyListener, MouseListe
       EditorClient.theClient().getHandler().raiseEvent(message);
       dirty = true;
     }
-    addStyles();
     if (autoComplete) checkKeywords();
-  }
-
-  private void checkKeywords() {
-    if (isAlpha(lastChar)) {
-      Vector<Keyword> keys = getKeysAtCurrentPosition();
-      if (keys != null) key(keys);
-    }
-  }
-
-  private boolean isAlpha(char c) {
-    return 'a' <= c && c <= 'z';
   }
 
   public void mouseDoubleClick(MouseEvent event) {
@@ -386,6 +431,33 @@ public class TextEditor implements ModifyListener, VerifyKeyListener, MouseListe
     for (int i = 0; i < indent; i++)
       text.insert(" ");
     text.setCaretOffset(text.getCaretOffset() + indent);
+  }
+
+  private PPrint operation() {
+    return new Seq(new Literal("@Operation name(args)"), new Indent(new Seq(new NewLine(), new Literal("body"))), new NewLine(), new Literal("end"));
+  }
+
+  private void populateAt() {
+    atTable.put("Attribute", attribute());
+    atTable.put("Class", _class());
+    atTable.put("Constructor", constructor());
+    atTable.put("For", _for());
+    atTable.put("Operation", operation());
+    atTable.put("TypeCase", typeCase());
+    atTable.put("WithOpenFile (in)", withOpenFileIn());
+    atTable.put("WithOpenFile (out)", withOpenFileOut());
+  }
+
+  private void populateKeywords() {
+    addKeyword("context", "context (class)", contextClass());
+    addKeyword("context", "context (operation)", contextOperation());
+    addKeyword("if", "if (then)", ifThen());
+    addKeyword("if", "if (then else)", ifThenElse());
+    addKeyword("format", "format", format());
+    addKeyword("let", "let (multiple sequential bindings)", letMultipleSequentialBindings());
+    addKeyword("let", "let (single binding)", letSingleBinding());
+    addKeyword("try", "try", _try());
+    addKeyword("context", "context (package)", contextPackage());
   }
 
   public void rightClick(MouseEvent event) {
@@ -435,6 +507,28 @@ public class TextEditor implements ModifyListener, VerifyKeyListener, MouseListe
     return (StyleRange[]) ranges.toArray(new StyleRange[0]);
   }
 
+  private StyleRange[] styleRange(int start, int end) {
+    java.util.List<StyleRange> ranges = new java.util.ArrayList<StyleRange>();
+    String s = text.getText();
+    int prevChar = -1;
+    for (int i = start; i < end; i++) {
+      for (WordRule wordRule : wordRules) {
+        StyleRange style = wordRule.match(s, i, prevChar);
+        if (style != null) {
+          ranges.add(style);
+          i = i + style.length - 1;
+          break;
+        }
+      }
+      prevChar = s.charAt(i);
+    }
+    return (StyleRange[]) ranges.toArray(new StyleRange[0]);
+  }
+
+  private PPrint typeCase() {
+    return new Seq(new Indent(new Seq(new Literal("@TypeCase(exp)"), new NewLine(), new Indent(new Seq(new Literal("exp"), new Space(), new Literal("do"), new NewLine(), new Literal("exp"))), new NewLine(), new Literal("end"), new NewLine(), new Literal("else"), new Space(), new Literal("exp"))), new NewLine(), new Literal("end"));
+  }
+
   public void verifyKey(VerifyEvent e) {
     if (((e.stateMask & SWT.CTRL) == SWT.CTRL) && (e.keyCode == '=')) {
       fontData.setHeight(Math.min(fontData.getHeight() + ZOOM, MAX_FONT_SIZE));
@@ -469,47 +563,12 @@ public class TextEditor implements ModifyListener, VerifyKeyListener, MouseListe
     if (e.doit) lastChar = e.character;
   }
 
-  private void key(Vector<Keyword> keys) {
-    if (keys.size() == 1) {
-      String s = keys.elementAt(0).toString(getCurrentIndent());
-      autoComplete = false;
-      text.insert(s);
-      autoComplete = true;
-      text.setCaretOffset(text.getCaretOffset() + s.length());
-    }
-    if (keys.size() > 1) {
-      Menu menu = new Menu(XModeler.getXModeler(), SWT.POP_UP);
-      for (final Keyword keyword : keys) {
-        MenuItem item = new MenuItem(menu, SWT.NONE);
-        item.setText(keyword.description);
-        item.addSelectionListener(new SelectionListener() {
-          public void widgetDefaultSelected(SelectionEvent event) {
-          }
-
-          public void widgetSelected(SelectionEvent event) {
-            String s = keyword.toString(getCurrentIndent());
-            autoComplete = false;
-            text.insert(s);
-            autoComplete = true;
-            text.setCaretOffset(text.getCaretOffset() + s.length());
-          }
-        });
-      }
-      menu.setVisible(true);
-      while (!menu.isDisposed() && menu.isVisible()) {
-        if (!Display.getCurrent().readAndDispatch()) Display.getCurrent().sleep();
-      }
-      menu.dispose();
-    }
+  private PPrint withOpenFileIn() {
+    return new Seq(new Indent(new Seq(new Literal("@WithOpenFile(fin <- filename)"), new NewLine(), new Literal("body"))), new NewLine(), new Literal("end"));
   }
 
-  private Vector<Keyword> getKeysAtCurrentPosition() {
-    int index = text.getCaretOffset();
-    String s = text.getText();
-    for (String key : keyTable.keySet()) {
-      if (s.indexOf(key, index - key.length()) == index - key.length()) return keyTable.get(key);
-    }
-    return null;
+  private PPrint withOpenFileOut() {
+    return new Seq(new Indent(new Seq(new Literal("@WithOpenFile(fout -> filename)"), new NewLine(), new Literal("body"))), new NewLine(), new Literal("end"));
   }
 
   public void writeXML(PrintStream out, boolean isSelected, String label, String toolTip) {

@@ -38,7 +38,7 @@ public class FormTools {
     if (toolName.equals("browseAndClearHistory"))
       return "icons/Clear.gif";
     else {
-      System.out.println("unkown tool icon file for " + toolName);
+      System.err.println("unkown tool icon file for " + toolName);
       return "icons/Object.gif";
     }
   }
@@ -52,7 +52,7 @@ public class FormTools {
     if (toolName.equals("browseAndClearHistory"))
       return "clearHistory";
     else {
-      System.out.println("unknown tool event name for " + toolName);
+      System.err.println("unknown tool event name for " + toolName);
       return toolName;
     }
   }

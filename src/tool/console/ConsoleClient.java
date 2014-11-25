@@ -105,7 +105,7 @@ public class ConsoleClient extends Thread {
         Node item = list.item(i);
         inflateConsoleElement(item);
       }
-    } else System.out.println("expecting exactly 1 console client got: " + consoleClients.getLength());
+    } else System.err.println("expecting exactly 1 console client got: " + consoleClients.getLength());
   }
 
   private void inflateConsoleElement(Node item) {

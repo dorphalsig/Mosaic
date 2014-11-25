@@ -60,7 +60,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       public void run() {
         if (editors.containsKey(id))
           editors.get(id).addLineHighlight(line);
-        else System.out.println("cannot find editor: " + id);
+        else System.err.println("cannot find editor: " + id);
       }
     });
   }
@@ -76,7 +76,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       addMultilineRule(id, start, end, 0, 153, 0);
     else if (color.equals("blue"))
       addMultilineRule(id, start, end, 50, 50, 255);
-    else System.out.println("unknown color: " + color);
+    else System.err.println("unknown color: " + color);
   }
 
   private void addMultilineRule(String id, String start, String end, int red, int green, int blue) {
@@ -114,7 +114,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       addWordRuleColor(id, text, 0, 153, 0);
     else if (color.equals("blue"))
       addWordRuleColor(id, text, 50, 50, 255);
-    else System.out.println("unknown color: " + color);
+    else System.err.println("unknown color: " + color);
   }
 
   public Value callMessage(Message message) {
@@ -157,7 +157,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       public void run() {
         if (editors.containsKey(id))
           editors.get(id).clearHighlights();
-        else System.out.println("cannot find editor: " + id);
+        else System.err.println("cannot find editor: " + id);
       }
     });
   }
@@ -166,12 +166,13 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
     // Careful because the diagrams and files share the same tab folder...
     CTabItem item = (CTabItem) event.item;
     String id = getId(item);
-    if (id != null && editors.containsKey(id)) {
+    if (id != null && (editors.containsKey(id) || browsers.containsKey(id))) {
       EventHandler handler = getHandler();
       Message message = handler.newMessage("textClosed", 1);
       message.args[0] = new Value(id);
       handler.raiseEvent(message);
       editors.remove(id);
+      browsers.remove(id);
       tabs.remove(id);
     } else {
       DiagramClient.theClient().close(event);
@@ -185,7 +186,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
   }
 
   private String getId(CTabItem item) {
-    for (String id : editors.keySet())
+    for (String id : tabs.keySet())
       if (tabs.get(id) == item) return id;
     return null;
   }
@@ -210,7 +211,8 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
     String label = XModeler.attributeValue(browser, "label");
     String tooltip = XModeler.attributeValue(browser, "toolTip");
     String url = XModeler.attributeValue(browser, "url");
-    newBrowser(id, label, tooltip, url);
+    String text = XModeler.attributeValue(browser, "text");
+    newBrowser(id, label, tooltip, url, text);
   }
 
   private void inflateEditorElement(Node editor) {
@@ -247,7 +249,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
         Node editor = editors.item(i);
         inflateEditorElement(editor);
       }
-    } else System.out.println("expecting exactly 1 editor client got: " + editorClients.getLength());
+    } else System.err.println("expecting exactly 1 editor client got: " + editorClients.getLength());
   }
 
   public void maximize(CTabFolderEvent event) {
@@ -261,25 +263,30 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
     String label = message.args[1].strValue();
     String tooltip = message.args[2].strValue();
     String url = message.args[3].strValue();
-    newBrowser(id, label, tooltip, url);
+    newBrowser(id, label, tooltip, url, "");
   }
 
-  private void newBrowser(final String id, final String label, String tooltip, final String url) {
+  private void newBrowser(final String id, final String label, String tooltip, final String url, final String text) {
     runOnDisplay(new Runnable() {
       public void run() {
         CTabItem tabItem = new CTabItem(tabFolder, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL);
         tabItem.setText(label);
+        tabItem.setShowClose(true);
         tabs.put(id, tabItem);
         Browser browser = new Browser(tabFolder, SWT.BORDER);
         tabItem.setControl(browser);
-        browser.setText("<b> Nothing </b>");
-        if (url.length() != 0) browser.setUrl(url);
+        browser.setText(text);
+        if (isURL(url)) browser.setUrl(url);
         browsers.put(id, browser);
         browser.setVisible(true);
         browser.addLocationListener(EditorClient.this);
         tabFolder.setSelection(tabItem);
       }
     });
+  }
+
+  private boolean isURL(String url) {
+    return url.startsWith("http://") || url.startsWith("file://");
   }
 
   private void newTextEditor(Message message) {
@@ -307,7 +314,6 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
   }
 
   public boolean processMessage(Message message) {
-    System.out.println(this + " <- " + message);
     return false;
   }
 
@@ -331,6 +337,8 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       setDirty(message);
     else if (message.hasName("setClean"))
       setClean(message);
+    else if (message.hasName("setName"))
+      setName(message);
     else if (message.hasName("showLine"))
       showLine(message);
     else if (message.hasName("addLineHighlight"))
@@ -340,6 +348,22 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
     else if (message.hasName("setFocus"))
       setFocus(message);
     else super.sendMessage(message);
+  }
+
+  private void setName(Message message) {
+    String id = message.args[0].strValue();
+    String name = message.args[1].strValue();
+    setName(id, name);
+  }
+
+  private void setName(final String id, final String name) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (String tid : tabs.keySet()) {
+          if (tid.equals(id)) tabs.get(id).setText(name);
+        }
+      }
+    });
   }
 
   private void setClean(Message message) {
@@ -384,7 +408,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       public void run() {
         if (tabs.containsKey(id))
           tabFolder.setSelection(tabs.get(id));
-        else System.out.println("cannot set focus to editor: " + id);
+        else System.err.println("cannot set focus to editor: " + id);
       }
     });
   }
@@ -401,7 +425,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
           tabFolder.setSelection(tabs.get(id.strValue()));
         }
       });
-    } else System.out.println("cannot find text editor " + id);
+    } else System.err.println("cannot find text editor " + id);
   }
 
   private void setUrl(Message message) {
@@ -421,7 +445,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
           tabFolder.setSelection(tabs.get(id.strValue()));
         }
       });
-    } else System.out.println("cannot find browser " + id);
+    } else System.err.println("cannot find browser " + id);
   }
 
   private void showLine(Message message) {
@@ -435,7 +459,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       public void run() {
         if (editors.containsKey(id))
           editors.get(id).showLine(line);
-        else System.out.println("cannot find editor: " + id);
+        else System.err.println("cannot find editor: " + id);
       }
     });
   }
@@ -456,7 +480,8 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       String tooltip = tab.getToolTipText();
       Browser browser = browsers.get(id);
       String url = browser.getUrl();
-      out.print("<Browser id='" + id + "' label='" + label + "' tooltip='" + tooltip + "' url='" + url + "'/>");
+      String text = browser.getText();
+      out.print("<Browser id='" + id + "' label='" + label + "' tooltip='" + tooltip + "' url='" + url + "' text='" + XModeler.encodeXmlAttribute(text) + "'/>");
     }
     out.print("</Editors>");
   }

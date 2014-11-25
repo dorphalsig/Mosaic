@@ -547,8 +547,8 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
         Edge edge = new Edge(id, sourceNode, sourcePort, sourceX, sourceY, targetNode, targetPort, targetX, targetY, refx, refy, sourceHead, targetHead, lineStyle, red, green, blue);
         edges.put(id, edge);
         redraw();
-      } else System.out.println("cannot find target port " + targetId);
-    } else System.out.println("cannot find source port " + sourceId);
+      } else System.err.println("cannot find target port " + targetId);
+    } else System.err.println("cannot find source port " + sourceId);
   }
 
   public void newGroup(String name) {
@@ -833,13 +833,27 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     }
   }
 
-  private void scale(MouseEvent event) {
+  public void scale(MouseEvent event) {
     float[] points = new float[] { (float) event.x, (float) event.y };
     transform.invert();
     transform.transform(points);
     transform.invert();
     event.x = (int) points[0];
     event.y = (int) points[1];
+  }
+
+  public Point scale(int x, int y) {
+    float[] points = new float[] { (float) x, (float) y };
+    transform.invert();
+    transform.transform(points);
+    transform.invert();
+    return new Point((int) points[0], (int) points[1]);
+  }
+
+  public Point scaleinv(int x, int y) {
+    float[] points = new float[] { (float) x, (float) y };
+    transform.transform(points);
+    return new Point((int) points[0], (int) points[1]);
   }
 
   private void select(int stateMask, int x, int y) {
@@ -1070,5 +1084,10 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     message.args[0] = new Value(getId());
     message.args[1] = new Value(zoom);
     eventHandler.raiseEvent(message);
+  }
+
+  public void align() {
+    for (Edge edge : edges.values())
+      edge.align();
   }
 }

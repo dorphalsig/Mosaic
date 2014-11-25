@@ -140,6 +140,26 @@ public class FormsClient extends Client implements CTabFolder2Listener {
     });
   }
 
+  public Value callMessage(Message message) {
+    if (message.hasName("getText"))
+      return getText(message);
+    else return super.callMessage(message);
+  }
+
+  private Value getText(Message message) {
+    final String id = message.args[0].strValue();
+    final String[] text = new String[] { "" };
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (Form form : forms) {
+          String textIn = form.getText(id);
+          if (textIn != null) text[0] = textIn;
+        }
+      }
+    });
+    return new Value(text[0]);
+  }
+
   private void clearForm(Message message) {
     String id = message.args[0].strValue();
     final Form form = getForm(id);
@@ -149,7 +169,7 @@ public class FormsClient extends Client implements CTabFolder2Listener {
           form.clear();
         }
       });
-    } else System.out.println("cannot find form to clear " + id);
+    } else System.err.println("cannot find form to clear " + id);
   }
 
   private Form getForm(String id) {
@@ -235,7 +255,7 @@ public class FormsClient extends Client implements CTabFolder2Listener {
       inflateTree(parentId, element);
     else if (element.getNodeName().equals("List"))
       inflateList(parentId, element);
-    else System.out.println("Unknown type of form element: " + element.getNodeName());
+    else System.err.println("Unknown type of form element: " + element.getNodeName());
   }
 
   private void inflateFormTools(Node formTools) {
@@ -326,15 +346,19 @@ public class FormsClient extends Client implements CTabFolder2Listener {
   public void inflateXML(final Document doc) {
     runOnDisplay(new Runnable() {
       public void run() {
-        NodeList formClients = doc.getElementsByTagName("Forms");
-        if (formClients.getLength() == 1) {
-          Node formClient = formClients.item(0);
-          NodeList forms = formClient.getChildNodes();
-          for (int i = 0; i < forms.getLength(); i++) {
-            Node element = forms.item(i);
-            inflateFormClientElement(element);
-          }
-        } else System.out.println("expecting exactly 1 editor client got: " + formClients.getLength());
+        try {
+          NodeList formClients = doc.getElementsByTagName("Forms");
+          if (formClients.getLength() == 1) {
+            Node formClient = formClients.item(0);
+            NodeList forms = formClient.getChildNodes();
+            for (int i = 0; i < forms.getLength(); i++) {
+              Node element = forms.item(i);
+              inflateFormClientElement(element);
+            }
+          } else System.err.println("expecting exactly 1 editor client got: " + formClients.getLength());
+        } catch (Throwable t) {
+          t.printStackTrace(System.err);
+        }
       }
     });
   }
@@ -450,7 +474,7 @@ public class FormsClient extends Client implements CTabFolder2Listener {
           form.newText(id, string, x, y);
         }
       });
-    } else System.out.println("cannot find text parent " + parentId);
+    } else System.err.println("cannot find text parent " + parentId);
   }
 
   private void newTextBox(Message message) {
@@ -492,7 +516,7 @@ public class FormsClient extends Client implements CTabFolder2Listener {
           form.newTextField(id, x, y, width, height, editable);
         }
       });
-    } else System.out.println("cannot find text field parent " + parentId);
+    } else System.err.println("cannot find text field parent " + parentId);
   }
 
   private void newTree(Message message) {
@@ -516,7 +540,6 @@ public class FormsClient extends Client implements CTabFolder2Listener {
   }
 
   public boolean processMessage(Message message) {
-    System.out.println(this + " <- " + message);
     return false;
   }
 
@@ -525,7 +548,7 @@ public class FormsClient extends Client implements CTabFolder2Listener {
       public void run() {
         if (tabs.containsKey(id))
           tabFolder.setSelection(tabs.get(id));
-        else System.out.println("cannot find form: " + id);
+        else System.err.println("cannot find form: " + id);
       }
     });
   }
@@ -650,7 +673,7 @@ public class FormsClient extends Client implements CTabFolder2Listener {
       if (tabs.containsKey(id.strValue())) {
         FormTools formTools = getFormTools(id.strValue());
         formTools.addTool(name.strValue(), id.strValue());
-      } else System.out.println("cannot find form " + id);
+      } else System.err.println("cannot find form " + id);
     }
   }
 
@@ -683,7 +706,7 @@ public class FormsClient extends Client implements CTabFolder2Listener {
       Message message = handler.newMessage("formClosed", 1);
       message.args[0] = new Value(id);
       handler.raiseEvent(message);
-      forms.remove(id);
+      forms.remove(getForm(id));
       tabs.remove(id);
     }
   }

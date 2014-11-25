@@ -162,7 +162,7 @@ public class MenuClient extends Client implements SelectionListener {
     Value elementId = message.args[1];
     if (popups.containsKey(menuId.strValue())) {
       popupAssignments.put(elementId.strValue(), popups.get(menuId.strValue()));
-    } else System.out.println("cannot set global menu for " + menuId);
+    } else System.err.println("cannot set global menu for " + menuId);
   }
 
   private void addMenuItem(Message message) {
@@ -204,7 +204,7 @@ public class MenuClient extends Client implements SelectionListener {
       Node menuClient = menuClients.item(0);
       for (int i = 0; i < menuClient.getChildNodes().getLength(); i++)
         inflateMenuClientElement(menuClient.getChildNodes().item(i));
-    } else System.out.println("expecting exactly 1 menu client got: " + menuClients.getLength());
+    } else System.err.println("expecting exactly 1 menu client got: " + menuClients.getLength());
   }
 
   private void inflateMenuClientElement(Node item) {
@@ -302,7 +302,7 @@ public class MenuClient extends Client implements SelectionListener {
           XModeler.getXModeler().setMenuBar(XModeler.getMenuBar());
         }
       });
-    } else System.out.println("Cannot find menu " + parent);
+    } else System.err.println("Cannot find menu " + parent);
   }
 
   private void newGroupMarker(Message message) {
@@ -312,7 +312,7 @@ public class MenuClient extends Client implements SelectionListener {
       // Assume that the group can share the parent menu.
       // CAREFUL when serializing due to sharing...
       menus.put(id.strValue(), menus.get(parent.strValue()));
-    } else System.out.println("Cannot find menu " + parent.strValue());
+    } else System.err.println("Cannot find menu " + parent.strValue());
   }
 
   private void newMenu(final Message message) {
@@ -335,7 +335,7 @@ public class MenuClient extends Client implements SelectionListener {
           menuItem.setText(name);
           menus.put(id, subMenu);
           XModeler.getXModeler().setMenuBar(XModeler.getMenuBar());
-        } else System.out.println("Cannot find menu " + parent);
+        } else System.err.println("Cannot find menu " + parent);
       }
     });
   }
@@ -368,12 +368,10 @@ public class MenuClient extends Client implements SelectionListener {
   }
 
   public boolean processMessage(Message message) {
-    System.out.println(this + " <- " + message);
     return true;
   }
 
   public void widgetDefaultSelected(SelectionEvent arg0) {
-    System.out.println(arg0);
   }
 
   public void widgetSelected(SelectionEvent event) {
@@ -393,6 +391,6 @@ public class MenuClient extends Client implements SelectionListener {
       PopupMenu pmenu = popupAssignments.get(id);
       Menu menu = pmenu.popup(id);
       menu.setVisible(true);
-    } else System.out.println("no menu for " + id);
+    } else System.err.println("no menu for " + id);
   }
 }

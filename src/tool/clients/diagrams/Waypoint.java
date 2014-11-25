@@ -26,42 +26,42 @@ public class Waypoint implements Selectable {
     this.y = y;
   }
 
-  public int getX() {
-    return x;
-  }
-
-  public void setX(int x) {
-    this.x = x;
-  }
-
-  public int getY() {
-    return y;
-  }
-
-  public void setY(int y) {
-    this.y = y;
+  public boolean colocated(Waypoint w) {
+    return getX() == w.getX() && getY() == w.getY();
   }
 
   public String getId() {
     return id;
   }
 
-  public String toString() {
-    return "Waypoint(" + x + "," + y + ")";
+  public int getX() {
+    return x;
+  }
+
+  public int getY() {
+    return y;
+  }
+
+  public boolean isEnd() {
+    return getId().equals("end");
+  }
+
+  public boolean isStart() {
+    return getId().equals("start");
+  }
+
+  public void move(String id, int x, int y) {
+    if (id.equals(getId())) {
+      this.x = x;
+      this.y = y;
+      edge.checkWaypoints(this);
+    }
   }
 
   public void moveBy(int dx, int dy) {
     x = x + dx;
     y = y + dy;
     edge.movedBy(this);
-  }
-
-  public void paintSelected(GC gc) {
-    Color c = gc.getForeground();
-    gc.setForeground(Diagram.RED);
-    gc.drawOval(x - SELECTED_SIZE, y - SELECTED_SIZE, SELECTED_SIZE * 2, SELECTED_SIZE * 2);
-    gc.setForeground(c);
-    edge.paintOrthogonal(gc, this);
   }
 
   public void moveEvent() {
@@ -78,31 +78,31 @@ public class Waypoint implements Selectable {
     return Math.sqrt((dx * dx) + (dy * dy)) < 5;
   }
 
-  public void move(String id, int x, int y) {
-    if (id.equals(getId())) {
-      this.x = x;
-      this.y = y;
-      edge.checkWaypoints(this);
-    }
-  }
-
-  public void writeXML(PrintStream out) {
-    out.print("<Waypoint id='" + getId() + "' index='" + edge.getWaypoints().indexOf(this) + "' x='" + getX() + "' y='" + getY() + "'/>");
-  }
-
-  public boolean colocated(Waypoint w) {
-    return getX() == w.getX() && getY() == w.getY();
+  public void paintSelected(GC gc) {
+    Color c = gc.getForeground();
+    gc.setForeground(Diagram.RED);
+    gc.drawOval(x - SELECTED_SIZE, y - SELECTED_SIZE, SELECTED_SIZE * 2, SELECTED_SIZE * 2);
+    gc.setForeground(c);
+    edge.paintOrthogonal(gc, this);
   }
 
   public void rightClick(int x, int y) {
     MenuClient.popup(edge.getId(), x, y);
   }
 
-  public boolean isEnd() {
-    return getId().equals("end");
+  public void setX(int x) {
+    this.x = x;
   }
 
-  public boolean isStart() {
-    return getId().equals("start");
+  public void setY(int y) {
+    this.y = y;
+  }
+
+  public String toString() {
+    return "Waypoint(" + x + "," + y + ")";
+  }
+
+  public void writeXML(PrintStream out) {
+    out.print("<Waypoint id='" + getId() + "' index='" + edge.getWaypoints().indexOf(this) + "' x='" + getX() + "' y='" + getY() + "'/>");
   }
 }

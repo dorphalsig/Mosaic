@@ -104,7 +104,7 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
               if (i == item) tabFolder.setSelection(tabs.get(id));
         }
       });
-    } else System.out.println("Cannot find node " + parentId);
+    } else System.err.println("ModelBrowserClicnt.addNodeWithIcon: cannot find node " + parentId);
   }
 
   private void addRootNodeWithIcon(final String parentId, final String nodeId, final String text, boolean editable, final boolean expanded, final String icon, final int index) {
@@ -267,7 +267,7 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
       inflateTreeItem(root);
       if (selected) select(id);
       if (expanded) expand(rootId);
-    } else System.out.println("expecting to inflate a tree with 1 root node.");
+    } else System.err.println("expecting to inflate a tree with 1 root node.");
   }
 
   private void inflateTreeItem(Node node) {
@@ -294,7 +294,7 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
         Node treeNode = treeNodes.item(i);
         inflateTree(treeNode);
       }
-    } else System.out.println("expecting exactly 1 model browser got: " + modelBrowsers.getLength());
+    } else System.err.println("expecting exactly 1 model browser got: " + modelBrowsers.getLength());
   }
 
   private boolean isCommand(MouseEvent event) {
@@ -352,7 +352,6 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
   }
 
   public boolean processMessage(Message message) {
-    System.out.println(this + " <- " + message);
     return false;
   }
 
@@ -365,7 +364,7 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
           item.dispose();
         }
       });
-    } else System.out.println("cannnot remove node with id " + id);
+    } else System.err.println("ModelBrowserClient.removeNode: cannnot remove node with id " + id);
   }
 
   private void select(final String id) {
@@ -396,7 +395,6 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
   }
 
   public void sendMessage(final Message message) {
-    // System.err.println(message);
     if (message.hasName("newModelBrowser"))
       newModelBrowser(message);
     else if (message.hasName("addNodeWithIcon"))
@@ -426,7 +424,7 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
           tabFolder.setSelection(tab);
         }
       });
-    } else System.out.println("cannot find tab " + id);
+    } else System.err.println("cannot find tab " + id);
   }
 
   private void setText(Message message) {
@@ -439,7 +437,7 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
           item.setText(text.strValue());
         }
       });
-    } else System.out.println("cannot find tree item " + id.strValue());
+    } else System.err.println("ModelBrowserClienr.setText: cannot find tree item " + id.strValue());
   }
 
   private void setTooltipText(Message message) {
@@ -455,7 +453,7 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
           tabFolder.setSelection(item);
         }
       });
-    } else System.out.println("cannot select tab " + id);
+    } else System.err.println("cannot select tab " + id);
   }
 
   public void updateText(TreeItem item, String text) {
@@ -493,7 +491,7 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
       for (String itemId : items.keySet()) {
         if (items.get(itemId) == item) id = itemId;
       }
-      if (id == null) System.out.println("error: cannot find tree item " + item);
+      if (id == null) System.err.println("error: cannot find tree item " + item);
       String icon = images.get(id);
       out.print("<Item id='" + id + "' text='" + XModeler.encodeXmlAttribute(item.getText()) + "' image='" + icon + "' expanded='" + item.getExpanded() + "'>");
       writeXMLTreeItems(item.getItems(), out);
