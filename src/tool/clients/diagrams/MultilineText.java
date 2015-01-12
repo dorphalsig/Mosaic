@@ -248,4 +248,16 @@ public class MultilineText implements Display {
   public void newMultilineText(String parentId, String id, String text, int x, int y, int width, int height, boolean editable, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue, String font) {
   }
 
+  public void setFillColor(String id, int red, int green, int blue) {
+    if (id.equals(getId())) {
+      fillRed = red;
+      fillGreen = green;
+      fillBlue = blue;
+    }
+  }
+
+  public void italicise(String id, boolean italics) {
+
+  }
+
 }

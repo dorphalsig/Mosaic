@@ -54,7 +54,7 @@ public class TextEditor implements ModifyListener, VerifyKeyListener, MouseListe
   String                             id;
   String                             label;
   StyledText                         text;
-  FontData                           fontData      = new FontData("Courier New", 16, SWT.NO);
+  FontData                           fontData      = new FontData("Monaco", 12, SWT.NO);
   Hashtable<String, PPrint>          atTable       = new Hashtable<String, PPrint>();
   Hashtable<String, Vector<Keyword>> keyTable      = new Hashtable<String, Vector<Keyword>>();
   Vector<WordRule>                   wordRules     = new Vector<WordRule>();
@@ -121,7 +121,7 @@ public class TextEditor implements ModifyListener, VerifyKeyListener, MouseListe
     if (lineNumbers) {
       int maxLine = text.getLineCount();
       int lineCountWidth = Math.max(String.valueOf(maxLine).length(), 3);
-      StyleRange style = new StyleRange();
+      StyleRange style = new StyleRange(0, text.getTextLimit(), EditorClient.GREY, EditorClient.WHITE);
       style.metrics = new GlyphMetrics(0, 0, lineCountWidth * 8 + 5);
       Bullet bullet = new Bullet(ST.BULLET_NUMBER, style);
       text.setLineBullet(0, text.getLineCount(), null);

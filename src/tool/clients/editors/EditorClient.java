@@ -36,6 +36,12 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
   }
 
   static final Color                   LINE_HIGHLIGHT = new Color(XModeler.getXModeler().getDisplay(), 192, 192, 192);
+  static final Color                   RED            = new Color(XModeler.getXModeler().getDisplay(), 255, 0, 0);
+  static final Color                   GREY           = new Color(XModeler.getXModeler().getDisplay(), 192, 192, 192);
+  static final Color                   WHITE          = new Color(XModeler.getXModeler().getDisplay(), 255, 255, 255);
+  static final Color                   GREEN          = new Color(XModeler.getXModeler().getDisplay(), 0, 170, 0);
+  static final Color                   BLACK          = new Color(XModeler.getXModeler().getDisplay(), 0, 0, 0);
+  
   static EditorClient                  theClient;
   static CTabFolder                    tabFolder;
   static boolean                       browserLocked  = true;
@@ -122,10 +128,9 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       // help page if it is available.
       URL location = EditorClient.class.getProtectionDomain().getCodeSource().getLocation();
       String path = location.toString();
-      path = path.substring(0, path.length() - 4); // delete "/bin" from
-      // string
+      path = path.substring(0, path.length() - 4); // delete "/bin" from string
       path += "web/index.html";
-      // showBrowser(path);
+      System.err.println(path);
       return new Value(path);
     }
     if (message.hasName("getText")) return getText(message);
@@ -273,9 +278,10 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
         tabItem.setText(label);
         tabItem.setShowClose(true);
         tabs.put(id, tabItem);
-        Browser browser = new Browser(tabFolder, SWT.BORDER);
+        Browser browser = new Browser(tabFolder, SWT.BORDER | SWT.WEBKIT);
         tabItem.setControl(browser);
         browser.setText(text);
+        browser.setJavascriptEnabled(true);
         if (isURL(url)) browser.setUrl(url);
         browsers.put(id, browser);
         browser.setVisible(true);

@@ -53,7 +53,7 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
     return theClient;
   }
 
-  static Font                        labelFont    = new Font(XModeler.getXModeler().getDisplay(), new FontData("Courier New", 12, SWT.NONE));
+  static Font                        labelFont    = new Font(XModeler.getXModeler().getDisplay(), new FontData("Monaco", 12, SWT.NONE));
 
   final static int                   RIGHT_BUTTON = 3;
   static CTabFolder                  tabFolder;

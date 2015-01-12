@@ -68,6 +68,14 @@ public class WorkbenchClient extends Client {
     getHandler().raiseEvent(message);
   }
 
+  public void send(int targetHandle, String message, Value... args) {
+    Message m = getHandler().newMessage("send", 3);
+    m.args[0] = new Value(targetHandle);
+    m.args[1] = new Value(message);
+    m.args[2] = new Value(args);
+    getHandler().raiseEvent(m);
+  }
+
   public static WorkbenchClient theClient() {
     return theClient;
   }

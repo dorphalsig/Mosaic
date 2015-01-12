@@ -36,9 +36,10 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
 
   static DiagramClient               theClient;
   static CTabFolder                  tabFolder;
-  static Hashtable<String, CTabItem> tabs        = new Hashtable<String, CTabItem>();
-  static Vector<Diagram>             diagrams    = new Vector<Diagram>();
-  static Font                        diagramFont = new Font(XModeler.getXModeler().getDisplay(), new FontData("Courier New", 12, SWT.NO));
+  static Hashtable<String, CTabItem> tabs              = new Hashtable<String, CTabItem>();
+  static Vector<Diagram>             diagrams          = new Vector<Diagram>();
+  static Font                        diagramFont       = new Font(XModeler.getXModeler().getDisplay(), new FontData("Courier New", 12, SWT.NO));
+  static Font                        diagramItalicFont = new Font(XModeler.getXModeler().getDisplay(), new FontData("Courier New", 12, SWT.ITALIC));
 
   public DiagramClient() {
     super("com.ceteva.diagram");
@@ -266,6 +267,22 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     newMultilineText(parentId, id, text, x, y, width, height, editable, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, font);
   }
 
+  private void inflateEllipse(String parentId, Node node) {
+    String id = XModeler.attributeValue(node, "id");
+    int x = Integer.parseInt(XModeler.attributeValue(node, "x"));
+    int y = Integer.parseInt(XModeler.attributeValue(node, "y"));
+    int width = Integer.parseInt(XModeler.attributeValue(node, "width"));
+    int height = Integer.parseInt(XModeler.attributeValue(node, "height"));
+    boolean showOutline = XModeler.attributeValue(node, "showOutline").equals("true");
+    int lineRed = Integer.parseInt(XModeler.attributeValue(node, "lineRed"));
+    int lineGreen = Integer.parseInt(XModeler.attributeValue(node, "lineGreen"));
+    int lineBlue = Integer.parseInt(XModeler.attributeValue(node, "lineBlue"));
+    int fillRed = Integer.parseInt(XModeler.attributeValue(node, "fillRed"));
+    int fillGreen = Integer.parseInt(XModeler.attributeValue(node, "fillGreen"));
+    int fillBlue = Integer.parseInt(XModeler.attributeValue(node, "fillBlue"));
+    newEllipse(parentId, id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
+  }
+
   private void inflateNodeElement(String id, Node node) {
     if (node.getNodeName().equals("Port"))
       inflatePort(id, node);
@@ -275,6 +292,10 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
       inflateText(id, node);
     else if (node.getNodeName().equals("MultilineText"))
       inflateMultilineText(id, node);
+    else if (node.getNodeName().equals("Ellipse"))
+      inflateEllipse(id, node);
+    else if (node.getNodeName().equals("Image"))
+      inflateImage(id, node);
     else System.err.println("Unknown type of node element " + node.getNodeName());
   }
 
@@ -282,6 +303,16 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     NodeList groups = node.getChildNodes();
     for (int i = 0; i < groups.getLength(); i++)
       inflateGroup(id, groups.item(i));
+  }
+
+  private void inflateImage(String parentId, Node node) {
+    String id = XModeler.attributeValue(node, "id");
+    String fileName = XModeler.attributeValue(node, "fileName");
+    int x = Integer.parseInt(XModeler.attributeValue(node, "x"));
+    int y = Integer.parseInt(XModeler.attributeValue(node, "y"));
+    int width = Integer.parseInt(XModeler.attributeValue(node, "width"));
+    int height = Integer.parseInt(XModeler.attributeValue(node, "height"));
+    newImage(parentId, id, fileName, x, y, width, height);
   }
 
   private void inflatePort(String parentId, Node node) {
@@ -653,7 +684,93 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
       newMultilineText(message);
     else if (message.hasName("copyToClipboard"))
       copyToClipboard(message);
+    else if (message.hasName("setFillColor"))
+      setFillColor(message);
+    else if (message.hasName("italicise"))
+      italicise(message);
+    else if (message.hasName("newEllipse"))
+      newEllipse(message);
+    else if (message.hasName("newImage"))
+      newImage(message);
     else super.sendMessage(message);
+  }
+
+  private void newImage(Message message) {
+    String parentId = message.args[0].strValue();
+    String id = message.args[1].strValue();
+    String fileName = message.args[2].strValue();
+    int x = message.args[3].intValue;
+    int y = message.args[4].intValue;
+    int width = message.args[5].intValue;
+    int height = message.args[6].intValue;
+    newImage(parentId, id, fileName, x, y, width, height);
+  }
+
+  private void newImage(final String parentId, final String id, final String fileName, final int x, final int y, final int width, final int height) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (Diagram diagram : diagrams)
+          diagram.newImage(parentId, id, fileName, x, y, width, height);
+      }
+    });
+  }
+
+  private void newEllipse(Message message) {
+    String parentId = message.args[0].strValue();
+    String id = message.args[1].strValue();
+    int x = message.args[2].intValue;
+    int y = message.args[3].intValue;
+    int width = message.args[4].intValue;
+    int height = message.args[5].intValue;
+    boolean showOutline = message.args[6].boolValue;
+    int lineRed = message.args[7].intValue;
+    int lineGreen = message.args[8].intValue;
+    int lineBlue = message.args[9].intValue;
+    int fillRed = message.args[10].intValue;
+    int fillGreen = message.args[11].intValue;
+    int fillBlue = message.args[12].intValue;
+    newEllipse(parentId, id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
+  }
+
+  private void newEllipse(final String parentId, final String id, final int x, final int y, final int width, final int height, final boolean showOutline, final int lineRed, final int lineGreen, final int lineBlue, final int fillRed, final int fillGreen, final int fillBlue) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (Diagram d : diagrams)
+          d.newEllipse(parentId, id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
+      }
+    });
+  }
+
+  private void italicise(Message message) {
+    String id = message.args[0].strValue();
+    boolean italics = message.args[1].boolValue;
+    italicise(id, italics);
+  }
+
+  private void italicise(final String id, final boolean italics) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (Diagram diagram : diagrams)
+          diagram.italicise(id, italics);
+      }
+    });
+  }
+
+  private void setFillColor(Message message) {
+    String id = message.args[0].strValue();
+    int red = message.args[1].intValue;
+    int green = message.args[2].intValue;
+    int blue = message.args[3].intValue;
+    setFillColor(id, red, green, blue);
+  }
+
+  private void setFillColor(final String id, final int red, final int green, final int blue) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (Diagram diagram : diagrams)
+          diagram.setFillColor(id, red, green, blue);
+      }
+    });
   }
 
   private void setEdgeColor(final Message message) {

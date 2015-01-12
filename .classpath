@@ -22,11 +22,22 @@
 	<classpathentry kind="lib" path="lib/swt-4.4.cocoa-macosx-x86_64.zip.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.nebula.visualization.widgets_1.0.0.201411131833.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.nebula.visualization.xygraph_1.0.0.201411131833.jar"/>
+	<classpathentry kind="lib" path="lib/poi-3.10.1/poi-scratchpad-3.10.1-20140818.jar"/>
+	<classpathentry kind="lib" path="lib/poi-3.10.1/poi-examples-3.10.1-20140818.jar"/>
+	<classpathentry kind="lib" path="lib/poi-3.10.1/poi-excelant-3.10.1-20140818.jar"/>
+	<classpathentry kind="lib" path="lib/poi-3.10.1/poi-ooxml-3.10.1-20140818.jar"/>
+	<classpathentry kind="lib" path="lib/poi-3.10.1/poi-ooxml-schemas-3.10.1-20140818.jar"/>
+	<classpathentry kind="lib" path="lib/poi-3.10.1/ooxml-lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/poi-3.10.1/ooxml-lib/stax-api-1.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/poi-3.10.1/ooxml-lib/xmlbeans-2.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/kodkod.jar"/>
+	<classpathentry kind="lib" path="lib/org.sat4j.core.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.gef_3.5.0.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="lib/gson-2.2.2.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.draw2d_3.5.0.jar"/>
 	<classpathentry exported="true" kind="src" path="/com.ceteva.xmf.machine"/>
+	<classpathentry kind="lib" path="/Users/tony/Dropbox/MDX_Files/workspace/poi-3.10.1/poi-3.10.1-20140818.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

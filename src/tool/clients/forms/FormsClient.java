@@ -74,8 +74,8 @@ public class FormsClient extends Client implements CTabFolder2Listener {
   static Hashtable<String, CTabItem>  tabs              = new Hashtable<String, CTabItem>();
   static Vector<Form>                 forms             = new Vector<Form>();
   static Hashtable<String, FormTools> toolDefs          = new Hashtable<String, FormTools>();
-  static Font                         formLabelFont     = new Font(Display.getDefault(), new FontData("Courier New", 12, SWT.NO));
-  static Font                         formTextFieldFont = new Font(Display.getDefault(), new FontData("Courier New", 12, SWT.NO));
+  static Font                         formLabelFont     = new Font(Display.getDefault(), new FontData("Monaco", 12, SWT.NO));
+  static Font                         formTextFieldFont = new Font(Display.getDefault(), new FontData("Monaco", 12, SWT.NO));
 
   public FormsClient() {
     super("com.ceteva.forms");

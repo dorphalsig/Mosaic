@@ -146,7 +146,12 @@ public class Node implements Selectable {
       display.newText(parentId, id, text, x, y, editable, underline, italicise, red, green, blue);
   }
 
-  public void paint(GC gc) {
+  public void paint(GC gc, Diagram diagram) {
+    // Clear the background of the node...
+    Color background = gc.getBackground();
+    gc.setBackground(diagram.getDiagramBackgroundColor());
+    gc.fillRectangle(x, y, width, height);
+    gc.setBackground(background);
     for (Display display : displays) {
       display.paint(gc, x, y);
     }
@@ -337,6 +342,26 @@ public class Node implements Selectable {
     } else {
       for (Display d : displays)
         d.newMultilineText(parentId, id, text, x, y, width, height, editable, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, font);
+    }
+  }
+
+  public void setFillColor(String id, int red, int green, int blue) {
+    for (Display display : displays)
+      display.setFillColor(id, red, green, blue);
+  }
+
+  public void italicise(String id, boolean italics) {
+    for (Display display : displays)
+      display.italicise(id, italics);
+  }
+
+  public void newEllipse(String parentId, String id, int x, int y, int width, int height, boolean showOutline, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue) {
+    if (parentId.equals(getId())) displays.add(new Ellipse(id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue));
+  }
+
+  public void newImage(String parentId, String id, String fileName, int x, int y, int width, int height) {
+    if (parentId.equals(getId())) {
+      displays.add(new Image(id, fileName, x, y, width, height));
     }
   }
 }

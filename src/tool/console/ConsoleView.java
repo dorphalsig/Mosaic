@@ -53,7 +53,7 @@ public class ConsoleView {
   StyledText           text            = null;
   History              history         = new History();
   int                  inputStart      = 0;
-  Font                 textFont        = new Font(Display.getCurrent(), "Courier New", 14, SWT.NORMAL);
+  Font                 textFont        = new Font(Display.getCurrent(), "Monaco", 14, SWT.NORMAL);
   Color                backgroundColor = ColorManager.getColor(new RGB(255, 255, 255));
   Color                foregroundColor = ColorManager.getColor(new RGB(0, 0, 0));
   int                  waterMark       = 1000;

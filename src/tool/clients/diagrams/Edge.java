@@ -400,7 +400,7 @@ public class Edge {
     gc.setBackground(Diagram.BLACK);
     for (int i = 1; i < waypoints.size(); i++) {
       Waypoint wp = waypoints.elementAt(i);
-      gc.drawLine(x, y, wp.getX(), wp.getY());
+      paintLine(gc, x, y, wp.getX(), wp.getY());
       if (i < waypoints.size() - 1) gc.fillOval(wp.getX() - 3, wp.getY() - 3, 6, 6);
       x = wp.getX();
       y = wp.getY();
@@ -412,6 +412,30 @@ public class Edge {
     gc.setLineWidth(width);
   }
 
+  public void paintLine(GC gc, int x1, int y1, int x2, int y2) {
+    // Paint the line in the line style.
+    int style = gc.getLineStyle();
+    switch (lineStyle) {
+    case Line.DASH_LINE:
+      gc.setLineStyle(SWT.LINE_DASH);
+      break;
+    case Line.DOTTED_LINE:
+      gc.setLineStyle(SWT.LINE_DOT);
+      break;
+    case Line.DASH_DOTTED_LINE:
+      gc.setLineStyle(SWT.LINE_DASHDOT);
+      break;
+    case Line.DASH_DOT_DOT_LINE:
+      gc.setLineStyle(SWT.LINE_DASHDOTDOT);
+      break;
+    case Line.SOLID_LINE:
+    default:
+      gc.setLineStyle(SWT.LINE_SOLID);
+    }
+    gc.drawLine(x1, y1, x2, y2);
+    gc.setLineStyle(style);
+  }
+
   public void paintAligned(GC gc) {
     int x = waypoints.elementAt(0).getX();
     int y = waypoints.elementAt(0).getY();
@@ -421,7 +445,7 @@ public class Edge {
     gc.setForeground(Diagram.RED);
     for (int i = 1; i < waypoints.size(); i++) {
       Waypoint wp = waypoints.elementAt(i);
-      gc.drawLine(x, y, wp.getX(), wp.getY());
+      paintLine(gc, x, y, wp.getX(), wp.getY());
       if (i < waypoints.size() - 1) gc.fillOval(wp.getX() - 3, wp.getY() - 3, 6, 6);
       x = wp.getX();
       y = wp.getY();
@@ -463,12 +487,12 @@ public class Edge {
     gc.setBackground(Diagram.BLACK);
     for (int i = 1; i < waypoints.size() - 1; i++) {
       Waypoint wp = waypoints.elementAt(i);
-      gc.drawLine(x, y, wp.getX(), wp.getY());
+      paintLine(gc, x, y, wp.getX(), wp.getY());
       if (i < waypoints.size() - 1) gc.fillOval(wp.getX() - 3, wp.getY() - 3, 6, 6);
       x = wp.getX();
       y = wp.getY();
     }
-    gc.drawLine(x, y, endX, endY);
+    paintLine(gc, x, y, endX, endY);
     gc.setBackground(c);
     for (Label label : labels)
       label.paint(gc);

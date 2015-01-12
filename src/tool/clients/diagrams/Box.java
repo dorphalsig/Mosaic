@@ -1,7 +1,7 @@
 package tool.clients.diagrams;
 
 import java.io.PrintStream;
-import java.util.Hashtable;
+import java.util.Vector;
 
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.GC;
@@ -9,23 +9,23 @@ import org.eclipse.swt.graphics.GC;
 import tool.xmodeler.XModeler;
 
 public class Box implements Display {
-  String                     id;
-  int                        x;
-  int                        y;
-  int                        width;
-  int                        height;
-  int                        curve;
-  boolean                    top;
-  boolean                    right;
-  boolean                    bottom;
-  boolean                    left;
-  int                        lineRed;
-  int                        lineGreen;
-  int                        lineBlue;
-  int                        fillRed;
-  int                        fillGreen;
-  int                        fillBlue;
-  Hashtable<String, Display> displays = new Hashtable<String, Display>();
+  String          id;
+  int             x;
+  int             y;
+  int             width;
+  int             height;
+  int             curve;
+  boolean         top;
+  boolean         right;
+  boolean         bottom;
+  boolean         left;
+  int             lineRed;
+  int             lineGreen;
+  int             lineBlue;
+  int             fillRed;
+  int             fillGreen;
+  int             fillBlue;
+  Vector<Display> displays = new Vector<Display>();
 
   public Box(String id, int x, int y, int width, int height, int curve, boolean top, boolean right, boolean bottom, boolean left, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue) {
     super();
@@ -39,22 +39,22 @@ public class Box implements Display {
     this.right = right;
     this.bottom = bottom;
     this.left = left;
-    this.lineRed = lineRed == -1 ? 0 : lineRed;
-    this.lineGreen = lineGreen == -1 ? 0 : lineGreen;
-    this.lineBlue = lineBlue == -1 ? 0 : lineBlue;
-    this.fillRed = fillRed == -1 ? 255 : fillRed;
-    this.fillGreen = fillGreen == -1 ? 255 : fillGreen;
-    this.fillBlue = fillBlue == -1 ? 255 : fillBlue;
+    this.lineRed = lineRed == -1 ? 0 : lineRed % 256;
+    this.lineGreen = lineGreen == -1 ? 0 : lineGreen % 256;
+    this.lineBlue = lineBlue == -1 ? 0 : lineBlue % 256;
+    this.fillRed = fillRed == -1 ? 255 : fillRed % 256;
+    this.fillGreen = fillGreen == -1 ? 255 : fillGreen % 256;
+    this.fillBlue = fillBlue == -1 ? 255 : fillBlue % 256;
   }
 
   public void doubleClick(GC gc, Diagram diagram, int dx, int dy, int mouseX, int mouseY) {
-    for (Display display : displays.values()) {
+    for (Display display : displays) {
       display.doubleClick(gc, diagram, dx + getX(), dy + getY(), mouseX, mouseY);
     }
   }
 
   public void editText(String id) {
-    for (Display display : displays.values())
+    for (Display display : displays)
       display.editText(id);
   }
 
@@ -127,7 +127,7 @@ public class Box implements Display {
       this.x = x;
       this.y = y;
     } else {
-      for (Display display : displays.values())
+      for (Display display : displays)
         display.move(id, x, y);
     }
   }
@@ -135,9 +135,9 @@ public class Box implements Display {
   public void newBox(String parentId, String id, int x, int y, int width, int height, int curve, boolean top, boolean right, boolean bottom, boolean left, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue) {
     if (getId().equals(parentId)) {
       Box box = new Box(id, x, y, width, height, curve, top, right, bottom, left, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
-      displays.put(id, box);
+      displays.add(box);
     } else {
-      for (Display display : displays.values()) {
+      for (Display display : displays) {
         display.newBox(parentId, id, x, y, width, height, curve, top, right, bottom, left, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
       }
     }
@@ -146,8 +146,8 @@ public class Box implements Display {
   public void newText(String parentId, String id, String text, int x, int y, boolean editable, boolean underline, boolean italicise, int red, int green, int blue) {
     if (parentId.equals(getId())) {
       Text t = new Text(id, text, x, y, editable, underline, italicise, red, green, blue);
-      displays.put(id, t);
-    } else for (Display display : displays.values())
+      displays.add(t);
+    } else for (Display display : displays)
       display.newText(parentId, id, text, x, y, editable, underline, italicise, red, green, blue);
   }
 
@@ -157,7 +157,7 @@ public class Box implements Display {
       gc.setBackground(new Color(XModeler.getXModeler().getDisplay(), getFillRed(), getFillGreen(), getFillBlue()));
       gc.fillRectangle(x + getX(), y + getY(), width, height);
       gc.setBackground(fillColor);
-      for (Display display : displays.values())
+      for (Display display : displays)
         display.paint(gc, x + getX(), y + getY());
       Color lineColor = gc.getForeground();
       gc.setForeground(new Color(XModeler.getXModeler().getDisplay(), getLineRed(), getLineGreen(), getLineBlue()));
@@ -167,18 +167,25 @@ public class Box implements Display {
   }
 
   public void paintHover(GC gc, int x, int y, int dx, int dy) {
-    for (Display display : displays.values())
+    for (Display display : displays)
       display.paintHover(gc, x, y, dx + getX(), dy + getY());
   }
 
   public void remove(String id) {
-    if (displays.containsKey(id)) {
-      displays.remove(id);
+    Display d = getDisplay(id);
+    if (d != null) {
+      displays.remove(d);
     } else {
-      for (Display display : displays.values()) {
+      for (Display display : displays) {
         display.remove(id);
       }
     }
+  }
+
+  private Display getDisplay(String id) {
+    for (Display d : displays)
+      if (d.getId().equals(id)) return d;
+    return null;
   }
 
   public void resize(String id, int width, int height) {
@@ -186,18 +193,18 @@ public class Box implements Display {
       this.width = width;
       this.height = height;
     } else {
-      for (Display display : displays.values())
+      for (Display display : displays)
         display.resize(id, width, height);
     }
   }
 
   public void setText(String id, String text) {
-    for (Display display : displays.values())
+    for (Display display : displays)
       display.setText(id, text);
   }
 
   public String toString() {
-    return "Box(" + id + "," + x + "," + y + "," + width + "," + height + "," + displays.values() + ")";
+    return "Box(" + id + "," + x + "," + y + "," + width + "," + height + "," + displays + ")";
   }
 
   public void writeXML(PrintStream out) {
@@ -218,7 +225,7 @@ public class Box implements Display {
     out.print("fillRed='" + getFillRed() + "' ");
     out.print("fillGreen='" + getFillGreen() + "' ");
     out.print("fillBlue='" + getFillBlue() + "'>");
-    for (Display display : displays.values())
+    for (Display display : displays)
       display.writeXML(out);
     out.print("</Box>");
   }
@@ -226,10 +233,24 @@ public class Box implements Display {
   public void newMultilineText(String parentId, String id, String text, int x, int y, int width, int height, boolean editable, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue, String font) {
     if (getId().equals(parentId)) {
       MultilineText t = new MultilineText(id, text, x, y, width, height, editable, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, font);
-      displays.put(id, t);
+      displays.add(t);
     } else {
-      for (Display d : displays.values())
+      for (Display d : displays)
         d.newMultilineText(parentId, id, text, x, y, width, height, editable, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, font);
     }
+  }
+
+  public void setFillColor(String id, int red, int green, int blue) {
+    if (id.equals(getId())) {
+      fillRed = red == -1 ? 255 : red % 256;
+      fillGreen = green == -1 ? 255 : green % 256;
+      fillBlue = blue == -1 ? 255 : blue % 256;
+    } else for (Display display : displays)
+      display.setFillColor(id, red, green, blue);
+  }
+
+  public void italicise(String id, boolean italics) {
+    for (Display display : displays)
+      display.italicise(id, italics);
   }
 }

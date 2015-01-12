@@ -44,7 +44,22 @@ public class DialogsClient extends Client {
       newMessageDialog(message);
     else if (message.hasName("newWarningDialog"))
       newMessageDialog(message);
+    else if (message.hasName("newTextAreaDialog"))
+      newTextAreaDialog(message);
     else super.sendMessage(message);
+  }
+
+  private void newTextAreaDialog(Message message) {
+    String id = message.args[0].strValue();
+    String type = message.args[1].strValue();
+    final String title = message.args[2].strValue();
+    final String info = message.args[3].strValue();
+    runOnDisplay(new Runnable() {
+      public void run() {
+        MessageDialog dialog = new MessageDialog(XModeler.getXModeler(), title, null, info, MessageDialog.INFORMATION, new String[] { "OK" }, 0);
+        dialog.open();
+      }
+    });
   }
 
   private Value newDirectoryDialog(final Message message) {

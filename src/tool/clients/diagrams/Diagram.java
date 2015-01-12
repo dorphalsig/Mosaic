@@ -152,6 +152,11 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     this.id = id;
   }
 
+  public void align() {
+    for (Edge edge : edges.values())
+      edge.align();
+  }
+
   private void checkEdgeCreation(int x, int y) {
     Port port = selectPort(x, y);
     if (port != null) {
@@ -339,6 +344,12 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
 
   private boolean isRightClick(MouseEvent event) {
     return event.button == RIGHT_BUTTON;
+  }
+
+  public void italicise(String id, boolean italics) {
+    for (Node node : nodes.values())
+      node.italicise(id, italics);
+    redraw();
   }
 
   public void keyPressed(KeyEvent e) {
@@ -551,6 +562,12 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     } else System.err.println("cannot find source port " + sourceId);
   }
 
+  public void newEllipse(String parentId, String id, int x, int y, int width, int height, boolean showOutline, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue) {
+    for (Node n : nodes.values())
+      n.newEllipse(parentId, id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
+    redraw();
+  }
+
   public void newGroup(String name) {
     palette.newGroup(name);
     container.layout();
@@ -724,7 +741,7 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
 
   private void paintNodes(GC gc) {
     for (Node node : nodes.values())
-      node.paint(gc);
+      node.paint(gc,this);
   }
 
   private void paintOn(GC gc) {
@@ -833,6 +850,14 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     }
   }
 
+  public Point scale(int x, int y) {
+    float[] points = new float[] { (float) x, (float) y };
+    transform.invert();
+    transform.transform(points);
+    transform.invert();
+    return new Point((int) points[0], (int) points[1]);
+  }
+
   public void scale(MouseEvent event) {
     float[] points = new float[] { (float) event.x, (float) event.y };
     transform.invert();
@@ -840,14 +865,6 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     transform.invert();
     event.x = (int) points[0];
     event.y = (int) points[1];
-  }
-
-  public Point scale(int x, int y) {
-    float[] points = new float[] { (float) x, (float) y };
-    transform.invert();
-    transform.transform(points);
-    transform.invert();
-    return new Point((int) points[0], (int) points[1]);
   }
 
   public Point scaleinv(int x, int y) {
@@ -1036,6 +1053,12 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     }
   }
 
+  public void setFillColor(String id, int red, int green, int blue) {
+    for (Node node : nodes.values())
+      node.setFillColor(id, red, green, blue);
+    redraw();
+  }
+
   public void setText(String id, String text) {
     for (Node node : nodes.values())
       node.setText(id, text);
@@ -1086,8 +1109,8 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     eventHandler.raiseEvent(message);
   }
 
-  public void align() {
-    for (Edge edge : edges.values())
-      edge.align();
+  public void newImage(String parentId, String id, String fileName, int x, int y, int width, int height) {
+    for (Node node : nodes.values())
+      node.newImage(parentId, id, fileName, x, y, width, height);
   }
 }
