@@ -83,8 +83,8 @@ public class PacketDisplayRunnable implements Runnable {
 			Message message = packet.getMessage(i);
 			if (message != null) {
 				client.processMessage(message);
-				writeMessageOut(message, "F:\\xmf\\code\\receive\\packet.txt");
-				writeText(client.name, "F:\\xmf\\code\\receive\\packet.txt");
+				//writeMessageOut(message, "F:\\xmf\\code\\receive\\packet.txt");
+				//writeText(client.name, "F:\\xmf\\code\\receive\\packet.txt");
 				// System.out.println("------send message client:" + client);
 			}
 		}

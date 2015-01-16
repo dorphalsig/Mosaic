@@ -78,21 +78,24 @@ public class DialogsClient extends Client {
   }
 
   private Value newFileDialog(final Message message) {
-    final Value[] result = new Value[1];
+    final Value[] result = new Value[] { new Value("") };
     runOnDisplay(new Runnable() {
       public void run() {
-        String type = message.args[0].strValue();
-        String path = message.args[1].strValue();
-        String pattern = message.args[2].strValue();
-        String def = message.args[3].strValue();
-        FileDialog dialog = new FileDialog(XModeler.getXModeler(), type.equals("open") ? SWT.OPEN : SWT.SAVE);
-        dialog.setFilterExtensions(new String[] { pattern });
-        dialog.setFileName(def);
-        dialog.setFilterPath(path);
-        if (new File(path).exists()) dialog.setFilterPath(path);
-        path = dialog.open();
-        path = path == null ? "" : path;
-        result[0] = new Value(path);
+        try {
+          String type = message.args[0].strValue();
+          String path = message.args[1].strValue();
+          String pattern = message.args[2].strValue();
+          String def = message.args[3].strValue();
+          FileDialog dialog = new FileDialog(XModeler.getXModeler(), type.equals("open") ? SWT.OPEN : SWT.SAVE);
+          dialog.setFilterExtensions(new String[] { pattern });
+          dialog.setFileName(def);
+          if (new File(path).exists()) dialog.setFilterPath(path);
+          path = dialog.open();
+          path = path == null ? "" : path;
+          result[0] = new Value(path);
+        } catch (Exception e) {
+          e.printStackTrace(System.err);
+        }
       }
     });
     return result[0];

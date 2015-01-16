@@ -356,7 +356,7 @@ public class XModeler {
 
   static int             TOOL_WIDTH      = 1200;
 
-  static int             TOOL_HEIGHT     = 850;
+  static int             TOOL_HEIGHT     = 900;
 
   static OperatingSystem xos             = new OperatingSystem();
 
