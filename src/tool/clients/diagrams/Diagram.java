@@ -805,6 +805,8 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
         public void run() {
           checkSize();
           container.redraw();
+          canvas.redraw(); // ensure repainting on all platforms          
+          canvas.update();          
         }
       });
     }
