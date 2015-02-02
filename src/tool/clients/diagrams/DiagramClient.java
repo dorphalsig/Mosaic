@@ -201,6 +201,16 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
       inflateDiagramNode(id, node);
     else if (node.getNodeName().equals("Edge"))
       inflateDiagramEdge(id, node);
+    else if (node.getNodeName().equals("Box"))
+      inflateBox(id, node);
+    else if (node.getNodeName().equals("Text"))
+      inflateText(id, node);
+    else if (node.getNodeName().equals("MultilineText"))
+      inflateMultilineText(id, node);
+    else if (node.getNodeName().equals("Ellipse"))
+      inflateEllipse(id, node);
+    else if (node.getNodeName().equals("Image"))
+      inflateImage(id, node);
     else System.err.println("Unknown type of diagram node " + node.getNodeName());
   }
 

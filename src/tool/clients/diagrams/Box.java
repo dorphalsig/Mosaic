@@ -62,6 +62,12 @@ public class Box implements Display {
     return curve;
   }
 
+  private Display getDisplay(String id) {
+    for (Display d : displays)
+      if (d.getId().equals(id)) return d;
+    return null;
+  }
+
   public int getFillBlue() {
     return fillBlue;
   }
@@ -122,6 +128,11 @@ public class Box implements Display {
     return top;
   }
 
+  public void italicise(String id, boolean italics) {
+    for (Display display : displays)
+      display.italicise(id, italics);
+  }
+
   public void move(String id, int x, int y) {
     if (getId().equals(id)) {
       this.x = x;
@@ -143,12 +154,42 @@ public class Box implements Display {
     }
   }
 
+  public void newEllipse(String parentId, String id, int x, int y, int width, int height, boolean showOutline, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue) {
+    if (parentId.equals(getId()))
+      displays.add(new Ellipse(id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue));
+    else {
+      for (Display display : displays)
+        display.newEllipse(parentId, id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
+    }
+  }
+
+  public void newMultilineText(String parentId, String id, String text, int x, int y, int width, int height, boolean editable, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue, String font) {
+    if (getId().equals(parentId)) {
+      MultilineText t = new MultilineText(id, text, x, y, width, height, editable, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, font);
+      displays.add(t);
+    } else {
+      for (Display d : displays)
+        d.newMultilineText(parentId, id, text, x, y, width, height, editable, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, font);
+    }
+  }
+
   public void newText(String parentId, String id, String text, int x, int y, boolean editable, boolean underline, boolean italicise, int red, int green, int blue) {
     if (parentId.equals(getId())) {
       Text t = new Text(id, text, x, y, editable, underline, italicise, red, green, blue);
       displays.add(t);
-    } else for (Display display : displays)
-      display.newText(parentId, id, text, x, y, editable, underline, italicise, red, green, blue);
+    } else {
+      for (Display display : displays)
+        display.newText(parentId, id, text, x, y, editable, underline, italicise, red, green, blue);
+    }
+  }
+
+  public void newImage(String parentId, String id, String fileName, int x, int y, int width, int height) {
+    if (parentId.equals(getId())) {
+      displays.add(new Image(id, fileName, x, y, width, height));
+    } else {
+      for (Display display : displays)
+        display.newImage(parentId, id, fileName, x, y, width, height);
+    }
   }
 
   public void paint(GC gc, int x, int y) {
@@ -182,12 +223,6 @@ public class Box implements Display {
     }
   }
 
-  private Display getDisplay(String id) {
-    for (Display d : displays)
-      if (d.getId().equals(id)) return d;
-    return null;
-  }
-
   public void resize(String id, int width, int height) {
     if (id.equals(getId())) {
       this.width = width;
@@ -196,6 +231,15 @@ public class Box implements Display {
       for (Display display : displays)
         display.resize(id, width, height);
     }
+  }
+
+  public void setFillColor(String id, int red, int green, int blue) {
+    if (id.equals(getId())) {
+      fillRed = red == -1 ? 255 : red % 256;
+      fillGreen = green == -1 ? 255 : green % 256;
+      fillBlue = blue == -1 ? 255 : blue % 256;
+    } else for (Display display : displays)
+      display.setFillColor(id, red, green, blue);
   }
 
   public void setText(String id, String text) {
@@ -228,29 +272,5 @@ public class Box implements Display {
     for (Display display : displays)
       display.writeXML(out);
     out.print("</Box>");
-  }
-
-  public void newMultilineText(String parentId, String id, String text, int x, int y, int width, int height, boolean editable, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue, String font) {
-    if (getId().equals(parentId)) {
-      MultilineText t = new MultilineText(id, text, x, y, width, height, editable, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, font);
-      displays.add(t);
-    } else {
-      for (Display d : displays)
-        d.newMultilineText(parentId, id, text, x, y, width, height, editable, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, font);
-    }
-  }
-
-  public void setFillColor(String id, int red, int green, int blue) {
-    if (id.equals(getId())) {
-      fillRed = red == -1 ? 255 : red % 256;
-      fillGreen = green == -1 ? 255 : green % 256;
-      fillBlue = blue == -1 ? 255 : blue % 256;
-    } else for (Display display : displays)
-      display.setFillColor(id, red, green, blue);
-  }
-
-  public void italicise(String id, boolean italics) {
-    for (Display display : displays)
-      display.italicise(id, italics);
   }
 }

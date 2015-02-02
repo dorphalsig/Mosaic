@@ -33,7 +33,7 @@ import tool.xmodeler.XModeler;
 import xos.Message;
 import xos.Value;
 
-public class Diagram implements MouseListener, PaintListener, MouseMoveListener, KeyListener {
+public class Diagram implements Display, MouseListener, PaintListener, MouseMoveListener, KeyListener {
 
   enum MouseMode {
     NONE, SELECTED, NEW_EDGE, DOUBLE_CLICK, MOVE_TARGET, MOVE_SOURCE, RESIZE_TOP_LEFT, RESIZE_TOP_RIGHT, RESIZE_BOTTOM_LEFT, RESIZE_BOTTOM_RIGHT, RUBBER_BAND
@@ -115,6 +115,7 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
   Color                   diagramBackgroundColor = WHITE;
   Hashtable<String, Node> nodes                  = new Hashtable<String, Node>();
   Hashtable<String, Edge> edges                  = new Hashtable<String, Edge>();
+  Vector<Display>         displays               = new Vector<Display>();
   Vector<Selectable>      selection              = new Vector<Selectable>();
   Transform               transform              = new Transform(org.eclipse.swt.widgets.Display.getCurrent());
   String                  id;
@@ -124,6 +125,8 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
   ScrolledComposite       scroller;
   Edge                    selectedEdge           = null;
   Node                    selectedNode           = null;
+  int                     x                      = 0;
+  int                     y                      = 0;
   int                     render                 = 0;
   int                     firstX                 = 0;
   int                     firstY                 = 0;
@@ -236,6 +239,10 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
   }
 
   public void delete(String id) {
+    for (Display display : displays)
+      display.remove(id);
+    Display display = this.getDisplay(id);
+    if (display != null) displays.remove(display);
     for (Node node : nodes.values()) {
       node.remove(id);
     }
@@ -269,6 +276,11 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     selectedNode = null;
   }
 
+  public void doubleClick(GC gc, Diagram diagram, int dx, int dy, int mouseX, int mouseY) {
+    // Called when a diagram is a display element.
+    // Currently does nothing.
+  }
+
   public void editText(String id) {
     for (Node node : nodes.values())
       node.editText(id);
@@ -284,6 +296,12 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
 
   public Color getDiagramBackgroundColor() {
     return diagramBackgroundColor;
+  }
+
+  public Display getDisplay(String id) {
+    for (Display display : displays)
+      if (display.getId().equals(id)) return display;
+    return null;
   }
 
   public Edge getEdge(Label label) {
@@ -328,6 +346,9 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
   private void handleDoubleClick(GC gc) {
     if (mode == MouseMode.DOUBLE_CLICK) {
       mode = MouseMode.NONE;
+      for (Display display : displays) {
+        display.doubleClick(gc, this, 0, 0, lastX, lastY);
+      }
       for (Node node : nodes.values()) {
         node.doubleClick(gc, this, lastX, lastY);
       }
@@ -347,6 +368,8 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
   }
 
   public void italicise(String id, boolean italics) {
+    for (Display display : displays)
+      display.italicise(id, italics);
     for (Node node : nodes.values())
       node.italicise(id, italics);
     redraw();
@@ -527,6 +550,8 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
   }
 
   public void move(String id, int x, int y) {
+    for (Display display : displays)
+      display.move(id, x, y);
     for (Node node : nodes.values())
       node.move(id, x, y);
     for (Edge edge : edges.values())
@@ -539,9 +564,20 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
   }
 
   public void newBox(String parentId, String id, int x, int y, int width, int height, int curve, boolean top, boolean right, boolean bottom, boolean left, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue) {
-    for (Node node : nodes.values())
-      node.newBox(parentId, id, x, y, width, height, curve, top, right, bottom, left, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
-    redraw();
+    if (parentId.equals(getId()))
+      newBox(id, x, y, width, height, curve, top, right, bottom, left, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
+    else {
+      for (Display display : displays)
+        display.newBox(parentId, id, x, y, width, height, curve, top, right, bottom, left, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
+      for (Node node : nodes.values())
+        node.newBox(parentId, id, x, y, width, height, curve, top, right, bottom, left, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
+      redraw();
+    }
+  }
+
+  public void newBox(String id, int x, int y, int width, int height, int curve, boolean top, boolean right, boolean bottom, boolean left, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue) {
+    Box box = new Box(id, x, y, width, height, curve, top, right, bottom, left, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
+    displays.add(box);
   }
 
   public void newEdge(String id, String sourceId, String targetId, int refx, int refy, int sourceHead, int targetHead, int lineStyle, int red, int green, int blue) {
@@ -563,9 +599,19 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
   }
 
   public void newEllipse(String parentId, String id, int x, int y, int width, int height, boolean showOutline, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue) {
-    for (Node n : nodes.values())
-      n.newEllipse(parentId, id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
+    if (parentId.equals(getId()))
+      newEllipse(id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
+    else {
+      for (Display display : displays)
+        display.newEllipse(parentId, id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
+      for (Node n : nodes.values())
+        n.newEllipse(parentId, id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
+    }
     redraw();
+  }
+
+  private void newEllipse(String id, int x, int y, int width, int height, boolean showOutline, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue) {
+    displays.add(new Ellipse(id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue));
   }
 
   public void newGroup(String name) {
@@ -573,9 +619,37 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     container.layout();
   }
 
+  public void newImage(String parentId, String id, String fileName, int x, int y, int width, int height) {
+    if (parentId.equals(getId()))
+      newImage(id, fileName, x, y, width, height);
+    else {
+      for(Display display : displays)
+        display.newImage(parentId, id, fileName, x, y, width, height);
+      for (Node node : nodes.values())
+        node.newImage(parentId, id, fileName, x, y, width, height);
+    }
+    redraw();
+  }
+
+  public void newImage(String id, String fileName, int x, int y, int width, int height) {
+    displays.add(new tool.clients.diagrams.Image(id, fileName, x, y, width, height));
+  }
+
   public void newMultilineText(String parentId, String id, String text, int x, int y, int width, int height, boolean editable, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue, String font) {
-    for (Node node : nodes.values())
-      node.newMultilineText(parentId, id, text, x, y, width, height, editable, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, font);
+    if (parentId.equals(getId()))
+      newMultilineText(id, text, x, y, width, height, editable, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, font);
+    else {
+      for(Display display : displays)
+        display.newMultilineText(parentId, id, text, x, y, width, height, editable, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, font);
+      for (Node node : nodes.values())
+        node.newMultilineText(parentId, id, text, x, y, width, height, editable, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, font);
+    }
+    redraw();
+  }
+
+  public void newMultilineText(String id, String text, int x, int y, int width, int height, boolean editable, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue, String font) {
+    MultilineText t = new MultilineText(id, text, x, y, width, height, editable, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, font);
+    displays.add(displays.size(), t);
   }
 
   public void newNode(String id, int x, int y, int width, int height, boolean selectable) {
@@ -591,9 +665,20 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
   }
 
   public void newText(String parentId, String id, String text, int x, int y, boolean editable, boolean underline, boolean italicise, int red, int green, int blue) {
-    for (Node node : nodes.values())
-      node.newText(parentId, id, text, x, y, editable, underline, italicise, red, green, blue);
+    if (parentId.equals(getId()))
+      newText(id, text, x, y, editable, underline, italicise, red, green, blue);
+    else {
+      for (Display display : displays)
+        display.newText(parentId, id, text, x, y, editable, underline, italicise, red, green, blue);
+      for (Node node : nodes.values())
+        node.newText(parentId, id, text, x, y, editable, underline, italicise, red, green, blue);
+    }
     redraw();
+  }
+
+  private void newText(String id, String s, int x, int y, boolean editable, boolean underline, boolean italicise, int red, int green, int blue) {
+    Text text = new Text(id, s, x, y, editable, underline, italicise, red, green, blue);
+    displays.add(text);
   }
 
   public void newTool(String group, String label, String toolId, boolean isEdge, String icon) {
@@ -644,6 +729,12 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
       double angle = Math.atan2(dy, dx);
       return new Polar(force, angle);
     }
+  }
+
+  public void paint(GC gc, int x, int y) {
+    // This is called when a diagram is a display element. The offsets need to be
+    // included so that global painting is relative to (0,0).
+    paintOn(gc);
   }
 
   private void paintAlignment(GC gc) {
@@ -702,6 +793,11 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     }
   }
 
+  public void paintHover(GC gc, int x, int y, int dx, int dy) {
+    // Called when a diagram is a display element.
+    // Currently does nothing.
+  }
+
   private void paintNewEdge(GC gc) {
     if (mode == MouseMode.NEW_EDGE) {
       gc.drawLine(firstX, firstY, lastX, lastY);
@@ -741,7 +837,7 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
 
   private void paintNodes(GC gc) {
     for (Node node : nodes.values())
-      node.paint(gc,this);
+      node.paint(gc, this);
   }
 
   private void paintOn(GC gc) {
@@ -751,6 +847,7 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     gc.setAdvanced(true);
     gc.setTransform(transform);
     clear(gc);
+    paintDisplays(gc);
     paintNewEdge(gc);
     paintResizing(gc);
     paintEdges(gc);
@@ -760,6 +857,12 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     paintSelected(gc);
     paintRubberBand(gc);
     handleDoubleClick(gc);
+  }
+
+  private void paintDisplays(GC gc) {
+    for (Display display : displays) {
+      display.paint(gc, x, y);
+    }
   }
 
   private void paintResizing(GC gc) {
@@ -810,6 +913,17 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     }
   }
 
+  public void remove(String id) {
+    Display d = getDisplay(id);
+    if (d != null) {
+      displays.remove(d);
+    } else {
+      for (Display display : displays) {
+        display.remove(id);
+      }
+    }
+  }
+
   public void renderOff() {
     render++;
   }
@@ -820,6 +934,8 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
   }
 
   public void resize(String id, int width, int height) {
+    for (Display display : displays)
+      display.resize(id, width, height);
     for (Node node : nodes.values())
       node.resize(id, width, height);
     redraw();
@@ -1060,6 +1176,8 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
   }
 
   public void setText(String id, String text) {
+    for (Display d : displays)
+      d.setText(id, text);
     for (Node node : nodes.values())
       node.setText(id, text);
     for (Edge edge : edges.values())
@@ -1077,9 +1195,15 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     return "Diagram(" + nodes.values() + "," + edges.values() + ")";
   }
 
+  public void writeXML(PrintStream out) {
+    writeXML("", out);
+  }
+
   public void writeXML(String label, PrintStream out) {
     out.print("<Diagram id='" + getId() + "' label='" + label + "' zoom='" + getZoom() + "'>");
     palette.writeXML(out);
+    for(Display display : displays)
+      display.writeXML(out);
     for (Node node : nodes.values())
       node.writeXML(out);
     for (Edge edge : edges.values())
@@ -1107,10 +1231,5 @@ public class Diagram implements MouseListener, PaintListener, MouseMoveListener,
     message.args[0] = new Value(getId());
     message.args[1] = new Value(zoom);
     eventHandler.raiseEvent(message);
-  }
-
-  public void newImage(String parentId, String id, String fileName, int x, int y, int width, int height) {
-    for (Node node : nodes.values())
-      node.newImage(parentId, id, fileName, x, y, width, height);
   }
 }

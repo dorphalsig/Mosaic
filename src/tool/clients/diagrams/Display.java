@@ -36,4 +36,8 @@ public interface Display {
 
   void italicise(String id, boolean italics);
 
+  void newEllipse(String parentId, String id, int x, int y, int width, int height, boolean showOutline, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue);
+
+  void newImage(String parentId, String id, String fileName, int x, int y, int width, int height);
+
 }

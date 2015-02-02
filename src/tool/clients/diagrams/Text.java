@@ -235,4 +235,12 @@ public class Text implements Display {
     out.print("green='" + getGreen() + "' ");
     out.print("blue='" + getBlue() + "'/>");
   }
+
+  public void newEllipse(String parentId, String id, int x, int y, int width, int height, boolean showOutline, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue) {
+
+  }
+
+  public void newImage(String parentId, String id, String fileName, int x, int y, int width, int height) {
+
+  }
 }

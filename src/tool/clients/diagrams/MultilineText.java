@@ -3,6 +3,7 @@ package tool.clients.diagrams;
 import java.io.PrintStream;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Point;
@@ -58,21 +59,23 @@ public class MultilineText implements Display {
 
   public void paint(GC gc, int parentX, int parentY) {
     FontData fontData = DiagramClient.diagramFont.getFontData()[0];
+    Font font = gc.getFont();
+    gc.setFont(DiagramClient.diagramFont);
     int fontHeight = fontData.getHeight() + 5;
     int x = this.x + parentX + INDENT;
     int y = this.y + parentY + INDENT;
     for (int i = 0; i < text.length(); i++) {
       char c = text.charAt(i);
-      if (x + gc.getCharWidth(c) > this.x + parentX + width || c == '\n') {
+      if (x + gc.getCharWidth(c) > this.x + parentX + width || c == '\n' || c == '\r') {
         x = this.x + parentX + INDENT;
         y = y + fontHeight;
       }
-      if (!(y + fontHeight > this.y + height + parentY) && c != '\n') {
+      if (!(y + fontHeight > this.y + height + parentY) && (c != '\n'|| c == '\r')) {
         gc.drawString(c + "", x, y, true);
         x += gc.getCharWidth(c);
       }
     }
-
+    gc.setFont(font);
   }
 
   public String getId() {
@@ -257,6 +260,14 @@ public class MultilineText implements Display {
   }
 
   public void italicise(String id, boolean italics) {
+
+  }
+
+  public void newEllipse(String parentId, String id, int x, int y, int width, int height, boolean showOutline, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue) {
+
+  }
+
+  public void newImage(String parentId, String id, String fileName, int x, int y, int width, int height) {
 
   }
 

@@ -38,21 +38,59 @@ public class Node implements Selectable {
     this.selectable = selectable;
   }
 
+  public boolean atBottomLeftCorner(int x, int y) {
+    return distance(new Point(getX(), getY() + getHeight()), new Point(x, y)) < 5;
+  }
+
+  public boolean atBottomRightCorner(int x, int y) {
+    return distance(new Point(getX() + getWidth(), getY() + getHeight()), new Point(x, y)) < 5;
+  }
+
+  public boolean atCorner(int x, int y) {
+    return atBottomLeftCorner(x, y) || atBottomRightCorner(x, y) || atTopLeftCorner(x, y) || atTopRightCorner(x, y);
+  }
+
   public boolean atOrigin() {
     return getX() == 0 && getY() == 0;
   }
 
-  public boolean contains(Waypoint w) {
-    return contains(w.x, w.y);
+  public boolean atTopLeftCorner(int x, int y) {
+    return distance(new Point(getX(), getY()), new Point(x, y)) < 5;
+  }
+
+  public boolean atTopRightCorner(int x, int y) {
+    return distance(new Point(getX() + getWidth(), getY()), new Point(x, y)) < 5;
   }
 
   public boolean contains(int x, int y) {
     return getX() <= x && getY() <= y && x <= (getX() + getWidth()) && y <= (getY() + getHeight());
   }
 
+  public boolean contains(Waypoint w) {
+    return contains(w.x, w.y);
+  }
+
+  private double distance(Point p1, Point p2) {
+    int dx = p1.x - p2.x;
+    int dy = p1.y - p2.y;
+    return Math.sqrt((dx * dx) + (dy * dy));
+  }
+
+  public void doubleClick(GC gc, Diagram diagram, int x, int y) {
+    for (Display display : displays) {
+      display.doubleClick(gc, diagram, getX(), getY(), x, y);
+    }
+  }
+
   public void editText(String id) {
     for (Display display : displays)
       display.editText(id);
+  }
+
+  public Display getDisplay(String id) {
+    for (Display display : displays)
+      if (display.getId().equals(id)) return display;
+    return null;
   }
 
   public int getHeight() {
@@ -83,13 +121,17 @@ public class Node implements Selectable {
     return selectable;
   }
 
-  public void move(String id, int x, int y) {
-    if (getId().equals(id))
-      move(x, y);
-    else {
-      for (Display display : displays)
-        display.move(id, x, y);
-    }
+  public void italicise(String id, boolean italics) {
+    for (Display display : displays)
+      display.italicise(id, italics);
+  }
+
+  public int maxX() {
+    return getX() + getWidth();
+  }
+
+  public int maxY() {
+    return getY() + getHeight();
   }
 
   public void move(int x, int y) {
@@ -99,6 +141,15 @@ public class Node implements Selectable {
     this.y = y;
     for (Port port : ports.values()) {
       port.ownerMovedBy(dx, dy);
+    }
+  }
+
+  public void move(String id, int x, int y) {
+    if (getId().equals(id))
+      move(x, y);
+    else {
+      for (Display display : displays)
+        display.move(id, x, y);
     }
   }
 
@@ -126,6 +177,34 @@ public class Node implements Selectable {
       for (Display display : displays) {
         display.newBox(parentId, id, x, y, width, height, curve, top, right, bottom, left, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
       }
+    }
+  }
+
+  public void newEllipse(String parentId, String id, int x, int y, int width, int height, boolean showOutline, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue) {
+    if (parentId.equals(getId()))
+      displays.add(new Ellipse(id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue));
+    else {
+      for (Display display : displays)
+        display.newEllipse(parentId, id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
+    }
+  }
+
+  public void newImage(String parentId, String id, String fileName, int x, int y, int width, int height) {
+    if (parentId.equals(getId())) {
+      displays.add(new Image(id, fileName, x, y, width, height));
+    } else {
+      for (Display display : displays)
+        display.newImage(parentId, id, fileName, x, y, width, height);
+    }
+  }
+
+  public void newMultilineText(String parentId, String id, String text, int x, int y, int width, int height, boolean editable, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue, String font) {
+    if (getId().equals(parentId)) {
+      MultilineText t = new MultilineText(id, text, x, y, width, height, editable, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, font);
+      displays.add(displays.size(), t);
+    } else {
+      for (Display d : displays)
+        d.newMultilineText(parentId, id, text, x, y, width, height, editable, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, font);
     }
   }
 
@@ -166,45 +245,10 @@ public class Node implements Selectable {
     if (!selected && !contains(x, y) && atCorner(x, y)) paintResizeHover(gc, x, y);
   }
 
-  public boolean atCorner(int x, int y) {
-    return atBottomLeftCorner(x, y) || atBottomRightCorner(x, y) || atTopLeftCorner(x, y) || atTopRightCorner(x, y);
-  }
-
-  public boolean atTopLeftCorner(int x, int y) {
-    return distance(new Point(getX(), getY()), new Point(x, y)) < 5;
-  }
-
-  public boolean atTopRightCorner(int x, int y) {
-    return distance(new Point(getX() + getWidth(), getY()), new Point(x, y)) < 5;
-  }
-
-  public boolean atBottomLeftCorner(int x, int y) {
-    return distance(new Point(getX(), getY() + getHeight()), new Point(x, y)) < 5;
-  }
-
-  public boolean atBottomRightCorner(int x, int y) {
-    return distance(new Point(getX() + getWidth(), getY() + getHeight()), new Point(x, y)) < 5;
-  }
-
-  private double distance(Point p1, Point p2) {
-    int dx = p1.x - p2.x;
-    int dy = p1.y - p2.y;
-    return Math.sqrt((dx * dx) + (dy * dy));
-  }
-
-  private void paintResizeHover(GC gc, int x, int y) {
-    if (atTopLeftCorner(x, y)) paintResizeTopLeft(gc);
-    if (atTopRightCorner(x, y)) paintResizeTopRight(gc);
-    if (atBottomLeftCorner(x, y)) paintResizeBottomLeft(gc);
-    if (atBottomRightCorner(x, y)) paintResizeBottomRight(gc);
-  }
-
-  private void paintResizeTopLeft(GC gc) {
-    Color c = gc.getForeground();
-    gc.setForeground(Diagram.GREEN);
-    gc.drawLine(getX() - EAR_GAP, getY() - EAR_GAP, getX() + EAR_GAP + EAR_LENGTH, getY() - EAR_GAP);
-    gc.drawLine(getX() - EAR_GAP, getY() - EAR_GAP, getX() - EAR_GAP, getY() + EAR_GAP + EAR_LENGTH);
-    gc.setForeground(c);
+  public void paintPortHover(GC gc, int x, int y) {
+    for (Port port : ports.values()) {
+      if (port.contains(x - getX(), y - getY())) port.paintHover(gc, getX(), getY());
+    }
   }
 
   private void paintResizeBottomLeft(GC gc) {
@@ -220,6 +264,21 @@ public class Node implements Selectable {
     gc.setForeground(Diagram.GREEN);
     gc.drawLine(getX() + (getWidth() + EAR_GAP), getY() + (getHeight() + EAR_GAP), getX() + (getWidth() + EAR_GAP), getY() + (getHeight() - EAR_LENGTH));
     gc.drawLine(getX() + (getWidth() + EAR_GAP), getY() + (getHeight() + EAR_GAP), getX() + (getWidth() - EAR_LENGTH), getY() + (getHeight() + EAR_GAP));
+    gc.setForeground(c);
+  }
+
+  private void paintResizeHover(GC gc, int x, int y) {
+    if (atTopLeftCorner(x, y)) paintResizeTopLeft(gc);
+    if (atTopRightCorner(x, y)) paintResizeTopRight(gc);
+    if (atBottomLeftCorner(x, y)) paintResizeBottomLeft(gc);
+    if (atBottomRightCorner(x, y)) paintResizeBottomRight(gc);
+  }
+
+  private void paintResizeTopLeft(GC gc) {
+    Color c = gc.getForeground();
+    gc.setForeground(Diagram.GREEN);
+    gc.drawLine(getX() - EAR_GAP, getY() - EAR_GAP, getX() + EAR_GAP + EAR_LENGTH, getY() - EAR_GAP);
+    gc.drawLine(getX() - EAR_GAP, getY() - EAR_GAP, getX() - EAR_GAP, getY() + EAR_GAP + EAR_LENGTH);
     gc.setForeground(c);
   }
 
@@ -251,6 +310,17 @@ public class Node implements Selectable {
     gc.setLineWidth(width);
   }
 
+  public void remove(String id) {
+    Display d = getDisplay(id);
+    if (d != null) {
+      displays.remove(d);
+    } else {
+      for (Display display : displays) {
+        display.remove(id);
+      }
+    }
+  }
+
   public void resize(String id, int width, int height) {
     if (id.equals(getId())) {
       this.width = width;
@@ -263,8 +333,17 @@ public class Node implements Selectable {
     }
   }
 
+  public void rightClick(int x, int y) {
+    MenuClient.popup(id, x, y);
+  }
+
   public boolean sameLocation(Node other) {
     return getX() == other.getX() && getY() == other.getY();
+  }
+
+  public void setFillColor(String id, int red, int green, int blue) {
+    for (Display display : displays)
+      display.setFillColor(id, red, green, blue);
   }
 
   public void setText(String id, String text) {
@@ -284,29 +363,6 @@ public class Node implements Selectable {
     return "Node(" + id + "," + x + "," + y + "," + width + "," + height + "," + displays + ")";
   }
 
-  public Display getDisplay(String id) {
-    for (Display display : displays)
-      if (display.getId().equals(id)) return display;
-    return null;
-  }
-
-  public void remove(String id) {
-    Display d = getDisplay(id);
-    if (d != null) {
-      displays.remove(d);
-    } else {
-      for (Display display : displays) {
-        display.remove(id);
-      }
-    }
-  }
-
-  public void doubleClick(GC gc, Diagram diagram, int x, int y) {
-    for (Display display : displays) {
-      display.doubleClick(gc, diagram, getX(), getY(), x, y);
-    }
-  }
-
   public void writeXML(PrintStream out) {
     out.print("<Node id='" + getId() + "' x = '" + getX() + "' y='" + getY() + "' width='" + getWidth() + "' height='" + getHeight() + "' selectable='" + isSelectable() + "'>");
     for (Port port : ports.values())
@@ -315,53 +371,5 @@ public class Node implements Selectable {
       display.writeXML(out);
     out.print("</Node>");
 
-  }
-
-  public int maxY() {
-    return getY() + getHeight();
-  }
-
-  public int maxX() {
-    return getX() + getWidth();
-  }
-
-  public void paintPortHover(GC gc, int x, int y) {
-    for (Port port : ports.values()) {
-      if (port.contains(x - getX(), y - getY())) port.paintHover(gc, getX(), getY());
-    }
-  }
-
-  public void rightClick(int x, int y) {
-    MenuClient.popup(id, x, y);
-  }
-
-  public void newMultilineText(String parentId, String id, String text, int x, int y, int width, int height, boolean editable, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue, String font) {
-    if (getId().equals(parentId)) {
-      MultilineText t = new MultilineText(id, text, x, y, width, height, editable, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, font);
-      displays.add(displays.size(), t);
-    } else {
-      for (Display d : displays)
-        d.newMultilineText(parentId, id, text, x, y, width, height, editable, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, font);
-    }
-  }
-
-  public void setFillColor(String id, int red, int green, int blue) {
-    for (Display display : displays)
-      display.setFillColor(id, red, green, blue);
-  }
-
-  public void italicise(String id, boolean italics) {
-    for (Display display : displays)
-      display.italicise(id, italics);
-  }
-
-  public void newEllipse(String parentId, String id, int x, int y, int width, int height, boolean showOutline, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue) {
-    if (parentId.equals(getId())) displays.add(new Ellipse(id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue));
-  }
-
-  public void newImage(String parentId, String id, String fileName, int x, int y, int width, int height) {
-    if (parentId.equals(getId())) {
-      displays.add(new Image(id, fileName, x, y, width, height));
-    }
   }
 }
