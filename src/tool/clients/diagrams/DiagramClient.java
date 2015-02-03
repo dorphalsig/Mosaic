@@ -50,7 +50,16 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
   public Value callMessage(Message message) {
     if (message.hasName("getTextDimension"))
       return getTextDimension(message);
+    else if (message.hasName("getPalette"))
+      return getPalette(message);
     else return super.callMessage(message);
+  }
+
+  private Value getPalette(Message message) {
+    String id = message.args[0].strValue();
+    for (Diagram diagram : diagrams)
+      if (diagram.getId().equals(id)) { return diagram.getPalette().asValue(); }
+    return new Value(new Value[0]);
   }
 
   private void copyToClipboard(Message message) {
@@ -702,7 +711,22 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
       newEllipse(message);
     else if (message.hasName("newImage"))
       newImage(message);
+    else if (message.hasName("deleteGroup"))
+      deleteGroup(message);
     else super.sendMessage(message);
+  }
+
+  private void deleteGroup(Message message) {
+    final String id = message.args[0].strValue();
+    final String name = message.args[1].strValue();
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (Diagram diagram : diagrams) {
+          if (diagram.getId().equals(id)) diagram.deleteGroup(name);
+        }
+      }
+    });
+
   }
 
   private void newImage(Message message) {

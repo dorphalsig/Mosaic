@@ -18,6 +18,7 @@ import org.eclipse.swt.widgets.ExpandBar;
 import org.eclipse.swt.widgets.ExpandItem;
 
 import tool.xmodeler.XModeler;
+import xos.Value;
 
 public class Group implements SelectionListener {
 
@@ -87,5 +88,23 @@ public class Group implements SelectionListener {
     for (Button button : buttons.keySet())
       out.print("<Button name='" + button.getText() + "' tool='" + buttons.get(button) + "' isEdge='" + edges.get(button) + "' icon='" + icons.get(button) + "'/>");
     out.print("</Group>");
+  }
+
+  public Value asValue(String name) {
+    Value[] bs = new Value[buttons.size() + 1];
+    bs[0] = new Value(name);
+    int i = 1;
+    for (Button button : buttons.keySet()) {
+      if (edges.get(button)) {
+        bs[i++] = new Value(new Value[] { new Value(buttons.get(button)), new Value("EDGE") });
+      } else {
+        bs[i++] = new Value(new Value[] { new Value(buttons.get(button)), new Value("NODE") });
+      }
+    }
+    return new Value(bs);
+  }
+
+  public void delete() {
+    item.dispose();
   }
 }

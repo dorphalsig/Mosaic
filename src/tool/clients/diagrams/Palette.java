@@ -7,6 +7,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.ExpandBar;
 
+import xos.Value;
+
 public class Palette {
 
   ExpandBar                groupContainer;
@@ -55,8 +57,24 @@ public class Palette {
   public void writeXML(PrintStream out) {
     out.print("<Palette>");
     for (String groupName : groups.keySet())
-      if(!groupName.equals("Diagram"))
-        groups.get(groupName).writeXML(groupName, out);
+      if (!groupName.equals("Diagram")) groups.get(groupName).writeXML(groupName, out);
     out.print("</Palette>");
+  }
+
+  public Value asValue() {
+    Value[] g = new Value[groups.size()];
+    int i = 0;
+    for (String name : groups.keySet())
+      g[i++] = groups.get(name).asValue(name);
+    return new Value(g);
+  }
+
+  public void deleteGroup(String name) {
+    if (groups.containsKey(name)) {
+      Group group = groups.get(name);
+      groups.remove(name);
+      group.delete();
+    }
+
   }
 }

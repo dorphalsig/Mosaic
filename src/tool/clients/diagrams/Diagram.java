@@ -623,7 +623,7 @@ public class Diagram implements Display, MouseListener, PaintListener, MouseMove
     if (parentId.equals(getId()))
       newImage(id, fileName, x, y, width, height);
     else {
-      for(Display display : displays)
+      for (Display display : displays)
         display.newImage(parentId, id, fileName, x, y, width, height);
       for (Node node : nodes.values())
         node.newImage(parentId, id, fileName, x, y, width, height);
@@ -639,7 +639,7 @@ public class Diagram implements Display, MouseListener, PaintListener, MouseMove
     if (parentId.equals(getId()))
       newMultilineText(id, text, x, y, width, height, editable, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, font);
     else {
-      for(Display display : displays)
+      for (Display display : displays)
         display.newMultilineText(parentId, id, text, x, y, width, height, editable, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, font);
       for (Node node : nodes.values())
         node.newMultilineText(parentId, id, text, x, y, width, height, editable, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, font);
@@ -908,8 +908,8 @@ public class Diagram implements Display, MouseListener, PaintListener, MouseMove
         public void run() {
           checkSize();
           container.redraw();
-          canvas.redraw(); // ensure repainting on all platforms          
-          canvas.update();          
+          canvas.redraw(); // ensure repainting on all platforms
+          canvas.update();
         }
       });
     }
@@ -1204,7 +1204,7 @@ public class Diagram implements Display, MouseListener, PaintListener, MouseMove
   public void writeXML(String label, PrintStream out) {
     out.print("<Diagram id='" + getId() + "' label='" + label + "' zoom='" + getZoom() + "'>");
     palette.writeXML(out);
-    for(Display display : displays)
+    for (Display display : displays)
       display.writeXML(out);
     for (Node node : nodes.values())
       node.writeXML(out);
@@ -1233,5 +1233,9 @@ public class Diagram implements Display, MouseListener, PaintListener, MouseMove
     message.args[0] = new Value(getId());
     message.args[1] = new Value(zoom);
     eventHandler.raiseEvent(message);
+  }
+
+  public void deleteGroup(String name) {
+    palette.deleteGroup(name);
   }
 }
