@@ -38,6 +38,5 @@
 	<classpathentry kind="lib" path="lib/gson-2.2.2.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.draw2d_3.5.0.jar"/>
 	<classpathentry exported="true" kind="src" path="/com.ceteva.xmf.machine"/>
-	<classpathentry kind="lib" path="/Users/tony/Dropbox/MDX_Files/workspace/poi-3.10.1/poi-3.10.1-20140818.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
