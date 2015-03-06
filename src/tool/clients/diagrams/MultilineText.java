@@ -57,7 +57,8 @@ public class MultilineText implements Display {
     return "MultilineText(" + x + "," + y + "," + width + "," + height + "," + text + ")";
   }
 
-  public void paint(GC gc, int parentX, int parentY) {
+  public void paint(GC gc, int parentX, int parentY) { 
+    //FontData fontData = font.equals("") ? DiagramClient.diagramFont.getFontData()[0] : new FontData(font);
     FontData fontData = DiagramClient.diagramFont.getFontData()[0];
     Font font = gc.getFont();
     gc.setFont(DiagramClient.diagramFont);
@@ -70,7 +71,7 @@ public class MultilineText implements Display {
         x = this.x + parentX + INDENT;
         y = y + fontHeight;
       }
-      if (!(y + fontHeight > this.y + height + parentY) && (c != '\n'|| c == '\r')) {
+      if (!(y + fontHeight > this.y + height + parentY) && (c != '\n' || c == '\r')) {
         gc.drawString(c + "", x, y, true);
         x += gc.getCharWidth(c);
       }
@@ -269,6 +270,10 @@ public class MultilineText implements Display {
 
   public void newImage(String parentId, String id, String fileName, int x, int y, int width, int height) {
 
+  }
+
+  public void setFont(String id, String fontData) {
+    if (getId().equals(id)) font = fontData;
   }
 
 }

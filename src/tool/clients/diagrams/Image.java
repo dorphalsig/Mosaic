@@ -146,4 +146,7 @@ public class Image implements Display {
 
   }
 
+  public void setFont(String id, String fontData) {
+  }
+
 }

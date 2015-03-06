@@ -9,6 +9,7 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Point;
 
+import tool.clients.EventHandler;
 import tool.clients.menus.MenuClient;
 import tool.xmodeler.XModeler;
 import xos.Message;
@@ -27,6 +28,7 @@ public class Node implements Selectable {
   boolean                  selectable;
   Hashtable<String, Port>  ports         = new Hashtable<String, Port>();
   Vector<Display>          displays      = new Vector<Display>();
+  boolean                  hidden        = false;
 
   public Node(String id, int x, int y, int width, int height, boolean selectable) {
     super();
@@ -226,18 +228,20 @@ public class Node implements Selectable {
   }
 
   public void paint(GC gc, Diagram diagram) {
-    // Clear the background of the node...
-    Color background = gc.getBackground();
-    gc.setBackground(diagram.getDiagramBackgroundColor());
-    gc.fillRectangle(x, y, width, height);
-    gc.setBackground(background);
-    for (Display display : displays) {
-      display.paint(gc, x, y);
+    if (!hidden) {
+      // Clear the background of the node...
+      Color background = gc.getBackground();
+      gc.setBackground(diagram.getDiagramBackgroundColor());
+      gc.fillRectangle(x, y, width, height);
+      gc.setBackground(background);
+      for (Display display : displays) {
+        display.paint(gc, x, y);
+      }
     }
   }
 
   public void paintHover(GC gc, int x, int y, boolean selected) {
-    if (contains(x, y)) {
+    if (!hidden && contains(x, y)) {
       paintSelectableOutline(gc);
       for (Display display : displays)
         display.paintHover(gc, x, y, getX(), getY());
@@ -246,68 +250,86 @@ public class Node implements Selectable {
   }
 
   public void paintPortHover(GC gc, int x, int y) {
-    for (Port port : ports.values()) {
-      if (port.contains(x - getX(), y - getY())) port.paintHover(gc, getX(), getY());
+    if (!hidden) {
+      for (Port port : ports.values()) {
+        if (port.contains(x - getX(), y - getY())) {
+          port.paintHover(gc, getX(), getY());
+        }
+      }
     }
   }
 
   private void paintResizeBottomLeft(GC gc) {
-    Color c = gc.getForeground();
-    gc.setForeground(Diagram.GREEN);
-    gc.drawLine(getX() - EAR_GAP, getY() + (getHeight() + EAR_GAP), getX() - EAR_GAP, getY() + (getHeight() - EAR_LENGTH));
-    gc.drawLine(getX() - EAR_GAP, getY() + (getHeight() + EAR_GAP), getX() + EAR_GAP + EAR_LENGTH, getY() + (getHeight() + EAR_GAP));
-    gc.setForeground(c);
+    if (!hidden) {
+      Color c = gc.getForeground();
+      gc.setForeground(Diagram.GREEN);
+      gc.drawLine(getX() - EAR_GAP, getY() + (getHeight() + EAR_GAP), getX() - EAR_GAP, getY() + (getHeight() - EAR_LENGTH));
+      gc.drawLine(getX() - EAR_GAP, getY() + (getHeight() + EAR_GAP), getX() + EAR_GAP + EAR_LENGTH, getY() + (getHeight() + EAR_GAP));
+      gc.setForeground(c);
+    }
   }
 
   private void paintResizeBottomRight(GC gc) {
-    Color c = gc.getForeground();
-    gc.setForeground(Diagram.GREEN);
-    gc.drawLine(getX() + (getWidth() + EAR_GAP), getY() + (getHeight() + EAR_GAP), getX() + (getWidth() + EAR_GAP), getY() + (getHeight() - EAR_LENGTH));
-    gc.drawLine(getX() + (getWidth() + EAR_GAP), getY() + (getHeight() + EAR_GAP), getX() + (getWidth() - EAR_LENGTH), getY() + (getHeight() + EAR_GAP));
-    gc.setForeground(c);
+    if (!hidden) {
+      Color c = gc.getForeground();
+      gc.setForeground(Diagram.GREEN);
+      gc.drawLine(getX() + (getWidth() + EAR_GAP), getY() + (getHeight() + EAR_GAP), getX() + (getWidth() + EAR_GAP), getY() + (getHeight() - EAR_LENGTH));
+      gc.drawLine(getX() + (getWidth() + EAR_GAP), getY() + (getHeight() + EAR_GAP), getX() + (getWidth() - EAR_LENGTH), getY() + (getHeight() + EAR_GAP));
+      gc.setForeground(c);
+    }
   }
 
   private void paintResizeHover(GC gc, int x, int y) {
-    if (atTopLeftCorner(x, y)) paintResizeTopLeft(gc);
-    if (atTopRightCorner(x, y)) paintResizeTopRight(gc);
-    if (atBottomLeftCorner(x, y)) paintResizeBottomLeft(gc);
-    if (atBottomRightCorner(x, y)) paintResizeBottomRight(gc);
+    if (!hidden) {
+      if (atTopLeftCorner(x, y)) paintResizeTopLeft(gc);
+      if (atTopRightCorner(x, y)) paintResizeTopRight(gc);
+      if (atBottomLeftCorner(x, y)) paintResizeBottomLeft(gc);
+      if (atBottomRightCorner(x, y)) paintResizeBottomRight(gc);
+    }
   }
 
   private void paintResizeTopLeft(GC gc) {
-    Color c = gc.getForeground();
-    gc.setForeground(Diagram.GREEN);
-    gc.drawLine(getX() - EAR_GAP, getY() - EAR_GAP, getX() + EAR_GAP + EAR_LENGTH, getY() - EAR_GAP);
-    gc.drawLine(getX() - EAR_GAP, getY() - EAR_GAP, getX() - EAR_GAP, getY() + EAR_GAP + EAR_LENGTH);
-    gc.setForeground(c);
+    if (!hidden) {
+      Color c = gc.getForeground();
+      gc.setForeground(Diagram.GREEN);
+      gc.drawLine(getX() - EAR_GAP, getY() - EAR_GAP, getX() + EAR_GAP + EAR_LENGTH, getY() - EAR_GAP);
+      gc.drawLine(getX() - EAR_GAP, getY() - EAR_GAP, getX() - EAR_GAP, getY() + EAR_GAP + EAR_LENGTH);
+      gc.setForeground(c);
+    }
   }
 
   private void paintResizeTopRight(GC gc) {
-    Color c = gc.getForeground();
-    gc.setForeground(Diagram.GREEN);
-    gc.drawLine(getX() + getWidth() + EAR_GAP, getY() - EAR_GAP, getX() + (getWidth() - EAR_LENGTH), getY() - EAR_GAP);
-    gc.drawLine(getX() + getWidth() + EAR_GAP, getY() - EAR_GAP, getX() + getWidth() + EAR_GAP, getY() + EAR_GAP + EAR_LENGTH);
-    gc.setForeground(c);
+    if (!hidden) {
+      Color c = gc.getForeground();
+      gc.setForeground(Diagram.GREEN);
+      gc.drawLine(getX() + getWidth() + EAR_GAP, getY() - EAR_GAP, getX() + (getWidth() - EAR_LENGTH), getY() - EAR_GAP);
+      gc.drawLine(getX() + getWidth() + EAR_GAP, getY() - EAR_GAP, getX() + getWidth() + EAR_GAP, getY() + EAR_GAP + EAR_LENGTH);
+      gc.setForeground(c);
+    }
   }
 
   private void paintSelectableOutline(GC gc) {
-    Color c = gc.getForeground();
-    int width = gc.getLineWidth();
-    gc.setLineWidth(1);
-    gc.setForeground(XModeler.getXModeler().getDisplay().getSystemColor(SWT.COLOR_RED));
-    gc.drawRectangle(getX() - SELECTION_GAP, getY() - SELECTION_GAP, getWidth() + (SELECTION_GAP * 2), getHeight() + (SELECTION_GAP * 2));
-    gc.setForeground(c);
-    gc.setLineWidth(width);
+    if (!hidden) {
+      Color c = gc.getForeground();
+      int width = gc.getLineWidth();
+      gc.setLineWidth(1);
+      gc.setForeground(XModeler.getXModeler().getDisplay().getSystemColor(SWT.COLOR_RED));
+      gc.drawRectangle(getX() - SELECTION_GAP, getY() - SELECTION_GAP, getWidth() + (SELECTION_GAP * 2), getHeight() + (SELECTION_GAP * 2));
+      gc.setForeground(c);
+      gc.setLineWidth(width);
+    }
   }
 
   public void paintSelected(GC gc) {
-    Color c = gc.getForeground();
-    int width = gc.getLineWidth();
-    gc.setLineWidth(2);
-    gc.setForeground(XModeler.getXModeler().getDisplay().getSystemColor(SWT.COLOR_RED));
-    gc.drawRectangle(getX() - SELECTION_GAP, getY() - SELECTION_GAP, getWidth() + (SELECTION_GAP * 2), getHeight() + (SELECTION_GAP * 2));
-    gc.setForeground(c);
-    gc.setLineWidth(width);
+    if (!hidden) {
+      Color c = gc.getForeground();
+      int width = gc.getLineWidth();
+      gc.setLineWidth(2);
+      gc.setForeground(XModeler.getXModeler().getDisplay().getSystemColor(SWT.COLOR_RED));
+      gc.drawRectangle(getX() - SELECTION_GAP, getY() - SELECTION_GAP, getWidth() + (SELECTION_GAP * 2), getHeight() + (SELECTION_GAP * 2));
+      gc.setForeground(c);
+      gc.setLineWidth(width);
+    }
   }
 
   public void remove(String id) {
@@ -334,7 +356,9 @@ public class Node implements Selectable {
   }
 
   public void rightClick(int x, int y) {
-    MenuClient.popup(id, x, y);
+    if (!hidden) {
+      MenuClient.popup(id, x, y);
+    }
   }
 
   public boolean sameLocation(Node other) {
@@ -364,12 +388,39 @@ public class Node implements Selectable {
   }
 
   public void writeXML(PrintStream out) {
-    out.print("<Node id='" + getId() + "' x = '" + getX() + "' y='" + getY() + "' width='" + getWidth() + "' height='" + getHeight() + "' selectable='" + isSelectable() + "'>");
+    out.print("<Node id='" + getId() + "' x = '" + getX() + "' y='" + getY() + "' width='" + getWidth() + "' height='" + getHeight() + "' hidden='" + hidden + "' selectable='" + isSelectable() + "'>");
     for (Port port : ports.values())
       port.writeXML(out);
     for (Display display : displays)
       display.writeXML(out);
     out.print("</Node>");
 
+  }
+
+  public void setFont(String id, String fontData) {
+    for (Display display : displays)
+      display.setFont(id, fontData);
+  }
+
+  public void deselect() {
+    EventHandler eventHandler = DiagramClient.theClient().getHandler();
+    Message message = eventHandler.newMessage("nodeDeselected", 1);
+    message.args[0] = new Value(getId());
+    eventHandler.raiseEvent(message);
+  }
+
+  public void select() {
+    EventHandler eventHandler = DiagramClient.theClient().getHandler();
+    Message message = eventHandler.newMessage("nodeSelected", 1);
+    message.args[0] = new Value(getId());
+    eventHandler.raiseEvent(message);
+  }
+
+  public void hide(String id) {
+    if (getId().equals(id)) hidden = true;
+  }
+
+  public void show(String id) {
+    if (getId().equals(id)) hidden = false;
   }
 }

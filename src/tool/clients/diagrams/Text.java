@@ -5,6 +5,7 @@ import java.io.PrintStream;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Event;
@@ -17,6 +18,7 @@ import xos.Message;
 import xos.Value;
 
 public class Text implements Display {
+
   String  id;
   String  text;
   int     x;
@@ -27,6 +29,8 @@ public class Text implements Display {
   int     red;
   int     green;
   int     blue;
+  String  fontData = "";
+  Font    font     = null;
 
   public Text(String id, String text, int x, int y, boolean editable, boolean underline, boolean italicise, int red, int green, int blue) {
     super();
@@ -113,8 +117,19 @@ public class Text implements Display {
     return green;
   }
 
+  public Font getFont() {
+    if (font == null) {
+      if (fontData.equals("")) {
+        return DiagramClient.diagramFont;
+      } else {
+        font = new Font(XModeler.getXModeler().getDisplay(), new FontData(fontData));
+        return font;
+      }
+    } else return font;
+  }
+
   public int getHeight() {
-    Point extent = DiagramClient.theClient().textDimension(text, DiagramClient.diagramFont);
+    Point extent = DiagramClient.theClient().textDimension(text, getFont());
     return extent.y;
   }
 
@@ -131,7 +146,7 @@ public class Text implements Display {
   }
 
   public int getWidth() {
-    Point extent = DiagramClient.theClient().textDimension(text, DiagramClient.diagramFont);
+    Point extent = DiagramClient.theClient().textDimension(text, getFont());
     return extent.x;
   }
 
@@ -176,10 +191,10 @@ public class Text implements Display {
   }
 
   public void paint(GC gc, int x, int y) {
-    Font font = gc.getFont();
-    gc.setFont(italicise ? DiagramClient.diagramItalicFont : DiagramClient.diagramFont);
+    Font f = gc.getFont();
+    gc.setFont(italicise ? DiagramClient.diagramItalicFont : getFont());
     gc.drawText(text, x + getX(), y + getY(), true);
-    gc.setFont(font);
+    gc.setFont(f);
   }
 
   public void paintHover(GC gc, int x, int y, int dx, int dy) {
@@ -242,5 +257,12 @@ public class Text implements Display {
 
   public void newImage(String parentId, String id, String fileName, int x, int y, int width, int height) {
 
+  }
+
+  public void setFont(String id, String fontData) {
+    if (getId().equals(id)) {
+      this.fontData = fontData;
+      font = null;
+    }
   }
 }

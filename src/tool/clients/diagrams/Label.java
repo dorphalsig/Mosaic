@@ -43,21 +43,6 @@ public class Label implements Selectable {
     this.font = font;
   }
 
-  public void writeXML(PrintStream out) {
-    out.print("<Label id='" + getId() + "' ");
-    out.print("text='" + XModeler.encodeXmlAttribute(text) + "' ");
-    out.print("pos='" + pos + "' ");
-    out.print("x='" + x + "' ");
-    out.print("y='" + y + "' ");
-    out.print("editable='" + editable + "' ");
-    out.print("underline='" + underline + "' ");
-    out.print("condense='" + condense + "' ");
-    out.print("red='" + red + "' ");
-    out.print("green='" + green + "' ");
-    out.print("blue='" + blue + "' ");
-    out.print("font='" + font + "'/>");
-  }
-
   public boolean contains(int x, int y) {
     Point extent = DiagramClient.theClient().textDimension(text, DiagramClient.diagramFont);
     return x >= getAbsoluteX() && y >= getAbsoluteY() && x <= getAbsoluteX() + extent.x && y <= getAbsoluteY() + extent.y;
@@ -95,11 +80,6 @@ public class Label implements Selectable {
     }
   }
 
-  public int getWidth() {
-    Point extent = DiagramClient.theClient().textDimension(text, DiagramClient.diagramFont);
-    return extent.x;
-  }
-
   public int getHeight() {
     Point extent = DiagramClient.theClient().textDimension(text, DiagramClient.diagramFont);
     return extent.y;
@@ -109,12 +89,40 @@ public class Label implements Selectable {
     return id;
   }
 
+  public int getWidth() {
+    Point extent = DiagramClient.theClient().textDimension(text, DiagramClient.diagramFont);
+    return extent.x;
+  }
+
   public int getX() {
     return x;
   }
 
   public int getY() {
     return y;
+  }
+
+  public int maxX() {
+    if (pos.equals("start"))
+      return edge.start().getX() + x;
+    else if (pos.equals("end"))
+      return edge.end().getX() + x;
+    else return 0;
+  }
+
+  public int maxY() {
+    if (pos.equals("start"))
+      return edge.start().getY() + y;
+    else if (pos.equals("end"))
+      return edge.end().getY() + y;
+    else return 0;
+  }
+
+  public void move(String id, int x, int y) {
+    if (id.equals(getId())) {
+      this.x = x;
+      this.y = y;
+    }
   }
 
   public void moveBy(int dx, int dy) {
@@ -165,6 +173,10 @@ public class Label implements Selectable {
     }
   }
 
+  public void rightClick(int x, int y) {
+    MenuClient.popup(id, x, y);
+  }
+
   public void setText(String id, String text) {
     if (getId().equals(id)) this.text = text;
   }
@@ -177,14 +189,28 @@ public class Label implements Selectable {
     this.y = y;
   }
 
-  public void move(String id, int x, int y) {
-    if (id.equals(getId())) {
-      this.x = x;
-      this.y = y;
-    }
+  public String toString() {
+    return "L(" + text + ")";
   }
 
-  public void rightClick(int x, int y) {
-    MenuClient.popup(id, x, y);
+  public void writeXML(PrintStream out) {
+    out.print("<Label id='" + getId() + "' ");
+    out.print("text='" + XModeler.encodeXmlAttribute(text) + "' ");
+    out.print("pos='" + pos + "' ");
+    out.print("x='" + x + "' ");
+    out.print("y='" + y + "' ");
+    out.print("editable='" + editable + "' ");
+    out.print("underline='" + underline + "' ");
+    out.print("condense='" + condense + "' ");
+    out.print("red='" + red + "' ");
+    out.print("green='" + green + "' ");
+    out.print("blue='" + blue + "' ");
+    out.print("font='" + font + "'/>");
+  }
+
+  public void deselect() {
+  }
+
+  public void select() {
   }
 }

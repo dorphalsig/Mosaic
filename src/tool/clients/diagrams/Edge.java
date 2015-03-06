@@ -1,6 +1,8 @@
 package tool.clients.diagrams;
 
 import java.io.PrintStream;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Vector;
 
 import org.eclipse.swt.SWT;
@@ -13,33 +15,97 @@ import xos.Value;
 
 public class Edge {
 
-  public static int ARROW_ANGLE   = 35;
-  public static int ARROW_HEAD    = 10;
-  public static int LINE_WIDTH    = 1;
+  public static Point circleIntersect(int centerx, int centery, double radius, int x, int y) {
+    double dx = x - centerx;
+    double dy = y - centery;
+    double lineLength = Math.sqrt((dx * dx) + (dy * dy));
+    dx = dx / lineLength;
+    dy = dy / lineLength;
+    Point p = new Point((int) (centerx + (dx * radius)), (int) (centery + (dy * radius)));
+    return p;
+  }
 
-  static final int  NO_ARROW      = 0;
-  static final int  ARROW         = 1;
-  static final int  BLACK_DIAMOND = 2;
-  static final int  WHITE_DIAMOND = 3;
-  static final int  BLACK_ARROW   = 4;
-  static final int  WHITE_ARROW   = 5;
+  public static Point intercept(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) {
+    float x12 = x1 - x2;
+    float x34 = x3 - x4;
+    float y12 = y1 - y2;
+    float y34 = y3 - y4;
+    float c = x12 * y34 - y12 * x34;
+    if (Math.abs(c) < 0.01)
+      // No intersection
+      return new Point(-1, -1);
+    else {
+      // Intersection
+      float a = x1 * y2 - y1 * x2;
+      float b = x3 * y4 - y3 * x4;
+      float x = (a * x34 - b * x12) / c;
+      float y = (a * y34 - b * y12) / c;
+      return new Point((int) x, (int) y);
+    }
+  }
 
-  Vector<Waypoint>  waypoints     = new Vector<Waypoint>();
-  Vector<Label>     labels        = new Vector<Label>();
+  public static Point intersect(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) {
+    float x12 = x1 - x2;
+    float x34 = x3 - x4;
+    float y12 = y1 - y2;
+    float y34 = y3 - y4;
+    float c = x12 * y34 - y12 * x34;
+    if (Math.abs(c) < 0.01)
+      // No intersection
+      return new Point(-1, -1);
+    else {
+      // Intersection
+      float a = x1 * y2 - y1 * x2;
+      float b = x3 * y4 - y3 * x4;
+      float x = (a * x34 - b * x12) / c;
+      float y = (a * y34 - b * y12) / c;
+      if (isOnLine((int) x, (int) y, x1, y1, x2, y2) && isOnLine((int) x, (int) y, x3, y3, x4, y4))
+        return new Point((int) x, (int) y);
+      else return new Point(-1, -1);
+    }
+  }
 
-  String            id;
-  Node              sourceNode;
-  Port              sourcePort;
-  Node              targetNode;
-  Port              targetPort;
-  int               refx;
-  int               refy;
-  int               sourceHead;
-  int               targetHead;
-  int               lineStyle;
-  int               red;
-  int               green;
-  int               blue;
+  public static boolean isOnLine(int x, int y, int x1, int y1, int x2, int y2) {
+    boolean inX = x1 < x2 ? (x >= x1 && x <= x2) : (x >= x2 && x <= x1);
+    boolean inY = y1 < y2 ? (y >= y1 && y <= y2) : (y >= y2 && y <= y1);
+    return inX && inY;
+  }
+
+  private static double pointToLineDistance(Waypoint A, Waypoint B, int x, int y) {
+    double normalLength = Math.sqrt((B.x - A.x) * (B.x - A.x) + (B.y - A.y) * (B.y - A.y));
+    return Math.abs((x - A.x) * (B.y - A.y) - (y - A.y) * (B.x - A.x)) / normalLength;
+  }
+
+  private static final Vector<Point> noIntersections = new Vector<Point>();
+
+  public static int                  ARROW_ANGLE     = 35;
+  public static int                  ARROW_HEAD      = 10;
+  public static int                  LINE_WIDTH      = 1;
+  public static int                  WAYPOINT_ALIGN  = 20;
+
+  static final int                   NO_ARROW        = 0;
+  static final int                   ARROW           = 1;
+  static final int                   BLACK_DIAMOND   = 2;
+  static final int                   WHITE_DIAMOND   = 3;
+  static final int                   BLACK_ARROW     = 4;
+  static final int                   WHITE_ARROW     = 5;
+
+  Vector<Waypoint>                   waypoints       = new Vector<Waypoint>();
+  Vector<Label>                      labels          = new Vector<Label>();
+  boolean                            hidden          = false;
+  String                             id;
+  Node                               sourceNode;
+  Port                               sourcePort;
+  Node                               targetNode;
+  Port                               targetPort;
+  int                                refx;
+  int                                refy;
+  int                                sourceHead;
+  int                                targetHead;
+  int                                lineStyle;
+  int                                red;
+  int                                green;
+  int                                blue;
 
   public Edge(String id, Node sourceNode, Port sourcePort, int sourceX, int sourceY, Node targetNode, Port targetPort, int targetX, int targetY, int refx, int refy, int sourceHead, int targetHead, int lineStyle, int red, int green, int blue) {
     super();
@@ -110,6 +176,21 @@ public class Edge {
     else return p;
   }
 
+  public Point bottomIntercept(Node node, Waypoint w1, Waypoint w2) {
+    int x0 = w1.getX();
+    int y0 = w1.getY();
+    int x1 = w2.getX();
+    int y1 = w2.getY();
+    int x2 = node.getX();
+    int y2 = node.getY() + node.getHeight();
+    int x3 = node.getX() + node.getWidth();
+    int y3 = node.getY() + node.getHeight();
+    Point p = intercept(x0, y0, x1, y1, x2, y2, x3, y3);
+    if (y1 <= y2 || p.x <= x2 || p.x >= x3)
+      return null;
+    else return p;
+  }
+
   public void checkWaypoints(Waypoint justMoved) {
     if (getWaypoints().size() > 2 && justMoved != start() && justMoved != end()) {
       int index = waypoints.indexOf(justMoved);
@@ -129,12 +210,14 @@ public class Edge {
     return Math.sqrt((dx * dx) + (dy * dy));
   }
 
-  private void drawArrow(GC gc, int tipx, int tipy, int tailx, int taily, boolean filled, Color fill) {
+  private void drawArrow(GC gc, int tipx, int tipy, int tailx, int taily, boolean filled, Color fill, Color line) {
     double phi = Math.toRadians(ARROW_ANGLE);
     double dy = tipy - taily;
     double dx = tipx - tailx;
     double theta = Math.atan2(dy, dx);
     double x, y, rho = theta + phi;
+    Color c = gc.getForeground();
+    gc.setForeground(line);
     if (!filled) {
       for (int j = 0; j < 2; j++) {
         x = tipx - ARROW_HEAD * Math.cos(rho);
@@ -156,35 +239,39 @@ public class Edge {
         rho = theta - phi;
       }
       gc.drawLine(points[2], points[3], points[4], points[5]);
+      gc.setForeground(c);
+      c = gc.getBackground();
+      gc.setBackground(fill);
       gc.fillPolygon(points);
+      gc.setBackground(c);
       gc.setLineWidth(width);
     }
   }
 
-  private void drawSourceDecoration(GC gc, int x, int y, int x2, int y2) {
+  private void drawSourceDecoration(GC gc, Color color, int x, int y, int x2, int y2) {
     switch (sourceHead) {
     case NO_ARROW:
       break;
     case ARROW:
-      drawArrow(gc, x, y, x2, y2, false, null);
+      drawArrow(gc, x, y, x2, y2, false, null, color);
       break;
     case WHITE_ARROW:
-      drawArrow(gc, x, y, x2, y2, true, Diagram.WHITE);
+      drawArrow(gc, x, y, x2, y2, true, Diagram.WHITE, color);
       break;
     default:
       System.err.println("unknown type of source decoration: " + sourceHead);
     }
   }
 
-  private void drawTargetDecoration(GC gc, int x, int y, int x2, int y2) {
+  private void drawTargetDecoration(GC gc, Color color, int x, int y, int x2, int y2) {
     switch (targetHead) {
     case NO_ARROW:
       break;
     case ARROW:
-      drawArrow(gc, x, y, x2, y2, false, null);
+      drawArrow(gc, x, y, x2, y2, false, null, color);
       break;
     case WHITE_ARROW:
-      drawArrow(gc, x, y, x2, y2, true, Diagram.WHITE);
+      drawArrow(gc, x, y, x2, y2, true, Diagram.WHITE, color);
       break;
     default:
       System.err.println("unknown type of target decoration: " + targetHead);
@@ -205,6 +292,17 @@ public class Edge {
 
   public String getId() {
     return id;
+  }
+
+  private Vector<Point> getIntersection(Waypoint wp0, Waypoint wp1, Vector<Point> intersections) {
+    Vector<Point> i = new Vector<Point>();
+    for (Point p : intersections) {
+      double d = pointToLineDistance(wp0, wp1, p.x, p.y);
+      if (d < 1) {
+        i.add(p);
+      }
+    }
+    return i;
   }
 
   public Label getLabel(String id) {
@@ -267,36 +365,20 @@ public class Edge {
     return waypoints;
   }
 
-  public Point intercept(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) {
-    float x12 = x1 - x2;
-    float x34 = x3 - x4;
-    float y12 = y1 - y2;
-    float y34 = y3 - y4;
-
-    float c = x12 * y34 - y12 * x34;
-
-    if (Math.abs(c) < 0.01)
-
-      // No intersection
-      return new Point(-1, -1);
-    else {
-      // Intersection
-      float a = x1 * y2 - y1 * x2;
-      float b = x3 * y4 - y3 * x4;
-
-      float x = (a * x34 - b * x12) / c;
-      float y = (a * y34 - b * y12) / c;
-
-      return new Point((int) x, (int) y);
-    }
-  }
-
   public Point intercept(Node node) {
     Point p = topIntercept(node);
     p = p == null ? leftIntercept(node) : p;
     p = p == null ? rightIntercept(node) : p;
     p = p == null ? bottomIntercept(node) : p;
     return p;
+  }
+
+  public boolean isHidden() {
+    return hidden;
+  }
+
+  private boolean isSelfEdge() {
+    return sourceNode == targetNode;
   }
 
   public Point leftIntercept(Node node) {
@@ -312,6 +394,39 @@ public class Edge {
     if (x1 > x2 || p.y <= y2 || p.y >= y3)
       return null;
     else return p;
+  }
+
+  public Point leftIntercept(Node node, Waypoint w1, Waypoint w2) {
+    int x0 = w1.getX();
+    int y0 = w1.getY();
+    int x1 = w2.getX();
+    int y1 = w2.getY();
+    int x2 = node.getX();
+    int y2 = node.getY();
+    int x3 = node.getX();
+    int y3 = node.getY() + node.getHeight();
+    Point p = intercept(x0, y0, x1, y1, x2, y2, x3, y3);
+    if (x1 > x2 || p.y <= y2 || p.y >= y3)
+      return null;
+    else return p;
+  }
+
+  public int maxX() {
+    int maxX = 0;
+    for (Waypoint w : waypoints)
+      maxX = Math.max(maxX, w.getX());
+    for (Label label : labels)
+      maxX = Math.max(maxX, label.maxX());
+    return maxX;
+  }
+
+  public int maxY() {
+    int maxY = 0;
+    for (Waypoint w : waypoints)
+      maxY = Math.max(maxY, w.getY());
+    for (Label label : labels)
+      maxY = Math.max(maxY, label.maxY());
+    return maxY;
   }
 
   public void move(String id, int x, int y) {
@@ -391,30 +506,112 @@ public class Edge {
     DiagramClient.theClient().getHandler().raiseEvent(message);
   }
 
-  public void paint(GC gc) {
-    int x = waypoints.elementAt(0).getX();
-    int y = waypoints.elementAt(0).getY();
-    int width = gc.getLineWidth();
-    gc.setLineWidth(LINE_WIDTH);
-    Color c = gc.getBackground();
-    gc.setBackground(Diagram.BLACK);
-    for (int i = 1; i < waypoints.size(); i++) {
-      Waypoint wp = waypoints.elementAt(i);
-      paintLine(gc, x, y, wp.getX(), wp.getY());
-      if (i < waypoints.size() - 1) gc.fillOval(wp.getX() - 3, wp.getY() - 3, 6, 6);
-      x = wp.getX();
-      y = wp.getY();
+  public void paint(GC gc, Color color, boolean showWaypoints, Vector<Point> intersections) {
+    if (!hidden) {
+      int x = waypoints.elementAt(0).getX();
+      int y = waypoints.elementAt(0).getY();
+      int width = gc.getLineWidth();
+      gc.setLineWidth(LINE_WIDTH);
+      Color c = gc.getBackground();
+      gc.setBackground(color);
+      for (int i = 1; i < waypoints.size(); i++) {
+        final Waypoint wp0 = waypoints.elementAt(i - 1);
+        final Waypoint wp1 = waypoints.elementAt(i);
+        Vector<Point> p = getIntersection(wp0, wp1, intersections);
+        Collections.sort(p, new Comparator() {
+          public int compare(Object o1, Object o2) {
+            Point p1 = (Point) o1;
+            Point p2 = (Point) o2;
+            boolean cmpx = wp0.x <= wp1.x ? p1.x <= p2.x : p2.x <= p1.x;
+            boolean cmpy = wp0.y <= wp1.y ? p1.y <= p2.y : p2.y <= p1.y;
+            return cmpx && cmpy ? -1 : 1;
+          }
+        });
+        paintLine(gc, x, y, wp1.getX(), wp1.getY(), color, p);
+        if (showWaypoints && i < waypoints.size() - 1) gc.fillOval(wp1.getX() - 3, wp1.getY() - 3, 6, 6);
+        x = wp1.getX();
+        y = wp1.getY();
+      }
+      gc.setBackground(c);
+      for (Label label : labels)
+        label.paint(gc);
+      paintDecorations(gc, color);
+      gc.setLineWidth(width);
     }
-    gc.setBackground(c);
-    for (Label label : labels)
-      label.paint(gc);
-    paintDecorations(gc);
-    gc.setLineWidth(width);
   }
 
-  public void paintLine(GC gc, int x1, int y1, int x2, int y2) {
+  public void paintAligned(GC gc) {
+    if (!hidden) {
+      int x = waypoints.elementAt(0).getX();
+      int y = waypoints.elementAt(0).getY();
+      int width = gc.getLineWidth();
+      gc.setLineWidth(LINE_WIDTH + 1);
+      for (int i = 1; i < waypoints.size(); i++) {
+        Waypoint wp = waypoints.elementAt(i);
+        paintLine(gc, x, y, wp.getX(), wp.getY(), Diagram.RED, noIntersections);
+        if (i < waypoints.size() - 1) gc.fillOval(wp.getX() - 3, wp.getY() - 3, 6, 6);
+        x = wp.getX();
+        y = wp.getY();
+      }
+      gc.setLineWidth(width);
+    }
+  }
+
+  private void paintDecorations(GC gc, Color color) {
+    if (isSelfEdge())
+      paintHomogeneousEdgeDecorations(gc, color);
+    else paintHeterogeneousEdgeDecorations(gc, color);
+  }
+
+  public void paintHeterogeneousEdgeDecorations(GC gc, Color color) {
+    Point topIntercept = topIntercept(targetNode);
+    if (topIntercept != null && topIntercept.x >= 0 && topIntercept.y >= 0) drawTargetDecoration(gc, color, topIntercept.x, topIntercept.y, penultimate().x, penultimate().y);
+    Point bottomIntercept = bottomIntercept(sourceNode);
+    if (bottomIntercept != null && bottomIntercept.x >= 0 && bottomIntercept.y >= 0) drawSourceDecoration(gc, color, bottomIntercept.x, bottomIntercept.y, second().x, second().y);
+    topIntercept = topIntercept(sourceNode);
+    if (topIntercept != null && topIntercept.x >= 0 && topIntercept.y >= 0) drawSourceDecoration(gc, color, topIntercept.x, topIntercept.y, second().x, second().y);
+    bottomIntercept = bottomIntercept(targetNode);
+    if (bottomIntercept != null && bottomIntercept.x >= 0 && bottomIntercept.y >= 0) drawTargetDecoration(gc, color, bottomIntercept.x, bottomIntercept.y, penultimate().x, penultimate().y);
+    Point leftIntercept = leftIntercept(sourceNode);
+    if (leftIntercept != null && leftIntercept.x >= 0 && leftIntercept.y >= 0) drawSourceDecoration(gc, color, leftIntercept.x, leftIntercept.y, second().x, second().y);
+    Point rightIntercept = rightIntercept(targetNode);
+    if (rightIntercept != null && rightIntercept.x >= 0 && rightIntercept.y >= 0) drawTargetDecoration(gc, color, rightIntercept.x, rightIntercept.y, penultimate().x, penultimate().y);
+    leftIntercept = leftIntercept(targetNode);
+    if (leftIntercept != null && leftIntercept.x >= 0 && leftIntercept.y >= 0) drawTargetDecoration(gc, color, leftIntercept.x, leftIntercept.y, penultimate().x, penultimate().y);
+    rightIntercept = rightIntercept(sourceNode);
+    if (rightIntercept != null && rightIntercept.x >= 0 && rightIntercept.y >= 0) drawSourceDecoration(gc, color, rightIntercept.x, rightIntercept.y, second().x, second().y);
+  }
+
+  public void paintHomogeneousEdgeDecorations(GC gc, Color color) {
+    // Ensure that the correct waypoint is used when calculating the intercepts...
+    Point topIntercept = targetHead == NO_ARROW ? null : topIntercept(targetNode, end(), penultimate());
+    if (topIntercept != null && topIntercept.x >= 0 && topIntercept.y >= 0) drawTargetDecoration(gc, color, topIntercept.x, topIntercept.y, penultimate().x, penultimate().y);
+    Point bottomIntercept = sourceHead == NO_ARROW ? null : bottomIntercept(sourceNode, start(), second());
+    if (bottomIntercept != null && bottomIntercept.x >= 0 && bottomIntercept.y >= 0) drawSourceDecoration(gc, color, bottomIntercept.x, bottomIntercept.y, second().x, second().y);
+    topIntercept = sourceHead == NO_ARROW ? null : topIntercept(sourceNode, start(), second());
+    if (topIntercept != null && topIntercept.x >= 0 && topIntercept.y >= 0) drawSourceDecoration(gc, color, topIntercept.x, topIntercept.y, second().x, second().y);
+    bottomIntercept = targetHead == NO_ARROW ? null : bottomIntercept(targetNode, end(), penultimate());
+    if (bottomIntercept != null && bottomIntercept.x >= 0 && bottomIntercept.y >= 0) drawTargetDecoration(gc, color, bottomIntercept.x, bottomIntercept.y, penultimate().x, penultimate().y);
+    Point leftIntercept = sourceHead == NO_ARROW ? null : leftIntercept(sourceNode, start(), second());
+    if (leftIntercept != null && leftIntercept.x >= 0 && leftIntercept.y >= 0) drawSourceDecoration(gc, color, leftIntercept.x, leftIntercept.y, second().x, second().y);
+    Point rightIntercept = targetHead == NO_ARROW ? null : rightIntercept(targetNode, end(), penultimate());
+    if (rightIntercept != null && rightIntercept.x >= 0 && rightIntercept.y >= 0) drawTargetDecoration(gc, color, rightIntercept.x, rightIntercept.y, penultimate().x, penultimate().y);
+    leftIntercept = targetHead == NO_ARROW ? null : leftIntercept(targetNode, end(), penultimate());
+    if (leftIntercept != null && leftIntercept.x >= 0 && leftIntercept.y >= 0) drawTargetDecoration(gc, color, leftIntercept.x, leftIntercept.y, penultimate().x, penultimate().y);
+    rightIntercept = sourceHead == NO_ARROW ? null : rightIntercept(sourceNode, start(), second());
+    if (rightIntercept != null && rightIntercept.x >= 0 && rightIntercept.y >= 0) drawSourceDecoration(gc, color, rightIntercept.x, rightIntercept.y, second().x, second().y);
+  }
+
+  public void paintHover(GC gc, int x, int y) {
+    for (Label label : labels)
+      label.paintHover(gc, x, y);
+  }
+
+  public void paintLine(GC gc, int x1, int y1, int x2, int y2, Color lineColor, Vector<Point> intersect) {
     // Paint the line in the line style.
     int style = gc.getLineStyle();
+    Color c = gc.getForeground();
+    gc.setForeground(lineColor);
     switch (lineStyle) {
     case Line.DASH_LINE:
       gc.setLineStyle(SWT.LINE_DASH);
@@ -432,50 +629,16 @@ public class Edge {
     default:
       gc.setLineStyle(SWT.LINE_SOLID);
     }
+    for (Point p : intersect) {
+      Point p1 = circleIntersect(p.x, p.y, 3.0, x1, y1);
+      Point p2 = circleIntersect(p.x, p.y, 3.0, x2, y2);
+      gc.drawLine(x1, y1, p1.x, p1.y);
+      x1 = p2.x;
+      y1 = p2.y;
+    }
     gc.drawLine(x1, y1, x2, y2);
     gc.setLineStyle(style);
-  }
-
-  public void paintAligned(GC gc) {
-    int x = waypoints.elementAt(0).getX();
-    int y = waypoints.elementAt(0).getY();
-    int width = gc.getLineWidth();
-    gc.setLineWidth(LINE_WIDTH + 1);
-    Color c = gc.getForeground();
-    gc.setForeground(Diagram.RED);
-    for (int i = 1; i < waypoints.size(); i++) {
-      Waypoint wp = waypoints.elementAt(i);
-      paintLine(gc, x, y, wp.getX(), wp.getY());
-      if (i < waypoints.size() - 1) gc.fillOval(wp.getX() - 3, wp.getY() - 3, 6, 6);
-      x = wp.getX();
-      y = wp.getY();
-    }
-    gc.setLineWidth(width);
     gc.setForeground(c);
-  }
-
-  private void paintDecorations(GC gc) {
-    Point topIntercept = topIntercept(targetNode);
-    if (topIntercept != null && topIntercept.x >= 0 && topIntercept.y >= 0) drawTargetDecoration(gc, topIntercept.x, topIntercept.y, penultimate().x, penultimate().y);
-    Point bottomIntercept = bottomIntercept(sourceNode);
-    if (bottomIntercept != null && bottomIntercept.x >= 0 && bottomIntercept.y >= 0) drawSourceDecoration(gc, bottomIntercept.x, bottomIntercept.y, second().x, second().y);
-    topIntercept = topIntercept(sourceNode);
-    if (topIntercept != null && topIntercept.x >= 0 && topIntercept.y >= 0) drawSourceDecoration(gc, topIntercept.x, topIntercept.y, second().x, second().y);
-    bottomIntercept = bottomIntercept(targetNode);
-    if (bottomIntercept != null && bottomIntercept.x >= 0 && bottomIntercept.y >= 0) drawTargetDecoration(gc, bottomIntercept.x, bottomIntercept.y, penultimate().x, penultimate().y);
-    Point leftIntercept = leftIntercept(sourceNode);
-    if (leftIntercept != null && leftIntercept.x >= 0 && leftIntercept.y >= 0) drawSourceDecoration(gc, leftIntercept.x, leftIntercept.y, second().x, second().y);
-    Point rightIntercept = rightIntercept(targetNode);
-    if (rightIntercept != null && rightIntercept.x >= 0 && rightIntercept.y >= 0) drawTargetDecoration(gc, rightIntercept.x, rightIntercept.y, penultimate().x, penultimate().y);
-    leftIntercept = leftIntercept(targetNode);
-    if (leftIntercept != null && leftIntercept.x >= 0 && leftIntercept.y >= 0) drawTargetDecoration(gc, leftIntercept.x, leftIntercept.y, penultimate().x, penultimate().y);
-    rightIntercept = rightIntercept(sourceNode);
-    if (rightIntercept != null && rightIntercept.x >= 0 && rightIntercept.y >= 0) drawSourceDecoration(gc, rightIntercept.x, rightIntercept.y, second().x, second().y);
-  }
-
-  public void paintHover(GC gc, int x, int y) {
-    for (Label label : labels)
-      label.paintHover(gc, x, y);
   }
 
   public void paintMovingSourceOrTarget(GC gc, int startX, int startY, int endX, int endY) {
@@ -487,17 +650,17 @@ public class Edge {
     gc.setBackground(Diagram.BLACK);
     for (int i = 1; i < waypoints.size() - 1; i++) {
       Waypoint wp = waypoints.elementAt(i);
-      paintLine(gc, x, y, wp.getX(), wp.getY());
+      paintLine(gc, x, y, wp.getX(), wp.getY(), Diagram.BLACK, noIntersections);
       if (i < waypoints.size() - 1) gc.fillOval(wp.getX() - 3, wp.getY() - 3, 6, 6);
       x = wp.getX();
       y = wp.getY();
     }
-    paintLine(gc, x, y, endX, endY);
+    paintLine(gc, x, y, endX, endY, Diagram.BLACK, noIntersections);
     gc.setBackground(c);
     for (Label label : labels)
       label.paint(gc);
-    drawSourceDecoration(gc, startX, startY, waypoints.elementAt(1).getX(), waypoints.elementAt(1).getY());
-    drawTargetDecoration(gc, endX, endY, waypoints.elementAt(waypoints.size() - 2).getX(), waypoints.elementAt(waypoints.size() - 2).getY());
+    drawSourceDecoration(gc, Diagram.BLACK, startX, startY, waypoints.elementAt(1).getX(), waypoints.elementAt(1).getY());
+    drawTargetDecoration(gc, Diagram.BLACK, endX, endY, waypoints.elementAt(waypoints.size() - 2).getX(), waypoints.elementAt(waypoints.size() - 2).getY());
     gc.setLineWidth(width);
   }
 
@@ -533,11 +696,6 @@ public class Edge {
     return waypoints.elementAt(waypoints.size() - 2);
   }
 
-  private double pointToLineDistance(Waypoint A, Waypoint B, int x, int y) {
-    double normalLength = Math.sqrt((B.x - A.x) * (B.x - A.x) + (B.y - A.y) * (B.y - A.y));
-    return Math.abs((x - A.x) * (B.y - A.y) - (y - A.y) * (B.x - A.x)) / normalLength;
-  }
-
   public void reconnectSource(Node node, Port port) {
     if (sourcePort != null) sourcePort.getSources().remove(this);
     setSourceNode(node);
@@ -545,7 +703,6 @@ public class Edge {
     port.getSources().add(this);
     start().setX(node.getX() + port.getX() + (port.getWidth() / 2));
     start().setY(node.getY() + port.getY() + (port.getHeight() / 2));
-
   }
 
   public void reconnectTarget(Node node, Port port) {
@@ -562,6 +719,21 @@ public class Edge {
     int y0 = node.contains(start()) ? start().getY() : end().getY();
     int x1 = node.contains(start()) ? second().getX() : penultimate().getX();
     int y1 = node.contains(start()) ? second().getY() : penultimate().getY();
+    int x2 = node.getX() + node.getWidth();
+    int y2 = node.getY();
+    int x3 = node.getX() + node.getWidth();
+    int y3 = node.getY() + node.getHeight();
+    Point p = intercept(x0, y0, x1, y1, x2, y2, x3, y3);
+    if (x1 < x2 || p.y <= y2 || p.y >= y3)
+      return null;
+    else return p;
+  }
+
+  public Point rightIntercept(Node node, Waypoint w1, Waypoint w2) {
+    int x0 = w1.getX();
+    int y0 = w1.getY();
+    int x1 = w2.getX();
+    int y1 = w2.getY();
     int x2 = node.getX() + node.getWidth();
     int y2 = node.getY();
     int x3 = node.getX() + node.getWidth();
@@ -650,6 +822,34 @@ public class Edge {
     return waypoints.get(0);
   }
 
+  public void straighten() {
+    // To straighten edges:
+    // (1) Remove all way-points that are not needed.
+    // (2) Straighten segments by moving way-points;
+    for (Waypoint w : waypoints) {
+      if (w != start() && w != end()) {
+        checkWaypoints(w);
+      }
+    }
+    straightenFrom(start(), 1, 1);
+    straightenFrom(end(), waypoints.size() - 2, -1);
+  }
+
+  public void straightenFrom(Waypoint w1, int start, int inc) {
+    for (int i = start; i >= 0 && i < waypoints.size(); i = i + inc) {
+      Waypoint w2 = waypoints.elementAt(i);
+      int dx = Math.abs(w1.getX() - w2.getX());
+      int dy = Math.abs(w1.getY() - w2.getY());
+      if (dx < WAYPOINT_ALIGN) {
+        w2.move(w1.getX(), w2.getY());
+      }
+      if (dy < WAYPOINT_ALIGN) {
+        w2.move(w2.getX(), w1.getY());
+      }
+      w1 = w2;
+    }
+  }
+
   public Point targetIntercept() {
     return intercept(targetNode);
   }
@@ -669,8 +869,23 @@ public class Edge {
     else return p;
   }
 
+  public Point topIntercept(Node node, Waypoint w1, Waypoint w2) {
+    int x0 = w1.getX();
+    int y0 = w1.getY();
+    int x1 = w2.getX();
+    int y1 = w2.getY();
+    int x2 = node.getX();
+    int y2 = node.getY();
+    int x3 = node.getX() + node.getWidth();
+    int y3 = node.getY();
+    Point p = intercept(x0, y0, x1, y1, x2, y2, x3, y3);
+    if (y1 >= y2 || p.x <= x2 || p.x >= x3)
+      return null;
+    else return p;
+  }
+
   public String toString() {
-    return "Edge(" + waypoints + ")";
+    return "Edge(" + waypoints + "," + labels + ")";
   }
 
   public void writeXML(PrintStream out) {
@@ -685,6 +900,7 @@ public class Edge {
     out.print("sourceHead='" + getSourceHead() + "' ");
     out.print("targetHead='" + getTargetHead() + "' ");
     out.print("lineStyle='" + getLineStyle() + "' ");
+    out.print("hidden='" + isHidden() + "' ");
     out.print("red='" + getRed() + "' ");
     out.print("green='" + getGreen() + "' ");
     out.print("blue='" + getBlue() + "'>");
@@ -693,5 +909,13 @@ public class Edge {
     for (Label label : labels)
       label.writeXML(out);
     out.print("</Edge>");
+  }
+
+  public void hide(String id) {
+    if (getId().equals(id)) hidden = true;
+  }
+
+  public void show(String id) {
+    if (getId().equals(id)) hidden = false;
   }
 }

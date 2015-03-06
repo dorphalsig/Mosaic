@@ -184,4 +184,8 @@ public class Ellipse implements Display {
 
   }
 
+  public void setFont(String id, String fontData) {
+
+  }
+
 }

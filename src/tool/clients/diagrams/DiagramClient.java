@@ -50,16 +50,25 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
   public Value callMessage(Message message) {
     if (message.hasName("getTextDimension"))
       return getTextDimension(message);
+    else if (message.hasName("getTextDimensionWithFont"))
+      return getTextDimensionWithFont(message);
     else if (message.hasName("getPalette"))
       return getPalette(message);
     else return super.callMessage(message);
   }
 
-  private Value getPalette(Message message) {
-    String id = message.args[0].strValue();
-    for (Diagram diagram : diagrams)
-      if (diagram.getId().equals(id)) { return diagram.getPalette().asValue(); }
-    return new Value(new Value[0]);
+  public void close(CTabFolderEvent event) {
+    CTabItem item = (CTabItem) event.item;
+    String id = getId(item);
+    Diagram diagram = getDiagram(id);
+    if (diagram != null) {
+      EventHandler handler = getHandler();
+      Message message = handler.newMessage("diagramClosed", 1);
+      message.args[0] = new Value(id);
+      handler.raiseEvent(message);
+      diagrams.remove(diagram);
+      tabs.remove(id);
+    }
   }
 
   private void copyToClipboard(Message message) {
@@ -87,6 +96,21 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     });
   }
 
+  private void deleteGroup(Message message) {
+    final String id = message.args[0].strValue();
+    final String name = message.args[1].strValue();
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (Diagram diagram : diagrams) {
+          if (diagram.getId().equals(id)) {
+            diagram.deleteGroup(name);
+            diagram.redraw();
+          }
+        }
+      }
+    });
+  }
+
   private void editText(Message message) {
     final Value id = message.args[0];
     runOnDisplay(new Runnable() {
@@ -103,6 +127,19 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     return null;
   }
 
+  private String getId(CTabItem item) {
+    for (String id : tabs.keySet())
+      if (tabs.get(id) == item) return id;
+    return null;
+  }
+
+  private Value getPalette(Message message) {
+    String id = message.args[0].strValue();
+    for (Diagram diagram : diagrams)
+      if (diagram.getId().equals(id)) { return diagram.getPalette().asValue(); }
+    return new Value(new Value[0]);
+  }
+
   private Diagram getSelectedDiagram() {
     CTabItem item = tabFolder.getSelection();
     for (String id : tabs.keySet()) {
@@ -116,9 +153,23 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     runOnDisplay(new Runnable() {
       public void run() {
         Value text = message.args[0];
-        Value italics = message.args[1];
-        Diagram diagram = getSelectedDiagram();
+        // Value italics = message.args[1];
         Point extent = textDimension(text.strValue(), diagramFont);
+        Value width = new Value(extent.x);
+        Value height = new Value(extent.y);
+        result[0] = new Value(new Value[] { width, height });
+      }
+    });
+    return result[0];
+  }
+
+  private Value getTextDimensionWithFont(final Message message) {
+    final Value[] result = new Value[1];
+    runOnDisplay(new Runnable() {
+      public void run() {
+        Value text = message.args[0];
+        Value fontData = message.args[1];
+        Point extent = textDimension(text.strValue(), new Font(XModeler.getXModeler().getDisplay(), new FontData(fontData.strValue())));
         Value width = new Value(extent.x);
         Value height = new Value(extent.y);
         result[0] = new Value(new Value[] { width, height });
@@ -160,27 +211,65 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
       inflateNodeElement(id, children.item(i));
   }
 
-  private void inflateButton(String diagramId, String groupId, Node button) {
-    String buttonName = XModeler.attributeValue(button, "name");
-    String buttonAction = XModeler.attributeValue(button, "tool");
-    String icon = XModeler.attributeValue(button, "icon");
-    boolean isEdge = XModeler.attributeValue(button, "isEdge").equals("true");
-    newTool(diagramId, groupId, buttonName, buttonAction, isEdge, icon);
+  private void inflateTool(String diagramId, String groupId, Node tool) {
+    String toolType = tool.getNodeName();
+    if (toolType.equals("EdgeCreationTool"))
+      inflateEdgeCreationTool(diagramId, groupId, tool);
+    else if (toolType.equals("NodeCreationTool"))
+      inflateNodeCreationTool(diagramId, groupId, tool);
+    else if (toolType.equals("ToggleTool"))
+      inflateToggleTool(diagramId, groupId, tool);
+    else if (toolType.equals("ActionTool"))
+      inflateActionTool(diagramId, groupId, tool);
+    else System.err.println("unknown type of tool: " + toolType);
+  }
+
+  private void inflateEdgeCreationTool(String diagramId, String groupId, Node tool) {
+    String label = XModeler.attributeValue(tool, "label");
+    String id = XModeler.attributeValue(tool, "id");
+    String icon = XModeler.attributeValue(tool, "icon");
+    newTool(diagramId, groupId, label, id, true, icon);
+  }
+
+  private void inflateNodeCreationTool(String diagramId, String groupId, Node tool) {
+    String label = XModeler.attributeValue(tool, "label");
+    String id = XModeler.attributeValue(tool, "id");
+    String icon = XModeler.attributeValue(tool, "icon");
+    newTool(diagramId, groupId, label, id, false, icon);
+  }
+
+  private void inflateToggleTool(String diagramId, String groupId, Node tool) {
+    String label = XModeler.attributeValue(tool, "label");
+    String id = XModeler.attributeValue(tool, "id");
+    boolean state = XModeler.attributeValue(tool, "state").equals("true");
+    String icon = XModeler.attributeValue(tool, "icon");
+    newToggle(diagramId, groupId, label, id, state, icon);
+  }
+
+  private void inflateActionTool(String diagramId, String groupId, Node tool) {
+    String label = XModeler.attributeValue(tool, "label");
+    String id = XModeler.attributeValue(tool, "id");
+    String icon = XModeler.attributeValue(tool, "icon");
+    newAction(diagramId, groupId, label, id, icon);
   }
 
   private void inflateDiagram(Node diagram) {
     String id = XModeler.attributeValue(diagram, "id");
     String label = XModeler.attributeValue(diagram, "label");
+    boolean magnetic = XModeler.attributeValue(diagram, "magnetic").equals("true");
     int zoom = Integer.parseInt(XModeler.attributeValue(diagram, "zoom", "100"));
     newDiagram(id, label);
     Diagram d = getDiagram(id);
+    d.setMagneticWaypoints(magnetic);
     d.renderOff();
     d.setZoom(zoom);
     NodeList children = diagram.getChildNodes();
     for (int i = 0; i < children.getLength(); i++)
       inflateDiagramElement(id, children.item(i));
     d.align();
+    d.deselect();
     d.renderOn();
+    d.resetPalette();
   }
 
   private void inflateDiagramEdge(String parentId, Node edge) {
@@ -244,12 +333,38 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     else System.err.println("Unknown type of edge element " + node.getNodeName());
   }
 
+  private void inflateEllipse(String parentId, Node node) {
+    String id = XModeler.attributeValue(node, "id");
+    int x = Integer.parseInt(XModeler.attributeValue(node, "x"));
+    int y = Integer.parseInt(XModeler.attributeValue(node, "y"));
+    int width = Integer.parseInt(XModeler.attributeValue(node, "width"));
+    int height = Integer.parseInt(XModeler.attributeValue(node, "height"));
+    boolean showOutline = XModeler.attributeValue(node, "showOutline").equals("true");
+    int lineRed = Integer.parseInt(XModeler.attributeValue(node, "lineRed"));
+    int lineGreen = Integer.parseInt(XModeler.attributeValue(node, "lineGreen"));
+    int lineBlue = Integer.parseInt(XModeler.attributeValue(node, "lineBlue"));
+    int fillRed = Integer.parseInt(XModeler.attributeValue(node, "fillRed"));
+    int fillGreen = Integer.parseInt(XModeler.attributeValue(node, "fillGreen"));
+    int fillBlue = Integer.parseInt(XModeler.attributeValue(node, "fillBlue"));
+    newEllipse(parentId, id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
+  }
+
   private void inflateGroup(String id, Node group) {
     String name = XModeler.attributeValue(group, "name");
     newGroup(id, name);
     NodeList buttons = group.getChildNodes();
     for (int i = 0; i < buttons.getLength(); i++)
-      inflateButton(id, name, buttons.item(i));
+      inflateTool(id, name, buttons.item(i));
+  }
+
+  private void inflateImage(String parentId, Node node) {
+    String id = XModeler.attributeValue(node, "id");
+    String fileName = XModeler.attributeValue(node, "fileName");
+    int x = Integer.parseInt(XModeler.attributeValue(node, "x"));
+    int y = Integer.parseInt(XModeler.attributeValue(node, "y"));
+    int width = Integer.parseInt(XModeler.attributeValue(node, "width"));
+    int height = Integer.parseInt(XModeler.attributeValue(node, "height"));
+    newImage(parentId, id, fileName, x, y, width, height);
   }
 
   private void inflateLabel(String edgeId, Node node) {
@@ -286,22 +401,6 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     newMultilineText(parentId, id, text, x, y, width, height, editable, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, font);
   }
 
-  private void inflateEllipse(String parentId, Node node) {
-    String id = XModeler.attributeValue(node, "id");
-    int x = Integer.parseInt(XModeler.attributeValue(node, "x"));
-    int y = Integer.parseInt(XModeler.attributeValue(node, "y"));
-    int width = Integer.parseInt(XModeler.attributeValue(node, "width"));
-    int height = Integer.parseInt(XModeler.attributeValue(node, "height"));
-    boolean showOutline = XModeler.attributeValue(node, "showOutline").equals("true");
-    int lineRed = Integer.parseInt(XModeler.attributeValue(node, "lineRed"));
-    int lineGreen = Integer.parseInt(XModeler.attributeValue(node, "lineGreen"));
-    int lineBlue = Integer.parseInt(XModeler.attributeValue(node, "lineBlue"));
-    int fillRed = Integer.parseInt(XModeler.attributeValue(node, "fillRed"));
-    int fillGreen = Integer.parseInt(XModeler.attributeValue(node, "fillGreen"));
-    int fillBlue = Integer.parseInt(XModeler.attributeValue(node, "fillBlue"));
-    newEllipse(parentId, id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
-  }
-
   private void inflateNodeElement(String id, Node node) {
     if (node.getNodeName().equals("Port"))
       inflatePort(id, node);
@@ -322,16 +421,6 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     NodeList groups = node.getChildNodes();
     for (int i = 0; i < groups.getLength(); i++)
       inflateGroup(id, groups.item(i));
-  }
-
-  private void inflateImage(String parentId, Node node) {
-    String id = XModeler.attributeValue(node, "id");
-    String fileName = XModeler.attributeValue(node, "fileName");
-    int x = Integer.parseInt(XModeler.attributeValue(node, "x"));
-    int y = Integer.parseInt(XModeler.attributeValue(node, "y"));
-    int width = Integer.parseInt(XModeler.attributeValue(node, "width"));
-    int height = Integer.parseInt(XModeler.attributeValue(node, "height"));
-    newImage(parentId, id, fileName, x, y, width, height);
   }
 
   private void inflatePort(String parentId, Node node) {
@@ -375,6 +464,28 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
         inflateDiagram(diagram);
       }
     } else System.err.println("expecting exactly 1 diagram client got: " + diagramClients.getLength());
+  }
+
+  private void italicise(Message message) {
+    String id = message.args[0].strValue();
+    boolean italics = message.args[1].boolValue;
+    italicise(id, italics);
+  }
+
+  private void italicise(final String id, final boolean italics) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (Diagram diagram : diagrams)
+          diagram.italicise(id, italics);
+      }
+    });
+  }
+
+  public void maximize(CTabFolderEvent event) {
+  }
+
+  public void minimize(CTabFolderEvent event) {
+
   }
 
   private void move(Message message) {
@@ -458,6 +569,32 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     }
   }
 
+  private void newEllipse(Message message) {
+    String parentId = message.args[0].strValue();
+    String id = message.args[1].strValue();
+    int x = message.args[2].intValue;
+    int y = message.args[3].intValue;
+    int width = message.args[4].intValue;
+    int height = message.args[5].intValue;
+    boolean showOutline = message.args[6].boolValue;
+    int lineRed = message.args[7].intValue;
+    int lineGreen = message.args[8].intValue;
+    int lineBlue = message.args[9].intValue;
+    int fillRed = message.args[10].intValue;
+    int fillGreen = message.args[11].intValue;
+    int fillBlue = message.args[12].intValue;
+    newEllipse(parentId, id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
+  }
+
+  private void newEllipse(final String parentId, final String id, final int x, final int y, final int width, final int height, final boolean showOutline, final int lineRed, final int lineGreen, final int lineBlue, final int fillRed, final int fillGreen, final int fillBlue) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (Diagram d : diagrams)
+          d.newEllipse(parentId, id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
+      }
+    });
+  }
+
   private void newGroup(final String diagramId, final String name) {
     if (getDiagram(diagramId) != null) {
       runOnDisplay(new Runnable() {
@@ -467,6 +604,26 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
         }
       });
     } else System.err.println("cannot find diagram " + diagramId);
+  }
+
+  private void newImage(Message message) {
+    String parentId = message.args[0].strValue();
+    String id = message.args[1].strValue();
+    String fileName = message.args[2].strValue();
+    int x = message.args[3].intValue;
+    int y = message.args[4].intValue;
+    int width = message.args[5].intValue;
+    int height = message.args[6].intValue;
+    newImage(parentId, id, fileName, x, y, width, height);
+  }
+
+  private void newImage(final String parentId, final String id, final String fileName, final int x, final int y, final int width, final int height) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (Diagram diagram : diagrams)
+          diagram.newImage(parentId, id, fileName, x, y, width, height);
+      }
+    });
   }
 
   private void newLabel(final Message message) {
@@ -488,7 +645,7 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
 
   private void newLabel(String parentId, String id, String text, String position, int x, int y, Boolean editable, Boolean underline, Boolean condense, int red, int green, int blue, String font) {
     for (Diagram diagram : diagrams) {
-      for (Edge edge : diagram.getEdges().values()) {
+      for (Edge edge : diagram.getEdges()) {
         if (edge.getId().equals(parentId)) {
           edge.addLabel(id, text, position, x, y, editable, underline, condense, red, green, blue, font);
         }
@@ -598,12 +755,53 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     newTool(diagramId.strValue(), groupId.strValue(), label.strValue(), toolId.strValue(), isEdge.boolValue, icon.strValue());
   }
 
+  private void newToggle(Message message) {
+    final Value diagramId = message.args[0];
+    final Value groupId = message.args[1];
+    final Value label = message.args[2];
+    final Value toolId = message.args[3];
+    final Value state = message.args[4];
+    final Value icon = message.args[5];
+    newToggle(diagramId.strValue(), groupId.strValue(), label.strValue(), toolId.strValue(), state.boolValue, icon.strValue());
+  }
+
+  private void newAction(Message message) {
+    final Value diagramId = message.args[0];
+    final Value groupId = message.args[1];
+    final Value label = message.args[2];
+    final Value toolId = message.args[3];
+    final Value icon = message.args[4];
+    newAction(diagramId.strValue(), groupId.strValue(), label.strValue(), toolId.strValue(), icon.strValue());
+  }
+
   private void newTool(final String diagramId, final String groupId, final String label, final String toolId, final boolean isEdge, final String icon) {
     if (getDiagram(diagramId) != null) {
       runOnDisplay(new Runnable() {
         public void run() {
           Diagram diagram = getDiagram(diagramId);
           diagram.newTool(groupId, label, toolId, isEdge, icon);
+        }
+      });
+    } else System.err.println("cannot find diagram " + diagramId);
+  }
+
+  private void newToggle(final String diagramId, final String groupId, final String label, final String toolId, final boolean state, final String icon) {
+    if (getDiagram(diagramId) != null) {
+      runOnDisplay(new Runnable() {
+        public void run() {
+          Diagram diagram = getDiagram(diagramId);
+          diagram.newToggle(groupId, label, toolId, state, icon);
+        }
+      });
+    } else System.err.println("cannot find diagram " + diagramId);
+  }
+
+  private void newAction(final String diagramId, final String groupId, final String label, final String toolId, final String icon) {
+    if (getDiagram(diagramId) != null) {
+      runOnDisplay(new Runnable() {
+        public void run() {
+          Diagram diagram = getDiagram(diagramId);
+          diagram.newAction(groupId, label, toolId, icon);
         }
       });
     } else System.err.println("cannot find diagram " + diagramId);
@@ -644,6 +842,10 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
           diagram.resize(id.strValue(), width.intValue, height.intValue);
       }
     });
+  }
+
+  public void restore(CTabFolderEvent event) {
+
   }
 
   public void sendMessage(final Message message) {
@@ -713,98 +915,83 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
       newImage(message);
     else if (message.hasName("deleteGroup"))
       deleteGroup(message);
+    else if (message.hasName("setFont"))
+      setFont(message);
+    else if (message.hasName("newToggle"))
+      newToggle(message);
+    else if (message.hasName("setMagneticWaypoints"))
+      setMagneticWaypoints(message);
+    else if (message.hasName("newAction"))
+      newAction(message);
+    else if (message.hasName("zoomIn"))
+      zoomIn(message);
+    else if (message.hasName("zoomOut"))
+      zoomOut(message);
+    else if (message.hasName("hide"))
+      hide(message);
+    else if (message.hasName("show"))
+      show(message);
     else super.sendMessage(message);
   }
 
-  private void deleteGroup(Message message) {
-    final String id = message.args[0].strValue();
-    final String name = message.args[1].strValue();
+  private void hide(final Message message) {
     runOnDisplay(new Runnable() {
       public void run() {
+        Value id = message.args[0];
         for (Diagram diagram : diagrams) {
-          if (diagram.getId().equals(id)) diagram.deleteGroup(name);
+          diagram.hide(id.strValue());
+          diagram.redraw();
         }
       }
     });
-
   }
 
-  private void newImage(Message message) {
-    String parentId = message.args[0].strValue();
-    String id = message.args[1].strValue();
-    String fileName = message.args[2].strValue();
-    int x = message.args[3].intValue;
-    int y = message.args[4].intValue;
-    int width = message.args[5].intValue;
-    int height = message.args[6].intValue;
-    newImage(parentId, id, fileName, x, y, width, height);
-  }
-
-  private void newImage(final String parentId, final String id, final String fileName, final int x, final int y, final int width, final int height) {
+  private void show(final Message message) {
     runOnDisplay(new Runnable() {
       public void run() {
-        for (Diagram diagram : diagrams)
-          diagram.newImage(parentId, id, fileName, x, y, width, height);
+        Value id = message.args[0];
+        for (Diagram diagram : diagrams) {
+          diagram.show(id.strValue());
+          diagram.redraw();
+        }
       }
     });
   }
 
-  private void newEllipse(Message message) {
-    String parentId = message.args[0].strValue();
-    String id = message.args[1].strValue();
-    int x = message.args[2].intValue;
-    int y = message.args[3].intValue;
-    int width = message.args[4].intValue;
-    int height = message.args[5].intValue;
-    boolean showOutline = message.args[6].boolValue;
-    int lineRed = message.args[7].intValue;
-    int lineGreen = message.args[8].intValue;
-    int lineBlue = message.args[9].intValue;
-    int fillRed = message.args[10].intValue;
-    int fillGreen = message.args[11].intValue;
-    int fillBlue = message.args[12].intValue;
-    newEllipse(parentId, id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
-  }
-
-  private void newEllipse(final String parentId, final String id, final int x, final int y, final int width, final int height, final boolean showOutline, final int lineRed, final int lineGreen, final int lineBlue, final int fillRed, final int fillGreen, final int fillBlue) {
+  private void zoomIn(final Message message) {
     runOnDisplay(new Runnable() {
       public void run() {
-        for (Diagram d : diagrams)
-          d.newEllipse(parentId, id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
+        Value id = message.args[0];
+        for (Diagram diagram : diagrams) {
+          if (diagram.getId().equals(id.strValue())) {
+            diagram.zoomIn();
+            diagram.redraw();
+          }
+        }
       }
     });
   }
 
-  private void italicise(Message message) {
+  private void zoomOut(final Message message) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        Value id = message.args[0];
+        for (Diagram diagram : diagrams) {
+          if (diagram.getId().equals(id.strValue())) {
+            diagram.zoomOut();
+            diagram.redraw();
+          }
+        }
+      }
+    });
+  }
+
+  private void setMagneticWaypoints(Message message) {
     String id = message.args[0].strValue();
-    boolean italics = message.args[1].boolValue;
-    italicise(id, italics);
-  }
-
-  private void italicise(final String id, final boolean italics) {
-    runOnDisplay(new Runnable() {
-      public void run() {
-        for (Diagram diagram : diagrams)
-          diagram.italicise(id, italics);
-      }
-    });
-  }
-
-  private void setFillColor(Message message) {
-    String id = message.args[0].strValue();
-    int red = message.args[1].intValue;
-    int green = message.args[2].intValue;
-    int blue = message.args[3].intValue;
-    setFillColor(id, red, green, blue);
-  }
-
-  private void setFillColor(final String id, final int red, final int green, final int blue) {
-    runOnDisplay(new Runnable() {
-      public void run() {
-        for (Diagram diagram : diagrams)
-          diagram.setFillColor(id, red, green, blue);
-      }
-    });
+    boolean state = message.args[1].boolValue;
+    for (Diagram d : diagrams) {
+      if (d.getId().equals(id)) d.setMagneticWaypoints(state);
+    }
   }
 
   private void setEdgeColor(final Message message) {
@@ -815,7 +1002,7 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
         Value green = message.args[2];
         Value blue = message.args[3];
         for (Diagram diagram : diagrams) {
-          for (Edge edge : diagram.getEdges().values()) {
+          for (Edge edge : diagram.getEdges()) {
             if (edge.getId().equals(id.strValue())) {
               edge.setRed(red.intValue);
               edge.setRed(green.intValue);
@@ -849,7 +1036,7 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
         Value id = message.args[0];
         Value style = message.args[1];
         for (Diagram diagram : diagrams) {
-          for (Edge edge : diagram.getEdges().values()) {
+          for (Edge edge : diagram.getEdges()) {
             if (edge.getId().equals(id.strValue())) {
               edge.setLineStyle(style.intValue);
             }
@@ -875,12 +1062,41 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     });
   }
 
+  private void setFillColor(Message message) {
+    String id = message.args[0].strValue();
+    int red = message.args[1].intValue;
+    int green = message.args[2].intValue;
+    int blue = message.args[3].intValue;
+    setFillColor(id, red, green, blue);
+  }
+
+  private void setFillColor(final String id, final int red, final int green, final int blue) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (Diagram diagram : diagrams)
+          diagram.setFillColor(id, red, green, blue);
+      }
+    });
+  }
+
   private void setFocus(final Message message) {
     runOnDisplay(new Runnable() {
       public void run() {
         Value id = message.args[0];
         for (String tabId : tabs.keySet()) {
           if (tabId.equals(id.strValue())) tabFolder.setSelection(tabs.get(tabId));
+        }
+      }
+    });
+  }
+
+  private void setFont(Message message) {
+    final String id = message.args[0].strValue();
+    final String fontData = message.args[1].strValue();
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (Diagram diagram : diagrams) {
+          diagram.setFont(id, fontData);
         }
       }
     });
@@ -906,7 +1122,7 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
         Value refx = message.args[1];
         Value refy = message.args[2];
         for (Diagram diagram : diagrams) {
-          for (Edge edge : diagram.getEdges().values()) {
+          for (Edge edge : diagram.getEdges()) {
             if (edge.getId().equals(id.strValue())) {
               edge.setRefx(refx.intValue);
               edge.setRefy(refy.intValue);
@@ -922,6 +1138,10 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     final Value text = message.args[1];
     for (Diagram diagram : diagrams)
       diagram.setText(id.strValue(), text.strValue());
+  }
+
+  public void showList(CTabFolderEvent event) {
+
   }
 
   private void startRender(final Message message) {
@@ -955,40 +1175,5 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     for (Diagram diagram : diagrams)
       diagram.writeXML(tabs.get(diagram.getId()).getText(), out);
     out.print("</Diagrams>");
-  }
-
-  public void close(CTabFolderEvent event) {
-    CTabItem item = (CTabItem) event.item;
-    String id = getId(item);
-    Diagram diagram = getDiagram(id);
-    if (diagram != null) {
-      EventHandler handler = getHandler();
-      Message message = handler.newMessage("diagramClosed", 1);
-      message.args[0] = new Value(id);
-      handler.raiseEvent(message);
-      diagrams.remove(diagram);
-      tabs.remove(id);
-    }
-  }
-
-  private String getId(CTabItem item) {
-    for (String id : tabs.keySet())
-      if (tabs.get(id) == item) return id;
-    return null;
-  }
-
-  public void maximize(CTabFolderEvent event) {
-  }
-
-  public void minimize(CTabFolderEvent event) {
-
-  }
-
-  public void restore(CTabFolderEvent event) {
-
-  }
-
-  public void showList(CTabFolderEvent event) {
-
   }
 }

@@ -40,4 +40,6 @@ public interface Display {
 
   void newImage(String parentId, String id, String fileName, int x, int y, int width, int height);
 
+  void setFont(String id, String fontData);
+
 }

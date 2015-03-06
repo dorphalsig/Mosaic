@@ -1,7 +1,9 @@
 package tool.clients.diagrams;
 
 import java.io.PrintStream;
+import java.util.Collections;
 import java.util.Hashtable;
+import java.util.Vector;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
@@ -20,21 +22,24 @@ import org.eclipse.swt.widgets.ExpandItem;
 import tool.xmodeler.XModeler;
 import xos.Value;
 
-public class Group implements SelectionListener {
+public class Group {
 
-  static FontData            defaultFont = new FontData("Courier New", 12, SWT.NO);
+  public static FontData getDefaultFont() {
+    return defaultFont;
+  }
 
-  Composite                  buttonContainer;
-  ExpandItem                 item;
-  Palette                    palette;
-  Hashtable<Button, String>  buttons     = new Hashtable<Button, String>();
-  Hashtable<Button, Boolean> edges       = new Hashtable<Button, Boolean>();
-  Hashtable<Button, String>  icons       = new Hashtable<Button, String>();
+  static FontData defaultFont = new FontData("Monaco", 10, SWT.NORMAL);
+  Composite       buttonContainer;
+  ExpandItem      item;
+  Palette         palette;
+  String          name;
+  Vector<Tool>    tools       = new Vector<Tool>();
 
   public Group(Palette palette, ExpandBar parent, String name) {
     this.palette = palette;
-    item = new ExpandItem(parent, SWT.NONE);
+    this.name = name;
     buttonContainer = new Composite(parent, SWT.BORDER);
+    item = new ExpandItem(parent, SWT.NONE);
     item.setControl(buttonContainer);
     item.setText(name);
     GridLayout layout = new GridLayout(1, true);
@@ -48,63 +53,86 @@ public class Group implements SelectionListener {
     buttonContainer.setLayoutData(buttonData);
   }
 
-  public void newTool(String label, String toolId, boolean isEdge, String icon) {
-    Image image = new Image(XModeler.getXModeler().getDisplay(), new ImageData("icons/" + icon));
-    Button button = new Button(buttonContainer, SWT.TOGGLE);
-    GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
-    button.setText(label);
-    button.setImage(image);
-    button.setLayoutData(data);
-    button.setFont(new Font(XModeler.getXModeler().getDisplay(), defaultFont));
-    button.addSelectionListener(this);
-    buttons.put(button, toolId);
-    edges.put(button, isEdge);
-    icons.put(button, icon);
-    item.setHeight(buttonContainer.computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
-    item.setExpanded(true);
-  }
-
-  public void widgetDefaultSelected(SelectionEvent event) {
-  }
-
-  public void widgetSelected(SelectionEvent event) {
-    palette.reset();
-    for (Button button : buttons.keySet()) {
-      if (button == event.widget) {
-        button.setSelection(true);
-        palette.setCurrentTool(buttons.get(button), edges.get(button));
-      }
-    }
-  }
-
-  public void resetButtons() {
-    for (Button button : buttons.keySet()) {
-      button.setSelection(false);
-    }
-  }
-
-  public void writeXML(String name, PrintStream out) {
-    out.print("<Group name='" + name + "'>");
-    for (Button button : buttons.keySet())
-      out.print("<Button name='" + button.getText() + "' tool='" + buttons.get(button) + "' isEdge='" + edges.get(button) + "' icon='" + icons.get(button) + "'/>");
-    out.print("</Group>");
+  public String getName() {
+    return name;
   }
 
   public Value asValue(String name) {
-    Value[] bs = new Value[buttons.size() + 1];
+    Value[] bs = new Value[tools.size() + 1];
     bs[0] = new Value(name);
     int i = 1;
-    for (Button button : buttons.keySet()) {
-      if (edges.get(button)) {
-        bs[i++] = new Value(new Value[] { new Value(buttons.get(button)), new Value("EDGE") });
-      } else {
-        bs[i++] = new Value(new Value[] { new Value(buttons.get(button)), new Value("NODE") });
-      }
+    for (Tool tool : tools) {
+      bs[i++] = new Value(new Value[] { new Value(tool.getId()), new Value(tool.getType()) });
     }
     return new Value(bs);
   }
 
   public void delete() {
+    for (Tool tool : tools) {
+      tool.getButton().dispose();
+    }
     item.dispose();
+    buttonContainer.dispose();
+  }
+
+  public void deselect() {
+    for (Tool tool : tools) {
+      tool.reset();
+    }
+  }
+
+  public Composite getButtonContainer() {
+    return buttonContainer;
+  }
+
+  public ExpandItem getItem() {
+    return item;
+  }
+
+  public Palette getPalette() {
+    return palette;
+  }
+
+  public Tool getToolLabelled(String label) {
+    for (Tool tool : tools)
+      if (tool.getLabel().equals(label)) return tool;
+    return null;
+  }
+
+  public void newToggle(Diagram diagram, String label, String toolId, boolean state, String icon) {
+    tools.add(new ToggleTool(buttonContainer, diagram, label, toolId, state, icon));
+    item.setHeight(buttonContainer.computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
+    item.setExpanded(true);
+  }
+
+  public void newAction(Diagram diagram, String label, String toolId,String icon) {
+    tools.add(new ActionTool(buttonContainer, diagram, label, toolId, icon));
+    item.setHeight(buttonContainer.computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
+    item.setExpanded(true);
+  }
+
+  public void newTool(Diagram diagram, String label, String toolId, boolean isEdge, String icon) {
+    if (isEdge)
+      tools.add(new EdgeCreationTool(buttonContainer, diagram, label, toolId, icon));
+    else tools.add(new NodeCreationTool(buttonContainer, diagram, label, toolId, icon));
+    item.setHeight(buttonContainer.computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
+    item.setExpanded(true);
+  }
+
+  public void resetButtons() {
+    for (Tool tool : tools) {
+      tool.reset();
+    }
+  }
+
+  public String toString() {
+    return "Group(" + buttonContainer + "," + item + "," + tools + ")";
+  }
+
+  public void writeXML(PrintStream out) {
+    out.print("<Group name='" + name + "'>");
+    for (Tool tool : tools)
+      tool.writeXML(out);
+    out.print("</Group>");
   }
 }

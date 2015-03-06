@@ -110,4 +110,7 @@ public class Line implements Display {
 
   }
 
+  public void setFont(String id, String fontData) {
+  }
+
 }

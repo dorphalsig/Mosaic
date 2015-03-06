@@ -119,6 +119,8 @@ public class ConsoleView {
           autoComplete = !autoComplete;
           showStatus();
           e.doit = false;
+        } else if (e.keyCode == '/' && ((e.stateMask & SWT.CTRL) == SWT.CTRL) && ((e.stateMask & SWT.SHIFT) == SWT.SHIFT)) {
+          help();
         } else if (e.keyCode == SWT.CR) {
           goToEnd();
           appendText("\n");
@@ -175,6 +177,16 @@ public class ConsoleView {
 
     ConsoleLineStyler consoleLineStyper = new ConsoleLineStyler();
     text.addLineStyleListener(consoleLineStyper);
+  }
+
+  private void help() {
+    // Show the commands...
+    String s = "Console controls: ";
+    s = s + "autocomplete (ctrl-a) = " + autoComplete + ", ";
+    s = s + "zoom (ctrl+ ctrl-) " + ", ";
+    s = s + "previous command (uparrow) ,";
+    s = s + "next command (downarrow)";
+    XModeler.showMessage("Console Commands", s);
   }
 
   private void showStatus() {

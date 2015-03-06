@@ -273,4 +273,9 @@ public class Box implements Display {
       display.writeXML(out);
     out.print("</Box>");
   }
+
+  public void setFont(String id, String fontData) {
+    for (Display display : displays)
+      display.setFont(id, fontData);
+  }
 }

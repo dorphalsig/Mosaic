@@ -12,4 +12,8 @@ public interface Selectable {
 
   void rightClick(int x, int y);
 
+  void deselect();
+  
+  void select();
+
 }

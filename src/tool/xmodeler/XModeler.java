@@ -32,6 +32,8 @@ import org.xml.sax.SAXException;
 import tool.clients.browser.ModelBrowserClient;
 import tool.clients.diagrams.DiagramClient;
 import tool.clients.dialogs.DialogsClient;
+import tool.clients.dialogs.notifier.NotificationType;
+import tool.clients.dialogs.notifier.NotifierDialog;
 import tool.clients.editors.EditorClient;
 import tool.clients.forms.FormsClient;
 import tool.clients.menus.MenuClient;
@@ -344,6 +346,10 @@ public class XModeler {
       }
     };
     t.start();
+  }
+
+  public static void showMessage(String title, String message) {
+    NotifierDialog.notify(title, message, NotificationType.values()[2]);
   }
 
   static final String    NAME            = "XModeler";
