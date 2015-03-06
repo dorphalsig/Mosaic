@@ -52,4 +52,8 @@ public abstract class Tool implements SelectionListener {
   public abstract void reset();
 
   public abstract void select();
+
+  public void delete() {
+    button.dispose();
+  }
 }

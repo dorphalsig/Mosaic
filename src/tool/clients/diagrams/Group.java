@@ -105,10 +105,29 @@ public class Group {
     item.setExpanded(true);
   }
 
-  public void newAction(Diagram diagram, String label, String toolId,String icon) {
+  public void newAction(Diagram diagram, String label, String toolId, String icon) {
+    Tool tool = getTool(label);
+    if (tool != null) removeTool(label);
     tools.add(new ActionTool(buttonContainer, diagram, label, toolId, icon));
     item.setHeight(buttonContainer.computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
     item.setExpanded(true);
+  }
+
+  private void removeTool(String label) {
+    Tool tool = getTool(label);
+    if (tool != null) {
+      tools.remove(tool);
+      tool.delete();
+      item.setHeight(buttonContainer.computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
+      item.setExpanded(true);
+    }
+
+  }
+
+  private Tool getTool(String label) {
+    for (Tool tool : tools)
+      if (tool.getLabel().equals(label)) return tool;
+    return null;
   }
 
   public void newTool(Diagram diagram, String label, String toolId, boolean isEdge, String icon) {
