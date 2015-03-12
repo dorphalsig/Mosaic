@@ -36,3 +36,5 @@ tool.console.ConsoleClient:com.ceteva.console
 15000
 -freeHeap
 80
+-arg
+initFile:./xmf-addons/Multilevel-Editor/boot_XMF2.o
