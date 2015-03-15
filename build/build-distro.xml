@@ -46,6 +46,7 @@
     			<exclude name="**/.DS_Store"/>
 	    	</zipfileset>
     		<zipfileset dir="../XMF/com.ceteva.xmf.system" prefix="${prefix}">
+        		<include name="xmf-addons/**"/>
         		<include name="xmf-src/**"/>
            		<include name="xmf-img/**"/>
     			<exclude name="**/.DS_Store"/>

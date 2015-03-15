@@ -8,12 +8,14 @@ import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 
 import tool.clients.dialogs.notifier.NotificationType;
 import tool.clients.dialogs.notifier.NotifierDialog;
 import tool.xmodeler.XModeler;
+import uk.ac.mdx.xmf.swt.misc.ColorManager;
 import xos.Message;
 import xos.Value;
 
@@ -191,11 +193,17 @@ public class Text implements Display {
   }
 
   public void paint(GC gc, int x, int y) {
-    Font f = gc.getFont();
-    gc.setFont(italicise ? DiagramClient.diagramItalicFont : getFont());
-    gc.drawText(text, x + getX(), y + getY(), true);
-    gc.setFont(f);
-  }
+	    Font font = gc.getFont();
+	    Color c = gc.getForeground(); //Björn
+	    gc.setFont(italicise ? DiagramClient.diagramItalicFont : DiagramClient.diagramFont);
+	    //Check if a color is set
+	    if(getRed() >=0 && getGreen() >= 0 && getBlue() >= 0){ //Björn
+	    	gc.setForeground(ColorManager.getColor(new RGB(getRed(), getGreen(), getBlue())));
+	    }
+	    gc.drawText(text, x + getX(), y + getY(), true);
+	    gc.setFont(font);
+	    gc.setForeground(c); //Björn
+	  }
 
   public void paintHover(GC gc, int x, int y, int dx, int dy) {
     if (editable && contains(x - dx, y - dy)) paintSelectableOutline(gc, dx, dy);
@@ -215,8 +223,13 @@ public class Text implements Display {
   }
 
   public void setFillColor(String id, int red, int green, int blue) {
-
-  }
+	  //Björn
+	  if (id.equals(getId())){
+		this.red = red;  
+		this.green = green;
+		this.blue = blue;
+	  }
+  }  
 
   public void setText(String text) {
     this.text = text;
