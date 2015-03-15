@@ -41,7 +41,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
   static final Color                   WHITE          = new Color(XModeler.getXModeler().getDisplay(), 255, 255, 255);
   static final Color                   GREEN          = new Color(XModeler.getXModeler().getDisplay(), 0, 170, 0);
   static final Color                   BLACK          = new Color(XModeler.getXModeler().getDisplay(), 0, 0, 0);
-  
+
   static EditorClient                  theClient;
   static CTabFolder                    tabFolder;
   static boolean                       browserLocked  = true;
@@ -133,7 +133,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       System.err.println(path);
       return new Value(path);
     }
-    if (message.hasName("getText")) return getText(message);
+    if (message.hasName("getText")) { return getText(message); }
     return super.callMessage(message);
   }
 
@@ -202,7 +202,9 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
     runOnDisplay(new Runnable() {
       public void run() {
         for (String editorId : editors.keySet()) {
-          if (id.equals(editorId)) result[0] = new Value(editors.get(editorId).getText().getText());
+          if (id.equals(editorId)) {
+            result[0] = new Value(editors.get(editorId).getString());
+          }
         }
       }
     });
@@ -426,7 +428,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       Display.getDefault().syncExec(new Runnable() {
         public void run() {
           TextEditor editor = editors.get(id.strValue());
-          editor.setText(text.strValue());
+          editor.setString(text.strValue());
           tabFolder.setFocus();
           tabFolder.setSelection(tabs.get(id.strValue()));
         }
