@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project default="build" basedir="/home/user/git/Mosaic" name="Create Runnable Jar for Project GUI-XMF2 with libraries in sub-folder">
 	
-    <!-- Written by Jens Gulden. ANT 1.7 is required -->
+    <!-- 
+        Written by Jens Gulden. ANT 1.7 is required
+	    Before running this, run XModeler as Eclipse Application from within the IDE once, to make sure all .xmf files are pre-compiled. 
+	-->
 	
 	<tstamp/>
 	<property name="outputArchive" location="/home/user/xmodeler_builds/xmodeler-${DSTAMP}.zip"/>
