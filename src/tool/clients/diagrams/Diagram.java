@@ -159,7 +159,7 @@ public class Diagram implements Display, MouseListener, PaintListener, MouseMove
     scroller = new ScrolledComposite(container, SWT.V_SCROLL | SWT.H_SCROLL);
     scroller.setExpandHorizontal(true);
     scroller.setExpandVertical(true);
-    canvas = new Canvas(scroller, SWT.BORDER);
+    canvas = new Canvas(scroller, SWT.BORDER | SWT.DOUBLE_BUFFERED);
     canvas.setBackground(diagramBackgroundColor);
     canvas.addMouseListener(this);
     canvas.addPaintListener(this);
