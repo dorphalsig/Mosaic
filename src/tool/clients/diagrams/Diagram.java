@@ -1177,24 +1177,61 @@ public class Diagram implements Display, MouseListener, PaintListener, MouseMove
   }
 
   private void paintOn(GC gc) {
-    gc.setAntialias(SWT.ON);
-    gc.setTextAntialias(SWT.ON);
-    gc.setInterpolation(SWT.HIGH);
-    gc.setAdvanced(true);
-    gc.setTransform(transform);
-    clear(gc);
-    paintDisplays(gc);
-    paintNewEdge(gc);
-    paintResizing(gc);
-    paintEdges(gc);
-    paintAlignment(gc);
-    paintNodes(gc);
-    paintHover(gc);
-    paintSelected(gc);
-    paintRubberBand(gc);
-    handleDoubleClick(gc);
-  }
+	    gc.setAntialias(SWT.ON);
+	    gc.setTextAntialias(SWT.ON);
+	    gc.setInterpolation(SWT.HIGH);
+	    gc.setAdvanced(true);
+	    gc.setTransform(transform);
+	    clear(gc);
+	    paintDisplays(gc);
+	    paintNewEdge(gc);
+	    paintResizing(gc);
+	    paintEdges(gc);
+	    paintAlignment(gc);
+	    paintNodes(gc);
+	    paintHover(gc);
+	    paintSelected(gc);
+	    paintRubberBand(gc);
+	    paintNewNode(gc);
+	    handleDoubleClick(gc);
+	  }
+	  
+  private void paintNewNode(GC gc) {	  
+		if(nodeCreationType == null) return;
 
+		int X = lastX + 21;
+		int Y = lastY + 16;
+		int A = 2;
+		int B = 7;
+		int[] polygon = new int[] {
+				X-A,Y-A,
+				X-A,Y-B,
+				X+A,Y-B,
+				X+A,Y-A,
+				X+B,Y-A,
+				X+B,Y+A,
+				X+A,Y+A,
+				X+A,Y+B,
+				X-A,Y+B,
+				X-A,Y+A,
+				X-B,Y+A,
+				X-B,Y-A,
+				X-A,Y-A};
+
+		Color oldFGColor = gc.getForeground();
+		Color oldBGColor = gc.getBackground();
+		
+		gc.setBackground(new Color(XModeler.getXModeler().getDisplay(), 0, 200, 100));
+		gc.fillPolygon(polygon);
+		gc.setForeground(BLACK);
+		gc.drawPolygon(polygon);
+		
+		gc.setBackground(oldBGColor);
+		gc.drawText("new " + nodeCreationType, X+8, Y+2);
+		gc.setForeground(oldFGColor);
+		
+	}
+	  
   private void paintResizing(GC gc) {
     if (mode == MouseMode.RESIZE_BOTTOM_RIGHT) {
       int width = lastX - selectedNode.getX();
