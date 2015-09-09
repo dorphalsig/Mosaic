@@ -5,10 +5,13 @@ import java.util.Hashtable;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabFolder2Adapter;
 import org.eclipse.swt.custom.CTabFolder2Listener;
 import org.eclipse.swt.custom.CTabFolderEvent;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.TreeEditor;
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseEvent;
@@ -21,10 +24,12 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
@@ -127,9 +132,10 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
   }
 
   private void addTree(final String id, final String name) {
+	new RuntimeException("new Tab added...").printStackTrace();
     runOnDisplay(new Runnable() {
       public void run() {
-        CTabItem tabItem = new CTabItem(tabFolder, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL);
+        final CTabItem tabItem = new CTabItem(tabFolder, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL | SWT.CLOSE);
         tabItem.setText(name);
         tabs.put(id, tabItem);
         Tree tree = new Tree(tabFolder, SWT.VIRTUAL);
@@ -140,6 +146,32 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
         tree.addListener(SWT.Expand, ModelBrowserClient.this);
         tree.addListener(SWT.Selection, ModelBrowserClient.this);
         tabFolder.setSelection(tabItem);
+        
+        tabFolder.addCTabFolder2Listener(new CTabFolder2Adapter() {
+            public void close(CTabFolderEvent event) {
+              if (event.item.equals(tabItem)) {
+
+                Message m = getHandler().newMessage("modelBrowserClosed", 1);
+                m.args[0] = new Value(id);
+                getHandler().raiseEvent(m);
+              }
+            }
+          });
+        
+//        tabItem.getDisplay().addFilter(SWT.KeyDown, new Listener() {
+//	            public void handleEvent(Event event) {
+//	            	if(event.stateMask == SWT.CTRL) {
+//	            		if((int)(event.character) == 23) { // Ctrl + W 
+//	            			tabItem.dispose();
+//	            			Message m = getHandler().newMessage("modelBrowserClosed", 1);
+//	            			m.args[0] = new Value(id);
+//	            			getHandler().raiseEvent(m);
+//	            		}
+//	            	}
+//	            }
+//        	}
+//        );
+        
       }
     });
   }
@@ -394,6 +426,7 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
     }
   }
 
+  @Override
   public void sendMessage(final Message message) {
     if (message.hasName("newModelBrowser"))
       newModelBrowser(message);
