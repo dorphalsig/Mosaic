@@ -253,6 +253,13 @@ public class Form implements MouseListener, SelectionListener {
       Widget w = event.widget;
       if (w instanceof StyledText) id = getId((StyledText) w);
       if (w instanceof Text) id = getId((Text) w);
+      if (w instanceof Tree) {
+          Tree tree = (Tree) w;
+          if (tree.getSelectionCount() == 1) {
+            TreeItem item = tree.getSelection()[0];
+            id = getId(item);
+          }
+        }
       if (id != null) MenuClient.popup(id, event.x, event.y);
     }
   }
@@ -383,6 +390,14 @@ public class Form implements MouseListener, SelectionListener {
       trees.put(id, tree);
     }
   }
+  
+  public void maximiseToCanvas(String id) {
+	  Tree tree = trees.get(id);
+	  if (tree != null) {
+		  org.eclipse.swt.graphics.Point parentSize = tree.getParent().getSize();
+		  tree.setSize(parentSize);
+	  }
+  }
 
   private void selected(Button b) {
     String id = getId(b);
@@ -428,6 +443,10 @@ public class Form implements MouseListener, SelectionListener {
       StyledText text = boxes.get(id);
       text.setText(string);
       text.pack();
+    }
+    if (items.containsKey(id)) {
+    	TreeItem item = items.get(id);
+    	item.setText(string);
     }
   }
 

@@ -184,8 +184,9 @@ public class XModeler {
     return null;
   }
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws InterruptedException {
     startXOS(args[0]);
+    //Thread.sleep(500); // Jens: workaround for proper startup on fast systems (?) - needs further investigation  
     startXModeler();
     startClients();
     startDispatching();

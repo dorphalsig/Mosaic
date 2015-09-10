@@ -428,24 +428,28 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
 
   @Override
   public void sendMessage(final Message message) {
-    if (message.hasName("newModelBrowser"))
-      newModelBrowser(message);
-    else if (message.hasName("addNodeWithIcon"))
-      addNodeWithIcon(message);
-    else if (message.hasName("removeNode"))
-      removeNode(message);
-    else if (message.hasName("setText"))
-      setText(message);
-    else if (message.hasName("setVisible"))
-      setVisible(message);
-    else if (message.hasName("selectNode"))
-      selectNode(message);
-    else if (message.hasName("setFocus"))
-      setFocus(message);
-    else if (message.hasName("setToolTipText"))
-      setTooltipText(message);
-    else super.sendMessage(message);
-  }
+//System.out.println("####### MESSAGE TO MODEL BROWSER CLIENT: "+message.output());    	
+	      if (message.hasName("newModelBrowser"))
+	        newModelBrowser(message);
+	      else if (message.hasName("addNodeWithIcon"))
+	        addNodeWithIcon(message);
+	      else if (message.hasName("removeNode"))
+	        removeNode(message);
+	      else if (message.hasName("setText"))
+	        setText(message);
+	      else if (message.hasName("setVisible"))
+	        setVisible(message);
+	      else if (message.hasName("selectNode"))
+	        selectNode(message);
+	      else if (message.hasName("setFocus"))
+	        setFocus(message);
+	      else if (message.hasName("setToolTipText"))
+	        setTooltipText(message);
+	      else {
+//System.out.println("------- Unknown ");    	
+	      	super.sendMessage(message);
+	      }
+   }
 
   private void setFocus(Message message) {
     final Value id = message.args[0];
