@@ -21,6 +21,7 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.ToolBar;
 import org.w3c.dom.Attr;
@@ -44,6 +45,8 @@ import xos.OperatingSystem;
 
 import com.ceteva.oleBridge.OleBridgeClient;
 import com.ceteva.undo.UndoClient;
+
+import engine.Machine;
 
 public class XModeler {
 
@@ -329,8 +332,27 @@ public class XModeler {
     Console.start(propertyTabFolder);
     rightSash.setWeights(new int[] { 2, 1 });
     XModeler.open();
+    
+    XModeler.getDisplay().timerExec(1000, new Runnable() {
+    	
+    	@Override
+    	public void run() {
+    		
+    	    Menu exitMenu = new Menu(menuBar);
+    	    MenuItem exit = new MenuItem(menuBar, SWT.CASCADE);
+    	    exit.setText("Debug");
+    	    exit.setMenu(exitMenu);
+    	    MenuItem panic = new MenuItem(exitMenu, SWT.NONE);
+    	    panic.setText("VM Panic");
+    	    panic.addListener(SWT.Selection, new Listener() {
+    	        public void handleEvent(Event e) {
+    	          Machine.interrupt = true;
+    	        }
+    	      });		
+    	}
+    });
   }
-
+  
   static void startXOS(String initFile) {
     final String[] args = xos.getInitArgs(initFile);
     setProjectDirectory(args);
