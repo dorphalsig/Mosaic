@@ -553,7 +553,18 @@ public class FormsClient extends Client implements CTabFolder2Listener {
     });
   }
 
+  private void maximiseToCanvas(Message message) {
+	    final String id = message.args[0].strValue();
+	    runOnDisplay(new Runnable() {
+	        public void run() {
+	          for (Form form : forms)
+	            form.maximiseToCanvas(id);
+	        }
+	      });
+  }
+
   public void sendMessage(final Message message) {
+//System.out.println("####### MESSAGE TO FORM CLIENT: "+message.output());
     if (message.hasName("newForm"))
       newForm(message);
     else if (message.hasName("setTool"))
@@ -592,7 +603,12 @@ public class FormsClient extends Client implements CTabFolder2Listener {
       check(message);
     else if (message.hasName("uncheck"))
       uncheck(message);
-    else super.sendMessage(message);
+    else if (message.hasName("maximiseToCanvas"))
+      maximiseToCanvas(message);
+    else {
+//System.out.println("------- UNKNOWN");    	
+    	super.sendMessage(message);
+    }
   }
 
   private void check(Message message) {
