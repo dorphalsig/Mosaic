@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Arrays;
 
+import javax.management.RuntimeErrorException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -130,6 +131,10 @@ public class XModeler {
   }
 
   public static void inflate(String inflationPath) {
+	  inflationPath = img2xml(loadedImagePath);
+//	  System.err.println("loadedImagePath: " + loadedImagePath);
+//	  System.err.println("inflationPath: " + inflationPath);
+//	  new RuntimeException("XML").printStackTrace();
     try {
       File fXmlFile = new File(inflationPath);
       if (fXmlFile.exists()) {
@@ -169,9 +174,18 @@ public class XModeler {
     }
   }
 
-  private static String inflationPath() {
+  private static String img2xml(String imgString) {
+	  File img = new File(imgString);
+	  File path = img.getParentFile();
+	  String imgFile = img.getName();
+	  String xmlFile = imgFile.substring(0, imgFile.lastIndexOf("."))+".xml";
+	  File xml = new File(path, xmlFile);
+	  return xml.getAbsolutePath();
+  }
+
+private static String inflationPath() {
     if (loadedImagePath != null) {
-      String name = loadedImagePath.substring(0, loadedImagePath.indexOf('.'));
+      String name = loadedImagePath.substring(0, loadedImagePath.lastIndexOf('.'));
       return name + ".xml";
     }
     return null;
@@ -184,9 +198,8 @@ public class XModeler {
     return null;
   }
 
-  public static void main(String[] args) throws InterruptedException {
+  public static void main(String[] args) {
     startXOS(args[0]);
-    //Thread.sleep(500); // Jens: workaround for proper startup on fast systems (?) - needs further investigation  
     startXModeler();
     startClients();
     startDispatching();
@@ -216,7 +229,7 @@ public class XModeler {
       public void run() {
         try {
           if (inflationPath != null) {
-            loadedImagePath = inflationPath.substring(0, inflationPath.indexOf('.')) + ".img";
+            loadedImagePath = inflationPath.substring(0, inflationPath.lastIndexOf('.')) + ".img";
             setToolLabel();
             File file = new File(inflationPath);
             FileOutputStream fout = new FileOutputStream(file);
