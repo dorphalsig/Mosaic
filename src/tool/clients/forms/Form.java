@@ -50,6 +50,7 @@ public class Form implements MouseListener, SelectionListener {
   Hashtable<String, Tree>       trees        = new Hashtable<String, Tree>();
   Hashtable<String, TreeItem>   items        = new Hashtable<String, TreeItem>();
   Hashtable<String, String>     images       = new Hashtable<String, String>();
+  private int TEXTFIELDHEIGHT = 20;
 
   public Form(CTabFolder parent, String id) {
     this.id = id;
@@ -328,6 +329,12 @@ public class Form implements MouseListener, SelectionListener {
   }
 
   public void newText(String id, String string, int x, int y) {
+		if(x > 200) {
+			System.err.println("id: " + id + "," + x + "," + y + " " + string);
+		}
+		if(string.length() < 2) {
+			string = "leer";
+		}
     Text text = new Text(content, SWT.NONE);
     text.setText(string);
     text.setEditable(false);
@@ -353,11 +360,12 @@ public class Form implements MouseListener, SelectionListener {
   }
 
   public void newTextField(final String id, int x, int y, int width, int height, boolean editable) {
-    final Text text = new Text(content, SWT.BORDER);
+	final Text text = new Text(content, SWT.BORDER);
     text.setEditable(editable);
     text.setBackground(FormsClient.theClient().WHITE);
     text.setFont(FormsClient.getFormTextFieldFont());
-    text.setBounds(x, y, width, height);
+    text.setBounds(x, y, width, TEXTFIELDHEIGHT);
+//    text.setLocation(x, y);
     text.addMouseListener(this);
     textFields.put(id, text);
     Listener listener = new Listener() {
@@ -436,13 +444,13 @@ public class Form implements MouseListener, SelectionListener {
     if (textFields.containsKey(id)) {
       Text text = textFields.get(id);
       text.setText(string);
-      text.pack();
-      form.setMinSize(content.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+//      text.pack();
+//      form.setMinSize(content.computeSize(SWT.DEFAULT, SWT.DEFAULT));
     }
     if (boxes.containsKey(id)) {
       StyledText text = boxes.get(id);
       text.setText(string);
-      text.pack();
+//      text.pack();
     }
     if (items.containsKey(id)) {
     	TreeItem item = items.get(id);

@@ -74,8 +74,8 @@ public class FormsClient extends Client implements CTabFolder2Listener {
   static Hashtable<String, CTabItem>  tabs              = new Hashtable<String, CTabItem>();
   static Vector<Form>                 forms             = new Vector<Form>();
   static Hashtable<String, FormTools> toolDefs          = new Hashtable<String, FormTools>();
-  static Font                         formLabelFont     = new Font(Display.getDefault(), new FontData("Monaco", 12, SWT.NO));
-  static Font                         formTextFieldFont = new Font(Display.getDefault(), new FontData("Monaco", 12, SWT.NO));
+  static Font                         formLabelFont     = Display.getDefault().getSystemFont();//new Font(Display.getDefault(), new FontData("Monaco", 12, SWT.NO));
+  static Font                         formTextFieldFont = Display.getDefault().getSystemFont();//new Font(Display.getDefault(), new FontData("Monaco", 12, SWT.NO));
 
   public FormsClient() {
     super("com.ceteva.forms");
@@ -509,7 +509,7 @@ public class FormsClient extends Client implements CTabFolder2Listener {
   }
 
   private void newTextField(final String parentId, final String id, final int x, final int y, final int width, final int height, final boolean editable) {
-    final Form form = getForm(parentId);
+	final Form form = getForm(parentId);
     if (form != null) {
       Display.getDefault().syncExec(new Runnable() {
         public void run() {
@@ -564,7 +564,7 @@ public class FormsClient extends Client implements CTabFolder2Listener {
   }
 
   public void sendMessage(final Message message) {
-//System.out.println("####### MESSAGE TO FORM CLIENT: "+message.output());
+System.err.println("####### MESSAGE TO FORM CLIENT: "+message.output());
     if (message.hasName("newForm"))
       newForm(message);
     else if (message.hasName("setTool"))

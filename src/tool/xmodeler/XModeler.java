@@ -347,7 +347,7 @@ private static String inflationPath() {
     rightSash.setWeights(new int[] { 2, 1 });
     XModeler.open();
     
-    XModeler.getDisplay().timerExec(1000, new Runnable() {
+    XModeler.getDisplay().timerExec(3000, new Runnable() {
     	
     	@Override
     	public void run() {
