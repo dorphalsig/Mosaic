@@ -12,6 +12,10 @@
 \usepackage{pdfpages}
 \usepackage{cite}
 
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\definecolor{airforceblue}{rgb}{0.66, .0, 0.36}
 
 \hypersetup{
 %    bookmarks=false,    % show bookmarks bar?
@@ -29,7 +33,7 @@
 
 \def\myversion{1.0 }
 
-\newcounter{myCounter}[subsection] 
+\newcounter{myCounter}[subsubsection] 
 \newcounter{mySubCounter}[myCounter] 
 
 \makeatletter
@@ -72,10 +76,10 @@
 \makeatletter
 	\newcommand{\myLabel}[2]{%
 		\refstepcounter{myCounter}
-		\def\@currentlabel{#2-\thesubsection.\arabic{myCounter}}% Update label
+		\def\@currentlabel{#2-\thesubsubsection.\arabic{myCounter}}% Update label
 		\raisebox{\f@size pt}\phantomsection
 		\label{req:#1}
-		#2-\thesubsection.\arabic{myCounter}}
+		#2-\thesubsubsection.\arabic{myCounter}}
 \makeatother
 
 %\makeatletter
@@ -92,10 +96,11 @@
 \makeatletter
 	\newcommand{\myLabelB}[2]{%
 		\refstepcounter{mySubCounter}
-		\def\@currentlabel{#2-\thesubsection.\arabic{myCounter}\alph{mySubCounter}}% Update label
+		\def\@currentlabel{#2-\thesubsubsection.\arabic{myCounter}\alph{mySubCounter}}%
+		% Update label
 		\raisebox{\f@size pt}\phantomsection
 		\label{req:#1}
-		#2-\thesubsection.\arabic{myCounter}\alph{mySubCounter}}
+		#2-\thesubsubsection.\arabic{myCounter}\alph{mySubCounter}}
 \makeatother
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Variante 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -141,9 +146,9 @@
 \rule{16cm}{5pt}\vskip1cm
 \Huge{SOFTWARE REQUIREMENTS\\ SPECIFICATION}\\
 \vspace{2cm}
-for a\\
+for\\
 \vspace{2cm}
-Train Control System\\
+XModeler\\
 \vspace{2cm}
 \LARGE{Release 1.0\\}
 \vspace{2cm}
@@ -181,6 +186,25 @@ Train Control System\\
 
 \layerFour{Multi-Level Diagram}
 
+\layerThree{Forms}
+
+\layerFour{FormsClient}
+
+\begin{tabularx}{\textwidth}[t]{|l|X|} \hline
+\reqLabel{Forms:FormsClient:r1} & 
+The FormsClient receives messages to add components.\\
+\hline
+\reqLabel{Forms:FormsClient:r2} & 
+The FormsClient must be able to display these components:
+\begin{itemize}
+  \item Label
+  \item Textfield
+  \item Textarea
+  \item Checkbox
+\end{itemize}\\
+\hline
+\end{tabularx}
+
 \layerOne{Specifications} 
 
 \setcounter{myCounter}{0}
@@ -206,8 +230,7 @@ Train Control System\\
 		\specLabel{signal:hp1} & Hp1: Proceed aspect. One green light. See Fig.~\ref{fig:hp012}, \myRef{signal:1}\\ \hline
 		\specLabel{signal:hp2} & Hp2: Slow aspect. One green over one yellow light. Shown for speeds up to $60kmh^{-1}$. If no speed is specified by Zs3 the limit is $40kmh^{-1}$. 
 		This default speed limit may be changed to $50kmh^{-1}$ or $60kmh^{-1}$. 
-		See Fig.~\ref{fig:hp012}, \myRef{signal:1}, \myRef{signal:zs3}, \myRef{editor:signal:s3:L5Ma}, \myRef{editor:signal:s3:L5Mb},
-		\myRef{editor:signal:s3:L5Mc}, \myRef{editor:signal:s3:L5Md}, \myRef{editor:signal:s3:L6Ma}  \\ \hline
+		See Fig.~\ref{fig:hp012} \\ \hline
 \end{tabularx}
 
 \vspace{.5cm}
@@ -219,6 +242,64 @@ Train Control System\\
 \end{figure} 
 
 %\noindent
+
+\layerOne{Other}
+
+\layerTwo{git}
+
+\includegraphics[width=120pt]{img/git-IconDecorations.png} %% von http://wiki.eclipse.org/EGit/User_Guide
+
+\begin{itemize}
+  \item {\bf dirty (folder)} - At least one file below the folder is dirty; that
+  means that it has changes in the working tree that are neither in the index nor in the repository.
+  \item {\bf tracked} - The resource is known to the Git repository and hence
+  under version control.
+  \item {\bf untracked} - The resource is not known to the Git repository and
+  will not be version controlled until it is explicitly added.
+  \item {\bf ignored} - The resource is ignored by the Git team provider. The
+  preference settings under Team $>$ Ignored Resources, "derived" flag and
+  settings from .gitignore files are taken into account.
+  \item {\bf dirty} - The resource has changes in the working tree that are
+  neither in the index nor in the repository.
+  \item {\bf staged} - The resource has changes which have been added to the
+  index. Note that adding changes to the index is currently possible only in the commit dialog via the context menu of a resource.
+  \item {\bf partially-staged} - The resource has changes which are added to the
+  index and additional changes in the working tree that neither reached the index nor have been committed to the repository. See partial staging from the Git Staging view for how to do that.
+  \item {\bf added} - The resource has not yet reached any commit in the
+  repository but has been freshly added to the Git repository in order to be tracked in future.
+  \item {\bf removed} - The resource is staged for removal from the Git
+  repository.
+  \item {\bf conflict} - A merge conflict exists for the file.
+  \item {\bf assume-valid} - The resource has the "assume unchanged" flag. This
+  means that Git stops checking the working tree files for possible modifications, so you need to manually unset the bit to tell Git when you change the working tree file. Also see Assume unchanged action.
+\end{itemize}
+
+\layerThree{fetch}
+
+Fetch from remote repository
+
+\layerThree{pull}
+
+Incorporates changes from a remote repository into the current branch. 
+In its default mode, git pull is shorthand for git fetch followed by git merge FETCH_HEAD.
+
+\layerThree{commit}
+
+Commit changes to local repository
+
+\layerThree{push}
+
+Push Commits to remote repository
+
+\layerThree{conflicts}
+
+\url{http://wiki.eclipse.org/EGit/User_Guide#Resolving_a_merge_conflict}
+
+\layerThree{branches}
+branch
+merge
+rebase
+cherry-pick
 
 \input{WeeklyReports.tex}
 
