@@ -143,7 +143,7 @@
 
 \title{
 \flushright
-\rule{16cm}{5pt}\vskip1cm
+\rule{15.5cm}{5pt}\vskip1cm
 \Huge{SOFTWARE REQUIREMENTS\\ SPECIFICATION}\\
 \vspace{2cm}
 for\\
@@ -154,7 +154,7 @@ XModeler\\
 \vspace{2cm}
 \LARGE{Version \myversion approved\\}
 \vfill
-\rule{16cm}{5pt}
+\rule{15.5cm}{5pt}
 }
 \date{}
 \usepackage{hyperref}
@@ -250,27 +250,27 @@ The FormsClient must be able to display these components:
 \includegraphics[width=120pt]{img/git-IconDecorations.png} %% von http://wiki.eclipse.org/EGit/User_Guide
 
 \begin{itemize}
-  \item {\bf dirty (folder)} - At least one file below the folder is dirty; that
+  \item \textbf{dirty (folder)} - At least one file below the folder is dirty; that
   means that it has changes in the working tree that are neither in the index nor in the repository.
-  \item {\bf tracked} - The resource is known to the Git repository and hence
+  \item \textbf{tracked} - The resource is known to the Git repository and hence
   under version control.
-  \item {\bf untracked} - The resource is not known to the Git repository and
-  will not be version controlled until it is explicitly added.
-  \item {\bf ignored} - The resource is ignored by the Git team provider. The
+  \item \textbf{untracked} - The resource is not known to the Git repository
+  and will not be version controlled until it is explicitly added.
+  \item \textbf{ignored} - The resource is ignored by the Git team provider. The
   preference settings under Team $>$ Ignored Resources, "derived" flag and
   settings from .gitignore files are taken into account.
-  \item {\bf dirty} - The resource has changes in the working tree that are
+  \item \textbf{dirty} - The resource has changes in the working tree that are
   neither in the index nor in the repository.
-  \item {\bf staged} - The resource has changes which have been added to the
+  \item \textbf{staged} - The resource has changes which have been added to the
   index. Note that adding changes to the index is currently possible only in the commit dialog via the context menu of a resource.
-  \item {\bf partially-staged} - The resource has changes which are added to the
+  \item \textbf{partially-staged} - The resource has changes which are added to the
   index and additional changes in the working tree that neither reached the index nor have been committed to the repository. See partial staging from the Git Staging view for how to do that.
-  \item {\bf added} - The resource has not yet reached any commit in the
+  \item \textbf{added} - The resource has not yet reached any commit in the
   repository but has been freshly added to the Git repository in order to be tracked in future.
-  \item {\bf removed} - The resource is staged for removal from the Git
+  \item \textbf{removed} - The resource is staged for removal from the Git
   repository.
-  \item {\bf conflict} - A merge conflict exists for the file.
-  \item {\bf assume-valid} - The resource has the "assume unchanged" flag. This
+  \item \textbf{conflict} - A merge conflict exists for the file.
+  \item \textbf{assume-valid} - The resource has the "assume unchanged" flag. This
   means that Git stops checking the working tree files for possible modifications, so you need to manually unset the bit to tell Git when you change the working tree file. Also see Assume unchanged action.
 \end{itemize}
 
