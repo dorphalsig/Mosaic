@@ -66,6 +66,16 @@
 \myLabel{#1}{NF}}
 \makeatother
 
+\makeatletter
+\newcommand{\rightMouse}{%
+\includegraphics[width=15pt]{img/rightMouse.png}}
+\makeatother
+
+\makeatletter
+\newcommand{\rightArrow}{%
+\includegraphics[width=10pt]{img/rightArrow.jpeg}\hspace{1mm}}
+\makeatother
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Variante 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\layerOne}[1]{\chapter{#1}}
 \newcommand{\layerOneStar}[1]{\chapter*{#1}}
@@ -222,24 +232,27 @@ The FormsClient must be able to display these components:
 
 \layerFour{Multi-Level Diagram}
 
-\layerThree{Signals}
-
-\begin{tabularx}{\textwidth}[t]{|l|X|}
-	  \hline
-    \specLabel{signal:hp0} & Hp0: Stop aspect. One or two red lights. See Fig.~\ref{fig:hp012}, \myRef{signal:1}, \myRef{signal:1a} \\	\hline
-		\specLabel{signal:hp1} & Hp1: Proceed aspect. One green light. See Fig.~\ref{fig:hp012}, \myRef{signal:1}\\ \hline
-		\specLabel{signal:hp2} & Hp2: Slow aspect. One green over one yellow light. Shown for speeds up to $60kmh^{-1}$. If no speed is specified by Zs3 the limit is $40kmh^{-1}$. 
-		This default speed limit may be changed to $50kmh^{-1}$ or $60kmh^{-1}$. 
-		See Fig.~\ref{fig:hp012} \\ \hline
-\end{tabularx}
-
-\vspace{.5cm}
-\begin{figure}[ht!]
-	\centering
-	\includegraphics[width=420pt]{img/hp012.pdf}
-	\caption{from left to right: Hp0, Hp1, Hp2}
-	\label{fig:hp012}
-\end{figure} 
+%\layerThree{Signals}
+%
+%\begin{tabularx}{\textwidth}[t]{|l|X|}
+%	  \hline
+%    \specLabel{signal:hp0} & Hp0: Stop aspect. One or two red lights. See
+    % Fig.~\ref{fig:hp012}, \myRef{signal:1}, \myRef{signal:1a} \\	\hline
+%		\specLabel{signal:hp1} & Hp1: Proceed aspect. One green light. See
+		% Fig.~\ref{fig:hp012}, \myRef{signal:1}\\ \hline
+%		\specLabel{signal:hp2} & Hp2: Slow aspect. One green over one yellow light.
+		% Shown for speeds up to $60kmh^{-1}$. If no speed is specified by Zs3 the limit is $40kmh^{-1}$.
+%		This default speed limit may be changed to $50kmh^{-1}$ or $60kmh^{-1}$. 
+%		See Fig.~\ref{fig:hp012} \\ \hline
+%\end{tabularx}
+%
+%\vspace{.5cm}
+%\begin{figure}[ht!]
+%	\centering
+%	\includegraphics[width=420pt]{img/hp012.pdf}
+%	\caption{from left to right: Hp0, Hp1, Hp2}
+%	\label{fig:hp012}
+%\end{figure} 
 
 %\noindent
 
@@ -300,6 +313,17 @@ branch
 merge
 rebase
 cherry-pick
+
+\layerThree{revert}
+
+If a commit which has not yet been pushed has to be undone:
+
+\rightMouse Team \rightArrow Show History \\
+Note number of commit
+\\ then use command line \\
+{\ttfamily git revert <noted number>}
+
+If a commit which has already been pushed has to be undone:
 
 \input{WeeklyReports.tex}
 
