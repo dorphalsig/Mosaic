@@ -132,7 +132,7 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
   }
 
   private void addTree(final String id, final String name) {
-	new RuntimeException("new Tab added...").printStackTrace();
+//	new RuntimeException("new Tab added...").printStackTrace();
     runOnDisplay(new Runnable() {
       public void run() {
         final CTabItem tabItem = new CTabItem(tabFolder, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL | SWT.CLOSE);
