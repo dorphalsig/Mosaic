@@ -280,14 +280,14 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
         tabItem.setText(label);
         tabItem.setShowClose(true);
         tabs.put(id, tabItem);
-        Browser browser = new Browser(tabFolder, SWT.BORDER | SWT.WEBKIT);
+        Browser browser = new Browser(tabFolder, SWT.BORDER);
         tabItem.setControl(browser);
         browser.setText(text);
         browser.setJavascriptEnabled(true);
         if (isURL(url)) browser.setUrl(url);
         browsers.put(id, browser);
         browser.setVisible(true);
-        browser.addLocationListener(EditorClient.this);
+//        browser.addLocationListener(EditorClient.this);
         tabFolder.setSelection(tabItem);
       }
     });
