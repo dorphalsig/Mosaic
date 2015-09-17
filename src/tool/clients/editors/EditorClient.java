@@ -44,7 +44,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
 
   static EditorClient                  theClient;
   static CTabFolder                    tabFolder;
-  static boolean                       browserLocked  = true;
+  boolean                       browserLocked  = true;
   static Hashtable<String, CTabItem>   tabs           = new Hashtable<String, CTabItem>();
   static Hashtable<String, Browser>    browsers       = new Hashtable<String, Browser>();
   static Hashtable<String, TextEditor> editors        = new Hashtable<String, TextEditor>();
@@ -137,10 +137,14 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
     return super.callMessage(message);
   }
 
+  @Override
   public void changed(LocationEvent event) {
   }
 
+  @Override
   public void changing(LocationEvent event) {
+	  System.err.println("changing: " + event);
+//	  System.err.println("browserLocked: " + browserLocked);
     if (browserLocked) {
       event.doit = false;
       Browser browser = (Browser) event.widget;
@@ -148,7 +152,10 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       Message message = handler.newMessage("urlRequest", 2);
       message.args[0] = new Value(getId(browser));
       message.args[1] = new Value(event.location);
+      System.err.println("message: " + message);
       handler.raiseEvent(message);
+    } else {
+    	browserLocked = true;
     }
   }
 
@@ -284,17 +291,20 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
         tabItem.setControl(browser);
         browser.setText(text);
         browser.setJavascriptEnabled(true);
-        if (isURL(url)) browser.setUrl(url);
+        browserLocked = false;
+        if (isURL(url)) {
+        	browser.setUrl(url);
+        }
         browsers.put(id, browser);
         browser.setVisible(true);
-//        browser.addLocationListener(EditorClient.this);
+        browser.addLocationListener(EditorClient.this);
         tabFolder.setSelection(tabItem);
       }
     });
   }
 
   private boolean isURL(String url) {
-    return url.startsWith("http://") || url.startsWith("file://");
+    return url.startsWith("http://") || url.startsWith("file:/");
   }
 
   private void newTextEditor(Message message) {
@@ -445,10 +455,11 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
         public void run() {
           browserLocked = false;
           String s = url.strValue();
+          System.err.println("message.url: " + url.strValue());
           if (s.startsWith("<html>"))
             browser.setText(s);
           else browser.setUrl(url.strValue());
-          browserLocked = true;
+          
           tabFolder.setFocus();
           tabFolder.setSelection(tabs.get(id.strValue()));
         }
