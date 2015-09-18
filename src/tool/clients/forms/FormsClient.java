@@ -564,7 +564,7 @@ public class FormsClient extends Client implements CTabFolder2Listener {
   }
 
   public void sendMessage(final Message message) {
-System.err.println("####### MESSAGE TO FORM CLIENT: "+message.output());
+//System.err.println("####### MESSAGE TO FORM CLIENT: "+message.output());
     if (message.hasName("newForm"))
       newForm(message);
     else if (message.hasName("setTool"))
@@ -604,7 +604,11 @@ System.err.println("####### MESSAGE TO FORM CLIENT: "+message.output());
     else if (message.hasName("uncheck"))
       uncheck(message);
     else if (message.hasName("maximiseToCanvas"))
-      maximiseToCanvas(message);
+        maximiseToCanvas(message);
+    else if (message.hasName("gitConflict"))
+    	System.out.println("gitConflict");    	
+    else if (message.hasName("test"))
+        System.err.println("Test");
     else {
 //System.out.println("------- UNKNOWN");    	
     	super.sendMessage(message);
