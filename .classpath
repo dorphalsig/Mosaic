@@ -31,12 +31,12 @@
 	<classpathentry kind="lib" path="lib/poi-3.10.1/ooxml-lib/xmlbeans-2.6.0.jar"/>
 	<classpathentry kind="lib" path="lib/kodkod.jar"/>
 	<classpathentry kind="lib" path="lib/org.sat4j.core.jar"/>
-	<classpathentry kind="lib" path="lib/swt.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.gef_3.5.0.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="lib/gson-2.2.2.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.draw2d_3.5.0.jar"/>
 	<classpathentry exported="true" kind="src" path="/com.ceteva.xmf.machine"/>
+	<classpathentry kind="lib" path="lib/swt-3.7.2-win-64bit-debug.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

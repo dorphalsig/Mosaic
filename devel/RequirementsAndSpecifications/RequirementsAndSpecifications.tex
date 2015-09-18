@@ -150,7 +150,10 @@
   \hspace{1em} \textit{Comment}}
 \makeatother
 
-
+\makeatletter
+  \newcommand{\issue}[1]{
+  \href{https://github.com/xmf-xmodeler/Mosaic/issues/#1}{Git Issue \##1}}
+\makeatother
 \title{
 \flushright
 \rule{15.5cm}{5pt}\vskip1cm
@@ -188,7 +191,20 @@ XModeler\\
 \reqLabel{general:r1} & Some requirements may be optional. \myRef{general:s1}\\ \hline
 \end{tabularx}
 
-\layerTwo{XMF-Language}
+\layerTwo{MeMo-Language}
+
+\begin{tabularx}{\textwidth}[t]{|l|X|} \hline
+\reqLabel{MeMo:General:r1} & 
+The MultiLevel language MeMo requires\ldots\\
+\hline
+\reqLabel{MeMo:General:r2} & 
+The MultiLevel language MeMo requires\ldots\\
+\hline
+\reqLabel{MeMo:General:r3} & 
+The MultiLevel language MeMo requires\ldots\\
+\hline
+\end{tabularx}
+
 \layerTwo{Kernel}
 \layerTwo{X-Modeler}
 
@@ -211,8 +227,30 @@ The FormsClient must be able to display these components:
   \item Textfield
   \item Textarea
   \item Checkbox
-\end{itemize}\\
+\end{itemize}
+The component is determined by the type of the value.\\
 \hline
+\reqLabelB{Forms:FormsClient:r2a} & 
+A boolean is shown as a Checkbox\\\hline
+\reqLabelB{Forms:FormsClient:r2b} & 
+An enum is shown as a drop-down-list\\\hline
+\reqLabelB{Forms:FormsClient:r2c} & 
+A short(?define) Strings or a number is shown as Textfield\\\hline
+\reqLabelB{Forms:FormsClient:r2b} & 
+A long(?define) String is shown as Textarea\\\hline
+\reqLabel{Forms:FormsClient:r3} & 
+Labels can be grouped with other components to form a key-value-pair.\\
+\hline
+\reqLabel{Forms:FormsClient:r4} & 
+A form client has a listener for changes which will be transferred instantly to
+the underlying model. There are no Save, Cancel or Undo buttons.\\\hline
+\reqLabel{Forms:FormsClient:r5} & 
+The FormsClient is linked to the underlying model.\\\hline
+\reqLabel{Forms:FormsClient:r6} & 
+The FormsClient's components are linked to the underlying model's parts
+by an id.\\\hline
+\comment & Labels should not be empty. \issue{34}\\\hline
+\comment & Double click should not freeze the form. \issue{33}\\\hline
 \end{tabularx}
 
 \layerOne{Specifications} 
@@ -338,7 +376,7 @@ be logged.
   \item A Unifying Approach to Connections for Multi-Level Modeling
   \cite{article:AtkinsonGerbigKuehne2015}
   \begin{itemize}
-  \item Melanie – Multi-level Modeling and Ontology Engineering
+  \item Melanie: Multi-level Modeling and Ontology Engineering
   Environment \cite{article:AtkinsonGerbig2012}
   \item Referenced 2
   \item Referenced 3

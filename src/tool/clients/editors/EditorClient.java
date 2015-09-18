@@ -458,7 +458,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
           System.err.println("message.url: " + url.strValue());
           if (s.startsWith("<html>"))
             browser.setText(s);
-          else browser.setUrl(url.strValue());
+          else browser.setUrl(url.strValue()+" ");
           
           tabFolder.setFocus();
           tabFolder.setSelection(tabs.get(id.strValue()));
