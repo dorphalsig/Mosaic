@@ -11,7 +11,7 @@ import xos.Value;
 public class CallBackTest extends Frame implements ActionListener {
 
   String title;
-  int    counter = 0;
+  int    counter = 17;
   int    handler;
 
   public CallBackTest(String title, int x, int y, int width, int height, int handler) {
