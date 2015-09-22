@@ -370,6 +370,107 @@ Is done the same way.
 \noindent Note: Both reverts don't undo history. The wrong commit and the reversion will
 be logged.
 
+\layerOne{Example}
+
+\begin{verbatim}
+parserImport XOCL;
+
+\end{verbatim}
+The class {\ttfamily OmniscientClass} extends {\ttfamily Class}. Any instance of
+it will therefore be a class.
+\begin{verbatim}
+context Root
+  @Class OmniscientClass isabstract extends Class 
+  @Attribute instances : Vector = Vector(12) end
+  @Attribute numberInstances : Integer = 0 end
+  @Attribute pluralName : String (?) end
+  
+  @Operation getPluralName() : String  
+    name + "s"
+  end
+  
+  @Operation new():Element
+    if numberInstances >= 3 
+    then let
+       o = super()
+       in
+\end{verbatim}
+This line is throwing an exception, when too many instances of the
+OmniscientClass are created. It uses the function {\ttfamily getPluralName()} to
+test about overwriting functions. In most cases the plural is formed by
+appending a {\ttfamily s}. This is done in the default function above. The word ``Mouse''
+however has an irregular plural and therefore needs to overwrite the function,
+returning ``Mice'' instead of the default ``Mouses''.
+
+Instead of overwriting functions, attributes could be used. In this case it
+proves a worse choice as every slot has to be filled manually, and no useful
+default can be provided.
+\begin{verbatim}
+          self.error("According to popular belief, " 
+          + (numberInstances+1) + " " 
+          + o.getPluralName() 
+       // + pluralName 
+          + " are deemed unlucky.")
+    end
+    else 
+      let 
+        o = super()
+      in let
+        c = o.of()
+      in
+        c.instances.put(numberInstances,o);
+        self.numberInstances := numberInstances +1;
+        o
+      end end
+    end
+  end
+end
+\end{verbatim}
+Class {\ttfamily Dog} is an instance of {\ttfamily OmniscientClass}. It is a
+class because it's {\ttfamily of} is {\ttfamily Class} or a any extension
+thereof.
+\begin{verbatim}
+context Root
+  @Class Dog metaclass OmniscientClass
+  @Attribute name : String = "nameless Dog" end
+  @Constructor(name) ! end
+  @Slot OmniscientClass::pluralName = "Dogs" end
+\end{verbatim}
+As {\ttfamily Dog} does not extend {\ttfamily Class}, this function is not
+supposed to be called. However, it can be called by {\ttfamily(Dog())()},
+naturally causing an exception to be thrown somewhere in {\ttfamily super()}.
+It can be called without an exception if {\ttfamily Dog} would extend {\ttfamily Class}.
+\begin{verbatim}
+  @Operation new():Element
+    "Dog.new".println();
+    super()
+  end
+end
+
+context Root
+  @Class Cat metaclass OmniscientClass
+  @Attribute name : String = "nameless Cat" end
+  @Constructor(name) ! end
+  @Slot OmniscientClass::pluralName = "Cats" end
+end
+\end{verbatim}
+The class {\ttfamily Mouse} 
+\begin{verbatim}
+context Root
+  @Class Mouse metaclass OmniscientClass
+  @Attribute name : String = "nameless Mouse" end
+  @Constructor(name) ! end
+  @Slot OmniscientClass::pluralName = "Mice" end
+  @Operation getPluralName() : String  
+    "Mice"
+  end
+end
+
+  Root::dog1 := Dog.new();
+  Root::dog1.name := "Fido";
+  Root::mouse1 := Mouse("Mickey");
+\end{verbatim}
+
 \layerOne{Literature}
 
 \begin{itemize}
