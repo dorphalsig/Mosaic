@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.1 "
-   sodipodi:docname="New document 1">
+   sodipodi:docname="classDiagram1.svg">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -24,9 +24,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8"
-     inkscape:cx="40.523895"
-     inkscape:cy="89.340102"
+     inkscape:zoom="7.9195959"
+     inkscape:cx="93.357986"
+     inkscape:cy="115.16811"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -53,7 +53,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -322,17 +322,6 @@
          id="flowPara2995-7-77-41-8"
          style="font-size:7px;text-align:start;text-anchor:start">of</flowPara></flowRoot>    <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       d="m 55,902.36218 0,20"
-       id="path5133-8-5"
-       inkscape:connector-curvature="0" />
-    <path
-       style="fill:#ffffff;stroke:#000000;stroke-width:0.9999997px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 52.5,907.66218 2.5,-4.7 2.500001,4.7 z"
-       id="path5135-0-1"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cccc" />
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        d="m 30,882.36218 -25,0 0,50 25,0"
        id="path5133-2-9"
        inkscape:connector-curvature="0"
@@ -411,5 +400,41 @@
        id="path5135-0-1-4-8-5-3"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccc" />
-  </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 40,902.36218 0,20"
+       id="path5133-8-5"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.9999997px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 37.5,907.66218 2.5,-4.7 2.500001,4.7 z"
+       id="path5135-0-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:2, 2;stroke-dashoffset:0"
+       d="m 70,922.36218 0,-5 c 0,-13 -20,-13 -20,0 l 0,5"
+       id="path5133-2-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.9999997px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 52.5,917.06218 -2.5,4.7 -2.5,-4.7"
+       id="path5135-0-1-4-8-9-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccc" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot2989-7-9-6-5-4"
+       style="font-size:7px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       transform="translate(-7.4375,890.13817)"><flowRegion
+         id="flowRegion2991-7-1-9-4-8"><rect
+           id="rect2993-6-7-9-8-5"
+           width="70"
+           height="15.000016"
+           x="64.422127"
+           y="19.38064"
+           style="font-size:7px;text-align:start;text-anchor:start" /></flowRegion><flowPara
+         id="flowPara2995-7-77-41-8-3"
+         style="font-size:7px;text-align:start;text-anchor:start">of</flowPara></flowRoot>  </g>
 </svg>

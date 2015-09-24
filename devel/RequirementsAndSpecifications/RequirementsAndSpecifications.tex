@@ -76,6 +76,19 @@
 \includegraphics[width=10pt]{img/rightArrow.png}\hspace{1mm}}
 \makeatother
 
+\makeatletter
+\newcommand{\of}{%
+\includegraphics[height=8pt]{img/arrowOf.png}\hspace{1mm}}
+\makeatother
+\makeatletter
+\newcommand{\extends}{%
+\includegraphics[height=8pt]{img/arrowExtends.png}\hspace{1mm}}
+\makeatother
+\makeatletter
+\newcommand{\has}{%
+\includegraphics[height=8pt]{img/arrowHas.png}\hspace{1mm}}
+\makeatother
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Variante 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\layerOne}[1]{\chapter{#1}}
 \newcommand{\layerOneStar}[1]{\chapter*{#1}}
@@ -236,7 +249,7 @@ A boolean is shown as a Checkbox\\\hline
 An enum is shown as a drop-down-list\\\hline
 \reqLabelB{Forms:FormsClient:r2c} & 
 A short(?define) Strings or a number is shown as Textfield\\\hline
-\reqLabelB{Forms:FormsClient:r2b} & 
+\reqLabelB{Forms:FormsClient:r2d} & 
 A long(?define) String is shown as Textarea\\\hline
 \reqLabel{Forms:FormsClient:r3} & 
 Labels can be grouped with other components to form a key-value-pair.\\
@@ -371,6 +384,23 @@ Is done the same way.
 be logged.
 
 \layerOne{Example}
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=185pt]{img/classDiagram1.pdf}
+	\caption{Basic Class diagram}
+	\label{fig:exampleDogClassDiagram}
+\end{figure} 
+
+Dog extends (\extends) {\ttfamily Object} .It does not extend {\ttfamily Class}. It is an instance of (\of) {\ttfamily Class}. {\ttfamily Fido} is an instance of (\of) {\ttfamily Dog}. Therefore (commonly spoken): Fido is a Dog. Dog is a Class. But: Is {\ttfamily Fido} an {\ttfamily Object}? Is {\ttfamily Dog} an {\ttfamily Object}?
+
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[width=195pt]{img/classDiagram2.pdf}
+	\caption{Extended Class diagram}
+	\label{fig:exampleDogClassDiagram2}
+\end{figure} 
 
 \begin{verbatim}
 parserImport XOCL;
