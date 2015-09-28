@@ -92,8 +92,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Variante 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\layerOne}[1]{\chapter{#1}}
 \newcommand{\layerOneStar}[1]{\chapter*{#1}}
-\newcommand{\layerTwo}[1]{\section{#1}}
-\newcommand{\layerThree}[1]{\subsection{#1}}
+\newcommand{\layerTwo}[1]{\section{#1} \setcounter{myCounter}{0}}
+\newcommand{\layerThree}[1]{\subsection{#1} \setcounter{myCounter}{0}}
 \newcommand{\layerFour}[1]{\subsubsection{#1}}
 
 \makeatletter
@@ -204,6 +204,52 @@ XModeler\\
 \reqLabel{general:r1} & Some requirements may be optional. \myRef{general:s1}\\ \hline
 \end{tabularx}
 
+\layerTwo{Web Site} 
+
+\begin{tabularx}{\textwidth}[t]{|l|X|} \hline
+\reqLabel{Website:General:r1} & 
+The website is available online. \\\hline& 
+A slightly different version is available in XModeler. \\\hline OR&  The online version is accessed from XModeler, but unavailable when offline. \\\hline OR& XModeler tries to access the online version, but keeps a offline version as backup. \\\hline &
+The online version cannot use the XModeler's hijacking mode for references.\\
+\hline
+\end{tabularx}
+
+\layerThree{Content} 
+
+\begin{tabularx}{\textwidth}[t]{|l|X|} \hline
+\reqLabel{Website:Content:r1} & 
+The website should include a tutorial.\\
+\hline
+\reqLabel{Website:Content:r2} & 
+The website should include a "`API"', explaining the basic data types and classes.\\
+\hline
+\reqLabel{Website:Content:r3} & 
+The website should include an explanation of basic language concepts. (grammar, operators)\\
+\hline
+\reqLabel{Website:Content:r4} & 
+The website should include snippets. (Small examples on a specific topic, like how to read from a file)\\
+\hline
+\reqLabel{Website:Content:r5} & 
+The website should include a list of literature, with links if possible.\\
+\hline
+\reqLabel{Website:Content:r6} & 
+The website should include a link to git, Maybe direct links to the Issues?\\
+\hline
+\reqLabel{Website:Content:r7} & 
+The website should include information about contact. \textit{Whom was it made by? How do I contact them, report a bug?\ldots}\\
+\hline
+\end{tabularx}
+
+\layerThree{Design} 
+\begin{tabularx}{\textwidth}[t]{|l|X|} \hline
+\reqLabel{Website:Design:r1} & 
+The design should have a primary and a secondary colour. These, together with grayscale colours should be used predominantly. 
+\myRef{Website:Design:s1}, \myRef{Website:Design:s2}\\
+\hline
+\reqLabel{Website:Design:r2} & The website is split vertically: Title, Links, local Links, Content
+\\\hline
+\end{tabularx}
+
 \layerTwo{MeMo-Language}
 
 \begin{tabularx}{\textwidth}[t]{|l|X|} \hline
@@ -272,6 +318,18 @@ by an id.\\\hline
 \begin{tabularx}{\textwidth}[t]{|l|X|} \hline
 \specLabel{general:s1} & Some specifications may be optional.
 \myRef{general:r1}\\
+\hline
+\end{tabularx}
+
+\layerTwo{Web Site}
+
+\layerThree{Design} 
+\begin{tabularx}{\textwidth}[t]{|l|X|} \hline
+\specLabel{Website:Design:s1} & 
+The design's primary colour is \#1155BB. \myRef{Website:Design:r1}\\
+\hline
+\specLabel{Website:Design:s2} & 
+The design's secondary colour is \#22AA44. \myRef{Website:Design:r1}\\
 \hline
 \end{tabularx}
 
@@ -394,6 +452,14 @@ be logged.
 
 Dog extends (\extends) {\ttfamily Object} .It does not extend {\ttfamily Class}. It is an instance of (\of) {\ttfamily Class}. {\ttfamily Fido} is an instance of (\of) {\ttfamily Dog}. Therefore (commonly spoken): Fido is a Dog. Dog is a Class. But: Is {\ttfamily Fido} an {\ttfamily Object}? Is {\ttfamily Dog} an {\ttfamily Object}?
 
+Differentiate between 
+\begin{itemize}
+	\item the \textit{operation} of() which returns the target of the \of of-Arrow \\
+and 
+	\item the \textit{operator} instance? which returns true if second argument is \of of() or anything of() \of\extends inherited from
+  \item isTypeOf
+  \item isReallyTypeOf
+\end{itemize}
 
 \begin{figure}[ht!]
 	\centering
@@ -513,6 +579,11 @@ end
   \item Referenced 3
 \end{itemize}
 \end{itemize}
+
+\layerTwo{Integrating Language Engineering\cite{article:ClarkFrank0000}...}
+
+
+
 
 \nocite{article:test}
 
