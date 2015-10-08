@@ -3,10 +3,10 @@ Type=TeXnicCenterProjectInformation
 Version=4
 
 [ProjectInfo]
-MainFile=
-UseBibTeX=0
+MainFile=RequirementsAndSpecifications.tex
+UseBibTeX=1
 UseMakeIndex=0
-ActiveProfile=LaTeX ⇨ PDF
+ActiveProfile=LuaLaTeX ⇨ PDF
 ProjectLanguage=en
-ProjectDialect=US
+ProjectDialect=GB
 

@@ -102,6 +102,7 @@
 		\def\@currentlabel{#2-\thesubsubsection.\arabic{myCounter}}% Update label
 		\raisebox{\f@size pt}\phantomsection
 		\label{req:#1}
+		\hspace{-\f@size pt}
 		#2-\thesubsubsection.\arabic{myCounter}}
 \makeatother
 
@@ -123,6 +124,7 @@
 		% Update label
 		\raisebox{\f@size pt}\phantomsection
 		\label{req:#1}
+		\hspace{-\f@size pt}
 		#2-\thesubsubsection.\arabic{myCounter}\alph{mySubCounter}}
 \makeatother
 
@@ -156,6 +158,11 @@
 \makeatletter
   \newcommand{\myRef}[1]{
   \ref{req:#1}}
+\makeatother
+
+\makeatletter
+  \newcommand{\lowItem}{
+  \vspace{-2.5mm}\item}
 \makeatother
 
 \makeatletter
@@ -209,15 +216,37 @@ XModeler\\
 \begin{tabularx}{\textwidth}[t]{|l|X|} \hline
 \reqLabel{Website:General:r1} & 
 The website is available online. \\\hline& 
-A slightly different version is available in XModeler. \\\hline OR&  The online version is accessed from XModeler, but unavailable when offline. \\\hline OR& XModeler tries to access the online version, but keeps a offline version as backup. \\\hline &
+A slightly different version is available in XModeler. \\\hline OR & The online version is accessed from XModeler, but unavailable when offline. \\\hline OR& XModeler tries to access the online version, but keeps a offline version as backup. \\\hline &
 The online version cannot use the XModeler's hijacking mode for references.\\
+\hline
+\reqLabel{Website:General:r2} & 
+The website will have several parts: 
+The online home page, 
+the in-tool home page, 
+online content, 
+in-tool content,
+online content which is available offline.
+In-tool content can access online content. Online content cannot access in-tool content. \\
 \hline
 \end{tabularx}
 
 \layerThree{Content} 
 
 \begin{tabularx}{\textwidth}[t]{|l|X|} \hline
+\reqLabel{Website:Content:r0} & 
+\input{WebTreeRaw.tex}
+%\vspace{-15mm}\\
+\hline
 \reqLabel{Website:Content:r1} & 
+The website should include a install guide\\
+\hline
+\reqLabelB{Website:Content:r1a} & 
+The install guide should be split into several parts, after each (and before first) some checks to see if step worked. \\
+\hline
+\reqLabelB{Website:Content:r1b} & 
+The install guide should contain common problems. \\
+\hline
+\reqLabel{Website:Content:r10} & 
 The website should include a tutorial.\\
 \hline
 \reqLabel{Website:Content:r2} & 
@@ -567,6 +596,122 @@ end
   Root::mouse1 := Mouse("Mickey");
 \end{verbatim}
 
+
+
+ Objects have a type and slots. The type is returned by the of() operation and the slots are accessed by name either using the '.' operator or the get(name) operation. Values of slots can be updated using the o.s := v notation or the o.set(s,v) operator. Messages can be sent to an object using the o.m(a1,a2,...) notation or using the o.send(m,Seq{a1,a2,...}) operator.
+\vspace{3mm}
+
+Objects implement a MOP via their meta-class that determines how slot access and update is handled. The MOP is defined on an objects type via the getInstanceSlot, hasInstanceSlot and setInstanceSlot operations. Define a new meta-class (sub-class of Class) that implements a new MOP and therefore handles object storage completely differently to the VM. 
+\vspace{3mm}
+
+\textbf{Slot storage} is usually allocated when a class is instantiated and \textbf{is always consistent with the attributes defined by the class}. You can modify this using addStructuralFeature and removeStructuralFeature, but you \textbf{must be aware that certain key execution features of XMF rely on the slots of an object conforming to the attributes of its class}. NB adding new slots to an object that do not clash with these attributes is safe and can be used to squirrel away information in particular objects.
+
+\layerThree{Multilevel Draft Essen} 
+
+Extend Association, Attribute, Compiled Operation by isIntrinsic, instLevel, isCore and Constraint and Doc by id.
+
+new class/interface MetaAdapter overriding new(decreasing level by one) with additional function newAtLevel(decreasing level by more than one) 
+
+???
+
+Is a level $<=1$ (class, object) automatically forbidden to extend MetaAdapter/Class?
+Is a level 0 (object) automatically forbidden to be of type MetaAdapter/Class?
+Is an element which does not extend MetaAdapter/Class but is of type MetaAdapter/Class automatically a level 1?
+Is an element which is not of type MetaAdapter/Class automatically a level 0?
+
+Why start numbering levels at object level?
+This means: a classic object is always level 0, a classic class always level 1.
+Therefore it is always necessary to know before the number of the top layer.
+Or do the upper layers number automatically? But then the instLevel for attributes does not give an absolute level-distance. Maybe allow relative intLevels? Or use another concept than integer numbering.
+
+!!!
+
+\layerThree{next Try} 
+
+An element $e$ is level $0$, if and only if $e.of()$ is level 1.\\
+$Level_0(e)\Leftrightarrow Level_1(e.of())$\\
+$Level_1(e)\Rightarrow \neg e $ inheritsFrom $ Class$.\\
+$Level_1(e)\Leftrightarrow Level_2(e.of()) \wedge \neg e $ inheritsFrom $ Class$.\\
+$Level_n(Class) \forall n \geq 2$
+
+\layerThree{next Try II} 
+
+\newpage
+
+\layerFour{numbering up} 
+Elements can be numbered by their distance to an object, if that object is given. \\
+Object o's Level in respect to o is 0.
+Object o's of()'s Level in respect to o is 1.
+Class' Level in respect to o is the number of \textit{of()}s one has to traverse,. including but not counting \textit{inherits}.
+\begin{verbatim}
+  int levelUp(Element a, Element b) {
+      if(a == b) return 0;
+      if(b.of() != b) return 1 + levelUp(a, b.of());
+      if(b.inherits() != b) return levelUp(a, b.inherits());
+      throw Exception;
+  }
+\end{verbatim}
+
+\layerFour{numbering down} 
+Elements can be numbered by their distance to \textit{Class} \\
+Object o's Level in respect to \textit{Class} is the number of \textit{of()}s one has to traverse from o to Class, including but not counting \textit{inherits}. Be this number negative for easier disambiguation.
+\begin{verbatim}
+  int levelDown(Element e) {
+      if(e == Class) return 0;
+      if(e.of() != e) return -1 - levelDown(e.of());
+      if(e.inherits() != e) return levelDown(e.inherits());
+      throw Exception;
+  } <==> {
+      return - levelUp(Class, e);
+  }	
+\end{verbatim}
+
+\layerFour{allowing multi-level jumps}
+If we have a of-relation with a specified weight $>=1$ we can amend the formulas above nad replace 1 with the weight.
+\begin{verbatim}
+  int levelUp(Element a, Element b) {
+      if(a == b) return 0;
+      if(b.of() != b) return b.ofWeight() + levelUp(a, b.of());
+      if(b.inherits() != b) return levelUp(a, b.inherits());
+      throw Exception;
+  }
+\end{verbatim}
+
+\newpage
+
+\layerFour{Finding a unified numbering scheme} 
+
+Assume the following relation:
+
+fido \of Dog \of Quadruped \of Animal \of MetaClass \of Class
+
+squidward \of Octopus \of Animal \of MetaClass \of Class
+
+where (Quadruped and Animal) \extends MetaClass \extends Class
+
+\begin{tabular}[t]{|l|l|l|l|l|l|} \hline
+x&levelDown(x)&levelUp(x, fido)&levelUp(x, Octopus)&levelUp(x, Animal) \\\hline
+fido 				&-5&  0& N/A&(-3) \\\hline
+Dog 				&-4&  1& N/A&(-2) \\\hline
+Quadruped 	&-3&  2& N/A&(-1) \\\hline
+squidward 	&-4&N/A&(-1)&(-2) \\\hline
+Octopus 	  &-3&N/A&   0&(-1) \\\hline
+Animal 			&-2&  3&   1&   0 \\\hline
+MetaClass 	&-1&  4&   2&   1 \\\hline
+Class 			& 0&  5&   3&   2 \\\hline
+\hline
+\end{tabular}
+
+The levelUp function can be extended downwards into negative results.
+
+\vspace{5mm}
+
+If we want a Slot name for every Animal, we would add an Attribute name to Animal to become a Slot on Level 0. But we cannot say which level Animal is on.\\
+We cannot instantiate an animal object directly to level 0, as Animal inherits Class
+
+
+%\vspace(12mm)
+%Modify Existing Classes --- or add new extended classes?
 \layerOne{Literature}
 
 \begin{itemize}
