@@ -196,6 +196,8 @@ public class DialogsClient extends Client {
       return newInputDialog(message);
     else if (message.hasName("newSelectionDialog"))
       return selectionDialog(message);
+    else if (message.hasName("newConfirmDialog"))
+        return newConfirmDialog(message);
     else return super.callMessage(message);
   }
 
@@ -281,6 +283,19 @@ public class DialogsClient extends Client {
     });
     return values[0];
   }
+
+	private Value newConfirmDialog(final Message message) {
+	    final Value[] values = new Value[1];
+	    runOnDisplay(new Runnable() { public void run() {
+	    	String question = message.args[0].strValue();
+	    	boolean reply = MessageDialog.openQuestion(XModeler.getXModeler(), "Confirm", question);
+	    	if (reply)
+	    		values[0] = new Value("Yes");
+	    	else
+	    		values[0] = new Value("No");
+	    	}});
+		return values[0];
+	}
 
   private void newTextAreaDialog(Message message) {
     String id = message.args[0].strValue();
