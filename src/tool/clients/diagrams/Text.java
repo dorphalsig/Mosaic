@@ -61,17 +61,18 @@ public class Text implements Display {
       text.setLocation(p.x, p.y);
       text.setSize(getWidth() + 10, getHeight() + 10);
       text.setVisible(true);
-      text.setFocus();
+      text.selectAll();
+      //text.setFocus(); - done delayed to not loose focus on Linux, see below
       NotifierDialog.notify("Edit Text", "Type text then RET to update.\nType ESC to cancel.", NotificationType.values()[3]);
       Listener listener = new Listener() {
         public void handleEvent(Event event) {
           org.eclipse.swt.widgets.Text t;
           switch (event.type) {
           case SWT.FocusOut:
-            t = (org.eclipse.swt.widgets.Text) event.widget;
-            t.setVisible(false);
-            t.dispose();
-            diagram.redraw();
+			t = (org.eclipse.swt.widgets.Text) event.widget;
+			t.setVisible(false);
+			t.dispose();
+			diagram.redraw();
             break;
           case SWT.Verify:
             t = (org.eclipse.swt.widgets.Text) event.widget;
@@ -104,6 +105,12 @@ public class Text implements Display {
       text.addListener(SWT.FocusOut, listener);
       text.addListener(SWT.Verify, listener);
       text.addListener(SWT.Traverse, listener);
+
+      XModeler.getXModeler().getDisplay().timerExec(100, new Runnable() {
+          public void run() {
+          	  text.setFocus();
+          }
+      });
     }
   }
 
@@ -194,15 +201,15 @@ public class Text implements Display {
 
   public void paint(GC gc, int x, int y) {
 	    Font font = gc.getFont();
-	    Color c = gc.getForeground(); //Björn
+	    Color c = gc.getForeground(); //Bjï¿½rn
 	    gc.setFont(italicise ? DiagramClient.diagramItalicFont : DiagramClient.diagramFont);
 	    //Check if a color is set
-	    if(getRed() >=0 && getGreen() >= 0 && getBlue() >= 0){ //Björn
+	    if(getRed() >=0 && getGreen() >= 0 && getBlue() >= 0){ //Bjï¿½rn
 	    	gc.setForeground(ColorManager.getColor(new RGB(getRed(), getGreen(), getBlue())));
 	    }
 	    gc.drawText(text, x + getX(), y + getY(), true);
 	    gc.setFont(font);
-	    gc.setForeground(c); //Björn
+	    gc.setForeground(c); //Bjï¿½rn
 	  }
 
   public void paintHover(GC gc, int x, int y, int dx, int dy) {
@@ -223,7 +230,7 @@ public class Text implements Display {
   }
 
   public void setFillColor(String id, int red, int green, int blue) {
-	  //Björn
+	  //Bjï¿½rn
 	  if (id.equals(getId())){
 		this.red = red;  
 		this.green = green;
