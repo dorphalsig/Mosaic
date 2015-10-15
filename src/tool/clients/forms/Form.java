@@ -332,7 +332,7 @@ public class Form implements MouseListener, SelectionListener {
 		if(x > 200) {
 			System.err.println("id: " + id + "," + x + "," + y + " " + string);
 		}
-		if(string.length() < 2) return;
+		if(string.trim().isEmpty()) return;
 //		if(string.length() < 2) { // leer?
 //			string = "id: " + id;
 //		}
