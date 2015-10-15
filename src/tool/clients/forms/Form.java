@@ -273,6 +273,7 @@ public class Form implements MouseListener, SelectionListener {
     if (getId().equals(parentId)) {
       Button button = new Button(content, SWT.PUSH);
       button.addSelectionListener(this);
+      if(label.startsWith("Maximi")) {width+=16; x-=16;}
       button.setLocation(x, y);
       button.setSize(width, height);
       button.setText(label);
@@ -352,7 +353,7 @@ public class Form implements MouseListener, SelectionListener {
     if (getId().equals(parentId)) {
       StyledText text = new StyledText(content, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
       text.setFont(FormsClient.formLabelFont);
-      text.setLocation(x, y);
+      text.setLocation(x, y+10); // wrong y value received in the one and only call
       text.setSize(width, height);
       text.setEditable(editable);
       text.addMouseListener(this);
@@ -365,7 +366,7 @@ public class Form implements MouseListener, SelectionListener {
     text.setEditable(editable);
     text.setBackground(FormsClient.theClient().WHITE);
     text.setFont(FormsClient.getFormTextFieldFont());
-    text.setBounds(x, y, width, TEXTFIELDHEIGHT);
+    text.setBounds(x, y, width, TEXTFIELDHEIGHT+1);
 //    text.setLocation(x, y);
     text.addMouseListener(this);
     textFields.put(id, text);
