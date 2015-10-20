@@ -279,6 +279,70 @@ The design should have a primary and a secondary colour. These, together with gr
 \\\hline
 \end{tabularx}
 
+\newpage
+\layerTwo{Changes on Intrinsics}
+
+\begin{tabularx}{\textwidth}[t]{|l|X|} \hline
+\reqLabel{MultilevelIntrinsicEditing:General:r1} & 
+The user may want the changes to affect all existing instances.\\\hline
+\reqLabel{MultilevelIntrinsicEditing:General:r2} & 
+The user may want the changes to affect all future instances.\\\hline
+\reqLabel{MultilevelIntrinsicEditing:General:r3} & 
+The user may want any alerts to be suppressed until he finishes his changes.\\\hline
+\end{tabularx}
+
+\layerThree{Add}
+
+\begin{tabularx}{\textwidth}[t]{|l|X|} \hline
+\reqLabel{MultilevelIntrinsicEditing:Add:r1} & 
+\textbf{The user adds a new intrinsic attribute. }Every instance on the appropriate level should get a slot for the Attribute. \textsl{Isn't there a constraint that an element must have all slots for which the of() has an attribute?} Unless a default value is given, all instances have to be supplied with new data.\\\hline
+\reqLabel{MultilevelIntrinsicEditing:Add:r2a} & 
+The user adds a new intrinsic attribute causing a name clash on lower levels.\\\hline
+\reqLabel{MultilevelIntrinsicEditing:Add:r2b} & 
+The user adds a new intrinsic attribute causing a name clash on higher levels.\\\hline
+%\reqLabel{MultilevelIntrinsicEditing:Add:r4} & 
+%\\
+%\hline
+\end{tabularx}
+
+\layerThree{Delete}
+
+\begin{tabularx}{\textwidth}[t]{|l|X|} \hline
+\reqLabel{MultilevelIntrinsicEditing:Delete:r1} & 
+\textbf{The user deletes an intrinsic attribute.} All usages should be removed as well. Otherwise they would lose their connection to their original definition.\\\hline
+%\reqLabel{MultilevelIntrinsicEditing:Delete:r2} & 
+%\\\hline
+%\reqLabel{MultilevelIntrinsicEditing:Delete:r3} & 
+%\\
+%\hline
+\end{tabularx}
+
+\layerThree{Change Level of Attribute}
+
+\begin{tabularx}{\textwidth}[t]{|l|X|} \hline
+\reqLabel{MultilevelIntrinsicEditing:Add:r3} & 
+T\textbf{he user adds a new intrinsic attribute intentionally causing a name clash on lower levels}, therefore raising the level of the attribute. The intrinsic attributes in the lower classes must be removed. Opposite of \myRef{MultilevelIntrinsicEditing:ChangeA:r1}\\\hline
+\reqLabel{MultilevelIntrinsicEditing:ChangeA:r1} & 
+\textbf{The user deletes an intrinsic attribute in a class and adds it to all that class' instances}. Opposite of 
+\myRef{MultilevelIntrinsicEditing:Add:r3}. Would mean adding redundancy and is therefore unlikely to happen.\\\hline
+\reqLabel{MultilevelIntrinsicEditing:ChangeA:r2} & 
+\textbf{The user renames an existing attribute.} In addition to the potential problems of adding one attribute and deleting another one, this case is different as the attribute should remain unchanged apart from it's name. This makes this scenario a genuine one, that means it is not a combination of other scenarios.\\\hline
+%\reqLabel{MultilevelIntrinsicEditing:ChangeA:r3} & 
+%\\\hline
+%\reqLabel{MultilevelIntrinsicEditing:ChangeA:r4} & 
+%\\
+%\hline
+\end{tabularx}
+
+\layerThree{Change Level Of Class}
+
+\begin{tabularx}{\textwidth}[t]{|l|X|} \hline
+\reqLabel{MultilevelIntrinsicEditing:ChangeC:r1} & 
+The user changes the level of a class: All instances have to be of lower level than the class. All intrinsic attributes have to be of lover level than the class. All classes above the class must comply or be changed as well.\\\hline
+%\reqLabel{MultilevelIntrinsicEditing:ChangeC:r2} & 
+%\\\hline
+\end{tabularx}
+\newpage
 \layerTwo{MeMo-Language}
 
 \begin{tabularx}{\textwidth}[t]{|l|X|} \hline
@@ -732,6 +796,7 @@ We cannot instantiate an animal object directly to level 0, as Animal inherits C
 
 \nocite{article:test}
 
+\input{WebTreeRaw.tex}
 \input{WeeklyReports.tex}
 
 \clearpage
