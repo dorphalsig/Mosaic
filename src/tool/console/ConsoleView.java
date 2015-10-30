@@ -59,7 +59,7 @@ public class ConsoleView {
   int                  waterMark       = 1000;
   PrintStream          out             = null;
   Object               overflowLock    = new Object();
-  boolean              autoComplete    = true;
+  boolean              autoComplete    = false; // de-activated for now for better usability
 
   public ConsoleView(Composite parent, CTabItem tabItem) {
     Composite c1 = new Composite(parent, SWT.BORDER);
