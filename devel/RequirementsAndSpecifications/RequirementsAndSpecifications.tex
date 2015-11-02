@@ -272,7 +272,7 @@ The website should include information about contact. \textit{Whom was it made b
 \layerThree{Design} 
 \begin{tabularx}{\textwidth}[t]{|l|X|} \hline
 \reqLabel{Website:Design:r1} & 
-The design should have a primary and a secondary colour. These, together with grayscale colours should be used predominantly. 
+The design should have a primary and a secondary colour. These, together with gray-scale colours should be used predominantly. 
 \myRef{Website:Design:s1}, \myRef{Website:Design:s2}\\
 \hline
 \reqLabel{Website:Design:r2} & The website is split vertically: Title, Links, local Links, Content
@@ -289,17 +289,23 @@ The user may want the changes to affect all existing instances.\\\hline
 The user may want the changes to affect all future instances.\\\hline
 \reqLabel{MultilevelIntrinsicEditing:General:r3} & 
 The user may want any alerts to be suppressed until he finishes his changes.\\\hline
+%\reqLabel{MultilevelIntrinsicEditing:General:q1} & 
+%How do we find all usages?\\\hline
 \end{tabularx}
 
 \layerThree{Add}
 
 \begin{tabularx}{\textwidth}[t]{|l|X|} \hline
 \reqLabel{MultilevelIntrinsicEditing:Add:r1} & 
-\textbf{The user adds a new intrinsic attribute. }Every instance on the appropriate level should get a slot for the Attribute. \textsl{Isn't there a constraint that an element must have all slots for which the of() has an attribute?} Unless a default value is given, all instances have to be supplied with new data.\\\hline
+\textbf{The user adds a new intrinsic attribute.} Every instance on the appropriate level should get a slot for the Attribute. No slot will be provided before the given level is reached. \textsl{Isn't there a constraint that an element must have all slots for which the of() has an attribute?} Unless a default value is given, all instances have to be supplied with new data.
+\\&\multicolumn{1}{c|}{\includegraphics[width=200pt]{img/intrinsics/IntrinsicAdd.pdf}}
+\\\hline
 \reqLabel{MultilevelIntrinsicEditing:Add:r2a} & 
-The user adds a new intrinsic attribute causing a name clash on lower levels.\\\hline
+\textbf{The user adds a new intrinsic attribute causing a name clash on lower levels.} This means that an attribute on a lower level would --- intended or not --- override or hide the newly created attribute.
+\\&\multicolumn{1}{c|}{\includegraphics[width=200pt]{img/intrinsics/IntrinsicAddClashLower.pdf}}
+\\\hline
 \reqLabel{MultilevelIntrinsicEditing:Add:r2b} & 
-The user adds a new intrinsic attribute causing a name clash on higher levels.\\\hline
+\textbf{The user adds a new intrinsic attribute causing a name clash on higher levels.} Basically the same possible conflicts as above, but a higher degree of intention can be assumed.\\\hline
 %\reqLabel{MultilevelIntrinsicEditing:Add:r4} & 
 %\\
 %\hline
@@ -309,7 +315,9 @@ The user adds a new intrinsic attribute causing a name clash on higher levels.\\
 
 \begin{tabularx}{\textwidth}[t]{|l|X|} \hline
 \reqLabel{MultilevelIntrinsicEditing:Delete:r1} & 
-\textbf{The user deletes an intrinsic attribute.} All usages should be removed as well. Otherwise they would lose their connection to their original definition.\\\hline
+\textbf{The user deletes an intrinsic attribute.} All usages should be removed as well. Otherwise they would lose their connection to their original definition.
+\\&\multicolumn{1}{c|}{\includegraphics[width=200pt]{img/intrinsics/IntrinsicRemove.pdf}}
+\\\hline
 %\reqLabel{MultilevelIntrinsicEditing:Delete:r2} & 
 %\\\hline
 %\reqLabel{MultilevelIntrinsicEditing:Delete:r3} & 
@@ -321,12 +329,16 @@ The user adds a new intrinsic attribute causing a name clash on higher levels.\\
 
 \begin{tabularx}{\textwidth}[t]{|l|X|} \hline
 \reqLabel{MultilevelIntrinsicEditing:Add:r3} & 
-T\textbf{he user adds a new intrinsic attribute intentionally causing a name clash on lower levels}, therefore raising the level of the attribute. The intrinsic attributes in the lower classes must be removed. Opposite of \myRef{MultilevelIntrinsicEditing:ChangeA:r1}\\\hline
+T\textbf{he user adds a new intrinsic attribute intentionally causing a name clash on lower levels}, therefore raising the level of the attribute. The intrinsic attributes in the lower classes must be removed. Opposite of \myRef{MultilevelIntrinsicEditing:ChangeA:r1}
+\\&\multicolumn{1}{c|}{\includegraphics[width=350pt]{img/intrinsics/IntrinsicRaise.pdf}}
+\\\hline
 \reqLabel{MultilevelIntrinsicEditing:ChangeA:r1} & 
 \textbf{The user deletes an intrinsic attribute in a class and adds it to all that class' instances}. Opposite of 
 \myRef{MultilevelIntrinsicEditing:Add:r3}. Would mean adding redundancy and is therefore unlikely to happen.\\\hline
 \reqLabel{MultilevelIntrinsicEditing:ChangeA:r2} & 
-\textbf{The user renames an existing attribute.} In addition to the potential problems of adding one attribute and deleting another one, this case is different as the attribute should remain unchanged apart from it's name. This makes this scenario a genuine one, that means it is not a combination of other scenarios.\\\hline
+\textbf{The user renames an existing attribute.} In addition to the potential problems of adding one attribute and deleting another one, this case is different as the attribute should remain unchanged apart from it's name. This makes this scenario a genuine one, that means it is not a combination of other scenarios.
+\\&\multicolumn{1}{c|}{\includegraphics[width=200pt]{img/intrinsics/IntrinsicRename.pdf}}
+\\\hline
 %\reqLabel{MultilevelIntrinsicEditing:ChangeA:r3} & 
 %\\\hline
 %\reqLabel{MultilevelIntrinsicEditing:ChangeA:r4} & 
@@ -338,11 +350,195 @@ T\textbf{he user adds a new intrinsic attribute intentionally causing a name cla
 
 \begin{tabularx}{\textwidth}[t]{|l|X|} \hline
 \reqLabel{MultilevelIntrinsicEditing:ChangeC:r1} & 
-The user changes the level of a class: All instances have to be of lower level than the class. All intrinsic attributes have to be of lover level than the class. All classes above the class must comply or be changed as well.\\\hline
+The user changes the level of a class: All instances have to be of lower level than the class. All intrinsic attributes have to be of lower level than the class. All classes above the class must comply or be changed as well. No gap must be left between levels.  \\\hline
 %\reqLabel{MultilevelIntrinsicEditing:ChangeC:r2} & 
 %\\\hline
 \end{tabularx}
 \newpage
+
+\layerThree{Checks}
+
+%An object with isIntrinsic=false has no Attributes with isIntrinsic=true\\
+\begin{itemize}
+	\item An Attribute, which is intrinsic, can only be in (or added to) Objects, which are intrinsic and are of Class.
+	\item An Attribute, which is not intrinsic, can only be in (or added to) Objects, which are of Class.
+	\item \textit{An Object with isIntrinsic=false has no Attributes with isIntrinsic=true}
+	\item \textit{An Object which is not of Class has no Attributes}
+	
+	\item An Object which is intrinsic on level 2 or more must extend Class/MetaClass
+	\item An Object which is intrinsic on level 1 must be of a something extending Class/MetaClass but must not extend Class/MetaClass
+	\item An Object which is intrinsic on level 0 must neither be of a something extending Class/MetaClass nor extend Class/MetaClass
+	
+	\item The level of an Object that is intrinsic must be 1 less the of's level, unless the of is not intrinsic.
+	
+	\item An Attribute, which is not intrinsic, of an Object, which is of Class (implied by a previous check), must have a slot at all instances.
+	\item \textit{All instances of an Object, which is of Class (implied by a previous check), must have a slot for every of's non-intrinsic Attribute.}
+	
+	\item An Attribute, which is intrinsic, of an Object, which is of Class, must have a slot at all instances (or instances' instances...) which are on the given level.
+\end{itemize}
+ 
+\layerThree{Addons-Essen Existing Implementation}
+
+\layerFour{MetaAdaptor new()}
+\begin{itemize}
+	\item 1: A class with isIntrinsic=false creates an instance, where isIntrinsic is false as well. Normal behaviour.
+	\item 2: A class with isIntrinsic=false creates an instance, where isIntrinsic is true. The instance needs a level, which has to be provided in some way. This class must extend Class/MetaClass to be on levels 2 or higher
+	\item 3: A class with isIntrinsic=true creates an instance, the level is decreased. If the class is higher than level 2(=the instance is at least at level 2) it must extend Class/MetaClass
+\end{itemize}
+
+If case 2 would provide the level by argument, then the function would be callable on level-aware objects as well. \textit{An object of level 3 instantiating to level 5?} The newToLevel must check and throw an error in this case. Alternatively it could be unavailable by splitting classes which would be a lot of extra work and would eventually resulting in throwing an error anyway...
+
+\textbf{MetaAdaptor} is of \textbf{Class}. Shouldn't it be Adapt\textbf{e}r?
+
+\begin{verbatim}
+=  @Operation new():Object
+\end{verbatim}
+o is created by the Kernel function instead of super class Class' new(). To prevent the creation of slots, Class' new() function is copied and modified (+,-,=)\\
+A are all Attributes, intrinsicA is an empty set
+\begin{verbatim}
+=      let o = Kernel_mkObj();
+=          A = self.allAttributes();
++         intrinsicA = Set{}
+\end{verbatim}
+The of link is set.\\
+A loop, aimed at emptying A (all Attributes) is started
+\begin{verbatim}
+=     in Kernel_setOf(o,self);
+=        @While not A->isEmpty do
+=          let a = A->sel
+\end{verbatim}
+for each attribute: if it is intrinsic, and the level too low, then it is meant to be skipped in creating slots. It is put in the set "`intrinsicA"'. \textbf{For a new unified constructor we can assume that no attribute is intrisic on non-intrinsics classes, so the exclusion does nothing, leaving the new set empty.}
+\begin{verbatim}
++          in if a.isIntrinsic and a.instLevel < o.of().level - 1
++             then
++               intrinsicA := intrinsicA.including(a)
++             else
+\end{verbatim}
+Otherwise, if the Attribute is to be instantiated. Then it is added, if available by the init function, as Class would do\\
+In both cases it is removed from the list A.
+\begin{verbatim}
+=                if a.init <> null
+=               then
+=                 Kernel_addAtt(o,a.name,a.init.invoke(o,Seq{}))
+=               else
+=                 Kernel_addAtt(o,a.name,a.type.default())
++               end
+=             end;
+=             A := A->excluding(a)
+=          end
+=        end;
+\end{verbatim}
+Now, the attributes are done. The parents are set. If it does not inherit form Classifier it returns false? 
+It originally returned o instead. \textbf{Both seem to be pointless, so the else should be dropped altogether.} After that the object/class is being initialized. 
+\begin{verbatim}
+=        if self.inheritsFrom(Classifier)
+=        then
+=          o.parents := o.defaultParents()
+=        else
++          false
+-          o
+=        end;
+=        o.init();
+\end{verbatim}
+The following part is used for case 2, creating a level-aware class form a level-agnostic, and for case 3, reducing the level on level-aware classes. Case 1 would simply finish here (except for two {\ttfamily end}s). \textbf{For a new unified constructor, case 2 would not go through a no-argument function. Therefor a new function is needed.}
+It checks if of() is MetaAdaptor, in which case a dialogue will open and ask for a level. MetaClass will then be a parent. This should imply a level of at least 2, which is not checked here.\\
+The level input by dialogue must be removed. A {\ttfamily newToLevel(level:Integer)} should be the replacement for these cases.
+\begin{verbatim}
++        if self.of() = Extensions::MetaAdaptor
++        then
++          o.level := xmf.getInteger("Metaebene","Auf welcher Metaebene soll 
++					sich diese Entität befinden?",3);
++           o.addParent(FMML::MetaClass)
++         else
+\end{verbatim}
+Otherwise (if of() is not MetaAdaptor) this is an instance of a level-aware class. If the level is more than 2 then the instance's level must be at least 2, implying it is a MetaClass. Then the instance's level is set to the next lower level. Unless a special case (Why?) requires it to be 2.\\
+If the level was less than 2. It is just decreased by one. Only level 1 and 2 should enter this path, resulting in level 1 or 0. Level 0 cannot access this function, as this is meant to be prevented elsewhere. Therefore levels lower than 0 cannot occur if prevented properly.
+\begin{verbatim}
++           if o.of().level > 2
++           then
++             o.addParent(FMML::MetaClass);
++             if o.of().of().allAttributes()->exists(a |
++               a.name = "level".asSymbol())
++             then
++               o.level := o.of().level - 1
++             else
++               o.level := 2
++             end
++           else
++             o.level := o.of().level - 1
++           end
++         end;
+\end{verbatim}
+The skipped intrinsic attributes are added (as Attributes) to the instance. As no intrinsics should remain on level 0, o's level must be at least 1.
+\begin{verbatim}
++         @While not intrinsicA.isEmpty() do
++           let intA = intrinsicA.sel()
++           in o.add(intA);
++              intrinsicA := intrinsicA.excluding(intA)
++           end
++         end;
++?         if Root.contents.keys().includes("TargetPackage".asSymbol())
++?         then
++?           TargetPackage.add(o)
++?         else
++?           false
++?         end;
++?         o
+=      end
+=    end
+\end{verbatim}
+
+\layerFour{newToLevel}
+
+\begin{verbatim}
+  @Operation newToLevel(level:integer):Object
+\end{verbatim}
+\begin{verbatim}
+      let o = Kernel_mkObj();
+          A = self.allAttributes();
+     in Kernel_setOf(o,self);
+        @While not A->isEmpty do
+          let a = A->sel
+             if a.init <> null
+             then
+               Kernel_addAtt(o,a.name,a.init.invoke(o,Seq{}))
+             else
+               Kernel_addAtt(o,a.name,a.type.default())
+             end;
+             A := A->excluding(a)
+          end
+        end;
+        if self.inheritsFrom(Classifier)
+        then
+          o.parents := o.defaultParents()
+        end;
+        o.init();
+\end{verbatim}
+Now case 2 is done
+\begin{verbatim}
+        if self.of() = Extensions::MetaAdaptor
+        then
+           o.level := level;
+           o.Isintrinsic = true;
+           o.addParent(FMML::MetaClass)
+         end;
+				
+         if Root.contents.keys().includes("TargetPackage".asSymbol())
+         then
+           TargetPackage.add(o)
+         else
+           false
+         end;
+         o
+      end
+    end
+\end{verbatim}
+
+%Intrinsics are copied (or linked) through the levels. So allAttributes returns the skipped attributes because the are stored in that level. \\
+Another approach would not copy them through the levels. Instead the allAttributes function would check all higher levels for skipped attributes.
+
+\newpage
+
 \layerTwo{MeMo-Language}
 
 \begin{tabularx}{\textwidth}[t]{|l|X|} \hline
