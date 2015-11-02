@@ -357,6 +357,13 @@ public class Form implements MouseListener, SelectionListener {
       text.setSize(width, height);
       text.setEditable(editable);
       text.addMouseListener(this);
+      { // set Monospace Font
+          FontData[] fontData = org.eclipse.swt.widgets.Display.getDefault().getSystemFont().getFontData();
+          XModeler.getXModeler().getDisplay().loadFont("dejavu/DejaVuSansMono.ttf");
+          fontData[0].setName("DejaVu Sans Mono");
+          text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
+          System.err.println("Set font: " + id + "/" + text);
+        }
       boxes.put(id, text);
     }
   }

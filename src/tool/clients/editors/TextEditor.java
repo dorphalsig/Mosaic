@@ -68,7 +68,7 @@ public class TextEditor implements ModifyListener, VerifyListener, VerifyKeyList
   String                             id;
   String                             label;
   StyledText                         text;
-  FontData                           fontData      = new FontData("Monaco", 12, SWT.NO);
+//  FontData                           fontData      = new FontData("Courier", 12, SWT.NO);
   Hashtable<String, PPrint>          atTable       = new Hashtable<String, PPrint>();
   Hashtable<String, Vector<Keyword>> keyTable      = new Hashtable<String, Vector<Keyword>>();
   Vector<WordRule>                   wordRules     = new Vector<WordRule>();
@@ -88,7 +88,18 @@ public class TextEditor implements ModifyListener, VerifyListener, VerifyKeyList
     text = new StyledText(parent, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
     text.setEditable(editable);
     text.setText(s);
+    FontData[] fontData = Display.getDefault().getSystemFont().getFontData();
+    System.err.println("fontData.length: " + fontData.length);
+    for(int i = 0; i < fontData.length; i++) {
+    	System.err.println("fontData.[" + i + "]: " + fontData[i]);
+    }
+    XModeler.getXModeler().getDisplay().loadFont("dejavu/DejaVuSansMono.ttf");
+    fontData[0].setName("DejaVu Sans Mono");
+    for(int i = 0; i < fontData.length; i++) {
+    	System.err.println("fontData.[" + i + "]: " + fontData[i]);
+    }
     text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
+//    text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
     Color bg = Display.getDefault().getSystemColor(SWT.COLOR_WHITE);
     text.setBackground(bg);
     text.addModifyListener(this);
@@ -99,6 +110,8 @@ public class TextEditor implements ModifyListener, VerifyListener, VerifyKeyList
     text.addVerifyListener(this);
     text.addPaintObjectListener(this);
     text.addSelectionListener(this);
+    GC gc = new GC(text);
+    gc.setTextAntialias(SWT.ON);
     populateAt();
     populateKeywords();
     new UndoRedoImpl(text);
@@ -700,8 +713,8 @@ public class TextEditor implements ModifyListener, VerifyListener, VerifyKeyList
       if (selectedImage != null)
         growSelectedImage();
       else {
-        fontData.setHeight(Math.min(fontData.getHeight() + ZOOM, MAX_FONT_SIZE));
-        text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
+//        fontData.setHeight(Math.min(fontData.getHeight() + ZOOM, MAX_FONT_SIZE));
+//        text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
         e.doit = false;
       }
     }
@@ -709,8 +722,8 @@ public class TextEditor implements ModifyListener, VerifyListener, VerifyKeyList
       if (selectedImage != null)
         shrinkSelectedImage();
       else {
-        fontData.setHeight(Math.max(MIN_FONT_SIZE, fontData.getHeight() - ZOOM));
-        text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
+//        fontData.setHeight(Math.max(MIN_FONT_SIZE, fontData.getHeight() - ZOOM));
+//        text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
         e.doit = false;
       }
     }
@@ -820,7 +833,7 @@ public class TextEditor implements ModifyListener, VerifyListener, VerifyKeyList
     out.print(" label='" + label + "'");
     out.print(" toolTip='" + toolTip + "'");
     out.print(" editable='" + text.getEditable() + "'");
-    out.print(" fontHeight='" + fontData.getHeight() + "'>");
+//    out.print(" fontHeight='" + fontData.getHeight() + "'>");
     for (WordRule rule : wordRules)
       rule.writeXML(out);
     out.print("</TextEditor>");
