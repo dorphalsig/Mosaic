@@ -456,13 +456,22 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
           browserLocked = false;
           String s = url.strValue();
           System.err.println("message.url: " + url.strValue());
-          if (s.startsWith("<html>"))
+          if (isLikelyToBeHTML(s)) //s.startsWith("<html>"))
             browser.setText(s);
           else browser.setUrl(url.strValue()+" ");
           
           tabFolder.setFocus();
           tabFolder.setSelection(tabs.get(id.strValue()));
         }
+
+		private boolean isLikelyToBeHTML(String s) {
+			s = s.trim();
+			s = s.toLowerCase();
+			if(s.startsWith("<html>")) return true;
+			if(s.startsWith("<!doctype html")) return true;
+			return false;
+		}
+		
       });
     } else System.err.println("cannot find browser " + id);
   }

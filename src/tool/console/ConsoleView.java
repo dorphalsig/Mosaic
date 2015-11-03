@@ -59,7 +59,7 @@ public class ConsoleView {
   int                  waterMark       = 1000;
   PrintStream          out             = null;
   Object               overflowLock    = new Object();
-  boolean              autoComplete    = false; // de-activated for now for better usability
+  AutoComplete         autoComplete    = AutoComplete.newDefault(); // de-activated for now for better usability
 
   public ConsoleView(Composite parent, CTabItem tabItem) {
     Composite c1 = new Composite(parent, SWT.BORDER);
@@ -116,7 +116,7 @@ public class ConsoleView {
           text.setFont(textFont);
           e.doit = false;
         } else if (e.keyCode == 'a' && ((e.stateMask & SWT.CTRL) == SWT.CTRL)) {
-          autoComplete = !autoComplete;
+          autoComplete.toggleMainSwitch();
           showStatus();
           e.doit = false;
         } else if (e.keyCode == '/' && ((e.stateMask & SWT.CTRL) == SWT.CTRL) && ((e.stateMask & SWT.SHIFT) == SWT.SHIFT)) {
@@ -133,26 +133,26 @@ public class ConsoleView {
           }
           goToEnd();
           inputStart = text.getContent().getCharCount();
-        } else if (e.keyCode == '.' && ((e.stateMask & SWT.SHIFT) != SWT.SHIFT) && autoComplete) {
+        } else if (e.keyCode == '.' && ((e.stateMask & SWT.SHIFT) != SWT.SHIFT) && autoComplete.isDisplayOptions()) {
           // Display options based on the type of the input.
           StyledTextContent content = text.getContent();
           String command = content.getTextRange(inputStart, text.getCaretOffset() - inputStart);
           WorkbenchClient.theClient().dotConsole(command);
-        } else if (e.keyCode == ';' && ((e.stateMask & SWT.SHIFT) == SWT.SHIFT) && autoComplete) {
+        } else if (e.keyCode == ';' && ((e.stateMask & SWT.SHIFT) == SWT.SHIFT) && autoComplete.isQuadrupleColonAddPath()) {
           // We might have a :: where there is a path to the left ...
           StyledTextContent content = text.getContent();
           String command = content.getTextRange(inputStart, text.getCaretOffset() - inputStart);
           if (command.endsWith(":")) {
             WorkbenchClient.theClient().nameLookup(command.substring(0, command.length() - 1));
           }
-        } else if (e.keyCode == '.' && ((e.stateMask & SWT.SHIFT) == SWT.SHIFT) && autoComplete) {
+        } else if (e.keyCode == '.' && ((e.stateMask & SWT.SHIFT) == SWT.SHIFT) && autoComplete.isRightArrowFillPatterns()) {
           // We might have a -> and can fill in the standard patterns ...
           StyledTextContent content = text.getContent();
           String command = content.getTextRange(inputStart, text.getCaretOffset() - inputStart);
           if (command.endsWith("-")) {
             completeArrow();
           }
-        } else if (e.keyCode == '[' && ((e.stateMask & SWT.SHIFT) == SWT.SHIFT) && autoComplete) {
+        } else if (e.keyCode == '[' && ((e.stateMask & SWT.SHIFT) == SWT.SHIFT) && autoComplete.isSquareStartCollection()) {
           // Are we starting a collection?
           StyledTextContent content = text.getContent();
           String command = content.getTextRange(inputStart, text.getCaretOffset() - inputStart);
@@ -161,12 +161,12 @@ public class ConsoleView {
             backup(1);
             e.doit = false;
           }
-        } else if (e.keyCode == '9' && ((e.stateMask & SWT.SHIFT) == SWT.SHIFT) && autoComplete) {
+        } else if (e.keyCode == '9' && ((e.stateMask & SWT.SHIFT) == SWT.SHIFT) && autoComplete.isNineAddParenthesis()) {
           // Insert the corresponding parenthesis...
           insert("()");
           backup(1);
           e.doit = false;
-        } else if (e.keyCode == '\'' && ((e.stateMask & SWT.SHIFT) == SWT.SHIFT) && autoComplete) {
+        } else if (e.keyCode == '\'' && ((e.stateMask & SWT.SHIFT) == SWT.SHIFT) && autoComplete.isApostropheAddQuotes()) {
           // Insert the corresponding close string...
           insert("\"\"");
           backup(1);
