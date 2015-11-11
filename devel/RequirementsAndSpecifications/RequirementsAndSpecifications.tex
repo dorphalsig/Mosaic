@@ -537,6 +537,71 @@ Now case 2 is done
 %Intrinsics are copied (or linked) through the levels. So allAttributes returns the skipped attributes because the are stored in that level. \\
 Another approach would not copy them through the levels. Instead the allAttributes function would check all higher levels for skipped attributes.
 
+\layerThree{Multiplicity}
+
+\begin{verbatim}
+context Attribute
+  @Operation setMult(mult)
+    if mult.isKindOf(String)
+    then self.setMultString(mult)
+    else self.setProperty("mult",mult)
+    end
+  end
+\end{verbatim}
+If multiplicity is a string, is needs to be parsed. Otherwise (what? int?) it is stored in "`mult"'.
+\begin{verbatim}
+context Attribute
+  @Operation setMultString(multString:String)
+    if self.mult().multString() <> multString
+    then 
+      self.setMult(self.decodeMultString(multString));
+      self.updateTypeFromMult()
+    end
+  end
+\end{verbatim}
+mult() therefore returns something having a multString, which can be checked for changes. I it is changed it is decoded and then used in the original function, obviously returning a non-String type.
+\begin{verbatim}
+context Attribute
+  @Operation decodeMultString(multString:String)
+    try
+      if multString = "" or multString = "1" or multString = null
+      then Multiplicities::SingleMult(false)
+      elseif multString = "!"
+      then Multiplicities::SingleMult(true)
+      else
+        if multString = "*"
+        then Multiplicities::CollectionMult(false,false,0,0)
+        elseif multString = "$" or multString = "$*" 
+        then Multiplicities::CollectionMult(true,false,0,0)
+        else
+          let ordered = multString.hasPrefix("$") then         //$
+              rangeSeq = if ordered
+                         then multString.subString(1,multString.size()).splitBy(".",0,0)
+                         else multString.splitBy(".",0,0)
+                         end then
+              lowerBound = rangeSeq->head->asInt;
+              hasUpperBound = not (rangeSeq->at(2) = "*") then
+              upperBound = if hasUpperBound then rangeSeq->at(2)->asInt else 0 end
+          in
+            if hasUpperBound andthen upperBound < lowerBound
+            then throw Exception("Invalid multiplicity '"+multString.toString() + "': upper bound is less than lower bound")
+            else Multiplicities::CollectionMult(ordered,hasUpperBound,lowerBound,upperBound)
+            end
+          end
+        end
+      end
+    catch(exception)
+      throw Exception("Invalid multiplicity '"+multString.toString() + "'")
+    end    
+  end
+\end{verbatim}
+Multiplicities are a type, an abstract one. There is SingleMult and CollectionMult.
+SingleMult only holds a boolean "`mandatory"' for $0..1$ and $1..1$
+CollectionMult holds a lower, an upper bound, a boolean switching off the upper bound, and a boolean for making the order significant.
+
+Is that separation neccessary? Isn't a SingleMult just a special case of CollectionMult. I saves storage to use a shorter one for standard cases.
+Upper bound boolean would not be necessary if Integer has a Positive-Infinity-Value.
+
 \newpage
 
 \layerTwo{MeMo-Language}
