@@ -465,6 +465,8 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
         }
 
 		private boolean isLikelyToBeHTML(String s) {
+			System.err.println("isLikelyToBeHTML?");
+			System.err.println(url.strValue());
 			s = s.trim();
 			s = s.toLowerCase();
 			if(s.startsWith("<html>")) return true;

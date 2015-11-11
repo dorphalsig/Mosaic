@@ -23,27 +23,39 @@ public class WordRule {
     out.print("<WordRule word='" + XModeler.encodeXmlAttribute(word) + "' red='" + color.getRed() + "' green='" + color.getGreen() + "' blue='" + color.getBlue() + "'/>");
   }
 
-  public String getWord() {
-    return word;
-  }
+//  public String getWord() {
+//    return word;
+//  }
+//
+//  public Color getColor() {
+//    return color;
+//  }
 
-  public Color getColor() {
-    return color;
-  }
+	public StyleRange match(String s, int i, int prevChar) {
+		if (canStartKeyword(prevChar, word.charAt(0)) && s.startsWith(word, i)) {
+			int length = word.length();
+			int nextchar = getNextChar(s, i, length);
+			if (canStartKeyword(word.charAt(length - 1), nextchar)) {
+				StyleRange style = new StyleRange();
+				style.start = i;
+				style.length = length;
+				style.fontStyle = SWT.UNDERLINE_SINGLE;
+				style.foreground = color;
+				return style;
+			} else
+				return null;
+		} else
+			return null;
+	}
 
-  public StyleRange match(String s, int i, int prevChar) {
-    if (canStartKeyword(prevChar, word.charAt(0)) && s.startsWith(word, i)) {
-      StyleRange style = new StyleRange();
-      style.start = i;
-      style.length = word.length();
-      style.fontStyle = SWT.UNDERLINE_SINGLE;
-      style.foreground = color;
-      return style;
-    } else return null;
+  protected int getNextChar(String s, int i, int length) {
+	  int position = i + length;
+	  if(s.length() > position) return s.charAt(position);
+	return -1;
   }
 
   public boolean canStartKeyword(int prevChar, int keyChar) {
-    return !(Character.isAlphabetic(prevChar) && Character.isAlphabetic(keyChar));
+    return !(Character.isLetterOrDigit(prevChar) && Character.isLetterOrDigit(keyChar));
   }
 
   public String toString() {

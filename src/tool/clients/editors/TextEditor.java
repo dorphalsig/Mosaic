@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.Hashtable;
+import java.util.Timer;
 import java.util.Vector;
 
 import org.eclipse.swt.SWT;
@@ -26,6 +27,7 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
+import org.eclipse.swt.events.MouseWheelListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.events.VerifyEvent;
@@ -58,7 +60,7 @@ import tool.xmodeler.XModeler;
 import xos.Message;
 import xos.Value;
 
-public class TextEditor implements ModifyListener, VerifyListener, VerifyKeyListener, MouseListener, LineBackgroundListener, ExtendedModifyListener, PaintObjectListener, SelectionListener {
+public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListener, MouseWheelListener, LineBackgroundListener, ExtendedModifyListener, PaintObjectListener, SelectionListener {
 
   private static final int           ZOOM          = 2;
   private static final int           MAX_FONT_SIZE = 40;
@@ -68,7 +70,7 @@ public class TextEditor implements ModifyListener, VerifyListener, VerifyKeyList
   String                             id;
   String                             label;
   StyledText                         text;
-//  FontData                           fontData      = new FontData("Courier", 12, SWT.NO);
+  FontData                           fontData;//      = new FontData("Courier", 12, SWT.NO);
   Hashtable<String, PPrint>          atTable       = new Hashtable<String, PPrint>();
   Hashtable<String, Vector<Keyword>> keyTable      = new Hashtable<String, Vector<Keyword>>();
   Vector<WordRule>                   wordRules     = new Vector<WordRule>();
@@ -80,6 +82,7 @@ public class TextEditor implements ModifyListener, VerifyListener, VerifyKeyList
   boolean                            dirty         = false;
   boolean                            autoComplete  = true;
   char                               lastChar      = '\0';
+  int    							 syntaxDirty   = 0;
 
   public TextEditor(String id, String label, CTabFolder parent, boolean editable, boolean lineNumbers, String s) {
     this.id = id;
@@ -89,23 +92,24 @@ public class TextEditor implements ModifyListener, VerifyListener, VerifyKeyList
     text.setEditable(editable);
     text.setText(s);
     FontData[] fontData = Display.getDefault().getSystemFont().getFontData();
-    System.err.println("fontData.length: " + fontData.length);
-    for(int i = 0; i < fontData.length; i++) {
-    	System.err.println("fontData.[" + i + "]: " + fontData[i]);
-    }
+    this.fontData = fontData[0];
+//    System.err.println("fontData.length: " + fontData.length);
+//    for(int i = 0; i < fontData.length; i++) {
+//    	System.err.println("fontData.[" + i + "]: " + fontData[i]);
+//    }
     XModeler.getXModeler().getDisplay().loadFont("dejavu/DejaVuSansMono.ttf");
-    fontData[0].setName("DejaVu Sans Mono");
-    for(int i = 0; i < fontData.length; i++) {
-    	System.err.println("fontData.[" + i + "]: " + fontData[i]);
-    }
+    this.fontData.setName("DejaVu Sans Mono");
+//    for(int i = 0; i < fontData.length; i++) {
+//    	System.err.println("fontData.[" + i + "]: " + fontData[i]);
+//    }
     text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
 //    text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
     Color bg = Display.getDefault().getSystemColor(SWT.COLOR_WHITE);
     text.setBackground(bg);
-    text.addModifyListener(this);
     text.addExtendedModifyListener(this);
     text.addVerifyKeyListener(this);
     text.addMouseListener(this);
+    text.addMouseWheelListener(this);
     text.addLineBackgroundListener(this);
     text.addVerifyListener(this);
     text.addPaintObjectListener(this);
@@ -137,6 +141,7 @@ public class TextEditor implements ModifyListener, VerifyListener, VerifyKeyList
   private void addCommentWordRule() {
     // This should be done by XMF really. Add comment as the first multiline rule...
     addMultilineRule(getId(), "//", "\n", 204, 0, 0);
+    wordRules.addElement(new NumberWordRule());
   }
 
   public void addImage(Image image, int offset) {
@@ -207,6 +212,11 @@ public class TextEditor implements ModifyListener, VerifyListener, VerifyKeyList
   private void addStyles(int i, int length) {
     int start = backupToPossibleStyleStart(i);
     int end = start + length + (i - start);
+//	  final int EXTENDED_RANGE = 50;
+//	  int start = i - EXTENDED_RANGE;
+//	  if(start < 0) start = 0;
+//	  int end = i + length + EXTENDED_RANGE;
+//	  if(end > text.getText().length()) end = text.getText().length();
     StyleRange[] ranges = styleRange(start, end);
     for (StyleRange range : ranges)
       end = Math.max(end, range.start + range.length);
@@ -242,7 +252,7 @@ public class TextEditor implements ModifyListener, VerifyListener, VerifyKeyList
 
   private int backupToPossibleStyleStart(int start) {
     String s = text.getText();
-    while (start > 0 && isKeywordChar(s.charAt(start)))
+    while (start > 0 && s.charAt(start) != ' ') // isKeywordChar2(s.charAt(start)))
       start--;
     return start;
   }
@@ -465,10 +475,14 @@ public class TextEditor implements ModifyListener, VerifyListener, VerifyKeyList
   private boolean isAlpha(char c) {
     return 'a' <= c && c <= 'z';
   }
+  
+//  private boolean isNumber(char c) {
+//	    return '0' <= c && c <= '9';
+//  }
 
-  private boolean isAlphaChar(char c) {
-    return isLowerAlphaChar(c) || isUpperAlphaChar(c);
-  }
+//  private boolean isAlphaChar(char c) {
+//    return isLowerAlphaChar(c) || isUpperAlphaChar(c);
+//  }
 
   private boolean isCommand(MouseEvent event) {
     return (event.stateMask & SWT.COMMAND) != 0;
@@ -478,25 +492,29 @@ public class TextEditor implements ModifyListener, VerifyListener, VerifyKeyList
     return dirty;
   }
 
-  private boolean isKeywordChar(char c) {
-    return isAlphaChar(c) || c == '_';
-  }
+//  private boolean isKeywordChar(char c) {
+//    return isAlphaChar(c) || c == '_';
+//  }
+//  
+//  private boolean isKeywordChar2(char c) {
+//	    return isAlphaChar(c) || isNumber(c) || c == '_' || c == '.' || c == '-' ;
+//  }
 
   public boolean isLeft(MouseEvent event) {
     return event.button == 1;
   }
 
-  private boolean isLowerAlphaChar(char c) {
-    return 'a' <= c && 'z' >= c;
-  }
+//  private boolean isLowerAlphaChar(char c) {
+//    return 'a' <= c && 'z' >= c;
+//  }
 
   private boolean isRightClick(MouseEvent event) {
     return event.button == RIGHT_BUTTON;
   }
 
-  private boolean isUpperAlphaChar(char c) {
-    return 'A' <= c && 'Z' >= c;
-  }
+//  private boolean isUpperAlphaChar(char c) {
+//    return 'A' <= c && 'Z' >= c;
+//  }
 
   private void key(Vector<Keyword> keys) {
     if (keys.size() == 1) {
@@ -543,25 +561,54 @@ public class TextEditor implements ModifyListener, VerifyListener, VerifyKeyList
   public void lineGetBackground(LineBackgroundEvent event) {
     if (highlights.contains(event.lineOffset)) event.lineBackground = EditorClient.LINE_HIGHLIGHT;
   }
-
+  
   public void modifyText(ExtendedModifyEvent event) {
-    int start = event.start;
-    int length = event.length;
-    String text = event.replacedText;
-    if (length > 0) addStyles(start, length);
-  }
+		System.err.println("ExtendedModifyEvent: dirty?" + dirty);
+		if (!dirty) {
+			Message message = EditorClient.theClient().getHandler().newMessage("textDirty", 2);
+			message.args[0] = new Value(getId());
+			message.args[1] = new Value(true);
+			EditorClient.theClient().getHandler().raiseEvent(message);
 
-  public void modifyText(ModifyEvent event) {
-    addLines();
-    if (!dirty) {
-      Message message = EditorClient.theClient().getHandler().newMessage("textDirty", 2);
-      message.args[0] = new Value(getId());
-      message.args[1] = new Value(true);
-      EditorClient.theClient().getHandler().raiseEvent(message);
-      dirty = true;
-    }
-    if (autoComplete) checkKeywords();
-  }
+			dirty = true;
+		}
+//		addStyles();
+		int start = event.start;
+		int length = event.length;
+		if (length > 0)	addStyles(start, length);
+		if (autoComplete) checkKeywords();
+		
+		syntaxDirty++;
+		Display.getCurrent().timerExec(3000, new Runnable() {
+			@Override
+	    	public void run() {
+				syntaxDirty--;
+				if(syntaxDirty == 0) {
+					addStyles();
+				}
+			}
+		});
+	}
+  
+//  public void modifyText(ExtendedModifyEvent event) {
+////    int start = event.start;
+////    int length = event.length;
+////    String text = event.replacedText;
+////    if (length > 0) addStyles(start, length);
+//	  addStyles();
+//  }
+//
+//  public void modifyText(ModifyEvent event) {
+//    addLines();
+//    if (!dirty) {
+//      Message message = EditorClient.theClient().getHandler().newMessage("textDirty", 2);
+//      message.args[0] = new Value(getId());
+//      message.args[1] = new Value(true);
+//      EditorClient.theClient().getHandler().raiseEvent(message);
+//      dirty = true;
+//    }
+//    if (autoComplete) checkKeywords();
+//  }
 
   public void mouseDoubleClick(MouseEvent event) {
 
@@ -576,6 +623,19 @@ public class TextEditor implements ModifyListener, VerifyListener, VerifyKeyList
   public void mouseUp(MouseEvent event) {
 
   }
+
+  
+  @Override
+	public void mouseScrolled(MouseEvent e) {
+		if (((e.stateMask & SWT.CTRL) == SWT.CTRL) && (e.count > 0)) {
+			fontData.setHeight(Math.min(fontData.getHeight() + ZOOM, MAX_FONT_SIZE));
+			text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
+		}
+		if (((e.stateMask & SWT.CTRL) == SWT.CTRL) && (e.count < 0)) {
+			fontData.setHeight(Math.max(MIN_FONT_SIZE, fontData.getHeight() - ZOOM));
+			text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
+		}
+	}
 
   private void newline(int indent) {
     text.insert("\n");
@@ -673,13 +733,22 @@ public class TextEditor implements ModifyListener, VerifyListener, VerifyKeyList
     String s = text.getText();
     int prevChar = -1;
     for (int i = start; i < end; i++) {
+      StyleRange style = null;
       for (WordRule wordRule : wordRules) {
-        StyleRange style = wordRule.match(s, i, prevChar);
+        style = wordRule.match(s, i, prevChar);
         if (style != null) {
           ranges.add(style);
           i = i + style.length - 1;
           break;
         }
+      }
+      if(style == null) {
+    	  StyleRange defaultStyle = new StyleRange();
+    	  defaultStyle.start = i;
+    	  defaultStyle.length = 1;
+    	  defaultStyle.fontStyle = SWT.UNDERLINE_SINGLE;
+    	  defaultStyle.foreground = new Color(Display.getCurrent(), 0,0,0);
+    	  ranges.add(defaultStyle);
       }
       prevChar = s.charAt(i);
     }
@@ -687,21 +756,7 @@ public class TextEditor implements ModifyListener, VerifyListener, VerifyKeyList
   }
 
   private StyleRange[] styleRanges() {
-    java.util.List<StyleRange> ranges = new java.util.ArrayList<StyleRange>();
-    String s = text.getText();
-    int prevChar = -1;
-    for (int i = 0; i < s.length(); i++) {
-      for (WordRule wordRule : wordRules) {
-        StyleRange style = wordRule.match(s, i, prevChar);
-        if (style != null) {
-          ranges.add(style);
-          i = i + style.length - 1;
-          break;
-        }
-      }
-      prevChar = s.charAt(i);
-    }
-    return (StyleRange[]) ranges.toArray(new StyleRange[0]);
+	  return styleRange(0, text.getText().length());
   }
 
   private PPrint typeCase() {
@@ -713,8 +768,8 @@ public class TextEditor implements ModifyListener, VerifyListener, VerifyKeyList
       if (selectedImage != null)
         growSelectedImage();
       else {
-//        fontData.setHeight(Math.min(fontData.getHeight() + ZOOM, MAX_FONT_SIZE));
-//        text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
+        fontData.setHeight(Math.min(fontData.getHeight() + ZOOM, MAX_FONT_SIZE));
+        text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
         e.doit = false;
       }
     }
@@ -722,8 +777,8 @@ public class TextEditor implements ModifyListener, VerifyListener, VerifyKeyList
       if (selectedImage != null)
         shrinkSelectedImage();
       else {
-//        fontData.setHeight(Math.max(MIN_FONT_SIZE, fontData.getHeight() - ZOOM));
-//        text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
+        fontData.setHeight(Math.max(MIN_FONT_SIZE, fontData.getHeight() - ZOOM));
+        text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
         e.doit = false;
       }
     }
