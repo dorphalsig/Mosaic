@@ -22,10 +22,11 @@ public class MultiLineRule extends WordRule {
   }
 
   public StyleRange match(String s, int i, int prevChar) {
-    if (canStartKeyword(prevChar, word.charAt(0)) && s.startsWith(word, i) && s.indexOf(end, i + 1) >= 0) {
+	String sEscaped = s.replace("\\\"", "xx");
+    if (canStartKeyword(prevChar, word.charAt(0)) && sEscaped.startsWith(word, i) && sEscaped.indexOf(end, i + 1) >= 0) {
       StyleRange style = new StyleRange();
       style.start = i;
-      style.length = (s.indexOf(end, i + 1) - i) + 1;
+      style.length = (sEscaped.indexOf(end, i + 1) - i) + 1;
       style.fontStyle = SWT.UNDERLINE_SINGLE;
       style.foreground = color;
       return style;
