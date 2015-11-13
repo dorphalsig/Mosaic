@@ -82,7 +82,7 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
   boolean                            dirty         = false;
   boolean                            autoComplete  = true;
   char                               lastChar      = '\0';
-  int    							 syntaxDirty   = 0;
+  int    							 syntaxDirty   = 0; // counter for delaying syntax highlighting update
 
   public TextEditor(String id, String label, CTabFolder parent, boolean editable, boolean lineNumbers, String s) {
     this.id = id;
@@ -93,17 +93,9 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
     text.setText(s);
     FontData[] fontData = Display.getDefault().getSystemFont().getFontData();
     this.fontData = fontData[0];
-//    System.err.println("fontData.length: " + fontData.length);
-//    for(int i = 0; i < fontData.length; i++) {
-//    	System.err.println("fontData.[" + i + "]: " + fontData[i]);
-//    }
     XModeler.getXModeler().getDisplay().loadFont("dejavu/DejaVuSansMono.ttf");
     this.fontData.setName("DejaVu Sans Mono");
-//    for(int i = 0; i < fontData.length; i++) {
-//    	System.err.println("fontData.[" + i + "]: " + fontData[i]);
-//    }
     text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
-//    text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
     Color bg = Display.getDefault().getSystemColor(SWT.COLOR_WHITE);
     text.setBackground(bg);
     text.addExtendedModifyListener(this);
@@ -563,7 +555,6 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
   }
   
   public void modifyText(ExtendedModifyEvent event) {
-		System.err.println("ExtendedModifyEvent: dirty?" + dirty);
 		if (!dirty) {
 			Message message = EditorClient.theClient().getHandler().newMessage("textDirty", 2);
 			message.args[0] = new Value(getId());
@@ -572,7 +563,6 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
 
 			dirty = true;
 		}
-//		addStyles();
 		int start = event.start;
 		int length = event.length;
 		if (length > 0)	addStyles(start, length);
@@ -589,26 +579,6 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
 			}
 		});
 	}
-  
-//  public void modifyText(ExtendedModifyEvent event) {
-////    int start = event.start;
-////    int length = event.length;
-////    String text = event.replacedText;
-////    if (length > 0) addStyles(start, length);
-//	  addStyles();
-//  }
-//
-//  public void modifyText(ModifyEvent event) {
-//    addLines();
-//    if (!dirty) {
-//      Message message = EditorClient.theClient().getHandler().newMessage("textDirty", 2);
-//      message.args[0] = new Value(getId());
-//      message.args[1] = new Value(true);
-//      EditorClient.theClient().getHandler().raiseEvent(message);
-//      dirty = true;
-//    }
-//    if (autoComplete) checkKeywords();
-//  }
 
   public void mouseDoubleClick(MouseEvent event) {
 

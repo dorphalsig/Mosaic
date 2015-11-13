@@ -22,7 +22,7 @@ public class MultiLineRule extends WordRule {
   }
 
   public StyleRange match(String s, int i, int prevChar) {
-	String sEscaped = s.replace("\\\"", "xx");
+	String sEscaped = s.replace("\\\"", "xx"); // for "..." to ignore \" 
     if (canStartKeyword(prevChar, word.charAt(0)) && sEscaped.startsWith(word, i) && sEscaped.indexOf(end, i + 1) >= 0) {
       StyleRange style = new StyleRange();
       style.start = i;
