@@ -130,7 +130,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       String path = location.toString();
       path = path.substring(0, path.length() - 4); // delete "/bin" from string
       path += "web/index.html";
-      System.err.println(path);
+//      System.err.println("getWelcomePage: >" + path + "<");
       return new Value(path);
     }
     if (message.hasName("getText")) { return getText(message); }
@@ -143,7 +143,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
 
   @Override
   public void changing(LocationEvent event) {
-	  System.err.println("changing: " + event);
+//	  System.err.println("changing: " + event);
 //	  System.err.println("browserLocked: " + browserLocked);
     if (browserLocked) {
       event.doit = false;
@@ -152,7 +152,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       Message message = handler.newMessage("urlRequest", 2);
       message.args[0] = new Value(getId(browser));
       message.args[1] = new Value(event.location);
-      System.err.println("message: " + message);
+//      System.err.println("message: " + message);
       handler.raiseEvent(message);
     } else {
     	browserLocked = true;
@@ -455,18 +455,17 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
         public void run() {
           browserLocked = false;
           String s = url.strValue();
-          System.err.println("message.url: " + url.strValue());
+//          System.err.println("message.url: >" + url.strValue() +"<");
           if (isLikelyToBeHTML(s)) //s.startsWith("<html>"))
             browser.setText(s);
-          else browser.setUrl(url.strValue()+" ");
+          else browser.setUrl(url.strValue()); // +" "?
           
           tabFolder.setFocus();
           tabFolder.setSelection(tabs.get(id.strValue()));
         }
 
 		private boolean isLikelyToBeHTML(String s) {
-			System.err.println("isLikelyToBeHTML?");
-			System.err.println(url.strValue());
+//			System.err.println("isLikelyToBeHTML?" + url.strValue());
 			s = s.trim();
 			s = s.toLowerCase();
 			if(s.startsWith("<html>")) return true;
