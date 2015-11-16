@@ -21,7 +21,7 @@ public class AutoComplete {
 	}
 
 	public boolean isDisplayOptions() { 		    return MAIN_SWITCH && DISPLAY_OPTIONS; 	}
-	public boolean isQuadrupleColonAddPath() { 		return MAIN_SWITCH && COLON_ADD_PATH; 	}
+	public boolean isColonAddPath() { 		        return MAIN_SWITCH && COLON_ADD_PATH; 	}
 	public boolean isRightArrowFillPatterns() { 	return MAIN_SWITCH && ARROW_FILL_PATTERNS; 	}
 	public boolean isSquareStartCollection() { 		return MAIN_SWITCH && SQUARE_START_COLLECTION; 	}
 	public boolean isNineAddParenthesis() { 		return MAIN_SWITCH && COMPLETE_PARENTHESIS; 	}

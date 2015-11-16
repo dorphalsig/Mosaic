@@ -157,13 +157,16 @@ public void addCommand(StyledText text, String command) {
           }
           goToEnd();
           inputStart = text.getContent().getCharCount();
-        } else if (e.keyCode == '.' && ((e.stateMask & SWT.CTRL) == SWT.CTRL) && autoComplete.isDisplayOptions()) {
+//        } else if (e.keyCode == '.' && ((e.stateMask & SWT.CTRL) == SWT.CTRL) && autoComplete.isDisplayOptions()) {
+        } else if (e.keyCode == '.' || e.keyCode == ' ' && ((e.stateMask & SWT.CTRL) == SWT.CTRL) && autoComplete.isDisplayOptions()) {
           // Display options based on the type of the input.
           StyledTextContent content = text.getContent();
-          String command = content.getTextRange(inputStart, text.getCaretOffset() - inputStart);
-          insert(".");
-	      WorkbenchClient.theClient().dotConsole(command); 
-        } else if (e.keyCode == ';' && ((e.stateMask & SWT.SHIFT) == SWT.SHIFT) && autoComplete.isQuadrupleColonAddPath()) {
+          if(text.getCaretOffset() >=  inputStart) {
+        	  String command = content.getTextRange(inputStart, text.getCaretOffset() - inputStart);
+//        	  if(e.keyCode == '.') insert(".");
+	          WorkbenchClient.theClient().dotConsole(command); 
+          }
+        } else if (e.keyCode == ';' && ((e.stateMask & SWT.SHIFT) == SWT.SHIFT) && autoComplete.isColonAddPath()) {
           // We might have a :: where there is a path to the left ...
           StyledTextContent content = text.getContent();
           String command = content.getTextRange(inputStart, text.getCaretOffset() - inputStart);
@@ -366,11 +369,13 @@ public void addCommand(StyledText text, String command) {
     XModeler.getXModeler().getDisplay().syncExec(new Runnable() {
       public void run() {
         try {
-          Menu menu = getDotPopup(message);
+//          Menu menu = getDotPopup(message);
           Point p = text.getCaret().getLocation();
           Point displayPoint = text.toDisplay(p);
-          menu.setLocation(displayPoint);
-          menu.setVisible(true);
+          String insertText = new AutoCompleteBox(XModeler.getXModeler().getShell(), message).show(displayPoint);
+          if(insertText != null) insert(insertText);
+//          menu.setLocation(displayPoint);
+//          menu.setVisible(true);
         } catch (Throwable t) {
           t.printStackTrace();
         }
