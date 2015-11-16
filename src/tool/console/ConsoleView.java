@@ -18,6 +18,7 @@ import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.layout.FillLayout;
@@ -53,7 +54,8 @@ public class ConsoleView {
   StyledText           text            = null;
   History              history         = new History();
   int                  inputStart      = 0;
-  Font                 textFont        = new Font(Display.getCurrent(), "Monaco", 14, SWT.NORMAL);
+  FontData			   fontData;
+//  Font                 textFont        = new Font(Display.getCurrent(), "Monaco", 14, SWT.NORMAL);
   Color                backgroundColor = ColorManager.getColor(new RGB(255, 255, 255));
   Color                foregroundColor = ColorManager.getColor(new RGB(0, 0, 0));
   int                  waterMark       = 1000;
@@ -67,16 +69,31 @@ public class ConsoleView {
     text = new StyledText(c1, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
     text.setWordWrap(true);
     text.setBackground(backgroundColor);
-    text.setFont(textFont);
+//    text.setFont(textFont);
+    setFont("dejavu/DejaVuSansMono.ttf", "DejaVu Sans Mono");
     addVerifyListener(text);
     tabItem.setControl(c1);
   }
 
-  public void addCommand(StyledText text, String command) {
+	public final void setFont(String fileName, String name) {
+		int oldHeight = fontData==null?13:fontData.getHeight();
+		FontData[] fontData = Display.getDefault().getSystemFont().getFontData();
+		this.fontData = fontData[0];
+//		File root = getB
+//		URL url = ConsoleView.class.getResource(fileName);
+		XModeler.getXModeler().getDisplay().loadFont(fileName);
+		this.fontData.setName(name);
+		this.fontData.setHeight(oldHeight);
+		text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
+	}
+
+public void addCommand(StyledText text, String command) {
     int length = text.getCharCount() - inputStart;
     text.replaceTextRange(inputStart, length, command);
     goToEnd();
   }
+
+ boolean fontToggleTest = false;
 
   public void addVerifyListener(final StyledText text) {
     text.addVerifyListener(new VerifyListener() {
@@ -107,13 +124,20 @@ public class ConsoleView {
           String command = recallFromHistoryBackward();
           if (command != "") addCommand(text, command);
           e.doit = false;
-        } else if (e.keyCode == '=' && ((e.stateMask & SWT.CTRL) == SWT.CTRL) && ((e.stateMask & SWT.SHIFT) == SWT.SHIFT)) {
-          textFont = new Font(Display.getCurrent(), textFont.getFontData()[0].getName(), Math.min(MAX_FONT_HEIGHT, textFont.getFontData()[0].getHeight() + FONT_INC), SWT.NORMAL);
-          text.setFont(textFont);
+        } else if (e.keyCode == '+' && ((e.stateMask & SWT.CTRL) == SWT.CTRL)) {
+		  fontData.setHeight(Math.min(fontData.getHeight() + FONT_INC, MAX_FONT_HEIGHT));
+	      text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
           e.doit = false;
-        } else if (e.keyCode == '-' && ((e.stateMask & SWT.CTRL) == SWT.CTRL) && ((e.stateMask & SWT.SHIFT) == SWT.SHIFT)) {
-          textFont = new Font(Display.getCurrent(), textFont.getFontData()[0].getName(), Math.max(MIN_FONT_HEIGHT, textFont.getFontData()[0].getHeight() - FONT_INC), SWT.NORMAL);
-          text.setFont(textFont);
+        } else if (e.keyCode == '-' && ((e.stateMask & SWT.CTRL) == SWT.CTRL)) {
+		  fontData.setHeight(Math.max(MIN_FONT_HEIGHT, fontData.getHeight() - FONT_INC));
+	      text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
+          e.doit = false;
+        } else if (e.keyCode == 't' && ((e.stateMask & SWT.CTRL) == SWT.CTRL)) {
+	      fontToggleTest =! fontToggleTest;
+	      if(fontToggleTest) 
+	    	  setFont("dejavu/DejaVuSans.ttf", "DejaVu Sans");
+	      else 
+	    	  setFont("dejavu/DejaVuSansMono.ttf", "DejaVu Sans Mono");
           e.doit = false;
         } else if (e.keyCode == 'a' && ((e.stateMask & SWT.CTRL) == SWT.CTRL)) {
           autoComplete.toggleMainSwitch();
@@ -133,11 +157,12 @@ public class ConsoleView {
           }
           goToEnd();
           inputStart = text.getContent().getCharCount();
-        } else if (e.keyCode == '.' && ((e.stateMask & SWT.SHIFT) != SWT.SHIFT) && autoComplete.isDisplayOptions()) {
+        } else if (e.keyCode == '.' && ((e.stateMask & SWT.CTRL) == SWT.CTRL) && autoComplete.isDisplayOptions()) {
           // Display options based on the type of the input.
           StyledTextContent content = text.getContent();
           String command = content.getTextRange(inputStart, text.getCaretOffset() - inputStart);
-          WorkbenchClient.theClient().dotConsole(command);
+          insert(".");
+	      WorkbenchClient.theClient().dotConsole(command); 
         } else if (e.keyCode == ';' && ((e.stateMask & SWT.SHIFT) == SWT.SHIFT) && autoComplete.isQuadrupleColonAddPath()) {
           // We might have a :: where there is a path to the left ...
           StyledTextContent content = text.getContent();
@@ -161,7 +186,7 @@ public class ConsoleView {
             backup(1);
             e.doit = false;
           }
-        } else if (e.keyCode == '9' && ((e.stateMask & SWT.SHIFT) == SWT.SHIFT) && autoComplete.isNineAddParenthesis()) {
+        } else if (e.character == '(' && autoComplete.isNineAddParenthesis()) {
           // Insert the corresponding parenthesis...
           insert("()");
           backup(1);
@@ -218,7 +243,7 @@ public class ConsoleView {
   }
 
   public void dispose() {
-    textFont.dispose();
+//    textFont.dispose();
     backgroundColor.dispose();
     foregroundColor.dispose();
   }
@@ -228,9 +253,9 @@ public class ConsoleView {
   }
 
   public void getPreferences() {
-    if (textFont != null) textFont.dispose();
+//    if (textFont != null) textFont.dispose();
     if (backgroundColor != null) backgroundColor.dispose();
-    if (foregroundColor != null) backgroundColor.dispose();
+    if (foregroundColor != null) foregroundColor.dispose();
   }
 
   public void goToEnd() {

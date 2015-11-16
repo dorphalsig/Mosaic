@@ -455,7 +455,6 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
         public void run() {
           browserLocked = false;
           String s = url.strValue();
-//          System.err.println("message.url: >" + url.strValue() +"<");
           if (isLikelyToBeHTML(s)) //s.startsWith("<html>"))
             browser.setText(s);
           else browser.setUrl(url.strValue()); // +" "?
@@ -465,7 +464,6 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
         }
 
 		private boolean isLikelyToBeHTML(String s) {
-//			System.err.println("isLikelyToBeHTML?" + url.strValue());
 			s = s.trim();
 			s = s.toLowerCase();
 			if(s.startsWith("<html>")) return true;
