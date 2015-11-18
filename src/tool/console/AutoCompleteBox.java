@@ -6,6 +6,8 @@ import java.util.Vector;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.TraverseEvent;
 import org.eclipse.swt.events.TraverseListener;
 import org.eclipse.swt.graphics.Color;
@@ -34,16 +36,12 @@ public class AutoCompleteBox extends Dialog {
 	public AutoCompleteBox(Shell owner, Message message) {
 		super(owner);
 		
-//	    HashSet<String> labels = new HashSet<String>();
 	    Value[] pairs = message.args[0].values;
 	    for (Value value : pairs) {
 	      Value[] pair = value.values;
-//	      String type = pair[0].strValue();
 	      String label = pair[1].strValue();
 	      labels.add(new Suggestion(label));
 	    }
-//	    Vector<String> sortedLabels = new Vector<String>(labels);
-//	    Collections.sort(sortedLabels);
 	    
 	    if(labels.size() <= 0) {
 	    	labels.add(new Suggestion("Aardvark"));
@@ -86,7 +84,7 @@ public class AutoCompleteBox extends Dialog {
 		gridData.verticalAlignment = SWT.FILL;
 		gridData.grabExcessVerticalSpace = true;
 		listOfSuggestions.setLayoutData(gridData);
-//		listOfSuggestions.addTraverseListener(new MyListListener());
+		listOfSuggestions.addMouseListener(new MyListListener());
 		
 		addAllToListSortedBy("");
         
@@ -203,17 +201,12 @@ public class AutoCompleteBox extends Dialog {
 		}
 	}
 	
-//	private class MyListListener implements TraverseListener {
-//
-//		@Override
-//		public void keyTraversed(TraverseEvent event) {
-////			if (event.detail == SWT.TRAVERSE_RETURN) {
-////			    if(listOfSuggestions.getSelectionIndex() != -1) {
-////			    	result = listOfSuggestions.getSelection()[0];
-////			    } else {
-////			    	result = searchField.getText();
-////			    }
-////			}
-//		}
-//	}
+	private class MyListListener extends MouseAdapter {
+		@Override
+		public void mouseDoubleClick(MouseEvent e) {
+		    if(listOfSuggestions.getSelectionIndex() != -1) {
+		    	result = listOfSuggestions.getSelection()[0];
+		    }
+		}
+	}
 }

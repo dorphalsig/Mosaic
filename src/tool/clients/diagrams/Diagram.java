@@ -38,63 +38,7 @@ public class Diagram implements Display, MouseListener, PaintListener, MouseMove
   enum MouseMode {
     NONE, SELECTED, NEW_EDGE, DOUBLE_CLICK, MOVE_TARGET, MOVE_SOURCE, RESIZE_TOP_LEFT, RESIZE_TOP_RIGHT, RESIZE_BOTTOM_LEFT, RESIZE_BOTTOM_RIGHT, RUBBER_BAND
   };
-
-  class Polar {
-
-    double magnitude;
-    double angle;
-
-    public Polar(double magnitude, double angle) {
-      super();
-      this.magnitude = magnitude;
-      this.angle = angle;
-    }
-
-    public Polar add(Polar p) {
-      return toRectangular().add(p.toRectangular()).toPolar();
-    }
-
-    public Polar negate() {
-      return toRectangular().negate().toPolar();
-    }
-
-    public Rectangular toRectangular() {
-      return new Rectangular(magnitude * Math.cos(angle), magnitude * Math.sin(angle));
-    }
-
-    public String toString() {
-      return toRectangular().toString();
-    }
-  }
-
-  class Rectangular {
-
-    double x;
-    double y;
-
-    public Rectangular(double x, double y) {
-      super();
-      this.x = x;
-      this.y = y;
-    }
-
-    public Rectangular add(Rectangular r) {
-      return new Rectangular(x + r.x, y + r.y);
-    }
-
-    public Rectangular negate() {
-      return new Rectangular(-x, -y);
-    }
-
-    public Polar toPolar() {
-      return new Polar(Math.sqrt(x * x + y * y), Math.atan2(y, x));
-    }
-
-    public String toString() {
-      return "Rect(" + x + "," + y + ")";
-    }
-  }
-
+  
   public static Color color(int code) {
     return XModeler.getXModeler().getDisplay().getSystemColor(code);
   }
@@ -170,21 +114,6 @@ public class Diagram implements Display, MouseListener, PaintListener, MouseMove
     this.id = id;
   }
 
-  public void align() {
-    for (Edge edge : edges)
-      edge.align();
-  }
-
-  private boolean at(int x1, int y1, int x2, int y2) {
-    return x1 == x2 && y1 == y2;
-  }
-
-  private boolean between(int v, int v1, int v2) {
-    if (v1 < v2)
-      return v >= v1 && v <= v2;
-    else return v >= v2 && v <= v1;
-  }
-
   private void checkEdgeCreation(int x, int y) {
     Port port = selectPort(x, y);
     if (port != null) {
@@ -240,10 +169,6 @@ public class Diagram implements Display, MouseListener, PaintListener, MouseMove
     height = (int) points[1];
     canvas.setSize(width, height);
     scroller.setMinSize(width, height);
-  }
-
-  private void clear(GC gc) {
-    gc.fillRectangle(0, 0, canvas.getSize().x, canvas.getSize().y);
   }
 
   private void copyToClipboard() {
@@ -417,18 +342,6 @@ public class Diagram implements Display, MouseListener, PaintListener, MouseMove
       node.editText(id);
   }
 
-  public Canvas getCanvas() {
-    return canvas;
-  }
-
-  public SashForm getContainer() {
-    return container;
-  }
-
-  public Color getDiagramBackgroundColor() {
-    return diagramBackgroundColor;
-  }
-
   public Display getDisplay(String id) {
     for (Display display : displays)
       if (display.getId().equals(id)) return display;
@@ -457,18 +370,6 @@ public class Diagram implements Display, MouseListener, PaintListener, MouseMove
         return COLOURS[edges.indexOf(edge) % COLOURS.length];
       } else return Diagram.BLACK;
     } else return Diagram.BLACK;
-  }
-
-  public String getEdgeCreationType() {
-    return edgeCreationType;
-  }
-
-  public Vector<Edge> getEdges() {
-    return edges;
-  }
-
-  public String getId() {
-    return id;
   }
 
   Node getNode(Port port) {
@@ -500,10 +401,6 @@ public class Diagram implements Display, MouseListener, PaintListener, MouseMove
       for (Port port : node.getPorts().values())
         if (port.getId().equals(id)) return port;
     return null;
-  }
-
-  public int getZoom() {
-    return zoom;
   }
 
   private void handleDoubleClick(GC gc) {
@@ -544,36 +441,6 @@ public class Diagram implements Display, MouseListener, PaintListener, MouseMove
     return points;
   }
 
-  private Hashtable<Edge, Hashtable<Edge, Vector<Point>>> intersectionTable() {
-    Hashtable<Edge, Hashtable<Edge, Vector<Point>>> iTable = new Hashtable<Edge, Hashtable<Edge, Vector<Point>>>();
-    for (Edge e1 : edges) {
-      iTable.put(e1, new Hashtable<Edge, Vector<Point>>());
-      for (Edge e2 : edges) {
-        if (e1 != e2) {
-          iTable.get(e1).put(e2, new Vector<Point>());
-          for (int i = 1; i < e1.getWaypoints().size(); i++) {
-            for (int j = 1; j < e2.getWaypoints().size(); j++) {
-              int x1 = e1.getWaypoints().elementAt(i - 1).getX();
-              int y1 = e1.getWaypoints().elementAt(i - 1).getY();
-              int x2 = e1.getWaypoints().elementAt(i).getX();
-              int y2 = e1.getWaypoints().elementAt(i).getY();
-              int x3 = e2.getWaypoints().elementAt(j - 1).getX();
-              int y3 = e2.getWaypoints().elementAt(j - 1).getY();
-              int x4 = e2.getWaypoints().elementAt(j).getX();
-              int y4 = e2.getWaypoints().elementAt(j).getY();
-              Point p = Edge.intersect(x1, y1, x2, y2, x3, y3, x4, y4);
-              int x = p.x;
-              int y = p.y;
-              if (!at(x, y, x1, y1) && !at(x, y, x2, y2) && !at(x, y, x3, y3) && !at(x, y, x4, y4) && onLine(x, y, x1, y1, x2, y2) && onLine(x, y, x3, y3, x4, y4)) {
-                iTable.get(e1).get(e2).add(p);
-              }
-            }
-          }
-        }
-      }
-    }
-    return iTable;
-  }
 
   private boolean isCloseToOtherEdge(Edge edge) {
     for (Edge e : edges) {
@@ -660,11 +527,13 @@ public class Diagram implements Display, MouseListener, PaintListener, MouseMove
   }
 
   private void layout() {
-    Hashtable<Node, Polar> positions = new Hashtable<Node, Polar>();
+    Hashtable<Node, Point2D> positions = new Hashtable<Node, Point2D>();
     for (int i = 0; i < DEFAULT_MAX_ITERATIONS; i++) {
       for (Node current : nodes) {
         if (!current.atOrigin() && !selection.contains(current)) {
-          Polar force = positions.containsKey(current) ? positions.get(current) : new Rectangular(current.getX(), current.getY()).toPolar();
+          Point2D force = positions.containsKey(current) 
+        		  ? positions.get(current) 
+        		  : Point2D.createRectangular(current.getX(), current.getY());
           for (Node other : nodes) {
             if (!current.sameLocation(other)) {
               force = force.add(nodeRepulsion(current, other));
@@ -683,9 +552,8 @@ public class Diagram implements Display, MouseListener, PaintListener, MouseMove
       }
       for (Node current : nodes) {
         if (positions.containsKey(current)) {
-          Polar polar = positions.get(current);
-          Rectangular rectangular = polar.toRectangular();
-          current.move((int) Math.max(0, rectangular.x), (int) Math.max(0, rectangular.y));
+          Point2D point = positions.get(current);
+          current.move((int) Math.max(0, point.getX()), (int) Math.max(0, point.getY()));
         }
       }
     }
@@ -1021,7 +889,7 @@ public class Diagram implements Display, MouseListener, PaintListener, MouseMove
     redraw();
   }
 
-  private Polar nodeAttraction(Node target, Node source, int springLength) {
+  private Point2D nodeAttraction(Node target, Node source, int springLength) {
     int x1 = target.getX();
     int y1 = target.getY();
     int x2 = source.getX();
@@ -1031,14 +899,14 @@ public class Diagram implements Display, MouseListener, PaintListener, MouseMove
     double magnitude = Math.sqrt((dx * dx) + (dy * dy));
     double force = ATTRACTION_CONSTANT * (Math.max(0, magnitude - springLength));
     if (magnitude <= 0.0001)
-      return new Polar(0.0, 0.0);
+      return Point2D.ZERO;
     else {
       double angle = Math.atan2(dy, dx);
-      return new Polar(force, angle).negate();
+      return Point2D.createPolar(force, angle).negate();
     }
   }
 
-  private Polar nodeRepulsion(Node target, Node source) {
+  private Point2D nodeRepulsion(Node target, Node source) {
     int x1 = target.getX();
     int y1 = target.getY();
     int x2 = source.getX();
@@ -1048,16 +916,14 @@ public class Diagram implements Display, MouseListener, PaintListener, MouseMove
     double magnitude = Math.sqrt((dx * dx) + (dy * dy));
     double force = REPULSION_CONSTANT / (magnitude * magnitude);
     if (magnitude < 0.0001)
-      return new Polar(0.0, 0.0);
+      return Point2D.ZERO;
     else {
       double angle = Math.atan2(dy, dx);
-      return new Polar(force, angle);
+      return Point2D.createPolar(force, angle);
     }
   }
 
-  private boolean onLine(int x, int y, int x1, int y1, int x2, int y2) {
-    return between(x, x1, x2) && between(y, y1, y2);
-  }
+
 
   public void paint(GC gc, int x, int y) {
     // This is called when a diagram is a display element. The offsets need to be
@@ -1098,20 +964,6 @@ public class Diagram implements Display, MouseListener, PaintListener, MouseMove
             }
           }
         }
-      }
-    }
-  }
-
-  private void paintEdges(GC gc) {
-    Hashtable<Edge, Hashtable<Edge, Vector<Point>>> iTable = intersectionTable();
-    for (Edge edge : edges) {
-      if ((mode != MouseMode.MOVE_SOURCE && mode != MouseMode.MOVE_TARGET) || (selectedEdge != edge)) {
-        Color color = getEdgeColor(edge);
-        edge.paint(gc, color, showWaypoints, intersectionPoints(edge, iTable));
-      } else {
-        if (mode == MouseMode.MOVE_SOURCE) {
-          edge.paintSourceMoving(gc, lastX, lastY);
-        } else edge.paintTargetMoving(gc, lastX, lastY);
       }
     }
   }
@@ -1177,24 +1029,28 @@ public class Diagram implements Display, MouseListener, PaintListener, MouseMove
   }
 
   private void paintOn(GC gc) {
-	    gc.setAntialias(SWT.ON);
-	    gc.setTextAntialias(SWT.ON);
-	    gc.setInterpolation(SWT.HIGH);
-	    gc.setAdvanced(true);
-	    gc.setTransform(transform);
-	    clear(gc);
-	    paintDisplays(gc);
-	    paintNewEdge(gc);
-	    paintResizing(gc);
-	    paintEdges(gc);
-	    paintAlignment(gc);
-	    paintNodes(gc);
-	    paintHover(gc);
-	    paintSelected(gc);
-	    paintRubberBand(gc);
-	    paintNewNode(gc);
-	    handleDoubleClick(gc);
-	  }
+    gc.setAntialias(SWT.ON);
+    gc.setTextAntialias(SWT.ON);
+    gc.setInterpolation(SWT.HIGH);
+    gc.setAdvanced(true);
+    gc.setTransform(transform);
+    clear(gc);
+    paintDisplays(gc);
+    paintNewEdge(gc);
+    paintResizing(gc);
+    paintEdges(gc);
+    paintAlignment(gc);
+    paintNodes(gc);
+    paintHover(gc);
+    paintSelected(gc);
+    paintRubberBand(gc);
+    paintNewNode(gc);
+    handleDoubleClick(gc);
+  }
+
+  private void clear(GC gc) {
+    gc.fillRectangle(0, 0, canvas.getSize().x, canvas.getSize().y);
+  }
 	  
   private void paintNewNode(GC gc) {	  
 		if(nodeCreationType == null) return;
@@ -1623,6 +1479,148 @@ public class Diagram implements Display, MouseListener, PaintListener, MouseMove
     return "Diagram(" + nodes + "," + edges + ")";
   }
 
+
+  public void action(String id) {
+    EventHandler eventHandler = DiagramClient.theClient().getHandler();
+    Message message = eventHandler.newMessage("action", 2);
+    message.args[0] = new Value(getId());
+    message.args[1] = new Value(id);
+    eventHandler.raiseEvent(message);
+  }
+  
+  
+  /*
+   * The following functions are used to paint edges
+   */
+
+  private boolean isOnLine(int x, int y, int x1, int y1, int x2, int y2) {
+    return isBetween(x, x1, x2) && isBetween(y, y1, y2);
+  }
+	  
+  private boolean isAt(int x1, int y1, int x2, int y2) {
+    return x1 == x2 && y1 == y2;
+  }
+
+  private boolean isBetween(int v, int v1, int v2) {
+    if (v1 < v2)
+      return v >= v1 && v <= v2;
+    else return v >= v2 && v <= v1;
+  }
+  
+  private Hashtable<Edge, Hashtable<Edge, Vector<Point>>> getIntersectionTable() {
+    Hashtable<Edge, Hashtable<Edge, Vector<Point>>> iTable = new Hashtable<Edge, Hashtable<Edge, Vector<Point>>>();
+    for (Edge e1 : edges) {
+      iTable.put(e1, new Hashtable<Edge, Vector<Point>>());
+      for (Edge e2 : edges) {
+        if (e1 != e2) {
+          iTable.get(e1).put(e2, new Vector<Point>());
+          for (int i = 1; i < e1.getWaypoints().size(); i++) {
+            for (int j = 1; j < e2.getWaypoints().size(); j++) {
+              int x1 = e1.getWaypoints().elementAt(i - 1).getX();
+              int y1 = e1.getWaypoints().elementAt(i - 1).getY();
+              int x2 = e1.getWaypoints().elementAt(i).getX();
+              int y2 = e1.getWaypoints().elementAt(i).getY();
+              int x3 = e2.getWaypoints().elementAt(j - 1).getX();
+              int y3 = e2.getWaypoints().elementAt(j - 1).getY();
+              int x4 = e2.getWaypoints().elementAt(j).getX();
+              int y4 = e2.getWaypoints().elementAt(j).getY();
+              Point p = Edge.intersect(x1, y1, x2, y2, x3, y3, x4, y4);
+              int x = p.x;
+              int y = p.y;
+              if (!isAt(x, y, x1, y1) && !isAt(x, y, x2, y2) && !isAt(x, y, x3, y3) && !isAt(x, y, x4, y4) && isOnLine(x, y, x1, y1, x2, y2) && isOnLine(x, y, x3, y3, x4, y4)) {
+                iTable.get(e1).get(e2).add(p);
+              }
+            }
+          }
+        }
+      }
+    }
+    return iTable;
+  }
+  
+  private void paintEdges(GC gc) {
+    Hashtable<Edge, Hashtable<Edge, Vector<Point>>> iTable = getIntersectionTable();
+    for (Edge edge : edges) {
+      if ((mode != MouseMode.MOVE_SOURCE && mode != MouseMode.MOVE_TARGET) || (selectedEdge != edge)) {
+        Color color = getEdgeColor(edge);
+        edge.paint(gc, color, showWaypoints, intersectionPoints(edge, iTable));
+      } else {
+        if (mode == MouseMode.MOVE_SOURCE) {
+          edge.paintSourceMoving(gc, lastX, lastY);
+        } else edge.paintTargetMoving(gc, lastX, lastY);
+      }
+    }
+  }
+
+  /*
+   * The previous functions are used to paint edges
+   *
+   * The following functions are used for Zoom
+   * 
+   * Zoom In/Out can be called by a KeyEvent or by DiagramClient
+   * Zoom 1 is still unused
+   * Why is zoom int? is it 100-based?
+   */
+
+  public void zoom1() {
+      setZoom(100);
+  }
+  
+  public void zoomIn() {
+    if (getZoom() < MAX_ZOOM) {
+      setZoom(getZoom() + ZOOM_INC);
+      zoomTo();
+    }
+  }
+
+  public void zoomOut() {
+    if (getZoom() > MIN_ZOOM) {
+      setZoom(getZoom() - ZOOM_INC);
+      zoomTo();
+    }
+  }
+  
+  public int getZoom() {
+    return zoom;
+  }
+
+  private void zoomTo() {
+    EventHandler eventHandler = DiagramClient.theClient().getHandler();
+    Message message = eventHandler.newMessage("zoomChanged", 2);
+    message.args[0] = new Value(getId());
+    message.args[1] = new Value(zoom);
+    eventHandler.raiseEvent(message);
+  }
+
+  /*
+   * The previous functions are used for Zoom
+   *
+   * The following functions are simply forwarding
+   */
+  
+  public void align() {
+    for (Edge edge : edges)
+      edge.align();
+  }
+
+  public void hide(String id) {
+    for (Node node : nodes)
+      node.hide(id);
+    for (Edge edge : edges)
+      edge.hide(id);
+  }
+  
+  public void show(String id) {
+    for (Node node : nodes)
+      node.show(id);
+    for (Edge edge : edges)
+      edge.show(id);
+  }
+  
+  /*
+   *  XML Save Load
+   */
+
   public void writeXML(PrintStream out) {
     writeXML("", out);
   }
@@ -1638,48 +1636,18 @@ public class Diagram implements Display, MouseListener, PaintListener, MouseMove
       edge.writeXML(out);
     out.print("</Diagram>");
   }
+  
+  /*
+   * Simple Getters
+   */
+  
+  public Canvas getCanvas() { return canvas; }
+  public SashForm getContainer() { return container; }
+  public Color getDiagramBackgroundColor() { return diagramBackgroundColor;}
+  public String getEdgeCreationType() { return edgeCreationType; }
+  public Vector<Edge> getEdges() { return edges; }
+  public String getId() { return id; }
 
-  public void zoomIn() {
-    if (getZoom() < MAX_ZOOM) {
-      setZoom(getZoom() + ZOOM_INC);
-      zoomTo();
-    }
-  }
 
-  public void zoomOut() {
-    if (getZoom() > MIN_ZOOM) {
-      setZoom(getZoom() - ZOOM_INC);
-      zoomTo();
-    }
-  }
 
-  private void zoomTo() {
-    EventHandler eventHandler = DiagramClient.theClient().getHandler();
-    Message message = eventHandler.newMessage("zoomChanged", 2);
-    message.args[0] = new Value(getId());
-    message.args[1] = new Value(zoom);
-    eventHandler.raiseEvent(message);
-  }
-
-  public void action(String id) {
-    EventHandler eventHandler = DiagramClient.theClient().getHandler();
-    Message message = eventHandler.newMessage("action", 2);
-    message.args[0] = new Value(getId());
-    message.args[1] = new Value(id);
-    eventHandler.raiseEvent(message);
-  }
-
-  public void hide(String id) {
-    for (Node node : nodes)
-      node.hide(id);
-    for (Edge edge : edges)
-      edge.hide(id);
-  }
-
-  public void show(String id) {
-    for (Node node : nodes)
-      node.show(id);
-    for (Edge edge : edges)
-      edge.show(id);
-  }
 }

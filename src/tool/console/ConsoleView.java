@@ -158,7 +158,7 @@ public void addCommand(StyledText text, String command) {
           goToEnd();
           inputStart = text.getContent().getCharCount();
 //        } else if (e.keyCode == '.' && ((e.stateMask & SWT.CTRL) == SWT.CTRL) && autoComplete.isDisplayOptions()) {
-        } else if (e.keyCode == '.' || e.keyCode == ' ' && ((e.stateMask & SWT.CTRL) == SWT.CTRL) && autoComplete.isDisplayOptions()) {
+        } else if (e.character == '.' || e.keyCode == ' ' && ((e.stateMask & SWT.CTRL) == SWT.CTRL) && autoComplete.isDisplayOptions()) {
           // Display options based on the type of the input.
           StyledTextContent content = text.getContent();
           if(text.getCaretOffset() >=  inputStart) {
