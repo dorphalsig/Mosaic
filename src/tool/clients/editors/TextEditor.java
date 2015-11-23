@@ -83,6 +83,8 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
   boolean                            autoComplete  = true;
   char                               lastChar      = '\0';
   int    							 syntaxDirty   = 0; // counter for delaying syntax highlighting update
+  
+  private boolean syntaxBusy;
 
   public TextEditor(String id, String label, CTabFolder parent, boolean editable, boolean lineNumbers, String s) {
     this.id = id;
@@ -197,23 +199,106 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
     if (getId().equals(id)) wordRules.add(new MultiLineRule(start, end, new Color(XModeler.getXModeler().getDisplay(), red, green, blue)));
   }
 
-  private void addStyles() {
-    if (text.getCharCount() > 0) text.replaceStyleRanges(0, text.getCharCount() - 1, styleRanges());
-  }
+	private void addStyles() {
+		addStylesQueueRequest(0, text.getText().length(), text.getText());
+//		System.err.println("addStyles START");
+//		if (text.getCharCount() > 0) {
+//			final StyleRange[] styleRanges = styleRanges();
+//			System.err.println("addStyles MITTE");
+//			Display.getCurrent().asyncExec(new Runnable() {
+//				@Override
+//				public void run() {
+//					text.replaceStyleRanges(0, text.getCharCount() - 1, styleRanges);
+//				}
+//			});
+//		}
+//		System.err.println("addStyles ENDE");
+	}
 
-  private void addStyles(int i, int length) {
-    int start = backupToPossibleStyleStart(i);
-    int end = start + length + (i - start);
-//	  final int EXTENDED_RANGE = 50;
-//	  int start = i - EXTENDED_RANGE;
-//	  if(start < 0) start = 0;
-//	  int end = i + length + EXTENDED_RANGE;
-//	  if(end > text.getText().length()) end = text.getText().length();
-    StyleRange[] ranges = styleRange(start, end);
-    for (StyleRange range : ranges)
-      end = Math.max(end, range.start + range.length);
-    if (ranges.length > 0 && text.getCharCount() > 0) text.replaceStyleRanges(start, end - start, ranges);
+//  private void addStyles(int i, int length, String s) {
+//    int start = backupToPossibleStyleStart(i);
+//    int end = start + length + (i - start);
+//    StyleRange[] ranges = styleRange(start, end, s);
+//    for (StyleRange range : ranges)
+//      end = Math.max(end, range.start + range.length);
+//    if (ranges.length > 0 && s.length() > 0) text.replaceStyleRanges(start, end - start, ranges);
+//  }
+  
+  
+  private void addStylesQueueRequest(int start, int length, String s) {
+//	  System.err.println(start + " ---> " + length);
+	  int startNew = backupToPossibleStyleStart(start);
+	  length = length + start - startNew;
+	  start = startNew;
+//	  System.err.println(start + " ---> " + length);
+	  if(syntaxBusy) {
+//		  System.err.println("syntaxBusy, request queued");
+		  styleQueue.add(new StyleQueueItem(start, length, s));
+	  } else {
+		  // Todo: if syntax is not busy but a request got stuck
+//		  System.err.println("request not queued");
+		  if(styleQueue.size() != 0) System.err.println("A request got stuck");
+		  syntaxBusy = true;
+		  addStylesNew(start, length, s);
+	  }
   }
+  
+  private class StyleQueueItem{
+	  final int start;
+	  final int length;
+	  final String s;
+	  
+	public StyleQueueItem(int start, int length, String s) {
+		super();
+		this.start = start;
+		this.length = length;
+		this.s = s;
+	}
+  }
+  
+  private Vector<StyleQueueItem> styleQueue = new Vector<StyleQueueItem>();
+  
+	private void addStylesNew(final int start, final int length, final String s) {
+		// System.err.println("\n");
+		RuntimeException err = new RuntimeException();
+//		StackTraceElement el = err.getStackTrace()[1];
+
+		final Display display = Display.getCurrent();
+		if (text.getCharCount() > 0) {
+			Thread thread = new Thread(new Runnable() {
+				@Override
+				public void run() {
+					final StyleRange[] styleRanges = styleRange(start, start + length, s);
+					if (styleRanges != null && styleRanges.length > 0) {
+						display.asyncExec(new Runnable() {
+							@Override
+							public void run() {
+								try{
+									text.replaceStyleRanges(start, length, styleRanges);
+								} catch (Exception e) {}
+							}
+						});
+					}
+					if (styleQueue.size() != 0) {
+						final StyleQueueItem next = styleQueue.remove(0);
+//						System.err.println("request unqueued");
+						display.asyncExec(new Runnable() {
+							@Override
+							public void run() {
+								addStylesNew(next.start, next.length, next.s);
+							}
+						});
+					} else {
+						syntaxBusy = false;
+					}
+				}
+			});
+
+			thread.start();
+		} else {
+			syntaxBusy = false;
+		}
+	}
 
   public void addWordRule(String id, String text, int red, int green, int blue) {
     if (getId().equals(id)) wordRules.add(new WordRule(text, new Color(XModeler.getXModeler().getDisplay(), red, green, blue)));
@@ -243,6 +328,17 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
   }
 
   private int backupToPossibleStyleStart(int start) {
+	start -= 10;
+	if(start < 0) return 0;
+	StyleRange[] ranges = text.getStyleRanges();
+//	System.err.println("start: " + start);
+	for(int i = 0; i < ranges.length; i++) {
+//		System.err.println("rangeStart: " + ranges[i].start);
+//		System.err.println("rangeEnd: " + (ranges[i].start + ranges[i].length));
+		if(ranges[i].start <= start && ranges[i].start + ranges[i].length >= start) return ranges[i].start;
+	}
+//	System.err.println("findStartFailed");
+	  
     String s = text.getText();
     while (start > 0 && s.charAt(start) != ' ') // isKeywordChar2(s.charAt(start)))
       start--;
@@ -563,10 +659,14 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
 
 			dirty = true;
 		}
+//		System.err.println("start: " + event.start);
+//		System.err.println("length: " + event.length);
 		int start = event.start;
 		int length = event.length;
-		if (length > 0)	addStyles(start, length);
+		if (length > 0)	addStylesQueueRequest(start, length, text.getText());
 		if (autoComplete) checkKeywords();
+		
+//		addStylesNew(start, length, s);
 		
 		syntaxDirty++;
 		Display.getCurrent().timerExec(3000, new Runnable() {
@@ -698,9 +798,9 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
     text.redraw();
   }
 
-  private StyleRange[] styleRange(int start, int end) {
+  private StyleRange[] styleRange(int start, int end, String s) {
     java.util.List<StyleRange> ranges = new java.util.ArrayList<StyleRange>();
-    String s = text.getText();
+//    String s = text.getText();
     int prevChar = -1;
     for (int i = start; i < end; i++) {
       StyleRange style = null;
@@ -725,9 +825,9 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
     return (StyleRange[]) ranges.toArray(new StyleRange[0]);
   }
 
-  private StyleRange[] styleRanges() {
-	  return styleRange(0, text.getText().length());
-  }
+//  private StyleRange[] styleRanges() {
+//	  return styleRange(0, text.getText().length(), text.getText());
+//  }
 
   private PPrint typeCase() {
     return new Seq(new Indent(new Seq(new Literal("@TypeCase(exp)"), new NewLine(), new Indent(new Seq(new Literal("exp"), new Space(), new Literal("do"), new NewLine(), new Literal("exp"))), new NewLine(), new Literal("end"), new NewLine(), new Literal("else"), new Space(), new Literal("exp"))), new NewLine(), new Literal("end"));
