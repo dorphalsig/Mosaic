@@ -111,7 +111,12 @@ public void addCommand(StyledText text, String command) {
     text.addVerifyKeyListener(new VerifyKeyListener() {
       public void verifyKey(VerifyEvent e) {
         if (overwriting(e.character)) {
-          text.setCaretOffset(text.getCaretOffset() + 1);
+          try{
+        	  text.setCaretOffset(text.getCaretOffset() + 1);
+          } catch (Exception err) {
+        	  System.err.println("something's wrong with a caret");
+        	  err.printStackTrace();
+          }
           e.doit = false;
         } else if (e.keyCode == SWT.ESC) {
           if (escape != null) escape.interrupt();
