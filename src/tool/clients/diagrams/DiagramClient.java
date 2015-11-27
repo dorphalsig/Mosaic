@@ -267,7 +267,7 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     for (int i = 0; i < children.getLength(); i++)
       inflateDiagramElement(id, children.item(i));
     d.align();
-    d.deselect();
+    d.deselectAll();
     d.renderOn();
     d.resetPalette();
   }
@@ -640,6 +640,12 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     int green = message.args[10].intValue;
     int blue = message.args[11].intValue;
     String font = message.args[12].strValue();
+    boolean border = message.args[13].boolValue;
+    String borderColor = message.args[14].strValue();
+    System.err.println("text: " + text);
+    System.err.println("border: " + border);
+    System.err.println("borderColor: " + borderColor);
+    System.err.println("editable: " + editable);
     newLabel(parentId, id, text, position, x, y, editable, underline, condense, red, green, blue, font);
   }
 
@@ -926,7 +932,9 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     else if (message.hasName("zoomIn"))
       zoomIn(message);
     else if (message.hasName("zoomOut"))
-      zoomOut(message);
+        zoomOut(message);
+    else if (message.hasName("zoomOne"))
+    	zoomOne(message);
     else if (message.hasName("hide"))
       hide(message);
     else if (message.hasName("show"))
@@ -979,6 +987,20 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
         for (Diagram diagram : diagrams) {
           if (diagram.getId().equals(id.strValue())) {
             diagram.zoomOut();
+            diagram.redraw();
+          }
+        }
+      }
+    });
+  }
+  
+  private void zoomOne(final Message message) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        Value id = message.args[0];
+        for (Diagram diagram : diagrams) {
+          if (diagram.getId().equals(id.strValue())) {
+            diagram.zoomOne();
             diagram.redraw();
           }
         }

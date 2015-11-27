@@ -1,21 +1,14 @@
 package tool.clients.diagrams;
 
 import java.io.PrintStream;
-import java.util.Collections;
-import java.util.Hashtable;
 import java.util.Vector;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.ExpandBar;
 import org.eclipse.swt.widgets.ExpandItem;
 
@@ -51,8 +44,18 @@ public class Group {
     GridData buttonData = new GridData(GridData.HORIZONTAL_ALIGN_FILL, GridData.VERTICAL_ALIGN_FILL, true, true);
     buttonData.horizontalSpan = 2;
     buttonContainer.setLayoutData(buttonData);
+    setFont("dejavu/DejaVuSans.ttf", "DejaVu Sans");
   }
 
+	public final void setFont(String fileName, String name) {
+		int oldHeight = defaultFont == null ? 13 : defaultFont.getHeight();
+		FontData[] fontData = Display.getDefault().getSystemFont().getFontData();
+		defaultFont = fontData[0];
+		XModeler.getXModeler().getDisplay().loadFont(fileName);
+		defaultFont.setName(name);
+		defaultFont.setHeight(oldHeight);
+	}
+	
   public String getName() {
     return name;
   }

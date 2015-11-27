@@ -43,23 +43,25 @@ public class AutoCompleteBox extends Dialog {
 	      labels.add(new Suggestion(label));
 	    }
 	    
-	    if(labels.size() <= 0) {
-	    	labels.add(new Suggestion("Aardvark"));
-	    	labels.add(new Suggestion("Bee"));
-	    	labels.add(new Suggestion("Cat"));
-	    	labels.add(new Suggestion("Dog"));
-	    	labels.add(new Suggestion("Elephant"));
-	    	labels.add(new Suggestion("Fox"));
-	    	labels.add(new Suggestion("Mouse"));
-	    	labels.add(new Suggestion("Unicorn"));
-	    	labels.add(new Suggestion("Wolpertinger"));
-	    	labels.add(new Suggestion("Yeti"));
-	    }
+//	    if(labels.size() <= 0) {
+//	    	labels.add(new Suggestion("Aardvark"));
+//	    	labels.add(new Suggestion("Bee"));
+//	    	labels.add(new Suggestion("Cat"));
+//	    	labels.add(new Suggestion("Dog"));
+//	    	labels.add(new Suggestion("Elephant"));
+//	    	labels.add(new Suggestion("Fox"));
+//	    	labels.add(new Suggestion("Mouse"));
+//	    	labels.add(new Suggestion("Unicorn"));
+//	    	labels.add(new Suggestion("Wolpertinger"));
+//	    	labels.add(new Suggestion("Yeti"));
+//	    }
 	    
 	}
 
 	
 	public String show(Point displayPoint) {
+		if(labels.size() <= 0) {return "";}
+		
         Shell parent = getParent();
         Shell shell = new Shell(parent, SWT.RESIZE | SWT.APPLICATION_MODAL);//SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
         shell.setText("getText()");

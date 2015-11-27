@@ -58,12 +58,13 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
     return theClient;
   }
 
-  static Font                        labelFont    = new Font(XModeler.getXModeler().getDisplay(), new FontData("Monaco", 12, SWT.NONE));
+//  static Font                        labelFont    = new Font(XModeler.getXModeler().getDisplay(), new FontData("Monaco", 12, SWT.NONE));
 
   final static int                   RIGHT_BUTTON = 3;
   static CTabFolder                  tabFolder;
   static ModelBrowserClient          theClient;
-
+  FontData			   fontData;
+  static Font                        labelFont;
   static Hashtable<String, TreeItem> items        = new Hashtable<String, TreeItem>();
   static Hashtable<String, CTabItem> tabs         = new Hashtable<String, CTabItem>();
   static Hashtable<String, Tree>     trees        = new Hashtable<String, Tree>();
@@ -74,6 +75,7 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
     super("com.ceteva.modelBrowser");
     theClient = this;
     tabFolder.addCTabFolder2Listener(this);
+    setFont("dejavu/DejaVuSans.ttf", "DejaVu Sans");
   }
 
   private void addNodeWithIcon(Message message) {
@@ -554,4 +556,14 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
   public void showList(CTabFolderEvent event) {
 
   }
+  
+	public final void setFont(String fileName, String name) {
+		int oldHeight = fontData==null?10:fontData.getHeight();
+		FontData[] fontData = Display.getDefault().getSystemFont().getFontData();
+		this.fontData = fontData[0];
+		XModeler.getXModeler().getDisplay().loadFont(fileName);
+		this.fontData.setName(name);
+		this.fontData.setHeight(oldHeight);
+		labelFont = new Font(XModeler.getXModeler().getDisplay(), fontData);
+	}
 }

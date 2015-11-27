@@ -57,10 +57,10 @@ public class Diagram implements Display {
 
   static int           DEFAULT_MAX_ITERATIONS = 200;
   static int           RIGHT_BUTTON           = 3;
-  static int           MAX_ZOOM               = 200;
-  static int           MIN_ZOOM               = 20;
+  static float           MAX_ZOOM               = 2.00f;
+  static float           MIN_ZOOM               = .20f;
 
-  static int           ZOOM_INC               = 10;
+  static float           ZOOM_INC               = .10f;
 
   static int           MIN_EDGE_DISTANCE      = 5;
   Color                diagramBackgroundColor = WHITE;
@@ -76,18 +76,22 @@ public class Diagram implements Display {
   ScrolledComposite    scroller;
   Edge                 selectedEdge           = null;
   Node                 selectedNode           = null;
-  int                  x                      = 0;
-  int                  y                      = 0;
   int                  render                 = 0;
+  
+  /*
+   * These coordinates are required for Mouse interaction (draw lines, rectangles, move ...)
+   */
+  
   int                  firstX                 = 0;
   int                  firstY                 = 0;
   int                  bandX                  = 0;
   int                  bandY                  = 0;
   int                  lastX                  = 0;
   int                  lastY                  = 0;
+    
   Port                 sourcePort;
   MouseMode            mode                   = MouseMode.NONE;
-  int                  zoom                   = 100;
+  float                  zoom                   = 1.00f;
   boolean              disambiguationColors   = true;
 
   boolean              showWaypoints          = true;
@@ -97,6 +101,11 @@ public class Diagram implements Display {
   String               edgeCreationType       = null;
   String               nodeCreationType       = null;
 
+  /**
+   * Creates a new Diagram
+   * @param id
+   * @param parent
+   */
   public Diagram(String id, CTabFolder parent) {
     container = new SashForm(parent, SWT.HORIZONTAL | SWT.BORDER);
     palette = new Palette(container, this);
@@ -114,38 +123,10 @@ public class Diagram implements Display {
     this.id = id;
   }
 
-  private void checkSize() {
-    Point p = canvas.getSize();
-    int width = Math.max(p.x, maxWidth());
-    int height = Math.max(p.y, maxHeight());
-    float[] points = new float[] { (float) width, (float) height };
-    transform.transform(points);
-    width = (int) points[0];
-    height = (int) points[1];
-    canvas.setSize(width, height);
-    scroller.setMinSize(width, height);
-  }
-
-  private void copyToClipboard() {
-    Clipboard clipboard = new Clipboard(XModeler.getXModeler().getDisplay());
-    org.eclipse.swt.widgets.Display d = XModeler.getXModeler().getDisplay().getCurrent();
-    double zoomRatio = ((double) zoom) / 100.0;
-    int width = (int) (zoomRatio * (maxWidth() + 50));
-    int height = (int) (zoomRatio * (maxHeight() + 50));
-    Image image = new Image(d, width, height);
-    GC gc = new GC(image);
-    paintOn(gc);
-    ImageTransfer imageTransfer = ImageTransfer.getInstance();
-    clipboard.setContents(new Object[] { image.getImageData() }, new Transfer[] { imageTransfer }, DND.CLIPBOARD | DND.SELECTION_CLIPBOARD);
-    clipboard.dispose();
-    image.dispose();
-    gc.dispose();
-  }
-
-  public void copyToClipboard(String id) {
-    if (getId().equals(id)) copyToClipboard();
-  }
-
+  /**
+   * Deletes a Display
+   * @param id
+   */
   public void delete(String id) {
     for (Display display : displays)
       display.remove(id);
@@ -176,21 +157,10 @@ public class Diagram implements Display {
     redraw();
   }
 
-  private void deselect(Selectable s) {
-    selection.remove(s);
-    s.deselect();
-  }
+
 
   public void deleteGroup(String name) {
     palette.deleteGroup(name);
-  }
-
-  public void deselect() {
-    for (Selectable selected : selection)
-      selected.deselect();
-    selection.clear();
-    selectedEdge = null;
-    selectedNode = null;
   }
 
   public void deselectPalette() {
@@ -249,11 +219,6 @@ public class Diagram implements Display {
         }
       }
     }
-  }
-
-  public void doubleClick(GC gc, Diagram diagram, int dx, int dy, int mouseX, int mouseY) {
-    // Called when a diagram is a display element.
-    // Currently does nothing.
   }
 
   private Vector<Point> edgeIntersections(Edge edge) {
@@ -403,10 +368,6 @@ public class Diagram implements Display {
     return (event.stateMask & SWT.COMMAND) != 0;
   }
 
-  public boolean isLeft(MouseEvent event) {
-    return event.button == 1;
-  }
-
   private boolean isRightClick(MouseEvent event) {
     return event.button == RIGHT_BUTTON;
   }
@@ -419,65 +380,10 @@ public class Diagram implements Display {
     redraw();
   }
 
-  private void layout() {
-    Hashtable<Node, Point2D> positions = new Hashtable<Node, Point2D>();
-    for (int i = 0; i < DEFAULT_MAX_ITERATIONS; i++) {
-      for (Node current : nodes) {
-        if (!current.atOrigin() && !selection.contains(current)) {
-          Point2D force = positions.containsKey(current) 
-        		  ? positions.get(current) 
-        		  : Point2D.createRectangular(current.getX(), current.getY());
-          for (Node other : nodes) {
-            if (!current.sameLocation(other)) {
-              force = force.add(nodeRepulsion(current, other));
-            }
-            for (Edge edge : edges) {
-              if (edge.getSourceNode() == other && edge.getTargetNode() == current) {
-                force = force.add(nodeAttraction(current, other, DEFAULT_SPRING_LENGTH));
-              }
-              if (edge.getTargetNode() == other && edge.getSourceNode() == current) {
-                force = force.add(nodeAttraction(current, other, DEFAULT_SPRING_LENGTH));
-              }
-            }
-          }
-          positions.put(current, force);
-        }
-      }
-      for (Node current : nodes) {
-        if (positions.containsKey(current)) {
-          Point2D point = positions.get(current);
-          current.move((int) Math.max(0, point.getX()), (int) Math.max(0, point.getY()));
-        }
-      }
-    }
-    for (Node node : positions.keySet())
-      node.moveEvent();
-  }
-
-  private void leftClick(MouseEvent event) {
-    if (nodeCreationType == null && edgeCreationType == null) {
-      select(event.stateMask, event.x, event.y);
-      lastX = event.x;
-      lastY = event.y;
-      redraw();
-    } else if (edgeCreationType != null) {
-      deselect();
-      int x = event.x;
-      int y = event.y;
-      Port port = selectPort(x, y);
-      if (port != null) {
-        sourcePort = port;
-        firstX = x;
-        firstY = y;
-        lastX = x;
-        lastY = y;
-        mode = MouseMode.NEW_EDGE;
-      }
-      redraw();
-    } else if (nodeCreationType != null) {
-      DiagramClient.theClient().newNode(nodeCreationType, id, event.x, event.y);
-      resetPalette();
-    }
+  @Override
+  public void doubleClick(GC gc, Diagram diagram, int dx, int dy, int mouseX, int mouseY) {
+    // Called when a diagram is a display element.
+    // Currently does nothing.
   }
 
   private void magnetize(Waypoint waypoint) {
@@ -590,12 +496,12 @@ public class Diagram implements Display {
     Node sourceNode = getNode(sourcePort);
     Port targetPort = getPort(targetId);
     Node targetNode = getNode(targetPort);
-    int sourceX = sourceNode.getX() + sourcePort.getX() + (sourcePort.getWidth() / 2);
-    int sourceY = sourceNode.getY() + sourcePort.getY() + (sourcePort.getHeight() / 2);
-    int targetX = targetNode.getX() + targetPort.getX() + (targetPort.getWidth() / 2);
-    int targetY = targetNode.getY() + targetPort.getY() + (targetPort.getHeight() / 2);
     if (sourcePort != null) {
       if (targetPort != null) {
+	    int sourceX = sourceNode.getX() + sourcePort.getX() + (sourcePort.getWidth() / 2);
+	    int sourceY = sourceNode.getY() + sourcePort.getY() + (sourcePort.getHeight() / 2);
+	    int targetX = targetNode.getX() + targetPort.getX() + (targetPort.getWidth() / 2);
+	    int targetY = targetNode.getY() + targetPort.getY() + (targetPort.getHeight() / 2);
         Edge edge = new Edge(id, sourceNode, sourcePort, sourceX, sourceY, targetNode, targetPort, targetX, targetY, refx, refy, sourceHead, targetHead, lineStyle, red, green, blue);
         edges.add(edge);
         redraw();
@@ -662,7 +568,7 @@ public class Diagram implements Display {
   public void newNode(String id, int x, int y, int width, int height, boolean selectable) {
     Node node = new Node(id, x, y, width, height, selectable);
     nodes.add(node);
-    deselect();
+    deselectAll();
     select(node);
   }
 
@@ -707,7 +613,7 @@ public class Diagram implements Display {
     for (Edge edge : edges) {
       Waypoint w = edge.newWaypoint(parentId, id, index, x, y);
       if (w != null) {
-        deselect();
+        deselectAll();
         select(w);
         mode = MouseMode.SELECTED;
       }
@@ -732,25 +638,6 @@ public class Diagram implements Display {
     }
   }
 
-  private Point2D nodeRepulsion(Node target, Node source) {
-    int x1 = target.getX();
-    int y1 = target.getY();
-    int x2 = source.getX();
-    int y2 = source.getY();
-    int dx = x1 - x2;
-    int dy = y1 - y2;
-    double magnitude = Math.sqrt((dx * dx) + (dy * dy));
-    double force = REPULSION_CONSTANT / (magnitude * magnitude);
-    if (magnitude < 0.0001)
-      return Point2D.ZERO;
-    else {
-      double angle = Math.atan2(dy, dx);
-      return Point2D.createPolar(force, angle);
-    }
-  }
-
-
-
   public void paint(GC gc, int x, int y) {
     // This is called when a diagram is a display element. The offsets need to be
     // included so that global painting is relative to (0,0).
@@ -766,7 +653,7 @@ public class Diagram implements Display {
 
   private void paintDisplays(GC gc) {
     for (Display display : displays) {
-      display.paint(gc, x, y);
+      display.paint(gc, 0, 0);
     }
   }
 
@@ -865,6 +752,9 @@ public class Diagram implements Display {
     paintRubberBand(gc);
     paintNewNode(gc);
     handleDoubleClick(gc);
+//    gc.drawString("Zoom: " + zoom, 5, 5);
+//    gc.drawString("Width M: " + maxWidth(), 5, 17);
+//    gc.drawString("Width C: " + canvas.getSize().x, 5, 29);
   }
 
   private void clear(GC gc) {
@@ -928,22 +818,6 @@ public class Diagram implements Display {
     }
   }
 
-  private void reconnectEdgeSource(Edge edge, Node node, Port port) {
-    EventHandler handler = DiagramClient.theClient().getHandler();
-    Message message = handler.newMessage("edgeSourceReconnected", 2);
-    message.args[0] = new Value(edge.getId());
-    message.args[1] = new Value(port.getId());
-    handler.raiseEvent(message);
-  }
-
-  private void reconnectEdgeTarget(Edge edge, Node node, Port port) {
-    EventHandler handler = DiagramClient.theClient().getHandler();
-    Message message = handler.newMessage("edgeTargetReconnected", 2);
-    message.args[0] = new Value(edge.getId());
-    message.args[1] = new Value(port.getId());
-    handler.raiseEvent(message);
-  }
-
   public void redraw() {
     if (render == 0) {
       DiagramClient.theClient().runOnDisplay(new Runnable() {
@@ -955,6 +829,49 @@ public class Diagram implements Display {
         }
       });
     }
+  }
+  
+  /**
+   * This function checks if the canvas has to be resized because 
+   * it is too small. If it is too small it's resized.
+   */
+  private void checkSize() {
+//    System.err.println("\ncheckSize");
+    /* p is the size of the canvas. 
+     * The size does not change with the zoom. */
+	Point p = canvas.getSize();
+//	System.err.println("canvas Screen Size : " + p);
+	/* Now it is compared with the needed size.
+     * This is calculated as raw positions. 
+	 */
+	Point maxRawSize = new Point(maxWidth(), maxHeight());
+//	System.err.println("needed Raw Size : " + maxRawSize);
+	/* Now  the canvas' screen size has to be 
+	 * converted to raw size.
+	 */
+	float[] canvasPoints = new float[] { (float) p.x, (float) p.y };
+	transform.invert();
+	transform.transform(canvasPoints);
+	transform.invert();
+	Point canvasRawSize = new Point((int) canvasPoints[0], (int) canvasPoints[1]);
+//	System.err.println("canvas Raw Size : " + canvasRawSize);
+	/* The new size can now be calculated */
+    int width = Math.max(canvasRawSize.x, maxRawSize.x);
+    int height = Math.max(canvasRawSize.y, maxRawSize.y);
+    /* But the new size is still in Raw size, 
+     * so it's transformed to screen size */
+    float[] newSize = new float[] { (float) width, (float) height };
+    transform.transform(newSize);
+    width = (int) newSize[0];
+    height = (int) newSize[1];    
+	/* As some rounding errors may have accumulated now,
+	 * any change which is less then 5 is ignored.
+	 */
+    if(Math.abs(width - canvas.getSize().x) < 4.5) width = canvas.getSize().x;
+    if(Math.abs(height - canvas.getSize().y) < 4.5) height = canvas.getSize().y;    
+    /* The new sizes are now set */
+	canvas.setSize(width, height);
+	scroller.setMinSize(width, height);
   }
 
   public void remove(String id) {
@@ -995,30 +912,13 @@ public class Diagram implements Display {
     redraw();
   }
 
-  private void resizeNode(Node node, int width, int height) {
-    EventHandler handler = DiagramClient.theClient().getHandler();
-    Message message = handler.newMessage("resizeNode", 3);
-    message.args[0] = new Value(node.getId());
-    message.args[1] = new Value(width);
-    message.args[2] = new Value(height);
-    handler.raiseEvent(message);
-  }
-
-  public void rightClick(MouseEvent event) {
-    if (selection.isEmpty())
-      MenuClient.popup(id, event.x, event.y);
-    else {
-      if (selection.size() == 1) {
-        selection.elementAt(0).rightClick(event.x, event.y);
-      }
-    }
-  }
-
   public Point scale(int x, int y) {
     float[] points = new float[] { (float) x, (float) y };
+//    System.err.println("before Transform (scale): " + points[0]);
     transform.invert();
     transform.transform(points);
     transform.invert();
+//    System.err.println("after Transform (scale): " + points[0]);
     return new Point((int) points[0], (int) points[1]);
   }
 
@@ -1034,146 +934,6 @@ public class Diagram implements Display {
     return new Point((int) points[0], (int) points[1]);
   }
 
-  private void select(int stateMask, int x, int y) {
-    boolean selected = false;
-    boolean isShift = (stateMask & SWT.SHIFT) == SWT.SHIFT;
-    if (!selected) {
-      for (Edge edge : edges) {
-        for (Waypoint waypoint : edge.getWaypoints()) {
-          // Try the existing waypoints. Be careful to exclude the
-          // dummy start and end waypoints...
-          if (!selected && waypoint != edge.start() && waypoint != edge.end() && waypoint.nearTo(x, y)) {
-            mode = MouseMode.SELECTED;
-            if (!isShift && !selected(waypoint)) deselect();
-            select(waypoint);
-            magnetize(waypoint);
-            dogLegs(waypoint);
-            selected = true;
-          }
-        }
-        if (!selected) {
-          // See if we are near an end. If so then we go into
-          // end reconnection mode...
-          if (edge.nearStart(x, y)) {
-            deselect();
-            mode = MouseMode.MOVE_SOURCE;
-            selectedEdge = edge;
-            selected = true;
-          } else if (edge.nearEnd(x, y)) {
-            deselect();
-            mode = MouseMode.MOVE_TARGET;
-            selectedEdge = edge;
-            selected = true;
-          }
-        }
-        if (!selected) {
-          // See if we are sufficiently near an edge to add a new way-point...
-          selected = edge.newWaypoint(x, y);
-          for (Label label : edge.getLabels()) {
-            // See if we are selecting an edge...
-            if (!selected && label.contains(x, y)) {
-              mode = MouseMode.SELECTED;
-              if (!isShift && !selected(label)) deselect();
-              select(label);
-              selected = true;
-            }
-          }
-        }
-      }
-    }
-    for (Node node : nodes) {
-      if (!selected && node.contains(x, y)) {
-        // If all else fails we might be selecting a node.
-        // Trying nodes last allows the other elements behind
-        // nodes to be selected...
-        mode = MouseMode.SELECTED;
-        if (!isShift && !selected(node)) deselect();
-        select(node);
-        selectSelfEdges(node);
-        sendSelectedEvent(node);
-        selected = true;
-      }
-      if (!selected && node.atTopLeftCorner(x, y)) {
-        deselect();
-        mode = MouseMode.RESIZE_TOP_LEFT;
-        selectedNode = node;
-        selected = true;
-      }
-      if (!selected && node.atTopRightCorner(x, y)) {
-        deselect();
-        mode = MouseMode.RESIZE_TOP_RIGHT;
-        selectedNode = node;
-        selected = true;
-      }
-      if (!selected && node.atBottomLeftCorner(x, y)) {
-        deselect();
-        mode = MouseMode.RESIZE_BOTTOM_LEFT;
-        selectedNode = node;
-        selected = true;
-      }
-      if (!selected && node.atBottomRightCorner(x, y)) {
-        deselect();
-        mode = MouseMode.RESIZE_BOTTOM_RIGHT;
-        selectedNode = node;
-        selected = true;
-      }
-    }
-    if (!selected && !isShift) {
-      deselect();
-      mode = MouseMode.RUBBER_BAND;
-      bandX = x;
-      bandY = y;
-    }
-  }
-
-  private void select(Selectable selectable) {
-    if (!selection.contains(selectable)) {
-      selection.add(selectable);
-      selectable.select();
-    }
-  }
-
-  private void selectAll() {
-    deselect();
-    for (Node node : nodes)
-      select(node);
-    for (Edge edge : edges) {
-      for (Waypoint waypoint : edge.getWaypoints())
-        if (waypoint != edge.start() && waypoint != edge.end()) select(waypoint);
-      mode = MouseMode.SELECTED;
-    }
-  }
-
-  private boolean selected(Selectable selectable) {
-    return selection.contains(selectable);
-  }
-
-  private Port selectPort(int x, int y) {
-    for (Node node : nodes) {
-      for (Port port : node.getPorts().values()) {
-        if (port.contains(x - node.getX(), y - node.getY())) { return port; }
-      }
-    }
-    return null;
-  }
-
-  private void selectSelfEdges(Node node) {
-    for (Edge edge : edges) {
-      if (edge.getSourceNode() == node && edge.getTargetNode() == node) {
-        for (Waypoint w : edge.getWaypoints()) {
-          if (w != edge.start() && w != edge.end()) select(w);
-        }
-      }
-    }
-  }
-
-  private void sendSelectedEvent(Node node) {
-    String id = node.getId();
-    EventHandler handler = DiagramClient.theClient().getHandler();
-    Message message = handler.newMessage("nodeSelected", 1);
-    message.args[0] = new Value(id);
-    handler.raiseEvent(message);
-  }
 
   public void setEdgeCreationType(String edgeCreationType) {
     this.edgeCreationType = edgeCreationType;
@@ -1240,37 +1000,21 @@ public class Diagram implements Display {
     redraw();
   }
 
-  public void setZoom(int zoom) {
+  public void setZoom(float zoom) {
     this.zoom = zoom;
     transform = new Transform(org.eclipse.swt.widgets.Display.getCurrent());
-    transform.scale((float) (zoom / 100.0), (float) (zoom / 100.0));
+    transform.scale(zoom, zoom);//(float) (zoom / 100.0), (float) (zoom / 100.0));
   }
 
   private void straightenEdges() {
     for (Edge edge : edges)
       edge.straighten();
   }
-
-  public void toggle(String toolId, boolean state) {
-    EventHandler handler = DiagramClient.theClient().getHandler();
-    Message message = handler.newMessage("toggle", 3);
-    message.args[0] = new Value(id);
-    message.args[1] = new Value(toolId);
-    message.args[2] = new Value(state);
-    handler.raiseEvent(message);
-  }
-
+  
   public String toString() {
     return "Diagram(" + nodes + "," + edges + ")";
   }
 
-  public void action(String id) {
-    EventHandler eventHandler = DiagramClient.theClient().getHandler();
-    Message message = eventHandler.newMessage("action", 2);
-    message.args[0] = new Value(getId());
-    message.args[1] = new Value(id);
-    eventHandler.raiseEvent(message);
-  }
   
   /*
    * The following functions are used to paint edges
@@ -1345,34 +1089,27 @@ public class Diagram implements Display {
    * Why is zoom int? is it 100-based?
    */
 
-  public void zoom1() {
-      setZoom(100);
+  public void zoomOne() {
+      setZoom(1);
+      new OutboundMessages().zoomTo();
   }
   
   public void zoomIn() {
     if (getZoom() < MAX_ZOOM) {
       setZoom(getZoom() + ZOOM_INC);
-      zoomTo();
+      new OutboundMessages().zoomTo();
     }
   }
 
   public void zoomOut() {
     if (getZoom() > MIN_ZOOM) {
       setZoom(getZoom() - ZOOM_INC);
-      zoomTo();
+      new OutboundMessages().zoomTo();
     }
   }
   
-  public int getZoom() {
+  public float getZoom() {
     return zoom;
-  }
-
-  private void zoomTo() {
-    EventHandler eventHandler = DiagramClient.theClient().getHandler();
-    Message message = eventHandler.newMessage("zoomChanged", 2);
-    message.args[0] = new Value(getId());
-    message.args[1] = new Value(zoom);
-    eventHandler.raiseEvent(message);
   }
 
   /*
@@ -1457,30 +1194,56 @@ public class Diagram implements Display {
 	    }
 	  }
 
+	  private void leftClick(MouseEvent event) {
+	    if (nodeCreationType == null && edgeCreationType == null) {
+	      select(event.stateMask, event.x, event.y);
+	      lastX = event.x;
+	      lastY = event.y;
+	      redraw();
+	    } else if (edgeCreationType != null) {
+	      deselectAll();
+	      int x = event.x;
+	      int y = event.y;
+	      Port port = selectPort(x, y);
+	      if (port != null) {
+	        sourcePort = port;
+	        firstX = x;
+	        firstY = y;
+	        lastX = x;
+	        lastY = y;
+	        mode = MouseMode.NEW_EDGE;
+	      }
+	      redraw();
+	    } else if (nodeCreationType != null) {
+	      DiagramClient.theClient().newNode(nodeCreationType, id, event.x, event.y);
+	      resetPalette();
+	    }
+	  }
+	  
+	  private void rightClick(MouseEvent event) {
+	    if (selection.isEmpty())
+	      MenuClient.popup(id, event.x, event.y);
+	    else {
+	      if (selection.size() == 1) {
+	        selection.elementAt(0).rightClick(event.x, event.y);
+	      }
+	    }
+	  }
+	  
+	  private boolean isLeft(MouseEvent event) {
+	    return event.button == 1;
+	  }
+
 	  @Override
 	  public void mouseUp(MouseEvent event) {
 	    scale(event);
-	    if (mode == MouseMode.NEW_EDGE) checkEdgeCreation(event.x, event.y);
+	    if (mode == MouseMode.NEW_EDGE) new OutboundMessages().checkEdgeCreation(event.x, event.y);
 	    if (mode == MouseMode.SELECTED) sendMoveSelectedEvents();
 	    if (mode == MouseMode.RESIZE_BOTTOM_RIGHT) resizeBottomRight();
 	    if (mode == MouseMode.RUBBER_BAND) selectRubberBand();
 	    if (movingEdgeEnd()) checkMovedEdge();
 	    mode = MouseMode.NONE;
 	    redraw();
-	  }
-	  
-	  private void checkEdgeCreation(int x, int y) {
-	    Port port = selectPort(x, y);
-	    if (port != null) {
-	      String sourceId = sourcePort.getId();
-	      String targetId = port.getId();
-	      Message m = DiagramClient.theClient().getHandler().newMessage("newEdge", 3);
-	      m.args[0] = new Value(edgeCreationType);
-	      m.args[1] = new Value(sourceId);
-	      m.args[2] = new Value(targetId);
-	      DiagramClient.theClient().getHandler().raiseEvent(m);
-	      resetPalette();
-	    }
 	  }
 	  
 	  private void sendMoveSelectedEvents() {
@@ -1491,7 +1254,7 @@ public class Diagram implements Display {
 	  private void resizeBottomRight() {
 	    int width = lastX - selectedNode.getX();
 	    int height = lastY - selectedNode.getY();
-	    if (width >= 10 && height >= 10) resizeNode(selectedNode, width, height);
+	    if (width >= 10 && height >= 10) new OutboundMessages().resizeNode(selectedNode, width, height);
 	  }
 
 	  private void selectRubberBand() {
@@ -1500,7 +1263,7 @@ public class Diagram implements Display {
 	    int width = Math.abs(bandX - lastX);
 	    int height = Math.abs(bandY - lastY);
 	    Rectangle r = new Rectangle(x, y, width, height);
-	    deselect();
+	    deselectAll();
 	    for (Node node : nodes) {
 	      if (r.contains(node.getX(), node.getY())) select(node);
 	    }
@@ -1526,7 +1289,7 @@ public class Diagram implements Display {
 	    for (Node n : nodes) {
 	      for (Port p : n.getPorts().values()) {
 	        if (!reconnected && p.contains(lastX - n.getX(), lastY - n.getY())) {
-	          reconnectEdgeSource(selectedEdge, n, p);
+	          new OutboundMessages().reconnectEdgeSource(selectedEdge, n, p);
 	          reconnected = true;
 	        }
 	      }
@@ -1538,15 +1301,13 @@ public class Diagram implements Display {
 	    for (Node n : nodes) {
 	      for (Port p : n.getPorts().values()) {
 	        if (!reconnected && p.contains(lastX - n.getX(), lastY - n.getY())) {
-	          reconnectEdgeTarget(selectedEdge, n, p);
+	          new OutboundMessages().reconnectEdgeTarget(selectedEdge, n, p);
 	          reconnected = true;
 	        }
 	      }
 	    }
 	  }
 	}
-	  
-  
   private class MyKeyListener implements KeyListener {
 
 	  @Override
@@ -1591,7 +1352,17 @@ public class Diagram implements Display {
 	      zoomIn();
 	      help();
 	      redraw();
-	    }
+		}
+	    if (((e.stateMask & SWT.CTRL) == SWT.CTRL) && (e.keyCode == '+')) {
+	      zoomIn();
+	      help();
+	      redraw();
+		}
+	    if (((e.stateMask & SWT.CTRL) == SWT.CTRL) && (e.keyCode == '1')) {
+	      zoomOne();
+	      help();
+	      redraw();
+		}
 	    if (((e.stateMask & SWT.CTRL) == SWT.CTRL) && (e.keyCode == '-')) {
 	      zoomOut();
 	      help();
@@ -1604,6 +1375,58 @@ public class Diagram implements Display {
 	  }
 
 	  @Override public void keyReleased(KeyEvent event) {}
+	  
+	  private void layout() {
+	    Hashtable<Node, Point2D> positions = new Hashtable<Node, Point2D>();
+	    for (int i = 0; i < DEFAULT_MAX_ITERATIONS; i++) {
+	      for (Node current : nodes) {
+	        if (!current.atOrigin() && !selection.contains(current)) {
+	          Point2D force = positions.containsKey(current) 
+	        		  ? positions.get(current) 
+	        		  : Point2D.createRectangular(current.getX(), current.getY());
+	          for (Node other : nodes) {
+	            if (!current.sameLocation(other)) {
+	              force = force.add(nodeRepulsion(current, other));
+	            }
+	            for (Edge edge : edges) {
+	              if (edge.getSourceNode() == other && edge.getTargetNode() == current) {
+	                force = force.add(nodeAttraction(current, other, DEFAULT_SPRING_LENGTH));
+	              }
+	              if (edge.getTargetNode() == other && edge.getSourceNode() == current) {
+	                force = force.add(nodeAttraction(current, other, DEFAULT_SPRING_LENGTH));
+	              }
+	            }
+	          }
+	          positions.put(current, force);
+	        }
+	      }
+	      for (Node current : nodes) {
+	        if (positions.containsKey(current)) {
+	          Point2D point = positions.get(current);
+	          current.move((int) Math.max(0, point.getX()), (int) Math.max(0, point.getY()));
+	        }
+	      }
+	    }
+	    for (Node node : positions.keySet())
+	      node.moveEvent();
+	  }
+	  
+	  private Point2D nodeRepulsion(Node target, Node source) {
+	    int x1 = target.getX();
+	    int y1 = target.getY();
+	    int x2 = source.getX();
+	    int y2 = source.getY();
+	    int dx = x1 - x2;
+	    int dy = y1 - y2;
+	    double magnitude = Math.sqrt((dx * dx) + (dy * dy));
+	    double force = REPULSION_CONSTANT / (magnitude * magnitude);
+	    if (magnitude < 0.0001)
+	      return Point2D.ZERO;
+	    else {
+	      double angle = Math.atan2(dy, dx);
+	      return Point2D.createPolar(force, angle);
+	    }
+	  }
 	  
   }
   private class MyMouseMoveListener implements MouseMoveListener {
@@ -1653,8 +1476,7 @@ public class Diagram implements Display {
 	    }
 	  }
   }
-  
-	private class MyPaintListener implements PaintListener {
+  private class MyPaintListener implements PaintListener {
 
 		@Override
 		public void paintControl(PaintEvent event) {
@@ -1664,5 +1486,259 @@ public class Diagram implements Display {
 			}
 		}
 	}
+	
+	/*
+	 * Clipboard
+	 */
+	
+  private void copyToClipboard() {
+    Clipboard clipboard = new Clipboard(XModeler.getXModeler().getDisplay());
+    org.eclipse.swt.widgets.Display d = org.eclipse.swt.widgets.Display.getCurrent();
+    double zoomRatio = zoom;//((double) zoom) / 100.0;
+    int width = (int) (zoomRatio * (maxWidth() + 50));
+    int height = (int) (zoomRatio * (maxHeight() + 50));
+    Image image = new Image(d, width, height);
+    GC gc = new GC(image);
+    paintOn(gc);
+    ImageTransfer imageTransfer = ImageTransfer.getInstance();
+    clipboard.setContents(new Object[] { image.getImageData() }, new Transfer[] { imageTransfer }, DND.CLIPBOARD | DND.SELECTION_CLIPBOARD);
+    clipboard.dispose();
+    image.dispose();
+    gc.dispose();
+  }
 
+  public void copyToClipboard(String id) {
+    if (getId().equals(id)) copyToClipboard();
+  }
+
+  /*
+   * Selections
+   */
+  
+  private void select(int stateMask, int x, int y) {
+    boolean selected = false;
+    boolean isShift = (stateMask & SWT.SHIFT) == SWT.SHIFT;
+    if (!selected) {
+      for (Edge edge : edges) {
+        for (Waypoint waypoint : edge.getWaypoints()) {
+          // Try the existing waypoints. Be careful to exclude the
+          // dummy start and end waypoints...
+          if (!selected && waypoint != edge.start() && waypoint != edge.end() && waypoint.nearTo(x, y)) {
+            mode = MouseMode.SELECTED;
+            if (!isShift && !selected(waypoint)) deselectAll();
+            select(waypoint);
+            magnetize(waypoint);
+            dogLegs(waypoint);
+            selected = true;
+          }
+        }
+        if (!selected) {
+          // See if we are near an end. If so then we go into
+          // end reconnection mode...
+          if (edge.nearStart(x, y)) {
+            deselectAll();
+            mode = MouseMode.MOVE_SOURCE;
+            selectedEdge = edge;
+            selected = true;
+          } else if (edge.nearEnd(x, y)) {
+            deselectAll();
+            mode = MouseMode.MOVE_TARGET;
+            selectedEdge = edge;
+            selected = true;
+          }
+        }
+        if (!selected) {
+          // See if we are sufficiently near an edge to add a new way-point...
+          selected = edge.newWaypoint(x, y);
+          for (Label label : edge.getLabels()) {
+            // See if we are selecting an edge...
+            if (!selected && label.contains(x, y)) {
+              mode = MouseMode.SELECTED;
+              if (!isShift && !selected(label)) deselectAll();
+              select(label);
+              selected = true;
+            }
+          }
+        }
+      }
+    }
+    for (Node node : nodes) {
+      if (!selected && node.contains(x, y)) {
+        // If all else fails we might be selecting a node.
+        // Trying nodes last allows the other elements behind
+        // nodes to be selected...
+        mode = MouseMode.SELECTED;
+        if (!isShift && !selected(node)) deselectAll();
+        select(node);
+        selectSelfEdges(node);
+        new OutboundMessages().sendSelectedEvent(node);
+        selected = true;
+      }
+      if (!selected && node.atTopLeftCorner(x, y)) {
+        deselectAll();
+        mode = MouseMode.RESIZE_TOP_LEFT;
+        selectedNode = node;
+        selected = true;
+      }
+      if (!selected && node.atTopRightCorner(x, y)) {
+        deselectAll();
+        mode = MouseMode.RESIZE_TOP_RIGHT;
+        selectedNode = node;
+        selected = true;
+      }
+      if (!selected && node.atBottomLeftCorner(x, y)) {
+        deselectAll();
+        mode = MouseMode.RESIZE_BOTTOM_LEFT;
+        selectedNode = node;
+        selected = true;
+      }
+      if (!selected && node.atBottomRightCorner(x, y)) {
+        deselectAll();
+        mode = MouseMode.RESIZE_BOTTOM_RIGHT;
+        selectedNode = node;
+        selected = true;
+      }
+    }
+    if (!selected && !isShift) {
+      deselectAll();
+      mode = MouseMode.RUBBER_BAND;
+      bandX = x;
+      bandY = y;
+    }
+  }
+
+  private void select(Selectable selectable) {
+    if (!selection.contains(selectable)) {
+      selection.add(selectable);
+      selectable.select();
+    }
+  }
+
+  private void selectAll() {
+    deselectAll();
+    for (Node node : nodes)
+      select(node);
+    for (Edge edge : edges) {
+      for (Waypoint waypoint : edge.getWaypoints())
+        if (waypoint != edge.start() && waypoint != edge.end()) select(waypoint);
+      mode = MouseMode.SELECTED;
+    }
+  }
+  
+  private void deselect(Selectable s) {
+    selection.remove(s);
+    s.deselect();
+  }
+  
+  public void deselectAll() {
+    for (Selectable selected : selection)
+      selected.deselect();
+    selection.clear();
+    selectedEdge = null;
+    selectedNode = null;
+  }
+
+  private boolean selected(Selectable selectable) {
+    return selection.contains(selectable);
+  }
+
+  private Port selectPort(int x, int y) {
+    for (Node node : nodes) {
+      for (Port port : node.getPorts().values()) {
+        if (port.contains(x - node.getX(), y - node.getY())) { return port; }
+      }
+    }
+    return null;
+  }
+
+  private void selectSelfEdges(Node node) {
+    for (Edge edge : edges) {
+      if (edge.getSourceNode() == node && edge.getTargetNode() == node) {
+        for (Waypoint w : edge.getWaypoints()) {
+          if (w != edge.start() && w != edge.end()) select(w);
+        }
+      }
+    }
+  }
+  
+  /*
+   * Outbound Messages
+   */
+	public void toggle(String toolId, boolean state) {new OutboundMessages().toggle(toolId, state);}
+	public void action(String id) {new OutboundMessages().action(id);}
+	
+	private class OutboundMessages {
+
+		private void reconnectEdgeSource(Edge edge, Node node, Port port) {
+			EventHandler handler = DiagramClient.theClient().getHandler();
+			Message message = handler.newMessage("edgeSourceReconnected", 2);
+			message.args[0] = new Value(edge.getId());
+			message.args[1] = new Value(port.getId());
+			handler.raiseEvent(message);
+		}
+
+		private void reconnectEdgeTarget(Edge edge, Node node, Port port) {
+			EventHandler handler = DiagramClient.theClient().getHandler();
+			Message message = handler.newMessage("edgeTargetReconnected", 2);
+			message.args[0] = new Value(edge.getId());
+			message.args[1] = new Value(port.getId());
+			handler.raiseEvent(message);
+		}
+
+		private void sendSelectedEvent(Node node) {
+			String id = node.getId();
+			EventHandler handler = DiagramClient.theClient().getHandler();
+			Message message = handler.newMessage("nodeSelected", 1);
+			message.args[0] = new Value(id);
+			handler.raiseEvent(message);
+		}
+
+		public void toggle(String toolId, boolean state) {
+			EventHandler handler = DiagramClient.theClient().getHandler();
+			Message message = handler.newMessage("toggle", 3);
+			message.args[0] = new Value(id);
+			message.args[1] = new Value(toolId);
+			message.args[2] = new Value(state);
+			handler.raiseEvent(message);
+		}
+
+		public void action(String id) {
+			EventHandler eventHandler = DiagramClient.theClient().getHandler();
+			Message message = eventHandler.newMessage("action", 2);
+			message.args[0] = new Value(getId());
+			message.args[1] = new Value(id);
+			eventHandler.raiseEvent(message);
+		}
+
+		private void resizeNode(Node node, int width, int height) {
+			EventHandler handler = DiagramClient.theClient().getHandler();
+			Message message = handler.newMessage("resizeNode", 3);
+			message.args[0] = new Value(node.getId());
+			message.args[1] = new Value(width);
+			message.args[2] = new Value(height);
+			handler.raiseEvent(message);
+		}
+
+		private void zoomTo() {
+			EventHandler eventHandler = DiagramClient.theClient().getHandler();
+			Message message = eventHandler.newMessage("zoomChanged", 2);
+			message.args[0] = new Value(getId());
+			message.args[1] = new Value((float) zoom);
+			eventHandler.raiseEvent(message);
+		}
+
+		private void checkEdgeCreation(int x, int y) {
+			Port port = selectPort(x, y);
+			if (port != null) {
+				String sourceId = sourcePort.getId();
+				String targetId = port.getId();
+				Message m = DiagramClient.theClient().getHandler().newMessage("newEdge", 3);
+				m.args[0] = new Value(edgeCreationType);
+				m.args[1] = new Value(sourceId);
+				m.args[2] = new Value(targetId);
+				DiagramClient.theClient().getHandler().raiseEvent(m);
+				resetPalette();
+			}
+		}
+	}
 }
