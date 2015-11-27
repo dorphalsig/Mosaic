@@ -188,6 +188,8 @@ public class DialogsClient extends Client {
   public Value callMessage(Message message) {
     if (message.hasName("newQuestionDialog"))
       return newQuestionDialog(message);
+    else if (message.hasName("newQuestionDialogYesNoCancel"))
+        return newQuestionDialogYesNoCancel(message);
     else if (message.hasName("newDirectoryDialog"))
       return newDirectoryDialog(message);
     else if (message.hasName("newFileDialog"))
@@ -283,6 +285,36 @@ public class DialogsClient extends Client {
     });
     return values[0];
   }
+
+  private Value newQuestionDialogYesNoCancel(final Message message) {
+	   final Value[] values = new Value[1];
+	    runOnDisplay(new Runnable() {
+	      public void run() {
+	        Value question = message.args[0];
+	        Value defaultResponse = message.args[1];
+	        Value icon = message.args[2];
+	        MessageDialog md = new MessageDialog(XModeler.getXModeler(), "Question", null, question.strValue(), MessageDialog.QUESTION_WITH_CANCEL, 
+	    			new String[]{
+	    				"Yes", 
+	    				"No", 
+	    				"Cancel"},
+	    			0
+	    	);
+	    	switch(md.open()) {
+	    	case 0: 
+		        values[0] = new Value("Yes");
+	    		break;
+	    	case 1:
+		        values[0] = new Value("No");
+	    		break;
+	    	case 2:
+		        values[0] = new Value("");
+	    		break;
+	    	}	        
+	      }
+	    });
+	    return values[0];
+	}
 
 	private Value newConfirmDialog(final Message message) {
 	    final Value[] values = new Value[1];
