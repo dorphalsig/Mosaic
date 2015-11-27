@@ -379,8 +379,12 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     int red = Integer.parseInt(XModeler.attributeValue(node, "red"));
     int green = Integer.parseInt(XModeler.attributeValue(node, "green"));
     int blue = Integer.parseInt(XModeler.attributeValue(node, "blue"));
+    boolean border = "true".equals(XModeler.attributeValue(node, "border"));
+    int borderRed = border?0:Integer.parseInt(XModeler.attributeValue(node, "borderRed"));
+    int borderGreen = border?0:Integer.parseInt(XModeler.attributeValue(node, "borderGreen"));
+    int borderBlue = border?0:Integer.parseInt(XModeler.attributeValue(node, "borderBlue"));
     String font = XModeler.attributeValue(node, "font");
-    newLabel(edgeId, id, text, pos, x, y, editable, underline, condense, red, green, blue, font);
+    newLabel(edgeId, id, text, pos, x, y, editable, underline, condense, red, green, blue, border, borderRed, borderGreen, borderBlue, font);
   }
 
   private void inflateMultilineText(String parentId, Node node) {
@@ -641,19 +645,20 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     int blue = message.args[11].intValue;
     String font = message.args[12].strValue();
     boolean border = message.args[13].boolValue;
-    String borderColor = message.args[14].strValue();
-    System.err.println("text: " + text);
-    System.err.println("border: " + border);
-    System.err.println("borderColor: " + borderColor);
-    System.err.println("editable: " + editable);
-    newLabel(parentId, id, text, position, x, y, editable, underline, condense, red, green, blue, font);
+    int borderRed = message.args[14].intValue;
+    int borderGreen = message.args[15].intValue;
+    int borderBlue = message.args[16].intValue;
+    newLabel(parentId, id, text, position, x, y, editable, underline, condense, red, green, blue, 
+    		border, borderRed, borderGreen, borderBlue,
+    		font);
   }
 
-  private void newLabel(String parentId, String id, String text, String position, int x, int y, Boolean editable, Boolean underline, Boolean condense, int red, int green, int blue, String font) {
+  private void newLabel(String parentId, String id, String text, String position, int x, int y, Boolean editable, Boolean underline, Boolean condense, int red, int green, int blue, 
+		  boolean border,  int borderRed, int borderGreen, int borderBlue, String font) {
     for (Diagram diagram : diagrams) {
       for (Edge edge : diagram.getEdges()) {
         if (edge.getId().equals(parentId)) {
-          edge.addLabel(id, text, position, x, y, editable, underline, condense, red, green, blue, font);
+          edge.addLabel(id, text, position, x, y, editable, underline, condense, red, green, blue, border, borderRed, borderGreen, borderBlue, font);
         }
       }
     }

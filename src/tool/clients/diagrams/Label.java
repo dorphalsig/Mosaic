@@ -3,6 +3,7 @@ package tool.clients.diagrams;
 import java.io.PrintStream;
 
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Point;
 
@@ -24,9 +25,13 @@ public class Label implements Selectable {
   int     red;
   int     green;
   int     blue;
+  boolean border;
+  int borderRed; 
+  int borderGreen; 
+  int borderBlue; 
   String  font;
 
-  public Label(Edge edge, String id, String text, String pos, int x, int y, boolean editable, boolean underline, boolean condense, int red, int green, int blue, String font) {
+  public Label(Edge edge, String id, String text, String pos, int x, int y, boolean editable, boolean underline, boolean condense, int red, int green, int blue, boolean border,  int borderRed, int borderGreen, int borderBlue, String font) {
     super();
     this.edge = edge;
     this.id = id;
@@ -41,6 +46,10 @@ public class Label implements Selectable {
     this.green = green;
     this.blue = blue;
     this.font = font;
+    this.border = border;
+    this.borderRed = borderRed;
+    this.borderGreen = borderGreen;
+    this.borderBlue = borderBlue;
   }
 
   public boolean contains(int x, int y) {
@@ -141,23 +150,32 @@ public class Label implements Selectable {
   public void paint(GC gc) {
     gc.setFont(DiagramClient.diagramFont);
     gc.drawText(text, getAbsoluteX(), getAbsoluteY());
+    paintBorder(gc);
   }
 
-  public void paintHover(GC gc, int x, int y) {
-    if (contains(x, y)) {
+  public void paintBorder(GC gc) {
+	  if(!border) return;
       Color c = gc.getForeground();
-      gc.setForeground(Diagram.GREY);
+      gc.setForeground(new Color (org.eclipse.swt.widgets.Display.getCurrent(), borderRed, borderGreen, borderBlue));
       gc.drawRectangle(getAbsoluteX() - 2, getAbsoluteY() - 2, getWidth() + 4, getHeight() + 4);
-      Point source = edge.sourceIntercept();
-      Point target = edge.targetIntercept();
-      if (source != null && target != null) {
-        int startX = pos.equals("start") ? source.x : pos.equals("end") ? target.x : (target.x - source.x) / 2;
-        int startY = pos.equals("start") ? source.y : pos.equals("end") ? target.y : (target.y - source.y) / 2;
-        gc.drawLine(startX, startY, getAbsoluteX() - 2, getAbsoluteY() - 2);
-        gc.setForeground(c);
-      }
-    }
+      gc.setForeground(c);
   }
+  
+  public void paintHover(GC gc, int x, int y) {
+	    if (contains(x, y)) {
+	      Color c = gc.getForeground();
+	      gc.setForeground(Diagram.GREY);
+	      gc.drawRectangle(getAbsoluteX() - 2, getAbsoluteY() - 2, getWidth() + 4, getHeight() + 4);
+	      Point source = edge.sourceIntercept();
+	      Point target = edge.targetIntercept();
+	      if (source != null && target != null) {
+	        int startX = pos.equals("start") ? source.x : pos.equals("end") ? target.x : (target.x - source.x) / 2;
+	        int startY = pos.equals("start") ? source.y : pos.equals("end") ? target.y : (target.y - source.y) / 2;
+	        gc.drawLine(startX, startY, getAbsoluteX() - 2, getAbsoluteY() - 2);
+	      }
+	      gc.setForeground(c);
+	    }
+	  }
 
   public void paintSelected(GC gc) {
     Color c = gc.getForeground();
@@ -205,6 +223,10 @@ public class Label implements Selectable {
     out.print("red='" + red + "' ");
     out.print("green='" + green + "' ");
     out.print("blue='" + blue + "' ");
+    out.print("border='" + border + "' ");
+    out.print("borderRed='" + borderRed + "' ");
+    out.print("borderGreen='" + borderGreen + "' ");
+    out.print("borderBlue='" + borderBlue + "' ");
     out.print("font='" + font + "'/>");
   }
 
