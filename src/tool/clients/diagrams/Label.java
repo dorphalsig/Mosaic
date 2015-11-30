@@ -169,8 +169,8 @@ public class Label implements Selectable {
 	      Point source = edge.sourceIntercept();
 	      Point target = edge.targetIntercept();
 	      if (source != null && target != null) {
-	        int startX = pos.equals("start") ? source.x : pos.equals("end") ? target.x : (target.x - source.x) / 2;
-	        int startY = pos.equals("start") ? source.y : pos.equals("end") ? target.y : (target.y - source.y) / 2;
+	        int startX = pos.equals("start") ? source.x : pos.equals("end") ? target.x : (target.x + source.x) / 2;
+	        int startY = pos.equals("start") ? source.y : pos.equals("end") ? target.y : (target.y + source.y) / 2;
 	        gc.drawLine(startX, startY, getAbsoluteX() - 2, getAbsoluteY() - 2);
 	      }
 	      gc.setForeground(c);
@@ -184,8 +184,8 @@ public class Label implements Selectable {
     Point source = edge.sourceIntercept();
     Point target = edge.targetIntercept();
     if (source != null && target != null) {
-      int startX = pos.equals("start") ? source.x : pos.equals("end") ? target.x : (target.x - source.x) / 2;
-      int startY = pos.equals("start") ? source.y : pos.equals("end") ? target.y : (target.y - source.y) / 2;
+      int startX = pos.equals("start") ? source.x : pos.equals("end") ? target.x : (target.x + source.x) / 2;
+      int startY = pos.equals("start") ? source.y : pos.equals("end") ? target.y : (target.y + source.y) / 2;
       gc.drawLine(startX, startY, getAbsoluteX() - 2, getAbsoluteY() - 2);
       gc.setForeground(c);
     }
