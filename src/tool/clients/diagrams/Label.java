@@ -151,6 +151,7 @@ public class Label implements Selectable {
     gc.setFont(DiagramClient.diagramFont);
     gc.drawText(text, getAbsoluteX(), getAbsoluteY());
     paintBorder(gc);
+    paintArrow(gc);
   }
 
   public void paintBorder(GC gc) {
@@ -159,6 +160,32 @@ public class Label implements Selectable {
       gc.setForeground(new Color (org.eclipse.swt.widgets.Display.getCurrent(), borderRed, borderGreen, borderBlue));
       gc.drawRectangle(getAbsoluteX() - 2, getAbsoluteY() - 2, getWidth() + 4, getHeight() + 4);
       gc.setForeground(c);
+  }
+  
+  public void paintArrow(GC gc) {
+	  int dir = "source".equals(text)?-1:"target".equals(text)?1:0;
+//	  if("A".equals(text)) dir = 1;
+	  if(dir == 0) return;
+	  Point p = dir==1?edge.sourceIntercept():edge.targetIntercept();
+	  if(p==null) return;
+	  int x0 = getAbsoluteX() - 10;
+	  int y0 = getAbsoluteY() + 8;
+	  double angle = Math.atan2(p.y - y0, p.x - x0);
+	  int SIZE = 6;
+	  Point p1 = new Point(
+			  x0+(int)(1.7 * SIZE * Math.cos(angle)), 
+			  y0+(int)(1.7 * SIZE * Math.sin(angle)));
+	  Point p2 = new Point(
+			  x0+(int)(SIZE * Math.cos(angle+Math.PI*2/3)), 
+			  y0+(int)(SIZE * Math.sin(angle+Math.PI*2/3)));
+	  Point p3 = new Point(
+			  x0+(int)(SIZE * Math.cos(angle-Math.PI*2/3)), 
+			  y0+(int)(SIZE * Math.sin(angle-Math.PI*2/3)));
+//	  System.err.println((angle * 180 / Math.PI) + "°");
+	  Color c = gc.getBackground();
+	  gc.setBackground(new Color(c.getDevice(), 0, 0, 0));
+	  gc.fillPolygon(new int[]{p1.x, p1.y, p2.x, p2.y, p3.x, p3.y});
+	  gc.setBackground(c);
   }
   
   public void paintHover(GC gc, int x, int y) {
