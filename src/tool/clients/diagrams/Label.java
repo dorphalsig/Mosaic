@@ -165,18 +165,19 @@ public class Label implements Selectable {
   }
   
   public void paintArrow(GC gc) {
-	  int dir = "source".equals(text)?-1:"target".equals(text)?1:0;
+//	  int dir = "source".equals(text)?-1:"target".equals(text)?1:0;
 //	  if("A".equals(text)) dir = 1;
-	  if(dir == 0) return;
-	  Point p = dir==1?edge.sourceIntercept():edge.targetIntercept();
+	  System.err.println(arrow);
+	  if(arrow == 0) return;
+	  Point p = arrow==-1?edge.sourceIntercept():edge.targetIntercept();
 	  if(p==null) return;
 	  int x0 = getAbsoluteX() - 10;
 	  int y0 = getAbsoluteY() + 8;
 	  double angle = Math.atan2(p.y - y0, p.x - x0);
-	  int SIZE = 6;
+	  int SIZE = 7;
 	  Point p1 = new Point(
-			  x0+(int)(1.7 * SIZE * Math.cos(angle)), 
-			  y0+(int)(1.7 * SIZE * Math.sin(angle)));
+			  x0+(int)(1.6 * SIZE * Math.cos(angle)), 
+			  y0+(int)(1.6 * SIZE * Math.sin(angle)));
 	  Point p2 = new Point(
 			  x0+(int)(SIZE * Math.cos(angle+Math.PI*2/3)), 
 			  y0+(int)(SIZE * Math.sin(angle+Math.PI*2/3)));
