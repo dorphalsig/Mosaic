@@ -30,8 +30,9 @@ public class Label implements Selectable {
   int borderGreen; 
   int borderBlue; 
   String  font;
+  int arrow;
 
-  public Label(Edge edge, String id, String text, String pos, int x, int y, boolean editable, boolean underline, boolean condense, int red, int green, int blue, boolean border,  int borderRed, int borderGreen, int borderBlue, String font) {
+  public Label(Edge edge, String id, String text, String pos, int x, int y, boolean editable, boolean underline, boolean condense, int red, int green, int blue, boolean border,  int borderRed, int borderGreen, int borderBlue, String font, int arrow) {
     super();
     this.edge = edge;
     this.id = id;
@@ -50,6 +51,7 @@ public class Label implements Selectable {
     this.borderRed = borderRed;
     this.borderGreen = borderGreen;
     this.borderBlue = borderBlue;
+    this.arrow = arrow;
   }
 
   public boolean contains(int x, int y) {
@@ -254,6 +256,7 @@ public class Label implements Selectable {
     out.print("borderRed='" + borderRed + "' ");
     out.print("borderGreen='" + borderGreen + "' ");
     out.print("borderBlue='" + borderBlue + "' ");
+    out.print("arrow='" + arrow + "' ");
     out.print("font='" + font + "'/>");
   }
 
