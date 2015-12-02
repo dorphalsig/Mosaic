@@ -324,7 +324,10 @@ public class Diagram implements Display {
         display.doubleClick(gc, this, 0, 0, lastX, lastY);
       }
       for (Node node : nodes) {
-        node.doubleClick(gc, this, lastX, lastY);
+          node.doubleClick(gc, this, lastX, lastY);
+      }
+      for(Edge edge : edges) {
+    	  edge.doubleClick(gc, this, lastX, lastY);
       }
     }
   }

@@ -2,11 +2,16 @@ package tool.clients.diagrams;
 
 import java.io.PrintStream;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
 
+import tool.clients.dialogs.notifier.NotificationType;
+import tool.clients.dialogs.notifier.NotifierDialog;
 import tool.clients.menus.MenuClient;
 import tool.xmodeler.XModeler;
 import xos.Message;
@@ -165,9 +170,6 @@ public class Label implements Selectable {
   }
   
   public void paintArrow(GC gc) {
-//	  int dir = "source".equals(text)?-1:"target".equals(text)?1:0;
-//	  if("A".equals(text)) dir = 1;
-	  System.err.println(arrow);
 	  if(arrow == 0) return;
 	  Point p = arrow==-1?edge.sourceIntercept():edge.targetIntercept();
 	  if(p==null) return;
@@ -266,4 +268,74 @@ public class Label implements Selectable {
 
   public void select() {
   }
+
+//public void doubleClick(GC gc, Diagram diagram, int x2, int y2) {
+	  public void doubleClick(GC gc, final Diagram diagram, int mouseX, int mouseY) {
+		    if (editable && contains(mouseX, mouseY)) {
+		      final org.eclipse.swt.widgets.Text text = new org.eclipse.swt.widgets.Text(diagram.getCanvas(), SWT.BORDER);
+		      text.setFont(DiagramClient.diagramFont);
+		      text.setText(this.text);
+		      Point p = diagram.scaleinv(getAbsoluteX(), getAbsoluteY());
+		      text.setLocation(p.x, p.y);
+		      text.setSize(getWidth() + 10, getHeight() + 10);
+		      text.setVisible(true);
+		      text.selectAll();
+		      //text.setFocus(); - done delayed to not loose focus on Linux, see below
+		      NotifierDialog.notify("Edit Text", "Type text then RET to update.\nType ESC to cancel.", NotificationType.values()[3]);
+		      Listener listener = new Listener() {
+		        public void handleEvent(Event event) {
+		          org.eclipse.swt.widgets.Text t;
+		          switch (event.type) {
+		          case SWT.FocusOut:
+					t = (org.eclipse.swt.widgets.Text) event.widget;
+					t.setVisible(false);
+					t.dispose();
+					diagram.redraw();
+		            break;
+		          case SWT.Verify:
+		            t = (org.eclipse.swt.widgets.Text) event.widget;
+		            GC gc = new GC(t);
+		            Point size = gc.textExtent(t.getText() + event.text);
+		            t.setSize(size.x + 10, getHeight() + 10);
+		            break;
+		          case SWT.Traverse:
+		            switch (event.detail) {
+		            case SWT.TRAVERSE_RETURN:
+		              t = (org.eclipse.swt.widgets.Text) event.widget;
+		              textChangedEvent(t.getText());
+		              t.setVisible(false);
+		              t.dispose();
+		              diagram.redraw();
+		              event.doit = false;
+		              break;
+		            case SWT.TRAVERSE_ESCAPE:
+		              t = (org.eclipse.swt.widgets.Text) event.widget;
+		              t.setVisible(false);
+		              t.dispose();
+		              diagram.redraw();
+		              event.doit = false;
+		              break;
+		            }
+		            break;
+		          }
+		        }
+		      };
+		      text.addListener(SWT.FocusOut, listener);
+		      text.addListener(SWT.Verify, listener);
+		      text.addListener(SWT.Traverse, listener);
+
+		      XModeler.getXModeler().getDisplay().timerExec(100, new Runnable() {
+		          public void run() {
+		          	  text.setFocus();
+		          }
+		      });
+		    }
+		  }
+	
+	  public void textChangedEvent(String text) {
+		    Message message = DiagramClient.theClient().getHandler().newMessage("textChanged", 2);
+		    message.args[0] = new Value(id);
+		    message.args[1] = new Value(text);
+		    DiagramClient.theClient().getHandler().raiseEvent(message);
+		  }
 }

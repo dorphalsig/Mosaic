@@ -939,9 +939,9 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     else if (message.hasName("zoomIn"))
       zoomIn(message);
     else if (message.hasName("zoomOut"))
-        zoomOut(message);
+      zoomOut(message);
     else if (message.hasName("zoomOne"))
-    	zoomOne(message);
+      zoomOne(message);
     else if (message.hasName("hide"))
       hide(message);
     else if (message.hasName("show"))

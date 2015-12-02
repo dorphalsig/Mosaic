@@ -518,8 +518,8 @@ public class Edge {
         final Waypoint wp0 = waypoints.elementAt(i - 1);
         final Waypoint wp1 = waypoints.elementAt(i);
         Vector<Point> p = getIntersection(wp0, wp1, intersections);
-        Collections.sort(p, new Comparator() {
-          public int compare(Object o1, Object o2) {
+        Collections.sort(p, new Comparator<Point>() {
+          public int compare(Point o1, Point o2) {
             Point p1 = (Point) o1;
             Point p2 = (Point) o2;
             boolean cmpx = wp0.x <= wp1.x ? p1.x <= p2.x : p2.x <= p1.x;
@@ -918,4 +918,13 @@ public class Edge {
   public void show(String id) {
     if (getId().equals(id)) hidden = false;
   }
+
+public void doubleClick(GC gc, Diagram diagram, int x, int y) {
+	for(Label label : labels) {
+		label.doubleClick(gc, diagram, x, y);
+	}
+//	if(lineIsHit(x,y,2)) {
+//		
+//	}
+}
 }
