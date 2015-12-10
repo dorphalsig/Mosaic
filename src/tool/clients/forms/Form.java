@@ -450,6 +450,7 @@ public class Form implements MouseListener, SelectionListener {
   }
 
   public void setText(String id, String string) {
+	  System.err.println("setText: " + string);
     if (textFields.containsKey(id)) {
       Text text = textFields.get(id);
       text.setText(string);

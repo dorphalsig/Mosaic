@@ -16,16 +16,24 @@ import tool.xmodeler.XModeler;
 public class ToggleTool extends Tool {
 
   boolean state;
+  String iconTrue;
+  String iconFalse;
+  transient Image imageTrue;
+  transient Image imageFalse;
 
-  public ToggleTool(Composite parent, Diagram diagram, String label, String id, boolean state, String icon) {
-    super(parent, diagram, label, id, icon);
+  public ToggleTool(Composite parent, Diagram diagram, String label, String id, boolean state, String iconTrue, String iconFalse) {
+    super(parent, diagram, label, id, state?iconTrue:iconFalse);
     this.state = state;
+    this.iconTrue = iconTrue;
+    this.iconFalse = iconFalse;
     if (state)
       select();
     else unselect();
   }
 
   public Button createButton(Composite parent) {
+//	  imageTrue = new Image(XModeler.getXModeler().getDisplay(), new ImageData("icons/" + iconTrue));
+//	  imageFalse = new Image(XModeler.getXModeler().getDisplay(), new ImageData("icons/" + iconFalse));
     Image image = new Image(XModeler.getXModeler().getDisplay(), new ImageData("icons/" + icon));
     Button button = new Button(parent, SWT.CHECK);
     GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
@@ -42,7 +50,8 @@ public class ToggleTool extends Tool {
     out.print("<ToggleTool label='" + label + "'");
     out.print(" id='" + id + "'");
     out.print(" state='" + state + "'");
-    out.print(" icon='" + icon + "'/>");
+    out.print(" icon='" + iconTrue + "'/>");
+    out.print(" icon2='" + iconFalse + "'/>");
   }
 
   public void widgetDefaultSelected(SelectionEvent event) {
@@ -57,6 +66,11 @@ public class ToggleTool extends Tool {
   private void toggle() {
     state = !state;
     button.setSelection(state);
+    System.err.println("toggle: " + state);
+    String file = "icons/" + (state?iconTrue:iconFalse);
+    System.err.println(file);
+    button.setImage(new Image(XModeler.getXModeler().getDisplay(), new ImageData(file)));
+    System.err.println(button.getImage());
   }
 
   public String getType() {
@@ -72,11 +86,13 @@ public class ToggleTool extends Tool {
   private void unselect() {
     button.setSelection(false);
     button.setGrayed(false);
+    button.setImage(new Image(XModeler.getXModeler().getDisplay(), new ImageData("icons/" + iconFalse)));
   }
 
   public void select() {
     button.setSelection(true);
     button.setGrayed(true);
+    button.setImage(new Image(XModeler.getXModeler().getDisplay(), new ImageData("icons/" + iconTrue)));
   }
 
 }

@@ -52,10 +52,10 @@ public class Palette {
     groups.add(group);
   }
 
-  public void newToggle(Diagram diagram, String groupName, String label, String toolId, boolean state, String icon) {
+  public void newToggle(Diagram diagram, String groupName, String label, String toolId, boolean state, String iconTrue, String iconFalse) {
     Group group = getGroup(groupName);
     if (group != null) {
-      group.newToggle(diagram, label, toolId, state, icon);
+      group.newToggle(diagram, label, toolId, state, iconTrue, iconFalse);
       groupContainer.layout();
     } else System.err.println("cannot find group " + groupName);
   }

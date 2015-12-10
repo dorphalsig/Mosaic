@@ -243,7 +243,11 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     String id = XModeler.attributeValue(tool, "id");
     boolean state = XModeler.attributeValue(tool, "state").equals("true");
     String icon = XModeler.attributeValue(tool, "icon");
-    newToggle(diagramId, groupId, label, id, state, icon);
+    String icon2 = icon;
+    try{
+    	icon2 = XModeler.attributeValue(tool, "icon2");
+    } catch (Exception e) {}
+    newToggle(diagramId, groupId, label, id, state, icon, icon2);
   }
 
   private void inflateActionTool(String diagramId, String groupId, Node tool) {
@@ -774,8 +778,9 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     final Value label = message.args[2];
     final Value toolId = message.args[3];
     final Value state = message.args[4];
-    final Value icon = message.args[5];
-    newToggle(diagramId.strValue(), groupId.strValue(), label.strValue(), toolId.strValue(), state.boolValue, icon.strValue());
+    final Value iconTrue = message.args[5];
+    final Value iconFalse = message.args[6];
+    newToggle(diagramId.strValue(), groupId.strValue(), label.strValue(), toolId.strValue(), state.boolValue, iconTrue.strValue(), iconFalse.strValue());
   }
 
   private void newAction(Message message) {
@@ -798,12 +803,12 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     } else System.err.println("cannot find diagram " + diagramId);
   }
 
-  private void newToggle(final String diagramId, final String groupId, final String label, final String toolId, final boolean state, final String icon) {
+  private void newToggle(final String diagramId, final String groupId, final String label, final String toolId, final boolean state, final String iconTrue, final String iconFalse) {
     if (getDiagram(diagramId) != null) {
       runOnDisplay(new Runnable() {
         public void run() {
           Diagram diagram = getDiagram(diagramId);
-          diagram.newToggle(groupId, label, toolId, state, icon);
+          diagram.newToggle(groupId, label, toolId, state, iconTrue, iconFalse);
         }
       });
     } else System.err.println("cannot find diagram " + diagramId);

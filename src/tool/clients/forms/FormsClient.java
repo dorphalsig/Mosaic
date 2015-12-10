@@ -564,13 +564,17 @@ public class FormsClient extends Client implements CTabFolder2Listener {
   }
 
   public void sendMessage(final Message message) {
-//System.err.println("####### MESSAGE TO FORM CLIENT: "+message.output());
     if (message.hasName("newForm"))
       newForm(message);
     else if (message.hasName("setTool"))
       setTool(message);
-    else if (message.hasName("newText"))
+    else if (message.hasName("newText")) {
       newText(message);
+      String string = message.args[2].strValue();
+      if(string.length() < 2) {
+    	  System.err.println("####### MESSAGE TO FORM CLIENT FOR EMPTY LABEL: "+message);
+      }
+    }
     else if (message.hasName("setText"))
       setText(message);
     else if (message.hasName("newTextField"))

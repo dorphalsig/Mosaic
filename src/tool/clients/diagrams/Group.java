@@ -102,8 +102,8 @@ public class Group {
     return null;
   }
 
-  public void newToggle(Diagram diagram, String label, String toolId, boolean state, String icon) {
-    tools.add(new ToggleTool(buttonContainer, diagram, label, toolId, state, icon));
+  public void newToggle(Diagram diagram, String label, String toolId, boolean state, String iconTrue, String iconFalse) {
+    tools.add(new ToggleTool(buttonContainer, diagram, label, toolId, state, iconTrue, iconFalse));
     item.setHeight(buttonContainer.computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
     item.setExpanded(true);
   }

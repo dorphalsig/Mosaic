@@ -597,8 +597,8 @@ public class Diagram implements Display {
     redraw();
   }
 
-  public void newToggle(String groupId, String label, String toolId, boolean state, String icon) {
-    palette.newToggle(this, groupId, label, toolId, state, icon);
+  public void newToggle(String groupId, String label, String toolId, boolean state, String iconTrue, String iconFalse) {
+    palette.newToggle(this, groupId, label, toolId, state, iconTrue, iconFalse);
     container.layout();
   }
 

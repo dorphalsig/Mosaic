@@ -163,6 +163,7 @@ public class Label implements Selectable {
 
   public void paintBorder(GC gc) {
 	  if(!border) return;
+	  if(text.length() == 0) return;
       Color c = gc.getForeground();
       gc.setForeground(new Color (org.eclipse.swt.widgets.Display.getCurrent(), borderRed, borderGreen, borderBlue));
       gc.drawRectangle(getAbsoluteX() - 2, getAbsoluteY() - 2, getWidth() + 4, getHeight() + 4);
