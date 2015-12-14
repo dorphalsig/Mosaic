@@ -171,22 +171,55 @@ public class Label implements Selectable {
   }
   
   public void paintArrow(GC gc) {
+	  // if no arrow is about to be painted or anything is wrong, simply skip this.
 	  if(arrow == 0) return;
-	  Point p = arrow==-1?edge.sourceIntercept():edge.targetIntercept();
-	  if(p==null) return;
-	  int x0 = getAbsoluteX() - 10;
-	  int y0 = getAbsoluteY() + 8;
-	  double angle = Math.atan2(p.y - y0, p.x - x0);
+	  Point sourcePoint = arrow==1?edge.sourceIntercept():edge.targetIntercept();
+	  if(sourcePoint==null) return;
+	  Point targetPoint = arrow==-1?edge.sourceIntercept():edge.targetIntercept();
+	  if(targetPoint==null) return;
+	  // Now we need to find the quadrant where the arrow is pointing to.
+	  // There are 4 cases separated by the diagonals: North, West, ... 
+	  // The angle will give the clue. 
+	  // We need the position of the source and
+	  // the target and use atan2 to get it.
+	  double angle = Math.atan2(targetPoint.y - sourcePoint.y, targetPoint.x - sourcePoint.x);
+	  double angleBaseFour = angle*2/Math.PI; // Now a full circle is 4
+	  angleBaseFour += 4.5; angleBaseFour %= 4;// The centre of EAST was 0 before, now 0 to 1 is EAST
+	  int quadrant = (int) angleBaseFour; // rounding down and we get one of 4 quadrants 0=EAST,1=SOUTH,...
+	  // the Position of the arrow is different for each quadrant:
+	  int xArrow;
+	  int yArrow;
+	  switch(quadrant) {
+	  case 0 : // EAST
+		  xArrow = getAbsoluteX() + getWidth() + 10;
+		  yArrow = getAbsoluteY() + getHeight()/2;
+	      break;
+	  case 3 : // NORTH
+		  xArrow = getAbsoluteX() + getWidth()/2;
+		  yArrow = getAbsoluteY() - 10;
+	      break;
+	  case 2 : // WEST
+		  xArrow = getAbsoluteX() - 10;
+		  yArrow = getAbsoluteY() + getHeight()/2;
+	      break;
+	  case 1 : // SOUTH
+		  xArrow = getAbsoluteX() + getWidth()/2;
+		  yArrow = getAbsoluteY() + getHeight() + 10;
+	      break;
+	  default : 
+		  System.err.println("Arrow quadrant = " + quadrant);
+		  return; // Something's gone wrong. No arrow this time...
+	  }
 	  int SIZE = 7;
 	  Point p1 = new Point(
-			  x0+(int)(1.6 * SIZE * Math.cos(angle)), 
-			  y0+(int)(1.6 * SIZE * Math.sin(angle)));
+			  xArrow+(int)(1.6 * SIZE * Math.cos(angle)), 
+			  yArrow+(int)(1.6 * SIZE * Math.sin(angle)));
 	  Point p2 = new Point(
-			  x0+(int)(SIZE * Math.cos(angle+Math.PI*2/3)), 
-			  y0+(int)(SIZE * Math.sin(angle+Math.PI*2/3)));
+			  xArrow+(int)(SIZE * Math.cos(angle+Math.PI*2/3)), 
+			  yArrow+(int)(SIZE * Math.sin(angle+Math.PI*2/3)));
 	  Point p3 = new Point(
-			  x0+(int)(SIZE * Math.cos(angle-Math.PI*2/3)), 
-			  y0+(int)(SIZE * Math.sin(angle-Math.PI*2/3)));
+			  xArrow+(int)(SIZE * Math.cos(angle-Math.PI*2/3)), 
+			  yArrow+(int)(SIZE * Math.sin(angle-Math.PI*2/3)));
 //	  System.err.println((angle * 180 / Math.PI) + "°");
 	  Color c = gc.getBackground();
 	  gc.setBackground(new Color(c.getDevice(), 0, 0, 0));
