@@ -496,7 +496,7 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
   }
 
   private PPrint ifThenElse() {
-    return new Seq(new Space(), new Literal("exp"), new Space(), new NewLine(), new Literal("then"), new Space(), new Literal("exp"), new NewLine(), new Literal("then"), new Space(), new Literal("exp"), new NewLine(), new Literal("end"));
+    return new Seq(new Space(), new Literal("exp"), new Space(), new NewLine(), new Literal("then"), new Space(), new Literal("exp"), new NewLine(), new Literal("else"), new Space(), new Literal("exp"), new NewLine(), new Literal("end"));
   }
 
   public void inflate(Node textEditor) {
