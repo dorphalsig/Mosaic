@@ -123,6 +123,14 @@ public class Diagram implements Display {
     this.id = id;
   }
 
+  
+	private void sendMessageToDeleteSelection() {
+		System.out.println("sendMessageToDeleteSelection");
+		for (Node node : nodes)
+			if (selection.contains(node)) 
+				new OutboundMessages().deleteComand(node.id);
+	}
+  
   /**
    * Deletes a Display
    * @param id
@@ -1372,9 +1380,13 @@ public class Diagram implements Display {
 	      redraw();
 	    }
 	    if (((e.stateMask & SWT.CTRL) == SWT.CTRL) && (e.keyCode == '/')) {
-	      help();
-	      redraw();
-	    }
+		      help();
+		      redraw();
+		    }
+	    if (e.keyCode == SWT.DEL) {
+			sendMessageToDeleteSelection();
+		    redraw();
+		}
 	  }
 
 	  @Override public void keyReleased(KeyEvent event) {}
@@ -1727,6 +1739,13 @@ public class Diagram implements Display {
 			Message message = eventHandler.newMessage("zoomChanged", 2);
 			message.args[0] = new Value(getId());
 			message.args[1] = new Value((float) zoom);
+			eventHandler.raiseEvent(message);
+		}
+		
+		private void deleteComand(String id) {
+			EventHandler eventHandler = DiagramClient.theClient().getHandler();
+			Message message = eventHandler.newMessage("delete", 1);
+			message.args[0] = new Value(id);
 			eventHandler.raiseEvent(message);
 		}
 
