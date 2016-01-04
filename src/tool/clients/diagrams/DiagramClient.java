@@ -261,7 +261,7 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     String id = XModeler.attributeValue(diagram, "id");
     String label = XModeler.attributeValue(diagram, "label");
     boolean magnetic = XModeler.attributeValue(diagram, "magnetic").equals("true");
-    int zoom = Integer.parseInt(XModeler.attributeValue(diagram, "zoom", "100"));
+    float zoom = Float.parseFloat(XModeler.attributeValue(diagram, "zoom", "1.0"));
     newDiagram(id, label);
     Diagram d = getDiagram(id);
     d.setMagneticWaypoints(magnetic);
