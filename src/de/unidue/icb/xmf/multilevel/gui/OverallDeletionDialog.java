@@ -21,6 +21,7 @@ public class OverallDeletionDialog {
 	public static DeletionSettings deletionSetting; 
 	
 	static Display display;
+	static Shell shlDeletionSettings;
 	
 	public static Composite coCurrent;
 	public static Composite coAll;
@@ -41,8 +42,11 @@ public class OverallDeletionDialog {
 	 * 
 	 */
 	public static DeletionSettings showDialog() {
+		Display.getDefault().syncExec(new Runnable() {
+		    public void run() {
 		display = Display.getDefault();
-		Shell shlDeletionSettings = new Shell();
+		shlDeletionSettings = new Shell();
+		
 		shlDeletionSettings.setSize(323, 207);
 		shlDeletionSettings.setText("Deletion Settings");
 		shlDeletionSettings.setLayout(new RowLayout(SWT.VERTICAL));
@@ -167,7 +171,8 @@ public class OverallDeletionDialog {
 		Button btnOk = new Button(composite_7, SWT.NONE);
 		btnOk.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				e.display.dispose();
+				//e.display.dispose();
+				shlDeletionSettings.close();
 			}
 		});
 		btnOk.setText("Ok");
@@ -175,7 +180,8 @@ public class OverallDeletionDialog {
 		Button btnCancel = new Button(composite_7, SWT.NONE);
 		btnCancel.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				e.display.dispose();
+//				e.display.dispose();
+				shlDeletionSettings.close();
 			}
 		});
 		btnCancel.setText("Cancel");
@@ -189,6 +195,8 @@ public class OverallDeletionDialog {
 				display.sleep();
 			}
 		}
+		    }
+		});
 		return deletionSetting;
 	}
 }
