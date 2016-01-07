@@ -2,6 +2,9 @@ package tool.clients.forms;
 
 import java.io.PrintStream;
 import java.util.Hashtable;
+import java.util.Vector;
+
+import javax.xml.bind.util.ValidationEventCollector;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
@@ -587,4 +590,11 @@ public class Form implements MouseListener, SelectionListener {
       return boxes.get(id).getText();
     else return null;
   }
+
+public void removeItem(String id) {
+	if(items.containsKey(id)){
+		TreeItem ti = items.get(id);
+		ti.dispose();
+	}
+}
 }

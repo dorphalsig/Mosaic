@@ -50,7 +50,7 @@ public class ToggleTool extends Tool {
     out.print("<ToggleTool label='" + label + "'");
     out.print(" id='" + id + "'");
     out.print(" state='" + state + "'");
-    out.print(" icon='" + iconTrue + "'/>");
+    out.print(" icon='" + iconTrue + "'");
     out.print(" icon2='" + iconFalse + "'/>");
   }
 

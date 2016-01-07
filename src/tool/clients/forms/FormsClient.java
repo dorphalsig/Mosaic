@@ -552,6 +552,17 @@ public class FormsClient extends Client implements CTabFolder2Listener {
       }
     });
   }
+  
+  private void removeNode(Message message) {
+	  final String id = message.args[0].strValue();
+	    runOnDisplay(new Runnable() {
+	        public void run() {
+	          for (Form form : forms) {
+	            form.removeItem(id);
+	          }
+	        }
+	      });	  
+  }
 
   private void maximiseToCanvas(Message message) {
 	    final String id = message.args[0].strValue();
@@ -606,7 +617,9 @@ public class FormsClient extends Client implements CTabFolder2Listener {
     else if (message.hasName("check"))
       check(message);
     else if (message.hasName("uncheck"))
-      uncheck(message);
+        uncheck(message);
+    else if (message.hasName("removeNode"))
+    	removeNode(message);
     else if (message.hasName("maximiseToCanvas"))
         maximiseToCanvas(message);
     else if (message.hasName("gitConflict"))
