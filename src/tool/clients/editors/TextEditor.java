@@ -134,7 +134,7 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
 
   private void addCommentWordRule() {
     // This should be done by XMF really. Add comment as the first multiline rule...
-    addMultilineRule(getId(), "//", "\n", 204, 0, 0);
+    addMultilineRule(getId(), "//", "\n", 120, 120, 120);
     wordRules.addElement(new NumberWordRule());
   }
 
@@ -196,7 +196,9 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
   }
 
   public void addMultilineRule(String id, String start, String end, int red, int green, int blue) {
-    if (getId().equals(id)) wordRules.add(new MultiLineRule(start, end, new Color(XModeler.getXModeler().getDisplay(), red, green, blue)));
+    if (getId().equals(id)) {
+    	wordRules.add(new MultiLineRule(start, end, new Color(XModeler.getXModeler().getDisplay(), red, green, blue)));
+    }
   }
 
 	private void addStyles() {

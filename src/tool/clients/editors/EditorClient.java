@@ -81,7 +81,9 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
     else if (color.equals("green"))
       addMultilineRule(id, start, end, 0, 153, 0);
     else if (color.equals("blue"))
-      addMultilineRule(id, start, end, 50, 50, 255);
+        addMultilineRule(id, start, end, 50, 50, 255);
+    else if (color.equals("gray"))
+        addMultilineRule(id, start, end, 120, 120, 120);
     else System.err.println("unknown color: " + color);
   }
 

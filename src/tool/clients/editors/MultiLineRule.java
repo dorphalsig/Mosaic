@@ -26,7 +26,7 @@ public class MultiLineRule extends WordRule {
     if (canStartKeyword(prevChar, word.charAt(0)) && sEscaped.startsWith(word, i) && sEscaped.indexOf(end, i + 1) >= 0) {
       StyleRange style = new StyleRange();
       style.start = i;
-      style.length = (sEscaped.indexOf(end, i + 1) - i) + 1;
+      style.length = (sEscaped.indexOf(end, i + 1) - i) + end.length();
       style.fontStyle = SWT.UNDERLINE_SINGLE;
       style.foreground = color;
       return style;
