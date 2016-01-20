@@ -1039,8 +1039,8 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
           for (Edge edge : diagram.getEdges()) {
             if (edge.getId().equals(id.strValue())) {
               edge.setRed(red.intValue);
-              edge.setRed(green.intValue);
-              edge.setRed(blue.intValue);
+              edge.setGreen(green.intValue);
+              edge.setBlue(blue.intValue);
             }
           }
         }
