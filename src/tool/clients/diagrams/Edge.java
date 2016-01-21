@@ -21,15 +21,6 @@ public class Edge {
   public static int                  ARROW_HEAD      = 10;
   public static int                  LINE_WIDTH      = 1;
   public static int                  WAYPOINT_ALIGN  = 20;
-
-//  static final int                   NO_ARROW        = 0;
-//  static final int                   ARROW           = 1;
-//  static final int                   BLACK_DIAMOND   = 2;
-//  static final int                   WHITE_DIAMOND   = 3;
-//  static final int                   BLACK_ARROW     = 4;
-//  static final int                   WHITE_ARROW     = 5;
-  
-  // enum for head styles
   
   enum HeadStyle {NO_ARROW(0), ARROW(1), BLACK_DIAMOND(2), WHITE_DIAMOND(3), BLACK_ARROW(4), WHITE_ARROW(5); 
 	  int id; 
@@ -67,47 +58,7 @@ public class Edge {
     Point p = new Point((int) (centerx + (dx * radius)), (int) (centery + (dy * radius)));
     return p;
   }
-
-  /*NEW PRIVATE*/private static Point intercept(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) {
-    float x12 = x1 - x2;
-    float x34 = x3 - x4;
-    float y12 = y1 - y2;
-    float y34 = y3 - y4;
-    float c = x12 * y34 - y12 * x34;
-    if (Math.abs(c) < 0.01)
-      // No intersection
-      return new Point(-1, -1);
-    else {
-      // Intersection
-      float a = x1 * y2 - y1 * x2;
-      float b = x3 * y4 - y3 * x4;
-      float x = (a * x34 - b * x12) / c;
-      float y = (a * y34 - b * y12) / c;
-      return new Point((int) x, (int) y);
-    }
-  }
-
-  /*PACKAGE ACCESS*/ static Point intersect(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) {
-    float x12 = x1 - x2;
-    float x34 = x3 - x4;
-    float y12 = y1 - y2;
-    float y34 = y3 - y4;
-    float c = x12 * y34 - y12 * x34;
-    if (Math.abs(c) < 0.01)
-      // No intersection
-      return new Point(-1, -1);
-    else {
-      // Intersection
-      float a = x1 * y2 - y1 * x2;
-      float b = x3 * y4 - y3 * x4;
-      float x = (a * x34 - b * x12) / c;
-      float y = (a * y34 - b * y12) / c;
-      if (isOnLine((int) x, (int) y, x1, y1, x2, y2) && isOnLine((int) x, (int) y, x3, y3, x4, y4))
-        return new Point((int) x, (int) y);
-      else return new Point(-1, -1);
-    }
-  }
-
+  
   /*NEW PRIVATE*/private static boolean isOnLine(int x, int y, int x1, int y1, int x2, int y2) {
     boolean inX = x1 < x2 ? (x >= x1 && x <= x2) : (x >= x2 && x <= x1);
     boolean inY = y1 < y2 ? (y >= y1 && y <= y2) : (y >= y2 && y <= y1);
@@ -361,30 +312,6 @@ public class Edge {
   /*PACKAGE ACCESS*/ void setRefy(int refy) {
     this.refy = refy;
   }
-//
-//  public void setSourceHead(int sourceHead) {
-//    this.sourceHead = sourceHead;
-//  }
-//
-//  public void setSourceNode(Node sourceNode) {
-//    this.sourceNode = sourceNode;
-//  }
-//
-//  public void setSourcePort(Port sourcePort) {
-//    this.sourcePort = sourcePort;
-//  }
-//
-//  public void setTargetHead(int targetHead) {
-//    this.targetHead = targetHead;
-//  }
-//
-//  public void setTargetNode(Node targetNode) {
-//    this.targetNode = targetNode;
-//  }
-//
-//  public void setTargetPort(Port targetPort) {
-//    this.targetPort = targetPort;
-//  }
 
   /*PACKAGE ACCESS*/ void setText(String id, String text) {
     for (Label label : labels)
@@ -476,7 +403,6 @@ public class Edge {
 //	}
 	}
   
-  
   /////// INTERCEPT //////
  
   /*PACKAGE ACCESS*/ Point targetIntercept() { // used by Label
@@ -488,140 +414,90 @@ public class Edge {
   }
 
   /*PACKAGE ACCESS*/ Point intercept(Node node) {
-    Point p = topIntercept(node);
-    p = p == null ? leftIntercept(node) : p;
-    p = p == null ? rightIntercept(node) : p;
-    p = p == null ? bottomIntercept(node) : p;
+    Point p = intercept(node, Position.TOP);
+    p = p == null ? intercept(node, Position.LEFT) : p;
+    p = p == null ? intercept(node, Position.RIGHT) : p;
+    p = p == null ? intercept(node, Position.BOTTOM) : p;
     return p;
   }
-
-  /*NEW PRIVATE*/private Point topIntercept(Node node) {
-    int x0 = node.contains(start()) ? start().getX() : end().getX();
-    int y0 = node.contains(start()) ? start().getY() : end().getY();
-    int x1 = node.contains(start()) ? second().getX() : penultimate().getX();
-    int y1 = node.contains(start()) ? second().getY() : penultimate().getY();
-    int x2 = node.getX();
-    int y2 = node.getY();
-    int x3 = node.getX() + node.getWidth();
-    int y3 = node.getY();
-    Point p = intercept(x0, y0, x1, y1, x2, y2, x3, y3);
-    if (y1 >= y2 || p.x <= x2 || p.x >= x3)
-      return null;
-    else return p;
+  
+  enum Position{TOP, BOTTOM, LEFT, RIGHT}
+  
+  private Point intercept(Node node, Position position) {
+	  Waypoint firstOrLast = node.contains(start()) ? start() : end();
+	  Waypoint secondOrPenultimate = node.contains(second()) ? penultimate() : end();
+	  return intercept(node, firstOrLast, secondOrPenultimate, position);
   }
 
-  private Point topIntercept(Node node, Waypoint w1, Waypoint w2) {
-    int x0 = w1.getX();
-    int y0 = w1.getY();
-    int x1 = w2.getX();
-    int y1 = w2.getY();
-    int x2 = node.getX();
-    int y2 = node.getY();
-    int x3 = node.getX() + node.getWidth();
-    int y3 = node.getY();
-    Point p = intercept(x0, y0, x1, y1, x2, y2, x3, y3);
-    if (y1 >= y2 || p.x <= x2 || p.x >= x3)
-      return null;
-    else return p;
+  private Point intercept(Node node, Waypoint w1, Waypoint w2, Position position) {
+	  	int x2 = node.getX() + (position == Position.RIGHT  ? node.getWidth()  : 0);
+	  	int y2 = node.getY() + (position == Position.BOTTOM ? node.getHeight() : 0);
+	  	int x3 = node.getX() + (position != Position.LEFT   ? node.getWidth()  : 0);
+	  	int y3 = node.getY() + (position != Position.TOP    ? node.getHeight() : 0);
+	  	Point p = intercept(w1.x, w1.y, w2.x, w2.y, x2, y2, x3, y3);
+	  	if(position == Position.TOP    && (w2.y >= y2 || p.x <= x2 || p.x >= x3)) return null;
+	  	if(position == Position.BOTTOM && (w2.y <= y2 || p.x <= x2 || p.x >= x3)) return null;
+	  	if(position == Position.LEFT   && (w2.x > x2  || p.y <= y2 || p.y >= y3)) return null;
+	  	if(position == Position.RIGHT  && (w2.x < x2  || p.y <= y2 || p.y >= y3)) return null;
+	  	return p;
   }
   
-  private Point bottomIntercept(Node node) {
-    int x0 = node.contains(start()) ? start().getX() : end().getX();
-    int y0 = node.contains(start()) ? start().getY() : end().getY();
-    int x1 = node.contains(start()) ? second().getX() : penultimate().getX();
-    int y1 = node.contains(start()) ? second().getY() : penultimate().getY();
-    int x2 = node.getX();
-    int y2 = node.getY() + node.getHeight();
-    int x3 = node.getX() + node.getWidth();
-    int y3 = node.getY() + node.getHeight();
-    Point p = intercept(x0, y0, x1, y1, x2, y2, x3, y3);
-    if (y1 <= y2 || p.x <= x2 || p.x >= x3)
-      return null;
-    else return p;
-  }
-
-  private Point bottomIntercept(Node node, Waypoint w1, Waypoint w2) {
-    int x0 = w1.getX();
-    int y0 = w1.getY();
-    int x1 = w2.getX();
-    int y1 = w2.getY();
-    int x2 = node.getX();
-    int y2 = node.getY() + node.getHeight();
-    int x3 = node.getX() + node.getWidth();
-    int y3 = node.getY() + node.getHeight();
-    Point p = intercept(x0, y0, x1, y1, x2, y2, x3, y3);
-    if (y1 <= y2 || p.x <= x2 || p.x >= x3)
-      return null;
-    else return p;
-  }
+  /*
+   * intercept checks where the two lines (infinitely extended) would meet. return -1/-1 if the lines are parallel
+   * 
+   * intersect checks where the two lines do actually meet. returns -1/-1 if the lines don't meet
+   */
   
-  private Point leftIntercept(Node node) {
-    int x0 = node.contains(start()) ? start().getX() : end().getX();
-    int y0 = node.contains(start()) ? start().getY() : end().getY();
-    int x1 = node.contains(start()) ? second().getX() : penultimate().getX();
-    int y1 = node.contains(start()) ? second().getY() : penultimate().getY();
-    int x2 = node.getX();
-    int y2 = node.getY();
-    int x3 = node.getX();
-    int y3 = node.getY() + node.getHeight();
-    Point p = intercept(x0, y0, x1, y1, x2, y2, x3, y3);
-    if (x1 > x2 || p.y <= y2 || p.y >= y3)
-      return null;
-    else return p;
-  }
+  /*NEW PRIVATE*/private static Point intercept(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) {
+	  // 1 is first (or last) Waypoint
+	  // 2 is next Waypoint
+	  // 3 and 4 are the relevant corners of the node
+	    float x12 = x1 - x2;
+	    float x34 = x3 - x4; // is negative width of the line between the corners of the node, zero for TOP or BOTTOM
+	    float y12 = y1 - y2;
+	    float y34 = y3 - y4; // is negative height of the line between the corners of the node, zero for LEFT or RIGHT
+	    float c = x12 * y34 - y12 * x34;
+	    if (Math.abs(c) < 0.01)
+	      // No intersection
+	      return new Point(-1, -1);
+	    else {
+	      // Intersection
+	      float a = x1 * y2 - y1 * x2;
+	      float b = x3 * y4 - y3 * x4;
+	      float x = (a * x34 - b * x12) / c;
+	      float y = (a * y34 - b * y12) / c;
+	      return new Point((int) x, (int) y);
+	    }
+	  }
 
-  private Point leftIntercept(Node node, Waypoint w1, Waypoint w2) {
-    int x0 = w1.getX();
-    int y0 = w1.getY();
-    int x1 = w2.getX();
-    int y1 = w2.getY();
-    int x2 = node.getX();
-    int y2 = node.getY();
-    int x3 = node.getX();
-    int y3 = node.getY() + node.getHeight();
-    Point p = intercept(x0, y0, x1, y1, x2, y2, x3, y3);
-    if (x1 > x2 || p.y <= y2 || p.y >= y3)
-      return null;
-    else return p;
-  }
-
-  private Point rightIntercept(Node node) {
-    int x0 = node.contains(start()) ? start().getX() : end().getX();
-    int y0 = node.contains(start()) ? start().getY() : end().getY();
-    int x1 = node.contains(start()) ? second().getX() : penultimate().getX();
-    int y1 = node.contains(start()) ? second().getY() : penultimate().getY();
-    int x2 = node.getX() + node.getWidth();
-    int y2 = node.getY();
-    int x3 = node.getX() + node.getWidth();
-    int y3 = node.getY() + node.getHeight();
-    Point p = intercept(x0, y0, x1, y1, x2, y2, x3, y3);
-    if (x1 < x2 || p.y <= y2 || p.y >= y3)
-      return null;
-    else return p;
-  }
-
-  private Point rightIntercept(Node node, Waypoint w1, Waypoint w2) {
-    int x0 = w1.getX();
-    int y0 = w1.getY();
-    int x1 = w2.getX();
-    int y1 = w2.getY();
-    int x2 = node.getX() + node.getWidth();
-    int y2 = node.getY();
-    int x3 = node.getX() + node.getWidth();
-    int y3 = node.getY() + node.getHeight();
-    Point p = intercept(x0, y0, x1, y1, x2, y2, x3, y3);
-    if (x1 < x2 || p.y <= y2 || p.y >= y3)
-      return null;
-    else return p;
-  }
+	  /*PACKAGE ACCESS*/ static Point intersect(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) {
+	    float x12 = x1 - x2;
+	    float x34 = x3 - x4;
+	    float y12 = y1 - y2;
+	    float y34 = y3 - y4;
+	    float c = x12 * y34 - y12 * x34;
+	    if (Math.abs(c) < 0.01)
+	      // No intersection
+	      return new Point(-1, -1);
+	    else {
+	      // Intersection
+	      float a = x1 * y2 - y1 * x2;
+	      float b = x3 * y4 - y3 * x4;
+	      float x = (a * x34 - b * x12) / c;
+	      float y = (a * y34 - b * y12) / c;
+	      if (isOnLine((int) x, (int) y, x1, y1, x2, y2) && isOnLine((int) x, (int) y, x3, y3, x4, y4))
+	        return new Point((int) x, (int) y);
+	      else return new Point(-1, -1);
+	    }
+	  }
   
   ///////// NEAR /////////
   
   public boolean near(Node node, int x, int y) {
-    Point p = topIntercept(node);
-    p = p == null ? leftIntercept(node) : p;
-    p = p == null ? rightIntercept(node) : p;
-    p = p == null ? bottomIntercept(node) : p;
+    Point p = intercept(node, Position.TOP);
+    p = p == null ? intercept(node, Position.BOTTOM) : p;
+    p = p == null ? intercept(node, Position.LEFT) : p;
+    p = p == null ? intercept(node, Position.RIGHT) : p;
     if (p != null)
       return distance(p.x, p.y, x, y) < 10;
     else return false;
@@ -711,7 +587,6 @@ public class Edge {
     }
   }  
   
-
   public void paint(GC gc, Color color, boolean showWaypoints, Vector<Point> intersections) {
     if (!hidden) {
       int x = waypoints.elementAt(0).getX();
@@ -770,41 +645,41 @@ public class Edge {
   }
 
   /*NEW PRIVATE*/private void paintHeterogeneousEdgeDecorations(GC gc, Color color) {
-    Point topIntercept = topIntercept(targetNode);
+    Point topIntercept = intercept(targetNode, Position.TOP);
     if (topIntercept != null && topIntercept.x >= 0 && topIntercept.y >= 0) drawTargetDecoration(gc, color, topIntercept.x, topIntercept.y, penultimate().x, penultimate().y);
-    Point bottomIntercept = bottomIntercept(sourceNode);
+    Point bottomIntercept = intercept(sourceNode, Position.BOTTOM);
     if (bottomIntercept != null && bottomIntercept.x >= 0 && bottomIntercept.y >= 0) drawSourceDecoration(gc, color, bottomIntercept.x, bottomIntercept.y, second().x, second().y);
-    topIntercept = topIntercept(sourceNode);
+    topIntercept = intercept(sourceNode, Position.TOP);
     if (topIntercept != null && topIntercept.x >= 0 && topIntercept.y >= 0) drawSourceDecoration(gc, color, topIntercept.x, topIntercept.y, second().x, second().y);
-    bottomIntercept = bottomIntercept(targetNode);
+    bottomIntercept = intercept(targetNode, Position.BOTTOM);
     if (bottomIntercept != null && bottomIntercept.x >= 0 && bottomIntercept.y >= 0) drawTargetDecoration(gc, color, bottomIntercept.x, bottomIntercept.y, penultimate().x, penultimate().y);
-    Point leftIntercept = leftIntercept(sourceNode);
+    Point leftIntercept = intercept(sourceNode, Position.LEFT);
     if (leftIntercept != null && leftIntercept.x >= 0 && leftIntercept.y >= 0) drawSourceDecoration(gc, color, leftIntercept.x, leftIntercept.y, second().x, second().y);
-    Point rightIntercept = rightIntercept(targetNode);
+    Point rightIntercept = intercept(targetNode, Position.RIGHT);
     if (rightIntercept != null && rightIntercept.x >= 0 && rightIntercept.y >= 0) drawTargetDecoration(gc, color, rightIntercept.x, rightIntercept.y, penultimate().x, penultimate().y);
-    leftIntercept = leftIntercept(targetNode);
+    leftIntercept = intercept(targetNode, Position.LEFT);
     if (leftIntercept != null && leftIntercept.x >= 0 && leftIntercept.y >= 0) drawTargetDecoration(gc, color, leftIntercept.x, leftIntercept.y, penultimate().x, penultimate().y);
-    rightIntercept = rightIntercept(sourceNode);
+    rightIntercept = intercept(sourceNode, Position.RIGHT);
     if (rightIntercept != null && rightIntercept.x >= 0 && rightIntercept.y >= 0) drawSourceDecoration(gc, color, rightIntercept.x, rightIntercept.y, second().x, second().y);
   }
 
   /*NEW PRIVATE*/private void paintHomogeneousEdgeDecorations(GC gc, Color color) {
     // Ensure that the correct waypoint is used when calculating the intercepts...
-    Point topIntercept = targetHead == HeadStyle.NO_ARROW ? null : topIntercept(targetNode, end(), penultimate());
+    Point topIntercept = targetHead == HeadStyle.NO_ARROW ? null : intercept(targetNode, end(), penultimate(), Position.TOP);
     if (topIntercept != null && topIntercept.x >= 0 && topIntercept.y >= 0) drawTargetDecoration(gc, color, topIntercept.x, topIntercept.y, penultimate().x, penultimate().y);
-    Point bottomIntercept = sourceHead == HeadStyle.NO_ARROW ? null : bottomIntercept(sourceNode, start(), second());
+    Point bottomIntercept = sourceHead == HeadStyle.NO_ARROW ? null : intercept(sourceNode, start(), second(), Position.BOTTOM);
     if (bottomIntercept != null && bottomIntercept.x >= 0 && bottomIntercept.y >= 0) drawSourceDecoration(gc, color, bottomIntercept.x, bottomIntercept.y, second().x, second().y);
-    topIntercept = sourceHead == HeadStyle.NO_ARROW ? null : topIntercept(sourceNode, start(), second());
+    topIntercept = sourceHead == HeadStyle.NO_ARROW ? null : intercept(sourceNode, start(), second(), Position.TOP);
     if (topIntercept != null && topIntercept.x >= 0 && topIntercept.y >= 0) drawSourceDecoration(gc, color, topIntercept.x, topIntercept.y, second().x, second().y);
-    bottomIntercept = targetHead == HeadStyle.NO_ARROW ? null : bottomIntercept(targetNode, end(), penultimate());
+    bottomIntercept = targetHead == HeadStyle.NO_ARROW ? null : intercept(targetNode, end(), penultimate(), Position.BOTTOM);
     if (bottomIntercept != null && bottomIntercept.x >= 0 && bottomIntercept.y >= 0) drawTargetDecoration(gc, color, bottomIntercept.x, bottomIntercept.y, penultimate().x, penultimate().y);
-    Point leftIntercept = sourceHead == HeadStyle.NO_ARROW ? null : leftIntercept(sourceNode, start(), second());
+    Point leftIntercept = sourceHead == HeadStyle.NO_ARROW ? null : intercept(sourceNode, start(), second(), Position.LEFT);
     if (leftIntercept != null && leftIntercept.x >= 0 && leftIntercept.y >= 0) drawSourceDecoration(gc, color, leftIntercept.x, leftIntercept.y, second().x, second().y);
-    Point rightIntercept = targetHead == HeadStyle.NO_ARROW ? null : rightIntercept(targetNode, end(), penultimate());
+    Point rightIntercept = targetHead == HeadStyle.NO_ARROW ? null : intercept(targetNode, end(), penultimate(), Position.RIGHT);
     if (rightIntercept != null && rightIntercept.x >= 0 && rightIntercept.y >= 0) drawTargetDecoration(gc, color, rightIntercept.x, rightIntercept.y, penultimate().x, penultimate().y);
-    leftIntercept = targetHead == HeadStyle.NO_ARROW ? null : leftIntercept(targetNode, end(), penultimate());
+    leftIntercept = targetHead == HeadStyle.NO_ARROW ? null : intercept(targetNode, end(), penultimate(), Position.LEFT);
     if (leftIntercept != null && leftIntercept.x >= 0 && leftIntercept.y >= 0) drawTargetDecoration(gc, color, leftIntercept.x, leftIntercept.y, penultimate().x, penultimate().y);
-    rightIntercept = sourceHead == HeadStyle.NO_ARROW ? null : rightIntercept(sourceNode, start(), second());
+    rightIntercept = sourceHead == HeadStyle.NO_ARROW ? null : intercept(sourceNode, start(), second(), Position.RIGHT);
     if (rightIntercept != null && rightIntercept.x >= 0 && rightIntercept.y >= 0) drawSourceDecoration(gc, color, rightIntercept.x, rightIntercept.y, second().x, second().y);
   }
 
