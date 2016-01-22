@@ -13,274 +13,268 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.layout.GridData;
 
 public class SpecificDeletionDialog {
-
-	private static SpecificDeletion specificDeletion;
-
+	
+	private static SpecificDeletion specificDeletion; 
+	
 	private static Display display;
-	private static Shell shlIntrinsicDeletion;
-
+	
 	private static Text txExpression;
-
-	private static Composite coM4;
-	private static Composite coM3;
-	private static Composite coM2;
-	private static Composite coM1;
-
+	
 	private static Button btnDeleteSlot;
 	private static Button radioAll;
-	private static Button radioNull;
+	private static Button radioNull ;
 	private static Button radioExpression;
-
+	
 	private static Scale scLevel;
 
+	public static Composite coInst;
+
+	private static Composite[] coListCon;
+	private static Composite[] coListCol ;
+	private static Label[] lblList;
+	
+	
 	/**
 	 * Launch the application.
-	 * 
 	 * @param args
-	 * @wbp.parser.entryPoint
 	 */
 	public static void main(String[] args) {
-		int definitionLayer = 4;
+		int definitionLayer = 5;
 		int instantiationLayer = 1;
 		System.out.println(showDialog(definitionLayer, instantiationLayer));
 	}
-
 	/**
-	 * @wbp.parser.entryPoint
 	 * 
 	 */
-	public static SpecificDeletion showDialog(int definitionLayer,
-			int instantiationLayer) {
-		specificDeletion = new SpecificDeletion(definitionLayer,
-				instantiationLayer);
+	public static SpecificDeletion showDialog(int definitionLayer, int instantiationLayer) {
+		specificDeletion = new SpecificDeletion(definitionLayer, instantiationLayer);
+		
 		Display.getDefault().syncExec(new Runnable() {
+			private Shell shlIntrinsicDeletion;
+
 			public void run() {
-				display = Display.getDefault();
-				// display = new Display();
-				shlIntrinsicDeletion = new Shell();
-				shlIntrinsicDeletion.setSize(416, 300);
-				shlIntrinsicDeletion.setText("intrinsic Deletion");
-				shlIntrinsicDeletion.setLayout(new RowLayout(SWT.VERTICAL));
-
-				Label lblDeletion = new Label(shlIntrinsicDeletion, SWT.NONE);
-				lblDeletion
-						.setText("Deletion attribute from M4, intrinsic on M1 ");
-
-				Composite composite = new Composite(shlIntrinsicDeletion,
-						SWT.NONE);
-				composite.setLayout(new RowLayout(SWT.HORIZONTAL));
-				composite.setLayoutData(new RowData(394, 209));
-
-				Composite composite_1 = new Composite(composite, SWT.NONE);
-				composite_1.setLayoutData(new RowData(25, 112));
-				composite_1.setLayout(new FillLayout(SWT.VERTICAL));
-
-				coM4 = new Composite(composite_1, SWT.NONE);
-				coM4.setBackground(display.getSystemColor(SWT.COLOR_RED));
-
-				coM3 = new Composite(composite_1, SWT.NONE);
-				coM3.setBackground(display
-						.getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
-
-				coM2 = new Composite(composite_1, SWT.NONE);
-				coM2.setBackground(display
-						.getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
-
-				coM1 = new Composite(composite_1, SWT.NONE);
-				coM1.setBackground(display
-						.getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
-
-				Composite composite_2 = new Composite(composite, SWT.NONE);
-				composite_2.setLayout(new FillLayout(SWT.VERTICAL));
-				composite_2.setLayoutData(new RowData(35, 113));
-
-				Font font = new Font(Display.getCurrent(), new FontData(
-						"Segoe UI", 14, SWT.NORMAL));
-
-				Label lblNewLabel = new Label(composite_2, SWT.NONE);
-				lblNewLabel.setFont(font);
-				lblNewLabel.setText("M4");
-
-				Label lblNewLabel_1 = new Label(composite_2, SWT.NONE);
-				lblNewLabel_1.setFont(font);
-				lblNewLabel_1.setText("M3");
-
-				Label lblNewLabel_2 = new Label(composite_2, SWT.NONE);
-				lblNewLabel_2.setFont(font);
-				lblNewLabel_2.setText("M2");
-
-				Label lblNewLabel_3 = new Label(composite_2, SWT.NONE);
-				lblNewLabel_3.setFont(font);
-				lblNewLabel_3.setText("M1");
-
-				Composite composite_3 = new Composite(composite, SWT.NONE);
-				composite_3.setLayout(new RowLayout(SWT.VERTICAL));
-				composite_3.setLayoutData(new RowData(314, 195));
-
-				Composite composite_8 = new Composite(composite_3, SWT.NONE);
-				composite_8.setLayout(new RowLayout(SWT.HORIZONTAL));
-				composite_8.setLayoutData(new RowData(306, 84));
-
-				scLevel = new Scale(composite_8, SWT.VERTICAL);
-				scLevel.addSelectionListener(new SelectionAdapter() {
-					public void widgetSelected(SelectionEvent e) {
-						if (scLevel.getSelection() == 2) {
-							coM4.setBackground(display
-									.getSystemColor(SWT.COLOR_RED));
-							coM3.setBackground(display
-									.getSystemColor(SWT.COLOR_RED));
-							coM2.setBackground(display
-									.getSystemColor(SWT.COLOR_RED));
-							specificDeletion.setDeletionUntilLayer(4);
-						} else {
-							coM2.setBackground(display
-									.getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
-							if (scLevel.getSelection() == 1) {
-								coM4.setBackground(display
-										.getSystemColor(SWT.COLOR_RED));
-								coM3.setBackground(display
-										.getSystemColor(SWT.COLOR_RED));
-								specificDeletion.setDeletionUntilLayer(3);
-							} else {
-								coM3.setBackground(display
-										.getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
-								if (scLevel.getSelection() == 0) {
-									coM4.setBackground(display
-											.getSystemColor(SWT.COLOR_RED));
-									specificDeletion.setDeletionUntilLayer(2);
-								}// Fall kann nicht eintreten
-									// else{
-									// coM4.setBackground(display.getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
-								// }
-							}
-						}
-
+		display = Display.getDefault();
+		shlIntrinsicDeletion = new Shell();
+		shlIntrinsicDeletion.setSize(255, 200+(specificDeletion.getDefinitionLayer()-specificDeletion.getInstantiationLayer())*25);
+		shlIntrinsicDeletion.setText("intrinsic Deletion");
+		RowLayout rl_shlIntrinsicDeletion = new RowLayout(SWT.VERTICAL);
+		shlIntrinsicDeletion.setLayout(rl_shlIntrinsicDeletion);
+		
+		Label lblDeletion = new Label(shlIntrinsicDeletion, SWT.NONE);
+		lblDeletion.setText("Deletion attribute from M4, intrinsic on M1 ");
+		
+		Composite composite = new Composite(shlIntrinsicDeletion, SWT.NONE);
+		RowLayout rl_composite = new RowLayout(SWT.VERTICAL);
+		rl_composite.spacing = 0;
+		rl_composite.marginTop = 0;
+		rl_composite.marginRight = 0;
+		rl_composite.marginLeft = 0;
+		rl_composite.marginBottom = 0;
+		composite.setLayout(rl_composite);
+		
+		Composite composite_8 = new Composite(composite, SWT.NONE);
+		RowLayout rl_composite_8 = new RowLayout(SWT.HORIZONTAL);
+		rl_composite_8.spacing = 0;
+		rl_composite_8.marginTop = 0;
+		rl_composite_8.marginRight = 0;
+		rl_composite_8.marginLeft = 0;
+		rl_composite_8.marginBottom = 0;
+		composite_8.setLayout(rl_composite_8);
+		
+		Composite composite_4 = new Composite(composite_8, SWT.NONE);
+		RowLayout rl_composite_4 = new RowLayout(SWT.VERTICAL);
+		rl_composite_4.spacing = 0;
+		rl_composite_4.marginTop = 0;
+		rl_composite_4.marginRight = 0;
+		rl_composite_4.marginLeft = 0;
+		rl_composite_4.marginBottom = 0;
+		composite_4.setLayout(rl_composite_4);
+		
+		coListCon = new Composite[specificDeletion.getDefinitionLayer()-specificDeletion.getInstantiationLayer()];
+		coListCol = new Composite[specificDeletion.getDefinitionLayer()-specificDeletion.getInstantiationLayer()];
+		lblList = new Label[specificDeletion.getDefinitionLayer()-specificDeletion.getInstantiationLayer()];
+		
+		for(int i = specificDeletion.getDefinitionLayer(); i > specificDeletion.getInstantiationLayer(); i--){
+			coListCon[specificDeletion.getDefinitionLayer()-i] = new Composite(composite_4, SWT.NONE);
+			GridLayout gl_composite_1 = new GridLayout(2, true);
+			gl_composite_1.marginWidth = 0;
+			gl_composite_1.verticalSpacing = 0;
+			gl_composite_1.marginHeight = 0;
+			gl_composite_1.horizontalSpacing = 0;
+			coListCon[specificDeletion.getDefinitionLayer()-i].setLayout(gl_composite_1);
+			coListCon[specificDeletion.getDefinitionLayer()-i].setLayoutData(new RowData(50, 25));
+			//definitionLayer-i
+			coListCol[specificDeletion.getDefinitionLayer()-i] = new Composite(coListCon[specificDeletion.getDefinitionLayer()-i], SWT.NONE);
+			GridData gd_compositeX = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
+			gd_compositeX.heightHint = 25;
+			gd_compositeX.widthHint = 25;
+			coListCol[specificDeletion.getDefinitionLayer()-i].setLayoutData(gd_compositeX);
+			
+			lblList[specificDeletion.getDefinitionLayer()-i] = new Label(coListCon[specificDeletion.getDefinitionLayer()-i], SWT.CENTER);
+			lblList[specificDeletion.getDefinitionLayer()-i].setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+			lblList[specificDeletion.getDefinitionLayer()-i].setText("M"+i);
+		}
+		
+		coListCol[0].setBackground(display.getSystemColor(SWT.COLOR_RED));
+		
+		Composite composite_3 = new Composite(composite_8, SWT.NONE);
+		RowLayout rl_composite_3 = new RowLayout(SWT.VERTICAL);
+		rl_composite_3.spacing = 0;
+		rl_composite_3.marginTop = 0;
+		rl_composite_3.marginRight = 0;
+		rl_composite_3.marginLeft = 0;
+		rl_composite_3.marginBottom = 0;
+		composite_3.setLayout(rl_composite_3);
+		
+		scLevel = new Scale(composite_3, SWT.VERTICAL);
+		scLevel.setLayoutData(new RowData(SWT.DEFAULT, (specificDeletion.getDefinitionLayer()-specificDeletion.getInstantiationLayer())*25));
+		scLevel.setIncrement(2);
+		scLevel.setPageIncrement(1);
+		scLevel.setMaximum(specificDeletion.getDefinitionLayer()-specificDeletion.getInstantiationLayer()-1);
+		scLevel.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				for(int i = 0; i < coListCol.length; i++){
+					if(i <= scLevel.getSelection()){
+						coListCol[i].setBackground(display.getSystemColor(SWT.COLOR_RED));
+					}else{
+						coListCol[i].setBackground(display.getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
 					}
-				});
-				scLevel.setIncrement(2);
-				scLevel.setPageIncrement(1);
-				scLevel.setMaximum(2);
-				scLevel.setLayoutData(new RowData(SWT.DEFAULT, 78));
+					specificDeletion.setDeletionUntilLayer(coListCol.length-scLevel.getSelection()+1);
+				}				
+			}
+		});
 
-				Composite composite_9 = new Composite(composite_3, SWT.NONE);
-				composite_9.setLayout(new RowLayout(SWT.VERTICAL));
-				composite_9.setLayoutData(new RowData(301, 100));
-
-				btnDeleteSlot = new Button(composite_9, SWT.CHECK);
-				btnDeleteSlot.addSelectionListener(new SelectionAdapter() {
-					public void widgetSelected(SelectionEvent e) {
-						specificDeletion
-								.setDeleteSlotValues(SpecificDeletionDialog.btnDeleteSlot
-										.getSelection());
-						if (SpecificDeletionDialog.btnDeleteSlot.getSelection()) {
-							coM1.setBackground(display
-									.getSystemColor(SWT.COLOR_RED));
-							SpecificDeletionDialog.radioAll.setEnabled(true);
-							SpecificDeletionDialog.radioExpression
-									.setEnabled(true);
-							SpecificDeletionDialog.radioNull.setEnabled(true);
-							if (SpecificDeletionDialog.radioExpression
-									.getSelection()) {
-								txExpression.setEnabled(true);
-							} else {
-								txExpression.setEnabled(false);
-							}
-						} else {
-							coM1.setBackground(display
-									.getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
-							SpecificDeletionDialog.radioAll.setEnabled(false);
-							SpecificDeletionDialog.radioExpression
-									.setEnabled(false);
-							SpecificDeletionDialog.radioNull.setEnabled(false);
-							txExpression.setEnabled(false);
-						}
+		
+		Composite composite_14 = new Composite(composite, SWT.NONE);
+		RowLayout rl_composite_14 = new RowLayout(SWT.HORIZONTAL);
+		rl_composite_14.marginBottom = 0;
+		rl_composite_14.marginLeft = 0;
+		rl_composite_14.marginTop = 0;
+		rl_composite_14.marginRight = 0;
+		rl_composite_14.spacing = 0;
+		composite_14.setLayout(rl_composite_14);
+		
+		Composite composite_7 = new Composite(composite_14, SWT.NONE);
+		GridLayout gl_composite_7 = new GridLayout(2, true);
+		gl_composite_7.verticalSpacing = 0;
+		gl_composite_7.marginWidth = 0;
+		gl_composite_7.marginHeight = 0;
+		gl_composite_7.horizontalSpacing = 0;
+		composite_7.setLayout(gl_composite_7);
+		
+		coInst = new Composite(composite_7, SWT.NONE);
+		GridData gd_coInst = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		gd_coInst.heightHint = 25;
+		gd_coInst.widthHint = 25;
+		coInst.setLayoutData(gd_coInst);
+		
+		Label lblNewLabel_3 = new Label(composite_7, SWT.NONE);
+		lblNewLabel_3.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+		lblNewLabel_3.setText("M1");
+		
+		Composite composite_9 = new Composite(composite_14, SWT.NONE);
+		composite_9.setLayout(new RowLayout(SWT.VERTICAL));
+		
+		btnDeleteSlot = new Button(composite_9, SWT.CHECK);
+		btnDeleteSlot.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				specificDeletion.setDeleteSlotValues(SpecificDeletionDialog.btnDeleteSlot.getSelection());
+				if(SpecificDeletionDialog.btnDeleteSlot.getSelection()){
+					coInst.setBackground(display.getSystemColor(SWT.COLOR_RED));
+					SpecificDeletionDialog.radioAll.setEnabled(true);
+					SpecificDeletionDialog.radioExpression.setEnabled(true);
+					SpecificDeletionDialog.radioNull.setEnabled(true);
+					if(SpecificDeletionDialog.radioExpression.getSelection()){
+						txExpression.setEnabled(true);
+					}else{
+						txExpression.setEnabled(false);
 					}
-				});
-				btnDeleteSlot.setText("Delete Slot Values");
-
-				radioAll = new Button(composite_9, SWT.RADIO);
-				radioAll.addSelectionListener(new SelectionAdapter() {
-					public void widgetSelected(SelectionEvent e) {
-						specificDeletion
-								.setDeleteMode(SpecificDeletion.deleteMode_All);
-					}
-				});
-				radioAll.setSelection(true);
-				radioAll.setText("All");
-				radioAll.setEnabled(false);
-
-				radioNull = new Button(composite_9, SWT.RADIO);
-				radioNull.addSelectionListener(new SelectionAdapter() {
-					public void widgetSelected(SelectionEvent e) {
-						specificDeletion
-								.setDeleteMode(SpecificDeletion.deleteMode_NullValue);
-					}
-				});
-				radioNull.setText("Null Values");
-				radioNull.setEnabled(false);
-
-				radioExpression = new Button(composite_9, SWT.RADIO);
-				radioExpression.addSelectionListener(new SelectionAdapter() {
-					public void widgetSelected(SelectionEvent e) {
-						specificDeletion
-								.setDeleteMode(SpecificDeletion.deleteMode_Expression);
-						if (SpecificDeletionDialog.radioExpression
-								.getSelection()) {
-							txExpression.setEnabled(true);
-						} else {
-							txExpression.setEnabled(false);
-						}
-					}
-				});
-				radioExpression.setText("With Expression");
-				radioExpression.setEnabled(false);
-
-				txExpression = new Text(composite_9, SWT.BORDER);
-				txExpression.addModifyListener(new ModifyListener() {
-					public void modifyText(ModifyEvent e) {
-						specificDeletion.setDeleteExpression(txExpression
-								.getText());
-					}
-				});
-				txExpression.setLayoutData(new RowData(195, SWT.DEFAULT));
-				txExpression.setEnabled(false);
-
-				Composite composite_10 = new Composite(shlIntrinsicDeletion,
-						SWT.NONE);
-				composite_10.setLayout(new FillLayout(SWT.HORIZONTAL));
-				composite_10.setLayoutData(new RowData(241, SWT.DEFAULT));
-
-				Button btnNewButton = new Button(composite_10, SWT.NONE);
-				btnNewButton.addSelectionListener(new SelectionAdapter() {
-					public void widgetSelected(SelectionEvent e) {
-						// e.display.dispose();
-						shlIntrinsicDeletion.close();
-					}
-				});
-				btnNewButton.setText("Ok");
-
-				Button btnNewButton_1 = new Button(composite_10, SWT.NONE);
-				btnNewButton_1.addSelectionListener(new SelectionAdapter() {
-					public void widgetSelected(SelectionEvent e) {
-						// e.display.dispose();
-						shlIntrinsicDeletion.close();
-					}
-				});
-				btnNewButton_1.setText("Cancel");
-
-				shlIntrinsicDeletion.open();
-				shlIntrinsicDeletion.layout();
-				while (!shlIntrinsicDeletion.isDisposed()) {
-					if (!display.readAndDispatch()) {
-						display.sleep();
-					}
+				}else{
+					coInst.setBackground(display.getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
+					SpecificDeletionDialog.radioAll.setEnabled(false);
+					SpecificDeletionDialog.radioExpression.setEnabled(false);
+					SpecificDeletionDialog.radioNull.setEnabled(false);
+					txExpression.setEnabled(false);
 				}
+			}
+		});
+		btnDeleteSlot.setText("Delete Slot Values");
+		
+		radioAll = new Button(composite_9, SWT.RADIO);
+		radioAll.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				specificDeletion.setDeleteMode(SpecificDeletion.deleteMode_All );
+			}
+		});
+		radioAll.setSelection(true);
+		radioAll.setText("All");
+		radioAll.setEnabled(false);
+		
+		radioNull = new Button(composite_9, SWT.RADIO);
+		radioNull.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				specificDeletion.setDeleteMode(SpecificDeletion.deleteMode_NullValue);
+			}
+		});
+		radioNull.setText("Null Values");
+		radioNull.setEnabled(false);
+		
+		radioExpression = new Button(composite_9, SWT.RADIO);
+		radioExpression.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				specificDeletion.setDeleteMode(SpecificDeletion.deleteMode_Expression );
+				if(SpecificDeletionDialog.radioExpression.getSelection()){
+					txExpression.setEnabled(true);
+				}else{
+					txExpression.setEnabled(false);
+				}
+			}
+		});
+		radioExpression.setText("With Expression");
+		radioExpression.setEnabled(false);
+		
+		txExpression = new Text(composite_9, SWT.BORDER);
+		txExpression.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent e) {
+				specificDeletion.setDeleteExpression(txExpression.getText());
+			}
+		});
+		txExpression.setLayoutData(new RowData(116, SWT.DEFAULT));
+		txExpression.setEnabled(false);
+		
+		Composite composite_10 = new Composite(shlIntrinsicDeletion, SWT.NONE);
+		composite_10.setLayout(new FillLayout(SWT.HORIZONTAL));
+		composite_10.setLayoutData(new RowData(192, SWT.DEFAULT));
+		
+		Button btnNewButton = new Button(composite_10, SWT.NONE);
+		btnNewButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				shlIntrinsicDeletion.close();
+			}
+		});
+		btnNewButton.setText("Ok");
+		
+		Button btnNewButton_1 = new Button(composite_10, SWT.NONE);
+		btnNewButton_1.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				shlIntrinsicDeletion.close();
+			}
+		});
+		btnNewButton_1.setText("Cancel");
+
+		shlIntrinsicDeletion.open();
+		shlIntrinsicDeletion.layout();
+		while (!shlIntrinsicDeletion.isDisposed()) {
+			if (!display.readAndDispatch()) {
+				display.sleep();
+			}
+		}
 			}
 		});
 		return specificDeletion;
