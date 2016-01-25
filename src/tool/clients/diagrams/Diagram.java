@@ -185,79 +185,63 @@ public class Diagram implements Display {
       Edge edge = waypoint.getEdge();
       Vector<Waypoint> waypoints = edge.getWaypoints();
       int length = waypoints.size();
-      int i = waypoints.indexOf(waypoint);
-      if (i == length - 2 && length > 3) {
-        Waypoint w = edge.getWaypoints().elementAt(i - 1);
-        if (edge.end().above(waypoint) && edge.end().above(w)) {
-          select(w);
-          w.moveVertically();
-          w.setY(waypoint.getY());
-        } else if (edge.end().left(waypoint) && edge.end().left(w)) {
-          select(w);
-          w.moveHorizontally();
-          w.setX(waypoint.getX());
-        } else if (edge.end().right(waypoint) && edge.end().right(w)) {
-          select(w);
-          w.moveHorizontally();
-          w.setX(waypoint.getX());
-        } else if (edge.end().below(waypoint) && edge.end().below(w)) {
-          select(w);
-          w.moveVertically();
-          w.setY(waypoint.getY());
-        }
+      int i = waypoints.indexOf(waypoint);     
+      if (i <= length - 2 && i >= 2 && length > 3) {
+	    Waypoint next     = edge.getWaypoints().elementAt(i - 1);
+	    Waypoint nextNext = edge.getWaypoints().elementAt(i - 2);
+    	if(waypoint.isApproximatelyLeftOrRightOf(next) && next.isExactlyAboveOrBelow(nextNext)) {  
+  		  select(next);
+  		  next.limitMovementToVertical(); 
+  		  next.setY(waypoint.getY()); }
+      	  if(waypoint.isApproximatelyAboveOrBelow(next) && next.isExactlyLeftOrRightOf(nextNext)) {  
+  		  select(next);
+  		  next.limitMovementToHorizontal();
+  		  next.setX(waypoint.getX()); }
       }
-      if (i == 1 && length > 3) {
-        Waypoint w = edge.getWaypoints().elementAt(i + 1);
-        if (edge.end().above(waypoint) && edge.end().above(w)) {
-          select(w);
-          w.moveVertically();
-          w.setY(waypoint.getY());
-        } else if (edge.end().left(waypoint) && edge.end().left(w)) {
-          select(w);
-          w.moveHorizontally();
-          w.setX(waypoint.getX());
-        } else if (edge.end().right(waypoint) && edge.end().right(w)) {
-          select(w);
-          w.moveHorizontally();
-          w.setX(waypoint.getX());
-        } else if (edge.end().below(waypoint) && edge.end().below(w)) {
-          select(w);
-          w.moveVertically();
-          w.setY(waypoint.getY());
-        }
+      if (i >= 1 && i <= length - 3 && length > 3) {
+    	Waypoint next     = edge.getWaypoints().elementAt(i + 1);
+    	Waypoint nextNext = edge.getWaypoints().elementAt(i + 2);
+	  	if(waypoint.isApproximatelyLeftOrRightOf(next) && next.isExactlyAboveOrBelow(nextNext)) {  
+  		  select(next);
+  		  next.limitMovementToVertical(); 
+  		  next.setY(waypoint.getY()); }
+	  	if(waypoint.isApproximatelyAboveOrBelow(next) && next.isExactlyLeftOrRightOf(nextNext)) {  
+  		  select(next);
+  		  next.limitMovementToHorizontal();
+  		  next.setX(waypoint.getX()); }
       }
     }
   }
 
-  private Vector<Point> edgeIntersections(Edge edge) {
-    Vector<Point> intersections = new Vector<Point>();
-    boolean found = false;
-    for (Edge e : edges) {
-      if (e == edge)
-        found = true;
-      else {
-        if (found) {
-          for (int i = 1; i < edge.getWaypoints().size(); i++) {
-            for (int j = 1; j < e.getWaypoints().size(); j++) {
-              int x1 = edge.getWaypoints().elementAt(i - 1).getX();
-              int y1 = edge.getWaypoints().elementAt(i - 1).getY();
-              int x2 = edge.getWaypoints().elementAt(i).getX();
-              int y2 = edge.getWaypoints().elementAt(i).getY();
-              int x3 = e.getWaypoints().elementAt(j - 1).getX();
-              int y3 = e.getWaypoints().elementAt(j - 1).getY();
-              int x4 = e.getWaypoints().elementAt(j).getX();
-              int y4 = e.getWaypoints().elementAt(j).getY();
-              Point p = Edge.intersect(x1, y1, x2, y2, x3, y3, x4, y4);
-              if (p.x > 0 && p.y > 0 && p.x != x1 && p.x != x2 && p.x != x3 && p.x != x4 && p.y != y1 && p.y != y2 && p.y != y3 && p.y != y4) {
-                intersections.add(p);
-              }
-            }
-          }
-        }
-      }
-    }
-    return intersections;
-  }
+//  private Vector<Point> edgeIntersections(Edge edge) {
+//    Vector<Point> intersections = new Vector<Point>();
+//    boolean found = false;
+//    for (Edge e : edges) {
+//      if (e == edge)
+//        found = true;
+//      else {
+//        if (found) {
+//          for (int i = 1; i < edge.getWaypoints().size(); i++) {
+//            for (int j = 1; j < e.getWaypoints().size(); j++) {
+//              int x1 = edge.getWaypoints().elementAt(i - 1).getX();
+//              int y1 = edge.getWaypoints().elementAt(i - 1).getY();
+//              int x2 = edge.getWaypoints().elementAt(i).getX();
+//              int y2 = edge.getWaypoints().elementAt(i).getY();
+//              int x3 = e.getWaypoints().elementAt(j - 1).getX();
+//              int y3 = e.getWaypoints().elementAt(j - 1).getY();
+//              int x4 = e.getWaypoints().elementAt(j).getX();
+//              int y4 = e.getWaypoints().elementAt(j).getY();
+//              Point p = Edge.intersect(x1, y1, x2, y2, x3, y3, x4, y4);
+//              if (p.x > 0 && p.y > 0 && p.x != x1 && p.x != x2 && p.x != x3 && p.x != x4 && p.y != y1 && p.y != y2 && p.y != y3 && p.y != y4) {
+//                intersections.add(p);
+//              }
+//            }
+//          }
+//        }
+//      }
+//    }
+//    return intersections;
+//  }
 
   public void editText(String id) {
     for (Node node : nodes)
@@ -369,7 +353,7 @@ public class Diagram implements Display {
 
   private boolean isCloseToOtherEdge(Edge edge) {
     for (Edge e : edges) {
-      int distance = minDistance(edge, e);
+      double distance = minDistance(edge, e);
       if (e != edge && 0 < distance && distance < MIN_EDGE_DISTANCE) return true;
     }
     return false;
@@ -416,7 +400,6 @@ public class Diagram implements Display {
         }
       }
     }
-
   }
 
   private int maxHeight() {
@@ -437,11 +420,11 @@ public class Diagram implements Display {
     return maxWidth;
   }
 
-  private int minDistance(Edge e1, Edge e2) {
+  private double minDistance(Edge e1, Edge e2) {
     // The minimum distance between two edges is calculated as the
     // the minimum distance between the way-points and the intercepts
     // on the corresponding source and target nodes.
-    int minDistance = Integer.MAX_VALUE;
+	double minDistance = Double.POSITIVE_INFINITY;
     for (Waypoint w1 : e1.getWaypoints()) {
       if (w1 != e1.start() && w1 != e1.end()) {
         for (Waypoint w2 : e2.getWaypoints()) {
@@ -1542,7 +1525,7 @@ public class Diagram implements Display {
             mode = MouseMode.SELECTED;
             if (!isShift && !selected(waypoint)) deselectAll();
             select(waypoint);
-            magnetize(waypoint);
+            magnetize(waypoint); // this will call "doglegs" on the other (magnetic) waypoint 
             dogLegs(waypoint);
             selected = true;
           }
@@ -1744,7 +1727,7 @@ public class Diagram implements Display {
 		
 		private void deleteComand(String id) {
 			EventHandler eventHandler = DiagramClient.theClient().getHandler();
-			Message message = eventHandler.newMessage("delete", 1);
+			Message message = eventHandler.newMessage("delete", 1); // deleteIfOfContained
 			message.args[0] = new Value(id);
 			eventHandler.raiseEvent(message);
 		}

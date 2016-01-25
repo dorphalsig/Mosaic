@@ -140,13 +140,13 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     return new Value(new Value[0]);
   }
 
-  private Diagram getSelectedDiagram() {
-    CTabItem item = tabFolder.getSelection();
-    for (String id : tabs.keySet()) {
-      if (tabs.get(id) == item) { return getDiagram(id); }
-    }
-    throw new Error("cannot find the current diagram");
-  }
+//  private Diagram getSelectedDiagram() { UNUSED?
+//    CTabItem item = tabFolder.getSelection();
+//    for (String id : tabs.keySet()) {
+//      if (tabs.get(id) == item) { return getDiagram(id); }
+//    }
+//    throw new Error("cannot find the current diagram");
+//  }
 
   private Value getTextDimension(final Message message) {
     final Value[] result = new Value[1];
@@ -280,8 +280,8 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     String id = XModeler.attributeValue(edge, "id");
     int refx = Integer.parseInt(XModeler.attributeValue(edge, "refx"));
     int refy = Integer.parseInt(XModeler.attributeValue(edge, "refy"));
-    String source = XModeler.attributeValue(edge, "source");
-    String target = XModeler.attributeValue(edge, "target");
+//    String source = XModeler.attributeValue(edge, "source");
+//    String target = XModeler.attributeValue(edge, "target");
     String sourcePort = XModeler.attributeValue(edge, "sourcePort");
     String targetPort = XModeler.attributeValue(edge, "targetPort");
     int sourceHead = Integer.parseInt(XModeler.attributeValue(edge, "sourceHead"));

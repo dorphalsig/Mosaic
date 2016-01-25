@@ -1,7 +1,6 @@
 package tool.clients.diagrams;
 
 import java.io.PrintStream;
-import java.util.Collections;
 import java.util.Vector;
 
 import org.eclipse.swt.SWT;

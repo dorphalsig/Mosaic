@@ -12,19 +12,19 @@ import xos.Value;
 
 public class Waypoint implements Selectable {
 
-  static int       SELECTED_SIZE = 6;
+  private static int       SELECTED_SIZE = 6;
 
   // Limits on the movement of a way-point...
 
-  static final int VERTICAL      = 0;
-  static final int HORIZONTAL    = 1;
-  static final int ANY           = 2;
+  private static final int VERTICAL      = 0;
+  private static final int HORIZONTAL    = 1;
+  private static final int ANY           = 2;
 
-  String           id;
-  Edge             edge;
-  int              x;
-  int              y;
-  int              limitMovement = ANY;
+  private String           id;
+  private Edge             edge;
+  int                      x;
+  int                      y;
+  private int              limitMovement = ANY;
 
   public Waypoint(String id, Edge edge, int x, int y) {
     super();
@@ -34,130 +34,103 @@ public class Waypoint implements Selectable {
     this.y = y;
   }
 
-  public boolean above(Waypoint w) {
-    return getY() < w.getY();
+  private final int MAX_DIFF = 4;
+  boolean isApproximatelyLeftOrRightOf( Waypoint that) { return Math.abs(this.y - that.y) < Math.abs(this.x - that.x) && (Math.abs(this.y - that.y) < MAX_DIFF); }
+  boolean isExactlyLeftOrRightOf( 		Waypoint that) { return this.x != that.x && this.y == that.y; }
+  boolean isApproximatelyAboveOrBelow( 	Waypoint that) { return Math.abs(this.x - that.x) < Math.abs(this.y - that.y) && (Math.abs(this.x - that.x) < MAX_DIFF); }
+  boolean isExactlyAboveOrBelow( 		Waypoint that) { return this.y != that.y && this.x == that.x; }
+  
+  void limitMovementToHorizontal() { limitMovement = HORIZONTAL; }
+  void limitMovementToVertical() { limitMovement = VERTICAL; } 
+  private void unLimitMovement() { limitMovement = ANY; }
+  private boolean canMoveHorizontally() { return limitMovement == ANY || limitMovement == HORIZONTAL; }
+  private boolean canMoveVertically() { return limitMovement == ANY || limitMovement == VERTICAL; }
+
+  boolean colocated(Waypoint other) { return x == other.x && y == other.y; }
+  
+  Edge getEdge() { return edge; }
+  String getId() { return id; }
+  
+  // These getters and setters are pointless as direct access is allowed
+  // but too much to do to replace them with direct access
+  // Don't add any checks/side effects in them as they will be bypassed anyway.
+  @Deprecated int getX() { return x; }
+  @Deprecated int getY() { return y; }
+  @Deprecated void setX(int x) { this.x = x; }
+  @Deprecated void setY(int y) { this.y = y; }
+  
+  // even more (3) methods to set x and y, but this time checking if it is allowed.  
+  void move(int x, int y) {
+    if (canMoveHorizontally()) this.x = x;
+    if (canMoveVertically()) this.y = y;
+    if (edge.start() != this && edge.end() != this) moveEvent();
   }
 
-  public boolean below(Waypoint w) {
-    return getY() > w.getY();
+  void move(String id, int x, int y) {
+    if (id.equals(getId())) {
+      if (canMoveHorizontally()) this.x = x;
+      if (canMoveVertically()) this.y = y;
+      edge.checkWaypointsForRedundancy(this);
+    }
   }
 
-  private boolean canMoveHorizontally() {
-    return limitMovement == ANY || limitMovement == HORIZONTAL;
+  @Override
+  public void moveBy(int dx, int dy) {
+    if (canMoveHorizontally()) x = x + dx;
+    if (canMoveVertically()) y = y + dy;
+    edge.movedBy(this);
   }
-
-  private boolean canMoveVertically() {
-    return limitMovement == ANY || limitMovement == VERTICAL;
-  }
-
-  public boolean colocated(Waypoint w) {
-    return getX() == w.getX() && getY() == w.getY();
-  }
-
+  
+  boolean isEnd() { return getId().equals("end"); }
+  boolean isStart() { return getId().equals("start"); }
+  public String toString() { return "W(" + x + "," + y + ")"; }
+  
+  @Override
   public void deselect() {
-    moveAny();
+    unLimitMovement();
     EventHandler eventHandler = DiagramClient.theClient().getHandler();
     Message message = eventHandler.newMessage("edgeDeselected", 1);
     message.args[0] = new Value(edge.getId());
     eventHandler.raiseEvent(message);
   }
 
-  public int distance(Waypoint w) {
+  double distance(Waypoint w) {
     int dx = x - w.x;
     int dy = y - w.y;
-    return (int) Math.sqrt((dx * dx) + (dy * dy));
+    return  Math.sqrt((dx * dx) + (dy * dy));
   }
 
-  public Edge getEdge() {
-    return edge;
+  boolean nearTo(int x, int y) {
+    int dx = this.x - x;
+    int dy = this.y - y;
+    return Math.sqrt((dx * dx) + (dy * dy)) < 5;
   }
-
-  public String getId() {
-    return id;
-  }
-
-  public int getX() {
-    return x;
-  }
-
-  public int getY() {
-    return y;
-  }
-
-  public boolean isEnd() {
-    return getId().equals("end");
-  }
-
-  public boolean isStart() {
-    return getId().equals("start");
-  }
-
-  public boolean left(Waypoint waypoint) {
-    return getX() < waypoint.getX();
-  }
-
-  public void move(int x, int y) {
-    if (canMoveHorizontally()) this.x = x;
-    if (canMoveVertically()) this.y = y;
-    if (edge.start() != this && edge.end() != this) moveEvent();
-  }
-
-  public void move(String id, int x, int y) {
-    if (id.equals(getId())) {
-      if (canMoveHorizontally()) this.x = x;
-      if (canMoveVertically()) this.y = y;
-      edge.checkWaypoints(this);
-    }
-  }
-
-  public void moveAny() {
-    limitMovement = ANY;
-  }
-
-  public void moveBy(int dx, int dy) {
-    if (canMoveHorizontally()) x = x + dx;
-    if (canMoveVertically()) y = y + dy;
-    edge.movedBy(this);
-  }
-
+  
+  @Override
   public void moveEvent() {
     Message message = DiagramClient.theClient().getHandler().newMessage("move", 3);
     message.args[0] = new Value(id);
-    message.args[1] = new Value(getX());
-    message.args[2] = new Value(getY());
+    message.args[1] = new Value(x);
+    message.args[2] = new Value(y);
     DiagramClient.theClient().getHandler().raiseEvent(message);
   }
 
-  public void moveHorizontally() {
-    limitMovement = HORIZONTAL;
-  }
 
-  public void moveVertically() {
-    limitMovement = VERTICAL;
-  }
-
-  public boolean nearTo(int x, int y) {
-    int dx = getX() - x;
-    int dy = getY() - y;
-    return Math.sqrt((dx * dx) + (dy * dy)) < 5;
-  }
-
+  @Override
   public void paintSelected(GC gc) {
     Color c = gc.getForeground();
     gc.setForeground(Diagram.RED);
     gc.drawOval(x - SELECTED_SIZE, y - SELECTED_SIZE, SELECTED_SIZE * 2, SELECTED_SIZE * 2);
     gc.setForeground(c);
-    edge.paintOrthogonal(gc, this);
+    edge.paintOrthogonal(gc, this); // Zielscheibe
   }
 
-  public boolean right(Waypoint waypoint) {
-    return getX() > waypoint.getX();
-  }
-
+  @Override
   public void rightClick(int x, int y) {
     MenuClient.popup(edge.getId(), x, y);
   }
 
+  @Override
   public void select() {
     EventHandler eventHandler = DiagramClient.theClient().getHandler();
     Message message = eventHandler.newMessage("edgeSelected", 1);
@@ -165,19 +138,7 @@ public class Waypoint implements Selectable {
     eventHandler.raiseEvent(message);
   }
 
-  public void setX(int x) {
-    this.x = x;
-  }
-
-  public void setY(int y) {
-    this.y = y;
-  }
-
-  public String toString() {
-    return "W(" + x + "," + y + ")";
-  }
-
-  public void writeXML(PrintStream out) {
-    out.print("<Waypoint id='" + getId() + "' index='" + edge.getWaypoints().indexOf(this) + "' x='" + getX() + "' y='" + getY() + "'/>");
+  void writeXML(PrintStream out) {
+    out.print("<Waypoint id='" + getId() + "' index='" + edge.getWaypoints().indexOf(this) + "' x='" + x + "' y='" + y + "'/>");
   }
 }

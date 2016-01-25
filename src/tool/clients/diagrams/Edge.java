@@ -95,6 +95,7 @@ public class Edge {
     labels.add(new Label(this, id, text, pos, x, y, editable, underline, condense, red, green, blue, border, borderRed, borderGreen, borderBlue, font, arrow));
   }
 
+  /** aligns the start and end waypoint to 90° lines if possible 
   /*PACKAGE ACCESS*/ void align() {
     // Called when there is some jiggling to be done.
     if (waypoints.size() == 2) {
@@ -106,6 +107,27 @@ public class Edge {
     }
   }
 
+  /**
+   * When a (visible) waypoint is moved, the start and end waypoints
+   * will be moved as possible to have straight (90°) lines.
+   */
+  /*PACKAGE ACCESS*/ void movedBy(Waypoint justMoved) {
+    if (justMoved != start() && justMoved != end()) {
+      int index = waypoints.indexOf(justMoved);
+      Waypoint w1 = waypoints.elementAt(index - 1);
+      Waypoint w2 = waypoints.elementAt(index + 1);
+      if (w1 == start()) alignStart(justMoved);
+      if (w2 == end()) alignEnd(justMoved);
+    }
+  }
+  
+  /**
+   * Aligns the last waypoint (hidden under the source node) 
+   * so that it connects to the next waypoint in a horizontal 
+   * or vertical way if that is possible. The other coordinate 
+   * is not changed. No changes at all are made otherwise 
+   * (i.e. the next waypoint's x/y cordinates are both outside the box's). 
+   */
   private void alignEnd(Waypoint w) {
     int portx = targetNode.getX() + targetPort.getX();
     int porty = targetNode.getY() + targetPort.getY();
@@ -115,6 +137,8 @@ public class Edge {
     if (w.getY() >= porty && w.getY() <= porty + height) end().setY(w.getY());
   }
 
+  /** Same as <code>alignEnd(Waypoint w)</code>, 
+   * but for the last waypoint (hidden under the target node)*/
   private void alignStart(Waypoint w) {
     int portx = sourceNode.getX() + sourcePort.getX();
     int porty = sourceNode.getY() + sourcePort.getY();
@@ -124,7 +148,10 @@ public class Edge {
     if (w.getY() >= porty && w.getY() <= porty + height) start().setY(w.getY());
   }
 
-  /*PACKAGE ACCESS*/ void checkWaypoints(Waypoint justMoved) {
+  /**
+   * Removes the justMoved waypoint if it is too close to another one.
+   */
+  /*PACKAGE ACCESS*/ void checkWaypointsForRedundancy(Waypoint justMoved) {
     if (getWaypoints().size() > 2 && justMoved != start() && justMoved != end()) {
       int index = waypoints.indexOf(justMoved);
       Waypoint w1 = waypoints.elementAt(index - 1);
@@ -203,16 +230,6 @@ public class Edge {
     }
   }
 
-  /*PACKAGE ACCESS*/ void movedBy(Waypoint justMoved) {
-    if (justMoved != start() && justMoved != end()) {
-      int index = waypoints.indexOf(justMoved);
-      Waypoint w1 = waypoints.elementAt(index - 1);
-      Waypoint w2 = waypoints.elementAt(index + 1);
-      if (w1 == start()) alignStart(justMoved);
-      if (w2 == end()) alignEnd(justMoved);
-    }
-  }
-
   /*PACKAGE ACCESS*/ void moveSourceBy(int dx, int dy) {
     waypoints.elementAt(0).moveBy(dx, dy);
   }
@@ -252,9 +269,7 @@ public class Edge {
     message.args[3] = new Value(y);
     DiagramClient.theClient().getHandler().raiseEvent(message);
   }
-
-
-
+  
   /*PACKAGE ACCESS*/ void reconnectSource(Node node, Port port) {
     if (this.sourcePort != null) sourcePort.getSources().remove(this);
     this.sourceNode = node; //setSourceNode(node);
@@ -337,7 +352,7 @@ public class Edge {
     // (2) Straighten segments by moving way-points;
     for (Waypoint w : waypoints) {
       if (w != start() && w != end()) {
-        checkWaypoints(w);
+        checkWaypointsForRedundancy(w);
       }
     }
     straightenFrom(start(), 1, 1);
@@ -425,7 +440,7 @@ public class Edge {
   
   private Point intercept(Node node, Position position) {
 	  Waypoint firstOrLast = node.contains(start()) ? start() : end();
-	  Waypoint secondOrPenultimate = node.contains(second()) ? penultimate() : end();
+	  Waypoint secondOrPenultimate = node.contains(start()) ? second() : penultimate();
 	  return intercept(node, firstOrLast, secondOrPenultimate, position);
   }
 
@@ -745,7 +760,7 @@ public class Edge {
     gc.setLineWidth(width);
   }
 
-  public void paintOrthogonal(GC gc, Waypoint waypoint) {
+  public void paintOrthogonal(GC gc, Waypoint waypoint) { // Zielscheibe
     if (waypoint != start() && waypoint != end()) {
       int index = waypoints.indexOf(waypoint);
       int length = 30;
