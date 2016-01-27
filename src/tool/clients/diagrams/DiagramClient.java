@@ -889,6 +889,8 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
       editText(message);
     else if (message.hasName("setText"))
       setText(message);
+    else if (message.hasName("setTextColor"))
+     setTextColor(message);
     else if (message.hasName("setName"))
       setName(message);
     else if (message.hasName("globalRenderOff"))
@@ -954,6 +956,14 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     else super.sendMessage(message);
   }
 
+  private void setTextColor(Message message) {
+    String id = message.args[0].strValue();
+    int red = message.args[1].intValue;
+    int green = message.args[2].intValue;
+    int blue = message.args[3].intValue;
+    setTextColor(id, red, green, blue);
+}
+
   private void hide(final Message message) {
     runOnDisplay(new Runnable() {
       public void run() {
@@ -966,6 +976,15 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     });
   }
 
+  private void setTextColor(final String id, final int red, final int green, final int blue) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (Diagram diagram : diagrams)
+          diagram.setFillColor(id, red, green, blue);
+      }
+    });
+  }
+  
   private void show(final Message message) {
     runOnDisplay(new Runnable() {
       public void run() {

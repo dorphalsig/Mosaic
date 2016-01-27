@@ -122,6 +122,8 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       addWordRuleColor(id, text, 0, 153, 0);
     else if (color.equals("blue"))
       addWordRuleColor(id, text, 50, 50, 255);
+    else if (color.equals("torquoise"))
+    	addWordRuleColor(id, text, 0, 120, 120);
     else System.err.println("unknown color: " + color);
   }
 

@@ -186,6 +186,7 @@ public class Diagram implements Display {
       Vector<Waypoint> waypoints = edge.getWaypoints();
       int length = waypoints.size();
       int i = waypoints.indexOf(waypoint);     
+      deselectAll(); select(waypoint);
       if (i <= length - 2 && i >= 2 && length > 3) {
 	    Waypoint next     = edge.getWaypoints().elementAt(i - 1);
 	    Waypoint nextNext = edge.getWaypoints().elementAt(i - 2);
@@ -212,36 +213,6 @@ public class Diagram implements Display {
       }
     }
   }
-
-//  private Vector<Point> edgeIntersections(Edge edge) {
-//    Vector<Point> intersections = new Vector<Point>();
-//    boolean found = false;
-//    for (Edge e : edges) {
-//      if (e == edge)
-//        found = true;
-//      else {
-//        if (found) {
-//          for (int i = 1; i < edge.getWaypoints().size(); i++) {
-//            for (int j = 1; j < e.getWaypoints().size(); j++) {
-//              int x1 = edge.getWaypoints().elementAt(i - 1).getX();
-//              int y1 = edge.getWaypoints().elementAt(i - 1).getY();
-//              int x2 = edge.getWaypoints().elementAt(i).getX();
-//              int y2 = edge.getWaypoints().elementAt(i).getY();
-//              int x3 = e.getWaypoints().elementAt(j - 1).getX();
-//              int y3 = e.getWaypoints().elementAt(j - 1).getY();
-//              int x4 = e.getWaypoints().elementAt(j).getX();
-//              int y4 = e.getWaypoints().elementAt(j).getY();
-//              Point p = Edge.intersect(x1, y1, x2, y2, x3, y3, x4, y4);
-//              if (p.x > 0 && p.y > 0 && p.x != x1 && p.x != x2 && p.x != x3 && p.x != x4 && p.y != y1 && p.y != y2 && p.y != y3 && p.y != y4) {
-//                intersections.add(p);
-//              }
-//            }
-//          }
-//        }
-//      }
-//    }
-//    return intersections;
-//  }
 
   public void editText(String id) {
     for (Node node : nodes)
@@ -966,6 +937,12 @@ public class Diagram implements Display {
   public void setFillColor(String id, int red, int green, int blue) {
     for (Node node : nodes)
       node.setFillColor(id, red, green, blue);
+    redraw();
+  }
+  
+  public void setTextColor(String id, int red, int green, int blue) {
+    for (Display display : displays)
+      display.setFillColor(id, red, green, blue);
     redraw();
   }
 

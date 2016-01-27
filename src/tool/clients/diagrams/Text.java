@@ -250,6 +250,7 @@ public class Text implements Display {
     Message message = DiagramClient.theClient().getHandler().newMessage("textChanged", 2);
     message.args[0] = new Value(id);
     message.args[1] = new Value(text);
+    System.out.println("textChanged: " + message);
     DiagramClient.theClient().getHandler().raiseEvent(message);
   }
 
