@@ -1,6 +1,7 @@
 package tool.clients.dialogs;
 
 import java.io.File;
+import java.util.Vector;
 
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -200,6 +201,8 @@ public class DialogsClient extends Client {
       return selectionDialog(message);
     else if (message.hasName("newConfirmDialog"))
         return newConfirmDialog(message);
+    else if (message.hasName("newTreeDialog"))
+        return simpleTreeDialog(message);
     else return super.callMessage(message);
   }
 
@@ -373,6 +376,163 @@ public class DialogsClient extends Client {
     return result[0];
   }
 
+	/**
+	 * Builds the tree.
+	 *
+	 * @param tree the tree
+	 * @param expand the expand
+	 * @param disable the disable
+	 * @param select the select
+	 * @return the tree element
+	 */
+	public TreeElement buildTree(Value[] tree, Vector expand, Vector disable,
+			Vector select) {
+		TreeElement root = new TreeElement(null, "Root");
+		buildTree(root, tree, expand, disable, select);
+		return root;
+	}
+
+	/**
+	 * Builds the tree.
+	 *
+	 * @param parent the parent
+	 * @param tree the tree
+	 * @param expand the expand
+	 * @param disable the disable
+	 * @param select the select
+	 */
+	public void buildTree(TreeElement parent, Value[] tree, Vector expand,
+			Vector disable, Vector select) {
+		// A
+
+		// xmf.multiSelectTreeDialog("BOB",
+		// Seq{"1","&",Seq{Seq{"2",Seq{Seq{"3",Seq{}}}}} } ,Seq{"1"},null);
+
+		String name = tree[0].strValue();
+		// if(stringContains(name,'*'))
+		// name = stringRemove(name,'*');
+		TreeElement branch = new TreeElement(parent, name);
+		;
+		parent.addChild(branch);
+		if (tree.length > 1) {
+			Value[] children = null;
+
+			if (tree[1].type == Value.VECTOR) {
+				children = tree[1].values;
+			} else {
+
+				// Extra information is encoded in the second element
+				// - '&' indicates that the node should be disabled
+				// - '*' indicates that the node should be expanded
+
+				String encoding = tree[1].strValue();
+				if (stringContains(encoding, '&')) {
+					disable.addElement(branch);
+				}
+				if (stringContains(encoding, '*')) {
+					expand.addElement(branch);
+				}
+				if (stringContains(encoding, '^')) {
+					select.addElement(branch);
+				}
+				children = tree[2].values;
+			}
+
+			// Recursively build the tree
+
+			for (int i = 0; i < children.length; i++) {
+				buildTree(branch, children[i].values, expand, disable, select);
+			}
+		}
+	}
+
+	/**
+	 * Multi tree dialog.
+	 *
+	 * @param message the message
+	 * @return the value
+	 */
+// still requires to use "runOnDisplay" (see other methods):
+/*	public Value multiTreeDialog(Message message) {
+		 String title = message.args[0].strValue();
+		 Value[] tree = message.args[1].values;
+		 Vector expand = new Vector();
+		 Vector disable = new Vector();
+		 Vector select = new Vector();
+		 TreeElement root = buildTree(tree, expand, disable, select);
+		 MultiSelectionTreeDialog treeDialog = new MultiSelectionTreeDialog(XModeler.getXModeler(), new LabelProvider(), new TreeElementProvider());
+		 treeDialog.setTitle(title);
+		 treeDialog.setInput(root);
+		 treeDialog.create();
+		 treeDialog.expandTree(expand);
+		 treeDialog.disableNodes(disable);
+		 treeDialog.selectNodes(select);
+		 int returncode = treeDialog.open();
+		 if (returncode != 1) {
+		 Object[] result = treeDialog.getResult();
+		 if (result != null) {
+		 Value[] values = new Value[result.length];
+		 for (int i = 0; i < result.length; i++) {
+		 TreeElement te = (TreeElement) result[i];
+		 Vector path = new Vector();
+		 te.getPath(path);
+		 Value[] value = new Value[path.size()];
+		 for (int z = path.size(); z > 0; z--) {
+		 String s = (String) path.elementAt(z - 1);
+		 value[path.size() - z] = new Value(s);
+		 }
+		 values[i] = new Value(value);
+		 }
+		 return new Value(values);
+		 }
+		 }
+		return new Value("");
+	}*/
+
+	/**
+	 * Simple tree dialog.
+	 *
+	 * @param message the message
+	 * @return the value
+	 */
+	public Value simpleTreeDialog(Message message) {
+		final String title = message.args[0].strValue();
+		Value[] tree = message.args[1].values;
+		final Vector expand = new Vector();
+		Vector disable = new Vector();
+		Vector selected = new Vector();
+		final TreeElement root = buildTree(tree, expand, disable, selected);
+	    final Value[] result = new Value[1];
+
+		DialogsClient.theClient().runOnDisplay(new Runnable() {
+			public void run() {
+				TreeDialog treeDialog = new TreeDialog(XModeler.getXModeler(),	new LabelProvider(), new TreeElementProvider());
+				treeDialog.setTitle(title);
+				treeDialog.setInput(root);
+				treeDialog.create();
+				treeDialog.expandTree(expand);
+				int returncode = treeDialog.open();
+				if (returncode != 1) {
+					Object[] result = treeDialog.getResult();
+					// if(result != null) {
+					if (result.length > 0) {
+						TreeElement te = (TreeElement) result[0];
+						Vector path = new Vector();
+						te.getPath(path);
+						Value[] value = new Value[path.size()];
+						for (int i = path.size(); i > 0; i--) {
+							String s = (String) path.elementAt(i - 1);
+							value[path.size() - i] = new Value(s);
+						}
+						result[0] = new Value(value);
+					}
+				}
+				result[0] = new Value("");
+			}
+		});
+		return result[0];
+	}
+
   public void sendMessage(final Message message) {
     if (message.hasName("newBusyDialog"))
       newBusyDialog(message);
@@ -386,4 +546,21 @@ public class DialogsClient extends Client {
       newTextAreaDialog(message);
     else super.sendMessage(message);
   }
+
+	/**
+	 * String contains.
+	 *
+	 * @param string the string
+	 * @param c the c
+	 * @return true, if successful
+	 */
+	protected boolean stringContains(String string, char c) {
+		for (int i = 0; i < string.length(); i++) {
+			char sc = string.charAt(i);
+			if (sc == c)
+				return true;
+		}
+		return false;
+	}
+
 }
