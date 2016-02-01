@@ -10,11 +10,11 @@ import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Scale;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Text;
+//import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.events.ModifyEvent;
+//import org.eclipse.swt.events.ModifyListener;
+//import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.GridData;
 
@@ -24,12 +24,12 @@ public class SpecificDeletionDialog {
 	
 	private static Display display;
 	
-	private static Text txExpression;
-	
-	private static Button btnDeleteSlot;
-	private static Button radioAll;
-	private static Button radioNull ;
-	private static Button radioExpression;
+//	private static Text txExpression;
+//	
+//	private static Button btnDeleteSlot;
+//	private static Button radioAll;
+//	private static Button radioNull ;
+//	private static Button radioExpression;
 	
 	private static Scale scLevel;
 
@@ -61,7 +61,7 @@ public class SpecificDeletionDialog {
 			public void run() {
 		display = Display.getDefault();
 		shlIntrinsicDeletion = new Shell();
-		shlIntrinsicDeletion.setSize(255, 200+(specificDeletion.getDefinitionLayer()-specificDeletion.getInstantiationLayer())*25);
+		shlIntrinsicDeletion.setSize(255, 120+(specificDeletion.getDefinitionLayer()-specificDeletion.getInstantiationLayer())*25);
 		shlIntrinsicDeletion.setText("intrinsic Deletion");
 		RowLayout rl_shlIntrinsicDeletion = new RowLayout(SWT.VERTICAL);
 		shlIntrinsicDeletion.setLayout(rl_shlIntrinsicDeletion);
@@ -142,11 +142,26 @@ public class SpecificDeletionDialog {
 				for(int i = 0; i < coListCol.length; i++){
 					if(i <= scLevel.getSelection()){
 						coListCol[i].setBackground(display.getSystemColor(SWT.COLOR_RED));
+//						if(i+1 == coListCol.length){
+//							coInst.setBackground(display.getSystemColor(SWT.COLOR_RED));
+//							specificDeletion.setDeleteSlotValues(true);
+//						}
 					}else{
 						coListCol[i].setBackground(display.getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
+//						if(i+1 == coListCol.length){
+//							coInst.setBackground(display.getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
+//							specificDeletion.setDeleteSlotValues(false);
+//						}
 					}
-					specificDeletion.setDeletionUntilLayer(coListCol.length-scLevel.getSelection()+1);
-				}				
+				}	
+				specificDeletion.setDeletionUntilLayer(coListCol.length-scLevel.getSelection()+1);
+				if(scLevel.getSelection()==coListCol.length-1){
+					coInst.setBackground(display.getSystemColor(SWT.COLOR_RED));
+					specificDeletion.setDeletionUntilLayer(specificDeletion.getDeletionUntilLayer()-1);
+				}else{
+					coInst.setBackground(display.getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
+				}
+					
 			}
 		});
 
@@ -178,75 +193,75 @@ public class SpecificDeletionDialog {
 		lblNewLabel_3.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
 		lblNewLabel_3.setText("M1");
 		
-		Composite composite_9 = new Composite(composite_14, SWT.NONE);
-		composite_9.setLayout(new RowLayout(SWT.VERTICAL));
+//		Composite composite_9 = new Composite(composite_14, SWT.NONE);
+//		composite_9.setLayout(new RowLayout(SWT.VERTICAL));
+//		
+//		btnDeleteSlot = new Button(composite_9, SWT.CHECK);
+//		btnDeleteSlot.addSelectionListener(new SelectionAdapter() {
+//			public void widgetSelected(SelectionEvent e) {
+//				specificDeletion.setDeleteSlotValues(SpecificDeletionDialog.btnDeleteSlot.getSelection());
+//				if(SpecificDeletionDialog.btnDeleteSlot.getSelection()){
+//					coInst.setBackground(display.getSystemColor(SWT.COLOR_RED));
+//					SpecificDeletionDialog.radioAll.setEnabled(true);
+//					SpecificDeletionDialog.radioExpression.setEnabled(true);
+//					SpecificDeletionDialog.radioNull.setEnabled(true);
+//					if(SpecificDeletionDialog.radioExpression.getSelection()){
+//						txExpression.setEnabled(true);
+//					}else{
+//						txExpression.setEnabled(false);
+//					}
+//				}else{
+//					coInst.setBackground(display.getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
+//					SpecificDeletionDialog.radioAll.setEnabled(false);
+//					SpecificDeletionDialog.radioExpression.setEnabled(false);
+//					SpecificDeletionDialog.radioNull.setEnabled(false);
+//					txExpression.setEnabled(false);
+//				}
+//			}
+//		});
+//		btnDeleteSlot.setText("Delete Slot Values");
+//		
+//		radioAll = new Button(composite_9, SWT.RADIO);
+//		radioAll.addSelectionListener(new SelectionAdapter() {
+//			public void widgetSelected(SelectionEvent e) {
+//				specificDeletion.setDeleteMode(SpecificDeletion.deleteMode_All );
+//			}
+//		});
+//		radioAll.setSelection(true);
+//		radioAll.setText("All");
+//		radioAll.setEnabled(false);
+//		
+//		radioNull = new Button(composite_9, SWT.RADIO);
+//		radioNull.addSelectionListener(new SelectionAdapter() {
+//			public void widgetSelected(SelectionEvent e) {
+//				specificDeletion.setDeleteMode(SpecificDeletion.deleteMode_NullValue);
+//			}
+//		});
+//		radioNull.setText("Null Values");
+//		radioNull.setEnabled(false);
 		
-		btnDeleteSlot = new Button(composite_9, SWT.CHECK);
-		btnDeleteSlot.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				specificDeletion.setDeleteSlotValues(SpecificDeletionDialog.btnDeleteSlot.getSelection());
-				if(SpecificDeletionDialog.btnDeleteSlot.getSelection()){
-					coInst.setBackground(display.getSystemColor(SWT.COLOR_RED));
-					SpecificDeletionDialog.radioAll.setEnabled(true);
-					SpecificDeletionDialog.radioExpression.setEnabled(true);
-					SpecificDeletionDialog.radioNull.setEnabled(true);
-					if(SpecificDeletionDialog.radioExpression.getSelection()){
-						txExpression.setEnabled(true);
-					}else{
-						txExpression.setEnabled(false);
-					}
-				}else{
-					coInst.setBackground(display.getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
-					SpecificDeletionDialog.radioAll.setEnabled(false);
-					SpecificDeletionDialog.radioExpression.setEnabled(false);
-					SpecificDeletionDialog.radioNull.setEnabled(false);
-					txExpression.setEnabled(false);
-				}
-			}
-		});
-		btnDeleteSlot.setText("Delete Slot Values");
-		
-		radioAll = new Button(composite_9, SWT.RADIO);
-		radioAll.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				specificDeletion.setDeleteMode(SpecificDeletion.deleteMode_All );
-			}
-		});
-		radioAll.setSelection(true);
-		radioAll.setText("All");
-		radioAll.setEnabled(false);
-		
-		radioNull = new Button(composite_9, SWT.RADIO);
-		radioNull.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				specificDeletion.setDeleteMode(SpecificDeletion.deleteMode_NullValue);
-			}
-		});
-		radioNull.setText("Null Values");
-		radioNull.setEnabled(false);
-		
-		radioExpression = new Button(composite_9, SWT.RADIO);
-		radioExpression.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				specificDeletion.setDeleteMode(SpecificDeletion.deleteMode_Expression );
-				if(SpecificDeletionDialog.radioExpression.getSelection()){
-					txExpression.setEnabled(true);
-				}else{
-					txExpression.setEnabled(false);
-				}
-			}
-		});
-		radioExpression.setText("With Expression");
-		radioExpression.setEnabled(false);
-		
-		txExpression = new Text(composite_9, SWT.BORDER);
-		txExpression.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent e) {
-				specificDeletion.setDeleteExpression(txExpression.getText());
-			}
-		});
-		txExpression.setLayoutData(new RowData(116, SWT.DEFAULT));
-		txExpression.setEnabled(false);
+//		radioExpression = new Button(composite_9, SWT.RADIO);
+//		radioExpression.addSelectionListener(new SelectionAdapter() {
+//			public void widgetSelected(SelectionEvent e) {
+//				specificDeletion.setDeleteMode(SpecificDeletion.deleteMode_Expression );
+//				if(SpecificDeletionDialog.radioExpression.getSelection()){
+//					txExpression.setEnabled(true);
+//				}else{
+//					txExpression.setEnabled(false);
+//				}
+//			}
+//		});
+//		radioExpression.setText("With Expression");
+//		radioExpression.setEnabled(false);
+//		
+//		txExpression = new Text(composite_9, SWT.BORDER);
+//		txExpression.addModifyListener(new ModifyListener() {
+//			public void modifyText(ModifyEvent e) {
+//				specificDeletion.setDeleteExpression(txExpression.getText());
+//			}
+//		});
+//		txExpression.setLayoutData(new RowData(116, SWT.DEFAULT));
+//		txExpression.setEnabled(false);
 		
 		Composite composite_10 = new Composite(shlIntrinsicDeletion, SWT.NONE);
 		composite_10.setLayout(new FillLayout(SWT.HORIZONTAL));

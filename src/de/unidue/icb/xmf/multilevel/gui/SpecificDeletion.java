@@ -6,14 +6,14 @@ public class SpecificDeletion {
 	
 	private int deletionUntilLayer;
 	
-	private boolean deleteSlotValues;
+//	private boolean deleteSlotValues;
 	
-	public static final int deleteMode_All = 1;
-	public static final int deleteMode_NullValue = 2;
-	public static final int deleteMode_Expression = 3;
-	
-	private int deleteMode;
-	private String deleteExpression;
+//	public static final int deleteMode_All = 1;
+//	public static final int deleteMode_NullValue = 2;
+//	public static final int deleteMode_Expression = 3;
+//	
+//	private int deleteMode;
+//	private String deleteExpression;
 	/**
 	 * @param definitionLayer
 	 * @param instantiationLayer
@@ -24,15 +24,16 @@ public class SpecificDeletion {
 	 * @param deleteWithExpression
 	 * @param deleteExpression
 	 */
-	public SpecificDeletion(int definitionLayer, int instantiationLayer,
-			int deletionUntilLayer, boolean deleteSlotValues, int deleteMode, String deleteExpression) {
+//	public SpecificDeletion(int definitionLayer, int instantiationLayer,
+//			int deletionUntilLayer, boolean deleteSlotValues, int deleteMode, String deleteExpression) {
+	public SpecificDeletion(int definitionLayer, int instantiationLayer, int deletionUntilLayer) {		
 		super();
 		this.definitionLayer = definitionLayer;
 		this.instantiationLayer = instantiationLayer;
 		this.deletionUntilLayer = deletionUntilLayer;
-		this.deleteSlotValues = deleteSlotValues;
-		this.deleteMode = deleteMode;
-		this.deleteExpression = deleteExpression;
+//		this.deleteSlotValues = deleteSlotValues;
+//		this.deleteMode = deleteMode;
+//		this.deleteExpression = deleteExpression;
 	}
 	
 	public SpecificDeletion(int definitionLayer, int instantiationLayer) {
@@ -40,9 +41,9 @@ public class SpecificDeletion {
 		this.definitionLayer = definitionLayer;
 		this.instantiationLayer = instantiationLayer;
 		this.deletionUntilLayer = definitionLayer;
-		this.deleteSlotValues = false;
-		this.deleteMode = deleteMode_All ;
-		this.deleteExpression = "";
+//		this.deleteSlotValues = false;
+//		this.deleteMode = deleteMode_All ;
+//		this.deleteExpression = "";
 	}
 
 	/**
@@ -86,48 +87,48 @@ public class SpecificDeletion {
 	public void setDeletionUntilLayer(int deletionUntilLayer) {
 		this.deletionUntilLayer = deletionUntilLayer;
 	}
+//
+//	/**
+//	 * @return the deleteSlotValues
+//	 */
+//	public boolean isDeleteSlotValues() {
+//		return deleteSlotValues;
+//	}
+//
+//	/**
+//	 * @param deleteSlotValues the deleteSlotValues to set
+//	 */
+//	public void setDeleteSlotValues(boolean deleteSlotValues) {
+//		this.deleteSlotValues = deleteSlotValues;
+//	}
 
-	/**
-	 * @return the deleteSlotValues
-	 */
-	public boolean isDeleteSlotValues() {
-		return deleteSlotValues;
-	}
-
-	/**
-	 * @param deleteSlotValues the deleteSlotValues to set
-	 */
-	public void setDeleteSlotValues(boolean deleteSlotValues) {
-		this.deleteSlotValues = deleteSlotValues;
-	}
-
-	/**
-	 * @return the deleteExpression
-	 */
-	public String getDeleteExpression() {
-		return deleteExpression;
-	}
-
-	/**
-	 * @param deleteExpression the deleteExpression to set
-	 */
-	public void setDeleteExpression(String deleteExpression) {
-		this.deleteExpression = deleteExpression;
-	}
-	
-	/**
-	 * @return the deleteMode
-	 */
-	public int getDeleteMode() {
-		return deleteMode;
-	}
-
-	/**
-	 * @param deleteMode the deleteMode to set
-	 */
-	public void setDeleteMode(int deleteMode) {
-		this.deleteMode = deleteMode;
-	}
+//	/**
+//	 * @return the deleteExpression
+//	 */
+//	public String getDeleteExpression() {
+//		return deleteExpression;
+//	}
+//
+//	/**
+//	 * @param deleteExpression the deleteExpression to set
+//	 */
+//	public void setDeleteExpression(String deleteExpression) {
+//		this.deleteExpression = deleteExpression;
+//	}
+//	
+//	/**
+//	 * @return the deleteMode
+//	 */
+//	public int getDeleteMode() {
+//		return deleteMode;
+//	}
+//
+//	/**
+//	 * @param deleteMode the deleteMode to set
+//	 */
+//	public void setDeleteMode(int deleteMode) {
+//		this.deleteMode = deleteMode;
+//	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -135,9 +136,11 @@ public class SpecificDeletion {
 	public String toString() {
 		return "SpecificDeletion [definitionLayer=" + definitionLayer
 				+ ", instantiationLayer=" + instantiationLayer
-				+ ", deletionUntilLayer=" + deletionUntilLayer + ", deleteSlotValues="
-				+ deleteSlotValues + ", deleteMode=" + deleteMode
-				+ ", deleteExpression=" + deleteExpression + "]";
+				+ ", deletionUntilLayer=" + deletionUntilLayer 
+//				+ ", deleteSlotValues="	+ deleteSlotValues 
+//				+ ", deleteMode=" + deleteMode
+//				+ ", deleteExpression=" + deleteExpression 
+				+ "]";
 	}
 	
 }
