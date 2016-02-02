@@ -33,7 +33,6 @@ saveSource:true
 -internal
 tool.console.ConsoleClient:com.ceteva.console
 -workspace ../..
--debug
 -heapSize
 15000
 -freeHeap
