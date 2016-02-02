@@ -1243,7 +1243,9 @@ public class Diagram implements Display {
 	        if (!w.isStart() && !w.isEnd() && r.contains(w.getX(), w.getY())) select(w);
 	      }
 	      for (Label l : edge.getLabels()) {
-	        if (r.contains(l.getX(), l.getY())) select(l);
+	        if (!selection.contains(l.getParentNode()) &&
+	            r.contains(l.getAbsoluteX(), l.getAbsoluteY()) && 
+		        r.contains(l.getAbsoluteX() + l.getWidth(), l.getAbsoluteY() + l.getHeight())) select(l);
 	      }
 	    }
 	  }

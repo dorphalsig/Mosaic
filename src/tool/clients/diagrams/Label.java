@@ -63,7 +63,13 @@ public class Label implements Selectable {
     return x >= getAbsoluteX() && y >= getAbsoluteY() && x <= getAbsoluteX() + extent.x && y <= getAbsoluteY() + extent.y;
   }
 
-  private int getAbsoluteX() {
+  Node getParentNode() {
+	  if (pos.equals("start"))
+	      return edge.getSourceNode();
+	  return edge.getTargetNode();
+  }
+  
+  int getAbsoluteX() {
     Port source = edge.getSourcePort();
     Port target = edge.getTargetPort();
     Node sourceNode = edge.getSourceNode();
@@ -79,7 +85,7 @@ public class Label implements Selectable {
     }
   }
 
-  private int getAbsoluteY() {
+  int getAbsoluteY() {
     Port source = edge.getSourcePort();
     Port target = edge.getTargetPort();
     Node sourceNode = edge.getSourceNode();
