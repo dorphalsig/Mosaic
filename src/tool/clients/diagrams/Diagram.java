@@ -1065,6 +1065,11 @@ public class Diagram implements Display {
       new OutboundMessages().zoomTo();
   }
   
+  public void zoomTo(float f) {
+      setZoom(f);
+      new OutboundMessages().zoomTo();
+  }
+  
   public void zoomIn() {
     if (getZoom() < MAX_ZOOM) {
       setZoom(getZoom() + ZOOM_INC);

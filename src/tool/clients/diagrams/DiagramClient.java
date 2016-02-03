@@ -949,6 +949,8 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
       zoomOut(message);
     else if (message.hasName("zoomOne"))
       zoomOne(message);
+    else if (message.hasName("nestedZoomTo") || message.hasName("zoomTo"))
+      zoomTo(message);
     else if (message.hasName("hide"))
       hide(message);
     else if (message.hasName("show"))
@@ -1037,7 +1039,21 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
         }
       }
     });
-  }
+  }  
+  
+  private void zoomTo(final Message message) {
+	    runOnDisplay(new Runnable() {
+	      public void run() {
+	        Value id = message.args[0];
+	        for (Diagram diagram : diagrams) {
+	          if (diagram.getId().equals(id.strValue())) {
+	            diagram.zoomTo(message.args[1].floatValue);
+	            diagram.redraw();
+	          }
+	        }
+	      }
+	    });
+	  }
 
   private void setMagneticWaypoints(Message message) {
     String id = message.args[0].strValue();
