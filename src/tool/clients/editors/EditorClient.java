@@ -3,6 +3,7 @@ package tool.clients.editors;
 import java.io.PrintStream;
 import java.net.URL;
 import java.util.Hashtable;
+import java.util.Vector;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
@@ -13,7 +14,21 @@ import org.eclipse.swt.custom.CTabFolder2Listener;
 import org.eclipse.swt.custom.CTabFolderEvent;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
+import org.eclipse.swt.layout.FormAttachment;
+import org.eclipse.swt.layout.FormData;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.ToolBar;
+import org.eclipse.swt.widgets.ToolItem;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -21,6 +36,7 @@ import org.w3c.dom.NodeList;
 import tool.clients.Client;
 import tool.clients.EventHandler;
 import tool.clients.diagrams.DiagramClient;
+import tool.clients.dialogs.MultiplicityDialog;
 import tool.xmodeler.XModeler;
 import xos.Message;
 import xos.Value;
@@ -291,10 +307,35 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
         tabItem.setText(label);
         tabItem.setShowClose(true);
         tabs.put(id, tabItem);
-        Browser browser = new Browser(tabFolder, SWT.BORDER);
-        tabItem.setControl(browser);
+        Composite browserParent = new Composite(tabFolder, SWT.NONE);
+        Vector<Object> buttons = new Vector<Object>();
+        Button b1 = new Button(browserParent, SWT.PUSH); b1.setImage(new Image(tabItem.getDisplay(), new ImageData("icons/User/Arrow4Left.gif"))); buttons.addElement(b1); 
+        Label b2 = new Label(browserParent, SWT.NONE); b2.setText("URL:"); buttons.addElement(b2); 
+        Text b3 = new Text(browserParent, SWT.BORDER); b3.setText("Enter URL here..."); buttons.addElement(b3); 
+        Button b4 = new Button(browserParent, SWT.PUSH); b4.setImage(new Image(tabItem.getDisplay(), new ImageData("icons/User/Balls1.gif"))); buttons.addElement(b4);         
+        final Browser browser = new Browser(browserParent, SWT.BORDER);
+        b1.addListener(SWT.Selection, new Listener() {
+			@Override
+			public void handleEvent(Event arg0) {browser.back();}
+		}); 
+        b4.addListener(SWT.Selection, new Listener() {
+			@Override
+			public void handleEvent(Event arg0) {MultiplicityDialog.main(null);}
+		});
+        tabItem.setControl(browserParent);
         browser.setText(text);
         browser.setJavascriptEnabled(true);
+	    int buttonCount = buttons.size();
+        GridLayout gridLayout = new GridLayout();
+        gridLayout.numColumns = buttonCount;
+        browserParent.setLayout(gridLayout);
+	    GridData gd = new GridData();
+	    gd.grabExcessHorizontalSpace = true;
+	    gd.grabExcessVerticalSpace = true;
+	    gd.horizontalAlignment = GridData.FILL;
+	    gd.verticalAlignment = GridData.FILL;
+	    gd.horizontalSpan=buttonCount;
+	    browser.setLayoutData(gd);
         browserLocked = false;
         if (isURL(url)) {
         	browser.setUrl(url);
@@ -306,6 +347,41 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       }
     });
   }
+  
+	private void addToolBar(CTabFolder parent, Browser browser) {
+		ToolBar toolbar = new ToolBar(parent, SWT.NONE);
+		FormData data = new FormData();
+		data.top = new FormAttachment(0, 5);
+		toolbar.setLayoutData(data);
+		ToolItem itemBack = new ToolItem(toolbar, SWT.PUSH);
+		itemBack.setText(("Back"));
+		ToolItem itemForward = new ToolItem(toolbar, SWT.PUSH);
+		itemForward.setText(("Forward"));
+		final ToolItem itemStop = new ToolItem(toolbar, SWT.PUSH);
+		itemStop.setText(("Stop"));
+		final ToolItem itemRefresh = new ToolItem(toolbar, SWT.PUSH);
+		itemRefresh.setText(("Refresh"));
+		final ToolItem itemGo = new ToolItem(toolbar, SWT.PUSH);
+		itemGo.setText(("Go"));
+
+		itemBack.setEnabled(browser.isBackEnabled());
+		itemForward.setEnabled(browser.isForwardEnabled());
+		// Listener listener = new Listener() {
+		// public void handleEvent(Event event) {
+		// ToolItem item = (ToolItem) event.widget;
+		// if (item == itemBack)
+		// browser.back();
+		// else if (item == itemForward)
+		// browser.forward();
+		// else if (item == itemStop)
+		// browser.stop();
+		// else if (item == itemRefresh)
+		// browser.refresh();
+		// else if (item == itemGo)
+		// browser.setUrl(locationBar.getText());
+		// }
+		// };
+	}
 
   private boolean isURL(String url) {
     return url.startsWith("http://") || url.startsWith("file:/");
