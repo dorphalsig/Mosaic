@@ -502,7 +502,7 @@ public class DialogsClient extends Client {
 		Vector disable = new Vector();
 		Vector selected = new Vector();
 		final TreeElement root = buildTree(tree, expand, disable, selected);
-	    final Value[] result = new Value[1];
+	    final Value[] result = new Value[] { new Value("") };
 
 		DialogsClient.theClient().runOnDisplay(new Runnable() {
 			public void run() {
@@ -512,11 +512,11 @@ public class DialogsClient extends Client {
 				treeDialog.create();
 				treeDialog.expandTree(expand);
 				int returncode = treeDialog.open();
+				//result[0] = new Value("");
 				if (returncode != 1) {
-					Object[] result = treeDialog.getResult();
-					// if(result != null) {
-					if (result.length > 0) {
-						TreeElement te = (TreeElement) result[0];
+					Object[] res = treeDialog.getResult();
+					if (res.length > 0) {
+						TreeElement te = (TreeElement) res[0];
 						Vector path = new Vector();
 						te.getPath(path);
 						Value[] value = new Value[path.size()];
@@ -527,7 +527,6 @@ public class DialogsClient extends Client {
 						result[0] = new Value(value);
 					}
 				}
-				result[0] = new Value("");
 			}
 		});
 		return result[0];
