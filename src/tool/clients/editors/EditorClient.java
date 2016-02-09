@@ -309,14 +309,19 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
         tabs.put(id, tabItem);
         Composite browserParent = new Composite(tabFolder, SWT.NONE);
         Vector<Object> buttons = new Vector<Object>();
-        Button b1 = new Button(browserParent, SWT.PUSH); b1.setImage(new Image(tabItem.getDisplay(), new ImageData("icons/User/Arrow4Left.gif"))); buttons.addElement(b1); 
+        Button b1a = new Button(browserParent, SWT.PUSH); b1a.setImage(new Image(tabItem.getDisplay(), new ImageData("icons/User/Arrow4Left.gif"))); buttons.addElement(b1a); 
+        Button b1b = new Button(browserParent, SWT.PUSH); b1b.setImage(new Image(tabItem.getDisplay(), new ImageData("icons/User/Arrow4Right.gif"))); buttons.addElement(b1b); 
         Label b2 = new Label(browserParent, SWT.NONE); b2.setText("URL:"); buttons.addElement(b2); 
         final Text b3 = new Text(browserParent, SWT.BORDER); b3.setText("Enter URL here..."); buttons.addElement(b3); 
         Button b4 = new Button(browserParent, SWT.PUSH); b4.setImage(new Image(tabItem.getDisplay(), new ImageData("icons/User/Balls1.gif"))); buttons.addElement(b4);         
         final Browser browser = new Browser(browserParent, SWT.BORDER);
-        b1.addListener(SWT.Selection, new Listener() {
+        b1a.addListener(SWT.Selection, new Listener() {
 			@Override
 			public void handleEvent(Event arg0) {browser.back();}
+		});
+        b1b.addListener(SWT.Selection, new Listener() {
+			@Override
+			public void handleEvent(Event arg0) {browser.forward();}
 		}); 
         b4.addListener(SWT.Selection, new Listener() {
 			@Override

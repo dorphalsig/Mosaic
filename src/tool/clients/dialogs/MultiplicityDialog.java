@@ -1,18 +1,15 @@
 package tool.clients.dialogs;
 
-import org.eclipse.jface.window.IShellProvider;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
@@ -23,14 +20,115 @@ public class MultiplicityDialog extends org.eclipse.jface.dialogs.Dialog{
 	private Button boxOrdered;
 	private Button boxNavigable;
 	
+	private int min, max;
+	private boolean ordered, navigable;
+
+	private transient boolean blocked;
+	private transient boolean finished;
+	private transient boolean okPressed;
+	String s;
+	
 	public static void main(String[] args) {
-		MultiplicityDialog m = new MultiplicityDialog((Shell)null);
-		m.open();
+		System.err.println(show(1,2,true,false));
+	}
+	
+	public static String show(final int min, final int max, final boolean ordered, final boolean navigable) {
+		final MultiplicityDialog m = new MultiplicityDialog((Shell) null, min, max, ordered, navigable);
+		return m.showLocal();
+	}
 		
+	private String showLocal() {
+		new Thread(new Runnable() {
+			public void run() {
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						open();
+					}
+				});
+			}
+		}).start();
+		while(!finished) {
+			blocked = true;
+//			System.err.println("Wait for Button");
+			while(blocked) {
+				try {
+					Thread.sleep(50);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			if(okPressed) {
+//				System.err.println("OK");
+				new Thread(new Runnable() {
+					public void run() {
+						Display.getDefault().syncExec(new Runnable() {
+							public void run() {
+								try{
+									int a = Integer.parseInt(txtMin.getText());
+									if(!"*".equals(txtMax.getText())) {
+										int b = Integer.parseInt(txtMax.getText());
+										if(b < 1) throw new IllegalArgumentException();
+										if(b < a) throw new IllegalArgumentException();
+									}
+									s = txtMin.getText() + ".." + txtMax.getText() + (boxOrdered.getSelection()?"$":"");
+									if(s.endsWith("1$")) s = s.substring(0, s.length()-1);
+									if("1..1".equals(s)) s = "!";
+									if("0..1".equals(s)) s = "1";								
+								} catch (Exception e) {
+									s = null;
+								};
+								blocked = false;							
+							}
+						});
+					}
+				}).start();
+				blocked = true;
+				while(blocked) {
+					try {
+						Thread.sleep(50);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				if(s != null) {
+					dispose();
+					finished = true;
+					return s;
+				}
+			} else {
+//				System.err.println("Cancel");
+				finished = true;
+				dispose();
+				return "exit2";
+			}
+		}
+		return "exit1";
 	}
 
-	protected MultiplicityDialog(Shell parentShell) { super(parentShell); }
-    protected MultiplicityDialog(IShellProvider parentShell) { super(parentShell); }
+	private void dispose() {
+		new Thread(new Runnable() {
+			public void run() {
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						dispose2();
+					}
+				});
+			}
+		}).start();
+	}
+
+	private void dispose2() {
+		super.okPressed();		
+	}
+
+	protected MultiplicityDialog(Shell parentShell, int min, int max, boolean ordered, boolean navigable) { 
+		super(parentShell); 
+		this.min = min;
+		this.max = max;
+		this.ordered = ordered;
+		this.navigable = navigable;
+	}
+//    protected MultiplicityDialog(IShellProvider parentShell) { super(parentShell); }
     
     @Override
     protected Control createDialogArea(Composite parent) {
@@ -46,6 +144,11 @@ public class MultiplicityDialog extends org.eclipse.jface.dialogs.Dialog{
 	    gd.horizontalSpan=2;
 	    defaultR1.setLayoutData(gd);
 	    
+	    defaultR1.addSelectionListener(new SelectionListener() {
+			@Override public void widgetSelected(SelectionEvent arg0) {setValues("0","1",false);}
+			@Override public void widgetDefaultSelected(SelectionEvent arg0) {setValues("0","1",false);}
+		});
+	    
 	    Label label1 = new Label(container, SWT.NONE); 
 	    label1.setText("Zero or one");
 	    gd = new GridData();
@@ -57,6 +160,11 @@ public class MultiplicityDialog extends org.eclipse.jface.dialogs.Dialog{
 	    gd = new GridData();
 	    gd.horizontalSpan=2;
 	    defaultR2.setLayoutData(gd);
+	    
+	    defaultR2.addSelectionListener(new SelectionListener() {
+			@Override public void widgetSelected(SelectionEvent arg0) {setValues("1","1",false);}
+			@Override public void widgetDefaultSelected(SelectionEvent arg0) {setValues("1","1",false);}
+		});
 	    
 	    Label label2 = new Label(container, SWT.NONE); 
 	    label2.setText("Exactly one"); 
@@ -70,6 +178,11 @@ public class MultiplicityDialog extends org.eclipse.jface.dialogs.Dialog{
 	    gd.horizontalSpan=2;
 	    defaultR3.setLayoutData(gd);
 	    
+	    defaultR3.addSelectionListener(new SelectionListener() {
+			@Override public void widgetSelected(SelectionEvent arg0) {setValues("0","*",false);}
+			@Override public void widgetDefaultSelected(SelectionEvent arg0) {setValues("0","*",false);}
+		});
+	    
 	    Label label3 = new Label(container, SWT.NONE); 
 	    label3.setText("Any number including zero"); 
 	    gd = new GridData();
@@ -82,6 +195,11 @@ public class MultiplicityDialog extends org.eclipse.jface.dialogs.Dialog{
 	    gd.horizontalSpan=2;
 	    defaultR4.setLayoutData(gd);
 	    
+	    defaultR4.addSelectionListener(new SelectionListener() {
+			@Override public void widgetSelected(SelectionEvent arg0) {setValues("1","*",false);}
+			@Override public void widgetDefaultSelected(SelectionEvent arg0) {setValues("1","*",false);}
+		});
+	    
 	    Label label4 = new Label(container, SWT.NONE); 
 	    label4.setText("Any number, at least one"); 
 	    gd = new GridData();
@@ -91,66 +209,29 @@ public class MultiplicityDialog extends org.eclipse.jface.dialogs.Dialog{
 	    
 	    Button defaultR5 = new Button(container, SWT.RADIO); defaultR5.setText("");
 	    txtMin = new Text(container, SWT.BORDER);
-	    txtMin.setText("1");
+	    txtMin.setText(min+"");
 	    Label dummy1 = new Label(container, SWT.NONE); dummy1.setText("..");
         txtMax = new Text(container, SWT.BORDER);
-//	    txtMax.setEnabled(false);
-	    txtMax.setText("*");
+	    txtMax.setText(max<0?"*":(max+""));
+	    
+	    defaultR5.setSelection(true);
+	    defaultR5.addSelectionListener(new SelectionListener() {
+			@Override public void widgetSelected(SelectionEvent arg0) {enableUserDef();}
+			@Override public void widgetDefaultSelected(SelectionEvent arg0) {enableUserDef();}
+		});
+	    
 
-	    boxOrdered = new Button(container, SWT.CHECK); boxOrdered.setText("Ordered");
-	    boxNavigable = new Button(container, SWT.CHECK); boxNavigable.setText("Navigable");
-//	    Label dummy2 = new Label(container, SWT.NONE); dummy2.setText(" ");
-//	    boxOrdered.setSelection(true);
-	    
-//	    Label labelMul = new Label(container, SWT.NONE); labelMul.setText("Multiplicity");
-//	    txtMul = new Text(container, SWT.BORDER);
-//	    txtMul.setText("$1..*");
-	    
-//	    Label dummy3 = new Label(container, SWT.NONE); dummy3.setText("Quick Select:");
-
-//	    Button default1 = new Button(container, SWT.PUSH); default1.setText("  0..1  ");
-//	    Button default2 = new Button(container, SWT.PUSH); default2.setText("  1..1  ");
-//	    Button default3 = new Button(container, SWT.PUSH); default3.setText("  0..*  ");
-//	    Button default4 = new Button(container, SWT.PUSH); default4.setText("  1..*  ");
-	    
-	    
-//	    GridData textFieldGridData = new GridData();
-////	    textFieldGridData.grabExcessHorizontalSpace = true;
-////	    textFieldGridData.horizontalAlignment = GridData.BEGINNING;
-////	    textFieldGridData.horizontalSpan = 2;
-//	    defaultR1.setLayoutData(textFieldGridData);
-//	    label1.setLayoutData(textFieldGridData);
-//	    defaultR2.setLayoutData(textFieldGridData);
-//	    label2.setLayoutData(textFieldGridData);
-//	    defaultR3.setLayoutData(textFieldGridData);
-//	    label3.setLayoutData(textFieldGridData);
-//	    defaultR4.setLayoutData(textFieldGridData);
-//	    label4.setLayoutData(textFieldGridData);
+	    boxOrdered = new Button(container, SWT.CHECK); boxOrdered.setText("Ordered"); boxOrdered.setSelection(ordered);
+	    boxNavigable = new Button(container, SWT.CHECK); boxNavigable.setText("Navigable"); boxNavigable.setSelection(navigable);
 	    
 	    GridData textFieldGridData = new GridData();
-//	    textFieldGridData.grabExcessHorizontalSpace = true;
-//	    textFieldGridData.horizontalAlignment = GridData.FILL;
 	    textFieldGridData.horizontalSpan = 4;
 	    boxOrdered.setLayoutData(textFieldGridData); 
 	    
 	    textFieldGridData = new GridData();
-//	    textFieldGridData.grabExcessHorizontalSpace = true;
-//	    textFieldGridData.horizontalAlignment = GridData.FILL;
 	    textFieldGridData.horizontalSpan = 4;
 	    boxNavigable.setLayoutData(textFieldGridData);
 
-//	    default1.addListener(SWT.Selection, new MyButtonListener("1"));	
-//	    default2.addListener(SWT.Selection, new MyButtonListener("2"));	
-//	    default3.addListener(SWT.Selection, new MyButtonListener("3"));	
-//	    default4.addListener(SWT.Selection, new MyButtonListener("4"));
-
-//	    MyListener myListener = new MyListener();
-	    
-//	    txtMin.addModifyListener(new MyListener(txtMin));
-////	    boxNoUpperBound.addListener(SWT.Selection, new MyListener(boxNoUpperBound));
-//	    txtMax.addModifyListener(new MyListener(txtMax));
-//	    boxOrdered.addListener(SWT.Selection, new MyListener(boxOrdered));
-////	    txtMul.addModifyListener(new MyListener(txtMul));
       return container;
     }
 
@@ -161,97 +242,34 @@ public class MultiplicityDialog extends org.eclipse.jface.dialogs.Dialog{
       super.configureShell(newShell);
       newShell.setText("Selection dialog");
     }
-
-//    @Override
-//    protected Point getInitialSize() {
-//      return new Point(200, 270);
-//    }		
     
-//	private void updateValues(Object whoDidIt) {
-//		if(listenerBlockedBy != null) {
-////			System.out.println("listener blocked by " + listenerBlockedBy);
-//			return;
-//		}
-//		listenerBlockedBy = whoDidIt;
-//		if(whoDidIt == txtMin) {
-//			updateMul();
-//		} else if(whoDidIt == txtMax) {
-//			updateMul();
-//		} else if(whoDidIt == txtMul) {
-//			updateOthers();
-//		} else if(whoDidIt == boxNoUpperBound) {
-//			txtMax.setEnabled(!boxNoUpperBound.getSelection());
-//			txtMax.setText(boxNoUpperBound.getSelection()?"*":txtMin.getText());
-//			updateMul();
-//		} else if(whoDidIt == boxOrdered) {
-//			updateMul();
-//		} else throw new IllegalStateException();
-//		listenerBlockedBy = null;
-//	}
+    private void setValues(String min, String max, boolean ordered) {
+    	txtMin.setText(min);
+    	txtMax.setText(max);
+    	boxOrdered.setSelection(ordered);
+    	txtMin.setEnabled(false);
+    	txtMax.setEnabled(false);
+    	boxOrdered.setEnabled(false);
+    } 
     
-//    private void updateOthers() {
-//		// TODO Auto-generated method stub
-//	}
-
-//	private void updateMul() {
-//		try{
-//			Integer min = Integer.parseInt(txtMin.getText());
-//			String s = min+"";
-//			if(boxNoUpperBound.getSelection()) {
-//				// no upper bound
-//				s += "..*";
-//			} else {
-//				Integer max = Integer.parseInt(txtMax.getText());
-//				if(min < max) {
-//					s += ".." +max;
-//				} else if(max < min) {
-//					throw new IllegalArgumentException("min ("+min+") > max ("+max+") not allowed");
-//				}
-//			}
-//			if(boxOrdered.getSelection()) {
-//				s = "$" + s;
-//			}
-//			txtMul.setText(s);
-//		} catch (Exception e) {
-//			txtMul.setText(e.getMessage());
-//		}
-//	}
-
-//	private final class MyListener implements Listener, ModifyListener {
-//    	
-//    	private final Object whoDidIt;
-//    	
-//    	private MyListener(Object whoDidIt) {
-//    		this.whoDidIt = whoDidIt;
-//    	}
-//
-//		@Override
-//		public void handleEvent(Event e) {
-//			updateValues(whoDidIt);
-//		}
-//
-//		@Override
-//		public void modifyText(ModifyEvent e) {
-//			updateValues(whoDidIt);
-//		}
-//    }
+    private void enableUserDef() {
+    	txtMin.setEnabled(true);
+    	txtMax.setEnabled(true);
+    	boxOrdered.setEnabled(true);
+    }
     
-//    private final class MyButtonListener implements Listener {
-//
-//    	final String value;
-//    	
-//    	private MyButtonListener(String value) {
-//    		this.value = value;
-//    	}
-//    	
-//		@Override
-//		public void handleEvent(Event e) {
-//			switch (e.type) {
-//			case SWT.Selection:
-//				txtMul.setText(value);
-//				break;
-//			}
-//		}
-//    }
+	@Override
+	protected void okPressed() {
+		okPressed = true;
+		blocked = false;
+//		super.okPressed();
+	}
+
+	@Override
+	protected void cancelPressed() {
+		okPressed = false;
+		blocked = false;
+//		super.cancelPressed();
+	}
 
 }

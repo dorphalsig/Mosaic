@@ -876,7 +876,7 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
         insertImage(imageData, text.getCaretOffset());
       }
     }
-    if (((e.stateMask & SWT.SHIFT) == SWT.SHIFT) && (e.keyCode == '2') && autoComplete) {
+    if (e.character == '@' && autoComplete) {
       e.doit = !at();
     }
     if (e.character == '\r') {
