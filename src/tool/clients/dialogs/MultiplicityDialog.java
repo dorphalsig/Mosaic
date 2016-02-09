@@ -99,10 +99,10 @@ public class MultiplicityDialog extends org.eclipse.jface.dialogs.Dialog{
 //				System.err.println("Cancel");
 				finished = true;
 				dispose();
-				return "exit2";
+				return null;
 			}
 		}
-		return "exit1";
+		return null;
 	}
 
 	private void dispose() {

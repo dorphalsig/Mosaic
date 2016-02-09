@@ -184,13 +184,17 @@ public class Label implements Selectable {
 	  if(targetPoint==null) return;
 	  // Now we need to find the quadrant where the arrow is pointing to.
 	  // There are 4 cases separated by the diagonals: North, West, ... 
+	  // NEW ony two cases: West & East
 	  // The angle will give the clue. 
 	  // We need the position of the source and
 	  // the target and use atan2 to get it.
 	  double angle = Math.atan2(targetPoint.y - sourcePoint.y, targetPoint.x - sourcePoint.x);
 	  double angleBaseFour = angle*2/Math.PI; // Now a full circle is 4
-	  angleBaseFour += 4.5; angleBaseFour %= 4;// The centre of EAST was 0 before, now 0 to 1 is EAST
-	  int quadrant = (int) angleBaseFour; // rounding down and we get one of 4 quadrants 0=EAST,1=SOUTH,...
+	  //angleBaseFour += 4.5; angleBaseFour %= 4;// The centre of EAST was 0 before, now 0 to 1 is EAST
+	  //int quadrant = (int) angleBaseFour; // rounding down and we get one of 4 quadrants 0=EAST,1=SOUTH,...
+	  //NEW:
+	  angleBaseFour += 4; angleBaseFour %= 4; // The centre of EAST was 0 before, so, 1-2.99 is West, 3-0.99 is East
+	  int quadrant = ((angleBaseFour>=1) && (angleBaseFour<3))?2:0;
 	  // the Position of the arrow is different for each quadrant:
 	  int xArrow;
 	  int yArrow;
