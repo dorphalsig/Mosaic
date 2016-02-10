@@ -106,6 +106,8 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
           item.setImage(image);
           item.setExpanded(expanded);
           item.setFont(labelFont);
+          //automatically open root-node, if child-node is created.
+          parent.setExpanded(true);
           for (String id : trees.keySet())
             for (TreeItem i : trees.get(id).getItems())
               if (i == item) tabFolder.setSelection(tabs.get(id));
@@ -159,7 +161,6 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
               }
             }
           });
-        
 //        tabItem.getDisplay().addFilter(SWT.KeyDown, new Listener() {
 //	            public void handleEvent(Event event) {
 //	            	if(event.stateMask == SWT.CTRL) {
@@ -383,6 +384,7 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
     if (clientName.strValue().equals("com.ceteva.browser")) {
       addTree(id.strValue(), name.strValue());
     }
+    
   }
 
   public boolean processMessage(Message message) {
