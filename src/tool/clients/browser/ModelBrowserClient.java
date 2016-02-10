@@ -107,7 +107,9 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
           item.setExpanded(expanded);
           item.setFont(labelFont);
           //automatically open root-node, if child-node is created.
-          parent.setExpanded(true);
+          if( parent.getParentItem() == null){
+    	  	parent.setExpanded(true);
+      	  }
           for (String id : trees.keySet())
             for (TreeItem i : trees.get(id).getItems())
               if (i == item) tabFolder.setSelection(tabs.get(id));
