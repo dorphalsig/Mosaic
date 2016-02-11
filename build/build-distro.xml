@@ -31,6 +31,7 @@
     			<include name="file/**"/>
     			<include name="icons/**"/>
     			<include name="images/**"/>
+    			<include name="dejavu/**"/>
     			<include name="MDC/**"/>
     			<include name="setting/**"/>
     			<include name="User/**"/>
