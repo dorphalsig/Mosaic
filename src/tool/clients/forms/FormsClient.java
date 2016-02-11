@@ -29,6 +29,9 @@ import xos.Value;
 
 public class FormsClient extends Client implements CTabFolder2Listener {
 
+	public static boolean HIGH_RESOLUTION = false;
+	public static final int HIGH_RESOLUTION_FACTOR = 2;
+	
   public static Font getFormLabelFont() {
     return formLabelFont;
   }
@@ -367,10 +370,10 @@ public class FormsClient extends Client implements CTabFolder2Listener {
     String parentId = message.args[0].strValue();
     String id = message.args[1].strValue();
     String label = message.args[2].strValue();
-    int x = message.args[3].intValue;
-    int y = message.args[4].intValue;
-    int width = message.args[5].intValue;
-    int height = message.args[6].intValue;
+    int x = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[3].intValue;
+    int y = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[4].intValue;
+    int width = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[5].intValue;
+    int height = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[6].intValue;
     newButton(parentId, id, label, x, y, width, height);
   }
 
@@ -386,8 +389,8 @@ public class FormsClient extends Client implements CTabFolder2Listener {
   private void newCheckBox(Message message) {
     String parentId = message.args[0].strValue();
     String id = message.args[1].strValue();
-    int x = message.args[2].intValue;
-    int y = message.args[3].intValue;
+    int x = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[2].intValue;
+    int y = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[3].intValue;
     boolean checked = message.args[4].boolValue;
     newCheckBox(parentId, id, x, y, checked);
   }
@@ -404,10 +407,10 @@ public class FormsClient extends Client implements CTabFolder2Listener {
   private void newComboBox(Message message) {
     String parentId = message.args[0].strValue();
     String id = message.args[1].strValue();
-    int x = message.args[2].intValue;
-    int y = message.args[3].intValue;
-    int width = message.args[4].intValue;
-    int height = message.args[5].intValue;
+    int x = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[2].intValue;
+    int y = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[3].intValue;
+    int width = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[4].intValue;
+    int height = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[5].intValue;
     newComboBox(parentId, id, x, y, width, height);
   }
 
@@ -445,10 +448,10 @@ public class FormsClient extends Client implements CTabFolder2Listener {
   private void newList(Message message) {
     String parentId = message.args[0].strValue();
     String id = message.args[1].strValue();
-    int x = message.args[2].intValue;
-    int y = message.args[3].intValue;
-    int width = message.args[4].intValue;
-    int height = message.args[5].intValue;
+    int x = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[2].intValue;
+    int y = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[3].intValue;
+    int width = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[4].intValue;
+    int height = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[5].intValue;
     newList(parentId, id, x, y, width, height);
   }
 
@@ -461,8 +464,8 @@ public class FormsClient extends Client implements CTabFolder2Listener {
     String parentId = message.args[0].strValue();
     String id = message.args[1].strValue();
     String string = message.args[2].strValue();
-    int x = message.args[3].intValue;
-    int y = message.args[4].intValue;
+    int x = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[3].intValue;
+    int y = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[4].intValue;
     newText(parentId, id, string, x, y);
   }
 
@@ -480,10 +483,10 @@ public class FormsClient extends Client implements CTabFolder2Listener {
   private void newTextBox(Message message) {
     String parentId = message.args[0].strValue();
     String id = message.args[1].strValue();
-    int x = message.args[2].intValue;
-    int y = message.args[3].intValue;
-    int width = message.args[4].intValue;
-    int height = message.args[5].intValue;
+    int x = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[2].intValue;
+    int y = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[3].intValue;
+    int width = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[4].intValue;
+    int height = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[5].intValue;
     boolean editable = message.args[6].boolValue;
     newTextBox(parentId, id, x, y, width, height, editable);
   }
@@ -500,10 +503,10 @@ public class FormsClient extends Client implements CTabFolder2Listener {
   private void newTextField(Message message) {
     String parentId = message.args[0].strValue();
     String id = message.args[1].strValue();
-    int x = message.args[2].intValue;
-    int y = message.args[3].intValue;
-    int width = message.args[4].intValue;
-    int height = message.args[5].intValue;
+    int x = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[2].intValue;
+    int y = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[3].intValue;
+    int width = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[4].intValue;
+    int height = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[5].intValue;
     boolean editable = message.args[6].boolValue;
     newTextField(parentId, id, x, y, width, height, editable);
   }
@@ -522,10 +525,10 @@ public class FormsClient extends Client implements CTabFolder2Listener {
   private void newTree(Message message) {
     String parentId = message.args[0].strValue();
     String id = message.args[1].strValue();
-    int x = message.args[2].intValue;
-    int y = message.args[3].intValue;
-    int width = message.args[4].intValue;
-    int height = message.args[5].intValue;
+    int x = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[2].intValue;
+    int y = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[3].intValue;
+    int width = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[4].intValue;
+    int height = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[5].intValue;
     boolean editable = message.args[6].boolValue;
     newTree(parentId, id, x, y, width, height, editable);
   }

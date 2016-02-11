@@ -369,6 +369,7 @@ private static String inflationPath() {
   
   static void startXOS(String initFile) {
     final String[] args = xos.getInitArgs(initFile);
+	/*QUICKFIX FOR HI_RES*/FormsClient.HIGH_RESOLUTION = checkHiRes(args);
     setProjectDirectory(args);
     setImage(args);
     Thread t = new Thread() {
@@ -384,7 +385,15 @@ private static String inflationPath() {
     t.start();
   }
 
-  public static void showMessage(String title, String message) {
+	private static boolean checkHiRes(String[] args) {
+		for (int i = 0; i < args.length; i++) {
+			if (args[i].equals("-hi-res"))
+				return "true".equals(args[i + 1]);
+		}
+		return false;
+	}
+
+public static void showMessage(String title, String message) {
     NotifierDialog.notify(title, message, NotificationType.values()[2]);
   }
 
