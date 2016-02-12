@@ -54,10 +54,10 @@ public class Waypoint implements Selectable {
   // These getters and setters are pointless as direct access is allowed
   // but too much to do to replace them with direct access
   // Don't add any checks/side effects in them as they will be bypassed anyway.
-  @Deprecated int getX() { return x; }
-  @Deprecated int getY() { return y; }
-  @Deprecated void setX(int x) { this.x = x; }
-  @Deprecated void setY(int y) { this.y = y; }
+  /*@Deprecated*/ int getX() { return x; }
+  /*@Deprecated*/ int getY() { return y; }
+  /*@Deprecated*/ void setX(int x) { this.x = x; }
+  /*@Deprecated*/ void setY(int y) { this.y = y; }
   
   // even more (3) methods to set x and y, but this time checking if it is allowed.  
   void move(int x, int y) {
@@ -122,7 +122,7 @@ public class Waypoint implements Selectable {
     gc.setForeground(Diagram.RED);
     gc.drawOval(x - SELECTED_SIZE, y - SELECTED_SIZE, SELECTED_SIZE * 2, SELECTED_SIZE * 2);
     gc.setForeground(c);
-    edge.paintOrthogonal(gc, this); // Zielscheibe
+    edge.getPainter().paintOrthogonal(gc, this); // Zielscheibe
   }
 
   @Override

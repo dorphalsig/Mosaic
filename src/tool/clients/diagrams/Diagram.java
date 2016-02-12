@@ -629,8 +629,8 @@ public class Diagram implements Display {
           for (Waypoint w : edge1.getWaypoints()) {
             if (selection.contains(w)) {
               if (edge1.sharesSegment(edge2)) {
-                edge1.paintAligned(gc);
-                edge2.paintAligned(gc);
+                edge1.getPainter().paintAligned(gc);
+                edge2.getPainter().paintAligned(gc);
               }
             }
           }
@@ -644,7 +644,7 @@ public class Diagram implements Display {
       for (Node node : nodes)
         node.paintHover(gc, lastX, lastY, selection.contains(node));
       for (Edge edge : edges)
-        edge.paintHover(gc, lastX, lastY);
+        edge.getPainter().paintHover(gc, lastX, lastY);
     }
     if (movingEdgeEnd()) {
       for (Node node : nodes)
@@ -1041,11 +1041,11 @@ public class Diagram implements Display {
     for (Edge edge : edges) {
       if ((mode != MouseMode.MOVE_SOURCE && mode != MouseMode.MOVE_TARGET) || (selectedEdge != edge)) {
         Color color = getEdgeColor(edge);
-        edge.paint(gc, color, showWaypoints, intersectionPoints(edge, iTable));
+        edge.getPainter().paint(gc, color, showWaypoints, intersectionPoints(edge, iTable));
       } else {
         if (mode == MouseMode.MOVE_SOURCE) {
-          edge.paintSourceMoving(gc, lastX, lastY);
-        } else edge.paintTargetMoving(gc, lastX, lastY);
+          edge.getPainter().paintSourceMoving(gc, lastX, lastY);
+        } else edge.getPainter().paintTargetMoving(gc, lastX, lastY);
       }
     }
   }
