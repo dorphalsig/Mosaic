@@ -83,6 +83,10 @@ public class Edge {
     targetPort.addTarget(this);
     waypoints.add(new Waypoint("start", this, sourceX, sourceY));
     waypoints.add(new Waypoint("end", this, targetX, targetY));
+    Diagram.dontSelectNextWaypoint = true;
+    if(waypointStyle == WaypointStyle.SQUARED) {
+    	 newWaypointEvent(1, sourceX, targetY, false);
+    }
   }
 
   /*PACKAGE ACCESS*/ void addLabel(String id, String text, String pos, int x, int y, boolean editable, boolean underline, boolean condense, int red, int green, int blue, boolean border,  int borderRed, int borderGreen, int borderBlue, String font, int arrow) {
@@ -158,7 +162,27 @@ public class Edge {
     }
   }
 
-
+  /**
+   * Adds a new waypoint if the edge is squared and it becomes necessary
+   */
+    void checkWaypointsForNewRequiredPoints() {
+		System.err.println("checkWaypointsForNewRequiredPoints");
+		if (waypointStyle != WaypointStyle.SQUARED)
+			return;
+		Waypoint first = start();
+		Waypoint second = second();
+		Waypoint third = waypoints.size() >= 3 ? waypoints.get(2) : null;
+		if (first.x != second.x && first.y != second.y) {
+			// Now the points are connected by a diagonal line. A new Waypoint is necessary
+			// if second and third have the same x then second and the new one have the same y
+			if (third == null || second.x == third.x) {
+				newWaypointEvent(1, first.x, second.y, false);
+			} else {
+				newWaypointEvent(1, first.y, second.x, false);
+			}
+		}
+  }
+  
   /*PACKAGE ACCESS*/ Label getLabel(String id) {
     for (Label label : labels)
       if (label.getId().equals(id)) return label;
@@ -209,6 +233,7 @@ public class Edge {
     for (Waypoint waypoint : waypoints) {
       waypoint.move(id, x, y);
     }
+    if (id.equals(getId())) checkWaypointsForNewRequiredPoints();
   }
 
   /*PACKAGE ACCESS*/ void moveSourceBy(int dx, int dy) {
@@ -220,13 +245,14 @@ public class Edge {
   }
 
   /*PACKAGE ACCESS*/ boolean newWaypoint(int x, int y) {
+    if(waypointStyle == WaypointStyle.SQUARED) return false;
     for (int i = 0; i < waypoints.size() - 1; i++) {
       Waypoint w1 = waypoints.elementAt(i);
       Waypoint w2 = waypoints.elementAt(i + 1);
       boolean betweenX = x >= Math.min(w1.x, w2.x) && x <= Math.max(w1.x, w2.x);
       boolean betweenY = y >= Math.min(w1.y, w2.y) && y <= Math.max(w1.y, w2.y);
       if (betweenX && betweenY && pointToLineDistance(w1, w2, x, y) < 5) {
-        newWaypointEvent(i + 1, x, y);
+        newWaypointEvent(i + 1, x, y, true);
         return true;
       }
     }
@@ -242,12 +268,13 @@ public class Edge {
     return null;
   }
 
-  private void newWaypointEvent(int index, int x, int y) {
+  private void newWaypointEvent(int index, int x, int y, boolean select) {
     Message message = DiagramClient.theClient().getHandler().newMessage("newWaypoint", 4);
     message.args[0] = new Value(id);
     message.args[1] = new Value(index);
     message.args[2] = new Value(x);
     message.args[3] = new Value(y);
+//    message.args[4] = new Value(select);
     DiagramClient.theClient().getHandler().raiseEvent(message);
   }
   
@@ -372,6 +399,7 @@ public class Edge {
     out.print("targetHead='" + targetHead.getID() + "' ");
     out.print("lineStyle='" + lineStyle + "' ");
     out.print("hidden='" + hidden + "' ");
+    out.print("waypointStyle='" + waypointStyle.name() + "' ");
     out.print("red='" + red + "' ");
     out.print("green='" + green + "' ");
     out.print("blue='" + blue + "'>");
@@ -528,6 +556,10 @@ public class Edge {
 	public EdgePainter getPainter() {
 		if(myPainter == null) myPainter = new EdgePainter(this);
 		return myPainter;
+	}
+
+	public boolean isSquared() {
+		return waypointStyle == WaypointStyle.SQUARED;
 	}
 
 }

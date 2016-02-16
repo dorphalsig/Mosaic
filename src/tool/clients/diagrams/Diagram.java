@@ -181,36 +181,40 @@ public class Diagram implements Display {
     // Edges that have 90 degree angles incident on a node
     // should be maintained. This is implemented by selecting
     // the appropriate way-point and limiting its movement...
+    Edge edge = waypoint.getEdge();
+    boolean squaredEdge = edge.isSquared();
     if (dogLegs) {
-      Edge edge = waypoint.getEdge();
       Vector<Waypoint> waypoints = edge.getWaypoints();
       int length = waypoints.size();
       int i = waypoints.indexOf(waypoint);     
       deselectAll(); select(waypoint);
-      if (i <= length - 2 && i >= 2 && length > 3) {
+      
+      if (i <= length - 2 && i >= 2 && length > 3) { // move previous Waypoint
 	    Waypoint next     = edge.getWaypoints().elementAt(i - 1);
 	    Waypoint nextNext = edge.getWaypoints().elementAt(i - 2);
-    	if(waypoint.isApproximatelyLeftOrRightOf(next) && next.isExactlyAboveOrBelow(nextNext)) {  
+    	if((waypoint.isApproximatelyLeftOrRightOf(next) || squaredEdge) && next.isExactlyAboveOrBelow(nextNext)) {  
   		  select(next);
   		  next.limitMovementToVertical(); 
   		  next.setY(waypoint.getY()); }
-      	  if(waypoint.isApproximatelyAboveOrBelow(next) && next.isExactlyLeftOrRightOf(nextNext)) {  
+  	    if((waypoint.isApproximatelyAboveOrBelow(next) || squaredEdge) && next.isExactlyLeftOrRightOf(nextNext)) {  
   		  select(next);
   		  next.limitMovementToHorizontal();
   		  next.setX(waypoint.getX()); }
       }
-      if (i >= 1 && i <= length - 3 && length > 3) {
+      
+      if (i >= 1 && i <= length - 3 && length > 3) { // move next Waypoint
     	Waypoint next     = edge.getWaypoints().elementAt(i + 1);
     	Waypoint nextNext = edge.getWaypoints().elementAt(i + 2);
-	  	if(waypoint.isApproximatelyLeftOrRightOf(next) && next.isExactlyAboveOrBelow(nextNext)) {  
+	  	if((waypoint.isApproximatelyLeftOrRightOf(next) || squaredEdge) && next.isExactlyAboveOrBelow(nextNext)) {  
   		  select(next);
   		  next.limitMovementToVertical(); 
   		  next.setY(waypoint.getY()); }
-	  	if(waypoint.isApproximatelyAboveOrBelow(next) && next.isExactlyLeftOrRightOf(nextNext)) {  
+	  	if((waypoint.isApproximatelyAboveOrBelow(next) || squaredEdge) && next.isExactlyLeftOrRightOf(nextNext)) {  
   		  select(next);
   		  next.limitMovementToHorizontal();
   		  next.setX(waypoint.getX()); }
       }
+      
     }
   }
 
@@ -574,13 +578,18 @@ public class Diagram implements Display {
     container.layout();
   }
 
+  transient static boolean dontSelectNextWaypoint = false;
   public void newWaypoint(String parentId, String id, int index, int x, int y) {
     for (Edge edge : edges) {
       Waypoint w = edge.newWaypoint(parentId, id, index, x, y);
       if (w != null) {
         deselectAll();
-        select(w);
-        mode = MouseMode.SELECTED;
+        if(!dontSelectNextWaypoint) {
+        	mode = MouseMode.SELECTED;
+        	select(w);
+        } else {
+        	dontSelectNextWaypoint = false;
+        }
       }
     }
     redraw();
