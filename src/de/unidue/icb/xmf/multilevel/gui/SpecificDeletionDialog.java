@@ -46,7 +46,7 @@ public class SpecificDeletionDialog {
 	 */
 	public static void main(String[] args) {
 		int definitionLayer = 5;
-		int instantiationLayer = 1;
+		int instantiationLayer = 0;
 		System.out.println(showDialog(definitionLayer, instantiationLayer));
 	}
 	/**
@@ -61,13 +61,13 @@ public class SpecificDeletionDialog {
 			public void run() {
 		display = Display.getDefault();
 		shlIntrinsicDeletion = new Shell();
-		shlIntrinsicDeletion.setSize(255, 120+(specificDeletion.getDefinitionLayer()-specificDeletion.getInstantiationLayer())*25);
+		shlIntrinsicDeletion.setSize(255, 120+(specificDeletion.getInstantiationLayer()-specificDeletion.getInstantiationLayer())*25);
 		shlIntrinsicDeletion.setText("intrinsic Deletion");
 		RowLayout rl_shlIntrinsicDeletion = new RowLayout(SWT.VERTICAL);
 		shlIntrinsicDeletion.setLayout(rl_shlIntrinsicDeletion);
 		
 		Label lblDeletion = new Label(shlIntrinsicDeletion, SWT.NONE);
-		lblDeletion.setText("Deletion attribute from M4, intrinsic on M1 ");
+		lblDeletion.setText("Deletion attribute from M"+specificDeletion.getDefinitionLayer()+", intrinsic on M"+specificDeletion.getInstantiationLayer());
 		
 		Composite composite = new Composite(shlIntrinsicDeletion, SWT.NONE);
 		RowLayout rl_composite = new RowLayout(SWT.VERTICAL);
@@ -191,7 +191,7 @@ public class SpecificDeletionDialog {
 		
 		Label lblNewLabel_3 = new Label(composite_7, SWT.NONE);
 		lblNewLabel_3.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
-		lblNewLabel_3.setText("M1");
+		lblNewLabel_3.setText("M"+specificDeletion.getInstantiationLayer());
 		
 //		Composite composite_9 = new Composite(composite_14, SWT.NONE);
 //		composite_9.setLayout(new RowLayout(SWT.VERTICAL));
@@ -283,8 +283,10 @@ public class SpecificDeletionDialog {
 		});
 		btnNewButton_1.setText("Cancel");
 
-		shlIntrinsicDeletion.open();
 		shlIntrinsicDeletion.layout();
+		shlIntrinsicDeletion.pack();
+		shlIntrinsicDeletion.open();
+		
 		while (!shlIntrinsicDeletion.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
