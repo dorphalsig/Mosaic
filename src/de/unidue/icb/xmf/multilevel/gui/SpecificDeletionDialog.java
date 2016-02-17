@@ -154,7 +154,8 @@ public class SpecificDeletionDialog {
 //						}
 					}
 				}	
-				specificDeletion.setDeletionUntilLayer(coListCol.length-scLevel.getSelection()+1);
+				//specificDeletion.getDefinitionLayer()
+				specificDeletion.setDeletionUntilLayer(specificDeletion.getDefinitionLayer()-scLevel.getSelection());
 				if(scLevel.getSelection()==coListCol.length-1){
 					coInst.setBackground(display.getSystemColor(SWT.COLOR_RED));
 					specificDeletion.setDeletionUntilLayer(specificDeletion.getDeletionUntilLayer()-1);
