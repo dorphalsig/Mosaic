@@ -389,7 +389,8 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     int borderBlue = border?0:Integer.parseInt(XModeler.attributeValue(node, "borderBlue"));
     int arrow = 0; try{arrow = Integer.parseInt(XModeler.attributeValue(node, "arrow"));} catch (Exception e) {}
     String font = XModeler.attributeValue(node, "font");
-    newLabel(edgeId, id, text, pos, x, y, editable, underline, condense, red, green, blue, border, borderRed, borderGreen, borderBlue, font, arrow);
+    boolean hidden = false; try{hidden = "true".equals(XModeler.attributeValue(node, "hidden"));} catch (Exception e) {}
+    newLabel(edgeId, id, text, pos, x, y, editable, underline, condense, red, green, blue, border, borderRed, borderGreen, borderBlue, font, arrow, hidden);
   }
 
   private void inflateMultilineText(String parentId, Node node) {
@@ -654,17 +655,18 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     int borderGreen = message.args[15].intValue;
     int borderBlue = message.args[16].intValue;
     int arrow = message.args[17].intValue;
+    boolean hidden = message.args.length > 18 ? message.args[18].boolValue : false;
     newLabel(parentId, id, text, position, x, y, editable, underline, condense, red, green, blue, 
     		border, borderRed, borderGreen, borderBlue,
-    		font, arrow);
+    		font, arrow, hidden);
   }
 
   private void newLabel(String parentId, String id, String text, String position, int x, int y, Boolean editable, Boolean underline, Boolean condense, int red, int green, int blue, 
-		  boolean border,  int borderRed, int borderGreen, int borderBlue, String font, int arrow) {
+		  boolean border,  int borderRed, int borderGreen, int borderBlue, String font, int arrow, boolean hidden) {
     for (Diagram diagram : diagrams) {
       for (Edge edge : diagram.getEdges()) {
         if (edge.getId().equals(parentId)) {
-          edge.addLabel(id, text, position, x, y, editable, underline, condense, red, green, blue, border, borderRed, borderGreen, borderBlue, font, arrow);
+          edge.addLabel(id, text, position, x, y, editable, underline, condense, red, green, blue, border, borderRed, borderGreen, borderBlue, font, arrow, hidden);
         }
       }
     }

@@ -12,7 +12,7 @@ import xos.Value;
 public class Edge {
   public static int                  WAYPOINT_ALIGN  = 20;
   
-  private static WaypointStyle waypointStyle = WaypointStyle.SQUARED;
+  private static WaypointStyle waypointStyle = WaypointStyle.FREE;
   
   public enum HeadStyle {NO_ARROW(0), ARROW(1), BLACK_DIAMOND(2), WHITE_DIAMOND(3), BLACK_ARROW(4), WHITE_ARROW(5), WHITE_CIRCLE(6), BLACK_CIRCLE(7); 
 	  int id; 
@@ -89,8 +89,8 @@ public class Edge {
     }
   }
 
-  /*PACKAGE ACCESS*/ void addLabel(String id, String text, String pos, int x, int y, boolean editable, boolean underline, boolean condense, int red, int green, int blue, boolean border,  int borderRed, int borderGreen, int borderBlue, String font, int arrow) {
-    labels.add(new Label(this, id, text, pos, x, y, editable, underline, condense, red, green, blue, border, borderRed, borderGreen, borderBlue, font, arrow));
+  /*PACKAGE ACCESS*/ void addLabel(String id, String text, String pos, int x, int y, boolean editable, boolean underline, boolean condense, int red, int green, int blue, boolean border,  int borderRed, int borderGreen, int borderBlue, String font, int arrow, boolean hidden) {
+    labels.add(new Label(this, id, text, pos, x, y, editable, underline, condense, red, green, blue, border, borderRed, borderGreen, borderBlue, font, arrow, hidden));
   }
 
   /** aligns the start and end waypoint to 90° lines if possible 
@@ -412,10 +412,16 @@ public class Edge {
 
   public void hide(String id) {
     if (getId().equals(id)) hidden = true;
+	for(Label label : labels) {
+		label.hide(id);
+	}
   }
 
   public void show(String id) {
     if (getId().equals(id)) hidden = false;
+	for(Label label : labels) {
+		label.show(id);
+	}
   }
 
   public void doubleClick(GC gc, Diagram diagram, int x, int y) {

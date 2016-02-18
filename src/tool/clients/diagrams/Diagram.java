@@ -1112,7 +1112,7 @@ public class Diagram implements Display {
     for (Node node : nodes)
       node.hide(id);
     for (Edge edge : edges)
-      edge.hide(id);
+        edge.hide(id);
   }
   
   public void show(String id) {
