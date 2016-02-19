@@ -655,7 +655,8 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     int borderGreen = message.args[15].intValue;
     int borderBlue = message.args[16].intValue;
     int arrow = message.args[17].intValue;
-    boolean hidden = message.args.length > 18 ? message.args[18].boolValue : false;
+    boolean hidden = false;
+    try{ hidden = message.args[18].boolValue; } catch (Exception e) {}
     newLabel(parentId, id, text, position, x, y, editable, underline, condense, red, green, blue, 
     		border, borderRed, borderGreen, borderBlue,
     		font, arrow, hidden);
