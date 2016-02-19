@@ -2,9 +2,6 @@ package tool.clients.forms;
 
 import java.io.PrintStream;
 import java.util.Hashtable;
-import java.util.Vector;
-
-import javax.xml.bind.util.ValidationEventCollector;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
@@ -150,8 +147,10 @@ public class Form implements MouseListener, SelectionListener {
   private void doubleClick(Text item) {
     String id = getId(item);
     Message m = FormsClient.theClient().getHandler().newMessage("doubleSelected", 1);
+    try{
     m.args[0] = new Value(id);
     FormsClient.theClient().getHandler().raiseEvent(m);
+    } catch (Exception e) {System.err.println("Double click into nowhere detected...");}
   }
 
   public Hashtable<String, StyledText> getBoxes() {
@@ -374,7 +373,7 @@ public class Form implements MouseListener, SelectionListener {
   public void newTextField(final String id, int x, int y, int width, int height, boolean editable) {
 	final Text text = new Text(content, SWT.BORDER);
     text.setEditable(editable);
-    text.setBackground(FormsClient.theClient().WHITE);
+    text.setBackground(FormsClient.WHITE);
     text.setFont(FormsClient.getFormTextFieldFont());
     text.setBounds(x, y, width, TEXTFIELDHEIGHT+1);
 //    text.setLocation(x, y);
