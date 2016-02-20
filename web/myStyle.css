@@ -39,25 +39,25 @@ td.smallTitle {
 }
 
 td.linkPrimary {
-    color: #FFFFFF;
-	background: #1155BB;
+    color: #ffffff;
+	background: #1155bb;
 }t
 
 td.linkPrimarySelected{
-    background: #FFFFFF;
-	color: #1155BB;
+    background: #ffffff;
+	color: #1155bb;
 }
 a {
         text-decoration:none;
-        color:#295b87;}
+        color:#ffffff;}
 
 a:hover {
-        text-decoration:underline;
-        color:#295b87;}
+        text-decoration:none;
+        color:#ffffff;}
 a.menu {
 		text-decoration:none;
-		color:#b5cce1; }
+		color:#ffffff; }
 
 a.menu:hover {
-		color:#FFFFFF;
+		color:#ffffff;
 		text-decoration:none; }
