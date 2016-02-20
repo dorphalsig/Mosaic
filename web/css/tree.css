@@ -1,0 +1,23 @@
+@CHARSET "UTF-8";
+
+body {
+	font-family: sans-serif;
+	/*background-image: url('favicon.png');*/
+	background-color: #dddddd;
+}
+
+ul.collapsibleList {
+	list-style-image: url('tree/cl.png');
+}
+
+ul.list {
+	list-style-image: url('tree/file.png');
+}
+
+li.collapsibleListOpen {
+	list-style-image: url('tree/op.png');
+}
+
+li.collapsibleListClosed {
+	list-style-image: url('tree/cl.png');
+}
