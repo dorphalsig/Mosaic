@@ -1,9 +1,16 @@
 @CHARSET "UTF-8";
 
 body {
-	font-family: sans-serif;
-	/*background-image: url('favicon.png');*/
-	background-color: #dddddd;
+	background-image: url('../img/background.png');
+    background-color: #3377FF;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: #ffffff;
+    /*font-size:10pt;*/
+    /*line-height:19px;*/
+}
+
+h1 {
+	font-weight: normal;
 }
 
 ul.collapsibleList {
@@ -20,4 +27,9 @@ li.collapsibleListOpen {
 
 li.collapsibleListClosed {
 	list-style-image: url('tree/cl.png');
+}
+
+a:link, a:visited, a:hover, a:active {
+	color: #ffffff;
+	text-decoration: none;
 }
