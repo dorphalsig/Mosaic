@@ -13,6 +13,10 @@ h1 {
     margin-left: 20px;
 }
 
+img{
+	border: none;
+}
+
 * {
         font-family: Verdana, Arial, Helvetica, sans-serif;
         font-size:10pt;

@@ -293,4 +293,11 @@ public class Text implements Display {
 	      
 	   }  
   }
+
+@Override
+public void showEdges(String id, boolean top, boolean bottom, boolean left,
+		boolean right) {
+	// TODO Auto-generated method stub
+	
+}
 }

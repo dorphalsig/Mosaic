@@ -276,4 +276,17 @@ public class MultilineText implements Display {
     if (getId().equals(id)) font = fontData;
   }
 
+@Override
+public void setEditable(String id, boolean editable) {
+	// TODO check, if it works
+	if (getId().equals(id)) this.editable = editable;
+}
+
+@Override
+public void showEdges(String id, boolean top, boolean bottom, boolean left,
+		boolean right) {
+	// TODO Auto-generated method stub
+	
+}
+
 }

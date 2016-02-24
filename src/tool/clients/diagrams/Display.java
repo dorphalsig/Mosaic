@@ -42,4 +42,7 @@ public interface Display {
 
   void setFont(String id, String fontData);
 
+  void setEditable(String id, boolean editable);
+  
+  void showEdges(String id, boolean top,boolean bottom,boolean left, boolean right);
 }
