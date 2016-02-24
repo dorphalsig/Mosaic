@@ -958,9 +958,46 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
       hide(message);
     else if (message.hasName("show"))
       show(message);
+    else if (message.hasName("showEdges"))
+      showEdges(message); //Björn
+    else if (message.hasName("setEditable"))
+    	setEditable(message); //Björn
     else super.sendMessage(message);
   }
 
+  private void setEditable(Message message) { //Björn
+	    String id = message.args[0].strValue();
+	    boolean editable = message.args[1].boolValue;
+	    setEditable(id, editable);
+	}
+  
+  private void setEditable(final String id, final boolean editable) { //Björn
+	    runOnDisplay(new Runnable() { 
+	      public void run() {
+	        for (Diagram diagram : diagrams)
+	        	diagram.setEditable(id, editable);
+	      }
+	    });
+  }
+  
+  private void showEdges(Message message) { //Björn
+	    String id = message.args[0].strValue();
+	    boolean top = message.args[1].boolValue;
+	    boolean bottom = message.args[2].boolValue;
+	    boolean left = message.args[3].boolValue;
+	    boolean right = message.args[4].boolValue;
+	    showEdges(id, top, bottom, left,right);
+	}
+  
+  private void showEdges(final String id, final boolean top,final boolean bottom,final boolean left, final boolean right) { //Björn
+	    runOnDisplay(new Runnable() { 
+	      public void run() {
+	        for (Diagram diagram : diagrams)
+	        	diagram.showEdges(id, top, bottom, left,right);
+	      }
+	    });
+  }
+ 
   private void setTextColor(Message message) {
     String id = message.args[0].strValue();
     int red = message.args[1].intValue;

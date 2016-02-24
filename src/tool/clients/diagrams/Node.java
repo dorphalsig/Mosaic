@@ -367,7 +367,7 @@ public class Node implements Selectable {
 
   public void setFillColor(String id, int red, int green, int blue) {
     for (Display display : displays)
-      display.setFillColor(id, red, green, blue);
+    	display.setFillColor(id, red, green, blue);
   }
 
   public void setText(String id, String text) {

@@ -200,10 +200,12 @@ public class Box implements Display {
       gc.setBackground(fillColor);
       for (Display display : displays)
         display.paint(gc, x + getX(), y + getY());
-      Color lineColor = gc.getForeground();
-      gc.setForeground(new Color(XModeler.getXModeler().getDisplay(), getLineRed(), getLineGreen(), getLineBlue()));
-      gc.drawRectangle(x + getX(), y + getY(), width, height);
-      gc.setForeground(lineColor);
+      if(top || bottom || left || right ) { //Björn
+    	  Color lineColor = gc.getForeground();
+      	gc.setForeground(new Color(XModeler.getXModeler().getDisplay(), getLineRed(), getLineGreen(), getLineBlue()));
+      	gc.drawRectangle(x + getX(), y + getY(), width, height);
+      	gc.setForeground(lineColor);
+      }
     }
   }
 
@@ -245,6 +247,16 @@ public class Box implements Display {
   public void setText(String id, String text) {
     for (Display display : displays)
       display.setText(id, text);
+  }
+  
+  public void showEdges(String id, boolean top, boolean bottom, boolean left,boolean right){ //Björn
+	    if (id.equals(getId())) {
+	        this.top = top;
+	        this.bottom = bottom;
+	        this.left = left;
+	        this.right = right;
+	      } //else for (Display display : displays)
+	        //display.showEdges(id, top, bottom, right, left); 
   }
 
   public String toString() {

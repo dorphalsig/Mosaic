@@ -286,4 +286,11 @@ public class Text implements Display {
       font = null;
     }
   }
+  
+  public void setEditable(String id, boolean editable){
+	  if (getId().equals(id)) {
+	      this.editable = editable;
+	      
+	   }  
+  }
 }
