@@ -950,19 +950,15 @@ public class Diagram implements Display {
   }
   
   public void setEditable(String id, boolean editable) { //Björn
-	    for (Display display : displays)
-	    	if(display instanceof Text){
-	    		((Text)display).setEditable(id, editable);
-	    	}
-	      redraw();  
+	  for (Node node : nodes)
+   		node.setEditable(id, editable);
+      redraw();  
   }
   
   public void showEdges(String id, boolean top,boolean bottom,boolean left, boolean right) { //Björn
-	    for (Display display : displays)
-	    	if(display instanceof Box){
-	    		((Box)display).showEdges(id, top, bottom, left,right);
-	    	}
-	      redraw();  
+	  for (Node node : nodes)
+	    node.showEdges(id, top, bottom, left,right);
+	  redraw();  
   }
   
   public void setTextColor(String id, int red, int green, int blue) {

@@ -255,8 +255,8 @@ public class Box implements Display {
 	        this.bottom = bottom;
 	        this.left = left;
 	        this.right = right;
-	      } //else for (Display display : displays)
-	        //display.showEdges(id, top, bottom, right, left); 
+	      } else for (Display display : displays)
+	        display.showEdges(id, top, bottom, right, left); 
   }
 
   public String toString() {
@@ -290,4 +290,11 @@ public class Box implements Display {
     for (Display display : displays)
       display.setFont(id, fontData);
   }
+
+@Override
+public void setEditable(String id, boolean editable) {
+    for (Display display : displays)
+	      display.setEditable(id, editable);
+	
+}
 }

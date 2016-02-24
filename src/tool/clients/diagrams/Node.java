@@ -89,6 +89,16 @@ public class Node implements Selectable {
       display.editText(id);
   }
 
+  public void setEditable(String id, boolean editable) {
+	    for (Display display : displays)
+	      display.setEditable(id, editable);
+  }
+  
+  public void showEdges(String id, boolean top,boolean bottom,boolean left, boolean right){
+	    for (Display display : displays)
+		      display.showEdges(id, top, bottom, left, right);
+  }
+  
   public Display getDisplay(String id) {
     for (Display display : displays)
       if (display.getId().equals(id)) return display;

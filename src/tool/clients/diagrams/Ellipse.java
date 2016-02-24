@@ -188,4 +188,17 @@ public class Ellipse implements Display {
 
   }
 
+@Override
+public void setEditable(String id, boolean editable) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void showEdges(String id, boolean top, boolean bottom, boolean left,
+		boolean right) {
+	// TODO Auto-generated method stub
+	
+}
+
 }
