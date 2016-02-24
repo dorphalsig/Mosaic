@@ -577,6 +577,17 @@ public class FormsClient extends Client implements CTabFolder2Listener {
 	      });
   }
 
+	/*private void changesMade(Message message) {
+		final String id = message.args[0].strValue();
+		final boolean made = message.args[1].boolValue;
+		runOnDisplay(new Runnable() {
+			public void run() {
+				for (Form form : forms)
+					form.changesMade(id, made);
+			}
+		});
+	}*/
+
   public void sendMessage(final Message message) {
     if (message.hasName("newForm"))
       newForm(message);
@@ -586,7 +597,7 @@ public class FormsClient extends Client implements CTabFolder2Listener {
       newText(message);
       String string = message.args[2].strValue();
       if(string.length() < 2) {
-    	  System.err.println("####### MESSAGE TO FORM CLIENT FOR EMPTY LABEL: "+message);
+    	  // [29Feb16] System.err.println("####### MESSAGE TO FORM CLIENT FOR EMPTY LABEL: "+message);
       }
     }
     else if (message.hasName("setText"))
@@ -625,6 +636,8 @@ public class FormsClient extends Client implements CTabFolder2Listener {
     	removeNode(message);
     else if (message.hasName("maximiseToCanvas"))
         maximiseToCanvas(message);
+    //else if (message.hasName("changesMade"))
+    //	changesMade(message);
     else if (message.hasName("gitConflict"))
     	System.out.println("gitConflict");    	
     else if (message.hasName("test"))

@@ -8,14 +8,18 @@ import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -29,12 +33,16 @@ import org.eclipse.swt.widgets.Widget;
 import tool.clients.EventHandler;
 import tool.clients.menus.MenuClient;
 import tool.xmodeler.XModeler;
+import uk.ac.mdx.xmf.swt.misc.ColorManager;
 import xos.Message;
 import xos.Value;
 
 public class Form implements MouseListener, SelectionListener {
 
   static Font                   labelFont    = new Font(XModeler.getXModeler().getDisplay(), new FontData("Courier New", 12, SWT.NONE));
+  final static Color normalBackgroundColor = ColorManager.getColor(new RGB(255,255,255));
+  final static Color disabledBackgroundColor = ColorManager.getColor(new RGB(222,221,220));
+  final static Color modifiedBackgroundColor = ColorManager.getColor(new RGB(255,205,194)); // RGB(221,171,160)
   final static int              RIGHT_BUTTON = 3;
 
   String                        id;
@@ -353,7 +361,7 @@ public class Form implements MouseListener, SelectionListener {
 
   public void newTextBox(String parentId, String id, int x, int y, int width, int height, boolean editable) {
     if (getId().equals(parentId)) {
-      StyledText text = new StyledText(content, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+      final StyledText text = new StyledText(content, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
       text.setFont(FormsClient.formLabelFont);
       text.setLocation(x, y+10); // wrong y value received in the one and only call
       text.setSize(width, height);
@@ -366,6 +374,12 @@ public class Form implements MouseListener, SelectionListener {
           text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
           System.err.println("Set font: " + id + "/" + text);
         }
+      text.addModifyListener(new ModifyListener() {
+		@Override
+		public void modifyText(ModifyEvent m) {
+			text.setBackground(modifiedBackgroundColor);
+		}
+	  });
       boxes.put(id, text);
     }
   }
@@ -418,6 +432,13 @@ public class Form implements MouseListener, SelectionListener {
 	  }
   }
 
+  /*public void changesMade(String id, boolean made) {
+	  StyledText text = boxes.get(id);
+	  if (text != null) {
+	      text.setBackground( made ? modifiedBackgroundColor : normalBackgroundColor);
+	  }
+  }*/
+
   private void selected(Button b) {
     String id = getId(b);
     EventHandler handler = FormsClient.theClient().getHandler();
@@ -452,7 +473,7 @@ public class Form implements MouseListener, SelectionListener {
   }
 
   public void setText(String id, String string) {
-	  System.err.println("setText: " + string);
+// [29Feb16] System.err.println("setText: " + string);
     if (textFields.containsKey(id)) {
       Text text = textFields.get(id);
       text.setText(string);
@@ -462,6 +483,7 @@ public class Form implements MouseListener, SelectionListener {
     if (boxes.containsKey(id)) {
       StyledText text = boxes.get(id);
       text.setText(string);
+      text.setBackground(normalBackgroundColor);
 //      text.pack();
     }
     if (items.containsKey(id)) {
