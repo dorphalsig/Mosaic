@@ -577,7 +577,7 @@ public class FormsClient extends Client implements CTabFolder2Listener {
 	      });
   }
 
-	/*private void changesMade(Message message) {
+	private void changesMade(Message message) {
 		final String id = message.args[0].strValue();
 		final boolean made = message.args[1].boolValue;
 		runOnDisplay(new Runnable() {
@@ -586,7 +586,7 @@ public class FormsClient extends Client implements CTabFolder2Listener {
 					form.changesMade(id, made);
 			}
 		});
-	}*/
+	}
 
   public void sendMessage(final Message message) {
     if (message.hasName("newForm"))
@@ -636,8 +636,8 @@ public class FormsClient extends Client implements CTabFolder2Listener {
     	removeNode(message);
     else if (message.hasName("maximiseToCanvas"))
         maximiseToCanvas(message);
-    //else if (message.hasName("changesMade"))
-    //	changesMade(message);
+    else if (message.hasName("changesMade"))
+    	changesMade(message);
     else if (message.hasName("gitConflict"))
     	System.out.println("gitConflict");    	
     else if (message.hasName("test"))

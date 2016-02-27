@@ -432,12 +432,12 @@ public class Form implements MouseListener, SelectionListener {
 	  }
   }
 
-  /*public void changesMade(String id, boolean made) {
+  public void changesMade(String id, boolean made) {
 	  StyledText text = boxes.get(id);
 	  if (text != null) {
 	      text.setBackground( made ? modifiedBackgroundColor : normalBackgroundColor);
 	  }
-  }*/
+  }
 
   private void selected(Button b) {
     String id = getId(b);
