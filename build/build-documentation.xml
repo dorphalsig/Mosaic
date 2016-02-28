@@ -10,14 +10,11 @@
 	<taskdef name="dbk"	
 		classname="net.sourceforge.ant4docbook.taskdefs.DocbookTask"
 		classpath="/home/user/ant4docbook-0.7.1/ant4docbook-0.7.1.jar"/>
-
-<!--	
-	classpath="/home/user/ant4docbook-0.8.0/ant4docbook-0.8.0.jar:/home/user/ant4docbook-0.8.0/ant4x.jar"/>
--->
+		<!--classpath="/home/user/ant4docbook-0.8.0/ant4docbook-0.8.0.jar:/home/user/ant4docbook-0.8.0/ant4x.jar"/>-->
 	
 	<target name="docbook-to-pdf">
 		<dbk file="doc/Bluebook/bluebook.xml" tofile="doc/Bluebook.pdf">
-			<!--parameter name="paper.type" value="A4" /-->
+			<parameter name="paper.type" value="A4" />
 		</dbk>
 	</target>
 
