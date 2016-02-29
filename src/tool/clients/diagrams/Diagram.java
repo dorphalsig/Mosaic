@@ -579,12 +579,12 @@ public class Diagram implements Display {
   }
 
   transient static boolean dontSelectNextWaypoint = false;
-  public void newWaypoint(String parentId, String id, int index, int x, int y) {
+  public void newWaypoint(String parentId, String id, int index, int x, int y, boolean skipSelection) {
     for (Edge edge : edges) {
       Waypoint w = edge.newWaypoint(parentId, id, index, x, y);
       if (w != null) {
         deselectAll();
-        if(!dontSelectNextWaypoint) {
+        if(!dontSelectNextWaypoint && !skipSelection) {
         	mode = MouseMode.SELECTED;
         	select(w);
         } else {

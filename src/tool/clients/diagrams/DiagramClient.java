@@ -461,7 +461,7 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     int index = Integer.parseInt(XModeler.attributeValue(node, "index"));
     int x = Integer.parseInt(XModeler.attributeValue(node, "x"));
     int y = Integer.parseInt(XModeler.attributeValue(node, "y"));
-    newWaypoint(edgeId, id, index, x, y);
+    newWaypoint(edgeId, id, index, x, y, true);
   }
 
   public void inflateXML(Document doc) {
@@ -840,12 +840,16 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     int index = message.args[2].intValue;
     int x = message.args[3].intValue;
     int y = message.args[4].intValue;
-    newWaypoint(parentId, id, index, x, y);
+    boolean skipSelection = false;
+    try{
+    	skipSelection = message.args[5].boolValue;
+    } catch (Exception e) {System.err.println("newWaypoint command message sent without 'skipSelection' parameter. Check in XMF!");}
+    newWaypoint(parentId, id, index, x, y, skipSelection);
   }
 
-  private void newWaypoint(String parentId, String id, int index, int x, int y) {
+  private void newWaypoint(String parentId, String id, int index, int x, int y, boolean skipSelection) {
     for (Diagram diagram : diagrams) {
-      diagram.newWaypoint(parentId, id, index, x, y);
+      diagram.newWaypoint(parentId, id, index, x, y, skipSelection);
     }
   }
 
