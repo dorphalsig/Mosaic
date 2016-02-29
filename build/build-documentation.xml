@@ -15,7 +15,7 @@
 		<!--classpath="/home/user/ant4docbook-0.8.0/ant4docbook-0.8.0.jar:/home/user/ant4docbook-0.8.0/ant4x.jar"/>-->
 	
 	<target name="docbook-to-pdf">
-		<dbk file="doc/Bluebook/bluebook.xml" tofile="doc/Bluebook.pdf">
+		<dbk file="doc/Bluebook/bluebook.xml" tofile="../XMF/com.ceteva.xmf.system/xmf-doc/xmf-books/Bluebook.pdf">
 			<parameter name="paper.type" value="A4" />
 		</dbk>
 	</target>
