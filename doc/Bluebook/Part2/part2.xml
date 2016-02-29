@@ -6,6 +6,7 @@
 
   <title>XMF Walkthroughs</title>
 
+  <!-- (removed, won't be displayed anyway without being inside a chapter/section, and itemizedlist causes syntax error during compiling)
    This section provides a number of walkthroughs that describe how to use many of the key features of XMF-Mosaic. These walkthroughs are broadly structured as follows: 
 
   <itemizedlist>
@@ -30,7 +31,8 @@
     </listitem>
   </itemizedlist>
 
-   Together they provide an overview of the different approaches that can be used to construct tools in XMF-Mosaic. 
+   Together they provide an overview of the different approaches that can be used to construct tools in XMF-Mosaic.
+    --> 
 
   <xi:include href="CreatingAModel/creatingamodel.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude" />

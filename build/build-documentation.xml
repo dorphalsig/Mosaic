@@ -6,6 +6,8 @@
         No <!DOCTYPE> declarations must be included in the sources.
 	-->
 
+	<property name="ant4docbook.keepTempFiles" value="false" />
+
 	<!-- from http://ant4docbook.sourceforge.net -->
 	<taskdef name="dbk"	
 		classname="net.sourceforge.ant4docbook.taskdefs.DocbookTask"
