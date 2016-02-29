@@ -313,7 +313,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
         Button b1b = new Button(browserParent, SWT.PUSH); b1b.setImage(new Image(tabItem.getDisplay(), new ImageData("icons/User/Arrow4Right.gif"))); buttons.addElement(b1b); 
         Label b2 = new Label(browserParent, SWT.NONE); b2.setText("URL:"); buttons.addElement(b2); 
         final Text b3 = new Text(browserParent, SWT.BORDER); b3.setText("Enter URL here..."); buttons.addElement(b3); 
-        Button b4 = new Button(browserParent, SWT.PUSH); b4.setImage(new Image(tabItem.getDisplay(), new ImageData("icons/User/Balls1.gif"))); buttons.addElement(b4);         
+//        Button b4 = new Button(browserParent, SWT.PUSH); b4.setImage(new Image(tabItem.getDisplay(), new ImageData("icons/User/Balls1.gif"))); buttons.addElement(b4);         
         final Browser browser = new Browser(browserParent, SWT.BORDER);
         b1a.addListener(SWT.Selection, new Listener() {
 			@Override
@@ -323,10 +323,10 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
 			@Override
 			public void handleEvent(Event arg0) {browser.forward();}
 		}); 
-        b4.addListener(SWT.Selection, new Listener() {
-			@Override
-			public void handleEvent(Event arg0) {MultiplicityDialog.main(null);}
-		});
+//        b4.addListener(SWT.Selection, new Listener() {
+//			@Override
+//			public void handleEvent(Event arg0) {MultiplicityDialog.main(null);}
+//		});
 		b3.addListener(SWT.DefaultSelection, new Listener() {
 			@Override
 			public void handleEvent(Event e) {
