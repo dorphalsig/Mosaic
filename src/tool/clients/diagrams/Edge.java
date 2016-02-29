@@ -263,6 +263,7 @@ public class Edge {
     if (parentId.equals(getId())) {
       Waypoint w = new Waypoint(id, this, x, y);
       waypoints.insertElementAt(w, index);
+      align();
       return w;
     }
     return null;
