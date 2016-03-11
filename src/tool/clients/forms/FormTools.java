@@ -24,7 +24,15 @@ public class FormTools {
   }
 
   public void addTool(String toolName, String id) {
-    tools.add(new FormToolDef(eventName(toolName), id, iconFile(toolName)));
+    boolean found = false;
+	for (FormToolDef formToolDef : tools) {
+    	if(formToolDef.event.equals(eventName(toolName)) && formToolDef.id.equals(id)){
+    		found = true;
+    	}
+	}
+	if(!found){  
+		tools.add(new FormToolDef(eventName(toolName), id, iconFile(toolName)));
+	}
   }
 
   public void writeXML(PrintStream out) {
@@ -37,7 +45,11 @@ public class FormTools {
   private String iconFile(String toolName) {
     if (toolName.equals("browseAndClearHistory"))
       return "icons/Clear.gif";
-    else {
+    else if(toolName.equals("previousInHistory"))
+    	return "icons/Back.gif";
+    else if(toolName.equals("nextInHistory"))
+    	return "icons/Forward.gif";
+    else{
       System.err.println("unkown tool icon file for " + toolName);
       return "icons/Object.gif";
     }
@@ -51,6 +63,10 @@ public class FormTools {
   private String eventName(String toolName) {
     if (toolName.equals("browseAndClearHistory"))
       return "clearHistory";
+    else if(toolName.equals("nextInHistory"))
+    	return "nextInHistory";
+    else if(toolName.equals("previousInHistory"))
+    	return "previousInHistory";
     else {
       System.err.println("unknown tool event name for " + toolName);
       return toolName;
