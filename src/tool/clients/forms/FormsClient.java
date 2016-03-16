@@ -41,15 +41,18 @@ public class FormsClient extends Client implements CTabFolder2Listener {
   }
 
   public static void select() {
-    CTabItem selectedItem = tabFolder.getSelection();
-    for (String id : tabs.keySet()) {
-      if (tabs.get(id) == selectedItem) {
-        for (ToolItem item : toolBar.getItems())
+	for (ToolItem item : toolBar.getItems())
           item.dispose();
-        FormTools formTools = FormsClient.theClient().getFormTools(id);
-        formTools.populateToolBar(toolBar);
+	CTabItem selectedItem = tabFolder.getSelection();
+	for (String id : tabs.keySet()) {
+      if (tabs.get(id) == selectedItem) {
+//        for (ToolItem item : toolBar.getItems())
+//          item.dispose();
+    	  FormTools formTools = FormsClient.theClient().getFormTools(id);
+    	  formTools.populateToolBar(toolBar);
       }
     }
+	toolBar.pack();
   }
 
   public static void start(CTabFolder tabFolder, ToolBar toolBar, int style) {
@@ -552,6 +555,7 @@ public class FormsClient extends Client implements CTabFolder2Listener {
         if (tabs.containsKey(id))
           tabFolder.setSelection(tabs.get(id));
         else System.err.println("cannot find form: " + id);
+        select();
       }
     });
   }
@@ -722,24 +726,49 @@ public class FormsClient extends Client implements CTabFolder2Listener {
     Value id = message.args[0];
     Value name = message.args[1];
     Value enabled = message.args[2];
-    if (enabled.boolValue) {
+//    if (enabled.boolValue) {
       if (tabs.containsKey(id.strValue())) {
         FormTools formTools = getFormTools(id.strValue());
-        formTools.addTool(name.strValue(), id.strValue());
+//        formTools.addTool(name.strValue(), id.strValue(), enabled.boolValue);
+        formTools.setTools(name.strValue(), id.strValue(), enabled.boolValue);
       } else System.err.println("cannot find form " + id);
-    }
+//    }else{
+//    	System.err.println("disabled tool: " + name.strValue());
+//    }
   }
 
   private void setVisible(Message message) {
     String id = message.args[0].strValue();
     selectForm(id);
+//    runOnDisplay(new Runnable() {
+//        public void run() {
+//          select();
+//        }
+//     });
   }
 
+  public void toolItemEvent(String event, String id, boolean enabled) {
+		Message m = null;
+		if (event.equals("lockForm")) {
+			m = getHandler().newMessage(event, 2);
+			Value v = new Value(id);
+			m.args[0] = v;
+			Value enabled_value = new Value(!enabled);
+			m.args[1] = enabled_value;
+		} else {
+			m = getHandler().newMessage(event, 1);
+			Value v = new Value(id);
+			m.args[0] = v;
+		}
+		getHandler().raiseEvent(m);
+  }
+  
   public void toolItemEvent(String event, String id) {
-    Message m = getHandler().newMessage(event, 1);
-    Value v = new Value(id);
-    m.args[0] = v;
-    getHandler().raiseEvent(m);
+//    Message m = getHandler().newMessage(event, 1);
+//    Value v = new Value(id);
+//    m.args[0] = v;
+//    getHandler().raiseEvent(m);
+	  toolItemEvent(event, id, false);
   }
 
   public void writeXML(PrintStream out) {
