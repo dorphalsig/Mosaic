@@ -65,7 +65,7 @@ public class FormToolDef implements SelectionListener {
   }
   
   public void setEnabled(boolean enabled){
-	  if(item != null){
+	  if(item != null && !item.isDisposed()){
     	  this.enabled = enabled;
 //		  final boolean enabled_local = enabled;
 //		  FormsClient.theClient().runOnDisplay(new Runnable() {
