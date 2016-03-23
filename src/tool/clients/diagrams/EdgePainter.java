@@ -32,7 +32,10 @@ public class EdgePainter {
 	    double dx = tipx - tailx;
 	    double theta = Math.atan2(dy, dx);
 	    double x, y, rho = theta + phi;
-	    Color c = gc.getForeground();
+	    
+	    Color oldFG = gc.getForeground();
+	    Color oldBG = gc.getBackground();
+	    
 	    gc.setForeground(line);
 	    if (!filled) {
 	      for (int j = 0; j < 2; j++) {
@@ -55,13 +58,13 @@ public class EdgePainter {
 	        rho = theta - phi;
 	      }
 	      gc.drawLine(points[2], points[3], points[4], points[5]);
-	      gc.setForeground(c);
-	      c = gc.getBackground();
 	      gc.setBackground(fill);
 	      gc.fillPolygon(points);
-	      gc.setBackground(c);
 	      gc.setLineWidth(width);
 	    }
+	    
+	    gc.setForeground(oldFG);
+	    gc.setBackground(oldBG);
 	  }
 
 	  private void drawSourceDecoration(GC gc, Color color, int x, int y, int x2, int y2) {
