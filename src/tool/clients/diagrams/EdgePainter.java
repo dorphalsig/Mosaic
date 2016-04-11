@@ -20,10 +20,69 @@ public class EdgePainter {
 	public static int                  ARROW_ANGLE     = 35;
 	public static int                  ARROW_HEAD      = 10;
 	public static int                  LINE_WIDTH      = 1;
+	public static int                  CIRCLE_SIZE     = 7;
 	private final Edge edge;
 
 	public EdgePainter(Edge edge) {
 		this.edge = edge;
+	}
+
+	//                           | intersect         | second/penultimate  |
+	private void drawCircle(GC gc, int tipx, int tipy, int tailx, int taily, boolean filled, Color fill, Color line) {
+	    double dy = tipy - taily;
+	    double dx = tipx - tailx;
+	    double theta = Math.atan2(dy, dx);
+	    
+	    // store old values
+	    Color oldFG = gc.getForeground();
+	    Color oldBG = gc.getBackground();	    
+	    int width = gc.getLineWidth();
+	    
+	    // set new values for temporary use
+	    gc.setForeground(line);	    
+	    gc.setBackground(fill);	
+	    gc.setLineWidth(1);//LINE_WIDTH + 2);
+
+	    // calculate
+	    int x, y;
+	    if(edgeIntersectsTopOrBottom(tipx, tipy)) {
+	    	if(theta > 0) { // TOP
+	    		y = tipy - CIRCLE_SIZE - 1;
+	    		x = tipx - (int)(CIRCLE_SIZE/2./Math.tan(theta) + CIRCLE_SIZE/2.);
+	    	} else { // BOTTOM
+	    		y = tipy;
+	    		x = tipx + (int)(CIRCLE_SIZE/2./Math.tan(theta) - CIRCLE_SIZE/2.);
+	    	}
+	    } else {
+	    	if(theta < Math.PI/2 && theta > -Math.PI/2) { // LEFT
+	    		x = tipx - CIRCLE_SIZE - 1;
+	    		y = tipy - (int)(CIRCLE_SIZE/2.*Math.tan(theta) + CIRCLE_SIZE/2.);
+	    	} else { // RIGHT
+	    		x = tipx;
+	    		y = tipy + (int)(CIRCLE_SIZE/2.*Math.tan(theta) - CIRCLE_SIZE/2.);
+	    	}
+	    }
+	    
+	    // draw
+	    gc.drawOval(x, y, CIRCLE_SIZE, CIRCLE_SIZE);
+	    gc.fillOval(x+1, y+1, CIRCLE_SIZE-1, CIRCLE_SIZE-1);
+
+	    
+	    //reset old Values
+	    gc.setLineWidth(width);	    
+	    gc.setForeground(oldFG);
+	    gc.setBackground(oldBG);
+	}
+	
+	/* Tries to figure out if the line goes out through the upper or lower side of the box.
+	 * We don't know which node, so we try all.
+	 **/
+	private boolean edgeIntersectsTopOrBottom(int intersectX, int intersectY) {
+		if(edge.targetNode.getY() == intersectY && edge.targetNode.getX() <= intersectX && edge.targetNode.maxX() >= intersectX) return true;
+		if(edge.targetNode.maxY() == intersectY && edge.targetNode.getX() <= intersectX && edge.targetNode.maxX() >= intersectX) return true;
+		if(edge.sourceNode.getY() == intersectY && edge.sourceNode.getX() <= intersectX && edge.sourceNode.maxX() >= intersectX) return true;
+		if(edge.sourceNode.maxY() == intersectY && edge.sourceNode.getX() <= intersectX && edge.sourceNode.maxX() >= intersectX) return true;
+		return false;
 	}
 
 	private void drawArrow(GC gc, int tipx, int tipy, int tailx, int taily, boolean filled, Color fill, Color line) {
@@ -91,6 +150,9 @@ public class EdgePainter {
 	      break;
 	    case WHITE_ARROW:
 	      drawArrow(gc, x, y, x2, y2, true, Diagram.WHITE, color);
+	      break;
+	    case WHITE_CIRCLE:
+	      drawCircle(gc, x, y, x2, y2, true, Diagram.WHITE, color);
 	      break;
 	    default:
 	      System.err.println("unknown type of target decoration: " + edge.targetHead);

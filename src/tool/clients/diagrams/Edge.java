@@ -14,7 +14,7 @@ public class Edge {
   
   private static WaypointStyle waypointStyle = WaypointStyle.FREE;
   
-  public enum HeadStyle {NO_ARROW(0), ARROW(1), BLACK_DIAMOND(2), WHITE_DIAMOND(3), BLACK_ARROW(4), WHITE_ARROW(5), WHITE_CIRCLE(6), BLACK_CIRCLE(7); 
+  public enum HeadStyle {NO_ARROW(0), ARROW(1), BLACK_DIAMOND(2), WHITE_DIAMOND(3), BLACK_ARROW(4), WHITE_ARROW(5), BLACK_CIRCLE(6), WHITE_CIRCLE(7); 
 	  int id; 
 	  private HeadStyle(int id) {this.id = id;}
 	  private int getID() {return id;}
@@ -261,6 +261,7 @@ public class Edge {
 
   /*PACKAGE ACCESS*/ Waypoint newWaypoint(String parentId, String id, int index, int x, int y) {
     if (parentId.equals(getId())) {
+   System.err.println("waypoint " + parentId + ":" + index);
       Waypoint w = new Waypoint(id, this, x, y);
       waypoints.insertElementAt(w, index);
       align();
