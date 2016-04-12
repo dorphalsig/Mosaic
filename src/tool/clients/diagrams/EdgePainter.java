@@ -136,6 +136,9 @@ public class EdgePainter {
 	    case WHITE_ARROW:
 	      drawArrow(gc, x, y, x2, y2, true, Diagram.WHITE, color);
 	      break;
+	    case WHITE_CIRCLE:
+	      drawCircle(gc, x, y, x2, y2, true, Diagram.WHITE, color);
+	      break;
 	    default:
 	      System.err.println("unknown type of source decoration: " + edge.sourceHead);
 	    }
