@@ -297,7 +297,7 @@ public class DialogsClient extends Client {
 	        Value question = message.args[0];
 	        new MessageDialog(XModeler.getXModeler(), "Question", null, question.strValue(), MessageDialog.INFORMATION, 
 	    			new String[]{
-	    					"Yes"},0).open();
+	    					"OK"},0).open();
 	      }});
 	    return new Value("VOID");
 	  }

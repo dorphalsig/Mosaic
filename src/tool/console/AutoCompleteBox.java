@@ -8,8 +8,6 @@ import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.TraverseEvent;
-import org.eclipse.swt.events.TraverseListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
@@ -40,7 +38,8 @@ public class AutoCompleteBox extends Dialog {
 	    for (Value value : pairs) {
 	      Value[] pair = value.values;
 	      String label = pair[1].strValue();
-	      labels.add(new Suggestion(label));
+	      Suggestion newSuggestion = new Suggestion(label);
+	      if(!labels.contains(newSuggestion)) labels.add(newSuggestion);
 	    }
 	    
 //	    if(labels.size() <= 0) {
@@ -151,6 +150,31 @@ public class AutoCompleteBox extends Dialog {
 					likelihood += .5;
 				lastKey = key;
 			} 
+		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((text == null) ? 0 : text.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Suggestion other = (Suggestion) obj;
+			if (text == null) {
+				if (other.text != null)
+					return false;
+			} else if (!text.equals(other.text))
+				return false;
+			return true;
 		}
 	}
 	
