@@ -992,6 +992,18 @@ public class Diagram implements Display {
     redraw();
   }
 
+  public void setBorder(String id, boolean border) {
+	  for (Edge edge : edges)
+	      edge.setBorder(id, border);
+	    redraw();
+  }
+  
+  public void setFill(String id, boolean fill) {
+	  for (Edge edge : edges)
+	      edge.setFill(id, fill);
+	    redraw();
+  }
+  
   public void setZoom(float zoom) {
     this.zoom = zoom;
     transform = new Transform(org.eclipse.swt.widgets.Display.getCurrent());

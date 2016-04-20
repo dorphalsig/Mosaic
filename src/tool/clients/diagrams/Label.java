@@ -30,6 +30,7 @@ public class Label implements Selectable {
   int     green;
   int     blue;
   boolean border;
+  boolean fill;
   int borderRed; 
   int borderGreen; 
   int borderBlue; 
@@ -37,7 +38,7 @@ public class Label implements Selectable {
   int arrow;
   boolean hidden;
 
-  public Label(Edge edge, String id, String text, String pos, int x, int y, boolean editable, boolean underline, boolean condense, int red, int green, int blue, boolean border,  int borderRed, int borderGreen, int borderBlue, String font, int arrow, boolean hidden) {
+  public Label(Edge edge, String id, String text, String pos, int x, int y, boolean editable, boolean underline, boolean condense, int red, int green, int blue, boolean border,  int borderRed, int borderGreen, int borderBlue, String font, int arrow, boolean hidden, boolean fill) {
     super();
     this.edge = edge;
     this.id = id;
@@ -58,6 +59,7 @@ public class Label implements Selectable {
     this.borderBlue = borderBlue;
     this.arrow = arrow;
     this.hidden = hidden;
+    this.fill = fill;
   }
 
   public boolean contains(int x, int y) {
@@ -164,12 +166,22 @@ public class Label implements Selectable {
 
   public void paint(GC gc) {
 	  if (hidden) return;
+	paintBackground(gc) ; 
     gc.setFont(DiagramClient.diagramFont);
-    gc.drawText(text, getAbsoluteX(), getAbsoluteY());
+    gc.drawText(text, getAbsoluteX(), getAbsoluteY(), true);
     paintBorder(gc);
     paintArrow(gc);
   }
 
+  public void paintBackground(GC gc) {
+	  if(!fill) return;
+	  if(text.length() == 0) return;
+      Color c = gc.getBackground();
+      gc.setBackground(new Color (org.eclipse.swt.widgets.Display.getCurrent(), borderRed, borderGreen, borderBlue));
+      gc.fillRectangle(getAbsoluteX() - 2, getAbsoluteY() - 2, getWidth() + 4, getHeight() + 4);
+      gc.setBackground(c);
+  }
+  
   public void paintBorder(GC gc) {
 	  if(!border) return;
 	  if(text.length() == 0) return;
@@ -275,6 +287,14 @@ public class Label implements Selectable {
     if(!hidden) MenuClient.popup(id, x, y);
   }
 
+  public void setBorder(String id, boolean border){
+	if (getId().equals(id)) this.border = border;
+  }
+  
+  public void setFill(String id, boolean fill){
+	if (getId().equals(id)) this.fill = fill;
+  }
+  
   public void setText(String id, String text) {
     if (getId().equals(id)) this.text = text;
   }

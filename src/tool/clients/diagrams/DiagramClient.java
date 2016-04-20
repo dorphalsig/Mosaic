@@ -390,7 +390,8 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     int arrow = 0; try{arrow = Integer.parseInt(XModeler.attributeValue(node, "arrow"));} catch (Exception e) {}
     String font = XModeler.attributeValue(node, "font");
     boolean hidden = false; try{hidden = "true".equals(XModeler.attributeValue(node, "hidden"));} catch (Exception e) {}
-    newLabel(edgeId, id, text, pos, x, y, editable, underline, condense, red, green, blue, border, borderRed, borderGreen, borderBlue, font, arrow, hidden);
+    boolean fill = false; try{fill = "true".equals(XModeler.attributeValue(node, "fill"));} catch (Exception e) {}
+    newLabel(edgeId, id, text, pos, x, y, editable, underline, condense, red, green, blue, border, borderRed, borderGreen, borderBlue, font, arrow, hidden, fill);
   }
 
   private void inflateMultilineText(String parentId, Node node) {
@@ -657,17 +658,19 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     int arrow = message.args[17].intValue;
     boolean hidden = false;
     try{ hidden = message.args[18].boolValue; } catch (Exception e) {}
+    boolean fill = false;
+    try{ fill = message.args[19].boolValue; } catch (Exception e) {}
     newLabel(parentId, id, text, position, x, y, editable, underline, condense, red, green, blue, 
     		border, borderRed, borderGreen, borderBlue,
-    		font, arrow, hidden);
+    		font, arrow, hidden, fill);
   }
 
   private void newLabel(String parentId, String id, String text, String position, int x, int y, Boolean editable, Boolean underline, Boolean condense, int red, int green, int blue, 
-		  boolean border,  int borderRed, int borderGreen, int borderBlue, String font, int arrow, boolean hidden) {
+		  boolean border,  int borderRed, int borderGreen, int borderBlue, String font, int arrow, boolean hidden, boolean fill) {
     for (Diagram diagram : diagrams) {
       for (Edge edge : diagram.getEdges()) {
         if (edge.getId().equals(parentId)) {
-          edge.addLabel(id, text, position, x, y, editable, underline, condense, red, green, blue, border, borderRed, borderGreen, borderBlue, font, arrow, hidden);
+          edge.addLabel(id, text, position, x, y, editable, underline, condense, red, green, blue, border, borderRed, borderGreen, borderBlue, font, arrow, hidden, fill);
         }
       }
     }
@@ -894,6 +897,10 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
       move(message);
     else if (message.hasName("editText"))
       editText(message);
+    else if (message.hasName("setBorder"))
+        setBorder(message);
+    else if (message.hasName("setFill"))
+        setFill(message);
     else if (message.hasName("setText"))
       setText(message);
     else if (message.hasName("setTextColor"))
@@ -1253,6 +1260,20 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
       diagram.setText(id.strValue(), text.strValue());
   }
 
+  private void setBorder(Message message) {
+	    final Value id = message.args[0];
+	    final Value border = message.args[1];
+	    for (Diagram diagram : diagrams)
+	      diagram.setBorder(id.strValue(), border.boolValue);
+  }
+  
+  private void setFill(Message message) {
+	    final Value id = message.args[0];
+	    final Value fill = message.args[1];
+	    for (Diagram diagram : diagrams)
+	      diagram.setFill(id.strValue(), fill.boolValue);
+}
+  
   public void showList(CTabFolderEvent event) {
 
   }

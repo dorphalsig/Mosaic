@@ -89,8 +89,8 @@ public class Edge {
     }
   }
 
-  /*PACKAGE ACCESS*/ void addLabel(String id, String text, String pos, int x, int y, boolean editable, boolean underline, boolean condense, int red, int green, int blue, boolean border,  int borderRed, int borderGreen, int borderBlue, String font, int arrow, boolean hidden) {
-    labels.add(new Label(this, id, text, pos, x, y, editable, underline, condense, red, green, blue, border, borderRed, borderGreen, borderBlue, font, arrow, hidden));
+  /*PACKAGE ACCESS*/ void addLabel(String id, String text, String pos, int x, int y, boolean editable, boolean underline, boolean condense, int red, int green, int blue, boolean border,  int borderRed, int borderGreen, int borderBlue, String font, int arrow, boolean hidden, boolean fill) {
+    labels.add(new Label(this, id, text, pos, x, y, editable, underline, condense, red, green, blue, border, borderRed, borderGreen, borderBlue, font, arrow, hidden, fill));
   }
 
   /** aligns the start and end waypoint to 90° lines if possible 
@@ -343,6 +343,16 @@ public class Edge {
       label.setText(id, text);
   }
 
+  /*PACKAGE ACCESS*/ void setBorder(String id, boolean border) {
+	    for (Label label : labels)
+	      label.setBorder(id, border);
+	  }
+  
+  /*PACKAGE ACCESS*/ void setFill(String id, boolean fill) {
+	    for (Label label : labels)
+	      label.setFill(id, fill);
+	  }
+  
   /*PACKAGE ACCESS*/ boolean sharesSegment(Edge edge) {
     for (int i = 0; i < getWaypoints().size() - 1; i++) {
       Waypoint w11 = getWaypoints().elementAt(i);
