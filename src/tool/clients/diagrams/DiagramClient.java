@@ -1128,7 +1128,11 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
               edge.setGreen(green.intValue);
               edge.setBlue(blue.intValue);
             }
+            for(Label label : edge.labels){
+            	label.setTextColor(id.strValue(), red.intValue, green.intValue, blue.intValue);
+            }
           }
+          diagram.redraw();
         }
       }
     });

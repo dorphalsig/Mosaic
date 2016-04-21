@@ -168,7 +168,11 @@ public class Label implements Selectable {
 	  if (hidden) return;
 	paintBackground(gc) ; 
     gc.setFont(DiagramClient.diagramFont);
+    Color c = gc.getForeground();
+    if(red >= 0 && green >= 0 && blue >= 0 )
+    	gc.setForeground(new Color (org.eclipse.swt.widgets.Display.getCurrent(), red, green, blue));
     gc.drawText(text, getAbsoluteX(), getAbsoluteY(), true);
+    gc.setForeground(c);
     paintBorder(gc);
     paintArrow(gc);
   }
@@ -298,7 +302,15 @@ public class Label implements Selectable {
   public void setText(String id, String text) {
     if (getId().equals(id)) this.text = text;
   }
-
+  
+  public void setTextColor(String id, int red, int green, int blue) {
+	    if (getId().equals(id)){
+	    	this.red = red;
+	    	this.green = green;
+	    	this.blue = blue;
+	    }
+  }
+  
   public void setX(int x) {
     this.x = x;
   }
