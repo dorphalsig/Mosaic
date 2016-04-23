@@ -3,6 +3,7 @@ package tool.clients.editors;
 import java.io.PrintStream;
 import java.net.URL;
 import java.util.Hashtable;
+import java.util.Stack;
 import java.util.Vector;
 
 import org.eclipse.swt.SWT;
@@ -36,12 +37,26 @@ import org.w3c.dom.NodeList;
 import tool.clients.Client;
 import tool.clients.EventHandler;
 import tool.clients.diagrams.DiagramClient;
-import tool.clients.dialogs.MultiplicityDialog;
 import tool.xmodeler.XModeler;
 import xos.Message;
 import xos.Value;
 
 public class EditorClient extends Client implements LocationListener, CTabFolder2Listener {
+
+  static final Color                   LINE_HIGHLIGHT = new Color(XModeler.getXModeler().getDisplay(), 192, 192, 192);
+
+  static final Color                   RED            = new Color(XModeler.getXModeler().getDisplay(), 255, 0, 0);
+
+  static final Color                   GREY           = new Color(XModeler.getXModeler().getDisplay(), 192, 192, 192);
+  static final Color                   WHITE          = new Color(XModeler.getXModeler().getDisplay(), 255, 255, 255);
+  static final Color                   GREEN          = new Color(XModeler.getXModeler().getDisplay(), 0, 170, 0);
+  static final Color                   BLACK          = new Color(XModeler.getXModeler().getDisplay(), 0, 0, 0);
+  static EditorClient                  theClient;
+  static CTabFolder                    tabFolder;
+
+  static Hashtable<String, CTabItem>   tabs           = new Hashtable<String, CTabItem>();
+  static Hashtable<String, Browser>    browsers       = new Hashtable<String, Browser>();
+  static Hashtable<String, TextEditor> editors        = new Hashtable<String, TextEditor>();
 
   public static void start(CTabFolder tabFolder, int style) {
     EditorClient.tabFolder = tabFolder;
@@ -51,19 +66,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
     return theClient;
   }
 
-  static final Color                   LINE_HIGHLIGHT = new Color(XModeler.getXModeler().getDisplay(), 192, 192, 192);
-  static final Color                   RED            = new Color(XModeler.getXModeler().getDisplay(), 255, 0, 0);
-  static final Color                   GREY           = new Color(XModeler.getXModeler().getDisplay(), 192, 192, 192);
-  static final Color                   WHITE          = new Color(XModeler.getXModeler().getDisplay(), 255, 255, 255);
-  static final Color                   GREEN          = new Color(XModeler.getXModeler().getDisplay(), 0, 170, 0);
-  static final Color                   BLACK          = new Color(XModeler.getXModeler().getDisplay(), 0, 0, 0);
-
-  static EditorClient                  theClient;
-  static CTabFolder                    tabFolder;
-  boolean                       browserLocked  = true;
-  static Hashtable<String, CTabItem>   tabs           = new Hashtable<String, CTabItem>();
-  static Hashtable<String, Browser>    browsers       = new Hashtable<String, Browser>();
-  static Hashtable<String, TextEditor> editors        = new Hashtable<String, TextEditor>();
+  boolean browserLocked = true;
 
   public EditorClient() {
     super("com.ceteva.text");
@@ -97,15 +100,50 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
     else if (color.equals("green"))
       addMultilineRule(id, start, end, 0, 153, 0);
     else if (color.equals("blue"))
-        addMultilineRule(id, start, end, 50, 50, 255);
+      addMultilineRule(id, start, end, 50, 50, 255);
     else if (color.equals("gray"))
-        addMultilineRule(id, start, end, 120, 120, 120);
+      addMultilineRule(id, start, end, 120, 120, 120);
     else System.err.println("unknown color: " + color);
   }
 
   private void addMultilineRule(String id, String start, String end, int red, int green, int blue) {
     for (TextEditor editor : editors.values())
       editor.addMultilineRule(id, start, end, red, green, blue);
+  }
+
+  private void addToolBar(CTabFolder parent, Browser browser) {
+    ToolBar toolbar = new ToolBar(parent, SWT.NONE);
+    FormData data = new FormData();
+    data.top = new FormAttachment(0, 5);
+    toolbar.setLayoutData(data);
+    ToolItem itemBack = new ToolItem(toolbar, SWT.PUSH);
+    itemBack.setText(("Back"));
+    ToolItem itemForward = new ToolItem(toolbar, SWT.PUSH);
+    itemForward.setText(("Forward"));
+    final ToolItem itemStop = new ToolItem(toolbar, SWT.PUSH);
+    itemStop.setText(("Stop"));
+    final ToolItem itemRefresh = new ToolItem(toolbar, SWT.PUSH);
+    itemRefresh.setText(("Refresh"));
+    final ToolItem itemGo = new ToolItem(toolbar, SWT.PUSH);
+    itemGo.setText(("Go"));
+
+    itemBack.setEnabled(browser.isBackEnabled());
+    itemForward.setEnabled(browser.isForwardEnabled());
+    // Listener listener = new Listener() {
+    // public void handleEvent(Event event) {
+    // ToolItem item = (ToolItem) event.widget;
+    // if (item == itemBack)
+    // browser.back();
+    // else if (item == itemForward)
+    // browser.forward();
+    // else if (item == itemStop)
+    // browser.stop();
+    // else if (item == itemRefresh)
+    // browser.refresh();
+    // else if (item == itemGo)
+    // browser.setUrl(locationBar.getText());
+    // }
+    // };
   }
 
   private void addWordRule(Message message) {
@@ -139,7 +177,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
     else if (color.equals("blue"))
       addWordRuleColor(id, text, 50, 50, 255);
     else if (color.equals("torquoise"))
-    	addWordRuleColor(id, text, 0, 120, 120);
+      addWordRuleColor(id, text, 0, 120, 120);
     else System.err.println("unknown color: " + color);
   }
 
@@ -150,21 +188,17 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       String path = location.toString();
       path = path.substring(0, path.length() - 4); // delete "/bin" from string
       path += "web/index.html";
-//      System.err.println("getWelcomePage: >" + path + "<");
+      // System.err.println("getWelcomePage: >" + path + "<");
       return new Value(path);
     }
     if (message.hasName("getText")) { return getText(message); }
     return super.callMessage(message);
   }
 
-  @Override
   public void changed(LocationEvent event) {
   }
 
-  @Override
   public void changing(LocationEvent event) {
-//	  System.err.println("changing: " + event);
-//	  System.err.println("browserLocked: " + browserLocked);
     if (browserLocked) {
       event.doit = false;
       Browser browser = (Browser) event.widget;
@@ -172,10 +206,11 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       Message message = handler.newMessage("urlRequest", 2);
       message.args[0] = new Value(getId(browser));
       message.args[1] = new Value(event.location);
-//      System.err.println("message: " + message);
+      // Can be used to push on an undo stack?
+      // System.err.println("FROM: " + browser.getText());
       handler.raiseEvent(message);
     } else {
-    	browserLocked = true;
+      browserLocked = true;
     }
   }
 
@@ -286,6 +321,10 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
     } else System.err.println("expecting exactly 1 editor client got: " + editorClients.getLength());
   }
 
+  private boolean isURL(String url) {
+    return url.startsWith("http://") || url.startsWith("file:/");
+  }
+
   public void maximize(CTabFolderEvent event) {
   }
 
@@ -309,60 +348,96 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
         tabs.put(id, tabItem);
         Composite browserParent = new Composite(tabFolder, SWT.NONE);
         Vector<Object> buttons = new Vector<Object>();
-        Button b1a = new Button(browserParent, SWT.PUSH); b1a.setImage(new Image(tabItem.getDisplay(), new ImageData("icons/User/Arrow4Left.gif"))); buttons.addElement(b1a); 
-        Button b1b = new Button(browserParent, SWT.PUSH); b1b.setImage(new Image(tabItem.getDisplay(), new ImageData("icons/User/Arrow4Right.gif"))); buttons.addElement(b1b); 
-        Label b2 = new Label(browserParent, SWT.NONE); b2.setText("URL:"); buttons.addElement(b2); 
-        final Text b3 = new Text(browserParent, SWT.BORDER); b3.setText("Enter URL here..."); buttons.addElement(b3); 
-//        Button b4 = new Button(browserParent, SWT.PUSH); b4.setImage(new Image(tabItem.getDisplay(), new ImageData("icons/User/Balls1.gif"))); buttons.addElement(b4);         
+        Button up = new Button(browserParent, SWT.PUSH);
+        up.setText("+");
+        buttons.add(up);
+        Button down = new Button(browserParent, SWT.PUSH);
+        down.setText("-");
+        buttons.add(down);
+        Button b1a = new Button(browserParent, SWT.PUSH);
+        b1a.setImage(new Image(tabItem.getDisplay(), new ImageData("icons/User/Arrow4Left.gif")));
+        buttons.addElement(b1a);
+        Button b1b = new Button(browserParent, SWT.PUSH);
+        b1b.setImage(new Image(tabItem.getDisplay(), new ImageData("icons/User/Arrow4Right.gif")));
+        buttons.addElement(b1b);
+        Label b2 = new Label(browserParent, SWT.NONE);
+        b2.setText("URL:");
+        buttons.addElement(b2);
+        final Text b3 = new Text(browserParent, SWT.BORDER);
+        b3.setText("Enter URL here...");
+        buttons.addElement(b3);
         final Browser browser = new Browser(browserParent, SWT.BORDER);
+        final int[] zoom = new int[] { 100 };
+        up.addListener(SWT.Selection, new Listener() {
+          public void handleEvent(Event arg0) {
+            zoom[0] += 10;
+            browser.execute("document.body.style.zoom = \"" + zoom[0] + "%\"");
+            browser.redraw();
+          }
+        });
+        down.addListener(SWT.Selection, new Listener() {
+          public void handleEvent(Event arg0) {
+            zoom[0] -= 10;
+            browser.execute("document.body.style.zoom = \"" + zoom[0] + "%\"");
+            browser.redraw();
+          }
+        });
         b1a.addListener(SWT.Selection, new Listener() {
-			@Override
-			public void handleEvent(Event arg0) {browser.back();}
-		});
+          public void handleEvent(Event arg0) {
+            // browser.back();
+            if (!getBackQueue(browser).isEmpty()) {
+              if (browserCurrent.containsKey(browser)) {
+                getForwardQueue(browser).push(browserCurrent.get(browser));
+              }
+              setUrl(id, getBackQueue(browser).pop(), false);
+            }
+          }
+        });
         b1b.addListener(SWT.Selection, new Listener() {
-			@Override
-			public void handleEvent(Event arg0) {browser.forward();}
-		}); 
-//        b4.addListener(SWT.Selection, new Listener() {
-//			@Override
-//			public void handleEvent(Event arg0) {MultiplicityDialog.main(null);}
-//		});
-		b3.addListener(SWT.DefaultSelection, new Listener() {
-			@Override
-			public void handleEvent(Event e) {
-				browser.setUrl(b3.getText());}
-		});	
-		browser.addLocationListener(new LocationListener() {
-			@Override
-			public void changed(LocationEvent event) {
-				if (event.top) b3.setText(event.location);
-			}
-			@Override
-			public void changing(LocationEvent event) {
-				
-			}
-		});
+          public void handleEvent(Event arg0) {
+            // browser.forward();
+            if (!getForwardQueue(browser).isEmpty()) {
+              if (browserCurrent.containsKey(browser)) {
+                getBackQueue(browser).push(browserCurrent.get(browser));
+              }
+              setUrl(id, getForwardQueue(browser).pop(), false);
+            }
+          }
+        });
+        b3.addListener(SWT.DefaultSelection, new Listener() {
+          public void handleEvent(Event e) {
+            browser.setUrl(b3.getText());
+          }
+        });
+        browser.addLocationListener(new LocationListener() {
+          public void changed(LocationEvent event) {
+            if (event.top) b3.setText(event.location);
+          }
+
+          public void changing(LocationEvent event) {
+          }
+        });
         tabItem.setControl(browserParent);
         browser.setText(text);
         browser.setJavascriptEnabled(true);
-	    int buttonCount = buttons.size();
+        int buttonCount = buttons.size();
         GridLayout gridLayout = new GridLayout();
         gridLayout.numColumns = buttonCount;
         browserParent.setLayout(gridLayout);
-	    GridData gd = new GridData();
-	    gd.grabExcessHorizontalSpace = true;
-	    gd.grabExcessVerticalSpace = true;
-	    gd.horizontalAlignment = GridData.FILL;
-	    gd.verticalAlignment = GridData.FILL;
-	    gd.horizontalSpan=buttonCount;
-	    browser.setLayoutData(gd);
-	    gd = new GridData();
-	    gd.grabExcessHorizontalSpace = true;
-	    gd.horizontalAlignment = GridData.FILL;
-	    b3.setLayoutData(gd);
+        GridData gd = new GridData();
+        gd.grabExcessHorizontalSpace = true;
+        gd.grabExcessVerticalSpace = true;
+        gd.horizontalAlignment = GridData.FILL;
+        gd.verticalAlignment = GridData.FILL;
+        gd.horizontalSpan = buttonCount;
+        browser.setLayoutData(gd);
+        gd = new GridData();
+        gd.grabExcessHorizontalSpace = true;
+        gd.horizontalAlignment = GridData.FILL;
+        b3.setLayoutData(gd);
         browserLocked = false;
         if (isURL(url)) {
-        	browser.setUrl(url);
+          browser.setUrl(url);
         }
         browsers.put(id, browser);
         browser.setVisible(true);
@@ -370,45 +445,6 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
         tabFolder.setSelection(tabItem);
       }
     });
-  }
-  
-	private void addToolBar(CTabFolder parent, Browser browser) {
-		ToolBar toolbar = new ToolBar(parent, SWT.NONE);
-		FormData data = new FormData();
-		data.top = new FormAttachment(0, 5);
-		toolbar.setLayoutData(data);
-		ToolItem itemBack = new ToolItem(toolbar, SWT.PUSH);
-		itemBack.setText(("Back"));
-		ToolItem itemForward = new ToolItem(toolbar, SWT.PUSH);
-		itemForward.setText(("Forward"));
-		final ToolItem itemStop = new ToolItem(toolbar, SWT.PUSH);
-		itemStop.setText(("Stop"));
-		final ToolItem itemRefresh = new ToolItem(toolbar, SWT.PUSH);
-		itemRefresh.setText(("Refresh"));
-		final ToolItem itemGo = new ToolItem(toolbar, SWT.PUSH);
-		itemGo.setText(("Go"));
-
-		itemBack.setEnabled(browser.isBackEnabled());
-		itemForward.setEnabled(browser.isForwardEnabled());
-		// Listener listener = new Listener() {
-		// public void handleEvent(Event event) {
-		// ToolItem item = (ToolItem) event.widget;
-		// if (item == itemBack)
-		// browser.back();
-		// else if (item == itemForward)
-		// browser.forward();
-		// else if (item == itemStop)
-		// browser.stop();
-		// else if (item == itemRefresh)
-		// browser.refresh();
-		// else if (item == itemGo)
-		// browser.setUrl(locationBar.getText());
-		// }
-		// };
-	}
-
-  private boolean isURL(String url) {
-    return url.startsWith("http://") || url.startsWith("file:/");
   }
 
   private void newTextEditor(Message message) {
@@ -472,22 +508,6 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
     else super.sendMessage(message);
   }
 
-  private void setName(Message message) {
-    String id = message.args[0].strValue();
-    String name = message.args[1].strValue();
-    setName(id, name);
-  }
-
-  private void setName(final String id, final String name) {
-    runOnDisplay(new Runnable() {
-      public void run() {
-        for (String tid : tabs.keySet()) {
-          if (tid.equals(id)) tabs.get(id).setText(name);
-        }
-      }
-    });
-  }
-
   private void setClean(Message message) {
     String id = message.args[0].strValue();
     setClean(id);
@@ -535,6 +555,22 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
     });
   }
 
+  private void setName(Message message) {
+    String id = message.args[0].strValue();
+    String name = message.args[1].strValue();
+    setName(id, name);
+  }
+
+  private void setName(final String id, final String name) {
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (String tid : tabs.keySet()) {
+          if (tid.equals(id)) tabs.get(id).setText(name);
+        }
+      }
+    });
+  }
+
   private void setText(Message message) {
     final Value id = message.args[0];
     final Value text = message.args[1];
@@ -550,31 +586,54 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
     } else System.err.println("cannot find text editor " + id);
   }
 
+  Hashtable<Browser, Stack<String>> backQueues     = new Hashtable<Browser, Stack<String>>();
+  Hashtable<Browser, String>        browserCurrent = new Hashtable<Browser, String>();
+  Hashtable<Browser, Stack<String>> forwardQueues  = new Hashtable<Browser, Stack<String>>();
+
   private void setUrl(Message message) {
     final Value id = message.args[0];
     final Value url = message.args[1];
-    if (browsers.containsKey(id.strValue())) {
-      final Browser browser = browsers.get(id.strValue());
+    setUrl(id.strValue(), url.strValue(), true);
+  }
+
+  private Stack<String> getBackQueue(Browser browser) {
+    if (!backQueues.containsKey(browser)) backQueues.put(browser, new Stack<String>());
+    return backQueues.get(browser);
+  }
+
+  private Stack<String> getForwardQueue(Browser browser) {
+    if (!forwardQueues.containsKey(browser)) forwardQueues.put(browser, new Stack<String>());
+    return forwardQueues.get(browser);
+  }
+
+  private void setUrl(final String id, final String url, final boolean addToHistory) {
+    if (browsers.containsKey(id)) {
+      final Browser browser = browsers.get(id);
       Display.getDefault().syncExec(new Runnable() {
-        public void run() {
-          browserLocked = false;
-          String s = url.strValue();
-          if (isLikelyToBeHTML(s)) //s.startsWith("<html>"))
-            browser.setText(s);
-          else browser.setUrl(url.strValue()); // +" "?
-          
-          tabFolder.setFocus();
-          tabFolder.setSelection(tabs.get(id.strValue()));
+        private boolean isLikelyToBeHTML(String s) {
+          s = s.trim();
+          s = s.toLowerCase();
+          if (s.startsWith("<html>")) return true;
+          if (s.startsWith("<!doctype html")) return true;
+          return false;
         }
 
-		private boolean isLikelyToBeHTML(String s) {
-			s = s.trim();
-			s = s.toLowerCase();
-			if(s.startsWith("<html>")) return true;
-			if(s.startsWith("<!doctype html")) return true;
-			return false;
-		}
-		
+        public void run() {
+          browserLocked = false;
+          if (addToHistory) {
+            if (browserCurrent.containsKey(browser)) {
+              getBackQueue(browser).push(browserCurrent.get(browser));
+            }
+          }
+          browserCurrent.put(browser, url);
+          if (isLikelyToBeHTML(url))
+            browser.setText(url);
+          else browser.setUrl(url);
+
+          tabFolder.setFocus();
+          tabFolder.setSelection(tabs.get(id));
+        }
+
       });
     } else System.err.println("cannot find browser " + id);
   }
