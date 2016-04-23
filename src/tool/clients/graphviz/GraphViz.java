@@ -235,7 +235,7 @@ public class GraphViz {
 
       // patch by Mike Chenault
       // representation type with -K argument by Olivier Duplouy
-      String[] args = { DOT, "-T" + type, "-K" + representationType, "-Gdpi=" + dpiSizes[this.currentDpiPos], dot.getAbsolutePath(), "-o", img.getAbsolutePath() };
+      String[] args = { DOT, "-T" + type, "-K" + representationType,"-Gdpi=" + dpiSizes[this.currentDpiPos], dot.getAbsolutePath(), "-o", img.getAbsolutePath() };
       Process p = rt.exec(args);
       p.waitFor();
 
@@ -264,7 +264,7 @@ public class GraphViz {
    * @return Source of the graph in dot language.
    */
   public String getDotSource() {
-    String s = "digraph G { URL=\"" + URL + "\";";
+    String s = "digraph G { rankdir=BT; URL=\"" + URL + "\";";
     for (Node node : nodes)
       s = s + node.getDotSource();
     for (Edge edge : edges)
