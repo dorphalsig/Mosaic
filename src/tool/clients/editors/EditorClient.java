@@ -1,6 +1,7 @@
 package tool.clients.editors;
 
 import java.io.PrintStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Hashtable;
 import java.util.Stack;
