@@ -47,8 +47,12 @@ public class NotifierDialog {
 
   // shell gradient background color - top
   private static Color       _bgFgGradient = ColorCache.getColor(226, 239, 249);
+  private static Color       _bgFgGradient_warning = ColorCache.getColor(226, 239, 50);
+  private static Color       _bgFgGradient_error = ColorCache.getColor(255, 150, 150);
   // shell gradient background color - bottom
   private static Color       _bgBgGradient = ColorCache.getColor(177, 211, 243);
+  private static Color       _bgBgGradient_warning = ColorCache.getColor(200, 220, 50);
+  private static Color       _bgBgGradient_error = ColorCache.getColor(255, 100, 100);
   // shell border color
   private static Color       _borderColor  = ColorCache.getColor(40, 73, 97);
 
@@ -67,7 +71,7 @@ public class NotifierDialog {
    * @param message
    * @param type
    */
-  public static void notify(String title, String message, NotificationType type) {
+  public static void notify(String title, String message, final NotificationType type) {
     _shell = new Shell(XModeler.getXModeler(), SWT.NO_FOCUS | SWT.NO_TRIM);
     _shell.setLayout(new FillLayout());
     _shell.setForeground(_fgColor);
@@ -101,8 +105,24 @@ public class NotifierDialog {
           GC gc = new GC(newImage);
 
           // fill background
-          gc.setForeground(_bgFgGradient);
-          gc.setBackground(_bgBgGradient);
+          if ( type == NotificationType.values()[5]){
+        	  //Info
+        	  gc.setForeground(_bgFgGradient);
+        	  gc.setBackground(_bgBgGradient);
+          }else if ( type == NotificationType.values()[3]){
+        	  //warning
+        	  gc.setForeground(_bgFgGradient_warning);
+        	  gc.setBackground(_bgBgGradient_warning);        	  
+          }else if ( type == NotificationType.values()[1]){
+        	  //error
+        	  gc.setForeground(_bgFgGradient_error);
+        	  gc.setBackground(_bgBgGradient_error);
+          }else{
+        	  //default
+        	  gc.setForeground(_bgFgGradient);
+        	  gc.setBackground(_bgBgGradient);
+          }
+        	  
           gc.fillGradientRectangle(rect.x, rect.y, rect.width, rect.height, true);
 
           // draw shell edge

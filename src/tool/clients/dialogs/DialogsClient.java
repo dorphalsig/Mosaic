@@ -279,6 +279,26 @@ public class DialogsClient extends Client {
     });
   }
 
+  private void newWarningDialog(final Message message) {
+	    runOnDisplay(new Runnable() {
+	      public void run() {
+	        Value id = message.args[0];
+	        Value info = message.args[1];
+	        NotifierDialog.notify("Warning", info.strValue(), NotificationType.values()[3]);
+	      }
+	    });
+	  }
+  
+  private void newErrorDialog(final Message message) {
+	    runOnDisplay(new Runnable() {
+	      public void run() {
+	        Value id = message.args[0];
+	        Value info = message.args[1];
+	        NotifierDialog.notify("Error", info.strValue(), NotificationType.values()[1]);
+	      }
+	    });
+	  }
+  
   private Value newQuestionDialog(final Message message) {
     final Value[] values = new Value[1];
     runOnDisplay(new Runnable() {
@@ -554,7 +574,10 @@ public class DialogsClient extends Client {
     else if (message.hasName("newMessageDialog"))
       newMessageDialog(message);
     else if (message.hasName("newWarningDialog"))
-      newMessageDialog(message);
+//      newMessageDialog(message);
+    	newWarningDialog(message);
+    else if (message.hasName("newErrorDialog"))
+        newErrorDialog(message);
     else if (message.hasName("newTextAreaDialog"))
       newTextAreaDialog(message);
     else super.sendMessage(message);
