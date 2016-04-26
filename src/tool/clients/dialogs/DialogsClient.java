@@ -258,6 +258,7 @@ public class DialogsClient extends Client {
         }
       }
     });
+    System.err.println(message);
     return result[0];
   }
 

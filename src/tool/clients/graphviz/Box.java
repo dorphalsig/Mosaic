@@ -31,10 +31,15 @@ public abstract class Box extends Element {
     return t;
   }
 
+  public Menu addMenu(String text, String... options) {
+    Menu menu = new Menu(text, options);
+    lastRow().add(menu);
+    return menu;
+  }
+
   public boolean isEmpty() {
-    for(Row row : rows)
-      if(!row.isEmpty())
-        return false;
+    for (Row row : rows)
+      if (!row.isEmpty()) return false;
     return true;
   }
 

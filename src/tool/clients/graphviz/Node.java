@@ -69,6 +69,12 @@ public class Node {
     return t;
   }
 
+  public Menu addMenu(String text, String... options) {
+    Menu menu = new Menu(text, options);
+    label = menu;
+    return menu;
+  }
+
   public VBox addVBox() {
     VBox vbox = new VBox();
     label = vbox;

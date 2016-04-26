@@ -4,6 +4,7 @@
 	<comment></comment>
 	<projects>
 		<project>com.ceteva.xmf.machine</project>
+		<project>org.eclipse.swt.mac</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
