@@ -43,7 +43,19 @@ public class Edge {
   int                                green;
   int                                blue;
 	  
-  /*PACKAGE ACCESS*/ static Point circleIntersect(int centerx, int centery, double radius, int x, int y) {
+  public int getRed() {
+	return red;
+}
+
+public int getGreen() {
+	return green;
+}
+
+public int getBlue() {
+	return blue;
+}
+
+/*PACKAGE ACCESS*/ static Point circleIntersect(int centerx, int centery, double radius, int x, int y) {
     double dx = x - centerx;
     double dy = y - centery;
     double lineLength = Math.sqrt((dx * dx) + (dy * dy));

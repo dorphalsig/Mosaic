@@ -249,7 +249,9 @@ public class Diagram implements Display {
         // color. OTOH, just painting them colors will show
         // that they are close.
         return COLOURS[edges.indexOf(edge) % COLOURS.length];
-      } else return Diagram.BLACK;
+      } else if(edge.getRed()>=0 && edge.getGreen() >=0 && edge.getBlue()>=0 )
+    	  		return new Color(XModeler.getXModeler().getDisplay(), edge.getRed(),edge.getGreen(),edge.getBlue());
+      	else return Diagram.BLACK;
     } else return Diagram.BLACK;
   }
 

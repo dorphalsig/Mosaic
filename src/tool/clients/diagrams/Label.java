@@ -251,7 +251,11 @@ public class Label implements Selectable {
 			  yArrow+(int)(SIZE * Math.sin(angle-Math.PI*2/3)));
 //	  System.err.println((angle * 180 / Math.PI) + "°");
 	  Color c = gc.getBackground();
-	  gc.setBackground(new Color(c.getDevice(), 0, 0, 0));
+	  if(red >= 0 && green >= 0 && blue >= 0 ){
+		  gc.setBackground(new Color (org.eclipse.swt.widgets.Display.getCurrent(), red, green, blue));
+	  }else{  	
+		  gc.setBackground(new Color(c.getDevice(), 0, 0, 0));
+	  }
 	  gc.fillPolygon(new int[]{p1.x, p1.y, p2.x, p2.y, p3.x, p3.y});
 	  gc.setBackground(c);
   }
