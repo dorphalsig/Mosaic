@@ -60,6 +60,56 @@ public class Label implements Selectable {
     this.arrow = arrow;
     this.hidden = hidden;
     this.fill = fill;
+    
+    //test
+    {
+        Port source = edge.getSourcePort();
+        Port target = edge.getTargetPort();
+        Node sourceNode = edge.getSourceNode();
+        Node targetNode = edge.getTargetNode();
+        
+        int xDiff = sourceNode.getX() + source.getMidX() - targetNode.getX() - target.getMidX();
+        int yDiff = sourceNode.getY() + source.getMidY() - targetNode.getY() - target.getMidY();
+        
+        boolean xDiffLarger = Math.abs(xDiff) > Math.abs(yDiff);
+        
+        if (pos.equals("start")){
+        	if(xDiffLarger && xDiff < 0) {
+//        		System.err.println("left");// start left of end
+        		this.x = 50 + source.getMidX(); //this.y=0;
+        	}
+        	if(xDiffLarger && xDiff >= 0) {
+//        		System.err.println("right");// start right of end
+        		this.x = -50 - source.getMidX(); //this.y=0;
+        	}
+        	if(!xDiffLarger && yDiff < 0) {
+//        		System.err.println("top");// start top of end
+        		this.y = 50 + source.getMidY(); this.x=y;
+        	}
+        	if(!xDiffLarger && yDiff >= 0) {
+//        		System.err.println("bottom");// start bottom of end
+        		this.y = -50 - source.getMidY(); this.x=y;
+        	}
+        } else if (pos.equals("end")){
+        	if(xDiffLarger && xDiff < 0) {
+//        		System.err.println("left");// start left of end
+        		this.x = -50 - target.getMidX(); //this.y=0;
+        	}
+        	if(xDiffLarger && xDiff >= 0) {
+//        		System.err.println("right");// start right of end
+        		this.x = 50 + target.getMidX(); //this.y=0;
+        	}
+        	if(!xDiffLarger && yDiff < 0) {
+//        		System.err.println("top");// start top of end
+        		this.y = -50 - target.getMidY(); this.x=y;
+        	}
+        	if(!xDiffLarger && yDiff >= 0) {
+//        		System.err.println("bottom");// start bottom of end
+        		this.y = 50 + target.getMidY(); this.x=y;
+        	}
+        }
+        
+    }
   }
 
   public boolean contains(int x, int y) {
