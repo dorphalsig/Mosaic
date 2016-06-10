@@ -1,17 +1,14 @@
 package tool.xmodeler;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Arrays;
 
-import javax.management.RuntimeErrorException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.SashForm;
@@ -205,19 +202,19 @@ private static String inflationPath() {
     startDispatching();
   }
 
-  private static boolean overwrite(final String file) {
-    final boolean[] result = new boolean[] { false };
-    XModeler.getDisplay().syncExec(new Runnable() {
-      public void run() {
-        try {
-          result[0] = MessageDialog.openConfirm(XModeler, "Overwite", "Overwrite " + file);
-        } catch (Throwable t) {
-          t.printStackTrace();
-        }
-      }
-    });
-    return result[0];
-  }
+//  private static boolean overwrite(final String file) {
+//    final boolean[] result = new boolean[] { false };
+//    XModeler.getDisplay().syncExec(new Runnable() {
+//      public void run() {
+//        try {
+//          result[0] = MessageDialog.openConfirm(XModeler, "Overwite", "Overwrite " + file);
+//        } catch (Throwable t) {
+//          t.printStackTrace();
+//        }
+//      }
+//    });
+//    return result[0];
+//  }
 
   public static void removeBusyInformation() {
     busyMessage = "";
@@ -232,13 +229,14 @@ private static String inflationPath() {
             loadedImagePath = inflationPath.substring(0, inflationPath.lastIndexOf('.')) + ".img";
             setToolLabel();
             File file = new File(inflationPath);
-            FileOutputStream fout = new FileOutputStream(file);
+//            FileOutputStream fout = new FileOutputStream(file);
             int x = XModeler.getLocation().x;
             int y = XModeler.getLocation().y;
             int width = XModeler.getSize().x;
             int height = XModeler.getSize().y;
-            PrintStream out = new PrintStream(fout);
-            out.print("<XModeler x='" + x + "' y='" + y + "' width='" + width + "' height = '" + height + "'>");
+//            PrintStream out = new PrintStream(fout);
+            PrintStream out = new PrintStream(file, "UTF-8");
+            out.print("<?xml version=\"1.0\" encoding=\"UTF-8\"?><XModeler x='" + x + "' y='" + y + "' width='" + width + "' height = '" + height + "'>");
             ModelBrowserClient.theClient().writeXML(out);
             DiagramClient.theClient().writeXML(out);
             MenuClient.theClient().writeXML(out);
