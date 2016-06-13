@@ -959,7 +959,7 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
     out.print(" lineNumbers='" + lineNumbers + "'");
     out.print(" label='" + label + "'");
     out.print(" toolTip='" + toolTip + "'");
-    out.print(" editable='" + text.getEditable() + "'");
+    out.print(" editable='" + text.getEditable() + "'>");
 //    out.print(" fontHeight='" + fontData.getHeight() + "'>");
     for (WordRule rule : wordRules)
       rule.writeXML(out);
