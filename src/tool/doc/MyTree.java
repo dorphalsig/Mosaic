@@ -22,6 +22,8 @@ public class MyTree extends JTree implements MouseListener{
 	
 	public MyTree() {
 		addMouseListener(this);
+		
+		setCellRenderer(new MyTreeCellRenderer());
 	}
 
 	@Override
@@ -108,12 +110,7 @@ public class MyTree extends JTree implements MouseListener{
 				menu.add(upMenu);
 				menu.add(downMenu);
 				
-				
-				
-				
 				menu.show(this, e.getX(), e.getY());
-				
-				
 			}
 		}
 	}

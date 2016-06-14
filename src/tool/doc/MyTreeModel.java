@@ -24,30 +24,18 @@ public class MyTreeModel extends DefaultTreeModel {
 
 	private static final long serialVersionUID = 1L;
 	private JFrame dialogParent;
-//	private JTree treeParent;
 	
 	private transient DefaultMutableTreeNode clipboard;
 	
 	public MyTreeModel(JFrame dialogParent) {
 		super(new MyTreeNode("Root"));
 		this.dialogParent = dialogParent;
-//		this.treeParent = treeParent;
 	}
 
 	public void actionRename(DefaultMutableTreeNode node) {
 		String name = JOptionPane.showInputDialog(dialogParent, "New name:", node);
 		if(name != null) node.setUserObject(name);
 		nodeChanged(node);
-//		dialogParent.repaint();
-//		fireTreeNodesChanged(
-//		           this,
-//		           new Object[] { node.getParent() }, // Path to the _parent_ of changed item
-//		           new int[] { 1 },          // Indexes of changed nodes
-//		           new Object[] { node } // Objects represents changed nodes
-//		                                     //    (Note: old ones!!! 
-//		                                     //     I.e. not "C2", but "C",
-//		                                     //     in this example)
-//		           );
 	}
 
 	public void actionAdd(DefaultMutableTreeNode parent) {
