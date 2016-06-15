@@ -9,8 +9,10 @@ import java.util.Collections;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -23,23 +25,23 @@ import org.xml.sax.SAXException;
 public class MyTreeModel extends DefaultTreeModel {
 
 	private static final long serialVersionUID = 1L;
-	private JFrame dialogParent;
+	private DocFrame frame;
 	
 	private transient DefaultMutableTreeNode clipboard;
 	
-	public MyTreeModel(JFrame dialogParent) {
+	public MyTreeModel(DocFrame parent) {
 		super(new MyTreeNode("Root"));
-		this.dialogParent = dialogParent;
+		this.frame = parent;
 	}
 
 	public void actionRename(DefaultMutableTreeNode node) {
-		String name = JOptionPane.showInputDialog(dialogParent, "New name:", node);
+		String name = JOptionPane.showInputDialog(frame, "New name:", node);
 		if(name != null) node.setUserObject(name);
 		nodeChanged(node);
 	}
 
 	public void actionAdd(DefaultMutableTreeNode parent) {
-		String name = JOptionPane.showInputDialog(dialogParent, "New node:", "new node");
+		String name = JOptionPane.showInputDialog(frame, "New node:", "new node");
 		if(name != null) {
 			MyTreeNode child = new MyTreeNode(name);
 			insertNodeInto(child, parent, parent.getChildCount());
@@ -61,39 +63,35 @@ public class MyTreeModel extends DefaultTreeModel {
 		
 	}
 
-	public void actionAddTest(DefaultMutableTreeNode node) {
-		// TODO Auto-generated method stub
-		
+	public void actionAddTest(DefaultMutableTreeNode parent) {
+		TestNode child = new TestNode("Test");
+		insertNodeInto(child, parent, parent.getChildCount());
 	}
 
 	public void save() {
-
 		try {
 			File file = new File("doc/XDoc/mainDoc.xdoc");
 			PrintStream out;
 			out = new PrintStream(file, "UTF-8");
 			out.print("<?xml version=\"1.0\" encoding=\"UTF-8\"?><XModelerDocumentation>");
-			writeTree(out, (DefaultMutableTreeNode) getRoot());
+			writeTree(out, (MyTreeNode) getRoot());
 			out.print("</XModelerDocumentation>");
 			out.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (FileNotFoundException e) {e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {e.printStackTrace();
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	private void writeTree(PrintStream out, DefaultMutableTreeNode node) {
+	private void writeTree(PrintStream out, MyTreeNode node) {
 		out.print("<Node");
 		out.print(" name = \""+node.toString()+"\"");	
-//		out.print(" type = \""+node.getType()+"\"");		
+		out.print(" type = \""+node.getType()+"\"");
+		node.save(out);
 		if(node.getChildCount() > 0) {
 			out.print(">");
 			for(Object o : Collections.list(node.children())) {
-				writeTree(out, (DefaultMutableTreeNode) o);
+				writeTree(out, (MyTreeNode) o);
 			}
 			out.print("</Node>");
 		} else {
@@ -127,7 +125,16 @@ public class MyTreeModel extends DefaultTreeModel {
 
 	private MyTreeNode loadTree(Node node) {
 		String name = node.getAttributes().getNamedItem("name").getNodeValue();
-		MyTreeNode treeNode = new MyTreeNode(name);
+		String type = node.getAttributes().getNamedItem("type").getNodeValue();
+		
+		MyTreeNode treeNode;
+		
+		if("test".equals(type)) {
+			treeNode = new TestNode(node);
+		} else {
+			treeNode = new MyTreeNode(name);
+		}
+		 
 		
 		NodeList children = node.getChildNodes();
 		for(int i = 0; i < children.getLength(); i++) {
@@ -176,6 +183,15 @@ public class MyTreeModel extends DefaultTreeModel {
 	public void actionDown(DefaultMutableTreeNode node) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void showNodePanel(MyTreeNode node) {
+		JPanel p = node.createPanel();
+		frame.setEditPanel(p);
+	}
+
+	public void storeValues(MyTreeNode node) {
+		node.storeValues();
 	}
 
 }

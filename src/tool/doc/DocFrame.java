@@ -14,14 +14,17 @@ import javax.swing.JSplitPane;
 public class DocFrame extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
+	JSplitPane split;
+	JScrollPane right;
+	
 	public static void main(String[] args) {
 		DocFrame frame = new DocFrame();
-		MyTree tree = new MyTree();
+		final MyTree tree = new MyTree();
 		JScrollPane left = new JScrollPane(tree);
-		JPanel right = new JPanel();
-		JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, left, right);
-		split.setDividerLocation(300);
-		frame.setContentPane(split);
+		frame.right = new JScrollPane();
+		frame.split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, left, frame.right);
+		frame.split.setDividerLocation(200);
+		frame.setContentPane(frame.split);
 
 		frame.pack();
 		
@@ -36,12 +39,12 @@ public class DocFrame extends JFrame{
 		JMenu menu = new JMenu("File");
 		JMenuItem menuItem1 = new JMenuItem("Save");
 		menuItem1.addActionListener(new ActionListener() {
-			@Override public void actionPerformed(ActionEvent e) {model.save();}
+			@Override public void actionPerformed(ActionEvent e) {tree.save();}
 		});
 		menu.add(menuItem1);
 		JMenuItem menuItem2 = new JMenuItem("Load");
 		menuItem2.addActionListener(new ActionListener() {
-			@Override public void actionPerformed(ActionEvent e) {model.load();}
+			@Override public void actionPerformed(ActionEvent e) {tree.load();}
 		});
 		menu.add(menuItem2);
 		menubar.add(menu);
@@ -50,6 +53,13 @@ public class DocFrame extends JFrame{
 
 		frame.setVisible(true);
 		
+	}
+
+	public void setEditPanel(JPanel p) {
+//		split.setResizeWeight(0.0);
+//		JScrollPane right = new JScrollPane(p);
+//		split.setRightComponent(right);		
+		right.setViewportView(p);
 	}
 
 }

@@ -9,10 +9,12 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
 import javax.swing.JTree;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
-public class MyTree extends JTree implements MouseListener{
+public class MyTree extends JTree implements MouseListener, TreeSelectionListener{
 	private static final long serialVersionUID = 1L;
 	
 	@Override
@@ -22,7 +24,7 @@ public class MyTree extends JTree implements MouseListener{
 	
 	public MyTree() {
 		addMouseListener(this);
-		
+		addTreeSelectionListener(this);
 		setCellRenderer(new MyTreeCellRenderer());
 	}
 
@@ -43,30 +45,30 @@ public class MyTree extends JTree implements MouseListener{
 						@Override public void actionPerformed(ActionEvent e) {getModel().actionAdd(node);}
 					});
 					menu.add(addMenu);
-					JMenuItem addRRMenu = new JMenuItem("Add Requirements");
-					addRRMenu.addActionListener(new ActionListener() {			
-						@Override public void actionPerformed(ActionEvent e) {getModel().actionAddRequirements(node);}
-					});
-					menu.add(addRRMenu);
-					JMenuItem addTTMenu = new JMenuItem("Add Tests");
-					addTTMenu.addActionListener(new ActionListener() {			
-						@Override public void actionPerformed(ActionEvent e) {getModel().actionAddTests(node);}
-					});
-					menu.add(addTTMenu);
-				}
-				if(node instanceof RequirementsNode) {
-					JMenuItem addRMenu = new JMenuItem("Add Requirement");
+//					JMenuItem addRRMenu = new JMenuItem("Add Requirements");
+//					addRRMenu.addActionListener(new ActionListener() {			
+//						@Override public void actionPerformed(ActionEvent e) {getModel().actionAddRequirements(node);}
+//					});
+//					menu.add(addRRMenu);
+//					JMenuItem addTTMenu = new JMenuItem("Add Tests");
+//					addTTMenu.addActionListener(new ActionListener() {			
+//						@Override public void actionPerformed(ActionEvent e) {getModel().actionAddTests(node);}
+//					});
+//					menu.add(addTTMenu);
+//				}
+//				if(node instanceof RequirementsNode) {
+					JMenuItem addRMenu = new JMenuItem("(Add Requirement)");
 					addRMenu.addActionListener(new ActionListener() {			
 						@Override public void actionPerformed(ActionEvent e) {getModel().actionAddRequirement(node);}
 					});
 					menu.add(addRMenu);
-				}
-				if(node instanceof TestsNode) {
-					JMenuItem addRMenu = new JMenuItem("Add Test");
-					addRMenu.addActionListener(new ActionListener() {			
+//				}
+//				if(node instanceof TestsNode) {
+					JMenuItem addTMenu = new JMenuItem("Add Test");
+					addTMenu.addActionListener(new ActionListener() {			
 						@Override public void actionPerformed(ActionEvent e) {getModel().actionAddTest(node);}
 					});
-					menu.add(addRMenu);
+					menu.add(addTMenu);
 				}
 				
 				menu.add(new JSeparator());
@@ -119,5 +121,33 @@ public class MyTree extends JTree implements MouseListener{
 	@Override public void mouseExited(MouseEvent e) {}
 	@Override public void mousePressed(MouseEvent e) {}
 	@Override public void mouseReleased(MouseEvent e) {}
+
+	transient MyTreeNode lastSelected = null;
+	
+	@Override
+	public void valueChanged(TreeSelectionEvent e) {
+		if(lastSelected != null) {
+			getModel().storeValues(lastSelected);
+		}
+		
+		TreePath path = getSelectionPath();
+		if(path == null) return;
+		Object selected = path.getLastPathComponent();
+		final MyTreeNode node = (MyTreeNode) selected;
+		lastSelected = node;
+		
+		getModel().showNodePanel(node);
+		
+
+	}
+
+	public void save() {
+		getModel().storeValues(lastSelected);
+		getModel().save();
+	}
+
+	public void load() {
+		getModel().load();
+	}
 
 }
