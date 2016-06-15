@@ -191,7 +191,7 @@ public class MyTreeModel extends DefaultTreeModel {
 	}
 
 	public void storeValues(MyTreeNode node) {
-		node.storeValues();
+		if(node != null) node.storeValues();
 	}
 
 }

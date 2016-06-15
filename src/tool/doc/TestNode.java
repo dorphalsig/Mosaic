@@ -1,11 +1,16 @@
 package tool.doc;
 
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.PrintStream;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.imageio.ImageIO;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -50,8 +55,28 @@ public class TestNode extends MyTreeNode{
 	boolean hasProblem;
 	
 	public ImageIcon getIcon() {
-		return new ImageIcon("icons/Forms/List.gif") ;
-	}
+		try {
+			final Image imgBG = new ImageIcon("icons/Forms/List.gif").getImage();//ImageIO.read(new URL("icons/Forms/List.gif"));
+			if(hasProblem) {
+				final Image imgFG = new ImageIcon("icons/Forms/EventHandler.gif").getImage();//ImageIO.read(new URL("icons/Forms/EventHandler.gif"));
+		        // For simplicity we will presume the images are of identical size
+		        final BufferedImage combinedImage = new BufferedImage( 
+		                16,//imgBG.getWidth(), 
+		                16,//imgBG.getHeight(), 
+		                BufferedImage.TYPE_INT_ARGB );
+		        Graphics2D g = combinedImage.createGraphics();
+		        g.drawImage(imgBG,0,0,null);
+		        g.drawImage(imgFG,0,0,null);
+		        g.dispose();
+		        return new ImageIcon(combinedImage);
+			} else {
+				return new ImageIcon(imgBG);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ImageIcon("icons/Tools/Delete.gif") ;
+		}
+ 	}
 	
 	public JPanel createPanel() {
 		TestPanel p = new TestPanel();
@@ -101,6 +126,9 @@ public class TestNode extends MyTreeNode{
 			
 			final int GAP = 3;
 			
+
+			final int BOXWIDTH = 470;
+			
 			layout.setHorizontalGroup(layout.createSequentialGroup()
 					.addGap(GAP)
 					.addGroup(layout.createParallelGroup(Alignment.LEADING)
@@ -112,29 +140,31 @@ public class TestNode extends MyTreeNode{
 							.addComponent(priorityLabel))
 					.addGap(GAP)
 					.addGroup(layout.createParallelGroup(Alignment.LEADING)
-							.addComponent(preScroll)
-							.addComponent(actionScroll)
-							.addComponent(postScroll)
-							.addComponent(lastTestedOnField)
-							.addComponent(resultScroll)
-							.addComponent(priorityField)
+							.addComponent(preScroll, BOXWIDTH, BOXWIDTH, BOXWIDTH)
+							.addComponent(actionScroll, BOXWIDTH, BOXWIDTH, BOXWIDTH)
+							.addComponent(postScroll, BOXWIDTH, BOXWIDTH, BOXWIDTH)
+							.addComponent(lastTestedOnField, BOXWIDTH/3, BOXWIDTH/3, BOXWIDTH/3)
+							.addComponent(resultScroll, BOXWIDTH, BOXWIDTH, BOXWIDTH)
+							.addComponent(priorityField, BOXWIDTH/3, BOXWIDTH/3, BOXWIDTH/3)
 							.addComponent(reportTestButton))
 					.addGap(GAP)
 					);
+			
+			final int BOXHEIGHT = 80;
 			
 			layout.setVerticalGroup(layout.createSequentialGroup()
 					.addGap(GAP)
 					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
 							.addComponent(preLabel)
-							.addComponent(preScroll))
+							.addComponent(preScroll, BOXHEIGHT, BOXHEIGHT, BOXHEIGHT))
 					.addGap(GAP)
 					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
 							.addComponent(actionLabel)
-							.addComponent(actionScroll))
+							.addComponent(actionScroll, BOXHEIGHT, BOXHEIGHT, BOXHEIGHT))
 					.addGap(GAP)
 					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
 							.addComponent(postLabel)
-							.addComponent(postScroll))
+							.addComponent(postScroll, BOXHEIGHT, BOXHEIGHT, BOXHEIGHT))
 					.addGap(GAP)
 					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
 							.addComponent(lastTestedOnLabel)
@@ -142,7 +172,7 @@ public class TestNode extends MyTreeNode{
 					.addGap(GAP)
 					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
 							.addComponent(lastTestedResultLabel)
-							.addComponent(resultScroll))
+							.addComponent(resultScroll, BOXHEIGHT, BOXHEIGHT, BOXHEIGHT))
 					.addGap(GAP)
 					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
 							.addComponent(priorityLabel)
