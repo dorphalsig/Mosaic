@@ -54,29 +54,26 @@ public class TestNode extends MyTreeNode{
 	String postconditions;
 	boolean hasProblem;
 	
-	public ImageIcon getIcon() {
+	public ImageIcon getIcon(Image defaultIcon) {
 		try {
-			final Image imgBG = new ImageIcon("icons/Forms/List.gif").getImage();//ImageIO.read(new URL("icons/Forms/List.gif"));
-			if(hasProblem) {
-				final Image imgFG = new ImageIcon("icons/Forms/EventHandler.gif").getImage();//ImageIO.read(new URL("icons/Forms/EventHandler.gif"));
-		        // For simplicity we will presume the images are of identical size
-		        final BufferedImage combinedImage = new BufferedImage( 
-		                16,//imgBG.getWidth(), 
-		                16,//imgBG.getHeight(), 
-		                BufferedImage.TYPE_INT_ARGB );
-		        Graphics2D g = combinedImage.createGraphics();
-		        g.drawImage(imgBG,0,0,null);
-		        g.drawImage(imgFG,0,0,null);
-		        g.dispose();
-		        return new ImageIcon(combinedImage);
-			} else {
-				return new ImageIcon(imgBG);
-			}
+			Image icon = new ImageIcon("icons/Forms/List.gif").getImage();
+			if(hasProblem) icon = MyTreeCellRenderer.addProblem(icon).getImage();
+			if(checkIsDue()) icon = MyTreeCellRenderer.addClock(icon).getImage();
+			return new ImageIcon(icon);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ImageIcon("icons/Tools/Delete.gif") ;
 		}
  	}
+	
+	protected boolean checkIsDue() {
+		return System.currentTimeMillis() - lastTestedOn > 1000000000;
+	}
+
+	protected boolean hasProblem() {
+		return hasProblem;
+	}
+
 	
 	public JPanel createPanel() {
 		TestPanel p = new TestPanel();
