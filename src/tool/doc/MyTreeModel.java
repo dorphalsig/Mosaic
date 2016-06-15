@@ -7,12 +7,10 @@ import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Collections;
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreePath;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -32,11 +30,12 @@ public class MyTreeModel extends DefaultTreeModel {
 	public MyTreeModel(DocFrame parent) {
 		super(new MyTreeNode("Root"));
 		this.frame = parent;
+		load();
 	}
 
-	public void actionRename(DefaultMutableTreeNode node) {
+	public void actionRename(MyTreeNode node) {
 		String name = JOptionPane.showInputDialog(frame, "New name:", node);
-		if(name != null) node.setUserObject(name);
+		if(name != null) node.setName(name);
 		nodeChanged(node);
 	}
 
@@ -64,7 +63,8 @@ public class MyTreeModel extends DefaultTreeModel {
 	}
 
 	public void actionAddTest(DefaultMutableTreeNode parent) {
-		TestNode child = new TestNode("Test");
+		String name = JOptionPane.showInputDialog(frame, "New Test:", "new Test");
+		TestNode child = new TestNode(name);
 		insertNodeInto(child, parent, parent.getChildCount());
 	}
 

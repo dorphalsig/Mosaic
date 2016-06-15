@@ -1,9 +1,10 @@
 package tool.doc;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.PrintStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
@@ -17,6 +18,7 @@ import javax.swing.JTextField;
 
 import org.w3c.dom.Node;
 
+
 import javax.swing.GroupLayout.Alignment;
 
 public class TestNode extends MyTreeNode{
@@ -24,7 +26,7 @@ public class TestNode extends MyTreeNode{
 	
 	public TestNode(String userObject) {
 		super(userObject);
-		title = "new Test";
+		title = userObject;
 	}	
 	
 	public TestNode(Node node) {
@@ -73,7 +75,9 @@ public class TestNode extends MyTreeNode{
 			actionField = new JTextArea(actions);
 			postField = new JTextArea(postconditions);
 
-			lastTestedOnField = new JTextField(lastTestedOn+"");
+			lastTestedOnField = new JTextField();
+			lastTestedOnField.setEditable(false);
+			setlastTestedOnDate();
 			lastTestedResultField = new JTextArea(lastResult);
 			priorityField = new JTextField(priority+"");
 
@@ -161,7 +165,7 @@ public class TestNode extends MyTreeNode{
 					switch(result) {
 					case JOptionPane.YES_OPTION : {
 						lastTestedOn = System.currentTimeMillis();
-						lastTestedOnField.setText(""+lastTestedOn);
+						setlastTestedOnDate();
 						lastResult = "Success";
 						lastTestedResultField.setText(lastResult);
 						hasProblem = false;
@@ -169,7 +173,7 @@ public class TestNode extends MyTreeNode{
 					}
 					case JOptionPane.NO_OPTION : {
 						lastTestedOn = System.currentTimeMillis();
-						lastTestedOnField.setText(""+lastTestedOn);
+						setlastTestedOnDate();
 						lastResult = "Fail";
 						lastTestedResultField.setText(lastResult);
 						hasProblem = true;
@@ -179,6 +183,10 @@ public class TestNode extends MyTreeNode{
 					
 				}
 			});
+		}
+
+		private void setlastTestedOnDate() {
+			lastTestedOnField.setText(new SimpleDateFormat("yyyy-MMM-dd HH:mm:ss").format(new Date(lastTestedOn)));			
 		}
 		
 	}
@@ -200,10 +208,10 @@ public class TestNode extends MyTreeNode{
 	}
 	
 	public void save(PrintStream out) {
-		out.print(" preConditions = \""+preConditions+"\"");
-		out.print(" actions = \""+actions+"\"");
-		out.print(" postconditions = \""+postconditions+"\"");
-		out.print(" lastResult = \""+lastResult+"\"");
+		out.print(" preConditions = \""+XMLHelper.protectSpecialCharacters(preConditions)+"\"");
+		out.print(" actions = \""+XMLHelper.protectSpecialCharacters(actions)+"\"");
+		out.print(" postconditions = \""+XMLHelper.protectSpecialCharacters(postconditions)+"\"");
+		out.print(" lastResult = \""+XMLHelper.protectSpecialCharacters(lastResult)+"\"");
 		out.print(" priority = \""+priority+"\"");
 		out.print(" lastTestedOn = \""+lastTestedOn+"\"");
 		out.print(" hasProblem = \""+(hasProblem?"YES":"NO")+"\"");
@@ -217,5 +225,9 @@ public class TestNode extends MyTreeNode{
 		priority = Double.parseDouble(node.getAttributes().getNamedItem("priority").getNodeValue());
 		lastTestedOn = Long.parseLong(node.getAttributes().getNamedItem("lastTestedOn").getNodeValue());
 		hasProblem = node.getAttributes().getNamedItem("hasProblem") != null && "YES".equals(node.getAttributes().getNamedItem("hasProblem").getNodeValue());
+	}
+	
+	public void setName(String name2) {
+		title = name2;
 	}
 }

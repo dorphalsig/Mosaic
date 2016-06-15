@@ -1,6 +1,5 @@
 package tool.doc;
 
-import java.awt.Color;
 import java.io.PrintStream;
 
 import javax.swing.ImageIcon;
@@ -33,4 +32,8 @@ public class MyTreeNode extends DefaultMutableTreeNode{
 	public void storeValues() {}
 
 	public void save(PrintStream out) {}
+
+	public void setName(String name2) {
+		setUserObject(name2);
+	}
 }

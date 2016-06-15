@@ -23,7 +23,7 @@ public class DocFrame extends JFrame{
 		JScrollPane left = new JScrollPane(tree);
 		frame.right = new JScrollPane();
 		frame.split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, left, frame.right);
-		frame.split.setDividerLocation(200);
+		frame.split.setDividerLocation(300);
 		frame.setContentPane(frame.split);
 
 		frame.pack();

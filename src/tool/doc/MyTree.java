@@ -11,7 +11,6 @@ import javax.swing.JSeparator;
 import javax.swing.JTree;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
-import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
 public class MyTree extends JTree implements MouseListener, TreeSelectionListener{
@@ -34,7 +33,7 @@ public class MyTree extends JTree implements MouseListener, TreeSelectionListene
 		TreePath path = getSelectionPath();
 		if(path == null) return;
 		Object selected = path.getLastPathComponent();
-		final DefaultMutableTreeNode node = (DefaultMutableTreeNode) selected;
+		final MyTreeNode node = (MyTreeNode) selected;
 		
 		if(e.getButton() == MouseEvent.BUTTON3) {
 			JPopupMenu menu = new JPopupMenu();
