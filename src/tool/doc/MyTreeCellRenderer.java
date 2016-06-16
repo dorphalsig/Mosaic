@@ -23,8 +23,13 @@ public class MyTreeCellRenderer extends DefaultTreeCellRenderer {
 		}
 		
 		MyTreeNode node = (MyTreeNode) value;
-		ImageIcon icon = node.getIcon(((ImageIcon)l.getIcon()).getImage());
-		if(icon != null) {l.setIcon(icon);}
+		try{
+			ImageIcon icon = node.getIcon(((ImageIcon)l.getIcon()).getImage());
+			if(icon != null) {l.setIcon(icon);}
+		} catch (Exception e) {
+			System.err.println("\t\t\t\tTrouble with icon. Using default.");
+		}
+		
 		
 		return defaultResult;
 	}

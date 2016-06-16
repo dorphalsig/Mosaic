@@ -18,6 +18,7 @@ public class DocFrame extends JFrame{
 	JScrollPane right;
 	
 	public static void main(String[] args) {
+		System.err.println("main started");
 		DocFrame frame = new DocFrame();
 		final MyTree tree = new MyTree();
 		JScrollPane left = new JScrollPane(tree);
@@ -32,8 +33,11 @@ public class DocFrame extends JFrame{
 		frame.setSize(900,600);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		System.err.println("creating tree model");
 		final MyTreeModel model = new MyTreeModel(frame);
 		tree.setModel(model);
+		System.err.println("tree model created");
 
 		JMenuBar menubar = new JMenuBar();
 		JMenu menu = new JMenu("File");
@@ -50,8 +54,10 @@ public class DocFrame extends JFrame{
 		menubar.add(menu);
 
 		frame.setJMenuBar(menubar);
-
+		
+		System.err.println("frame finished, setting visible");
 		frame.setVisible(true);
+		System.err.println("frame visible now");
 		
 	}
 

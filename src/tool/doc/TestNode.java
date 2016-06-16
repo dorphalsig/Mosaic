@@ -226,7 +226,7 @@ public class TestNode extends MyTreeNode{
 	public void storeValues() {
 		try{
 			priority = Double.parseDouble(priorityField.getText());
-		} catch (Exception e) {}
+		} catch (Exception e) {priority = 1; System.err.println("\t\t\t\tNumber not recognized.");}
 		
 		lastResult = lastTestedResultField.getText();
 		preConditions = preField.getText();

@@ -30,7 +30,9 @@ public class MyTreeModel extends DefaultTreeModel {
 	public MyTreeModel(DocFrame parent) {
 		super(new MyTreeNode("Root"));
 		this.frame = parent;
+		System.err.println("loading file");
 		load();
+		System.err.println("file loaded");
 	}
 
 	public void actionRename(MyTreeNode node) {
