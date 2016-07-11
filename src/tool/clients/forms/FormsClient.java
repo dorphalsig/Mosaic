@@ -84,7 +84,7 @@ public class FormsClient extends Client implements CTabFolder2Listener {
   static Font                         formTextFieldFont = Display.getDefault().getSystemFont();//new Font(Display.getDefault(), new FontData("Monaco", 12, SWT.NO));
 
   public FormsClient() {
-    super("tool.clients.forms");
+    super("com.ceteva.forms");
     theClient = this;
     tabFolder.addCTabFolder2Listener(this);
   }

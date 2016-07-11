@@ -12,7 +12,7 @@ public class WorkbenchClient extends Client {
   static WorkbenchClient theClient;
 
   public WorkbenchClient() {
-    super("tool.clients.mosaic");
+    super("com.ceteva.mosaic");
     theClient = this;
   }
 

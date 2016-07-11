@@ -29,7 +29,7 @@ public class MenuClient extends Client implements SelectionListener {
   static Hashtable<Menu, String>      menuSharingTable = new Hashtable<Menu, String>();
 
   public MenuClient() {
-    super("tool.clients.menus");
+    super("com.ceteva.menus");
     theClient = this;
   }
 

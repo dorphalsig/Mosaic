@@ -72,7 +72,7 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
   static Hashtable<Tree, TreeItem>   selections   = new Hashtable<Tree, TreeItem>();
 
   public ModelBrowserClient() {
-    super("tool.clients.modelBrowser");
+    super("com.ceteva.modelBrowser");
     theClient = this;
     tabFolder.addCTabFolder2Listener(this);
     setFont("dejavu/DejaVuSans.ttf", "DejaVu Sans");

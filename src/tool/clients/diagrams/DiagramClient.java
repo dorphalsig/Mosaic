@@ -42,7 +42,7 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
   static Font                        diagramItalicFont = new Font(XModeler.getXModeler().getDisplay(), new FontData("Courier New", 12, SWT.ITALIC));
 
   public DiagramClient() {
-    super("tool.clients.diagram");
+    super("com.ceteva.diagram");
     theClient = this;
     tabFolder.addCTabFolder2Listener(this);
   }

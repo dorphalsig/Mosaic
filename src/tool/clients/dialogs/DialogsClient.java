@@ -183,8 +183,7 @@ public class DialogsClient extends Client {
   static Cursor        cursor = null;
 
   public DialogsClient() {
-//	    super("com.ceteva.dialogs");
-	    super("tool.clients.dialogs");
+	    super("com.ceteva.dialogs");
     theClient = this;
   }
 
