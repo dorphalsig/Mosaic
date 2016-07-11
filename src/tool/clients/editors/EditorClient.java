@@ -70,7 +70,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
   boolean browserLocked = true;
 
   public EditorClient() {
-    super("com.ceteva.text");
+    super("tool.clients.text");
     theClient = this;
     tabFolder.addCTabFolder2Listener(this);
   }

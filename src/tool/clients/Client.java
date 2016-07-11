@@ -28,13 +28,13 @@ public abstract class Client implements MessageHandler, SerializableClient {
     this.debug = debug;
   }
 
-  public String getName() {
-    return name;
-  }
+//  public String getName() {
+//    return name;
+//  }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+//  public void setName(String name) {
+//    this.name = name;
+//  }
 
   public EventHandler getHandler() {
     return handler;

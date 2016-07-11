@@ -352,7 +352,6 @@ public class EdgePainter {
 	    paintMovingSourceOrTarget(gc, edge.start().getX(), edge.start().getY(), x, y);
 	  }
 	  
-
 	  private Vector<Point> getIntersection(Waypoint wp0, Waypoint wp1, Vector<Point> intersections) {
 	    Vector<Point> i = new Vector<Point>();
 	    for (Point p : intersections) {

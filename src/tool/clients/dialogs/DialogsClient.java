@@ -9,8 +9,9 @@ import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Cursor;
-import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.graphics.RGB;
+import org.eclipse.swt.widgets.ColorDialog;
 import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
@@ -182,12 +183,15 @@ public class DialogsClient extends Client {
   static Cursor        cursor = null;
 
   public DialogsClient() {
-    super("com.ceteva.dialogs");
+//	    super("com.ceteva.dialogs");
+	    super("tool.clients.dialogs");
     theClient = this;
   }
 
   public Value callMessage(Message message) {
-    if (message.hasName("newQuestionDialog"))
+	if (message.hasName("newColorDialog") && message.arity == 4)
+	  return colorDialog(message);
+	else if (message.hasName("newQuestionDialog"))
       return newQuestionDialog(message);
     else if (message.hasName("newQuestionDialogYesNoCancel"))
         return newQuestionDialogYesNoCancel(message);
@@ -211,9 +215,9 @@ public class DialogsClient extends Client {
   private void newBusyDialog(final Message message) {
     runOnDisplay(new Runnable() {
       public void run() {
-        Value id = message.args[0];
+//        Value id = message.args[0];
         Value info = message.args[1];
-        Value ignore = message.args[2];
+//        Value ignore = message.args[2];
         XModeler.showBusyInformation(info.strValue());
         Cursor busy = new Cursor(Display.getCurrent(), SWT.CURSOR_WAIT);
         cursor = XModeler.getXModeler().getCursor();
@@ -272,7 +276,7 @@ public class DialogsClient extends Client {
   private void newMessageDialog(final Message message) {
     runOnDisplay(new Runnable() {
       public void run() {
-        Value id = message.args[0];
+//        Value id = message.args[0];
         Value info = message.args[1];
         NotifierDialog.notify("Message", info.strValue(), NotificationType.values()[5]);
       }
@@ -282,7 +286,7 @@ public class DialogsClient extends Client {
   private void newWarningDialog(final Message message) {
 	    runOnDisplay(new Runnable() {
 	      public void run() {
-	        Value id = message.args[0];
+//	        Value id = message.args[0];
 	        Value info = message.args[1];
 	        NotifierDialog.notify("Warning", info.strValue(), NotificationType.values()[3]);
 	      }
@@ -292,7 +296,7 @@ public class DialogsClient extends Client {
   private void newErrorDialog(final Message message) {
 	    runOnDisplay(new Runnable() {
 	      public void run() {
-	        Value id = message.args[0];
+//	        Value id = message.args[0];
 	        Value info = message.args[1];
 	        NotifierDialog.notify("Error", info.strValue(), NotificationType.values()[1]);
 	      }
@@ -304,8 +308,8 @@ public class DialogsClient extends Client {
     runOnDisplay(new Runnable() {
       public void run() {
         Value question = message.args[0];
-        Value defaultResponse = message.args[1];
-        Value icon = message.args[2];
+//        Value defaultResponse = message.args[1];
+//        Value icon = message.args[2];
         values[0] = new Value(MessageDialog.openQuestion(XModeler.getXModeler(), "Question", question.strValue()) ? "Yes" : "No");
       }
     });
@@ -328,8 +332,8 @@ public class DialogsClient extends Client {
 	    runOnDisplay(new Runnable() {
 	      public void run() {
 	        Value question = message.args[0];
-	        Value defaultResponse = message.args[1];
-	        Value icon = message.args[2];
+//	        Value defaultResponse = message.args[1];
+//	        Value icon = message.args[2];
 	        MessageDialog md = new MessageDialog(XModeler.getXModeler(), "Question", null, question.strValue(), MessageDialog.QUESTION_WITH_CANCEL, 
 	    			new String[]{
 	    				"Yes", 
@@ -367,8 +371,8 @@ public class DialogsClient extends Client {
 	}
 
   private void newTextAreaDialog(Message message) {
-    String id = message.args[0].strValue();
-    String type = message.args[1].strValue();
+//    String id = message.args[0].strValue();
+//    String type = message.args[1].strValue();
     final String title = message.args[2].strValue();
     final String info = message.args[3].strValue();
     runOnDisplay(new Runnable() {
@@ -382,7 +386,7 @@ public class DialogsClient extends Client {
   private void noLongerBusy(final Message message) {
     runOnDisplay(new Runnable() {
       public void run() {
-        Value id = message.args[0];
+//        Value id = message.args[0];
         XModeler.removeBusyInformation();
         XModeler.getXModeler().setCursor(cursor);
         cursor = null;
@@ -419,8 +423,8 @@ public class DialogsClient extends Client {
 	 * @param select the select
 	 * @return the tree element
 	 */
-	public TreeElement buildTree(Value[] tree, Vector expand, Vector disable,
-			Vector select) {
+	public TreeElement buildTree(Value[] tree, Vector<TreeElement> expand, Vector<TreeElement> disable,
+			Vector<TreeElement> select) {
 		TreeElement root = new TreeElement(null, "Root");
 		buildTree(root, tree, expand, disable, select);
 		return root;
@@ -435,8 +439,8 @@ public class DialogsClient extends Client {
 	 * @param disable the disable
 	 * @param select the select
 	 */
-	public void buildTree(TreeElement parent, Value[] tree, Vector expand,
-			Vector disable, Vector select) {
+	public void buildTree(TreeElement parent, Value[] tree, Vector<TreeElement> expand,
+			Vector<TreeElement> disable, Vector<TreeElement> select) {
 		// A
 
 		// xmf.multiSelectTreeDialog("BOB",
@@ -532,9 +536,9 @@ public class DialogsClient extends Client {
 	public Value simpleTreeDialog(Message message) {
 		final String title = message.args[0].strValue();
 		Value[] tree = message.args[1].values;
-		final Vector expand = new Vector();
-		Vector disable = new Vector();
-		Vector selected = new Vector();
+		final Vector<TreeElement> expand = new Vector<TreeElement>();
+		Vector<TreeElement> disable = new Vector<TreeElement>();
+		Vector<TreeElement> selected = new Vector<TreeElement>();
 		final TreeElement root = buildTree(tree, expand, disable, selected);
 	    final Value[] result = new Value[] { new Value("") };
 
@@ -551,7 +555,7 @@ public class DialogsClient extends Client {
 					Object[] res = treeDialog.getResult();
 					if (res.length > 0) {
 						TreeElement te = (TreeElement) res[0];
-						Vector path = new Vector();
+						Vector<String> path = new Vector<String>();
 						te.getPath(path);
 						Value[] value = new Value[path.size()];
 						for (int i = path.size(); i > 0; i--) {
@@ -597,6 +601,43 @@ public class DialogsClient extends Client {
 				return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * Color dialog.
+	 *
+	 * @param message the message
+	 * @return the value
+	 */
+	public Value colorDialog(final Message message) {
+	    final Value[] result = new Value[1];
+	    DialogsClient.theClient().runOnDisplay(new Runnable() {
+		    public void run() {
+		    	String text = message.args[0].strValue();
+				int red = message.args[1].intValue;
+				int green = message.args[2].intValue;
+				int blue = message.args[3].intValue;
+				ColorDialog dialog = new ColorDialog(XModeler.getXModeler());
+				dialog.setText(text);
+				if (red > 0 && green > 0 && blue > 0)
+					dialog.setRGB(new RGB(red, green, blue));
+				RGB choosen = dialog.open();
+				if (choosen != null) {
+					Value[] color = new Value[3];
+					color[0] = new Value(choosen.red);
+					color[1] = new Value(choosen.green);
+					color[2] = new Value(choosen.blue);
+					result[0] = new  Value(color);
+				} else {
+					Value[] color = new Value[3];
+					color[0] = new Value(-1);
+					color[1] = new Value(-1);
+					color[2] = new Value(-1);
+					result[0] = new Value(color);
+				}
+			}
+	    });
+	    return result[0];
 	}
 
 }
