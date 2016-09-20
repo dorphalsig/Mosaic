@@ -389,7 +389,7 @@ public class Form implements MouseListener, SelectionListener {
     text.setEditable(editable);
     text.setBackground(FormsClient.WHITE);
     text.setFont(FormsClient.getFormTextFieldFont());
-    text.setBounds(x, y, width, TEXTFIELDHEIGHT+1);
+    text.setBounds(x, y, width, (TEXTFIELDHEIGHT*XModeler.getDeviceZoomPercent())/100+1);
 //    text.setLocation(x, y);
     text.addMouseListener(this);
     textFields.put(id, text);

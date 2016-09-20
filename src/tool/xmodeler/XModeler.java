@@ -201,7 +201,15 @@ private static String inflationPath() {
     startClients();
     startDispatching();
   }
+  
+  private static Integer DEVICE_ZOOM_PERCENT = null;
 
+  public static int getDeviceZoomPercent() {
+	  if(DEVICE_ZOOM_PERCENT == null) DEVICE_ZOOM_PERCENT = 100;
+	  return DEVICE_ZOOM_PERCENT;
+//	  return(display.getDPI().x*100/96);
+  }
+  
 //  private static boolean overwrite(final String file) {
 //    final boolean[] result = new boolean[] { false };
 //    XModeler.getDisplay().syncExec(new Runnable() {
@@ -321,6 +329,10 @@ private static String inflationPath() {
 
   public static void startXModeler() {
     display = Display.getDefault();
+
+    DEVICE_ZOOM_PERCENT = display.getDPI().x*100/96;
+	System.err.println("The zoom for this device was detected as " + DEVICE_ZOOM_PERCENT+"%.");
+	
     setToolLabel();
     Image windowIcon = new Image(XModeler.getDisplay(), "icons/shell/mosaic32.gif");
     XModeler.setImage(windowIcon);
@@ -367,7 +379,7 @@ private static String inflationPath() {
   
   static void startXOS(String initFile) {
     final String[] args = xos.getInitArgs(initFile);
-	/*QUICKFIX FOR HI_RES*/FormsClient.HIGH_RESOLUTION = checkHiRes(args);
+//	/*QUICKFIX FOR HI_RES*/FormsClient.HIGH_RESOLUTION = checkHiRes(args);
     setProjectDirectory(args);
     setImage(args);
     Thread t = new Thread() {
@@ -383,13 +395,13 @@ private static String inflationPath() {
     t.start();
   }
 
-	private static boolean checkHiRes(String[] args) {
-		for (int i = 0; i < args.length; i++) {
-			if (args[i].equals("-hi-res"))
-				return "true".equals(args[i + 1]);
-		}
-		return false;
-	}
+//	private static boolean checkHiRes(String[] args) {
+//		for (int i = 0; i < args.length; i++) {
+//			if (args[i].equals("-hi-res"))
+//				return "true".equals(args[i + 1]);
+//		}
+//		return false;
+//	}
 
 public static void showMessage(String title, String message) {
     NotifierDialog.notify(title, message, NotificationType.values()[2]);

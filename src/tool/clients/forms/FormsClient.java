@@ -29,8 +29,12 @@ import xos.Value;
 
 public class FormsClient extends Client implements CTabFolder2Listener {
 
-	public static boolean HIGH_RESOLUTION = false;
-	public static final int HIGH_RESOLUTION_FACTOR = 2;
+//	public static boolean HIGH_RESOLUTION = false;
+	public static final int HIGH_RESOLUTION_FACTOR_OLD = 2;
+	
+  public static int getDeviceZoomPercent() {
+	  return XModeler.getDeviceZoomPercent();
+  }
 	
   public static Font getFormLabelFont() {
     return formLabelFont;
@@ -373,10 +377,11 @@ public class FormsClient extends Client implements CTabFolder2Listener {
     String parentId = message.args[0].strValue();
     String id = message.args[1].strValue();
     String label = message.args[2].strValue();
-    int x = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[3].intValue;
-    int y = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[4].intValue;
-    int width = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[5].intValue;
-    int height = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[6].intValue;
+    int zoom = getDeviceZoomPercent();
+    int x = zoom*message.args[3].intValue/100;
+    int y = zoom*message.args[4].intValue/100;
+    int width = zoom*message.args[5].intValue/100;
+    int height = zoom*message.args[6].intValue/100;
     newButton(parentId, id, label, x, y, width, height);
   }
 
@@ -392,8 +397,9 @@ public class FormsClient extends Client implements CTabFolder2Listener {
   private void newCheckBox(Message message) {
     String parentId = message.args[0].strValue();
     String id = message.args[1].strValue();
-    int x = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[2].intValue;
-    int y = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[3].intValue;
+    int zoom = getDeviceZoomPercent();
+    int x = zoom*message.args[2].intValue/100;
+    int y = zoom*message.args[3].intValue/100;
     boolean checked = message.args[4].boolValue;
     newCheckBox(parentId, id, x, y, checked);
   }
@@ -410,10 +416,11 @@ public class FormsClient extends Client implements CTabFolder2Listener {
   private void newComboBox(Message message) {
     String parentId = message.args[0].strValue();
     String id = message.args[1].strValue();
-    int x = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[2].intValue;
-    int y = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[3].intValue;
-    int width = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[4].intValue;
-    int height = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[5].intValue;
+    int zoom = getDeviceZoomPercent();
+    int x = zoom*message.args[2].intValue/100;
+    int y = zoom*message.args[3].intValue/100;
+    int width = zoom*message.args[4].intValue/100;
+    int height = zoom*message.args[5].intValue/100;
     newComboBox(parentId, id, x, y, width, height);
   }
 
@@ -451,10 +458,11 @@ public class FormsClient extends Client implements CTabFolder2Listener {
   private void newList(Message message) {
     String parentId = message.args[0].strValue();
     String id = message.args[1].strValue();
-    int x = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[2].intValue;
-    int y = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[3].intValue;
-    int width = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[4].intValue;
-    int height = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[5].intValue;
+    int zoom = getDeviceZoomPercent();
+    int x = zoom*message.args[2].intValue/100;
+    int y = zoom*message.args[3].intValue/100;
+    int width = zoom*message.args[4].intValue/100;
+    int height = zoom*message.args[5].intValue/100;
     newList(parentId, id, x, y, width, height);
   }
 
@@ -467,8 +475,9 @@ public class FormsClient extends Client implements CTabFolder2Listener {
     String parentId = message.args[0].strValue();
     String id = message.args[1].strValue();
     String string = message.args[2].strValue();
-    int x = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[3].intValue;
-    int y = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[4].intValue;
+    int zoom = getDeviceZoomPercent();
+    int x = zoom*message.args[3].intValue/100;
+    int y = zoom*message.args[4].intValue/100;
     newText(parentId, id, string, x, y);
   }
 
@@ -486,10 +495,11 @@ public class FormsClient extends Client implements CTabFolder2Listener {
   private void newTextBox(Message message) {
     String parentId = message.args[0].strValue();
     String id = message.args[1].strValue();
-    int x = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[2].intValue;
-    int y = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[3].intValue;
-    int width = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[4].intValue;
-    int height = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[5].intValue;
+    int zoom = getDeviceZoomPercent();
+    int x = zoom*message.args[2].intValue/100;
+    int y = zoom*message.args[3].intValue/100;
+    int width = zoom*message.args[4].intValue/100;
+    int height = zoom*message.args[5].intValue/100;
     boolean editable = message.args[6].boolValue;
     newTextBox(parentId, id, x, y, width, height, editable);
   }
@@ -506,10 +516,11 @@ public class FormsClient extends Client implements CTabFolder2Listener {
   private void newTextField(Message message) {
     String parentId = message.args[0].strValue();
     String id = message.args[1].strValue();
-    int x = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[2].intValue;
-    int y = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[3].intValue;
-    int width = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[4].intValue;
-    int height = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[5].intValue;
+    int zoom = getDeviceZoomPercent();
+    int x = zoom*message.args[2].intValue/100;
+    int y = zoom*message.args[3].intValue/100;
+    int width = zoom*message.args[4].intValue/100;
+    int height = zoom*message.args[5].intValue/100;
     boolean editable = message.args[6].boolValue;
     newTextField(parentId, id, x, y, width, height, editable);
   }
@@ -528,10 +539,11 @@ public class FormsClient extends Client implements CTabFolder2Listener {
   private void newTree(Message message) {
     String parentId = message.args[0].strValue();
     String id = message.args[1].strValue();
-    int x = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[2].intValue;
-    int y = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[3].intValue;
-    int width = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[4].intValue;
-    int height = (HIGH_RESOLUTION?HIGH_RESOLUTION_FACTOR:1)*message.args[5].intValue;
+    int zoom = getDeviceZoomPercent();
+    int x = zoom*message.args[2].intValue/100;
+    int y = zoom*message.args[3].intValue/100;
+    int width = zoom*message.args[4].intValue/100;
+    int height = zoom*message.args[5].intValue/100;
     boolean editable = message.args[6].boolValue;
     newTree(parentId, id, x, y, width, height, editable);
   }
