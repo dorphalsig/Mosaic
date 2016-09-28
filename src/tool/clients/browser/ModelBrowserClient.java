@@ -562,12 +562,16 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
   }
   
 	public final void setFont(String fileName, String name) {
-		int oldHeight = fontData==null?10:fontData.getHeight();
+//		int oldHeight = fontData==null?10:fontData.getHeight();
+//		System.out.println("oldHeight: " + oldHeight + "("+(fontData!=null)+")");
 		FontData[] fontData = Display.getDefault().getSystemFont().getFontData();
+//		oldHeight = fontData==null?10:fontData[0].getHeight();
+//		int oldHeight = 
+//		System.out.println("oldHeight: " + oldHeight + "("+(fontData!=null)+")");
 		this.fontData = fontData[0];
 		XModeler.getXModeler().getDisplay().loadFont(fileName);
 		this.fontData.setName(name);
-		this.fontData.setHeight(oldHeight);
+//		this.fontData.setHeight(oldHeight);
 		labelFont = new Font(XModeler.getXModeler().getDisplay(), fontData);
 	}
 }

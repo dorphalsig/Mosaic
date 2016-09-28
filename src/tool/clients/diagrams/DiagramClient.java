@@ -875,7 +875,9 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
   public void restore(CTabFolderEvent event) {
 
   }
-
+ 
+  
+  // TODO: Copy from uk.ac.mdx.xmf.swt.model
   public void sendMessage(final Message message) {
     if (message.hasName("newDiagram"))
       newDiagram(message);

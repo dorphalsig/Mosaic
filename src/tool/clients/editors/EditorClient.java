@@ -368,19 +368,22 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
         b3.setText("Enter URL here...");
         buttons.addElement(b3);
         final Browser browser = new Browser(browserParent, SWT.BORDER);
-        final int[] zoom = new int[] { 100 };
+        final int defaultZoom = 100;//XModeler.getDeviceZoomPercent();
+        final int[] zoom = new int[] { defaultZoom };
         up.addListener(SWT.Selection, new Listener() {
           public void handleEvent(Event arg0) {
-            zoom[0] += 10;
+            zoom[0] += defaultZoom/10;
             browser.execute("document.body.style.zoom = \"" + zoom[0] + "%\"");
             browser.redraw();
           }
         });
         down.addListener(SWT.Selection, new Listener() {
           public void handleEvent(Event arg0) {
-            zoom[0] -= 10;
-            browser.execute("document.body.style.zoom = \"" + zoom[0] + "%\"");
-            browser.redraw();
+        	if(zoom[0] > defaultZoom/10) {
+              zoom[0] -= defaultZoom/10;
+              browser.execute("document.body.style.zoom = \"" + zoom[0] + "%\"");
+              browser.redraw();
+        	}
           }
         });
         b1a.addListener(SWT.Selection, new Listener() {
