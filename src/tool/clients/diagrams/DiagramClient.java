@@ -828,9 +828,26 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
           diagram.newAction(groupId, label, toolId, icon);
         }
       });
+    if(label.equals("Update")) {
+    	addUpdateTimer(diagramId, toolId);
+    }
     } else System.err.println("cannot find diagram " + diagramId);
   }
 
+	private void addUpdateTimer(final String diagramId, final String toolId) {
+		final int time = 2500;
+	      runOnDisplay(new Runnable() {
+	          public void run() {
+		Runnable timer = new Runnable() {
+			public void run() {
+				getDiagram(diagramId).action(toolId);
+				XModeler.getXModeler().getDisplay().timerExec(time, this);
+			}
+		};
+		XModeler.getXModeler().getDisplay().timerExec(time, timer);
+	          }});
+	}
+  
   private void newToolGroup(Message message) {
     final Value diagramId = message.args[0];
     final Value name = message.args[1];
