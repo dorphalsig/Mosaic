@@ -100,6 +100,7 @@ public class Diagram implements Display {
 
   String               edgeCreationType       = null;
   String               nodeCreationType       = null;
+  public String updateID = null;
 
   /**
    * Creates a new Diagram
@@ -1229,6 +1230,8 @@ public class Diagram implements Display {
 	      DiagramClient.theClient().newNode(nodeCreationType, id, event.x, event.y);
 	      resetPalette();
 	    }
+	    
+	    if(updateID != null) action(updateID);
 	  }
 	  
 	  private void rightClick(MouseEvent event) {
