@@ -83,7 +83,7 @@ public class Waypoint implements Selectable {
   
   boolean isEnd() { return getId().equals("end"); }
   boolean isStart() { return getId().equals("start"); }
-  public String toString() { return "W(" + x + "," + y + ")"; }
+  public String toString() { return "W(" + x + "," + y + "(" + id + "))"; }
   
   @Override
   public void deselect() {

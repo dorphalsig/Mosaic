@@ -290,7 +290,18 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     int red = Integer.parseInt(XModeler.attributeValue(edge, "red"));
     int green = Integer.parseInt(XModeler.attributeValue(edge, "green"));
     int blue = Integer.parseInt(XModeler.attributeValue(edge, "blue"));
-    newEdge(parentId, id, sourcePort, targetPort, refx, refy, sourceHead, targetHead, lineStyle, red, green, blue);
+    Integer sourceX = null; 
+    Integer sourceY = null; 
+    Integer targetX = null; 
+    Integer targetY = null; 
+    try{
+    	sourceX = Integer.parseInt(XModeler.attributeValue(edge, "sourceX"));
+    	sourceY = Integer.parseInt(XModeler.attributeValue(edge, "sourceY"));
+    	targetX = Integer.parseInt(XModeler.attributeValue(edge, "targetX"));
+    	targetY = Integer.parseInt(XModeler.attributeValue(edge, "targetY"));
+    } catch (Exception ex) {}
+    if(sourceX == null || sourceY == null || targetX == null || targetY == null) System.err.println("No edge termination points specified. Using centre instead");
+    newEdge(parentId, id, sourcePort, targetPort, refx, refy, sourceHead, targetHead, lineStyle, red, green, blue, sourceX, sourceY, targetX, targetY);
     NodeList children = edge.getChildNodes();
     for (int i = 0; i < children.getLength(); i++)
       inflateEdgeElement(id, children.item(i));
@@ -569,13 +580,18 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     int red = message.args[9].intValue;
     int green = message.args[10].intValue;
     int blue = message.args[11].intValue;
-    newEdge(parentId, id, sourceId, targetId, refx, refy, sourceHead, targetHead, lineStyle, red, green, blue);
+    Integer sourceX = message.arity > 12? message.args[12].intValue : null;
+    Integer sourceY = message.arity > 13? message.args[13].intValue : null;
+    Integer targetX = message.arity > 14? message.args[14].intValue : null;
+    Integer targetY = message.arity > 15? message.args[15].intValue : null;
+    if(sourceX == null || sourceY == null || targetX == null || targetY == null) System.err.println("No edge termination points specified. Using centre instead");
+    newEdge(parentId, id, sourceId, targetId, refx, refy, sourceHead, targetHead, lineStyle, red, green, blue, sourceX, sourceY, targetX, targetY);
   }
 
-  private void newEdge(String parentId, String id, String sourceId, String targetId, int refx, int refy, int sourceHead, int targetHead, int lineStyle, int red, int green, int blue) {
+  private void newEdge(String parentId, String id, String sourceId, String targetId, int refx, int refy, int sourceHead, int targetHead, int lineStyle, int red, int green, int blue, int sourceX, int sourceY, int targetX, int targetY) {
     for (Diagram diagram : diagrams) {
       if (diagram.getId().equals(parentId)) {
-        diagram.newEdge(id, sourceId, targetId, refx, refy, sourceHead, targetHead, lineStyle, red, green, blue);
+        diagram.newEdge(id, sourceId, targetId, refx, refy, sourceHead, targetHead, lineStyle, red, green, blue, sourceX, sourceY, targetX, targetY);
       }
     }
   }
@@ -1270,8 +1286,8 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
         for (Diagram diagram : diagrams) {
           for (Edge edge : diagram.getEdges()) {
             if (edge.getId().equals(id.strValue())) {
-              edge.setRefx(refx.intValue);
-              edge.setRefy(refy.intValue);
+//              edge.setRefx(refx.intValue);
+//              edge.setRefy(refy.intValue);
             }
           }
         }

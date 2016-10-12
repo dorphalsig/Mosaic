@@ -709,13 +709,19 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
 		}
 	}
 
-  private void newline(int indent) {
-    text.insert("\n");
-    text.setCaretOffset(text.getCaretOffset() + 1);
-    for (int i = 0; i < indent; i++)
-      text.insert(" ");
-    text.setCaretOffset(text.getCaretOffset() + indent);
-  }
+	private void newline(int indent) {
+		text.insert("\n");
+		try {
+			text.setCaretOffset(text.getCaretOffset() + 1);
+			for (int i = 0; i < indent; i++)
+				text.insert(" ");
+			text.setCaretOffset(text.getCaretOffset() + indent);
+		} catch (IllegalArgumentException iae) {
+			System.err.println(
+					"This exception caused the program to freeze.\n Whatever went wrong, now it does not freeze for this reason anymore.");
+			iae.printStackTrace();
+		}
+	}
 
   private PPrint operation() {
     return new Seq(new Literal("@Operation name(args)"), new Indent(new Seq(new NewLine(), new Literal("body"))), new NewLine(), new Literal("end"));

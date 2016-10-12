@@ -29,6 +29,7 @@ public class EdgePainter {
 
 	//                           | intersect         | second/penultimate  |
 	private void drawCircle(GC gc, int tipx, int tipy, int tailx, int taily, boolean filled, Color fill, Color line) {
+		
 	    double dy = tipy - taily;
 	    double dx = tipx - tailx;
 	    double theta = Math.atan2(dy, dx);

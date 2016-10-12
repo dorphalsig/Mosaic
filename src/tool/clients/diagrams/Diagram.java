@@ -28,6 +28,7 @@ import org.eclipse.swt.graphics.Transform;
 import org.eclipse.swt.widgets.Canvas;
 
 import tool.clients.EventHandler;
+import tool.clients.diagrams.Diagram.MouseMode;
 import tool.clients.menus.MenuClient;
 import tool.xmodeler.XModeler;
 import xos.Message;
@@ -463,17 +464,17 @@ public class Diagram implements Display {
     }
   }
 
-  public void newEdge(String id, String sourceId, String targetId, int refx, int refy, int sourceHead, int targetHead, int lineStyle, int red, int green, int blue) {
+  public void newEdge(String id, String sourceId, String targetId, int refx, int refy, int sourceHead, int targetHead, int lineStyle, int red, int green, int blue, Integer sourceX, Integer sourceY, Integer targetX, Integer targetY) {
     Port sourcePort = getPort(sourceId);
     Node sourceNode = getNode(sourcePort);
     Port targetPort = getPort(targetId);
     Node targetNode = getNode(targetPort);
     if (sourcePort != null) {
       if (targetPort != null) {
-	    int sourceX = sourceNode.getX() + sourcePort.getX() + (sourcePort.getWidth() / 2);
-	    int sourceY = sourceNode.getY() + sourcePort.getY() + (sourcePort.getHeight() / 2);
-	    int targetX = targetNode.getX() + targetPort.getX() + (targetPort.getWidth() / 2);
-	    int targetY = targetNode.getY() + targetPort.getY() + (targetPort.getHeight() / 2);
+    	 if(sourceX == null) sourceX = sourceNode.getX() + sourcePort.getX() + (sourcePort.getWidth() / 2);
+    	 if(sourceY == null) sourceY = sourceNode.getY() + sourcePort.getY() + (sourcePort.getHeight() / 2);
+    	 if(targetX == null) targetX = targetNode.getX() + targetPort.getX() + (targetPort.getWidth() / 2);
+    	 if(targetY == null) targetY = targetNode.getY() + targetPort.getY() + (targetPort.getHeight() / 2);
         Edge edge = new Edge(id, sourceNode, sourcePort, sourceX, sourceY, targetNode, targetPort, targetX, targetY, refx, refy, sourceHead, targetHead, lineStyle, red, green, blue);
         edges.add(edge);
         redraw();
@@ -1759,10 +1760,14 @@ public class Diagram implements Display {
 			if (port != null) {
 				String sourceId = sourcePort.getId();
 				String targetId = port.getId();
-				Message m = DiagramClient.theClient().getHandler().newMessage("newEdge", 3);
+				Message m = DiagramClient.theClient().getHandler().newMessage("newEdge", 7);
 				m.args[0] = new Value(edgeCreationType);
 				m.args[1] = new Value(sourceId);
 				m.args[2] = new Value(targetId);
+				m.args[3] = new Value(firstX);
+				m.args[4] = new Value(firstY);
+				m.args[5] = new Value(x);
+				m.args[6] = new Value(y);
 				DiagramClient.theClient().getHandler().raiseEvent(m);
 				resetPalette();
 			}

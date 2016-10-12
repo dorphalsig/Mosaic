@@ -6,6 +6,7 @@ import java.util.Vector;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Point;
 
+import tool.clients.diagrams.Diagram.MouseMode;
 import xos.Message;
 import xos.Value;
 
@@ -34,8 +35,8 @@ public class Edge {
   Port                               sourcePort;
   Node                               targetNode;
   Port                               targetPort;
-  int                                refx;
-  int                                refy;
+//  int                                refx;
+//  int                                refy;
   HeadStyle                          sourceHead;
   HeadStyle                          targetHead;
   int                                lineStyle;
@@ -76,15 +77,24 @@ public int getBlue() {
     return Math.abs((x - A.x) * (B.y - A.y) - (y - A.y) * (B.x - A.x)) / normalLength;
   }
 
-  /*PACKAGE ACCESS*/ Edge(String id, Node sourceNode, Port sourcePort, int sourceX, int sourceY, Node targetNode, Port targetPort, int targetX, int targetY, int refx, int refy, int sourceHead, int targetHead, int lineStyle, int red, int green, int blue) {
+  /*PACKAGE ACCESS*/ Edge(String id, Node sourceNode, Port sourcePort, 
+		  int sourceX, int sourceY, 
+		  Node targetNode, Port targetPort, 
+		  int targetX, int targetY, 
+		  int refx, int refy, 
+		  int sourceHead, int targetHead, 
+		  int lineStyle, 
+		  int red, int green, int blue) {
     super();
+    System.err.println("sourceHead: " + sourceHead);
+    System.err.println("targetHead: " + targetHead);
     this.id = id;
     this.sourceNode = sourceNode;
     this.sourcePort = sourcePort;
     this.targetNode = targetNode;
     this.targetPort = targetPort;
-    this.refx = refx;
-    this.refy = refy;
+//    this.refx = refx;
+//    this.refy = refy;
     this.sourceHead = HeadStyle.getHeadStyle(sourceHead);
     this.targetHead = HeadStyle.getHeadStyle(targetHead);
     this.lineStyle = lineStyle;
@@ -258,6 +268,7 @@ public int getBlue() {
   }
 
   /*PACKAGE ACCESS*/ boolean newWaypoint(int x, int y) {
+	  System.err.println("new Waypoint 1");
     if(waypointStyle == WaypointStyle.SQUARED) return false;
     for (int i = 0; i < waypoints.size() - 1; i++) {
       Waypoint w1 = waypoints.elementAt(i);
@@ -273,10 +284,12 @@ public int getBlue() {
   }
 
   /*PACKAGE ACCESS*/ Waypoint newWaypoint(String parentId, String id, int index, int x, int y) {
+	  System.err.println("new Waypoint 2: " + id);
     if (parentId.equals(getId())) {
    System.err.println("waypoint " + parentId + ":" + index);
       Waypoint w = new Waypoint(id, this, x, y);
       waypoints.insertElementAt(w, index);
+      System.err.println("waypoints:" + waypoints);
       align();
       return w;
     }
@@ -343,13 +356,13 @@ public int getBlue() {
     this.red = red;
   }
 
-  /*PACKAGE ACCESS*/ void setRefx(int refx) {
-    this.refx = refx;
-  }
-
-  /*PACKAGE ACCESS*/ void setRefy(int refy) {
-    this.refy = refy;
-  }
+//  /*PACKAGE ACCESS*/ void setRefx(int refx) {
+//    this.refx = refx;
+//  }
+//
+//  /*PACKAGE ACCESS*/ void setRefy(int refy) {
+//    this.refy = refy;
+//  }
 
   /*PACKAGE ACCESS*/ void setText(String id, String text) {
     for (Label label : labels)
@@ -414,14 +427,18 @@ public int getBlue() {
   public void writeXML(PrintStream out) {
     out.print("<Edge ");
     out.print("id='" + getId() + "' ");
-    out.print("refx='" + refx + "' ");
-    out.print("refy='" + refy+ "' ");
+//    out.print("refx='" + refx + "' ");
+//    out.print("refy='" + refy+ "' ");
     out.print("source='" + sourceNode.getId() + "' ");
     out.print("target='" + targetNode.getId() + "' ");
     out.print("sourcePort='" + sourcePort.getId() + "' ");
     out.print("targetPort='" + targetPort.getId() + "' ");
     out.print("sourceHead='" + sourceHead.getID() + "' ");
     out.print("targetHead='" + targetHead.getID() + "' ");
+    out.print("sourceX='" + waypoints.firstElement().x + "' ");
+    out.print("targetX='" + waypoints.lastElement().x + "' ");
+    out.print("sourceY='" + waypoints.firstElement().y + "' ");
+    out.print("targetY='" + waypoints.lastElement().y + "' ");
     out.print("lineStyle='" + lineStyle + "' ");
     out.print("hidden='" + hidden + "' ");
     out.print("waypointStyle='" + waypointStyle.name() + "' ");
