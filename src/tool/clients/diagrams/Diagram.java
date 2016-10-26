@@ -581,6 +581,12 @@ public class Diagram implements Display {
     palette.newTool(this, group, label, toolId, isEdge, icon);
     container.layout();
   }
+  
+
+  public void removeAny(String toolId) {
+	  palette.removeAny(this, toolId);
+	  container.layout();
+  }
 
   transient static boolean dontSelectNextWaypoint = false;
   public void newWaypoint(String parentId, String id, int index, int x, int y, boolean skipSelection) {
@@ -1773,4 +1779,5 @@ public class Diagram implements Display {
 			}
 		}
 	}
+
 }

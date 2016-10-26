@@ -118,14 +118,17 @@ public class Group {
 
   private void removeTool(String label) {
     Tool tool = getTool(label);
-    if (tool != null) {
-      tools.remove(tool);
-      tool.delete();
-      item.setHeight(buttonContainer.computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
-      item.setExpanded(true);
-    }
-
+    removeTool(tool);
   }
+  
+  void removeTool(Tool tool) {
+	    if (tool != null) {
+	      tools.remove(tool);
+	      tool.delete();
+	      item.setHeight(buttonContainer.computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
+	      item.setExpanded(true);
+	    }
+	  }
 
   private Tool getTool(String label) {
     for (Tool tool : tools)

@@ -783,6 +783,12 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
       diagram.newText(parentId, id, text, x, y, editable, underline, italicise, red, green, blue);
     }
   }
+  
+  private void removeAny(Message message) {
+	  final Value diagramId = message.args[0];
+	  final Value toolId = message.args[1];
+	  removeAny(diagramId.strValue(), toolId.strValue());
+  }
 
   private void newTool(Message message) {
     final Value diagramId = message.args[0];
@@ -814,6 +820,17 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     newAction(diagramId.strValue(), groupId.strValue(), label.strValue(), toolId.strValue(), icon.strValue());
   }
 
+  private void removeAny(final String diagramId, final String toolId) {
+	    if (getDiagram(diagramId) != null) {
+	      runOnDisplay(new Runnable() {
+	        public void run() {
+	          Diagram diagram = getDiagram(diagramId);
+	          diagram.removeAny(toolId);
+	        }
+	      });
+	    } else System.err.println("cannot find diagram " + diagramId);
+	  }
+  
   private void newTool(final String diagramId, final String groupId, final String label, final String toolId, final boolean isEdge, final String icon) {
     if (getDiagram(diagramId) != null) {
       runOnDisplay(new Runnable() {
@@ -914,13 +931,28 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
  
   
   // TODO: Copy from uk.ac.mdx.xmf.swt.model
+  // Trying to use only one REMOVE command for ANY Button, TODO: remove others if that works
   public void sendMessage(final Message message) {
     if (message.hasName("newDiagram"))
       newDiagram(message);
+    else if (message.hasName("removeAny"))
+    	removeAny(message);
     else if (message.hasName("newToolGroup"))
-      newToolGroup(message);
+        newToolGroup(message);
+    else if (message.hasName("removeToolGroup"))
+    	removeAny(message);
     else if (message.hasName("newTool"))
-      newTool(message);
+        newTool(message);
+    else if (message.hasName("removeTool"))
+    	removeAny(message);
+    else if (message.hasName("newToggle"))
+        newToggle(message);
+    else if (message.hasName("removeToggle"))
+    	removeAny(message);
+    else if (message.hasName("newAction"))
+        newAction(message);
+    else if (message.hasName("removeAction"))
+    	removeAny(message);
     else if (message.hasName("newNode"))
       newNode(message);
     else if (message.hasName("newPort"))
@@ -989,12 +1021,8 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
       deleteGroup(message);
     else if (message.hasName("setFont"))
       setFont(message);
-    else if (message.hasName("newToggle"))
-      newToggle(message);
     else if (message.hasName("setMagneticWaypoints"))
       setMagneticWaypoints(message);
-    else if (message.hasName("newAction"))
-      newAction(message);
     else if (message.hasName("zoomIn"))
       zoomIn(message);
     else if (message.hasName("zoomOut"))

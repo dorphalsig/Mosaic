@@ -95,4 +95,16 @@ public class Palette {
     for (Group group : groups)
       group.deselect();
   }
+
+  public void removeAny(Diagram diagram, String toolId) {
+	for (Group group : groups) {
+	  Tool toolToBeRemoved = null;
+	  for(Tool tool : group.tools) {
+		if(tool.id.equals(toolId)) {
+	      toolToBeRemoved = tool; break;
+		}
+	  }
+	  group.removeTool(toolToBeRemoved);
+	}
+  }
 }
