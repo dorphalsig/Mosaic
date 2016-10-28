@@ -95,7 +95,7 @@ public class Palette {
     for (Group group : groups)
       group.deselect();
   }
-
+  
   public void removeAny(Diagram diagram, String toolId) {
 	for (Group group : groups) {
 	  Tool toolToBeRemoved = null;
@@ -107,4 +107,15 @@ public class Palette {
 	  group.removeTool(toolToBeRemoved);
 	}
   }
+
+  public void renameAny(Diagram diagram, final String newName, final String oldName) {
+	for (Group group : groups) {
+	  for(Tool tool : group.tools) {
+		if(tool.id.equals(oldName)) {
+			tool.setID(newName);
+		}
+	  }
+	}
+  }
+  
 }

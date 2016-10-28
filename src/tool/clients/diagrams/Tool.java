@@ -34,6 +34,12 @@ public abstract class Tool implements SelectionListener {
   public String getLabel() {
     return label;
   }
+  
+  public void setID(String text) {
+	  this.label = text;
+	  this.id = text;
+	  getButton().setText(text);
+  }
 
   public String getId() {
     return id;

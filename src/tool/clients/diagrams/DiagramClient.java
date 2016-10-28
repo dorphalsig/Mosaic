@@ -788,6 +788,13 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
 	  final Value diagramId = message.args[0];
 	  final Value toolId = message.args[1];
 	  removeAny(diagramId.strValue(), toolId.strValue());
+  } 
+  
+  private void renameAny(Message message) {
+	  final Value diagramId = message.args[0];
+	  final Value newName = message.args[1];
+	  final Value oldName = message.args[2];
+	  renameAny(diagramId.strValue(), newName.strValue(), oldName.strValue());
   }
 
   private void newTool(Message message) {
@@ -821,15 +828,26 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
   }
 
   private void removeAny(final String diagramId, final String toolId) {
-	    if (getDiagram(diagramId) != null) {
-	      runOnDisplay(new Runnable() {
-	        public void run() {
-	          Diagram diagram = getDiagram(diagramId);
-	          diagram.removeAny(toolId);
-	        }
-	      });
-	    } else System.err.println("cannot find diagram " + diagramId);
-	  }
+    if (getDiagram(diagramId) != null) {
+      runOnDisplay(new Runnable() {
+        public void run() {
+          Diagram diagram = getDiagram(diagramId);
+          diagram.removeAny(toolId);
+        }
+      });
+    } else System.err.println("cannot find diagram " + diagramId);
+  }
+  
+  private void renameAny(final String diagramId, final String newName, final String oldName) {
+    if (getDiagram(diagramId) != null) {
+      runOnDisplay(new Runnable() {
+        public void run() {
+          Diagram diagram = getDiagram(diagramId);
+          diagram.renameAny(newName, oldName);
+        }
+      });
+    } else System.err.println("cannot find diagram " + diagramId);
+  }
   
   private void newTool(final String diagramId, final String groupId, final String label, final String toolId, final boolean isEdge, final String icon) {
     if (getDiagram(diagramId) != null) {
@@ -937,6 +955,8 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
       newDiagram(message);
     else if (message.hasName("removeAny"))
     	removeAny(message);
+    else if (message.hasName("renameAny"))
+    	renameAny(message);
     else if (message.hasName("newToolGroup"))
         newToolGroup(message);
     else if (message.hasName("removeToolGroup"))

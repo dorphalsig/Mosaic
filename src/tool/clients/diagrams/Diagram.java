@@ -582,11 +582,17 @@ public class Diagram implements Display {
     container.layout();
   }
   
-
   public void removeAny(String toolId) {
 	  palette.removeAny(this, toolId);
 	  container.layout();
   }
+  
+  public void renameAny(final String newName, final String oldName) {
+	  palette.renameAny(this, newName, oldName);
+	  container.layout();
+  }
+  
+  
 
   transient static boolean dontSelectNextWaypoint = false;
   public void newWaypoint(String parentId, String id, int index, int x, int y, boolean skipSelection) {
