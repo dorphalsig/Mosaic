@@ -127,10 +127,13 @@ public class Diagram implements Display {
 
   
 	private void sendMessageToDeleteSelection() {
-		System.out.println("sendMessageToDeleteSelection");
+		Vector<String> deleteList = new Vector<String>(); // to avoid any ConcurrentModificationTrouble
 		for (Node node : nodes)
 			if (selection.contains(node)) 
-				new OutboundMessages().deleteComand(node.id);
+				deleteList.addElement(node.id);
+		for(String id : deleteList) {
+			new OutboundMessages().deleteComand(id);
+		}
 	}
   
   /**
@@ -1762,7 +1765,7 @@ public class Diagram implements Display {
 		
 		private void deleteComand(String id) {
 			EventHandler eventHandler = DiagramClient.theClient().getHandler();
-			Message message = eventHandler.newMessage("delete", 1); // deleteIfOfContained
+			Message message = eventHandler.newMessage("deleteIfOfContained", 1); // deleteIfOfContained ?
 			message.args[0] = new Value(id);
 			eventHandler.raiseEvent(message);
 		}

@@ -70,15 +70,18 @@ public class DialogsClient extends Client {
   }
 
   public static Value newInputDialog(final String title, final String message, final String value) {
-    final String[] result = new String[] { "-1" };
+    final String[] result = new String[] { null };
     DialogsClient.theClient().runOnDisplay(new Runnable() {
       public void run() {
         InputDialog dialog = new InputDialog(XModeler.getXModeler(), title, message, value, null);
         dialog.open();
-        if (dialog.getValue() != null && !dialog.getValue().equals("")) result[0] = dialog.getValue();
+        //if (dialog.getValue() != null && !dialog.getValue().equals("")) 
+        result[0] = dialog.getValue();
       }
     });
-    return new Value(result[0]);
+    return result[0] != null 
+    		? new Value(result[0]) 
+    		: new Value(false);
   }
 
   private static String[] objectsToStrings(Value[] options) {
