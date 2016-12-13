@@ -6,7 +6,6 @@ import java.util.Vector;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Point;
 
-import tool.clients.diagrams.Diagram.MouseMode;
 import xos.Message;
 import xos.Value;
 
@@ -267,8 +266,9 @@ public int getBlue() {
     waypoints.elementAt(waypoints.size() - 1).moveBy(dx, dy);
   }
 
-  /*PACKAGE ACCESS*/ boolean newWaypoint(int x, int y) {
-	  System.err.println("new Waypoint 1");
+  /*PACKAGE ACCESS*/ boolean newWaypoint(int x, int y) { // outbound?
+//    System.err.println("new Waypoint 1");
+	Diagram.dontSelectNextWaypoint = false;
     if(waypointStyle == WaypointStyle.SQUARED) return false;
     for (int i = 0; i < waypoints.size() - 1; i++) {
       Waypoint w1 = waypoints.elementAt(i);
@@ -283,13 +283,13 @@ public int getBlue() {
     return false;
   }
 
-  /*PACKAGE ACCESS*/ Waypoint newWaypoint(String parentId, String id, int index, int x, int y) {
-	  System.err.println("new Waypoint 2: " + id);
+  /*PACKAGE ACCESS*/ Waypoint newWaypoint(String parentId, String id, int index, int x, int y) { // inbound ?
+//	  System.err.println("new Waypoint 2: " + id);
     if (parentId.equals(getId())) {
-   System.err.println("waypoint " + parentId + ":" + index);
+//   System.err.println("waypoint " + parentId + ":" + index);
       Waypoint w = new Waypoint(id, this, x, y);
       waypoints.insertElementAt(w, index);
-      System.err.println("waypoints:" + waypoints);
+//      System.err.println("waypoints:" + waypoints);
       align();
       return w;
     }
@@ -303,6 +303,7 @@ public int getBlue() {
     message.args[2] = new Value(x);
     message.args[3] = new Value(y);
 //    message.args[4] = new Value(select);
+    
     DiagramClient.theClient().getHandler().raiseEvent(message);
   }
   
