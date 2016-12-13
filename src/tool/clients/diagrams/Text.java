@@ -2,6 +2,7 @@ package tool.clients.diagrams;
 
 import java.io.PrintStream;
 
+import org.eclipse.jface.resource.FontDescriptor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
@@ -55,7 +56,11 @@ public class Text implements Display {
   public void doubleClick(GC gc, final Diagram diagram, int dx, int dy, int mouseX, int mouseY) {
     if (editable && contains(mouseX - dx, mouseY - dy)) {
       final org.eclipse.swt.widgets.Text text = new org.eclipse.swt.widgets.Text(diagram.getCanvas(), SWT.BORDER);
-      text.setFont(DiagramClient.diagramFont);
+//      text.setFont(DiagramClient.diagramFont);
+	  Font baseFont = italicise ? DiagramClient.diagramItalicFont : DiagramClient.diagramFont;
+	  FontDescriptor myDescriptor = FontDescriptor.createFrom(baseFont).setHeight(12 * 100 / XModeler.getDeviceZoomPercent());
+	  Font zoomFont = myDescriptor.createFont(XModeler.getXModeler().getDisplay());
+	  text.setFont(zoomFont);
       text.setText(this.text);
       Point p = diagram.scaleinv(dx + getX(), dy + getY());
       text.setLocation(p.x, p.y);
@@ -139,7 +144,7 @@ public class Text implements Display {
 
   public int getHeight() {
     Point extent = DiagramClient.theClient().textDimension(text, getFont());
-    return extent.y;
+    return extent.y * 100 / XModeler.getDeviceZoomPercent();
   }
 
   public String getId() {
@@ -156,7 +161,7 @@ public class Text implements Display {
 
   public int getWidth() {
     Point extent = DiagramClient.theClient().textDimension(text, getFont());
-    return extent.x;
+    return extent.x * 100 / XModeler.getDeviceZoomPercent();
   }
 
   public int getX() {
