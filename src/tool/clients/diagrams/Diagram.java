@@ -28,7 +28,6 @@ import org.eclipse.swt.graphics.Transform;
 import org.eclipse.swt.widgets.Canvas;
 
 import tool.clients.EventHandler;
-import tool.clients.diagrams.Diagram.MouseMode;
 import tool.clients.menus.MenuClient;
 import tool.xmodeler.XModeler;
 import xos.Message;

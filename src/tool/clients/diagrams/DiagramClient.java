@@ -40,8 +40,9 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
   static Vector<Diagram>             diagrams          = new Vector<Diagram>();
   static Font                        diagramFont       = new Font(XModeler.getXModeler().getDisplay(), new FontData("Courier New", 12, SWT.NO));
   static Font                        diagramItalicFont = new Font(XModeler.getXModeler().getDisplay(), new FontData("Courier New", 12, SWT.ITALIC));
-
-  public DiagramClient() {
+//  static java.awt.Font 				 diagramFont_AWT   = new java.awt.Font("Courier New", java.awt.Font.PLAIN, 16);
+  
+	  public DiagramClient() {
     super("com.ceteva.diagram");
     theClient = this;
     tabFolder.addCTabFolder2Listener(this);
@@ -148,16 +149,34 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
 //    throw new Error("cannot find the current diagram");
 //  }
 
+  /* These functions calculate the size for a String for use in XMF's layouts.
+   * Unfortunately, hi-dpi changes the font size, so we need to get that factor out of the 
+   * dimensions again. The value sent to XMF are those AS IF the font size were at 100% */
   private Value getTextDimension(final Message message) {
     final Value[] result = new Value[1];
     runOnDisplay(new Runnable() {
       public void run() {
         Value text = message.args[0];
+        
+//        FontRenderContext frc = new FontRenderContext(new AffineTransform(), true, true);
+//        double awtWidth = diagramFont_AWT.getStringBounds(text.strValue(), frc).getWidth()+2;
+//        double awtHeight = diagramFont_AWT.getStringBounds(text.strValue(), frc).getHeight();
+        
         // Value italics = message.args[1];
         Point extent = textDimension(text.strValue(), diagramFont);
-        Value width = new Value(extent.x);
-        Value height = new Value(extent.y);
-        result[0] = new Value(new Value[] { width, height });
+
+//	    FontDescriptor myDescriptor = FontDescriptor.createFrom(DiagramClient.diagramFont).setHeight(12 * 100 / XModeler.getDeviceZoomPercent());
+//	    Font zoomFont = myDescriptor.createFont(XModeler.getXModeler().getDisplay());
+//	    
+//	    Point extentTest = textDimension(text.strValue(), zoomFont);
+//	    System.err.println("width: " + extent.x + "\nadjusted to: " + (extent.x*100/XModeler.getDeviceZoomPercent())
+//	    		+ "\nwould be readjusted to: " + extentTest.x+ "\nfont: " + diagramFont
+//	    		+ "\nawt size: " + awtWidth);
+        Value width = new Value(extent.x*100/XModeler.getDeviceZoomPercent());
+        Value height = new Value(extent.y*100/XModeler.getDeviceZoomPercent());
+//        Value width = new Value((int)(awtWidth+.5));
+//        Value height = new Value((int)(awtHeight+.5));
+        result[0] = new Value(new Value[] {width, height});
       }
     });
     return result[0];
@@ -170,9 +189,9 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
         Value text = message.args[0];
         Value fontData = message.args[1];
         Point extent = textDimension(text.strValue(), new Font(XModeler.getXModeler().getDisplay(), new FontData(fontData.strValue())));
-        Value width = new Value(extent.x);
-        Value height = new Value(extent.y);
-        result[0] = new Value(new Value[] { width, height });
+        Value width = new Value(extent.x*100/XModeler.getDeviceZoomPercent());
+        Value height = new Value(extent.y*100/XModeler.getDeviceZoomPercent());
+        result[0] = new Value(new Value[] {width, height});
       }
     });
     return result[0];
