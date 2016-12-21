@@ -209,7 +209,8 @@ private static String inflationPath() {
   }
 
   public static void main(String[] args) {
-    startXOS(args[0]);
+    copyOfArgs = Arrays.copyOf(args, args.length);
+	startXOS(args[0]);
     startXModeler();
     startClients();
     startDispatching();
@@ -280,13 +281,13 @@ private static String inflationPath() {
     if (!new File(defaultImage).exists()) throw new Error("the default image file must exist: " + defaultImage);
     boolean imageDialog = getImageDialog(args);
     String selectedImage = null;
-    if(imageDialog){ 
-    FileDialog dialog = new FileDialog(XModeler, SWT.OPEN);
-    dialog.setText("Select the image file");
-    dialog.setFilterExtensions(new String[] { "*.img" });
-    dialog.setFileName(defaultImage);
-    dialog.setFilterPath(projDir);
-    selectedImage = dialog.open();
+    if(imageDialog || showLoad){ 
+    	FileDialog dialog = new FileDialog(XModeler, SWT.OPEN);
+    	dialog.setText("Select the image file");
+    	dialog.setFilterExtensions(new String[] { "*.img" });
+    	dialog.setFileName(defaultImage);
+    	dialog.setFilterPath(projDir);
+    	selectedImage = dialog.open();
   	}
     if (selectedImage != null && !selectedImage.equals(defaultImage)) {
       loadedImagePath = selectedImage;
@@ -378,7 +379,6 @@ private static String inflationPath() {
     	
     	@Override
     	public void run() {
-    		
     	    Menu exitMenu = new Menu(menuBar);
     	    MenuItem exit = new MenuItem(menuBar, SWT.CASCADE);
     	    exit.setText("Debug");
@@ -389,7 +389,29 @@ private static String inflationPath() {
     	        public void handleEvent(Event e) {
     	          Machine.interrupt = true;
     	        }
-    	      });		
+    	      });
+    	    MenuItem loadImage = new MenuItem(menuBar.getItem(0).getMenu(), SWT.NONE);
+    	    loadImage.setText("Load Image");
+    	    loadImage.addListener(SWT.Selection, new Listener() {
+    	        public void handleEvent(Event e) {
+   	        	  XModeler.dispose();
+   	        	  busyMessage     = "";
+   	        	  TOOL_X          = 100;
+   	        	  TOOL_Y          = 100;
+   	        	  TOOL_WIDTH      = 1200;
+   	        	  TOOL_HEIGHT     = 900;
+   	        	  xos             = new OperatingSystem();
+   	        	  XModeler        = new Shell(SWT.BORDER | SWT.SHELL_TRIM);
+   	        	  display = null;
+   	        	  menuBar = null;
+   	        	  projDir = null;
+   	        	  loadedImagePath = null;
+   	        	
+   	        	  showLoad = true;
+   	        	  main(copyOfArgs);	
+    	        }
+    	      });
+    	    
     	}
     });
   }
@@ -447,4 +469,7 @@ public static void showMessage(String title, String message) {
   static String          projDir;
 
   static String          loadedImagePath = null;
+  
+  static String[] 		copyOfArgs;
+  static boolean		showLoad = false;
 }
