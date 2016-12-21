@@ -119,6 +119,19 @@ public class XModeler {
     return null;
   }
 
+  private static boolean getImageDialog(String[] args) {
+	    for (int i = 0; i < args.length; i++) {
+	      if (args[i].equals("-imagedialog")){
+	    	  if( args[i + 1].equalsIgnoreCase("true")){
+	    		  return true;
+	    	  } else {
+	    		  return false;
+	    	  }
+	      }
+	    }
+	    return true;
+	  }
+    
   public static Menu getMenuBar() {
     return menuBar;
   }
@@ -265,12 +278,16 @@ private static String inflationPath() {
     String defaultImage = getImage(args);
     if (defaultImage == null) throw new Error("you have not supplied an image in the initialisation args:\n" + Arrays.toString(args));
     if (!new File(defaultImage).exists()) throw new Error("the default image file must exist: " + defaultImage);
+    boolean imageDialog = getImageDialog(args);
+    String selectedImage = null;
+    if(imageDialog){ 
     FileDialog dialog = new FileDialog(XModeler, SWT.OPEN);
     dialog.setText("Select the image file");
     dialog.setFilterExtensions(new String[] { "*.img" });
     dialog.setFileName(defaultImage);
     dialog.setFilterPath(projDir);
-    String selectedImage = dialog.open();
+    selectedImage = dialog.open();
+  	}
     if (selectedImage != null && !selectedImage.equals(defaultImage)) {
       loadedImagePath = selectedImage;
       setToolLabel();

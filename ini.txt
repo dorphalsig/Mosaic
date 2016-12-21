@@ -4,6 +4,8 @@ user:XModeler
 home:../XMF/com.ceteva.xmf.system/xmf-src
 -image
 ../XMF/com.ceteva.xmf.system/xmf-img/mosaic.img
+-imagedialog
+true
 -arg
 demos:
 -arg
