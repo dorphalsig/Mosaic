@@ -281,6 +281,12 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
     String label = XModeler.attributeValue(browser, "label");
     String tooltip = XModeler.attributeValue(browser, "toolTip");
     String url = XModeler.attributeValue(browser, "url");
+    if(url.equals("welcome")){
+    	URL location = EditorClient.class.getProtectionDomain().getCodeSource().getLocation();
+        url = location.toString();
+        url = url.substring(0, url.length() - 4); // delete "/bin" from string
+        url += "web/index.html";
+    }
     String text = XModeler.attributeValue(browser, "text");
     newBrowser(id, label, tooltip, url, text);
   }
@@ -674,6 +680,9 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       String tooltip = tab.getToolTipText();
       Browser browser = browsers.get(id);
       String url = browser.getUrl();
+      if( url.startsWith("file:") && url.endsWith("/web/index.html")){
+    	url = "welcome";  
+      }
       String text = browser.getText();
       out.print("<Browser id='" + id + "' label='" + label + "' tooltip='" + tooltip + "' url='" + url + "' text='" + XModeler.encodeXmlAttribute(text) + "'/>");
     }
