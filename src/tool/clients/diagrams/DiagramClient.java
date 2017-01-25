@@ -172,8 +172,8 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
 //	    System.err.println("width: " + extent.x + "\nadjusted to: " + (extent.x*100/XModeler.getDeviceZoomPercent())
 //	    		+ "\nwould be readjusted to: " + extentTest.x+ "\nfont: " + diagramFont
 //	    		+ "\nawt size: " + awtWidth);
-        Value width = new Value(extent.x*100/XModeler.getDeviceZoomPercent());
-        Value height = new Value(extent.y*100/XModeler.getDeviceZoomPercent());
+        Value width = new Value(extent.x);//*100/XModeler.getDeviceZoomPercent());
+        Value height = new Value(extent.y);//*100/XModeler.getDeviceZoomPercent());
 //        Value width = new Value((int)(awtWidth+.5));
 //        Value height = new Value((int)(awtHeight+.5));
         result[0] = new Value(new Value[] {width, height});

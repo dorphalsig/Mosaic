@@ -58,7 +58,7 @@ public class Text implements Display {
       final org.eclipse.swt.widgets.Text text = new org.eclipse.swt.widgets.Text(diagram.getCanvas(), SWT.BORDER);
 //      text.setFont(DiagramClient.diagramFont);
 	  Font baseFont = italicise ? DiagramClient.diagramItalicFont : DiagramClient.diagramFont;
-	  FontDescriptor myDescriptor = FontDescriptor.createFrom(baseFont).setHeight(12 * 100 / XModeler.getDeviceZoomPercent());
+	  FontDescriptor myDescriptor = FontDescriptor.createFrom(baseFont).setHeight(12);// * 100 / XModeler.getDeviceZoomPercent());
 	  Font zoomFont = myDescriptor.createFont(XModeler.getXModeler().getDisplay());
 	  text.setFont(zoomFont);
       text.setText(this.text);
@@ -144,7 +144,7 @@ public class Text implements Display {
 
   public int getHeight() {
     Point extent = DiagramClient.theClient().textDimension(text, getFont());
-    return extent.y * 100 / XModeler.getDeviceZoomPercent();
+    return extent.y;// * 100 / XModeler.getDeviceZoomPercent();
   }
 
   public String getId() {
@@ -161,7 +161,7 @@ public class Text implements Display {
 
   public int getWidth() {
     Point extent = DiagramClient.theClient().textDimension(text, getFont());
-    return extent.x * 100 / XModeler.getDeviceZoomPercent();
+    return extent.x;// * 100 / XModeler.getDeviceZoomPercent();
   }
 
   public int getX() {
