@@ -5,7 +5,9 @@ import java.io.PrintStream;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Path;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.Transform;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 
@@ -221,7 +223,23 @@ public class Label implements Selectable {
     Color c = gc.getForeground();
     if(red >= 0 && green >= 0 && blue >= 0 )
     	gc.setForeground(new Color (org.eclipse.swt.widgets.Display.getCurrent(), red, green, blue));
-    gc.drawText(text, getAbsoluteX(), getAbsoluteY(), true);
+    
+    if(!pos.equals("start") && !pos.equals("end")){
+    	Transform tr = new Transform(org.eclipse.swt.widgets.Display.getCurrent());
+        double angle = 180/Math.PI*Math.atan2(edge.getTargetNode().getY()-edge.getSourceNode().getY(),edge.getTargetNode().getX()-edge.getSourceNode().getX());
+        tr.translate(getAbsoluteX(), getAbsoluteY());
+        angle = (angle+450)%180-90;
+        tr.rotate((float)angle);
+    	gc.setTransform(tr);
+    	Path path = new Path(org.eclipse.swt.widgets.Display.getCurrent());
+        path.addString(text, 0, 0, gc.getFont());
+        gc.fillPath(path);
+        gc.drawPath(path);
+        gc.setTransform(new Transform(org.eclipse.swt.widgets.Display.getCurrent()));
+        tr.dispose();
+    }else{
+    	gc.drawText(text, getAbsoluteX(), getAbsoluteY(), true);
+    }
     gc.setForeground(c);
     paintBorder(gc);
     paintArrow(gc);
