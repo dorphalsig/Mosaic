@@ -228,13 +228,35 @@ public class Label implements Selectable {
     	Transform tr = new Transform(org.eclipse.swt.widgets.Display.getCurrent());
         double angle = 180/Math.PI*Math.atan2(edge.getTargetNode().getY()-edge.getSourceNode().getY(),edge.getTargetNode().getX()-edge.getSourceNode().getX());
         tr.translate(getAbsoluteX(), getAbsoluteY());
-        angle = (angle+450)%180-90;
-        tr.rotate((float)angle);
+//        angle = (angle+450)%180-90;
+        tr.rotate((float)((angle+450)%180-90));
     	gc.setTransform(tr);
     	Path path = new Path(org.eclipse.swt.widgets.Display.getCurrent());
         path.addString(text, 0, 0, gc.getFont());
         gc.fillPath(path);
         gc.drawPath(path);
+        
+        tr.dispose();
+        tr = new Transform(org.eclipse.swt.widgets.Display.getCurrent());
+        tr.translate(getAbsoluteX(), getAbsoluteY());
+        tr.rotate((float)(angle));
+        gc.setTransform(tr);
+        
+	  	Color cc = gc.getBackground();
+	  	if(red >= 0 && green >= 0 && blue >= 0 ){
+	  	    gc.setBackground(new Color (org.eclipse.swt.widgets.Display.getCurrent(), red, green, blue));
+	  	}else{  	
+	  	    gc.setBackground(new Color(cc.getDevice(), 0, 0, 0));
+	  	}
+	  	
+	  	int zoom = XModeler.getDeviceZoomPercent();
+	  	
+	  	gc.fillPolygon(new int[]{
+	  			-7*zoom/100,  6*zoom/100, 
+	  			 -20*zoom/100, 10*zoom/100, 
+	  			 -20*zoom/100,  2*zoom/100});
+	  	gc.setBackground(cc);        
+        
         gc.setTransform(new Transform(org.eclipse.swt.widgets.Display.getCurrent()));
         tr.dispose();
     }else{
@@ -242,7 +264,7 @@ public class Label implements Selectable {
     }
     gc.setForeground(c);
     paintBorder(gc);
-    paintArrow(gc);
+//    paintArrow(gc);
   }
 
   public void paintBackground(GC gc) {
@@ -263,71 +285,71 @@ public class Label implements Selectable {
       gc.setForeground(c);
   }
   
-  public void paintArrow(GC gc) {
-	  // if no arrow is about to be painted or anything is wrong, simply skip this.
-	  if(arrow == 0) return;
-	  Point sourcePoint = arrow==1?edge.sourceIntercept():edge.targetIntercept();
-	  if(sourcePoint==null) return;
-	  Point targetPoint = arrow==-1?edge.sourceIntercept():edge.targetIntercept();
-	  if(targetPoint==null) return;
-	  // Now we need to find the quadrant where the arrow is pointing to.
-	  // There are 4 cases separated by the diagonals: North, West, ... 
-	  // NEW ony two cases: West & East
-	  // The angle will give the clue. 
-	  // We need the position of the source and
-	  // the target and use atan2 to get it.
-	  double angle = Math.atan2(targetPoint.y - sourcePoint.y, targetPoint.x - sourcePoint.x);
-	  double angleBaseFour = angle*2/Math.PI; // Now a full circle is 4
-	  //angleBaseFour += 4.5; angleBaseFour %= 4;// The centre of EAST was 0 before, now 0 to 1 is EAST
-	  //int quadrant = (int) angleBaseFour; // rounding down and we get one of 4 quadrants 0=EAST,1=SOUTH,...
-	  //NEW:
-	  angleBaseFour += 4; angleBaseFour %= 4; // The centre of EAST was 0 before, so, 1-2.99 is West, 3-0.99 is East
-	  int quadrant = ((angleBaseFour>=1) && (angleBaseFour<3))?2:0;
-	  // the Position of the arrow is different for each quadrant:
-	  int xArrow;
-	  int yArrow;
-	  switch(quadrant) {
-	  case 0 : // EAST
-		  xArrow = getAbsoluteX() + getWidth() + 10;
-		  yArrow = getAbsoluteY() + getHeight()/2;
-	      break;
-	  case 3 : // NORTH
-		  xArrow = getAbsoluteX() + getWidth()/2;
-		  yArrow = getAbsoluteY() - 10;
-	      break;
-	  case 2 : // WEST
-		  xArrow = getAbsoluteX() - 10;
-		  yArrow = getAbsoluteY() + getHeight()/2;
-	      break;
-	  case 1 : // SOUTH
-		  xArrow = getAbsoluteX() + getWidth()/2;
-		  yArrow = getAbsoluteY() + getHeight() + 10;
-	      break;
-	  default : 
-		  System.err.println("Arrow quadrant = " + quadrant);
-		  return; // Something's gone wrong. No arrow this time...
-	  }
-	  int SIZE = 7;
-	  Point p1 = new Point(
-			  xArrow+(int)(1.6 * SIZE * Math.cos(angle)), 
-			  yArrow+(int)(1.6 * SIZE * Math.sin(angle)));
-	  Point p2 = new Point(
-			  xArrow+(int)(SIZE * Math.cos(angle+Math.PI*2/3)), 
-			  yArrow+(int)(SIZE * Math.sin(angle+Math.PI*2/3)));
-	  Point p3 = new Point(
-			  xArrow+(int)(SIZE * Math.cos(angle-Math.PI*2/3)), 
-			  yArrow+(int)(SIZE * Math.sin(angle-Math.PI*2/3)));
-//	  System.err.println((angle * 180 / Math.PI) + "°");
-	  Color c = gc.getBackground();
-	  if(red >= 0 && green >= 0 && blue >= 0 ){
-		  gc.setBackground(new Color (org.eclipse.swt.widgets.Display.getCurrent(), red, green, blue));
-	  }else{  	
-		  gc.setBackground(new Color(c.getDevice(), 0, 0, 0));
-	  }
-	  gc.fillPolygon(new int[]{p1.x, p1.y, p2.x, p2.y, p3.x, p3.y});
-	  gc.setBackground(c);
-  }
-  
+//  public void paintArrow(GC gc) {
+//	  // if no arrow is about to be painted or anything is wrong, simply skip this.
+//	  if(arrow == 0) return;
+//	  Point sourcePoint = arrow==1?edge.sourceIntercept():edge.targetIntercept();
+//	  if(sourcePoint==null) return;
+//	  Point targetPoint = arrow==-1?edge.sourceIntercept():edge.targetIntercept();
+//	  if(targetPoint==null) return;
+//	  // Now we need to find the quadrant where the arrow is pointing to.
+//	  // There are 4 cases separated by the diagonals: North, West, ... 
+//	  // NEW ony two cases: West & East
+//	  // The angle will give the clue. 
+//	  // We need the position of the source and
+//	  // the target and use atan2 to get it.
+//	  double angle = Math.atan2(targetPoint.y - sourcePoint.y, targetPoint.x - sourcePoint.x);
+//	  double angleBaseFour = angle*2/Math.PI; // Now a full circle is 4
+//	  //angleBaseFour += 4.5; angleBaseFour %= 4;// The centre of EAST was 0 before, now 0 to 1 is EAST
+//	  //int quadrant = (int) angleBaseFour; // rounding down and we get one of 4 quadrants 0=EAST,1=SOUTH,...
+//	  //NEW:
+//	  angleBaseFour += 4; angleBaseFour %= 4; // The centre of EAST was 0 before, so, 1-2.99 is West, 3-0.99 is East
+//	  int quadrant = ((angleBaseFour>=1) && (angleBaseFour<3))?2:0;
+//	  // the Position of the arrow is different for each quadrant:
+//	  int xArrow;
+//	  int yArrow;
+//	  switch(quadrant) {
+//	  case 0 : // EAST
+//		  xArrow = getAbsoluteX() + getWidth() + 10;
+//		  yArrow = getAbsoluteY() + getHeight()/2;
+//	      break;
+//	  case 3 : // NORTH
+//		  xArrow = getAbsoluteX() + getWidth()/2;
+//		  yArrow = getAbsoluteY() - 10;
+//	      break;
+//	  case 2 : // WEST
+//		  xArrow = getAbsoluteX() - 10;
+//		  yArrow = getAbsoluteY() + getHeight()/2;
+//	      break;
+//	  case 1 : // SOUTH
+//		  xArrow = getAbsoluteX() + getWidth()/2;
+//		  yArrow = getAbsoluteY() + getHeight() + 10;
+//	      break;
+//	  default : 
+//		  System.err.println("Arrow quadrant = " + quadrant);
+//		  return; // Something's gone wrong. No arrow this time...
+//	  }
+//	  int SIZE = 7;
+//	  Point p1 = new Point(
+//			  xArrow+(int)(1.6 * SIZE * Math.cos(angle)), 
+//			  yArrow+(int)(1.6 * SIZE * Math.sin(angle)));
+//	  Point p2 = new Point(
+//			  xArrow+(int)(SIZE * Math.cos(angle+Math.PI*2/3)), 
+//			  yArrow+(int)(SIZE * Math.sin(angle+Math.PI*2/3)));
+//	  Point p3 = new Point(
+//			  xArrow+(int)(SIZE * Math.cos(angle-Math.PI*2/3)), 
+//			  yArrow+(int)(SIZE * Math.sin(angle-Math.PI*2/3)));
+////	  System.err.println((angle * 180 / Math.PI) + "°");
+//	  Color c = gc.getBackground();
+//	  if(red >= 0 && green >= 0 && blue >= 0 ){
+//		  gc.setBackground(new Color (org.eclipse.swt.widgets.Display.getCurrent(), red, green, blue));
+//	  }else{  	
+//		  gc.setBackground(new Color(c.getDevice(), 0, 0, 0));
+//	  }
+//	  gc.fillPolygon(new int[]{p1.x, p1.y, p2.x, p2.y, p3.x, p3.y});
+//	  gc.setBackground(c);
+//  }
+//  
   public void paintHover(GC gc, int x, int y) {
 	    if (contains(x, y)) {
 	      Color c = gc.getForeground();
