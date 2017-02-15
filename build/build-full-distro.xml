@@ -7,80 +7,101 @@
         It is not necessary to modify paths as this script facilitates only relatives
 	-->
 
-	<tstamp/>
-	<property name="output" location="output/"/>
-	<property name="outputArchive" location="${output}/xmodeler-${DSTAMP}.zip"/>
-	<property name="prefix" value="XModeler/"/>
-	<!--<property name="eclipse_plugins" location="plugins/eclipse-modeling-neon-1a-win32-x86_64/plugins"/>
+	<target name="build">
+		<!--<tstamp/> -->
+		<property name="output" location="output/" />
+		<!--	<property name="outputArchive" location="${output}/xmodeler-${DSTAMP}.zip"/>-->
+		<loadfile property="version" srcFile="version.txt" />
+        <condition property="outputArchive" value="${output}/XModeler-${version}-SNAPSHOT.zip" else="${output}/XModeler-${version}.zip">
+			<resourceexists>
+				<file file="${output}/XModeler-${version}.zip" />
+			</resourceexists>
+        </condition>
+		<!--<property name="outputArchive" location="${output}/XModeler-${version}.zip" />-->
+		<property name="prefix" value="XModeler/" />
+		<!--<property name="eclipse_plugins" location="plugins/eclipse-modeling-neon-1a-win32-x86_64/plugins"/>
 	<property name="deltapack_plugins" location="plugins/eclipse-4.4-delta-pack/plugins"/> -->
 
-	<property name="homeDir" location="../../XMF/com.ceteva.xmf.system/xmf-src/"/>
-	<property name="compileAll" location="${homeDir}/bin/compileAll.bat"/>
-	<property name="makexmf" location="${homeDir}/bin/makexmf.bat"/>
-	<property name="makemosaic" location="${homeDir}/bin/makemosaic.bat"/>
+		<property name="homeDir" location="../../XMF/com.ceteva.xmf.system/xmf-src/" />
+		<property name="compileAll" location="${homeDir}/bin/compileAll.bat" />
+		<property name="makexmf" location="${homeDir}/bin/makexmf.bat" />
+		<property name="makemosaic" location="${homeDir}/bin/makemosaic.bat" />
 
-	<target name="build">
-		<delete file="${outputArchive}" failonerror="no"/>
+
+		<!--<fail message="Build version ${version} already exists!">
+			<condition>
+				<resourceexists>
+					<file file="${outputArchive}" />
+				</resourceexists>
+			</condition>
+		</fail>-->
 		<exec executable="cmd">
-			<arg value="/c"/>
-			<arg value="${compileAll}"/>
-			<arg value="${homeDir}"/>
+			<arg value="/c" />
+			<arg value="${compileAll}" />
+			<arg value="${homeDir}" />
 		</exec>
 		<exec dir="${homeDir}" executable="cmd">
-    	    <arg value="/c"/>
-    	    <arg value="${makexmf}"/>
-    		<arg value="." />
-    	</exec>
-	   	<exec dir="${homeDir}" executable="cmd">
-    	    <arg value="/c"/>
-    	    <arg value="${makemosaic}"/>
-    		<arg value="."/>
-    	</exec>
+			<arg value="/c" />
+			<arg value="${makexmf}" />
+			<arg value="." />
+		</exec>
+		<exec dir="${homeDir}" executable="cmd">
+			<arg value="/c" />
+			<arg value="${makemosaic}" />
+			<arg value="." />
+		</exec>
 
-		<echo file="${output}/release.txt">XModeler build ${DSTAMP}</echo>
+		<!-- set version -->
+		<copy file="./scripts_and_inits/ini-linux.txt" tofile="./output/ini-linux.txt" />
+		<replace file="./output/ini-linux.txt" token="@@VERSION@@" value="${version}" />
+		<copy file="./scripts_and_inits/ini-win.txt" tofile="./output/ini-win.txt" />
+		<replace file="./output/ini-win.txt" token="@@VERSION@@" value="${version}" />
+
+		<!--		<echo file="${output}/release.txt">XModeler build ${DSTAMP}</echo> -->
 		<zip destfile="${outputArchive}" compress="yes" duplicate="fail">
 			<zipfileset dir=".." prefix="${prefix}">
-				<include name="bin/**"/>
-				<include name="doc/**"/>
-				<include name="lib/*.jar"/>
-				<include name="lib/poi-3.10.1/*.jar"/>
-				<include name="lib/poi-3.10.1/LICENSE"/>
-				<include name="lib/poi-3.10.1/NOTICE"/>
+				<include name="bin/**" />
+				<include name="doc/**" />
+				<include name="lib/*.jar" />
+				<include name="lib/poi-3.10.1/*.jar" />
+				<include name="lib/poi-3.10.1/LICENSE" />
+				<include name="lib/poi-3.10.1/NOTICE" />
 				<!--<include name="lib/swt-4.5.*.jar"/>-->
-				<exclude name="lib/swt.jar"/>
-				<exclude name="lib/swt-3.7.2*.jar"/>
-				<exclude name="lib/swt-4.4.*.jar"/>
+				<exclude name="lib/swt.jar" />
+				<exclude name="lib/swt-3.7.2*.jar" />
+				<exclude name="lib/swt-4.4.*.jar" />
 				<!--<exclude name="lib/servlet-api.jar"/>-->
-				<exclude name="lib/org.eclipse.swt.win32.win32.x86_3.7.2.v3740f.jar"/>				
-				<include name="Exceptions/**"/>
-				<include name="file/**"/>
-				<include name="icons/**"/>
-				<include name="images/**"/>
-				<include name="dejavu/**"/>
-				<include name="MDC/**"/>
-				<include name="setting/**"/>
-				<include name="User/**"/>
-				<include name="web/**"/>
-				<exclude name="**/.DS_Store"/>
+				<exclude name="lib/org.eclipse.swt.win32.win32.x86_3.7.2.v3740f.jar" />
+				<include name="Exceptions/**" />
+				<include name="file/**" />
+				<include name="icons/**" />
+				<include name="images/**" />
+				<include name="dejavu/**" />
+				<include name="MDC/**" />
+				<include name="setting/**" />
+				<include name="User/**" />
+				<include name="web/**" />
+				<exclude name="**/.DS_Store" />
 			</zipfileset>
-			<zipfileset dir="." prefix="${prefix}">
-				<include name="*.txt"/>
+			<zipfileset dir="./output/" prefix="${prefix}">
+				<include name="ini-win.txt" />
+				<include name="ini-linux.txt" />
 				<!-- ini files -->
 			</zipfileset>
-			<zipfileset dir="." prefix="${prefix}" filemode="755">
-				<include name="*.sh"/>
+			<zipfileset dir="./scripts_and_inits/" prefix="${prefix}" filemode="755">
+				<include name="*.sh" />
 				<!-- start scripts -->
-				<include name="*.bat"/>
+				<include name="*.bat" />
 			</zipfileset>
 			<zipfileset dir="../../XMF/com.ceteva.xmf.machine" prefix="${prefix}">
-				<include name="bin/**"/>
-				<exclude name="**/.DS_Store"/>
+				<include name="bin/**" />
+				<exclude name="**/.DS_Store" />
 			</zipfileset>
 			<zipfileset dir="../../XMF/com.ceteva.xmf.system" prefix="${prefix}">
-				<include name="xmf-addons/**"/>
-				<include name="xmf-src/**"/>
-				<include name="xmf-img/**"/>
-				<exclude name="**/.DS_Store"/>
+				<include name="xmf-addons/**" />
+				<include name="xmf-src/**" />
+				<include name="xmf-img/**" />
+				<exclude name="**/.DS_Store" />
 			</zipfileset>
 			<!-- <zipfileset dir="../../XMF/com.ceteva.xmf.machine" prefix="${prefix}lib/">
 				<include name="servlet-api.jar"/>
@@ -104,7 +125,7 @@
 				<include name="org.eclipse.swt.cocoa.macosx.x86_64_3.103.0.v20140605-2012.jar"/>
 			</zipfileset>-->
 			<zipfileset dir="${output}" prefix="${prefix}">
-				<include name="release.txt"/>
+				<include name="release.txt" />
 			</zipfileset>
 		</zip>
 
