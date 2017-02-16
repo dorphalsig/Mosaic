@@ -119,6 +119,15 @@ public class XModeler {
     return null;
   }
 
+  private static String getVersion(String[] args) {
+	    for (int i = 0; i < args.length; i++) {
+	      if (args[i].startsWith("version:")){
+	    	  return args[i].replace("version:", "");
+	      }
+	    }
+	    return "";
+	  }
+  
   private static boolean getImageDialog(String[] args) {
 	    for (int i = 0; i < args.length; i++) {
 	      if (args[i].equals("-imagedialog")){
@@ -305,7 +314,7 @@ private static String inflationPath() {
 
   public static void setToolLabel() {
     String path = loadedImagePath == null ? "NO_IMAGE_SET" : loadedImagePath;
-    XModeler.setText(NAME + "[" + path + "]" + busyMessage);
+    XModeler.setText(NAME + " " + version + " [" + path + "]" + busyMessage);
   }
 
   public static void showBusyInformation(String info) {
@@ -420,6 +429,7 @@ private static String inflationPath() {
     final String[] args = xos.getInitArgs(initFile);
 //	/*QUICKFIX FOR HI_RES*/FormsClient.HIGH_RESOLUTION = checkHiRes(args);
     setProjectDirectory(args);
+    version = getVersion(args); 
     setImage(args);
     Thread t = new Thread() {
       public void run() {
@@ -469,7 +479,9 @@ public static void showMessage(String title, String message) {
   static String          projDir;
 
   static String          loadedImagePath = null;
+  static String			 version = null;
   
   static String[] 		copyOfArgs;
   static boolean		showLoad = false;
+  
 }

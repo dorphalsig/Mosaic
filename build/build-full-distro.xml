@@ -11,13 +11,18 @@
 		<!--<tstamp/> -->
 		<property name="output" location="output/" />
 		<!--	<property name="outputArchive" location="${output}/xmodeler-${DSTAMP}.zip"/>-->
-		<loadfile property="version" srcFile="version.txt" />
-        <condition property="outputArchive" value="${output}/XModeler-${version}-SNAPSHOT.zip" else="${output}/XModeler-${version}.zip">
+		<loadfile property="loadedVersion" srcFile="version.txt" />
+        <condition property="version" value="${loadedVersion}-SNAPSHOT" else="${loadedVersion}">
 			<resourceexists>
-				<file file="${output}/XModeler-${version}.zip" />
+				<file file="${output}/XModeler-${loadedVersion}.zip" />
 			</resourceexists>
         </condition>
-		<!--<property name="outputArchive" location="${output}/XModeler-${version}.zip" />-->
+		<!--<condition property="outputArchive" value="${output}/XModeler-${version}-SNAPSHOT.zip" else="${output}/XModeler-${version}.zip">
+					<resourceexists>
+						<file file="${output}/XModeler-${version}.zip" />
+					</resourceexists>
+		</condition> -->
+		<property name="outputArchive" location="${output}/XModeler-${version}.zip" />
 		<property name="prefix" value="XModeler/" />
 		<!--<property name="eclipse_plugins" location="plugins/eclipse-modeling-neon-1a-win32-x86_64/plugins"/>
 	<property name="deltapack_plugins" location="plugins/eclipse-4.4-delta-pack/plugins"/> -->
@@ -128,7 +133,8 @@
 				<include name="release.txt" />
 			</zipfileset>
 		</zip>
-
+		<delete file="./output/ini-win.txt" />
+		<delete file="./output/ini-linux.txt" />
 	</target>
 	<!--
 	  TODO deploy on Mac conforming to http://www.eclipse.org/swt/macosx/
