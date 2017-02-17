@@ -7,39 +7,23 @@
         It is not necessary to modify paths as this script facilitates only relatives
 	-->
 
-	<target name="build">
-		<!--<tstamp/> -->
+	<target name="init">
 		<property name="output" location="output/" />
-		<!--	<property name="outputArchive" location="${output}/xmodeler-${DSTAMP}.zip"/>-->
 		<loadfile property="loadedVersion" srcFile="version.txt" />
-        <condition property="version" value="${loadedVersion}-SNAPSHOT" else="${loadedVersion}">
+		<condition property="version" value="${loadedVersion}-SNAPSHOT" else="${loadedVersion}">
 			<resourceexists>
 				<file file="${output}/XModeler-${loadedVersion}.zip" />
 			</resourceexists>
-        </condition>
-		<!--<condition property="outputArchive" value="${output}/XModeler-${version}-SNAPSHOT.zip" else="${output}/XModeler-${version}.zip">
-					<resourceexists>
-						<file file="${output}/XModeler-${version}.zip" />
-					</resourceexists>
-		</condition> -->
+		</condition>
 		<property name="outputArchive" location="${output}/XModeler-${version}.zip" />
 		<property name="prefix" value="XModeler/" />
-		<!--<property name="eclipse_plugins" location="plugins/eclipse-modeling-neon-1a-win32-x86_64/plugins"/>
-	<property name="deltapack_plugins" location="plugins/eclipse-4.4-delta-pack/plugins"/> -->
 
 		<property name="homeDir" location="../../XMF/com.ceteva.xmf.system/xmf-src/" />
 		<property name="compileAll" location="${homeDir}/bin/compileAll.bat" />
 		<property name="makexmf" location="${homeDir}/bin/makexmf.bat" />
 		<property name="makemosaic" location="${homeDir}/bin/makemosaic.bat" />
-
-
-		<!--<fail message="Build version ${version} already exists!">
-			<condition>
-				<resourceexists>
-					<file file="${outputArchive}" />
-				</resourceexists>
-			</condition>
-		</fail>-->
+	</target>
+	<target name="compile" depends="init">
 		<exec executable="cmd">
 			<arg value="/c" />
 			<arg value="${compileAll}" />
@@ -55,14 +39,16 @@
 			<arg value="${makemosaic}" />
 			<arg value="." />
 		</exec>
-
+	</target>
+	<target name="build" depends="compile">
+		<!-- If there is a SNAPSHOT, it should be deleted -->
+		<delete file="${outputArchive}" failonerror="no"/> 
+		<copy file="./resources/ini-linux.txt" tofile="./output/ini-linux.txt" />
+		<copy file="./resources/ini-win.txt" tofile="./output/ini-win.txt" />
 		<!-- set version -->
-		<copy file="./scripts_and_inits/ini-linux.txt" tofile="./output/ini-linux.txt" />
 		<replace file="./output/ini-linux.txt" token="@@VERSION@@" value="${version}" />
-		<copy file="./scripts_and_inits/ini-win.txt" tofile="./output/ini-win.txt" />
 		<replace file="./output/ini-win.txt" token="@@VERSION@@" value="${version}" />
 
-		<!--		<echo file="${output}/release.txt">XModeler build ${DSTAMP}</echo> -->
 		<zip destfile="${outputArchive}" compress="yes" duplicate="fail">
 			<zipfileset dir=".." prefix="${prefix}">
 				<include name="bin/**" />
@@ -71,11 +57,9 @@
 				<include name="lib/poi-3.10.1/*.jar" />
 				<include name="lib/poi-3.10.1/LICENSE" />
 				<include name="lib/poi-3.10.1/NOTICE" />
-				<!--<include name="lib/swt-4.5.*.jar"/>-->
 				<exclude name="lib/swt.jar" />
 				<exclude name="lib/swt-3.7.2*.jar" />
 				<exclude name="lib/swt-4.4.*.jar" />
-				<!--<exclude name="lib/servlet-api.jar"/>-->
 				<exclude name="lib/org.eclipse.swt.win32.win32.x86_3.7.2.v3740f.jar" />
 				<include name="Exceptions/**" />
 				<include name="file/**" />
@@ -89,14 +73,17 @@
 				<exclude name="**/.DS_Store" />
 			</zipfileset>
 			<zipfileset dir="./output/" prefix="${prefix}">
+				<!-- ini files -->
 				<include name="ini-win.txt" />
 				<include name="ini-linux.txt" />
-				<!-- ini files -->
 			</zipfileset>
-			<zipfileset dir="./scripts_and_inits/" prefix="${prefix}" filemode="755">
+			<zipfileset dir="./resources/" prefix="${prefix}" filemode="755">
 				<include name="*.sh" />
 				<!-- start scripts -->
 				<include name="*.bat" />
+			</zipfileset>
+			<zipfileset dir="./resources/" prefix="${prefix}">
+				<include name="changelog.txt" />
 			</zipfileset>
 			<zipfileset dir="../../XMF/com.ceteva.xmf.machine" prefix="${prefix}">
 				<include name="bin/**" />
@@ -107,30 +94,6 @@
 				<include name="xmf-src/**" />
 				<include name="xmf-img/**" />
 				<exclude name="**/.DS_Store" />
-			</zipfileset>
-			<!-- <zipfileset dir="../../XMF/com.ceteva.xmf.machine" prefix="${prefix}lib/">
-				<include name="servlet-api.jar"/>
-			</zipfileset>-->
-			<!-- from Eclipse -->
-			<!-- <zipfileset dir="${eclipse_plugins}" prefix="${prefix}lib/">
-				Jface is included in the lib/ of the project Mosaic. Thus, it is not neccessary to include ist
-				<include name="org.eclipse.jface_3.10.0.v20140604-0740.jar"/>
-				<include name="org.eclipse.osgi_3.10.0.v20140606-1445.jar"/>
-				<include name="org.eclipse.osgi.compatibility.state_1.0.0.v20140403-1907.jar"/>
-				<include name="org.eclipse.ui.workbench_3.106.0.v20140530-0732.jar"/>
-				<include name="org.eclipse.swt_3.103.0.v20140605-2008.jar"/>
-			</zipfileset>-->
-			<!-- from delta pack -->
-			<!--<zipfileset dir="${deltapack_plugins}" prefix="${prefix}lib/">
-				<include name="org.eclipse.swt.gtk.linux.x86_3.103.0.v20140605-2012.jar"/>
-				<include name="org.eclipse.swt.gtk.linux.x86_64_3.103.0.v20140605-2012.jar"/>
-				<include name="org.eclipse.swt.win32.win32.x86_3.103.0.v20140605-2012.jar"/>
-				<include name="org.eclipse.swt.win32.win32.x86_64_3.103.0.v20140605-2012.jar"/>
-				<include name="org.eclipse.swt.cocoa.macosx_3.103.0.v20140605-2012.jar"/>
-				<include name="org.eclipse.swt.cocoa.macosx.x86_64_3.103.0.v20140605-2012.jar"/>
-			</zipfileset>-->
-			<zipfileset dir="${output}" prefix="${prefix}">
-				<include name="release.txt" />
 			</zipfileset>
 		</zip>
 		<delete file="./output/ini-win.txt" />

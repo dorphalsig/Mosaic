@@ -1,0 +1,4 @@
+=== Version 1.0.0 =====
+initial version 
+
+Image dialog does not appear on start-up any more. If the dialog should be shown, just set -imagedialog to true.
