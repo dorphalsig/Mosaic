@@ -799,6 +799,7 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
     dirty = true;
     text.setText(s);
     dirty = false;
+    addLines();
   }
 
   public void showLine(int line) {
