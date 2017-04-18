@@ -41,7 +41,7 @@ tool.console.ConsoleClient:com.ceteva.console
 80
 -arg
 projects:
-//-arg
-//initFile:C:/Users/acesdt6/git/XMF/com.ceteva.xmf.system/xmf-addons/Multilevel-Editor/boot_XMF2.o
 -arg
-initFile:C:/Users/acesdt6/git/Mosaic/init.o
+initFile:C:/Users/acesdt6/git/XMF/com.ceteva.xmf.system/xmf-addons/Multilevel-Editor/boot_XMF2.o
+//-arg
+//initFile:C:/Users/acesdt6/git/Mosaic/init.o
