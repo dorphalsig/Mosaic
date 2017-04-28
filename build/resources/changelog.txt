@@ -1,3 +1,12 @@
+=== Version 1.0.1 ===== 28.04.2017
+- Operator precedence has been corrected
+- Texteditor shows line-numbers correctly
+- An integer overflow has been fixed
+- The intrinsic level of associations can be removed
+- Deletion of associations has been fixed
+- Renaming of classes does not lead to problems concerning instance creation anymore
+- Diagrams which has been created with XTools can be opened directly.   
+
 === Version 1.0.0 =====
 initial version 
 
