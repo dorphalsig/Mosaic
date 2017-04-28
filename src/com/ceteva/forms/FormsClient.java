@@ -86,6 +86,7 @@ public class FormsClient extends XMLClient {
 	 * @return the text dimension
 	 */
 	public Value getTextDimension(String text) {
+		
 		Font f = Display.getDefault().getSystemFont();
 		Dimension d = FigureUtilities.getTextExtents(text, f);
 		Value[] values = new Value[2];

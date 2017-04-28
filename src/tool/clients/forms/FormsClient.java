@@ -4,6 +4,8 @@ import java.io.PrintStream;
 import java.util.Hashtable;
 import java.util.Vector;
 
+import org.eclipse.draw2d.FigureUtilities;
+import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabFolder2Listener;
@@ -31,6 +33,34 @@ public class FormsClient extends Client implements CTabFolder2Listener {
 
 //	public static boolean HIGH_RESOLUTION = false;
 	public static final int HIGH_RESOLUTION_FACTOR_OLD = 2;
+	
+	  private Value getTextDimension(final Message message) {
+
+//		  runOnDisplay( )
+		  
+//		  XModeler.getXModeler().getDisplay().syncExec(
+		  class calcTextDimension implements Runnable{ 
+			  public Value value = null;
+			  //calcTextDimension(){ 
+	 			public void run() {
+  					try {
+  						Value[] values = new Value[2];
+		        	Font f = XModeler.getXModeler().getDisplay().getSystemFont();
+		  			Dimension d = FigureUtilities.getTextExtents(message.args[0].strValue(), f);
+		  			
+  						values[0] = new Value(d.width);
+  						values[1] = new Value(d.height);
+  						value = new Value(values);
+  					} catch (Throwable t) {
+  						t.printStackTrace();
+  					}
+  				}
+	  		};
+//			  				);
+	  		calcTextDimension r = new calcTextDimension();
+	  		runOnDisplay(r);
+			return r.value;
+	  }
 	
   public static int getDeviceZoomPercent() {
 	  return XModeler.getDeviceZoomPercent();
@@ -153,6 +183,8 @@ public class FormsClient extends Client implements CTabFolder2Listener {
   public Value callMessage(Message message) {
     if (message.hasName("getText"))
       return getText(message);
+    else  if (message.hasName("getTextDimension"))
+        return getTextDimension(message);
     else return super.callMessage(message);
   }
 
