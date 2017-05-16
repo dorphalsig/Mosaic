@@ -1,0 +1,47 @@
+parserImport XOCL;
+
+context Root
+  @Package MEMO
+  
+    @Bind ATT    = "ATT"    end
+    @Bind BOOL   = "BOOL"   end
+    @Bind CLASS  = "CLASS"  end
+    @Bind CONST  = "CONST"  end
+    @Bind INFO   = "INFO"   end
+    @Bind INT    = "INT"    end
+    @Bind MODEL  = "MODEL"  end
+    @Bind OBJ    = "OBJ"    end
+    @Bind PATH   = "PATH"   end
+    @Bind SLOT   = "SLOT"   end
+    @Bind STR    = "STR"    end
+    
+    @Operation argString(arg)
+      @Case arg of
+        Seq{t | rest} when t = PATH do formats("~{::~;~S~}",Seq{rest}) end
+        Seq{t,v} when t = CONST do formats("~S",Seq{v}) end
+        else arg.toString()
+      end
+    end
+    
+    @Operation display(ast,out,indent)
+      @Case ast of
+        Seq{type | rest} do
+          format(out, "~V~S ~{,~;~S~}~%",Seq{indent,type,rest->select(x | isArg(x))->collect(x | argString(x))});
+          @For element in rest->reject(x | isArg(x)) do
+            display(element,out,indent + 2)
+          end
+        end
+        else format(out, "~V~S~%",Seq{indent,ast})
+      end
+    end
+    
+    @Operation isArg(x)
+      @Case x of
+        Seq{t | rest} when t = PATH do true end
+        Seq{t | rest} when t = CONST do true end
+        Seq{t | rest} do false end
+        else true
+      end
+    end
+    
+  end
