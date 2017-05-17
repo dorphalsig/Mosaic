@@ -1,3 +1,6 @@
+=== Version 1.0.2 ===== 16.05.2017
+- Fixed problems at Linux 32 Bit 
+
 === Version 1.0.1 ===== 28.04.2017
 - Operator precedence has been corrected
 - Texteditor shows line-numbers correctly
