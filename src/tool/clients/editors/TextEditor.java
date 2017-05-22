@@ -192,7 +192,10 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
       text.setLineBullet(0, text.getLineCount(), null);
       text.setLineBullet(0, text.getLineCount(), bullet);
       text.setLineIndent(0, text.getLineCount(), lineCountWidth + 10);
-    } else text.setLineBullet(0, text.getLineCount(), null);
+    } else {
+      text.setLineBullet(0, text.getLineCount(), null);
+      text.setLineIndent(0, text.getLineCount(), 10);
+    }
   }
 
   public void addMultilineRule(String id, String start, String end, int red, int green, int blue) {
@@ -680,6 +683,8 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
 				}
 			}
 		});
+		
+		addLines();
 	}
 
   public void mouseDoubleClick(MouseEvent event) {
