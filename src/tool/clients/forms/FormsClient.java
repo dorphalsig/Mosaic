@@ -446,6 +446,7 @@ public class FormsClient extends Client implements CTabFolder2Listener {
   }
 
   private void newComboBox(Message message) {
+	System.err.println("newComboBox:" + message);
     String parentId = message.args[0].strValue();
     String id = message.args[1].strValue();
     int zoom = getDeviceZoomPercent();
