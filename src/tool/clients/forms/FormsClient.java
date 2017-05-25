@@ -25,6 +25,7 @@ import org.w3c.dom.NodeList;
 
 import tool.clients.Client;
 import tool.clients.EventHandler;
+import tool.clients.diagrams.Diagram;
 import tool.xmodeler.XModeler;
 import xos.Message;
 import xos.Value;
@@ -680,21 +681,37 @@ public class FormsClient extends Client implements CTabFolder2Listener {
     else if (message.hasName("check"))
       check(message);
     else if (message.hasName("uncheck"))
-        uncheck(message);
+      uncheck(message);
     else if (message.hasName("removeNode"))
-    	removeNode(message);
+      removeNode(message);
     else if (message.hasName("maximiseToCanvas"))
-        maximiseToCanvas(message);
+      maximiseToCanvas(message);
     else if (message.hasName("changesMade"))
-    	changesMade(message);
-    else if (message.hasName("gitConflict"))
-    	System.out.println("gitConflict");    	
-    else if (message.hasName("test"))
-        System.err.println("Test");
+      changesMade(message);
+    else if (message.hasName("move"))
+        move(message);
+    else if (message.hasName("setSize"))
+        setSize(message);
     else {
 //System.out.println("------- UNKNOWN");    	
     	super.sendMessage(message);
     }
+  }
+  
+  private void move(Message message) {
+    Value id = message.args[0];
+    Value x = message.args[1];
+    Value y = message.args[2];
+    for (Form form : forms)
+      form.move(id.strValue(), x.intValue, y.intValue);
+  }
+  
+  private void setSize(Message message) {
+    final Value id = message.args[0];
+    final Value width = message.args[1];
+    final Value height = message.args[2];
+    for (Form form : forms)
+      form.setSize(id.strValue(), width.intValue, height.intValue);
   }
 
   private void check(Message message) {

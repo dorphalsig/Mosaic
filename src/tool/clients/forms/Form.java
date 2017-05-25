@@ -30,7 +30,11 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.swt.widgets.Widget;
 
+import tool.clients.Client;
 import tool.clients.EventHandler;
+import tool.clients.diagrams.Display;
+import tool.clients.diagrams.Edge;
+import tool.clients.diagrams.Node;
 import tool.clients.menus.MenuClient;
 import tool.xmodeler.XModeler;
 import uk.ac.mdx.xmf.swt.misc.ColorManager;
@@ -242,7 +246,54 @@ public class Form implements MouseListener, SelectionListener {
   private boolean isRightClick(MouseEvent event) {
     return event.button == RIGHT_BUTTON;
   }
+  
+  public void move(String id, int x, int y) {
+	  FormsClient.theClient().runOnDisplay(new Runnable() {
 
+	  public void run() {
+	        if(combos.containsKey(id)) {combos.get(id).setLocation(x, y); return;}
+	        if(textFields.containsKey(id)) {textFields.get(id).setLocation(x, y); return;}
+	        if(labels.containsKey(id)) {labels.get(id).setLocation(x, y); return;}
+	        if(checks.containsKey(id)) {checks.get(id).setLocation(x, y); return;}
+	        if(buttons.containsKey(id)) {buttons.get(id).setLocation(x, y); return;}      
+	        if(boxes.containsKey(id)) {boxes.get(id).setLocation(x, y); return;}
+	        if(trees.containsKey(id)) {trees.get(id).setLocation(x, y); return;}
+	        if(lists.containsKey(id)) throw new RuntimeException("The move()-operation for List is not yet implemented...");  
+	        if(items.containsKey(id)) throw new RuntimeException("The move()-operation for TreeItem is not yet implemented...");
+	        if(images.containsKey(id)) throw new RuntimeException("The move()-operation for String/Image is not yet implemented...");
+        throw new RuntimeException("The move()-operation for this type of Display is not yet implemented...");
+	  
+        // These Displays need to be added:
+//	  Hashtable<String, List>       lists        = new Hashtable<String, List>();
+//	  Hashtable<String, TreeItem>   items        = new Hashtable<String, TreeItem>();
+//	  Hashtable<String, String>     images       = new Hashtable<String, String>();	   
+	  }
+    });
+  }
+  
+  public void setSize(String id, int x, int y) {
+	  FormsClient.theClient().runOnDisplay(new Runnable() {
+
+	  public void run() {
+	        if(combos.containsKey(id)) {combos.get(id).setSize(x, y); return;}
+	        if(textFields.containsKey(id)) {textFields.get(id).setSize(x, y); return;}
+	        if(labels.containsKey(id)) {labels.get(id).setSize(x, y); return;}
+	        if(checks.containsKey(id)) {checks.get(id).setSize(x, y); return;}
+	        if(buttons.containsKey(id)) {buttons.get(id).setSize(x, y); return;}      
+	        if(boxes.containsKey(id)) {boxes.get(id).setSize(x, y); return;}
+	        if(trees.containsKey(id)) {trees.get(id).setSize(x, y); return;}
+	        if(lists.containsKey(id)) throw new RuntimeException("The setSize()-operation for List is not yet implemented...");  
+	        if(items.containsKey(id)) throw new RuntimeException("The setSize()-operation for TreeItem is not yet implemented...");
+	        if(images.containsKey(id)) throw new RuntimeException("The setSize()-operation for String/Image is not yet implemented...");
+        throw new RuntimeException("The setSize()-operation for this type of Display is not yet implemented...");
+	  
+        // These Displays need to be added:
+//	  Hashtable<String, List>       lists        = new Hashtable<String, List>();
+//	  Hashtable<String, TreeItem>   items        = new Hashtable<String, TreeItem>();
+//	  Hashtable<String, String>     images       = new Hashtable<String, String>();	   
+	  }
+    });
+  }  
   public void mouseDoubleClick(MouseEvent event) {
     Widget widget = event.widget;
     if (widget instanceof Tree) {
@@ -313,10 +364,11 @@ public class Form implements MouseListener, SelectionListener {
 
   public void newComboBox(String parentId, String id, int x, int y, int width, int height) {
     if (getId().equals(parentId)) {
-      CCombo combo = new CCombo(content, SWT.READ_ONLY | SWT.DROP_DOWN);
+      System.err.println("newComboBox: " + x+","+y + " (" + width+"x"+height+")");
+      CCombo combo = new CCombo(content, /*SWT.READ_ONLY | */SWT.DROP_DOWN | SWT.BORDER);
       combo.addSelectionListener(this);
       combo.setLocation(x, y);
-      // combo.setSize(width, height);
+      combo.setSize(150, 25);
       combo.setFont(FormsClient.formLabelFont);
       combos.put(id, combo);
     }
@@ -340,9 +392,9 @@ public class Form implements MouseListener, SelectionListener {
   }
 
   public void newText(String id, String string, int x, int y) {
-		if(x > 200) {
-			System.err.println("id: " + id + "," + x + "," + y + " " + string);
-		}
+//		if(x > 200) {
+//			System.err.println("id: " + id + "," + x + "," + y + " " + string);
+//		}
 		if(string.trim().isEmpty()) return;
 //		if(string.length() < 2) { // leer?
 //			string = "id: " + id;
