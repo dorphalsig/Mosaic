@@ -534,6 +534,7 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     Value id = message.args[0];
     Value x = message.args[1];
     Value y = message.args[2];
+// 	System.err.println("DiagramClient->move(" + id.strValue() +", "+ x.intValue +", "+ y.intValue +")");
     for (Diagram diagram : diagrams)
       diagram.move(id.strValue(), x.intValue, y.intValue);
   }
@@ -600,7 +601,7 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
   }
   
   private void newNestedDiagram(final String parentId, final String id, int x, int y, int width, int height) {
-	System.err.println("diagramClient->newNestedDiagram("+parentId+"->"+id+")");
+//	System.err.println("diagramClient->newNestedDiagram("+parentId+"->"+id+")");
     for (Diagram diagram : diagrams) {
         diagram.newNestedDiagram(parentId, id, x, y, width, height, null);
       }

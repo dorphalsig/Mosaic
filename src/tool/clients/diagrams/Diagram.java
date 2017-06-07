@@ -362,7 +362,7 @@ public class Diagram implements Display {
     // Currently does nothing.
   }
   
-  private String getNestedDiagramID(int x, int y) {
+  private Object[] getNestedDiagramID(int x, int y) {
 	  for (Node node : nodes) {
 		  if(node.contains(x,y)) {
 			  for(Display display : node.displays) {
@@ -370,10 +370,13 @@ public class Diagram implements Display {
 					  Box box = (Box) display;
 					  Diagram nestedDiagram = box.nestedDiagram;
 				  	  if(nestedDiagram != null) {
-						  String nestedDiagramID = nestedDiagram.getNestedDiagramID(x - node.getX(), y - node.getY());
-						  System.err.println("The nested diagram returned " + nestedDiagramID);
-						  if(nestedDiagramID != null) return nestedDiagramID;
-						  return nestedDiagram.id;
+				  		Object[] nestedDiagramID = nestedDiagram.getNestedDiagramID(x - node.getX(), y - node.getY());
+						  if(nestedDiagramID != null) return  
+								  new Object[] {
+										  nestedDiagramID[0], 
+										  ((Integer)nestedDiagramID[1]) + node.getX(), 
+										  ((Integer)nestedDiagramID[2]) + node.getY()};;
+						  return new Object[] {nestedDiagram.id, node.getX(), node.getY()};
 					  }
 				  }
 			  }
@@ -666,7 +669,7 @@ public class Diagram implements Display {
   public void paint(GC gc, int x, int y) {
     // This is called when a diagram is a display element. The offsets need to be
     // included so that global painting is relative to (0,0).
-    paintOn(gc);
+    paintOn(gc, x, y);
   }
 
   private void paintAlignment(GC gc) {
@@ -676,9 +679,9 @@ public class Diagram implements Display {
     }
   }
 
-  private void paintDisplays(GC gc) {
+  private void paintDisplays(GC gc, int x, int y) {
     for (Display display : displays) {
-      display.paint(gc, 0, 0);
+      display.paint(gc, x, y);
     }
   }
 
@@ -699,7 +702,7 @@ public class Diagram implements Display {
     }
   }
 
-  private void paintHover(GC gc) {
+  private void paintHover(GC gc, int x, int y) { // TODO:ADAPT X/Y
     if (!movingEdgeEnd()) {
       for (Node node : nodes)
         node.paintHover(gc, lastX, lastY, selection.contains(node));
@@ -754,36 +757,37 @@ public class Diagram implements Display {
         }
   }
 
-  private void paintNodes(GC gc) {
+  private void paintNodes(GC gc, int x, int y) {
     for (Node node : nodes)
-      node.paint(gc, this);
+      node.paint(gc, this, x, y);
   }
 
-  private void paintOn(GC gc) {
+  private void paintOn(GC gc, int x, int y) {
     gc.setAntialias(SWT.ON);
     gc.setTextAntialias(SWT.ON);
     gc.setInterpolation(SWT.HIGH);
     gc.setAdvanced(true);
     gc.setTransform(transform);
-    clear(gc);
-    paintDisplays(gc);
+    clear(gc, x, y);
+    paintDisplays(gc, x, y);
     paintNewEdge(gc);
     paintResizing(gc);
     paintEdges(gc);
     paintAlignment(gc);
-    paintNodes(gc);
-    paintHover(gc);
-    paintSelected(gc);
+    paintNodes(gc, x, y);
+    paintHover(gc, x, y);
+    paintSelected(gc, x, y);
     paintRubberBand(gc);
     paintNewNode(gc);
     handleDoubleClick(gc);
+    
 //    gc.drawString("Zoom: " + zoom, 5, 5);
 //    gc.drawString("Width M: " + maxWidth(), 5, 17);
 //    gc.drawString("Width C: " + canvas.getSize().x, 5, 29);
   }
 
-  private void clear(GC gc) {
-    gc.fillRectangle(0, 0, canvas.getSize().x, canvas.getSize().y);
+  private void clear(GC gc, int x, int y) {
+    gc.fillRectangle(x+1, y+1, canvas.getSize().x-2, canvas.getSize().y-2); // TODO: Problem with box border
   }
 	  
   private void paintNewNode(GC gc) {	  
@@ -836,10 +840,10 @@ public class Diagram implements Display {
     }
   }
 
-  private void paintSelected(GC gc) {
+  private void paintSelected(GC gc, int x, int y) {
     if (!movingEdgeEnd()) {
       for (Selectable selected : selection)
-        selected.paintSelected(gc);
+        selected.paintSelected(gc, x, y);
     }
   }
 
@@ -939,11 +943,9 @@ public class Diagram implements Display {
 
   public Point scale(int x, int y) {
     float[] points = new float[] { (float) x, (float) y };
-//    System.err.println("before Transform (scale): " + points[0]);
     transform.invert();
     transform.transform(points);
     transform.invert();
-//    System.err.println("after Transform (scale): " + points[0]);
     return new Point((int) points[0], (int) points[1]);
   }
 
@@ -1275,14 +1277,17 @@ public class Diagram implements Display {
 	      }
 	      redraw();
 	    } else if (nodeCreationType != null) {
-	      String diagramID = id;  // default this
+	      Object[] diagramData = new Object[] {id,0,0};  // default this
 		   // unless any node is hit
-	      String nestedDiagramID = getNestedDiagramID(event.x, event.y);
-	      if(nestedDiagramID != null) {
-	    	  diagramID = nestedDiagramID;
+	      Object[] nestedDiagramData = getNestedDiagramID(event.x, event.y);
+	      if(nestedDiagramData != null) {
+	    	  diagramData = nestedDiagramData;
 //			  System.err.println("found diagramID: " + diagramID);
 		  }
-	      DiagramClient.theClient().newNode(nodeCreationType, diagramID, event.x, event.y);
+	      DiagramClient.theClient().newNode(nodeCreationType, 
+	    		  (String) diagramData[0], 
+	    		  event.x - ((Integer)diagramData[1]), 
+	    		  event.y - ((Integer)diagramData[2]));
 	      resetPalette();
 	    }
 	    
@@ -1558,7 +1563,7 @@ public class Diagram implements Display {
 		public void paintControl(PaintEvent event) {
 			if (render == 0) {
 				GC gc = event.gc;
-				paintOn(gc);
+				paintOn(gc, 0 ,0);
 			}
 		}
 	}
@@ -1575,7 +1580,7 @@ public class Diagram implements Display {
     int height = (int) (zoomRatio * (maxHeight() + 50));
     Image image = new Image(d, width, height);
     GC gc = new GC(image);
-    paintOn(gc);
+    paintOn(gc,0,0);
     ImageTransfer imageTransfer = ImageTransfer.getInstance();
     clipboard.setContents(new Object[] { image.getImageData() }, new Transfer[] { imageTransfer }, DND.CLIPBOARD | DND.SELECTION_CLIPBOARD);
     clipboard.dispose();

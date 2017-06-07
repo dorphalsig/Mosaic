@@ -243,15 +243,15 @@ public class Node implements Selectable {
       display.newText(parentId, id, text, x, y, editable, underline, italicise, red, green, blue);
   }
 
-  public void paint(GC gc, Diagram diagram) {
+  public void paint(GC gc, Diagram diagram, int xOffset, int yOffset) {
     if (!hidden) {
       // Clear the background of the node...
       Color background = gc.getBackground();
       gc.setBackground(diagram.getDiagramBackgroundColor());
-      gc.fillRectangle(x, y, width, height);
+      gc.fillRectangle(x+xOffset, y+yOffset, width, height);
       gc.setBackground(background);
       for (Display display : displays) {
-        display.paint(gc, x, y);
+        display.paint(gc, x+xOffset, y+yOffset);
       }
     }
   }
@@ -336,13 +336,13 @@ public class Node implements Selectable {
     }
   }
 
-  public void paintSelected(GC gc) {
+  public void paintSelected(GC gc, int x, int y) { // TODO:ADAPT X/Y
     if (!hidden) {
       Color c = gc.getForeground();
       int width = gc.getLineWidth();
       gc.setLineWidth(2);
       gc.setForeground(XModeler.getXModeler().getDisplay().getSystemColor(SWT.COLOR_RED));
-      gc.drawRectangle(getX() - SELECTION_GAP, getY() - SELECTION_GAP, getWidth() + (SELECTION_GAP * 2), getHeight() + (SELECTION_GAP * 2));
+      gc.drawRectangle(getX() - SELECTION_GAP + x , getY() - SELECTION_GAP + y, getWidth() + (SELECTION_GAP * 2), getHeight() + (SELECTION_GAP * 2));
       gc.setForeground(c);
       gc.setLineWidth(width);
     }

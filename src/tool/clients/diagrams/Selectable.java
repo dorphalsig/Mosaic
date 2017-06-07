@@ -4,7 +4,7 @@ import org.eclipse.swt.graphics.GC;
 
 public interface Selectable {
 
-  void paintSelected(GC gc);
+  void paintSelected(GC gc, int x, int y);
 
   void moveEvent();
 

@@ -117,7 +117,7 @@ public class Waypoint implements Selectable {
 
 
   @Override
-  public void paintSelected(GC gc) {
+  public void paintSelected(GC gc, int x, int y) { // TODO:ADAPT X/Y
     Color c = gc.getForeground();
     gc.setForeground(Diagram.RED);
     gc.drawOval(x - SELECTED_SIZE, y - SELECTED_SIZE, SELECTED_SIZE * 2, SELECTED_SIZE * 2);

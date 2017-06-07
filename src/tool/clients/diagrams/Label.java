@@ -366,7 +366,7 @@ public class Label implements Selectable {
 	    }
 	  }
 
-  public void paintSelected(GC gc) {
+  public void paintSelected(GC gc, int x, int y) { // TODO:ADAPT X/Y
 	  if (hidden) return;
     Color c = gc.getForeground();
     gc.setForeground(Diagram.RED);
