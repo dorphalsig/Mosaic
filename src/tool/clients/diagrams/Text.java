@@ -203,6 +203,9 @@ public class Text implements Display {
 
   public void newText(String parentId, String id, String text, int x, int y, boolean editable, boolean underline, boolean italicise, int red, int green, int blue) {
   }
+  
+  public void newNestedDiagram(String parentId, String id, int x, int y, int width, int height, org.eclipse.swt.widgets.Composite canvas) {}
+
 
   public void paint(GC gc, int x, int y) {
 	    Font font = gc.getFont();

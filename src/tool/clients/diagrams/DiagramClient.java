@@ -38,6 +38,7 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
   static CTabFolder                  tabFolder;
   static Hashtable<String, CTabItem> tabs              = new Hashtable<String, CTabItem>();
   static Vector<Diagram>             diagrams          = new Vector<Diagram>();
+  transient static Vector<Diagram>   newlyCreatedDiagrams;
   static Font                        diagramFont       = new Font(XModeler.getXModeler().getDisplay(), new FontData("Courier New", 12, SWT.NO));
   static Font                        diagramItalicFont = new Font(XModeler.getXModeler().getDisplay(), new FontData("Courier New", 12, SWT.ITALIC));
 //  static java.awt.Font 				 diagramFont_AWT   = new java.awt.Font("Courier New", java.awt.Font.PLAIN, 16);
@@ -556,7 +557,6 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     final int fillGreen = message.args[15].intValue;
     final int fillBlue = message.args[16].intValue;
     newBox(parentId, id, x, y, width, height, curve, top, right, bottom, left, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
-
   }
 
   private void newBox(String parentId, String id, int x, int y, int width, int height, int curve, boolean top, boolean right, boolean bottom, boolean left, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue) {
@@ -569,6 +569,19 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     final Value id = message.args[0];
     final Value label = message.args[1];
     newDiagram(id.strValue(), label.strValue());
+  }
+  
+  private void newNestedDiagram(Message message) {
+    final Value parentId = message.args[0];
+    final Value groupId = message.args[1];
+    final Value x = message.args[2];
+    final Value y = message.args[3];
+    final Value width = message.args[4];
+    final Value height = message.args[5];
+    newlyCreatedDiagrams = new Vector<Diagram>(); // to avoid java.util.ConcurrentModificationException
+	  newNestedDiagram(parentId.strValue(), groupId.strValue(), x.intValue, y.intValue, width.intValue, height.intValue);
+	  diagrams.addAll(newlyCreatedDiagrams);
+    newlyCreatedDiagrams = null;
   }
 
   private void newDiagram(final String id, final String label) {
@@ -584,6 +597,13 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
         tabFolder.setSelection(item);
       }
     });
+  }
+  
+  private void newNestedDiagram(final String parentId, final String id, int x, int y, int width, int height) {
+	System.err.println("diagramClient->newNestedDiagram("+parentId+"->"+id+")");
+    for (Diagram diagram : diagrams) {
+        diagram.newNestedDiagram(parentId, id, x, y, width, height, null);
+      }
   }
 
   private void newEdge(final Message message) {
@@ -971,7 +991,9 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
   // Trying to use only one REMOVE command for ANY Button, TODO: remove others if that works
   public void sendMessage(final Message message) {
     if (message.hasName("newDiagram"))
-      newDiagram(message);
+        newDiagram(message);
+    else if (message.hasName("newGroup"))
+        newNestedDiagram(message);
     else if (message.hasName("removeAny"))
     	removeAny(message);
     else if (message.hasName("renameAny"))
@@ -1077,7 +1099,7 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     else if (message.hasName("showEdges"))
       showEdges(message); //Björn
     else if (message.hasName("setEditable"))
-    	setEditable(message); //Björn
+      setEditable(message); //Björn
     else super.sendMessage(message);
   }
 

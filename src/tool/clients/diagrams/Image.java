@@ -82,6 +82,8 @@ public class Image implements Display {
 
   }
 
+  public void newNestedDiagram(String parentId, String id, int x, int y, int width, int height, org.eclipse.swt.widgets.Composite canvas) {}
+
   public void resize(String id, int width, int height) {
     if (getId().equals(id)) {
       this.width = width;

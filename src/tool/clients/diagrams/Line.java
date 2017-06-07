@@ -125,5 +125,6 @@ public void showEdges(String id, boolean top, boolean bottom, boolean left,
 	// TODO Auto-generated method stub
 	
 }
+public void newNestedDiagram(String parentId, String id, int x, int y, int width, int height, org.eclipse.swt.widgets.Composite canvas) {}
 
 }

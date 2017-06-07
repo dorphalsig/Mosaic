@@ -26,7 +26,8 @@ public class Box implements Display {
   int             fillGreen;
   int             fillBlue;
   Vector<Display> displays = new Vector<Display>();
-
+  Diagram nestedDiagram = null;
+  
   public Box(String id, int x, int y, int width, int height, int curve, boolean top, boolean right, boolean bottom, boolean left, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue) {
     super();
     this.id = id;
@@ -153,6 +154,22 @@ public class Box implements Display {
       }
     }
   }
+  
+  public void newNestedDiagram(String parentId, String id, int x, int y, int width, int height, org.eclipse.swt.widgets.Composite canvas) {
+    if (getId().equals(parentId)) {
+      DiagramClient.theClient().runOnDisplay(new Runnable() {
+          public void run() {
+        	  Diagram diagram = new Diagram(id, canvas);
+        	  DiagramClient.newlyCreatedDiagrams.add(diagram);
+        	  Box.this.nestedDiagram = diagram;
+          }
+      });
+    } else {
+      for (Display display : displays) {
+        display.newNestedDiagram(parentId, id, x, y, width, height, canvas);
+      }
+    }
+  }
 
   public void newEllipse(String parentId, String id, int x, int y, int width, int height, boolean showOutline, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue) {
     if (parentId.equals(getId()))
@@ -207,6 +224,7 @@ public class Box implements Display {
       	gc.setForeground(lineColor);
       }
     }
+    if(nestedDiagram != null) nestedDiagram.paint(gc, x + getX(), y + getY());
   }
 
   public void paintHover(GC gc, int x, int y, int dx, int dy) {

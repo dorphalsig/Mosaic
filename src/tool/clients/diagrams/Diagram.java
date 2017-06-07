@@ -5,7 +5,6 @@ import java.util.Hashtable;
 import java.util.Vector;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.dnd.Clipboard;
@@ -26,6 +25,7 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.graphics.Transform;
 import org.eclipse.swt.widgets.Canvas;
+import org.eclipse.swt.widgets.Composite;
 
 import tool.clients.EventHandler;
 import tool.clients.menus.MenuClient;
@@ -107,7 +107,7 @@ public class Diagram implements Display {
    * @param id
    * @param parent
    */
-  public Diagram(String id, CTabFolder parent) {
+  public Diagram(String id, Composite parent) {
     container = new SashForm(parent, SWT.HORIZONTAL | SWT.BORDER);
     palette = new Palette(container, this);
     scroller = new ScrolledComposite(container, SWT.V_SCROLL | SWT.H_SCROLL);
@@ -361,6 +361,26 @@ public class Diagram implements Display {
     // Called when a diagram is a display element.
     // Currently does nothing.
   }
+  
+  private String getNestedDiagramID(int x, int y) {
+	  for (Node node : nodes) {
+		  if(node.contains(x,y)) {
+			  for(Display display : node.displays) {
+				  if(display instanceof Box) { 
+					  Box box = (Box) display;
+					  Diagram nestedDiagram = box.nestedDiagram;
+				  	  if(nestedDiagram != null) {
+						  String nestedDiagramID = nestedDiagram.getNestedDiagramID(x - node.getX(), y - node.getY());
+						  System.err.println("The nested diagram returned " + nestedDiagramID);
+						  if(nestedDiagramID != null) return nestedDiagramID;
+						  return nestedDiagram.id;
+					  }
+				  }
+			  }
+		  }
+	  }
+	  return null;
+  }
 
   private void magnetize(Waypoint waypoint) {
     // If we are in magnetic mode then select near way-points
@@ -465,7 +485,20 @@ public class Diagram implements Display {
       redraw();
     }
   }
-
+  
+  public void newNestedDiagram(String parentId, String id, int x, int y, int width, int height, org.eclipse.swt.widgets.Composite canvas) {
+    if (parentId.equals(getId())) {
+    	// System.err.println("Diagram(" + parentId + ")->newNestedDiagram(" + id + ")");
+    }
+    else {
+      for (Display display : displays)
+    	display.newNestedDiagram(parentId, id, x, y, width, height, this.canvas);
+      for (Node node : nodes) // should be only going through here
+        node.newNestedDiagram(parentId, id, x, y, width, height, this.canvas);
+    }
+    redraw();
+  }
+  
   public void newEdge(String id, String sourceId, String targetId, int refx, int refy, int sourceHead, int targetHead, int lineStyle, int red, int green, int blue, Integer sourceX, Integer sourceY, Integer targetX, Integer targetY) {
     Port sourcePort = getPort(sourceId);
     Node sourceNode = getNode(sourcePort);
@@ -1242,12 +1275,20 @@ public class Diagram implements Display {
 	      }
 	      redraw();
 	    } else if (nodeCreationType != null) {
-	      DiagramClient.theClient().newNode(nodeCreationType, id, event.x, event.y);
+	      String diagramID = id;  // default this
+		   // unless any node is hit
+	      String nestedDiagramID = getNestedDiagramID(event.x, event.y);
+	      if(nestedDiagramID != null) {
+	    	  diagramID = nestedDiagramID;
+//			  System.err.println("found diagramID: " + diagramID);
+		  }
+	      DiagramClient.theClient().newNode(nodeCreationType, diagramID, event.x, event.y);
 	      resetPalette();
 	    }
 	    
 	    if(updateID != null) action(updateID);
 	  }
+
 	  
 	  private void rightClick(MouseEvent event) {
 	    if (selection.isEmpty())

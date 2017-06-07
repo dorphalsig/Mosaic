@@ -106,6 +106,8 @@ public class Ellipse implements Display {
   public void newBox(String parentId, String id, int x, int y, int width, int height, int curve, boolean top, boolean right, boolean bottom, boolean left, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue) {
 
   }
+  
+  public void newNestedDiagram(String parentId, String id, int x, int y, int width, int height, org.eclipse.swt.widgets.Composite canvas) {}
 
   public void resize(String id, int width, int height) {
     if (getId().equals(id)) {

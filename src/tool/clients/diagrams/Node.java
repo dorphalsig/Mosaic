@@ -229,6 +229,12 @@ public class Node implements Selectable {
     Text text = new Text(id, s, x, y, editable, underline, italicise, red, green, blue);
     displays.add(text);
   }
+  
+  public void newNestedDiagram(String parentId, String id, int x, int y, int width, int height, org.eclipse.swt.widgets.Composite canvas) {
+	  for (Display display : displays) {
+		  display.newNestedDiagram(parentId, id, x, y, width, height, canvas);
+	  }
+  }
 
   public void newText(String parentId, String id, String text, int x, int y, boolean editable, boolean underline, boolean italicise, int red, int green, int blue) {
     if (parentId.equals(getId()))
