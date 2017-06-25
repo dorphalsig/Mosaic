@@ -691,7 +691,9 @@ public class FormsClient extends Client implements CTabFolder2Listener {
     else if (message.hasName("move"))
         move(message);
     else if (message.hasName("setSize"))
-        setSize(message);
+      setSize(message);
+    else if (message.hasName("delete"))
+      delete(message);
     else {
 //System.out.println("------- UNKNOWN");    	
     	super.sendMessage(message);
@@ -712,6 +714,12 @@ public class FormsClient extends Client implements CTabFolder2Listener {
     final Value height = message.args[2];
     for (Form form : forms)
       form.setSize(id.strValue(), width.intValue, height.intValue);
+  }
+  
+  private void delete(Message message) {
+    final Value id = message.args[0];
+    for (Form form : forms)
+      form.delete(id.strValue());
   }
 
   private void check(Message message) {

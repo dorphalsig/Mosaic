@@ -43,26 +43,27 @@ import xos.Value;
 
 public class Form implements MouseListener, SelectionListener {
 
-  static Font                   labelFont    = new Font(XModeler.getXModeler().getDisplay(), new FontData("Courier New", 12, SWT.NONE));
-  final static Color normalBackgroundColor = ColorManager.getColor(new RGB(255,255,255));
-  final static Color disabledBackgroundColor = ColorManager.getColor(new RGB(222,221,220));
-  final static Color modifiedBackgroundColor = ColorManager.getColor(new RGB(255,205,194)); // RGB(221,171,160)
-  final static int              RIGHT_BUTTON = 3;
+  static Font                   labelFont               = new Font(XModeler.getXModeler().getDisplay(), new FontData("Courier New", 12, SWT.NONE));
+  final static Color            normalBackgroundColor   = ColorManager.getColor(new RGB(255, 255, 255));
+  final static Color            disabledBackgroundColor = ColorManager.getColor(new RGB(222, 221, 220));
+  final static Color            modifiedBackgroundColor = ColorManager.getColor(new RGB(255, 205, 194));                                           // RGB(221,171,160)
+  final static int              RIGHT_BUTTON            = 3;
 
   String                        id;
   ScrolledComposite             form;
   Composite                     content;
-  Hashtable<String, Text>       textFields   = new Hashtable<String, Text>();
-  Hashtable<String, Text>       labels       = new Hashtable<String, Text>();
-  Hashtable<String, List>       lists        = new Hashtable<String, List>();
-  Hashtable<String, StyledText> boxes        = new Hashtable<String, StyledText>();
-  Hashtable<String, CCombo>     combos       = new Hashtable<String, CCombo>();
-  Hashtable<String, Button>     checks       = new Hashtable<String, Button>();
-  Hashtable<String, Button>     buttons      = new Hashtable<String, Button>();
-  Hashtable<String, Tree>       trees        = new Hashtable<String, Tree>();
-  Hashtable<String, TreeItem>   items        = new Hashtable<String, TreeItem>();
-  Hashtable<String, String>     images       = new Hashtable<String, String>();
-  private int TEXTFIELDHEIGHT = 20;
+  Hashtable<String, Text>       textFields              = new Hashtable<String, Text>();
+  Hashtable<String, Text>       labels                  = new Hashtable<String, Text>();
+  Hashtable<String, List>       lists                   = new Hashtable<String, List>();
+  Hashtable<String, StyledText> boxes                   = new Hashtable<String, StyledText>();
+  Hashtable<String, CCombo>     combos                  = new Hashtable<String, CCombo>();
+  Hashtable<String, Button>     checks                  = new Hashtable<String, Button>();
+  Hashtable<String, Button>     buttons                 = new Hashtable<String, Button>();
+  Hashtable<String, Tree>       trees                   = new Hashtable<String, Tree>();
+  Hashtable<String, TreeItem>   items                   = new Hashtable<String, TreeItem>();
+  Hashtable<String, String>     images                  = new Hashtable<String, String>();
+
+  private int                   TEXTFIELDHEIGHT         = 20;
 
   public Form(CTabFolder parent, String id) {
     this.id = id;
@@ -159,10 +160,12 @@ public class Form implements MouseListener, SelectionListener {
   private void doubleClick(Text item) {
     String id = getId(item);
     Message m = FormsClient.theClient().getHandler().newMessage("doubleSelected", 1);
-    try{
-    m.args[0] = new Value(id);
-    FormsClient.theClient().getHandler().raiseEvent(m);
-    } catch (Exception e) {System.err.println("Double click into nowhere detected...");}
+    try {
+      m.args[0] = new Value(id);
+      FormsClient.theClient().getHandler().raiseEvent(m);
+    } catch (Exception e) {
+      System.err.println("Double click into nowhere detected...");
+    }
   }
 
   public Hashtable<String, StyledText> getBoxes() {
@@ -246,54 +249,97 @@ public class Form implements MouseListener, SelectionListener {
   private boolean isRightClick(MouseEvent event) {
     return event.button == RIGHT_BUTTON;
   }
-  
-  public void move(String id, int x, int y) {
-	  FormsClient.theClient().runOnDisplay(new Runnable() {
 
-	  public void run() {
-	        if(combos.containsKey(id)) {combos.get(id).setLocation(x, y); return;}
-	        if(textFields.containsKey(id)) {textFields.get(id).setLocation(x, y); return;}
-	        if(labels.containsKey(id)) {labels.get(id).setLocation(x, y); return;}
-	        if(checks.containsKey(id)) {checks.get(id).setLocation(x, y); return;}
-	        if(buttons.containsKey(id)) {buttons.get(id).setLocation(x, y); return;}      
-	        if(boxes.containsKey(id)) {boxes.get(id).setLocation(x, y); return;}
-	        if(trees.containsKey(id)) {trees.get(id).setLocation(x, y); return;}
-	        if(lists.containsKey(id)) throw new RuntimeException("The move()-operation for List is not yet implemented...");  
-	        if(items.containsKey(id)) throw new RuntimeException("The move()-operation for TreeItem is not yet implemented...");
-	        if(images.containsKey(id)) throw new RuntimeException("The move()-operation for String/Image is not yet implemented...");
+  public void move(String id, int x, int y) {
+    FormsClient.theClient().runOnDisplay(new Runnable() {
+
+      public void run() {
+        if (combos.containsKey(id)) {
+          combos.get(id).setLocation(x, y);
+          return;
+        }
+        if (textFields.containsKey(id)) {
+          textFields.get(id).setLocation(x, y);
+          return;
+        }
+        if (labels.containsKey(id)) {
+          labels.get(id).setLocation(x, y);
+          return;
+        }
+        if (checks.containsKey(id)) {
+          checks.get(id).setLocation(x, y);
+          return;
+        }
+        if (buttons.containsKey(id)) {
+          buttons.get(id).setLocation(x, y);
+          return;
+        }
+        if (boxes.containsKey(id)) {
+          boxes.get(id).setLocation(x, y);
+          return;
+        }
+        if (trees.containsKey(id)) {
+          trees.get(id).setLocation(x, y);
+          return;
+        }
+        if (lists.containsKey(id)) throw new RuntimeException("The move()-operation for List is not yet implemented...");
+        if (items.containsKey(id)) throw new RuntimeException("The move()-operation for TreeItem is not yet implemented...");
+        if (images.containsKey(id)) throw new RuntimeException("The move()-operation for String/Image is not yet implemented...");
         throw new RuntimeException("The move()-operation for this type of Display is not yet implemented...");
-	  
+
         // These Displays need to be added:
-//	  Hashtable<String, List>       lists        = new Hashtable<String, List>();
-//	  Hashtable<String, TreeItem>   items        = new Hashtable<String, TreeItem>();
-//	  Hashtable<String, String>     images       = new Hashtable<String, String>();	   
-	  }
+        // Hashtable<String, List> lists = new Hashtable<String, List>();
+        // Hashtable<String, TreeItem> items = new Hashtable<String, TreeItem>();
+        // Hashtable<String, String> images = new Hashtable<String, String>();
+      }
     });
   }
-  
-  public void setSize(String id, int x, int y) {
-	  FormsClient.theClient().runOnDisplay(new Runnable() {
 
-	  public void run() {
-	        if(combos.containsKey(id)) {combos.get(id).setSize(x, y); return;}
-	        if(textFields.containsKey(id)) {textFields.get(id).setSize(x, y); return;}
-	        if(labels.containsKey(id)) {labels.get(id).setSize(x, y); return;}
-	        if(checks.containsKey(id)) {checks.get(id).setSize(x, y); return;}
-	        if(buttons.containsKey(id)) {buttons.get(id).setSize(x, y); return;}      
-	        if(boxes.containsKey(id)) {boxes.get(id).setSize(x, y); return;}
-	        if(trees.containsKey(id)) {trees.get(id).setSize(x, y); return;}
-	        if(lists.containsKey(id)) throw new RuntimeException("The setSize()-operation for List is not yet implemented...");  
-	        if(items.containsKey(id)) throw new RuntimeException("The setSize()-operation for TreeItem is not yet implemented...");
-	        if(images.containsKey(id)) throw new RuntimeException("The setSize()-operation for String/Image is not yet implemented...");
+  public void setSize(String id, int x, int y) {
+    FormsClient.theClient().runOnDisplay(new Runnable() {
+
+      public void run() {
+        if (combos.containsKey(id)) {
+          combos.get(id).setSize(x, y);
+          return;
+        }
+        if (textFields.containsKey(id)) {
+          textFields.get(id).setSize(x, y);
+          return;
+        }
+        if (labels.containsKey(id)) {
+          labels.get(id).setSize(x, y);
+          return;
+        }
+        if (checks.containsKey(id)) {
+          checks.get(id).setSize(x, y);
+          return;
+        }
+        if (buttons.containsKey(id)) {
+          buttons.get(id).setSize(x, y);
+          return;
+        }
+        if (boxes.containsKey(id)) {
+          boxes.get(id).setSize(x, y);
+          return;
+        }
+        if (trees.containsKey(id)) {
+          trees.get(id).setSize(x, y);
+          return;
+        }
+        if (lists.containsKey(id)) throw new RuntimeException("The setSize()-operation for List is not yet implemented...");
+        if (items.containsKey(id)) throw new RuntimeException("The setSize()-operation for TreeItem is not yet implemented...");
+        if (images.containsKey(id)) throw new RuntimeException("The setSize()-operation for String/Image is not yet implemented...");
         throw new RuntimeException("The setSize()-operation for this type of Display is not yet implemented...");
-	  
+
         // These Displays need to be added:
-//	  Hashtable<String, List>       lists        = new Hashtable<String, List>();
-//	  Hashtable<String, TreeItem>   items        = new Hashtable<String, TreeItem>();
-//	  Hashtable<String, String>     images       = new Hashtable<String, String>();	   
-	  }
+        // Hashtable<String, List> lists = new Hashtable<String, List>();
+        // Hashtable<String, TreeItem> items = new Hashtable<String, TreeItem>();
+        // Hashtable<String, String> images = new Hashtable<String, String>();
+      }
     });
-  }  
+  }
+
   public void mouseDoubleClick(MouseEvent event) {
     Widget widget = event.widget;
     if (widget instanceof Tree) {
@@ -316,12 +362,12 @@ public class Form implements MouseListener, SelectionListener {
       if (w instanceof StyledText) id = getId((StyledText) w);
       if (w instanceof Text) id = getId((Text) w);
       if (w instanceof Tree) {
-          Tree tree = (Tree) w;
-          if (tree.getSelectionCount() == 1) {
-            TreeItem item = tree.getSelection()[0];
-            id = getId(item);
-          }
+        Tree tree = (Tree) w;
+        if (tree.getSelectionCount() == 1) {
+          TreeItem item = tree.getSelection()[0];
+          id = getId(item);
         }
+      }
       if (id != null) MenuClient.popup(id, event.x, event.y);
     }
   }
@@ -334,7 +380,10 @@ public class Form implements MouseListener, SelectionListener {
     if (getId().equals(parentId)) {
       Button button = new Button(content, SWT.PUSH);
       button.addSelectionListener(this);
-      if(label.startsWith("Maximi")) {width+=16; x-=16;}
+      if (label.startsWith("Maximi")) {
+        width += 16;
+        x -= 16;
+      }
       button.setLocation(x, y);
       button.setSize(width, height);
       button.setText(label);
@@ -364,8 +413,8 @@ public class Form implements MouseListener, SelectionListener {
 
   public void newComboBox(String parentId, String id, int x, int y, int width, int height) {
     if (getId().equals(parentId)) {
-      System.err.println("newComboBox: " + x+","+y + " (" + width+"x"+height+")");
-      CCombo combo = new CCombo(content, /*SWT.READ_ONLY | */SWT.DROP_DOWN | SWT.BORDER);
+      System.err.println("newComboBox: " + x + "," + y + " (" + width + "x" + height + ")");
+      CCombo combo = new CCombo(content, /* SWT.READ_ONLY | */SWT.DROP_DOWN | SWT.BORDER);
       combo.addSelectionListener(this);
       combo.setLocation(x, y);
       combo.setSize(150, 25);
@@ -392,13 +441,13 @@ public class Form implements MouseListener, SelectionListener {
   }
 
   public void newText(String id, String string, int x, int y) {
-//		if(x > 200) {
-//			System.err.println("id: " + id + "," + x + "," + y + " " + string);
-//		}
-		if(string.trim().isEmpty()) return;
-//		if(string.length() < 2) { // leer?
-//			string = "id: " + id;
-//		}
+    // if(x > 200) {
+    // System.err.println("id: " + id + "," + x + "," + y + " " + string);
+    // }
+    if (string.trim().isEmpty()) return;
+    // if(string.length() < 2) { // leer?
+    // string = "id: " + id;
+    // }
     Text text = new Text(content, SWT.NONE);
     text.setText(string);
     text.setEditable(false);
@@ -415,49 +464,49 @@ public class Form implements MouseListener, SelectionListener {
     if (getId().equals(parentId)) {
       final StyledText text = new StyledText(content, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
       text.setFont(FormsClient.formLabelFont);
-      text.setLocation(x, y+10); // wrong y value received in the one and only call
+      text.setLocation(x, y + 10); // wrong y value received in the one and only call
       text.setSize(width, height);
       text.setEditable(editable);
       text.addMouseListener(this);
       { // set Monospace Font
-          FontData[] fontData = org.eclipse.swt.widgets.Display.getDefault().getSystemFont().getFontData();
-          XModeler.getXModeler().getDisplay().loadFont("dejavu/DejaVuSansMono.ttf");
-          fontData[0].setName("DejaVu Sans Mono");
-          text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
-          System.err.println("Set font: " + id + "/" + text);
-        }
+        FontData[] fontData = org.eclipse.swt.widgets.Display.getDefault().getSystemFont().getFontData();
+        XModeler.getXModeler().getDisplay().loadFont("dejavu/DejaVuSansMono.ttf");
+        fontData[0].setName("DejaVu Sans Mono");
+        text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
+        System.err.println("Set font: " + id + "/" + text);
+      }
       text.addModifyListener(new ModifyListener() {
-		@Override
-		public void modifyText(ModifyEvent m) {
-			text.setBackground(modifiedBackgroundColor);
-		}
-	  });
+        @Override
+        public void modifyText(ModifyEvent m) {
+          text.setBackground(modifiedBackgroundColor);
+        }
+      });
       boxes.put(id, text);
     }
   }
 
   public void newTextField(final String id, int x, int y, int width, int height, boolean editable) {
-	final Text text = new Text(content, SWT.BORDER);
+    final Text text = new Text(content, SWT.BORDER);
     text.setEditable(editable);
     text.setBackground(FormsClient.WHITE);
     text.setFont(FormsClient.getFormTextFieldFont());
-    text.setBounds(x, y, width, (TEXTFIELDHEIGHT*XModeler.getDeviceZoomPercent())/100+1);
-//    text.setLocation(x, y);
+    text.setBounds(x, y, width, (TEXTFIELDHEIGHT * XModeler.getDeviceZoomPercent()) / 100 + 1);
+    // text.setLocation(x, y);
     text.addMouseListener(this);
     textFields.put(id, text);
     Listener listener = new Listener() {
       public void handleEvent(Event event) {
         switch (event.type) {
-        case SWT.FocusOut:
-          textChangedEvent(id, text.getText());
-          break;
-        case SWT.Traverse:
-          switch (event.detail) {
-          case SWT.TRAVERSE_RETURN:
-          case SWT.TRAVERSE_ESCAPE:
+          case SWT.FocusOut:
             textChangedEvent(id, text.getText());
             break;
-          }
+          case SWT.Traverse:
+            switch (event.detail) {
+              case SWT.TRAVERSE_RETURN:
+              case SWT.TRAVERSE_ESCAPE:
+                textChangedEvent(id, text.getText());
+                break;
+            }
         }
       }
     };
@@ -475,20 +524,20 @@ public class Form implements MouseListener, SelectionListener {
       trees.put(id, tree);
     }
   }
-  
+
   public void maximiseToCanvas(String id) {
-	  Tree tree = trees.get(id);
-	  if (tree != null) {
-		  org.eclipse.swt.graphics.Point parentSize = tree.getParent().getSize();
-		  tree.setSize(parentSize);
-	  }
+    Tree tree = trees.get(id);
+    if (tree != null) {
+      org.eclipse.swt.graphics.Point parentSize = tree.getParent().getSize();
+      tree.setSize(parentSize);
+    }
   }
 
   public void changesMade(String id, boolean made) {
-	  StyledText text = boxes.get(id);
-	  if (text != null) {
-	      text.setBackground( made ? modifiedBackgroundColor : normalBackgroundColor);
-	  }
+    StyledText text = boxes.get(id);
+    if (text != null) {
+      text.setBackground(made ? modifiedBackgroundColor : normalBackgroundColor);
+    }
   }
 
   private void selected(Button b) {
@@ -528,18 +577,18 @@ public class Form implements MouseListener, SelectionListener {
     if (textFields.containsKey(id)) {
       Text text = textFields.get(id);
       text.setText(string);
-//      text.pack();
-//      form.setMinSize(content.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+      // text.pack();
+      // form.setMinSize(content.computeSize(SWT.DEFAULT, SWT.DEFAULT));
     }
     if (boxes.containsKey(id)) {
       StyledText text = boxes.get(id);
       text.setText(string);
       text.setBackground(normalBackgroundColor);
-//      text.pack();
+      // text.pack();
     }
     if (items.containsKey(id)) {
-    	TreeItem item = items.get(id);
-    	item.setText(string);
+      TreeItem item = items.get(id);
+      item.setText(string);
     }
   }
 
@@ -663,10 +712,47 @@ public class Form implements MouseListener, SelectionListener {
     else return null;
   }
 
-public void removeItem(String id) {
-	if(items.containsKey(id)){
-		TreeItem ti = items.get(id);
-		ti.dispose();
-	}
-}
+  public void removeItem(String id) {
+    if (items.containsKey(id)) {
+      TreeItem ti = items.get(id);
+      ti.dispose();
+    }
+  }
+
+  public void delete(String id) {
+    FormsClient.theClient().runOnDisplay(new Runnable() {
+      public void run() {
+        if (combos.containsKey(id)) {
+          combos.get(id).dispose();
+          combos.remove(id);
+        } else if (textFields.containsKey(id)) {
+          textFields.get(id).dispose();
+          textFields.remove(id);
+        } else if (labels.containsKey(id)) {
+          labels.get(id).dispose();
+          labels.remove(id);
+        } else if (checks.containsKey(id)) {
+          labels.get(id).dispose();
+          labels.remove(id);
+        } else if (buttons.containsKey(id)) {
+          labels.get(id).dispose();
+          labels.remove(id);
+        } else if (boxes.containsKey(id)) {
+          labels.get(id).dispose();
+          labels.remove(id);
+        } else if (trees.containsKey(id)) {
+          labels.get(id).dispose();
+          labels.remove(id);
+        } else if (lists.containsKey(id)) {
+          lists.get(id).list.dispose();
+          lists.remove(id);
+        } else if (items.containsKey(id)) {
+          items.get(id).dispose();
+          items.remove(id);
+        } else if (images.containsKey(id)) {
+          images.remove(id);
+        } else System.err.println("Cannot delete " + id);
+      }
+    });
+  }
 }
