@@ -356,20 +356,32 @@ public class Form implements MouseListener, SelectionListener {
   }
 
   public void mouseDown(MouseEvent event) {
-    if (isRightClick(event) || isCommand(event)) {
-      String id = null;
-      Widget w = event.widget;
-      if (w instanceof StyledText) id = getId((StyledText) w);
-      if (w instanceof Text) id = getId((Text) w);
-      if (w instanceof Tree) {
-        Tree tree = (Tree) w;
-        if (tree.getSelectionCount() == 1) {
-          TreeItem item = tree.getSelection()[0];
-          id = getId(item);
-        }
+    String id = null;
+    boolean isRightClick = isRightClick(event);
+    boolean isCommand = isCommand(event);
+
+    Widget w = event.widget;
+    if (w instanceof StyledText) id = getId((StyledText) w);
+    if (w instanceof Text) id = getId((Text) w);
+    if (w instanceof Tree) {
+      Tree tree = (Tree) w;
+      if (tree.getSelectionCount() == 1) {
+        TreeItem item = tree.getSelection()[0];
+        id = getId(item);
       }
-      if (id != null) MenuClient.popup(id, event.x, event.y);
     }
+    if (id != null) {
+      if (isRightClick || isCommand)
+        MenuClient.popup(id, event.x, event.y);
+      else select(id);
+    }
+  }
+
+  private void select(String id) {
+    EventHandler handler = FormsClient.theClient().getHandler();
+    Message m = FormsClient.theClient().getHandler().newMessage("selected", 1);
+    m.args[0] = new Value(id);
+    handler.raiseEvent(m);
   }
 
   public void mouseUp(MouseEvent event) {

@@ -3,9 +3,7 @@ package tool.clients.editors;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.Arrays;
 import java.util.Hashtable;
-import java.util.Timer;
 import java.util.Vector;
 
 import org.eclipse.swt.SWT;
@@ -23,8 +21,6 @@ import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.custom.VerifyKeyListener;
 import org.eclipse.swt.dnd.Clipboard;
 import org.eclipse.swt.dnd.ImageTransfer;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.MouseWheelListener;
@@ -40,7 +36,6 @@ import org.eclipse.swt.graphics.GlyphMetrics;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
-import org.eclipse.swt.graphics.PaletteData;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Display;
@@ -65,12 +60,14 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
   private static final int           ZOOM          = 2;
   private static final int           MAX_FONT_SIZE = 40;
   private static final int           MIN_FONT_SIZE = 2;
+  private static final int           LEFT_BUTTON   = 1;
+  private static final int           MIDDLE_BUTTON = 2;
   private static final int           RIGHT_BUTTON  = 3;
 
   String                             id;
   String                             label;
   StyledText                         text;
-  FontData                           fontData;//      = new FontData("Courier", 12, SWT.NO);
+  FontData                           fontData;                                                // = new FontData("Courier", 12, SWT.NO);
   Hashtable<String, PPrint>          atTable       = new Hashtable<String, PPrint>();
   Hashtable<String, Vector<Keyword>> keyTable      = new Hashtable<String, Vector<Keyword>>();
   Vector<WordRule>                   wordRules     = new Vector<WordRule>();
@@ -80,11 +77,11 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
   int[]                              offsets       = new int[] {};
   boolean                            lineNumbers   = true;
   boolean                            dirty         = false;
-  boolean                            autoComplete  = true;
+  boolean                            autoComplete  = false;
   char                               lastChar      = '\0';
-  int    							 syntaxDirty   = 0; // counter for delaying syntax highlighting update
-  
-  private boolean syntaxBusy;
+  int                                syntaxDirty   = 0;                                       // counter for delaying syntax highlighting update
+
+  private boolean                    syntaxBusy;
 
   public TextEditor(String id, String label, CTabFolder parent, boolean editable, boolean lineNumbers, String s) {
     this.id = id;
@@ -200,110 +197,110 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
 
   public void addMultilineRule(String id, String start, String end, int red, int green, int blue) {
     if (getId().equals(id)) {
-    	wordRules.add(new MultiLineRule(start, end, new Color(XModeler.getXModeler().getDisplay(), red, green, blue)));
+      wordRules.add(new MultiLineRule(start, end, new Color(XModeler.getXModeler().getDisplay(), red, green, blue)));
     }
   }
 
-	private void addStyles() {
-		addStylesQueueRequest(0, text.getText().length(), text.getText());
-//		System.err.println("addStyles START");
-//		if (text.getCharCount() > 0) {
-//			final StyleRange[] styleRanges = styleRanges();
-//			System.err.println("addStyles MITTE");
-//			Display.getCurrent().asyncExec(new Runnable() {
-//				@Override
-//				public void run() {
-//					text.replaceStyleRanges(0, text.getCharCount() - 1, styleRanges);
-//				}
-//			});
-//		}
-//		System.err.println("addStyles ENDE");
-	}
+  private void addStyles() {
+    addStylesQueueRequest(0, text.getText().length(), text.getText());
+    // System.err.println("addStyles START");
+    // if (text.getCharCount() > 0) {
+    // final StyleRange[] styleRanges = styleRanges();
+    // System.err.println("addStyles MITTE");
+    // Display.getCurrent().asyncExec(new Runnable() {
+    // @Override
+    // public void run() {
+    // text.replaceStyleRanges(0, text.getCharCount() - 1, styleRanges);
+    // }
+    // });
+    // }
+    // System.err.println("addStyles ENDE");
+  }
 
-//  private void addStyles(int i, int length, String s) {
-//    int start = backupToPossibleStyleStart(i);
-//    int end = start + length + (i - start);
-//    StyleRange[] ranges = styleRange(start, end, s);
-//    for (StyleRange range : ranges)
-//      end = Math.max(end, range.start + range.length);
-//    if (ranges.length > 0 && s.length() > 0) text.replaceStyleRanges(start, end - start, ranges);
-//  }
-  
-  
+  // private void addStyles(int i, int length, String s) {
+  // int start = backupToPossibleStyleStart(i);
+  // int end = start + length + (i - start);
+  // StyleRange[] ranges = styleRange(start, end, s);
+  // for (StyleRange range : ranges)
+  // end = Math.max(end, range.start + range.length);
+  // if (ranges.length > 0 && s.length() > 0) text.replaceStyleRanges(start, end - start, ranges);
+  // }
+
   private void addStylesQueueRequest(int start, int length, String s) {
-//	  System.err.println(start + " ---> " + length);
-	  int startNew = backupToPossibleStyleStart(start);
-	  length = length + start - startNew;
-	  start = startNew;
-//	  System.err.println(start + " ---> " + length);
-	  if(syntaxBusy) {
-//		  System.err.println("syntaxBusy, request queued");
-		  styleQueue.add(new StyleQueueItem(start, length, s));
-	  } else {
-		  // Todo: if syntax is not busy but a request got stuck
-//		  System.err.println("request not queued");
-		  if(styleQueue.size() != 0) System.err.println("A request got stuck");
-		  syntaxBusy = true;
-		  addStylesNew(start, length, s);
-	  }
+    // System.err.println(start + " ---> " + length);
+    int startNew = backupToPossibleStyleStart(start);
+    length = length + start - startNew;
+    start = startNew;
+    // System.err.println(start + " ---> " + length);
+    if (syntaxBusy) {
+      // System.err.println("syntaxBusy, request queued");
+      styleQueue.add(new StyleQueueItem(start, length, s));
+    } else {
+      // Todo: if syntax is not busy but a request got stuck
+      // System.err.println("request not queued");
+      if (styleQueue.size() != 0) System.err.println("A request got stuck");
+      syntaxBusy = true;
+      addStylesNew(start, length, s);
+    }
   }
-  
-  private class StyleQueueItem{
-	  final int start;
-	  final int length;
-	  final String s;
-	  
-	public StyleQueueItem(int start, int length, String s) {
-		super();
-		this.start = start;
-		this.length = length;
-		this.s = s;
-	}
+
+  private class StyleQueueItem {
+    final int    start;
+    final int    length;
+    final String s;
+
+    public StyleQueueItem(int start, int length, String s) {
+      super();
+      this.start = start;
+      this.length = length;
+      this.s = s;
+    }
   }
-  
+
   private Vector<StyleQueueItem> styleQueue = new Vector<StyleQueueItem>();
-  
-	private void addStylesNew(final int start, final int length, final String s) {
-		// System.err.println("\n");
-		RuntimeException err = new RuntimeException();
-//		StackTraceElement el = err.getStackTrace()[1];
 
-		final Display display = Display.getCurrent();
-		if (text.getCharCount() > 0) {
-			Thread thread = new Thread(new Runnable() {
-				@Override
-				public void run() {
-					final StyleRange[] styleRanges = styleRange(start, start + length, s);
-					if (styleRanges != null && styleRanges.length > 0) {
-						display.asyncExec(new Runnable() {
-							@Override
-							public void run() {
-								try{
-									text.replaceStyleRanges(start, length, styleRanges);
-								} catch (Exception e) {}
-							}
-						});
-					}
-					if (styleQueue.size() != 0) {
-						final StyleQueueItem next = styleQueue.remove(0);
-//						System.err.println("request unqueued");
-						display.asyncExec(new Runnable() {
-							@Override
-							public void run() {
-								addStylesNew(next.start, next.length, next.s);
-							}
-						});
-					} else {
-						syntaxBusy = false;
-					}
-				}
-			});
+  private void addStylesNew(final int start, final int length, final String s) {
+    // System.err.println("\n");
+    RuntimeException err = new RuntimeException();
+    // StackTraceElement el = err.getStackTrace()[1];
 
-			thread.start();
-		} else {
-			syntaxBusy = false;
-		}
-	}
+    final Display display = Display.getCurrent();
+    if (text.getCharCount() > 0) {
+      Thread thread = new Thread(new Runnable() {
+        @Override
+        public void run() {
+          final StyleRange[] styleRanges = styleRange(start, start + length, s);
+          if (styleRanges != null && styleRanges.length > 0) {
+            display.asyncExec(new Runnable() {
+              @Override
+              public void run() {
+                try {
+                  text.replaceStyleRanges(start, length, styleRanges);
+                } catch (Exception e) {
+                }
+              }
+            });
+          }
+          if (styleQueue.size() != 0) {
+            final StyleQueueItem next = styleQueue.remove(0);
+            // System.err.println("request unqueued");
+            display.asyncExec(new Runnable() {
+              @Override
+              public void run() {
+                addStylesNew(next.start, next.length, next.s);
+              }
+            });
+          } else {
+            syntaxBusy = false;
+          }
+        }
+      });
+
+      thread.start();
+    } else {
+      syntaxBusy = false;
+    }
+  }
 
   public void addWordRule(String id, String text, int red, int green, int blue) {
     if (getId().equals(id)) wordRules.add(new WordRule(text, new Color(XModeler.getXModeler().getDisplay(), red, green, blue)));
@@ -333,17 +330,17 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
   }
 
   private int backupToPossibleStyleStart(int start) {
-	start -= 10;
-	if(start < 0) return 0;
-	StyleRange[] ranges = text.getStyleRanges();
-//	System.err.println("start: " + start);
-	for(int i = 0; i < ranges.length; i++) {
-//		System.err.println("rangeStart: " + ranges[i].start);
-//		System.err.println("rangeEnd: " + (ranges[i].start + ranges[i].length));
-		if(ranges[i].start <= start && ranges[i].start + ranges[i].length >= start) return ranges[i].start;
-	}
-//	System.err.println("findStartFailed");
-	  
+    start -= 10;
+    if (start < 0) return 0;
+    StyleRange[] ranges = text.getStyleRanges();
+    // System.err.println("start: " + start);
+    for (int i = 0; i < ranges.length; i++) {
+      // System.err.println("rangeStart: " + ranges[i].start);
+      // System.err.println("rangeEnd: " + (ranges[i].start + ranges[i].length));
+      if (ranges[i].start <= start && ranges[i].start + ranges[i].length >= start) return ranges[i].start;
+    }
+    // System.err.println("findStartFailed");
+
     String s = text.getText();
     while (start > 0 && s.charAt(start) != ' ') // isKeywordChar2(s.charAt(start)))
       start--;
@@ -568,14 +565,14 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
   private boolean isAlpha(char c) {
     return 'a' <= c && c <= 'z';
   }
-  
-//  private boolean isNumber(char c) {
-//	    return '0' <= c && c <= '9';
-//  }
 
-//  private boolean isAlphaChar(char c) {
-//    return isLowerAlphaChar(c) || isUpperAlphaChar(c);
-//  }
+  // private boolean isNumber(char c) {
+  // return '0' <= c && c <= '9';
+  // }
+
+  // private boolean isAlphaChar(char c) {
+  // return isLowerAlphaChar(c) || isUpperAlphaChar(c);
+  // }
 
   private boolean isCommand(MouseEvent event) {
     return (event.stateMask & SWT.COMMAND) != 0;
@@ -585,29 +582,29 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
     return dirty;
   }
 
-//  private boolean isKeywordChar(char c) {
-//    return isAlphaChar(c) || c == '_';
-//  }
-//  
-//  private boolean isKeywordChar2(char c) {
-//	    return isAlphaChar(c) || isNumber(c) || c == '_' || c == '.' || c == '-' ;
-//  }
+  // private boolean isKeywordChar(char c) {
+  // return isAlphaChar(c) || c == '_';
+  // }
+  //
+  // private boolean isKeywordChar2(char c) {
+  // return isAlphaChar(c) || isNumber(c) || c == '_' || c == '.' || c == '-' ;
+  // }
 
   public boolean isLeft(MouseEvent event) {
     return event.button == 1;
   }
 
-//  private boolean isLowerAlphaChar(char c) {
-//    return 'a' <= c && 'z' >= c;
-//  }
+  // private boolean isLowerAlphaChar(char c) {
+  // return 'a' <= c && 'z' >= c;
+  // }
 
   private boolean isRightClick(MouseEvent event) {
-    return event.button == RIGHT_BUTTON;
+    return event.button == RIGHT_BUTTON || isCntrl(event);
   }
 
-//  private boolean isUpperAlphaChar(char c) {
-//    return 'A' <= c && 'Z' >= c;
-//  }
+  // private boolean isUpperAlphaChar(char c) {
+  // return 'A' <= c && 'Z' >= c;
+  // }
 
   private void key(Vector<Keyword> keys) {
     if (keys.size() == 1) {
@@ -654,38 +651,38 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
   public void lineGetBackground(LineBackgroundEvent event) {
     if (highlights.contains(event.lineOffset)) event.lineBackground = EditorClient.LINE_HIGHLIGHT;
   }
-  
-  public void modifyText(ExtendedModifyEvent event) {
-		if (!dirty) {
-			Message message = EditorClient.theClient().getHandler().newMessage("textDirty", 2);
-			message.args[0] = new Value(getId());
-			message.args[1] = new Value(true);
-			EditorClient.theClient().getHandler().raiseEvent(message);
 
-			dirty = true;
-		}
-//		System.err.println("start: " + event.start);
-//		System.err.println("length: " + event.length);
-		int start = event.start;
-		int length = event.length;
-		if (length > 0)	addStylesQueueRequest(start, length, text.getText());
-		if (autoComplete) checkKeywords();
-		
-//		addStylesNew(start, length, s);
-		
-		syntaxDirty++;
-		Display.getCurrent().timerExec(3000, new Runnable() {
-			@Override
-	    	public void run() {
-				syntaxDirty--;
-				if(syntaxDirty == 0) {
-					addStyles();
-				}
-			}
-		});
-		
-		addLines();
-	}
+  public void modifyText(ExtendedModifyEvent event) {
+    if (!dirty) {
+      Message message = EditorClient.theClient().getHandler().newMessage("textDirty", 2);
+      message.args[0] = new Value(getId());
+      message.args[1] = new Value(true);
+      EditorClient.theClient().getHandler().raiseEvent(message);
+
+      dirty = true;
+    }
+    // System.err.println("start: " + event.start);
+    // System.err.println("length: " + event.length);
+    int start = event.start;
+    int length = event.length;
+    if (length > 0) addStylesQueueRequest(start, length, text.getText());
+    if (autoComplete) checkKeywords();
+
+    // addStylesNew(start, length, s);
+
+    syntaxDirty++;
+    Display.getCurrent().timerExec(3000, new Runnable() {
+      @Override
+      public void run() {
+        syntaxDirty--;
+        if (syntaxDirty == 0) {
+          addStyles();
+        }
+      }
+    });
+
+    addLines();
+  }
 
   public void mouseDoubleClick(MouseEvent event) {
 
@@ -701,32 +698,30 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
 
   }
 
-  
   @Override
-	public void mouseScrolled(MouseEvent e) {
-		if (((e.stateMask & SWT.CTRL) == SWT.CTRL) && (e.count > 0)) {
-			fontData.setHeight(Math.min(fontData.getHeight() + ZOOM, MAX_FONT_SIZE));
-			text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
-		}
-		if (((e.stateMask & SWT.CTRL) == SWT.CTRL) && (e.count < 0)) {
-			fontData.setHeight(Math.max(MIN_FONT_SIZE, fontData.getHeight() - ZOOM));
-			text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
-		}
-	}
+  public void mouseScrolled(MouseEvent e) {
+    if (isCntrl(e) && (e.count > 0)) {
+      fontData.setHeight(Math.min(fontData.getHeight() + ZOOM, MAX_FONT_SIZE));
+      text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
+    }
+    if (isCntrl(e) && (e.count < 0)) {
+      fontData.setHeight(Math.max(MIN_FONT_SIZE, fontData.getHeight() - ZOOM));
+      text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
+    }
+  }
 
-	private void newline(int indent) {
-		text.insert("\n");
-		try {
-			text.setCaretOffset(text.getCaretOffset() + 1);
-			for (int i = 0; i < indent; i++)
-				text.insert(" ");
-			text.setCaretOffset(text.getCaretOffset() + indent);
-		} catch (IllegalArgumentException iae) {
-			System.err.println(
-					"This exception caused the program to freeze.\n Whatever went wrong, now it does not freeze for this reason anymore.");
-			iae.printStackTrace();
-		}
-	}
+  private void newline(int indent) {
+    text.insert("\n");
+    try {
+      text.setCaretOffset(text.getCaretOffset() + 1);
+      for (int i = 0; i < indent; i++)
+        text.insert(" ");
+      text.setCaretOffset(text.getCaretOffset() + indent);
+    } catch (IllegalArgumentException iae) {
+      System.err.println("This exception caused the program to freeze.\n Whatever went wrong, now it does not freeze for this reason anymore.");
+      iae.printStackTrace();
+    }
+  }
 
   private PPrint operation() {
     return new Seq(new Literal("@Operation name(args)"), new Indent(new Seq(new NewLine(), new Literal("body"))), new NewLine(), new Literal("end"));
@@ -814,7 +809,7 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
 
   private StyleRange[] styleRange(int start, int end, String s) {
     java.util.List<StyleRange> ranges = new java.util.ArrayList<StyleRange>();
-//    String s = text.getText();
+    // String s = text.getText();
     int prevChar = -1;
     for (int i = start; i < end; i++) {
       StyleRange style = null;
@@ -826,29 +821,37 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
           break;
         }
       }
-      if(style == null) {
-    	  StyleRange defaultStyle = new StyleRange();
-    	  defaultStyle.start = i;
-    	  defaultStyle.length = 1;
-    	  defaultStyle.fontStyle = SWT.UNDERLINE_SINGLE;
-    	  defaultStyle.foreground = new Color(Display.getCurrent(), 0,0,0);
-    	  ranges.add(defaultStyle);
+      if (style == null) {
+        StyleRange defaultStyle = new StyleRange();
+        defaultStyle.start = i;
+        defaultStyle.length = 1;
+        defaultStyle.fontStyle = SWT.UNDERLINE_SINGLE;
+        defaultStyle.foreground = new Color(Display.getCurrent(), 0, 0, 0);
+        ranges.add(defaultStyle);
       }
       prevChar = s.charAt(i);
     }
     return (StyleRange[]) ranges.toArray(new StyleRange[0]);
   }
 
-//  private StyleRange[] styleRanges() {
-//	  return styleRange(0, text.getText().length(), text.getText());
-//  }
+  // private StyleRange[] styleRanges() {
+  // return styleRange(0, text.getText().length(), text.getText());
+  // }
 
   private PPrint typeCase() {
     return new Seq(new Indent(new Seq(new Literal("@TypeCase(exp)"), new NewLine(), new Indent(new Seq(new Literal("exp"), new Space(), new Literal("do"), new NewLine(), new Literal("exp"))), new NewLine(), new Literal("end"), new NewLine(), new Literal("else"), new Space(), new Literal("exp"))), new NewLine(), new Literal("end"));
   }
 
+  private boolean isCntrl(VerifyEvent e) {
+    return (e.stateMask & SWT.CTRL) == SWT.CTRL || (e.stateMask & SWT.COMMAND) == SWT.COMMAND;
+  }
+
+  private boolean isCntrl(MouseEvent e) {
+    return (e.stateMask & SWT.CTRL) == SWT.CTRL || (e.stateMask & SWT.COMMAND) == SWT.COMMAND;
+  }
+
   public void verifyKey(VerifyEvent e) {
-    if (((e.stateMask & SWT.CTRL) == SWT.CTRL) && (e.keyCode == '=')) {
+    if (isCntrl(e) && (e.keyCode == '=')) {
       if (selectedImage != null)
         growSelectedImage();
       else {
@@ -857,7 +860,7 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
         e.doit = false;
       }
     }
-    if (((e.stateMask & SWT.CTRL) == SWT.CTRL) && (e.keyCode == '-')) {
+    if (isCntrl(e) && (e.keyCode == '-')) {
       if (selectedImage != null)
         shrinkSelectedImage();
       else {
@@ -866,20 +869,20 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
         e.doit = false;
       }
     }
-    if (((e.stateMask & SWT.CTRL) == SWT.CTRL) && (e.keyCode == 'f')) {
+    if (isCntrl(e) && (e.keyCode == 'f')) {
       FindUtil.show(XModeler.getXModeler(), text);
       e.doit = false;
     }
-    if (((e.stateMask & SWT.CTRL) == SWT.CTRL) && (e.keyCode == 's')) {
+    if (isCntrl(e) && (e.keyCode == 's')) {
       save();
       e.doit = false;
     }
-    if (((e.stateMask & SWT.CTRL) == SWT.CTRL) && (e.keyCode == 'l')) {
+    if (isCntrl(e) && (e.keyCode == 'l')) {
       lineNumbers = !lineNumbers;
       addLines();
       e.doit = false;
     }
-    if (((e.stateMask & SWT.CTRL) == SWT.CTRL) && (e.keyCode == 'v')) {
+    if (isCntrl(e) && (e.keyCode == 'v')) {
       Display display = XModeler.getXModeler().getDisplay();
       Clipboard clipboard = new Clipboard(display);
       ImageData imageData = (ImageData) clipboard.getContents(ImageTransfer.getInstance());
@@ -972,7 +975,7 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
     out.print(" label='" + label + "'");
     out.print(" toolTip='" + toolTip + "'");
     out.print(" editable='" + text.getEditable() + "'>");
-//    out.print(" fontHeight='" + fontData.getHeight() + "'>");
+    // out.print(" fontHeight='" + fontData.getHeight() + "'>");
     for (WordRule rule : wordRules)
       rule.writeXML(out);
     out.print("</TextEditor>");
