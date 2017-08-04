@@ -1,5 +1,11 @@
+=== Version 1.0.6 ===== 04.08.2017
+- Added further snippets
+
 === Version 1.0.5 ===== 05.07.2017
 - Added further snippets
+
+=== Version 1.0.4 ===== 22.05.2017
+- Fixed problems with XTools examples 
 
 === Version 1.0.4 ===== 22.05.2017
 - Fixed problems with XTools examples 
