@@ -1,6 +1,7 @@
 package tool.clients.diagrams;
 
 import java.io.PrintStream;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Vector;
 
@@ -1596,9 +1597,37 @@ public class Diagram implements Display {
    * Selections
    */
   
-  private void select(int stateMask, int x, int y) {
+    private transient HashMap<String,Point> nestedDiagramOffsets = new HashMap<String,Point>();
+  
+	private Vector<Diagram> getNestedDiagrams() {
+		nestedDiagramOffsets.clear();
+		Vector<Diagram> nestedDiagrams = new Vector<Diagram>();
+		for (Node node : nodes) {
+			for (Display display : node.displays) {
+				if (display instanceof Box) {
+					Box box = (Box) display;
+					Diagram nestedDiagram = box.nestedDiagram;
+					if (nestedDiagram != null) {
+						nestedDiagrams.add(nestedDiagram);
+						nestedDiagramOffsets.put(nestedDiagram.id, new Point(node.x, node.y));			
+					}
+				}
+			}
+		}
+		return nestedDiagrams;
+	}
+  
+  private boolean select(int stateMask, int x, int y) {
     boolean selected = false;
+    boolean somethingWasDone = false;
     boolean isShift = (stateMask & SWT.SHIFT) == SWT.SHIFT;
+    for(Diagram nestedDiagram : getNestedDiagrams()) {
+//    	System.err.println(x);
+    	somethingWasDone |= nestedDiagram.select(stateMask, x-nestedDiagramOffsets.get(nestedDiagram.id).x, y-nestedDiagramOffsets.get(nestedDiagram.id).y);
+    	nestedDiagram.lastX = x-nestedDiagramOffsets.get(nestedDiagram.id).x;
+    	nestedDiagram.lastY = y-nestedDiagramOffsets.get(nestedDiagram.id).y;
+    }
+    if(somethingWasDone) return true;
     if (!selected) {
       for (Edge edge : edges) {
         for (Waypoint waypoint : edge.getWaypoints()) {
@@ -1646,7 +1675,7 @@ public class Diagram implements Display {
     for (Node node : nodes) {
       if (!selected && node.contains(x, y)) {
         // If all else fails we might be selecting a node.
-        // Trying nodes last allows the other elements behind
+        // Trying no8des last allows the other elements behind
         // nodes to be selected...
         mode = MouseMode.SELECTED;
         if (!isShift && !selected(node)) deselectAll();
@@ -1686,6 +1715,7 @@ public class Diagram implements Display {
       bandX = x;
       bandY = y;
     }
+    return selected;
   }
 
   private void select(Selectable selectable) {
@@ -1717,9 +1747,12 @@ public class Diagram implements Display {
     selection.clear();
     selectedEdge = null;
     selectedNode = null;
+    for(Diagram child : getNestedDiagrams()) {
+      child.deselectAll();
+    }
   }
 
-  private boolean selected(Selectable selectable) {
+private boolean selected(Selectable selectable) {
     return selection.contains(selectable);
   }
 
