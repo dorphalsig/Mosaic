@@ -127,4 +127,11 @@ public void showEdges(String id, boolean top, boolean bottom, boolean left,
 }
 public void newNestedDiagram(String parentId, String id, int x, int y, int width, int height, org.eclipse.swt.widgets.Composite canvas) {}
 
+@Override
+public void newShape(String parentId, String id, int x, int y, int width, int height, boolean showOutline, int lineRed,
+		int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue, int[] points) {
+	// TODO Auto-generated method stub
+	
+}
+
 }

@@ -180,6 +180,16 @@ public class Box implements Display {
     }
   }
 
+  public void newShape(String parentId, String id, int x, int y, int width, int height, boolean showOutline, int lineRed,
+			int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue, int[] points) {
+	    if (parentId.equals(getId()))
+	        displays.add(new Shape(id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue,points));
+	      else {
+	        for (Display display : displays)
+	          display.newShape(parentId, id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue,points);
+	      }
+	}
+  
   public void newMultilineText(String parentId, String id, String text, int x, int y, int width, int height, boolean editable, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue, String font) {
     if (getId().equals(parentId)) {
       MultilineText t = new MultilineText(id, text, x, y, width, height, editable, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, font);
@@ -309,10 +319,11 @@ public class Box implements Display {
       display.setFont(id, fontData);
   }
 
-@Override
 public void setEditable(String id, boolean editable) {
     for (Display display : displays)
 	      display.setEditable(id, editable);
 	
 }
+
+
 }

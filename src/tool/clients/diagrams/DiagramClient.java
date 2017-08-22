@@ -653,6 +653,29 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     newEllipse(parentId, id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue);
   }
 
+  private void newShape(Message message) {
+	    String parentId = message.args[0].strValue();
+	    String id = message.args[1].strValue();
+	    int x = message.args[2].intValue;
+	    int y = message.args[3].intValue;
+	    int width = message.args[4].intValue;
+	    int height = message.args[5].intValue;
+	    boolean showOutline = message.args[6].boolValue;
+	    int lineRed = message.args[7].intValue;
+	    int lineGreen = message.args[8].intValue;
+	    int lineBlue = message.args[9].intValue;
+	    int fillRed = message.args[10].intValue;
+	    int fillGreen = message.args[11].intValue;
+	    int fillBlue = message.args[12].intValue;
+	    int[] points = new int[message.args[13].values.length];
+    
+	    for (int i = 0; i < message.args[13].values.length; i++) {
+			points[i] = message.args[13].values[i].intValue;
+		} 
+	    
+	    newShape(parentId, id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue,points);
+	  }
+  
   private void newEllipse(final String parentId, final String id, final int x, final int y, final int width, final int height, final boolean showOutline, final int lineRed, final int lineGreen, final int lineBlue, final int fillRed, final int fillGreen, final int fillBlue) {
     runOnDisplay(new Runnable() {
       public void run() {
@@ -662,6 +685,15 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     });
   }
 
+  private void newShape(final String parentId, final String id, final int x, final int y, final int width, final int height, final boolean showOutline, final int lineRed, final int lineGreen, final int lineBlue, final int fillRed, final int fillGreen, final int fillBlue, final int[] points) {
+	    runOnDisplay(new Runnable() {
+	      public void run() {
+	        for (Diagram d : diagrams)
+	          d.newShape(parentId, id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue,points);
+	      }
+	    });
+	  }
+  
   private void newGroup(final String diagramId, final String name) {
     if (getDiagram(diagramId) != null) {
       runOnDisplay(new Runnable() {
@@ -1077,6 +1109,8 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
       italicise(message);
     else if (message.hasName("newEllipse"))
       newEllipse(message);
+    else if (message.hasName("newShape"))
+        newShape(message);    
     else if (message.hasName("newImage"))
       newImage(message);
     else if (message.hasName("deleteGroup"))
