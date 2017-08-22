@@ -1,3 +1,6 @@
+=== Version 1.0.7 ===== 22.08.2017
+- fixed missing shapes (e.g., stars) in diagrams
+
 === Version 1.0.6 ===== 04.08.2017
 - Added further snippets
 
