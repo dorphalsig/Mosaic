@@ -9,11 +9,17 @@
 
 	<target name="init">
 		<property name="output" location="output/" />
+		<property name="archiveDir" location="${output}/archiv/" />
 		<loadfile property="loadedVersion" srcFile="version.txt" />
 		<condition property="version" value="${loadedVersion}-SNAPSHOT" else="${loadedVersion}">
-			<resourceexists>
-				<file file="${output}/XModeler-${loadedVersion}.zip" />
-			</resourceexists>
+			<or>
+				<resourceexists>
+					<file file="${output}/XModeler-${loadedVersion}.zip" />
+				</resourceexists>
+				<resourceexists>
+					<file file="${archiveDir}/XModeler-${loadedVersion}.zip" />
+				</resourceexists>
+			</or>
 		</condition>
 		<property name="outputArchive" location="${output}/XModeler-${version}.zip" />
 		<property name="prefix" value="XModeler/" />
@@ -22,8 +28,16 @@
 		<property name="compileAll" location="${homeDir}/bin/compileAll.bat" />
 		<property name="makexmf" location="${homeDir}/bin/makexmf.bat" />
 		<property name="makemosaic" location="${homeDir}/bin/makemosaic.bat" />
+		<move todir="${archiveDir}" overwrite="true">
+		    <fileset dir="${output}">
+		      <include name="*.zip"/>
+			</fileset>
+		</move>
 	</target>
 	<target name="compile" depends="init">
+		<javac srcdir="../src"
+         destdir="../bin"
+		/>
 		<exec executable="cmd">
 			<arg value="/c" />
 			<arg value="${compileAll}" />
