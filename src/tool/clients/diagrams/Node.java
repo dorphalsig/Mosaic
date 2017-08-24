@@ -265,15 +265,6 @@ public class Node implements Selectable {
     }
   }
 
-  public void paintHover(GC gc, int x, int y, boolean selected) {
-    if (!hidden && contains(x, y)) {
-      paintSelectableOutline(gc);
-      for (Display display : displays)
-        display.paintHover(gc, x, y, getX(), getY());
-    }
-    if (!selected && !contains(x, y) && atCorner(x, y)) paintResizeHover(gc, x, y);
-  }
-
   public void paintPortHover(GC gc, int x, int y) {
     if (!hidden) {
       for (Port port : ports.values()) {
@@ -333,19 +324,28 @@ public class Node implements Selectable {
     }
   }
 
-  private void paintSelectableOutline(GC gc) {
+  private void paintSelectableOutline(GC gc, int x, int y) {
     if (!hidden) {
       Color c = gc.getForeground();
       int width = gc.getLineWidth();
       gc.setLineWidth(1);
       gc.setForeground(XModeler.getXModeler().getDisplay().getSystemColor(SWT.COLOR_RED));
-      gc.drawRectangle(getX() - SELECTION_GAP, getY() - SELECTION_GAP, getWidth() + (SELECTION_GAP * 2), getHeight() + (SELECTION_GAP * 2));
+      gc.drawRectangle(getX() - SELECTION_GAP + x, getY() - SELECTION_GAP + y, getWidth() + (SELECTION_GAP * 2), getHeight() + (SELECTION_GAP * 2));
       gc.setForeground(c);
       gc.setLineWidth(width);
     }
   }
 
-  public void paintSelected(GC gc, int x, int y) { // TODO:ADAPT X/Y
+  public void paintHover(GC gc, int x, int y, int xOffset, int yOffset, boolean selected) {
+    if (!hidden && contains(x, y)) {
+      paintSelectableOutline(gc, xOffset, yOffset);
+      for (Display display : displays)
+        display.paintHover(gc, x, y, getX(), getY());
+    }
+    if (!selected && !contains(x, y) && atCorner(x, y)) paintResizeHover(gc, x, y);
+  }
+  
+  public void paintSelected(GC gc, int x, int y) { 
     if (!hidden) {
       Color c = gc.getForeground();
       int width = gc.getLineWidth();
@@ -356,6 +356,7 @@ public class Node implements Selectable {
       gc.setLineWidth(width);
     }
   }
+
 
   public void remove(String id) {
     Display d = getDisplay(id);

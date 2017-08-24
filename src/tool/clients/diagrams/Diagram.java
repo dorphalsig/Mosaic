@@ -124,7 +124,6 @@ public class Diagram implements Display {
     scroller.setContent(canvas);
     this.id = id;
   }
-
   
 	private void sendMessageToDeleteSelection() {
 		Vector<String> deleteList = new Vector<String>(); // to avoid any ConcurrentModificationTrouble
@@ -683,10 +682,10 @@ public class Diagram implements Display {
     }
   }
 
-  public void paint(GC gc, int x, int y) {
+  public void paint(GC gc, int xOffset, int yOffset) {
     // This is called when a diagram is a display element. The offsets need to be
     // included so that global painting is relative to (0,0).
-    paintOn(gc, x, y);
+    paintOn(gc, xOffset, yOffset);
   }
 
   private void paintAlignment(GC gc) {
@@ -716,19 +715,6 @@ public class Diagram implements Display {
           }
         }
       }
-    }
-  }
-
-  private void paintHover(GC gc, int x, int y) { // TODO:ADAPT X/Y
-    if (!movingEdgeEnd()) {
-      for (Node node : nodes)
-        node.paintHover(gc, lastX, lastY, selection.contains(node));
-      for (Edge edge : edges)
-        edge.getPainter().paintHover(gc, lastX, lastY);
-    }
-    if (movingEdgeEnd()) {
-      for (Node node : nodes)
-        node.paintPortHover(gc, lastX, lastY);
     }
   }
 
@@ -779,21 +765,21 @@ public class Diagram implements Display {
       node.paint(gc, this, x, y);
   }
 
-  private void paintOn(GC gc, int x, int y) {
+  private void paintOn(GC gc, int xOffset, int yOffset) {
     gc.setAntialias(SWT.ON);
     gc.setTextAntialias(SWT.ON);
     gc.setInterpolation(SWT.HIGH);
     gc.setAdvanced(true);
     gc.setTransform(transform);
-    clear(gc, x, y);
-    paintDisplays(gc, x, y);
+    clear(gc, xOffset, yOffset);
+    paintDisplays(gc, xOffset, yOffset);
     paintNewEdge(gc);
     paintResizing(gc);
     paintEdges(gc);
     paintAlignment(gc);
-    paintNodes(gc, x, y);
-    paintHover(gc, x, y);
-    paintSelected(gc, x, y);
+    paintNodes(gc, xOffset, yOffset);
+    paintHover(gc, xOffset, yOffset);
+    paintSelected(gc, xOffset, yOffset);
     paintRubberBand(gc);
     paintNewNode(gc);
     handleDoubleClick(gc);
@@ -857,10 +843,23 @@ public class Diagram implements Display {
     }
   }
 
-  private void paintSelected(GC gc, int x, int y) {
+  private void paintHover(GC gc, int xOffset, int yOffset) { 
+    if (!movingEdgeEnd()) {
+      for (Node node : nodes)
+        node.paintHover(gc, lastX, lastY, xOffset, yOffset, selection.contains(node));
+      for (Edge edge : edges)
+        edge.getPainter().paintHover(gc, lastX, lastY);
+    }
+    if (movingEdgeEnd()) {
+      for (Node node : nodes)
+        node.paintPortHover(gc, lastX, lastY);
+    }
+  }
+  
+  private void paintSelected(GC gc, int xOffset, int yOffset) {
     if (!movingEdgeEnd()) {
       for (Selectable selected : selection)
-        selected.paintSelected(gc, x, y);
+        selected.paintSelected(gc, xOffset, yOffset);
     }
   }
 
@@ -1250,6 +1249,33 @@ public class Diagram implements Display {
   /*
    * Listeners 
    */
+  
+  private void storeLastXY(int x, int y) {
+    lastX = x;
+    lastY = y;
+	  for(Diagram nestedDiagram : getNestedDiagrams()) {
+	    nestedDiagram.lastX = lastX-nestedDiagramOffsets.get(nestedDiagram.id).x;
+	    nestedDiagram.lastY = lastY-nestedDiagramOffsets.get(nestedDiagram.id).y;
+	 }
+  }
+  
+  private void storeFirstXY(int x, int y) {
+    firstX = x;
+    firstY = y;
+	  for(Diagram nestedDiagram : getNestedDiagrams()) {
+	    nestedDiagram.firstX = firstX-nestedDiagramOffsets.get(nestedDiagram.id).x;
+	    nestedDiagram.firstY = firstY-nestedDiagramOffsets.get(nestedDiagram.id).y;
+	 }
+  }
+  
+  private void storeBandXY(int x, int y) {
+    bandX = x;
+    bandY = y;
+	  for(Diagram nestedDiagram : getNestedDiagrams()) {
+	    nestedDiagram.bandX = bandX-nestedDiagramOffsets.get(nestedDiagram.id).x;
+	    nestedDiagram.bandY = bandY-nestedDiagramOffsets.get(nestedDiagram.id).y;
+	 }
+  }
 
   private class MyMouseListener implements MouseListener {
 	  
@@ -1267,17 +1293,19 @@ public class Diagram implements Display {
 	      leftClick(event);
 	    } else if (event.count == 2 && isLeft(event)) {
 	      mode = MouseMode.DOUBLE_CLICK;
-	      lastX = event.x;
-	      lastY = event.y;
+	      storeLastXY(event.x, event.y);
+//	      lastX = event.x;
+//	      lastY = event.y;
 	      redraw();
 	    }
 	  }
 
 	  private void leftClick(MouseEvent event) {
 	    if (nodeCreationType == null && edgeCreationType == null) {
-	      select(event.stateMask, event.x, event.y);
-	      lastX = event.x;
-	      lastY = event.y;
+	      select(event.stateMask, event.x, event.y, false);
+	      storeLastXY(event.x, event.y);
+//	      lastX = event.x;
+//	      lastY = event.y;
 	      redraw();
 	    } else if (edgeCreationType != null) {
 	      deselectAll();
@@ -1288,8 +1316,10 @@ public class Diagram implements Display {
 	        sourcePort = port;
 	        firstX = x;
 	        firstY = y;
-	        lastX = x;
-	        lastY = y;
+		    storeFirstXY(x, y);
+		    storeLastXY(x, y);
+//		      lastX = x;
+//		      lastY = y;
 	        mode = MouseMode.NEW_EDGE;
 	      }
 	      redraw();
@@ -1328,80 +1358,91 @@ public class Diagram implements Display {
 
 	  @Override
 	  public void mouseUp(MouseEvent event) {
-	    scale(event);
-	    if (mode == MouseMode.NEW_EDGE) new OutboundMessages().checkEdgeCreation(event.x, event.y);
-	    if (mode == MouseMode.SELECTED) sendMoveSelectedEvents();
-	    if (mode == MouseMode.RESIZE_BOTTOM_RIGHT) resizeBottomRight();
-	    if (mode == MouseMode.RUBBER_BAND) selectRubberBand();
-	    if (movingEdgeEnd()) checkMovedEdge();
-	    mode = MouseMode.NONE;
-	    redraw();
+		Diagram.this.mouseUp(event);
 	  }
 	  
-	  private void sendMoveSelectedEvents() {
-	    for (Selectable selectable : selection)
-	      selectable.moveEvent();
-	  }
-	  
-	  private void resizeBottomRight() {
-	    int width = lastX - selectedNode.getX();
-	    int height = lastY - selectedNode.getY();
-	    if (width >= 10 && height >= 10) new OutboundMessages().resizeNode(selectedNode, width, height);
-	  }
 
-	  private void selectRubberBand() {
-	    int x = Math.min(bandX, lastX);
-	    int y = Math.min(bandY, lastY);
-	    int width = Math.abs(bandX - lastX);
-	    int height = Math.abs(bandY - lastY);
-	    Rectangle r = new Rectangle(x, y, width, height);
-	    deselectAll();
-	    for (Node node : nodes) {
-	      if (r.contains(node.getX(), node.getY())) select(node);
-	    }
-	    for (Edge edge : edges) {
-	      for (Waypoint w : edge.getWaypoints()) {
-	        if (!w.isStart() && !w.isEnd() && r.contains(w.getX(), w.getY())) select(w);
-	      }
-	      for (Label l : edge.getLabels()) {
-	        if (!selection.contains(l.getParentNode()) &&
-	            r.contains(l.getAbsoluteX(), l.getAbsoluteY()) && 
-		        r.contains(l.getAbsoluteX() + l.getWidth(), l.getAbsoluteY() + l.getHeight())) select(l);
-	      }
-	    }
-	  }
-	  
-	  private void checkMovedEdge() {
-	    // Have we arrived over a port?
-	    if (mode == MouseMode.MOVE_SOURCE)
-	      checkMovedSourceEdge();
-	    else checkMovedTargetEdge();
-	  }
-	  
-	  private void checkMovedSourceEdge() {
-	    boolean reconnected = false;
-	    for (Node n : nodes) {
-	      for (Port p : n.getPorts().values()) {
-	        if (!reconnected && p.contains(lastX - n.getX(), lastY - n.getY())) {
-	          new OutboundMessages().reconnectEdgeSource(selectedEdge, n, p);
-	          reconnected = true;
-	        }
-	      }
-	    }
-	  }
-
-	  private void checkMovedTargetEdge() {
-	    boolean reconnected = false;
-	    for (Node n : nodes) {
-	      for (Port p : n.getPorts().values()) {
-	        if (!reconnected && p.contains(lastX - n.getX(), lastY - n.getY())) {
-	          new OutboundMessages().reconnectEdgeTarget(selectedEdge, n, p);
-	          reconnected = true;
-	        }
-	      }
-	    }
-	  }
 	}
+  
+
+  public void mouseUp(MouseEvent event) {
+	for(Diagram nestedDiagram : getNestedDiagrams()) {
+		nestedDiagram.mouseUp(event);
+	}
+    scale(event);
+    if (mode == MouseMode.NEW_EDGE) new OutboundMessages().checkEdgeCreation(event.x, event.y);
+    if (mode == MouseMode.SELECTED) sendMoveSelectedEvents();
+    if (mode == MouseMode.RESIZE_BOTTOM_RIGHT) resizeBottomRight();
+    if (mode == MouseMode.RUBBER_BAND) selectRubberBand();
+    if (movingEdgeEnd()) checkMovedEdge();
+    mode = MouseMode.NONE;
+    redraw();
+  }
+
+  private void sendMoveSelectedEvents() {
+    for (Selectable selectable : selection)
+      selectable.moveEvent();
+  }
+  
+  private void resizeBottomRight() {
+    int width = lastX - selectedNode.getX();
+    int height = lastY - selectedNode.getY();
+    if (width >= 10 && height >= 10) new OutboundMessages().resizeNode(selectedNode, width, height);
+  }
+
+  private void selectRubberBand() {
+    int x = Math.min(bandX, lastX);
+    int y = Math.min(bandY, lastY);
+    int width = Math.abs(bandX - lastX);
+    int height = Math.abs(bandY - lastY);
+    Rectangle r = new Rectangle(x, y, width, height);
+    deselectAll();
+    for (Node node : nodes) {
+      if (r.contains(node.getX(), node.getY())) select(node);
+    }
+    for (Edge edge : edges) {
+      for (Waypoint w : edge.getWaypoints()) {
+        if (!w.isStart() && !w.isEnd() && r.contains(w.getX(), w.getY())) select(w);
+      }
+      for (Label l : edge.getLabels()) {
+        if (!selection.contains(l.getParentNode()) &&
+            r.contains(l.getAbsoluteX(), l.getAbsoluteY()) && 
+	        r.contains(l.getAbsoluteX() + l.getWidth(), l.getAbsoluteY() + l.getHeight())) select(l);
+      }
+    }
+  }
+  
+  private void checkMovedEdge() {
+    // Have we arrived over a port?
+    if (mode == MouseMode.MOVE_SOURCE)
+      checkMovedSourceEdge();
+    else checkMovedTargetEdge();
+  }
+  
+  private void checkMovedSourceEdge() {
+    boolean reconnected = false;
+    for (Node n : nodes) {
+      for (Port p : n.getPorts().values()) {
+        if (!reconnected && p.contains(lastX - n.getX(), lastY - n.getY())) {
+          new OutboundMessages().reconnectEdgeSource(selectedEdge, n, p);
+          reconnected = true;
+        }
+      }
+    }
+  }
+
+  private void checkMovedTargetEdge() {
+    boolean reconnected = false;
+    for (Node n : nodes) {
+      for (Port p : n.getPorts().values()) {
+        if (!reconnected && p.contains(lastX - n.getX(), lastY - n.getY())) {
+          new OutboundMessages().reconnectEdgeTarget(selectedEdge, n, p);
+          reconnected = true;
+        }
+      }
+    }
+  }
+	  
   private class MyKeyListener implements KeyListener {
 
 	  @Override
@@ -1532,44 +1573,55 @@ public class Diagram implements Display {
 	@Override
 	  public void mouseMove(final MouseEvent event) {
 	    scale(event);
-	    if (mode == MouseMode.SELECTED) {
+//	    if (mode == MouseMode.SELECTED) {
 	      DiagramClient.theClient().runOnDisplay(new Runnable() {
 	        public void run() {
 	          if (event.x >= 0 && event.y >= 0) {
 	            int dx = event.x - lastX;
 	            int dy = event.y - lastY;
-	            lastX = event.x;
-	            lastY = event.y;
-	            for (Selectable selectable : selection)
-	              selectable.moveBy(dx, dy);
+	  	        storeLastXY(event.x, event.y);
+//		      lastX = event.x;
+//		      lastY = event.y;
+	            if(mode == MouseMode.SELECTED)
+	              for (Selectable selectable : selection)
+	                selectable.moveBy(dx, dy);
+	            for(Diagram nestedDiagram : getNestedDiagrams()) 
+	              if(nestedDiagram.mode == MouseMode.SELECTED)
+	            	for (Selectable selectable : nestedDiagram.selection)
+	            	  selectable.moveBy(dx, dy);	            
 	            redraw();
 	          }
 	        }
 	      });
-	    }
+//	    }
 	    if (mode == MouseMode.NEW_EDGE) {
-	      lastX = event.x;
-	      lastY = event.y;
+	      storeLastXY(event.x, event.y);
+//	      lastX = event.x;
+//	      lastY = event.y;
 	      redraw();
 	    }
 	    if (movingEdgeEnd()) {
-	      lastX = event.x;
-	      lastY = event.y;
+	      storeLastXY(event.x, event.y);
+//	      lastX = event.x;
+//	      lastY = event.y;
 	      redraw();
 	    }
 	    if (mode == MouseMode.NONE) {
-	      lastX = event.x;
-	      lastY = event.y;
+	      storeLastXY(event.x, event.y);
+//	      lastX = event.x;
+//	      lastY = event.y;
 	      redraw();
 	    }
 	    if (mode == MouseMode.RESIZE_BOTTOM_RIGHT) {
-	      lastX = event.x;
-	      lastY = event.y;
+		  storeLastXY(event.x, event.y);
+//		  lastX = event.x;
+//	      lastY = event.y;
 	      redraw();
 	    }
 	    if (mode == MouseMode.RUBBER_BAND) {
-	      lastX = event.x;
-	      lastY = event.y;
+		  storeLastXY(event.x, event.y);
+//		  lastX = event.x;
+//		  lastY = event.y;
 	      redraw();
 	    }
 	  }
@@ -1605,7 +1657,8 @@ public class Diagram implements Display {
     gc.dispose();
   }
 
-  public void copyToClipboard(String id) {
+
+public void copyToClipboard(String id) {
     if (getId().equals(id)) copyToClipboard();
   }
 
@@ -1633,15 +1686,16 @@ public class Diagram implements Display {
 		return nestedDiagrams;
 	}
   
-  private boolean select(int stateMask, int x, int y) {
+  private boolean select(int stateMask, int x, int y, boolean isNested) {
+	// isNested means, this method has been invoked recursively. false, if invokes by the Listener
     boolean selected = false;
     boolean somethingWasDone = false;
     boolean isShift = (stateMask & SWT.SHIFT) == SWT.SHIFT;
     for(Diagram nestedDiagram : getNestedDiagrams()) {
 //    	System.err.println(x);
-    	somethingWasDone |= nestedDiagram.select(stateMask, x-nestedDiagramOffsets.get(nestedDiagram.id).x, y-nestedDiagramOffsets.get(nestedDiagram.id).y);
-    	nestedDiagram.lastX = x-nestedDiagramOffsets.get(nestedDiagram.id).x;
-    	nestedDiagram.lastY = y-nestedDiagramOffsets.get(nestedDiagram.id).y;
+    	somethingWasDone |= nestedDiagram.select(stateMask, x-nestedDiagramOffsets.get(nestedDiagram.id).x, y-nestedDiagramOffsets.get(nestedDiagram.id).y, true);
+//    	nestedDiagram.lastX = x-nestedDiagramOffsets.get(nestedDiagram.id).x;
+//    	nestedDiagram.lastY = y-nestedDiagramOffsets.get(nestedDiagram.id).y;
     }
     if(somethingWasDone) return true;
     if (!selected) {
@@ -1727,14 +1781,17 @@ public class Diagram implements Display {
     }
     if (!selected && !isShift) {
       deselectAll();
-      mode = MouseMode.RUBBER_BAND;
-      bandX = x;
-      bandY = y;
+      if(!isNested) {
+    	mode = MouseMode.RUBBER_BAND;
+    	storeBandXY(x, y);
+      }
+//      bandX = x;
+//      bandY = y;
     }
     return selected;
   }
 
-  private void select(Selectable selectable) {
+private void select(Selectable selectable) {
     if (!selection.contains(selectable)) {
       selection.add(selectable);
       selectable.select();
