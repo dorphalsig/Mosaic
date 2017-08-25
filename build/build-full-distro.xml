@@ -35,6 +35,7 @@
 		</move>
 	</target>
 	<target name="compile" depends="init">
+		<mkdir dir="../bin"/>
 		<javac srcdir="../src"
          destdir="../bin"
 		/>
