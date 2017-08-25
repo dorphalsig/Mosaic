@@ -33,6 +33,8 @@
 		      <include name="*.zip"/>
 			</fileset>
 		</move>
+		<mkdir dir="../bin"/>
+		<javac srcdir="../src" destdir="../bin" classpath="../.classpath"/>
 	</target>
 	<target name="compile" depends="init">
 		<mkdir dir="../bin"/>
