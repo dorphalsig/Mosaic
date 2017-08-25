@@ -35,8 +35,27 @@
 		</move>
 	</target>
 	<target name="compile" depends="init">
+		<mkdir dir="../../XMF/com.ceteva.xmf.machine/bin"/>
+		<javac srcdir="../../XMF/com.ceteva.xmf.machine/src" destdir="../../XMF/com.ceteva.xmf.machine/bin">
+			<classpath>
+				<path>
+					<fileset dir="../../XMF/com.ceteva.xmf.machine/">
+						<include name = "*.jar"/>
+					</fileset>
+				</path>
+			</classpath>
+		</javac>
 		<mkdir dir="../bin"/>
-		<javac srcdir="../src" destdir="../bin" classpathref="../.classpath"/>
+		<javac srcdir="../src" destdir="../bin" classpathref="../.classpath">
+			<classpath>
+				<path>
+					<fileset dir="../lib/">
+						<include name = "**/*.jar"/>
+					</fileset>
+					<pathelement location="../../XMF/com.ceteva.xmf.machine/bin/"/>
+				</path>
+			</classpath>
+		</javac>
 		<exec executable="cmd">
 			<arg value="/c" />
 			<arg value="${compileAll}" />
