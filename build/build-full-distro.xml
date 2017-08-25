@@ -36,9 +36,9 @@
 	</target>
 	<target name="compile" depends="init">
 		<mkdir dir="../bin"/>
-		<javac srcdir="../src" destdir="../bin" >
-			 <exclude name="../src/com/"/>
-			 <exclude name="../src/uk/"/>
+		<javac srcdir="../src" destdir="../bin">
+			 <exclude name="com/**"/>
+			 <exclude name="uk/**"/>
 		</javac>
 		<exec executable="cmd">
 			<arg value="/c" />
