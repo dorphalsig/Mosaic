@@ -33,15 +33,10 @@
 		      <include name="*.zip"/>
 			</fileset>
 		</move>
-		<mkdir dir="../bin"/>
-		<javac srcdir="../src" destdir="../bin" classpath="../.classpath"/>
 	</target>
 	<target name="compile" depends="init">
 		<mkdir dir="../bin"/>
-		<javac srcdir="../src" destdir="../bin">
-			 <exclude name="com/**"/>
-			 <exclude name="uk/**"/>
-		</javac>
+		<javac srcdir="../src" destdir="../bin" classpathref="../.classpath"/>
 		<exec executable="cmd">
 			<arg value="/c" />
 			<arg value="${compileAll}" />
