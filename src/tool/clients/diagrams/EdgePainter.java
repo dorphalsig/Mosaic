@@ -163,7 +163,7 @@ public class EdgePainter {
 	    }
 	  }  
 	  
-	  public void paint(GC gc, Color color, boolean showWaypoints, Vector<Point> intersections) {
+	  public void paint(GC gc, Color color, boolean showWaypoints, Vector<Point> intersections, int xOffset, int yOffset) {
 	    if (!edge.hidden) {
 	      int x = edge.waypoints.elementAt(0).getX();
 	      int y = edge.waypoints.elementAt(0).getY();
@@ -184,15 +184,15 @@ public class EdgePainter {
 	            return cmpx && cmpy ? -1 : 1;
 	          }
 	        });
-	        paintLine(gc, x, y, wp1.getX(), wp1.getY(), color, p);
-	        if (showWaypoints && i < edge.waypoints.size() - 1) gc.fillOval(wp1.getX() - 3, wp1.getY() - 3, 6, 6);
+	        paintLine(gc, x + xOffset, y + yOffset, wp1.getX() + xOffset, wp1.getY() + yOffset, color, p);
+	        if (showWaypoints && i < edge.waypoints.size() - 1) gc.fillOval(wp1.getX() - 3 + xOffset, wp1.getY() - 3 + yOffset, 6, 6);
 	        x = wp1.getX();
 	        y = wp1.getY();
 	      }
 	      gc.setBackground(c);
 	      for (Label label : edge.labels)
-	        label.paint(gc);
-	      paintDecorations(gc, color);
+	        label.paint(gc, xOffset, yOffset);
+	      paintDecorations(gc, color, xOffset, yOffset);
 	      gc.setLineWidth(width);
 	    }
 	  }
@@ -214,53 +214,53 @@ public class EdgePainter {
 	    }
 	  }
 
-	  private void paintDecorations(GC gc, Color color) {
+	  private void paintDecorations(GC gc, Color color, int xOffset, int yOffset) { 
 	    if (isSelfEdge())
-	      paintHomogeneousEdgeDecorations(gc, color);
-	    else paintHeterogeneousEdgeDecorations(gc, color);
+	      paintHomogeneousEdgeDecorations(gc, color, xOffset, yOffset);
+	    else paintHeterogeneousEdgeDecorations(gc, color, xOffset, yOffset);
 	  }
 
 	  private boolean isSelfEdge() {
 	    return edge.sourceNode == edge.targetNode;
 	  }
 
-	  private void paintHeterogeneousEdgeDecorations(GC gc, Color color) {
+	  private void paintHeterogeneousEdgeDecorations(GC gc, Color color, int xOffset, int yOffset) {
 	    Point topIntercept = edge.intercept(edge.targetNode, Position.TOP);
-	    if (topIntercept != null && topIntercept.x >= 0 && topIntercept.y >= 0) drawTargetDecoration(gc, color, topIntercept.x, topIntercept.y, edge.penultimate().x, edge.penultimate().y);
+	    if (topIntercept != null && topIntercept.x >= 0 && topIntercept.y >= 0) drawTargetDecoration(gc, color, topIntercept.x + xOffset, topIntercept.y + yOffset, edge.penultimate().x + xOffset, edge.penultimate().y + yOffset);
 	    Point bottomIntercept = edge.intercept(edge.sourceNode, Position.BOTTOM);
-	    if (bottomIntercept != null && bottomIntercept.x >= 0 && bottomIntercept.y >= 0) drawSourceDecoration(gc, color, bottomIntercept.x, bottomIntercept.y, edge.second().x, edge.second().y);
+	    if (bottomIntercept != null && bottomIntercept.x >= 0 && bottomIntercept.y >= 0) drawSourceDecoration(gc, color, bottomIntercept.x + xOffset, bottomIntercept.y + yOffset, edge.second().x + xOffset, edge.second().y + yOffset);
 	    topIntercept = edge.intercept(edge.sourceNode, Position.TOP);
-	    if (topIntercept != null && topIntercept.x >= 0 && topIntercept.y >= 0) drawSourceDecoration(gc, color, topIntercept.x, topIntercept.y, edge.second().x, edge.second().y);
+	    if (topIntercept != null && topIntercept.x >= 0 && topIntercept.y >= 0) drawSourceDecoration(gc, color, topIntercept.x + xOffset, topIntercept.y + yOffset, edge.second().x + xOffset, edge.second().y + yOffset);
 	    bottomIntercept = edge.intercept(edge.targetNode, Position.BOTTOM);
-	    if (bottomIntercept != null && bottomIntercept.x >= 0 && bottomIntercept.y >= 0) drawTargetDecoration(gc, color, bottomIntercept.x, bottomIntercept.y, edge.penultimate().x, edge.penultimate().y);
+	    if (bottomIntercept != null && bottomIntercept.x >= 0 && bottomIntercept.y >= 0) drawTargetDecoration(gc, color, bottomIntercept.x + xOffset, bottomIntercept.y + yOffset, edge.penultimate().x + xOffset, edge.penultimate().y + yOffset);
 	    Point leftIntercept = edge.intercept(edge.sourceNode, Position.LEFT);
-	    if (leftIntercept != null && leftIntercept.x >= 0 && leftIntercept.y >= 0) drawSourceDecoration(gc, color, leftIntercept.x, leftIntercept.y, edge.second().x, edge.second().y);
+	    if (leftIntercept != null && leftIntercept.x >= 0 && leftIntercept.y >= 0) drawSourceDecoration(gc, color, leftIntercept.x + xOffset, leftIntercept.y + yOffset, edge.second().x + xOffset, edge.second().y + yOffset);
 	    Point rightIntercept = edge.intercept(edge.targetNode, Position.RIGHT);
-	    if (rightIntercept != null && rightIntercept.x >= 0 && rightIntercept.y >= 0) drawTargetDecoration(gc, color, rightIntercept.x, rightIntercept.y, edge.penultimate().x, edge.penultimate().y);
+	    if (rightIntercept != null && rightIntercept.x >= 0 && rightIntercept.y >= 0) drawTargetDecoration(gc, color, rightIntercept.x + xOffset, rightIntercept.y + yOffset, edge.penultimate().x + xOffset, edge.penultimate().y + yOffset);
 	    leftIntercept = edge.intercept(edge.targetNode, Position.LEFT);
-	    if (leftIntercept != null && leftIntercept.x >= 0 && leftIntercept.y >= 0) drawTargetDecoration(gc, color, leftIntercept.x, leftIntercept.y, edge.penultimate().x, edge.penultimate().y);
+	    if (leftIntercept != null && leftIntercept.x >= 0 && leftIntercept.y >= 0) drawTargetDecoration(gc, color, leftIntercept.x + xOffset, leftIntercept.y + yOffset, edge.penultimate().x + xOffset, edge.penultimate().y + yOffset);
 	    rightIntercept = edge.intercept(edge.sourceNode, Position.RIGHT);
-	    if (rightIntercept != null && rightIntercept.x >= 0 && rightIntercept.y >= 0) drawSourceDecoration(gc, color, rightIntercept.x, rightIntercept.y, edge.second().x, edge.second().y);
+	    if (rightIntercept != null && rightIntercept.x >= 0 && rightIntercept.y >= 0) drawSourceDecoration(gc, color, rightIntercept.x + xOffset, rightIntercept.y + yOffset, edge.second().x + xOffset, edge.second().y + yOffset);
 	  }
 
-	  /*NEW PRIVATE*/private void paintHomogeneousEdgeDecorations(GC gc, Color color) {
+	  /*NEW PRIVATE*/private void paintHomogeneousEdgeDecorations(GC gc, Color color, int xOffset, int yOffset) {
 	    // Ensure that the correct waypoint is used when calculating the intercepts...
 	    Point topIntercept = edge.targetHead == HeadStyle.NO_ARROW ? null : edge.intercept(edge.targetNode, edge.end(), edge.penultimate(), Position.TOP);
-	    if (topIntercept != null && topIntercept.x >= 0 && topIntercept.y >= 0) drawTargetDecoration(gc, color, topIntercept.x, topIntercept.y, edge.penultimate().x, edge.penultimate().y);
+	    if (topIntercept != null && topIntercept.x >= 0 && topIntercept.y >= 0) drawTargetDecoration(gc, color, topIntercept.x + xOffset, topIntercept.y + yOffset, edge.penultimate().x + xOffset, edge.penultimate().y + yOffset);
 	    Point bottomIntercept = edge.sourceHead == HeadStyle.NO_ARROW ? null : edge.intercept(edge.sourceNode, edge.start(), edge.second(), Position.BOTTOM);
-	    if (bottomIntercept != null && bottomIntercept.x >= 0 && bottomIntercept.y >= 0) drawSourceDecoration(gc, color, bottomIntercept.x, bottomIntercept.y, edge.second().x, edge.second().y);
+	    if (bottomIntercept != null && bottomIntercept.x >= 0 && bottomIntercept.y >= 0) drawSourceDecoration(gc, color, bottomIntercept.x + xOffset, bottomIntercept.y + yOffset, edge.second().x + xOffset, edge.second().y + yOffset);
 	    topIntercept = edge.sourceHead == HeadStyle.NO_ARROW ? null : edge.intercept(edge.sourceNode, edge.start(), edge.second(), Position.TOP);
-	    if (topIntercept != null && topIntercept.x >= 0 && topIntercept.y >= 0) drawSourceDecoration(gc, color, topIntercept.x, topIntercept.y, edge.second().x, edge.second().y);
+	    if (topIntercept != null && topIntercept.x >= 0 && topIntercept.y >= 0) drawSourceDecoration(gc, color, topIntercept.x + xOffset, topIntercept.y + yOffset, edge.second().x + xOffset, edge.second().y + yOffset);
 	    bottomIntercept = edge.targetHead == HeadStyle.NO_ARROW ? null : edge.intercept(edge.targetNode, edge.end(), edge.penultimate(), Position.BOTTOM);
-	    if (bottomIntercept != null && bottomIntercept.x >= 0 && bottomIntercept.y >= 0) drawTargetDecoration(gc, color, bottomIntercept.x, bottomIntercept.y, edge.penultimate().x, edge.penultimate().y);
+	    if (bottomIntercept != null && bottomIntercept.x >= 0 && bottomIntercept.y >= 0) drawTargetDecoration(gc, color, bottomIntercept.x + xOffset, bottomIntercept.y + yOffset, edge.penultimate().x + xOffset, edge.penultimate().y + yOffset);
 	    Point leftIntercept = edge.sourceHead == HeadStyle.NO_ARROW ? null : edge.intercept(edge.sourceNode, edge.start(), edge.second(), Position.LEFT);
-	    if (leftIntercept != null && leftIntercept.x >= 0 && leftIntercept.y >= 0) drawSourceDecoration(gc, color, leftIntercept.x, leftIntercept.y, edge.second().x, edge.second().y);
+	    if (leftIntercept != null && leftIntercept.x >= 0 && leftIntercept.y >= 0) drawSourceDecoration(gc, color, leftIntercept.x + xOffset, leftIntercept.y + yOffset, edge.second().x + xOffset, edge.second().y + yOffset);
 	    Point rightIntercept = edge.targetHead == HeadStyle.NO_ARROW ? null : edge.intercept(edge.targetNode, edge.end(), edge.penultimate(), Position.RIGHT);
-	    if (rightIntercept != null && rightIntercept.x >= 0 && rightIntercept.y >= 0) drawTargetDecoration(gc, color, rightIntercept.x, rightIntercept.y, edge.penultimate().x, edge.penultimate().y);
+	    if (rightIntercept != null && rightIntercept.x >= 0 && rightIntercept.y >= 0) drawTargetDecoration(gc, color, rightIntercept.x + xOffset, rightIntercept.y + yOffset, edge.penultimate().x + xOffset, edge.penultimate().y + yOffset);
 	    leftIntercept = edge.targetHead == HeadStyle.NO_ARROW ? null : edge.intercept(edge.targetNode, edge.end(), edge.penultimate(), Position.LEFT);
-	    if (leftIntercept != null && leftIntercept.x >= 0 && leftIntercept.y >= 0) drawTargetDecoration(gc, color, leftIntercept.x, leftIntercept.y, edge.penultimate().x, edge.penultimate().y);
+	    if (leftIntercept != null && leftIntercept.x >= 0 && leftIntercept.y >= 0) drawTargetDecoration(gc, color, leftIntercept.x + xOffset, leftIntercept.y + yOffset, edge.penultimate().x + xOffset, edge.penultimate().y + yOffset);
 	    rightIntercept = edge.sourceHead == HeadStyle.NO_ARROW ? null : edge.intercept(edge.sourceNode, edge.start(), edge.second(), Position.RIGHT);
-	    if (rightIntercept != null && rightIntercept.x >= 0 && rightIntercept.y >= 0) drawSourceDecoration(gc, color, rightIntercept.x, rightIntercept.y, edge.second().x, edge.second().y);
+	    if (rightIntercept != null && rightIntercept.x >= 0 && rightIntercept.y >= 0) drawSourceDecoration(gc, color, rightIntercept.x + xOffset, rightIntercept.y + yOffset, edge.second().x + xOffset, edge.second().y + yOffset);
 	  }
 
 	  public void paintHover(GC gc, int x, int y) {
@@ -302,7 +302,7 @@ public class EdgePainter {
 	    gc.setForeground(c);
 	  }
 
-	  public void paintMovingSourceOrTarget(GC gc, int startX, int startY, int endX, int endY) {
+	  public void paintMovingSourceOrTarget(GC gc, int startX, int startY, int endX, int endY, int xOffset, int yOffset) {
 	    int x = startX;
 	    int y = startY;
 	    int width = gc.getLineWidth();
@@ -311,17 +311,17 @@ public class EdgePainter {
 	    gc.setBackground(Diagram.BLACK);
 	    for (int i = 1; i < edge.waypoints.size() - 1; i++) {
 	      Waypoint wp = edge.waypoints.elementAt(i);
-	      paintLine(gc, x, y, wp.getX(), wp.getY(), Diagram.BLACK, NO_INTERSECTIONS_PLACEHOLDER);
-	      if (i < edge.waypoints.size() - 1) gc.fillOval(wp.getX() - 3, wp.getY() - 3, 6, 6);
+	      paintLine(gc, x + xOffset, y + yOffset, wp.getX() + xOffset, wp.getY() + yOffset, Diagram.BLACK, NO_INTERSECTIONS_PLACEHOLDER);
+	      if (i < edge.waypoints.size() - 1) gc.fillOval(wp.getX() - 3 + xOffset, wp.getY() - 3 + yOffset, 6, 6);
 	      x = wp.getX();
 	      y = wp.getY();
 	    }
-	    paintLine(gc, x, y, endX, endY, Diagram.BLACK, NO_INTERSECTIONS_PLACEHOLDER);
+	    paintLine(gc, x + xOffset, y + yOffset, endX + xOffset, endY + yOffset, Diagram.BLACK, NO_INTERSECTIONS_PLACEHOLDER);
 	    gc.setBackground(c);
 	    for (Label label : edge.labels)
-	      label.paint(gc);
-	    drawSourceDecoration(gc, Diagram.BLACK, startX, startY, edge.waypoints.elementAt(1).getX(), edge.waypoints.elementAt(1).getY());
-	    drawTargetDecoration(gc, Diagram.BLACK, endX, endY, edge.waypoints.elementAt(edge.waypoints.size() - 2).getX(), edge.waypoints.elementAt(edge.waypoints.size() - 2).getY());
+	      label.paint(gc, xOffset, yOffset);
+	    drawSourceDecoration(gc, Diagram.BLACK, startX + xOffset, startY + yOffset, edge.waypoints.elementAt(1).getX() + xOffset, edge.waypoints.elementAt(1).getY() + yOffset);
+	    drawTargetDecoration(gc, Diagram.BLACK, endX + xOffset, endY + yOffset, edge.waypoints.elementAt(edge.waypoints.size() - 2).getX() + xOffset, edge.waypoints.elementAt(edge.waypoints.size() - 2).getY() + yOffset);
 	    gc.setLineWidth(width);
 	  }
 
@@ -345,12 +345,12 @@ public class EdgePainter {
 	    }
 	  }
 
-	  public void paintSourceMoving(GC gc, int x, int y) {
-	    paintMovingSourceOrTarget(gc, x, y, edge.end().getX(), edge.end().getY());
+	  public void paintSourceMoving(GC gc, int x, int y, int xOffset, int yOffset) {
+	    paintMovingSourceOrTarget(gc, x, y, edge.end().getX(), edge.end().getY(), xOffset, yOffset);
 	  }
 
-	  public void paintTargetMoving(GC gc, int x, int y) {
-	    paintMovingSourceOrTarget(gc, edge.start().getX(), edge.start().getY(), x, y);
+	  public void paintTargetMoving(GC gc, int x, int y, int xOffset, int yOffset) {
+	    paintMovingSourceOrTarget(gc, edge.start().getX(), edge.start().getY(), x, y, xOffset, yOffset);
 	  }
 	  
 	  private Vector<Point> getIntersection(Waypoint wp0, Waypoint wp1, Vector<Point> intersections) {

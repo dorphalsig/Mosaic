@@ -216,7 +216,7 @@ public class Label implements Selectable {
     DiagramClient.theClient().getHandler().raiseEvent(message);
   }
 
-  public void paint(GC gc) {
+  public void paint(GC gc, int xOffset, int yOffset) { // TODO-OFFSET
 	  if (hidden) return;
 	paintBackground(gc) ; 
     gc.setFont(DiagramClient.diagramFont);

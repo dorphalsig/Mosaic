@@ -257,7 +257,7 @@ public class Node implements Selectable {
       // Clear the background of the node...
       Color background = gc.getBackground();
       gc.setBackground(diagram.getDiagramBackgroundColor());
-      gc.fillRectangle(x+xOffset, y+yOffset, width, height);
+      gc.fillRectangle(x+xOffset, y+yOffset, getWidth(), getHeight());
       gc.setBackground(background);
       for (Display display : displays) {
         display.paint(gc, x+xOffset, y+yOffset);
@@ -265,61 +265,69 @@ public class Node implements Selectable {
     }
   }
 
-  public void paintPortHover(GC gc, int x, int y) {
+  public void paintPortHover(GC gc, int x, int y, int xOffset, int yOffset) {
     if (!hidden) {
       for (Port port : ports.values()) {
         if (port.contains(x - getX(), y - getY())) {
-          port.paintHover(gc, getX(), getY());
+          port.paintHover(gc, getX(), getY(), xOffset, yOffset);
         }
       }
     }
   }
 
-  private void paintResizeBottomLeft(GC gc) {
+  private void paintResizeHover(GC gc, int x, int y, int xOffset, int yOffset) {
+    if (!hidden) {
+      if (atTopLeftCorner(x, y)) paintResizeTopLeft(gc, xOffset, yOffset);
+      if (atTopRightCorner(x, y)) paintResizeTopRight(gc, xOffset, yOffset);
+      if (atBottomLeftCorner(x, y)) paintResizeBottomLeft(gc, xOffset, yOffset);
+      if (atBottomRightCorner(x, y)) paintResizeBottomRight(gc, xOffset, yOffset);
+    }
+  }
+
+  private void paintResizeBottomLeft(GC gc, int xOffset, int yOffset) {
     if (!hidden) {
       Color c = gc.getForeground();
       gc.setForeground(Diagram.GREEN);
-      gc.drawLine(getX() - EAR_GAP, getY() + (getHeight() + EAR_GAP), getX() - EAR_GAP, getY() + (getHeight() - EAR_LENGTH));
-      gc.drawLine(getX() - EAR_GAP, getY() + (getHeight() + EAR_GAP), getX() + EAR_GAP + EAR_LENGTH, getY() + (getHeight() + EAR_GAP));
+      gc.drawLine(xOffset + getX() - EAR_GAP, yOffset + getY() + (getHeight() + EAR_GAP), 
+    		      xOffset + getX() - EAR_GAP, yOffset + getY() + (getHeight() - EAR_LENGTH));
+      gc.drawLine(xOffset + getX() - EAR_GAP, yOffset + getY() + (getHeight() + EAR_GAP), 
+    		      xOffset + getX() + EAR_LENGTH, yOffset + getY() + (getHeight() + EAR_GAP));
       gc.setForeground(c);
     }
   }
 
-  private void paintResizeBottomRight(GC gc) {
+  private void paintResizeBottomRight(GC gc, int xOffset, int yOffset) {
     if (!hidden) {
       Color c = gc.getForeground();
       gc.setForeground(Diagram.GREEN);
-      gc.drawLine(getX() + (getWidth() + EAR_GAP), getY() + (getHeight() + EAR_GAP), getX() + (getWidth() + EAR_GAP), getY() + (getHeight() - EAR_LENGTH));
-      gc.drawLine(getX() + (getWidth() + EAR_GAP), getY() + (getHeight() + EAR_GAP), getX() + (getWidth() - EAR_LENGTH), getY() + (getHeight() + EAR_GAP));
+      gc.drawLine(xOffset + getX() + (getWidth() + EAR_GAP), yOffset + getY() + (getHeight() + EAR_GAP), 
+    		      xOffset + getX() + (getWidth() + EAR_GAP), yOffset + getY() + (getHeight() - EAR_LENGTH));
+      gc.drawLine(xOffset + getX() + (getWidth() + EAR_GAP), yOffset + getY() + (getHeight() + EAR_GAP), 
+    		      xOffset + getX() + (getWidth() - EAR_LENGTH), yOffset + getY() + (getHeight() + EAR_GAP));
       gc.setForeground(c);
     }
   }
 
-  private void paintResizeHover(GC gc, int x, int y) {
-    if (!hidden) {
-      if (atTopLeftCorner(x, y)) paintResizeTopLeft(gc);
-      if (atTopRightCorner(x, y)) paintResizeTopRight(gc);
-      if (atBottomLeftCorner(x, y)) paintResizeBottomLeft(gc);
-      if (atBottomRightCorner(x, y)) paintResizeBottomRight(gc);
-    }
-  }
-
-  private void paintResizeTopLeft(GC gc) {
+  private void paintResizeTopLeft(GC gc, int xOffset, int yOffset) {
     if (!hidden) {
       Color c = gc.getForeground();
       gc.setForeground(Diagram.GREEN);
-      gc.drawLine(getX() - EAR_GAP, getY() - EAR_GAP, getX() + EAR_GAP + EAR_LENGTH, getY() - EAR_GAP);
-      gc.drawLine(getX() - EAR_GAP, getY() - EAR_GAP, getX() - EAR_GAP, getY() + EAR_GAP + EAR_LENGTH);
+      gc.drawLine(xOffset + getX() - EAR_GAP, yOffset + getY() - EAR_GAP, 
+    		      xOffset + getX() + EAR_LENGTH, yOffset + getY() - EAR_GAP);
+      gc.drawLine(xOffset + getX() - EAR_GAP, yOffset + getY() - EAR_GAP, 
+    		      xOffset + getX() - EAR_GAP, yOffset + getY() + EAR_LENGTH);
       gc.setForeground(c);
     }
   }
 
-  private void paintResizeTopRight(GC gc) {
+  private void paintResizeTopRight(GC gc, int xOffset, int yOffset) {
     if (!hidden) {
       Color c = gc.getForeground();
       gc.setForeground(Diagram.GREEN);
-      gc.drawLine(getX() + getWidth() + EAR_GAP, getY() - EAR_GAP, getX() + (getWidth() - EAR_LENGTH), getY() - EAR_GAP);
-      gc.drawLine(getX() + getWidth() + EAR_GAP, getY() - EAR_GAP, getX() + getWidth() + EAR_GAP, getY() + EAR_GAP + EAR_LENGTH);
+      gc.drawLine(xOffset + getX() + getWidth() + EAR_GAP, yOffset + getY() - EAR_GAP, 
+    		      xOffset + getX() + (getWidth() - EAR_LENGTH), yOffset + getY() - EAR_GAP);
+      gc.drawLine(xOffset + getX() + getWidth() + EAR_GAP, yOffset + getY() - EAR_GAP, 
+    		      xOffset + getX() + getWidth() + EAR_GAP, yOffset + getY() + EAR_LENGTH);
       gc.setForeground(c);
     }
   }
@@ -342,7 +350,7 @@ public class Node implements Selectable {
       for (Display display : displays)
         display.paintHover(gc, x, y, getX(), getY());
     }
-    if (!selected && !contains(x, y) && atCorner(x, y)) paintResizeHover(gc, x, y);
+    if (!selected && !contains(x, y) && atCorner(x, y)) paintResizeHover(gc, x, y, xOffset, yOffset);
   }
   
   public void paintSelected(GC gc, int x, int y) { 

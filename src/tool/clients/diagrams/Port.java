@@ -95,10 +95,10 @@ public class Port {
     }
   }
 
-  public void paintHover(GC gc, int x, int y) {
+  public void paintHover(GC gc, int x, int y, int xOffset, int yOffset) {
     Color c = gc.getForeground();
     gc.setForeground(Diagram.RED);
-    gc.drawRectangle(x + getX(), y + getY(), getWidth(), getHeight());
+    gc.drawRectangle(x + getX() + xOffset, y + getY() + yOffset, getWidth(), getHeight());
     gc.setForeground(c);
   }
 }

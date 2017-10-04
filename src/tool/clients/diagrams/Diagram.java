@@ -90,9 +90,9 @@ public class Diagram implements Display {
   int                  lastX                  = 0;
   int                  lastY                  = 0;
     
-  Port                 sourcePort;
+  PortAndDiagram       sourcePort;
   MouseMode            mode                   = MouseMode.NONE;
-  float                  zoom                   = 1.00f;
+  float                zoom                   = 1.00f;
   boolean              disambiguationColors   = true;
 
   boolean              showWaypoints          = true;
@@ -695,9 +695,9 @@ public class Diagram implements Display {
     }
   }
 
-  private void paintDisplays(GC gc, int x, int y) {
+  private void paintDisplays(GC gc, int xOffset, int yOffset) {
     for (Display display : displays) {
-      display.paint(gc, x, y);
+      display.paint(gc, xOffset, yOffset);
     }
   }
 
@@ -773,15 +773,15 @@ public class Diagram implements Display {
     gc.setTransform(transform);
     clear(gc, xOffset, yOffset);
     paintDisplays(gc, xOffset, yOffset);
-    paintNewEdge(gc);
-    paintResizing(gc);
-    paintEdges(gc);
+    paintResizing(gc, xOffset, yOffset);
+    paintEdges(gc, xOffset, yOffset);
     paintAlignment(gc);
     paintNodes(gc, xOffset, yOffset);
     paintHover(gc, xOffset, yOffset);
     paintSelected(gc, xOffset, yOffset);
-    paintRubberBand(gc);
+    paintRubberBand(gc, xOffset, yOffset);
     paintNewNode(gc);
+    paintNewEdge(gc);
     handleDoubleClick(gc);
     
 //    gc.drawString("Zoom: " + zoom, 5, 5);
@@ -829,17 +829,17 @@ public class Diagram implements Display {
 		
 	}
 	  
-  private void paintResizing(GC gc) {
+  private void paintResizing(GC gc, int xOffset, int yOffset) {
     if (mode == MouseMode.RESIZE_BOTTOM_RIGHT) {
       int width = lastX - selectedNode.getX();
       int height = lastY - selectedNode.getY();
-      if (width >= 10 && height >= 10) gc.drawRectangle(selectedNode.getX(), selectedNode.getY(), width, height);
+      if (width >= 10 && height >= 10) gc.drawRectangle(selectedNode.getX() + xOffset, selectedNode.getY() + yOffset, width, height);
     }
   }
 
-  private void paintRubberBand(GC gc) {
+  private void paintRubberBand(GC gc, int xOffset, int yOffset) {
     if (mode == MouseMode.RUBBER_BAND) {
-      gc.drawRectangle(bandX, bandY, lastX - bandX, lastY - bandY);
+      gc.drawRectangle(bandX + xOffset, bandY + yOffset, lastX - bandX, lastY - bandY);
     }
   }
 
@@ -852,7 +852,7 @@ public class Diagram implements Display {
     }
     if (movingEdgeEnd()) {
       for (Node node : nodes)
-        node.paintPortHover(gc, lastX, lastY);
+        node.paintPortHover(gc, lastX, lastY, xOffset, yOffset);
     }
   }
   
@@ -1138,16 +1138,16 @@ public class Diagram implements Display {
     return iTable;
   }
   
-  private void paintEdges(GC gc) {
+  private void paintEdges(GC gc, int xOffset, int yOffset) {
     Hashtable<Edge, Hashtable<Edge, Vector<Point>>> iTable = getIntersectionTable();
     for (Edge edge : edges) {
       if ((mode != MouseMode.MOVE_SOURCE && mode != MouseMode.MOVE_TARGET) || (selectedEdge != edge)) {
         Color color = getEdgeColor(edge);
-        edge.getPainter().paint(gc, color, showWaypoints, intersectionPoints(edge, iTable));
+        edge.getPainter().paint(gc, color, showWaypoints, intersectionPoints(edge, iTable), xOffset, yOffset);
       } else {
         if (mode == MouseMode.MOVE_SOURCE) {
-          edge.getPainter().paintSourceMoving(gc, lastX, lastY);
-        } else edge.getPainter().paintTargetMoving(gc, lastX, lastY);
+          edge.getPainter().paintSourceMoving(gc, lastX, lastY, xOffset, yOffset);
+        } else edge.getPainter().paintTargetMoving(gc, lastX, lastY, xOffset, yOffset);
       }
     }
   }
@@ -1254,8 +1254,8 @@ public class Diagram implements Display {
     lastX = x;
     lastY = y;
 	  for(Diagram nestedDiagram : getNestedDiagrams()) {
-	    nestedDiagram.lastX = lastX-nestedDiagramOffsets.get(nestedDiagram.id).x;
-	    nestedDiagram.lastY = lastY-nestedDiagramOffsets.get(nestedDiagram.id).y;
+	    nestedDiagram.lastX = lastX-getNestedDiagramOffsets(nestedDiagram.id).x;
+	    nestedDiagram.lastY = lastY-getNestedDiagramOffsets(nestedDiagram.id).y;
 	 }
   }
   
@@ -1263,8 +1263,8 @@ public class Diagram implements Display {
     firstX = x;
     firstY = y;
 	  for(Diagram nestedDiagram : getNestedDiagrams()) {
-	    nestedDiagram.firstX = firstX-nestedDiagramOffsets.get(nestedDiagram.id).x;
-	    nestedDiagram.firstY = firstY-nestedDiagramOffsets.get(nestedDiagram.id).y;
+	    nestedDiagram.firstX = firstX-getNestedDiagramOffsets(nestedDiagram.id).x;
+	    nestedDiagram.firstY = firstY-getNestedDiagramOffsets(nestedDiagram.id).y;
 	 }
   }
   
@@ -1272,8 +1272,8 @@ public class Diagram implements Display {
     bandX = x;
     bandY = y;
 	  for(Diagram nestedDiagram : getNestedDiagrams()) {
-	    nestedDiagram.bandX = bandX-nestedDiagramOffsets.get(nestedDiagram.id).x;
-	    nestedDiagram.bandY = bandY-nestedDiagramOffsets.get(nestedDiagram.id).y;
+	    nestedDiagram.bandX = bandX-getNestedDiagramOffsets(nestedDiagram.id).x;
+	    nestedDiagram.bandY = bandY-getNestedDiagramOffsets(nestedDiagram.id).y;
 	 }
   }
 
@@ -1311,7 +1311,7 @@ public class Diagram implements Display {
 	      deselectAll();
 	      int x = event.x;
 	      int y = event.y;
-	      Port port = selectPort(x, y);
+	      PortAndDiagram port = selectPort(x, y);
 	      if (port != null) {
 	        sourcePort = port;
 	        firstX = x;
@@ -1370,7 +1370,7 @@ public class Diagram implements Display {
 		nestedDiagram.mouseUp(event);
 	}
     scale(event);
-    if (mode == MouseMode.NEW_EDGE) new OutboundMessages().checkEdgeCreation(event.x, event.y);
+    if (mode == MouseMode.NEW_EDGE) new OutboundMessages().checkEdgeCreation(event.x, event.y, sourcePort);
     if (mode == MouseMode.SELECTED) sendMoveSelectedEvents();
     if (mode == MouseMode.RESIZE_BOTTOM_RIGHT) resizeBottomRight();
     if (mode == MouseMode.RUBBER_BAND) selectRubberBand();
@@ -1685,17 +1685,19 @@ public void copyToClipboard(String id) {
 		}
 		return nestedDiagrams;
 	}
+	
+	private Point getNestedDiagramOffsets(String id) {
+		Point p = nestedDiagramOffsets.get(id);
+		return p==null?new Point(0,0):p;
+	}
   
   private boolean select(int stateMask, int x, int y, boolean isNested) {
-	// isNested means, this method has been invoked recursively. false, if invokes by the Listener
+	// isNested means, this method has been invoked recursively. false, if invoked by the Listener
     boolean selected = false;
     boolean somethingWasDone = false;
     boolean isShift = (stateMask & SWT.SHIFT) == SWT.SHIFT;
     for(Diagram nestedDiagram : getNestedDiagrams()) {
-//    	System.err.println(x);
-    	somethingWasDone |= nestedDiagram.select(stateMask, x-nestedDiagramOffsets.get(nestedDiagram.id).x, y-nestedDiagramOffsets.get(nestedDiagram.id).y, true);
-//    	nestedDiagram.lastX = x-nestedDiagramOffsets.get(nestedDiagram.id).x;
-//    	nestedDiagram.lastY = y-nestedDiagramOffsets.get(nestedDiagram.id).y;
+    	somethingWasDone |= nestedDiagram.select(stateMask, x-getNestedDiagramOffsets(nestedDiagram.id).x, y-getNestedDiagramOffsets(nestedDiagram.id).y, true);
     }
     if(somethingWasDone) return true;
     if (!selected) {
@@ -1785,8 +1787,6 @@ public void copyToClipboard(String id) {
     	mode = MouseMode.RUBBER_BAND;
     	storeBandXY(x, y);
       }
-//      bandX = x;
-//      bandY = y;
     }
     return selected;
   }
@@ -1825,14 +1825,38 @@ private void select(Selectable selectable) {
     }
   }
 
-private boolean selected(Selectable selectable) {
+  private boolean selected(Selectable selectable) {
     return selection.contains(selectable);
   }
 
-  private Port selectPort(int x, int y) {
+  private static class PortAndDiagram {
+	final Port port;
+	final Diagram diagram;
+	  
+	public PortAndDiagram(Port port, Diagram diagram) {
+		this.port = port; this.diagram = diagram;
+	}
+  }
+  
+  private PortAndDiagram selectPort(int x, int y) {
     for (Node node : nodes) {
+    	
+      PortAndDiagram nestedPort = null;
+      if(node.contains(x,y)) {
+    	  for(Display display : node.displays) {
+			  if(display instanceof Box) { 
+				  Box box = (Box) display;
+				  Diagram nestedDiagram = box.nestedDiagram;
+			  	  if(nestedDiagram != null) {
+			  		nestedPort = nestedDiagram.selectPort(x - node.getX(), y - node.getY());
+			  	  }
+			  }
+    	  }
+      }
+      if(nestedPort != null) return nestedPort;
+      
       for (Port port : node.getPorts().values()) {
-        if (port.contains(x - node.getX(), y - node.getY())) { return port; }
+        if (port.contains(x - node.getX(), y - node.getY())) return new PortAndDiagram(port, this); 
       }
     }
     return null;
@@ -1921,21 +1945,23 @@ private boolean selected(Selectable selectable) {
 			eventHandler.raiseEvent(message);
 		}
 
-		private void checkEdgeCreation(int x, int y) {
-			Port port = selectPort(x, y);
-			if (port != null) {
-				String sourceId = sourcePort.getId();
-				String targetId = port.getId();
-				Message m = DiagramClient.theClient().getHandler().newMessage("newEdge", 7);
-				m.args[0] = new Value(edgeCreationType);
-				m.args[1] = new Value(sourceId);
-				m.args[2] = new Value(targetId);
-				m.args[3] = new Value(firstX);
-				m.args[4] = new Value(firstY);
-				m.args[5] = new Value(x);
-				m.args[6] = new Value(y);
-				DiagramClient.theClient().getHandler().raiseEvent(m);
-				resetPalette();
+		private void checkEdgeCreation(int x, int y, PortAndDiagram sourcePort) {
+			PortAndDiagram targetPort = selectPort(x, y);
+			if (targetPort != null) {
+				String sourceId = sourcePort.port.getId();
+				String targetId = targetPort.port.getId();
+				if(sourcePort.diagram.id.equals(targetPort.diagram.id)) {
+					Message m = DiagramClient.theClient().getHandler().newMessage("newEdge", 7);
+					m.args[0] = new Value(edgeCreationType);
+					m.args[1] = new Value(sourceId);
+					m.args[2] = new Value(targetId);
+					m.args[3] = new Value(firstX - getNestedDiagramOffsets(sourcePort.diagram.id).x);
+					m.args[4] = new Value(firstY - getNestedDiagramOffsets(sourcePort.diagram.id).y);
+					m.args[5] = new Value(x - getNestedDiagramOffsets(sourcePort.diagram.id).x);
+					m.args[6] = new Value(y - getNestedDiagramOffsets(sourcePort.diagram.id).y);
+					DiagramClient.theClient().getHandler().raiseEvent(m);
+					resetPalette();
+				}
 			}
 		}
 	}
