@@ -58,10 +58,10 @@ public class Diagram implements Display {
 
   static int           DEFAULT_MAX_ITERATIONS = 200;
   static int           RIGHT_BUTTON           = 3;
-  static float           MAX_ZOOM               = 2.00f;
-  static float           MIN_ZOOM               = .20f;
+  static float         MAX_ZOOM               = 2.00f;
+  static float         MIN_ZOOM               = .20f;
 
-  static float           ZOOM_INC               = .10f;
+  static float         ZOOM_INC               = .10f;
 
   static int           MIN_EDGE_DISTANCE      = 5;
   Color                diagramBackgroundColor = WHITE;
@@ -102,13 +102,14 @@ public class Diagram implements Display {
   String               edgeCreationType       = null;
   String               nodeCreationType       = null;
   public String updateID = null;
+  private final Box nestedParent;
 
   /**
    * Creates a new Diagram
    * @param id
    * @param parent
    */
-  public Diagram(String id, Composite parent) {
+  public Diagram(String id, Composite parent, Box parentIfNested) {
     container = new SashForm(parent, SWT.HORIZONTAL | SWT.BORDER);
     palette = new Palette(container, this);
     scroller = new ScrolledComposite(container, SWT.V_SCROLL | SWT.H_SCROLL);
@@ -123,6 +124,7 @@ public class Diagram implements Display {
     container.setWeights(new int[] { 1, 5 });
     scroller.setContent(canvas);
     this.id = id;
+    this.nestedParent = parentIfNested;
   }
   
 	private void sendMessageToDeleteSelection() {
@@ -1381,7 +1383,10 @@ public class Diagram implements Display {
 
   private void sendMoveSelectedEvents() {
     for (Selectable selectable : selection)
-      selectable.moveEvent();
+      selectable.moveEvent(0, 
+    		               isNested()?nestedParent.width:Integer.MAX_VALUE, 
+		                   0, 
+		                   isNested()?nestedParent.height:Integer.MAX_VALUE);
   }
   
   private void resizeBottomRight() {
@@ -1547,7 +1552,10 @@ public class Diagram implements Display {
 	      }
 	    }
 	    for (Node node : positions.keySet())
-	      node.moveEvent();
+	      node.moveEvent(0, 
+	    		         isNested()?nestedParent.width:Integer.MAX_VALUE, 
+	    		         0, 
+	    		         isNested()?nestedParent.height:Integer.MAX_VALUE);
 	  }
 	  
 	  private Point2D nodeRepulsion(Node target, Node source) {
@@ -1576,12 +1584,9 @@ public class Diagram implements Display {
 //	    if (mode == MouseMode.SELECTED) {
 	      DiagramClient.theClient().runOnDisplay(new Runnable() {
 	        public void run() {
-	          if (event.x >= 0 && event.y >= 0) {
 	            int dx = event.x - lastX;
 	            int dy = event.y - lastY;
 	  	        storeLastXY(event.x, event.y);
-//		      lastX = event.x;
-//		      lastY = event.y;
 	            if(mode == MouseMode.SELECTED)
 	              for (Selectable selectable : selection)
 	                selectable.moveBy(dx, dy);
@@ -1590,7 +1595,6 @@ public class Diagram implements Display {
 	            	for (Selectable selectable : nestedDiagram.selection)
 	            	  selectable.moveBy(dx, dy);	            
 	            redraw();
-	          }
 	        }
 	      });
 //	    }
@@ -1665,6 +1669,8 @@ public void copyToClipboard(String id) {
   /*
    * Selections
    */
+
+    private boolean isNested() {return nestedParent != null;}
   
     private transient HashMap<String,Point> nestedDiagramOffsets = new HashMap<String,Point>();
   

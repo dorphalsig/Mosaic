@@ -208,7 +208,7 @@ public class Label implements Selectable {
     y = y + dy;
   }
 
-  public void moveEvent() {
+  public void moveEvent(int minX, int maxX, int minY, int maxY) {
     Message message = DiagramClient.theClient().getHandler().newMessage("move", 3);
     message.args[0] = new Value(id);
     message.args[1] = new Value(getX());

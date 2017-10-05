@@ -63,7 +63,7 @@ public class Waypoint implements Selectable {
   void move(int x, int y) {
     if (canMoveHorizontally()) this.x = x;
     if (canMoveVertically()) this.y = y;
-    if (edge.start() != this && edge.end() != this) moveEvent();
+    if (edge.start() != this && edge.end() != this) moveEvent(Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MIN_VALUE, Integer.MAX_VALUE);
   }
 
   void move(String id, int x, int y) {
@@ -107,7 +107,7 @@ public class Waypoint implements Selectable {
   }
   
   @Override
-  public void moveEvent() {
+  public void moveEvent(int minX, int maxX, int minY, int maxY) {
     Message message = DiagramClient.theClient().getHandler().newMessage("move", 3);
     message.args[0] = new Value(id);
     message.args[1] = new Value(x);
@@ -117,10 +117,10 @@ public class Waypoint implements Selectable {
 
 
   @Override
-  public void paintSelected(GC gc, int x, int y) { // TODO:ADAPT X/Y
+  public void paintSelected(GC gc, int xOffset, int yOffset) { 
     Color c = gc.getForeground();
     gc.setForeground(Diagram.RED);
-    gc.drawOval(x - SELECTED_SIZE, y - SELECTED_SIZE, SELECTED_SIZE * 2, SELECTED_SIZE * 2);
+    gc.drawOval(x - SELECTED_SIZE + xOffset, y - SELECTED_SIZE + yOffset, SELECTED_SIZE * 2, SELECTED_SIZE * 2);
     gc.setForeground(c);
     edge.getPainter().paintOrthogonal(gc, this); // Zielscheibe
   }

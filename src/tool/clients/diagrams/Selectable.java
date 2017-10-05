@@ -6,7 +6,7 @@ public interface Selectable {
 
   void paintSelected(GC gc, int x, int y);
 
-  void moveEvent();
+  void moveEvent(int minX, int maxX, int minY, int maxY);
 
   void moveBy(int dx, int dy);
 

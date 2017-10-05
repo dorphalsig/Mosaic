@@ -588,7 +588,7 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
   private void newDiagram(final String id, final String label) {
     runOnDisplay(new Runnable() {
       public void run() {
-        Diagram diagram = new Diagram(id, tabFolder);
+        Diagram diagram = new Diagram(id, tabFolder, null);
         CTabItem item = new CTabItem(tabFolder, SWT.BORDER);
         item.setControl(diagram.getContainer());
         item.setText(label);
