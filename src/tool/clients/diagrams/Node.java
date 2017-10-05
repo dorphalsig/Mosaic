@@ -174,10 +174,21 @@ public class Node implements Selectable {
   }
 
   public void moveEvent(int minX, int maxX, int minY, int maxY) {
+	  
+	int oldX = getX(); // Save the intended but misplaced Position for the ports.
+	int oldY = getY();
+	
 	if(getX() < minX) setX(minX);
 	if(getY() < minY) setY(minY);
 	if(getX() + getWidth() > maxX) setX(maxX - getWidth());
 	if(getY() + getHeight() > maxY) setY(maxY - getHeight());
+	
+	//The position is now corrected. The ports are moved by the diff to follow
+	
+    for (Port port : ports.values()) {
+        port.ownerMovedBy(getX() - oldX, getY() - oldY);
+    }
+	
     Message message = DiagramClient.theClient().getHandler().newMessage("move", 3);
     message.args[0] = new Value(id);
     message.args[1] = new Value(getX());

@@ -108,6 +108,12 @@ public class Waypoint implements Selectable {
   
   @Override
   public void moveEvent(int minX, int maxX, int minY, int maxY) {
+
+    if(getX() < minX)  setX(minX);
+	if(getY() < minY)  setY(minY);
+	if(getX()  > maxX) setX(maxX);
+	if(getY()  > maxY) setY(maxY);
+		
     Message message = DiagramClient.theClient().getHandler().newMessage("move", 3);
     message.args[0] = new Value(id);
     message.args[1] = new Value(x);
