@@ -36,6 +36,7 @@ import tool.clients.dialogs.notifier.NotifierDialog;
 import tool.clients.editors.EditorClient;
 import tool.clients.forms.FormsClient;
 import tool.clients.menus.MenuClient;
+import tool.clients.screenGeneration.ScreenGenerationClient;
 import tool.clients.workbench.WorkbenchClient;
 import tool.console.Console;
 import tool.console.ConsoleClient;
@@ -344,6 +345,7 @@ private static String inflationPath() {
     xos.newMessageClient("com.ceteva.forms", new FormsClient());
     xos.newMessageClient("com.ceteva.undo", new UndoClient());
     xos.newMessageClient("com.ceteva.oleBridge", new OleBridgeClient());
+    xos.newMessageClient("screenGeneration", new ScreenGenerationClient()); //BB
   }
 
   public static void startDispatching() {
@@ -380,6 +382,7 @@ private static String inflationPath() {
     EditorClient.start(editorTabFolder, SWT.BORDER);
     DiagramClient.start(editorTabFolder);
     FormsClient.start(propertyTabFolder, propertyToolbar, SWT.BORDER);
+    ScreenGenerationClient.start(propertyTabFolder); //BB
     Console.start(propertyTabFolder);
     rightSash.setWeights(new int[] { 2, 1 });
     XModeler.open();
