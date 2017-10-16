@@ -52,6 +52,54 @@ public class XModeler {
   // XModeler is a tool that controls and is controlled by the XMF VM that runs
   // on the XMF operating system.
 
+  private static Integer DEVICE_ZOOM_PERCENT = null;
+
+  static final String    NAME                = "XModeler";
+
+  static String          busyMessage         = "";
+
+  static int             TOOL_X              = 100;
+
+  static int             TOOL_Y              = 100;
+
+  static int             TOOL_WIDTH          = 1200;
+
+  static int             TOOL_HEIGHT         = 900;
+
+  static OperatingSystem xos                 = new OperatingSystem();
+
+  static Shell           XModeler            = new Shell(SWT.BORDER | SWT.SHELL_TRIM);
+
+  static Display         display;
+
+  static Menu            menuBar;
+
+  static String          projDir;
+
+  static String          loadedImagePath     = null;
+
+  static String          version             = null;
+
+  static String[]        copyOfArgs;
+
+  static boolean         showLoad            = false;
+
+  public static String   textEditorClass     = "tool.clients.editors.TextEditor";
+
+  // private static boolean overwrite(final String file) {
+  // final boolean[] result = new boolean[] { false };
+  // XModeler.getDisplay().syncExec(new Runnable() {
+  // public void run() {
+  // try {
+  // result[0] = MessageDialog.openConfirm(XModeler, "Overwite", "Overwrite " + file);
+  // } catch (Throwable t) {
+  // t.printStackTrace();
+  // }
+  // }
+  // });
+  // return result[0];
+  // }
+
   public static String attributeValue(Node node, String name) {
     NamedNodeMap attrs = node.getAttributes();
     for (int i = 0; i < attrs.getLength(); i++) {
@@ -113,6 +161,12 @@ public class XModeler {
     return encoded.toString();
   }
 
+  public static int getDeviceZoomPercent() {
+    if (DEVICE_ZOOM_PERCENT == null) DEVICE_ZOOM_PERCENT = 100;
+    return DEVICE_ZOOM_PERCENT;
+    // return(display.getDPI().x*100/96);
+  }
+
   private static String getImage(String[] args) {
     for (int i = 0; i < args.length; i++) {
       if (args[i].equals("-image")) return args[i + 1];
@@ -120,41 +174,56 @@ public class XModeler {
     return null;
   }
 
-  private static String getVersion(String[] args) {
-	    for (int i = 0; i < args.length; i++) {
-	      if (args[i].startsWith("version:")){
-	    	  return args[i].replace("version:", "");
-	      }
-	    }
-	    return "";
-	  }
-  
   private static boolean getImageDialog(String[] args) {
-	    for (int i = 0; i < args.length; i++) {
-	      if (args[i].equals("-imagedialog")){
-	    	  if( args[i + 1].equalsIgnoreCase("true")){
-	    		  return true;
-	    	  } else {
-	    		  return false;
-	    	  }
-	      }
-	    }
-	    return true;
-	  }
-    
+    for (int i = 0; i < args.length; i++) {
+      if (args[i].equals("-imagedialog")) {
+        if (args[i + 1].equalsIgnoreCase("true")) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
   public static Menu getMenuBar() {
     return menuBar;
+  }
+
+  private static String getVersion(String[] args) {
+    for (int i = 0; i < args.length; i++) {
+      if (args[i].startsWith("version:")) { return args[i].replace("version:", ""); }
+    }
+    return "";
   }
 
   public static Shell getXModeler() {
     return XModeler;
   }
 
+  private static String img2xml(String imgString) {
+    File img = new File(imgString);
+    File path = img.getParentFile();
+    String imgFile = img.getName();
+    String xmlFile = imgFile.substring(0, imgFile.lastIndexOf(".")) + ".xml";
+    File xml = new File(path, xmlFile);
+    return xml.getAbsolutePath();
+  }
+
+  // private static boolean checkHiRes(String[] args) {
+  // for (int i = 0; i < args.length; i++) {
+  // if (args[i].equals("-hi-res"))
+  // return "true".equals(args[i + 1]);
+  // }
+  // return false;
+  // }
+
   public static void inflate(String inflationPath) {
-	  inflationPath = img2xml(loadedImagePath);
-//	  System.err.println("loadedImagePath: " + loadedImagePath);
-//	  System.err.println("inflationPath: " + inflationPath);
-//	  new RuntimeException("XML").printStackTrace();
+    inflationPath = img2xml(loadedImagePath);
+    // System.err.println("loadedImagePath: " + loadedImagePath);
+    // System.err.println("inflationPath: " + inflationPath);
+    // new RuntimeException("XML").printStackTrace();
     try {
       File fXmlFile = new File(inflationPath);
       if (fXmlFile.exists()) {
@@ -194,16 +263,7 @@ public class XModeler {
     }
   }
 
-  private static String img2xml(String imgString) {
-	  File img = new File(imgString);
-	  File path = img.getParentFile();
-	  String imgFile = img.getName();
-	  String xmlFile = imgFile.substring(0, imgFile.lastIndexOf("."))+".xml";
-	  File xml = new File(path, xmlFile);
-	  return xml.getAbsolutePath();
-  }
-
-private static String inflationPath() {
+  private static String inflationPath() {
     if (loadedImagePath != null) {
       String name = loadedImagePath.substring(0, loadedImagePath.lastIndexOf('.'));
       return name + ".xml";
@@ -220,33 +280,12 @@ private static String inflationPath() {
 
   public static void main(String[] args) {
     copyOfArgs = Arrays.copyOf(args, args.length);
-	startXOS(args[0]);
+    textEditorClass = args.length > 1 ? args[1] : "tool.clients.editors.TextEditor";
+    startXOS(args[0]);
     startXModeler();
     startClients();
     startDispatching();
   }
-  
-  private static Integer DEVICE_ZOOM_PERCENT = null;
-
-  public static int getDeviceZoomPercent() {
-	  if(DEVICE_ZOOM_PERCENT == null) DEVICE_ZOOM_PERCENT = 100;
-	  return DEVICE_ZOOM_PERCENT;
-//	  return(display.getDPI().x*100/96);
-  }
-  
-//  private static boolean overwrite(final String file) {
-//    final boolean[] result = new boolean[] { false };
-//    XModeler.getDisplay().syncExec(new Runnable() {
-//      public void run() {
-//        try {
-//          result[0] = MessageDialog.openConfirm(XModeler, "Overwite", "Overwrite " + file);
-//        } catch (Throwable t) {
-//          t.printStackTrace();
-//        }
-//      }
-//    });
-//    return result[0];
-//  }
 
   public static void removeBusyInformation() {
     busyMessage = "";
@@ -261,12 +300,12 @@ private static String inflationPath() {
             loadedImagePath = inflationPath.substring(0, inflationPath.lastIndexOf('.')) + ".img";
             setToolLabel();
             File file = new File(inflationPath);
-//            FileOutputStream fout = new FileOutputStream(file);
+            // FileOutputStream fout = new FileOutputStream(file);
             int x = XModeler.getLocation().x;
             int y = XModeler.getLocation().y;
             int width = XModeler.getSize().x;
             int height = XModeler.getSize().y;
-//            PrintStream out = new PrintStream(fout);
+            // PrintStream out = new PrintStream(fout);
             PrintStream out = new PrintStream(file, "UTF-8");
             out.print("<?xml version=\"1.0\" encoding=\"UTF-8\"?><XModeler x='" + x + "' y='" + y + "' width='" + width + "' height = '" + height + "'>");
             ModelBrowserClient.theClient().writeXML(out);
@@ -291,14 +330,14 @@ private static String inflationPath() {
     if (!new File(defaultImage).exists()) throw new Error("the default image file must exist: " + defaultImage);
     boolean imageDialog = getImageDialog(args);
     String selectedImage = null;
-    if(imageDialog || showLoad){ 
-    	FileDialog dialog = new FileDialog(XModeler, SWT.OPEN);
-    	dialog.setText("Select the image file");
-    	dialog.setFilterExtensions(new String[] { "*.img" });
-    	dialog.setFileName(defaultImage);
-    	dialog.setFilterPath(projDir);
-    	selectedImage = dialog.open();
-  	}
+    if (imageDialog || showLoad) {
+      FileDialog dialog = new FileDialog(XModeler, SWT.OPEN);
+      dialog.setText("Select the image file");
+      dialog.setFilterExtensions(new String[] { "*.img" });
+      dialog.setFileName(defaultImage);
+      dialog.setFilterPath(projDir);
+      selectedImage = dialog.open();
+    }
     if (selectedImage != null && !selectedImage.equals(defaultImage)) {
       loadedImagePath = selectedImage;
       setToolLabel();
@@ -323,6 +362,10 @@ private static String inflationPath() {
     setToolLabel();
   }
 
+  public static void showMessage(String title, String message) {
+    NotifierDialog.notify(title, message, NotificationType.values()[2]);
+  }
+
   public static void shutdown() {
     XModeler.getDisplay().syncExec(new Runnable() {
       public void run() {
@@ -345,7 +388,7 @@ private static String inflationPath() {
     xos.newMessageClient("com.ceteva.forms", new FormsClient());
     xos.newMessageClient("com.ceteva.undo", new UndoClient());
     xos.newMessageClient("com.ceteva.oleBridge", new OleBridgeClient());
-    xos.newMessageClient("screenGeneration", new ScreenGenerationClient()); //BB
+    xos.newMessageClient("screenGeneration", new ScreenGenerationClient()); // BB
   }
 
   public static void startDispatching() {
@@ -359,9 +402,9 @@ private static String inflationPath() {
   public static void startXModeler() {
     display = Display.getDefault();
 
-    DEVICE_ZOOM_PERCENT = display.getDPI().x*100/96;
-	System.err.println("The zoom for this device was detected as " + DEVICE_ZOOM_PERCENT+"%.");
-	
+    DEVICE_ZOOM_PERCENT = display.getDPI().x * 100 / 96;
+    System.err.println("The zoom for this device was detected as " + DEVICE_ZOOM_PERCENT + "%.");
+
     setToolLabel();
     Image windowIcon = new Image(XModeler.getDisplay(), "icons/shell/mosaic32.gif");
     XModeler.setImage(windowIcon);
@@ -382,57 +425,57 @@ private static String inflationPath() {
     EditorClient.start(editorTabFolder, SWT.BORDER);
     DiagramClient.start(editorTabFolder);
     FormsClient.start(propertyTabFolder, propertyToolbar, SWT.BORDER);
-    ScreenGenerationClient.start(propertyTabFolder); //BB
+    ScreenGenerationClient.start(propertyTabFolder); // BB
     Console.start(propertyTabFolder);
     rightSash.setWeights(new int[] { 2, 1 });
     XModeler.open();
-    
+
     XModeler.getDisplay().timerExec(3000, new Runnable() {
-    	
-    	@Override
-    	public void run() {
-    	    Menu exitMenu = new Menu(menuBar);
-    	    MenuItem exit = new MenuItem(menuBar, SWT.CASCADE);
-    	    exit.setText("Debug");
-    	    exit.setMenu(exitMenu);
-    	    MenuItem panic = new MenuItem(exitMenu, SWT.NONE);
-    	    panic.setText("VM Panic");
-    	    panic.addListener(SWT.Selection, new Listener() {
-    	        public void handleEvent(Event e) {
-    	          Machine.interrupt = true;
-    	        }
-    	      });
-    	    MenuItem loadImage = new MenuItem(menuBar.getItem(0).getMenu(), SWT.NONE);
-    	    loadImage.setText("Load Image");
-    	    loadImage.addListener(SWT.Selection, new Listener() {
-    	        public void handleEvent(Event e) {
-   	        	  XModeler.dispose();
-   	        	  busyMessage     = "";
-   	        	  TOOL_X          = 100;
-   	        	  TOOL_Y          = 100;
-   	        	  TOOL_WIDTH      = 1200;
-   	        	  TOOL_HEIGHT     = 900;
-   	        	  xos             = new OperatingSystem();
-   	        	  XModeler        = new Shell(SWT.BORDER | SWT.SHELL_TRIM);
-   	        	  display = null;
-   	        	  menuBar = null;
-   	        	  projDir = null;
-   	        	  loadedImagePath = null;
-   	        	
-   	        	  showLoad = true;
-   	        	  main(copyOfArgs);	
-    	        }
-    	      });
-    	    
-    	}
+
+      @Override
+      public void run() {
+        Menu exitMenu = new Menu(menuBar);
+        MenuItem exit = new MenuItem(menuBar, SWT.CASCADE);
+        exit.setText("Debug");
+        exit.setMenu(exitMenu);
+        MenuItem panic = new MenuItem(exitMenu, SWT.NONE);
+        panic.setText("VM Panic");
+        panic.addListener(SWT.Selection, new Listener() {
+          public void handleEvent(Event e) {
+            Machine.interrupt = true;
+          }
+        });
+        MenuItem loadImage = new MenuItem(menuBar.getItem(0).getMenu(), SWT.NONE);
+        loadImage.setText("Load Image");
+        loadImage.addListener(SWT.Selection, new Listener() {
+          public void handleEvent(Event e) {
+            XModeler.dispose();
+            busyMessage = "";
+            TOOL_X = 100;
+            TOOL_Y = 100;
+            TOOL_WIDTH = 1200;
+            TOOL_HEIGHT = 900;
+            xos = new OperatingSystem();
+            XModeler = new Shell(SWT.BORDER | SWT.SHELL_TRIM);
+            display = null;
+            menuBar = null;
+            projDir = null;
+            loadedImagePath = null;
+
+            showLoad = true;
+            main(copyOfArgs);
+          }
+        });
+
+      }
     });
   }
-  
+
   static void startXOS(String initFile) {
     final String[] args = xos.getInitArgs(initFile);
-//	/*QUICKFIX FOR HI_RES*/FormsClient.HIGH_RESOLUTION = checkHiRes(args);
+    // /*QUICKFIX FOR HI_RES*/FormsClient.HIGH_RESOLUTION = checkHiRes(args);
     setProjectDirectory(args);
-    version = getVersion(args); 
+    version = getVersion(args);
     setImage(args);
     Thread t = new Thread() {
       public void run() {
@@ -447,44 +490,4 @@ private static String inflationPath() {
     t.start();
   }
 
-//	private static boolean checkHiRes(String[] args) {
-//		for (int i = 0; i < args.length; i++) {
-//			if (args[i].equals("-hi-res"))
-//				return "true".equals(args[i + 1]);
-//		}
-//		return false;
-//	}
-
-public static void showMessage(String title, String message) {
-    NotifierDialog.notify(title, message, NotificationType.values()[2]);
-  }
-
-  static final String    NAME            = "XModeler";
-
-  static String          busyMessage     = "";
-
-  static int             TOOL_X          = 100;
-
-  static int             TOOL_Y          = 100;
-
-  static int             TOOL_WIDTH      = 1200;
-
-  static int             TOOL_HEIGHT     = 900;
-
-  static OperatingSystem xos             = new OperatingSystem();
-
-  static Shell           XModeler        = new Shell(SWT.BORDER | SWT.SHELL_TRIM);
-
-  static Display         display;
-
-  static Menu            menuBar;
-
-  static String          projDir;
-
-  static String          loadedImagePath = null;
-  static String			 version = null;
-  
-  static String[] 		copyOfArgs;
-  static boolean		showLoad = false;
-  
 }

@@ -38,4 +38,8 @@ public class MultiLineRule extends WordRule {
     return "Multiline(" + word + "," + end + "," + color + ")";
   }
 
+  public String getEnd() {
+    return end;
+  }
+
 }
