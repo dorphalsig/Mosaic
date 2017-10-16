@@ -55,7 +55,7 @@ import tool.xmodeler.XModeler;
 import xos.Message;
 import xos.Value;
 
-public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListener, MouseWheelListener, LineBackgroundListener, ExtendedModifyListener, PaintObjectListener, SelectionListener {
+public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListener, MouseWheelListener, LineBackgroundListener, ExtendedModifyListener, PaintObjectListener, SelectionListener, ITextEditor {
 
   private static final int           ZOOM          = 2;
   private static final int           MAX_FONT_SIZE = 40;
@@ -990,5 +990,24 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
     } catch (Exception e) {
       // Silently fail where things go wrong.
     }
+  }
+
+  public void varDec(int charStart, int charEnd, int decStart, int decEnd) {
+    
+  }
+
+  public void setRendering(boolean state) {
+  }
+
+  public void unboundVar(String name, int charStart, int charEnd) {
+    
+  }
+
+  public void syntaxError(int pos, String error) {
+    
+  }
+
+  public void clearErrors() {
+    
   }
 }

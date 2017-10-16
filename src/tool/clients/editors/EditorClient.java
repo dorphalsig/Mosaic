@@ -1,7 +1,8 @@
 package tool.clients.editors;
 
 import java.io.PrintStream;
-import java.net.MalformedURLException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.Hashtable;
 import java.util.Stack;
@@ -44,20 +45,19 @@ import xos.Value;
 
 public class EditorClient extends Client implements LocationListener, CTabFolder2Listener {
 
-  static final Color                   LINE_HIGHLIGHT = new Color(XModeler.getXModeler().getDisplay(), 192, 192, 192);
+  public static final Color             LINE_HIGHLIGHT = new Color(XModeler.getXModeler().getDisplay(), 192, 192, 192);
+  public static final Color             RED            = new Color(XModeler.getXModeler().getDisplay(), 255, 0, 0);
+  public static final Color             GREY           = new Color(XModeler.getXModeler().getDisplay(), 192, 192, 192);
+  public static final Color             WHITE          = new Color(XModeler.getXModeler().getDisplay(), 255, 255, 255);
+  public static final Color             GREEN          = new Color(XModeler.getXModeler().getDisplay(), 0, 170, 0);
+  public static final Color             BLACK          = new Color(XModeler.getXModeler().getDisplay(), 0, 0, 0);
 
-  static final Color                   RED            = new Color(XModeler.getXModeler().getDisplay(), 255, 0, 0);
+  static EditorClient                   theClient;
+  static CTabFolder                     tabFolder;
 
-  static final Color                   GREY           = new Color(XModeler.getXModeler().getDisplay(), 192, 192, 192);
-  static final Color                   WHITE          = new Color(XModeler.getXModeler().getDisplay(), 255, 255, 255);
-  static final Color                   GREEN          = new Color(XModeler.getXModeler().getDisplay(), 0, 170, 0);
-  static final Color                   BLACK          = new Color(XModeler.getXModeler().getDisplay(), 0, 0, 0);
-  static EditorClient                  theClient;
-  static CTabFolder                    tabFolder;
-
-  static Hashtable<String, CTabItem>   tabs           = new Hashtable<String, CTabItem>();
-  static Hashtable<String, Browser>    browsers       = new Hashtable<String, Browser>();
-  static Hashtable<String, TextEditor> editors        = new Hashtable<String, TextEditor>();
+  static Hashtable<String, CTabItem>    tabs           = new Hashtable<String, CTabItem>();
+  static Hashtable<String, Browser>     browsers       = new Hashtable<String, Browser>();
+  static Hashtable<String, ITextEditor> editors        = new Hashtable<String, ITextEditor>();
 
   public static void start(CTabFolder tabFolder, int style) {
     EditorClient.tabFolder = tabFolder;
@@ -108,7 +108,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
   }
 
   private void addMultilineRule(String id, String start, String end, int red, int green, int blue) {
-    for (TextEditor editor : editors.values())
+    for (ITextEditor editor : editors.values())
       editor.addMultilineRule(id, start, end, red, green, blue);
   }
 
@@ -163,7 +163,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
   }
 
   private void addWordRuleColor(String id, String text, int red, int green, int blue) {
-    for (TextEditor editor : editors.values())
+    for (ITextEditor editor : editors.values())
       editor.addWordRule(id, text, red, green, blue);
   }
 
@@ -281,33 +281,33 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
     String label = XModeler.attributeValue(browser, "label");
     String tooltip = XModeler.attributeValue(browser, "toolTip");
     String url = XModeler.attributeValue(browser, "url");
-    if(url.equals("welcome")){
-    	URL location = EditorClient.class.getProtectionDomain().getCodeSource().getLocation();
-        url = location.toString();
-        url = url.substring(0, url.length() - 4); // delete "/bin" from string
-        url += "web/index.html";
+    if (url.equals("welcome")) {
+      URL location = EditorClient.class.getProtectionDomain().getCodeSource().getLocation();
+      url = location.toString();
+      url = url.substring(0, url.length() - 4); // delete "/bin" from string
+      url += "web/index.html";
     }
     String text = XModeler.attributeValue(browser, "text");
     newBrowser(id, label, tooltip, url, text);
   }
 
   private void inflateEditorElement(Node editor) {
-    if (editor.getNodeName().equals("TextEditor")) inflateTextEditor(editor);
+    if (editor.getNodeName().equals("NewTextEditor")) inflateNewTextEditor(editor);
     if (editor.getNodeName().equals("Browser")) inflateBrowser(editor);
   }
 
-  private void inflateTextEditor(Node textEditor) {
-    final String id = XModeler.attributeValue(textEditor, "id");
-    String text = XModeler.attributeValue(textEditor, "text");
-    String label = XModeler.attributeValue(textEditor, "label");
-    String toolTip = XModeler.attributeValue(textEditor, "toolTip");
-    final boolean selected = XModeler.attributeValue(textEditor, "selected").equals("true");
-    boolean editable = XModeler.attributeValue(textEditor, "editable").equals("true");
-    boolean lineNumbers = XModeler.attributeValue(textEditor, "lineNumbers").equals("true");
-    int fontHeight = Integer.parseInt(XModeler.attributeValue(textEditor, "fontHeight"));
-    newTextEditor(id, label, toolTip, editable, lineNumbers, text);
-    final TextEditor editor = editors.get(id);
-    editor.inflate(textEditor);
+  private void inflateNewTextEditor(Node NewTextEditor) {
+    final String id = XModeler.attributeValue(NewTextEditor, "id");
+    String text = XModeler.attributeValue(NewTextEditor, "text");
+    String label = XModeler.attributeValue(NewTextEditor, "label");
+    String toolTip = XModeler.attributeValue(NewTextEditor, "toolTip");
+    final boolean selected = XModeler.attributeValue(NewTextEditor, "selected").equals("true");
+    boolean editable = XModeler.attributeValue(NewTextEditor, "editable").equals("true");
+    boolean lineNumbers = XModeler.attributeValue(NewTextEditor, "lineNumbers").equals("true");
+    int fontHeight = Integer.parseInt(XModeler.attributeValue(NewTextEditor, "fontHeight"));
+    newNewTextEditor(id, label, toolTip, editable, lineNumbers, text);
+    final ITextEditor editor = editors.get(id);
+    editor.inflate(NewTextEditor);
     runOnDisplay(new Runnable() {
       public void run() {
         editor.getText().redraw();
@@ -374,22 +374,22 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
         b3.setText("Enter URL here...");
         buttons.addElement(b3);
         final Browser browser = new Browser(browserParent, SWT.BORDER);
-        final int defaultZoom = 100;//XModeler.getDeviceZoomPercent();
+        final int defaultZoom = 100;// XModeler.getDeviceZoomPercent();
         final int[] zoom = new int[] { defaultZoom };
         up.addListener(SWT.Selection, new Listener() {
           public void handleEvent(Event arg0) {
-            zoom[0] += defaultZoom/10;
+            zoom[0] += defaultZoom / 10;
             browser.execute("document.body.style.zoom = \"" + zoom[0] + "%\"");
             browser.redraw();
           }
         });
         down.addListener(SWT.Selection, new Listener() {
           public void handleEvent(Event arg0) {
-        	if(zoom[0] > defaultZoom/10) {
-              zoom[0] -= defaultZoom/10;
+            if (zoom[0] > defaultZoom / 10) {
+              zoom[0] -= defaultZoom / 10;
               browser.execute("document.body.style.zoom = \"" + zoom[0] + "%\"");
               browser.redraw();
-        	}
+            }
           }
         });
         b1a.addListener(SWT.Selection, new Listener() {
@@ -457,15 +457,15 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
     });
   }
 
-  private void newTextEditor(Message message) {
+  private void newNewTextEditor(Message message) {
     String id = message.args[0].strValue();
     String label = message.args[1].strValue();
     String toolTip = message.args[2].strValue();
     boolean editable = message.args[3].boolValue;
-    newTextEditor(id, label, toolTip, editable, true, "");
+    newNewTextEditor(id, label, toolTip, editable, true, "");
   }
 
-  private void newTextEditor(final String id, final String label, final String toolTip, final boolean editable, final boolean lineNumbers, final String text) {
+  private void newNewTextEditor(final String id, final String label, final String toolTip, final boolean editable, final boolean lineNumbers, final String text) {
     Display.getDefault().syncExec(new Runnable() {
       public void run() {
         CTabItem tabItem = new CTabItem(tabFolder, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL);
@@ -473,10 +473,35 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
         tabItem.setToolTipText(toolTip);
         tabItem.setShowClose(true);
         tabs.put(id, tabItem);
-        TextEditor editor = new TextEditor(id, label, tabFolder, editable, lineNumbers, text);
-        tabItem.setControl(editor.getText());
-        editors.put(id, editor);
-        tabFolder.setSelection(tabItem);
+        try {
+          Class<?> textEditorClass = Class.forName(XModeler.textEditorClass);
+          Constructor<?> cnstr = textEditorClass.getConstructor(new Class<?>[] { String.class, String.class, CTabFolder.class, Boolean.TYPE, Boolean.TYPE, String.class });
+          ITextEditor editor = (ITextEditor) cnstr.newInstance(id, label, tabFolder, editable, lineNumbers, text);
+          //ITextEditor editor = new TextEditor(id, label, tabFolder, editable, lineNumbers, text);
+          tabItem.setControl(editor.getText());
+          editors.put(id, editor);
+          tabFolder.setSelection(tabItem);
+        } catch (ClassNotFoundException e) {
+          e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        } catch (SecurityException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        } catch (InstantiationException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        } catch (IllegalAccessException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        } catch (InvocationTargetException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
       }
     });
   }
@@ -494,7 +519,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
     else if (message.hasName("setUrl"))
       setUrl(message);
     else if (message.hasName("newTextEditor"))
-      newTextEditor(message);
+      newNewTextEditor(message);
     else if (message.hasName("setText"))
       setText(message);
     else if (message.hasName("addWordRule"))
@@ -515,7 +540,83 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       clearHighlights(message);
     else if (message.hasName("setFocus"))
       setFocus(message);
+    else if (message.hasName("syntaxError"))
+      syntaxError(message);
+    else if (message.hasName("clearErrors"))
+      clearErrors(message);
+    else if (message.hasName("unboundVar"))
+      unboundVar(message);
+    else if (message.hasName("rendering"))
+      rendering(message);
+    else if (message.hasName("varType"))
+      varType(message);
+    else if (message.hasName("varDec"))
+      varDec(message);
     else super.sendMessage(message);
+  }
+
+  private void varDec(Message message) {
+    String id = message.args[0].strValue();
+    int charStart = message.args[1].intValue;
+    int charEnd = message.args[2].intValue;
+    int decStart = message.args[3].intValue;
+    int decEnd = message.args[4].intValue;
+    final ITextEditor editor = editors.get(id);
+    runOnDisplay(new Runnable() {
+      public void run() {
+        editor.varDec(charStart, charEnd, decStart, decEnd);
+      }
+    });
+  }
+
+  private void varType(Message message) {
+    // Record the type of a variable.
+  }
+
+  private void rendering(Message message) {
+    String id = message.args[0].strValue();
+    boolean state = message.args[1].boolValue;
+    final ITextEditor editor = editors.get(id);
+    runOnDisplay(new Runnable() {
+      public void run() {
+        editor.setRendering(state);
+      }
+    });
+  }
+
+  private void unboundVar(Message message) {
+    String id = message.args[0].strValue();
+    String name = message.args[1].strValue();
+    int charStart = message.args[2].intValue;
+    int charEnd = message.args[3].intValue;
+    final ITextEditor editor = editors.get(id);
+    runOnDisplay(new Runnable() {
+      public void run() {
+        editor.unboundVar(name, charStart, charEnd);
+      }
+    });
+  }
+
+  private void syntaxError(Message message) {
+    String id = message.args[0].strValue();
+    int pos = message.args[1].intValue;
+    String error = message.args[2].strValue();
+    final ITextEditor editor = editors.get(id);
+    runOnDisplay(new Runnable() {
+      public void run() {
+        editor.syntaxError(pos, error);
+      }
+    });
+  }
+
+  private void clearErrors(Message message) {
+    String id = message.args[0].strValue();
+    final ITextEditor editor = editors.get(id);
+    runOnDisplay(new Runnable() {
+      public void run() {
+        editor.clearErrors();
+      }
+    });
   }
 
   private void setClean(Message message) {
@@ -525,7 +626,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
 
   public void setClean(String id) {
     final CTabItem item = tabs.get(id);
-    final TextEditor editor = editors.get(id);
+    final ITextEditor editor = editors.get(id);
     runOnDisplay(new Runnable() {
       public void run() {
         editor.setDirty(false);
@@ -541,7 +642,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
 
   public void setDirty(String id) {
     final CTabItem item = tabs.get(id);
-    final TextEditor editor = editors.get(id);
+    final ITextEditor editor = editors.get(id);
     runOnDisplay(new Runnable() {
       public void run() {
         editor.setDirty(true);
@@ -587,7 +688,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
     if (editors.containsKey(id.strValue())) {
       Display.getDefault().syncExec(new Runnable() {
         public void run() {
-          TextEditor editor = editors.get(id.strValue());
+          ITextEditor editor = editors.get(id.strValue());
           editor.setString(text.strValue());
           tabFolder.setFocus();
           tabFolder.setSelection(tabs.get(id.strValue()));
@@ -671,7 +772,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
     out.print("<Editors>");
     for (String id : editors.keySet()) {
       CTabItem item = tabs.get(id);
-      TextEditor editor = editors.get(id);
+      ITextEditor editor = editors.get(id);
       editor.writeXML(out, tabFolder.getSelection() == item, item.getText(), item.getToolTipText());
     }
     for (String id : browsers.keySet()) {
@@ -680,8 +781,8 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       String tooltip = tab.getToolTipText();
       Browser browser = browsers.get(id);
       String url = browser.getUrl();
-      if( url.startsWith("file:") && url.endsWith("/web/index.html")){
-    	url = "welcome";  
+      if (url.startsWith("file:") && url.endsWith("/web/index.html")) {
+        url = "welcome";
       }
       String text = browser.getText();
       out.print("<Browser id='" + id + "' label='" + label + "' tooltip='" + tooltip + "' url='" + url + "' text='" + XModeler.encodeXmlAttribute(text) + "'/>");
