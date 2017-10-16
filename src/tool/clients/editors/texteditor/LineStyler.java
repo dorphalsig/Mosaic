@@ -20,7 +20,7 @@ import tool.xmodeler.XModeler;
 
 public class LineStyler {
 
-  TextEditor                    editor;
+  TextEditor                       editor;
   boolean                          lineNumbers     = true;
   Vector<WordRule>                 wordRules       = new Vector<WordRule>();
   Vector<MultiLineRule>            multiLineRules  = new Vector<MultiLineRule>();
@@ -40,8 +40,11 @@ public class LineStyler {
     wordRules.add(new WordRule(text, new Color(XModeler.getXModeler().getDisplay(), red, green, blue)));
   }
 
-  public void clearCache(int line) {
+  public void clearCache(int line, boolean isNewline) {
     if (cache.containsKey(line)) cache.remove(line);
+    if (isNewline && editor.getText().getLineCount() > line) {
+      clearCache(line + 1, isNewline);
+    }
   }
 
   private Bullet getBullet(int line) {

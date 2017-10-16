@@ -330,9 +330,9 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseMoveL
   }
 
   public void modifyText(ExtendedModifyEvent event) {
-    lineStyler.clearCache(text.getLineAtOffset(event.start));
+    lineStyler.clearCache(text.getLineAtOffset(event.start), isNewline(event));
     varInfo.clear();
-    clearErrors(); 
+    clearErrors();
     lineStyler.refreshMultiLineStyles(text.getText());
     if (!dirty) {
       Message message = EditorClient.theClient().getHandler().newMessage("textDirty", 2);
@@ -342,6 +342,20 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseMoveL
       dirty = true;
     }
     if (checkingSyntax) syntaxTimer.ping();
+  }
+
+  private boolean isNewline(ExtendedModifyEvent event) {
+    int index = event.start;
+    int length = event.length;
+    for (int i = 0; i < length; i++) {
+      char c = text.getText().charAt(i+index);
+      if (c == '\n') return true;
+    }
+    for(int i = 0; i < event.replacedText.length();i++) {
+      char c = event.replacedText.charAt(i);
+      if (c == '\n') return true;
+    }
+    return false;
   }
 
   public void mouseDoubleClick(MouseEvent event) {
