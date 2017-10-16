@@ -25,9 +25,9 @@
 		<property name="prefix" value="XModeler/" />
 
 		<property name="homeDir" location="../../XMF/com.ceteva.xmf.system/xmf-src/" />
-		<property name="compileAll" location="${homeDir}/bin/compileAll.bat" />
-		<property name="makexmf" location="${homeDir}/bin/makexmf.bat" />
-		<property name="makemosaic" location="${homeDir}/bin/makemosaic.bat" />
+		<property name="compileAll" location="${homeDir}/bin/compileAll.sh" />
+		<property name="makexmf" location="${homeDir}/bin/makexmf" />
+		<property name="makemosaic" location="${homeDir}/bin/makemosaic" />
 		<move todir="${archiveDir}" overwrite="true">
 		    <fileset dir="${output}">
 		      <include name="*.zip"/>
@@ -35,8 +35,8 @@
 		</move>
 	</target>
 	<target name="compile" depends="init">
-		<!--<mkdir dir="../../XMF/com.ceteva.xmf.machine/bin"/>
-		<javac srcdir="../../XMF/com.ceteva.xmf.machine/src" destdir="../../XMF/com.ceteva.xmf.machine/bin">
+		<mkdir dir="../../XMF/com.ceteva.xmf.machine/bin"/>
+		<javac srcdir="../../XMF/com.ceteva.xmf.machine/src" destdir="../../XMF/com.ceteva.xmf.machine/bin" encoding="iso-8859-1">
 			<classpath>
 				<path>
 					<fileset dir="../../XMF/com.ceteva.xmf.machine/">
@@ -46,7 +46,7 @@
 			</classpath>
 		</javac>
 		<mkdir dir="../bin"/>
-		<javac srcdir="../src" destdir="../bin" classpathref="../.classpath">
+		<javac srcdir="../src" destdir="../bin" encoding="iso-8859-1">
 			<classpath>
 				<path>
 					<fileset dir="../lib/">
@@ -55,20 +55,15 @@
 					<pathelement location="../../XMF/com.ceteva.xmf.machine/bin/"/>
 				</path>
 			</classpath>
-		</javac>-->
-		<exec executable="cmd">
-			<arg value="/c" />
-			<arg value="${compileAll}" />
+		</javac>
+		<echo>${compileAll}</echo>
+		<exec dir="${homeDir}" executable="${compileAll}">
 			<arg value="${homeDir}" />
-		</exec>
-		<exec dir="${homeDir}" executable="cmd">
-			<arg value="/c" />
-			<arg value="${makexmf}" />
+		</exec> 
+		<exec dir="${homeDir}" executable="${makexmf}">
 			<arg value="." />
 		</exec>
-		<exec dir="${homeDir}" executable="cmd">
-			<arg value="/c" />
-			<arg value="${makemosaic}" />
+		<exec dir="${homeDir}" executable="${makemosaic}">
 			<arg value="." />
 		</exec>
 	</target>
