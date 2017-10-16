@@ -25,7 +25,7 @@
 		<property name="prefix" value="XModeler/" />
 
 		<property name="homeDir" location="../../XMF/com.ceteva.xmf.system/xmf-src/" />
-		<property name="compileAll" location="${homeDir}/bin/compileAll.sh" />
+		<property name="compileAll" location="${homeDir}/bin/compileAll" />
 		<property name="makexmf" location="${homeDir}/bin/makexmf" />
 		<property name="makemosaic" location="${homeDir}/bin/makemosaic" />
 		<move todir="${archiveDir}" overwrite="true">
