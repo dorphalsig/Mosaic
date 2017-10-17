@@ -330,10 +330,10 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseMoveL
   }
 
   public void modifyText(ExtendedModifyEvent event) {
-    lineStyler.clearCache(text.getLineAtOffset(event.start), isNewline(event));
+    //lineStyler.clearCache(text.getLineAtOffset(event.start), isNewline(event));
+    lineStyler.clearCache();
     varInfo.clear();
     clearErrors();
-    lineStyler.refreshMultiLineStyles(text.getText());
     if (!dirty) {
       Message message = EditorClient.theClient().getHandler().newMessage("textDirty", 2);
       message.args[0] = new Value(getId());

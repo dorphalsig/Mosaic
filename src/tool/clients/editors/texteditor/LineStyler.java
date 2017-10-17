@@ -1,6 +1,7 @@
 package tool.clients.editors.texteditor;
 
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Vector;
 
 import org.eclipse.swt.SWT;
@@ -21,11 +22,10 @@ import tool.xmodeler.XModeler;
 public class LineStyler {
 
   TextEditor                       editor;
-  boolean                          lineNumbers     = true;
-  Vector<WordRule>                 wordRules       = new Vector<WordRule>();
-  Vector<MultiLineRule>            multiLineRules  = new Vector<MultiLineRule>();
-  Hashtable<Integer, StyleRange[]> cache           = new Hashtable<Integer, StyleRange[]>();
-  Vector<MultiLineStyle>           multiLineStyles = new Vector<MultiLineStyle>();
+  boolean                          lineNumbers    = true;
+  Vector<WordRule>                 wordRules      = new Vector<WordRule>();
+  Vector<MultiLineRule>            multiLineRules = new Vector<MultiLineRule>();
+  Hashtable<Integer, StyleRange[]> cache          = new Hashtable<Integer, StyleRange[]>();
 
   public LineStyler(TextEditor editor) {
     super();
@@ -74,7 +74,7 @@ public class LineStyler {
     return styles;
   }
 
-  public void lineGetStyle(LineStyleEvent event) {
+  public void oldlineGetStyle(LineStyleEvent event) {
     // MultiLineStyle mls = getMultiLineStyle(event.lineOffset);
     int line = editor.getText().getLineAtOffset(event.lineOffset);
     event.bullet = getBullet(line);
@@ -89,11 +89,65 @@ public class LineStyler {
     }
   }
 
-  private MultiLineStyle getMultiLineStyle(int offset) {
-    for (MultiLineStyle style : multiLineStyles) {
-      if (style.getStart() <= offset && offset <= style.getEnd()) return style;
+  public void lineGetStyle(LineStyleEvent event) {
+    int line = editor.getText().getLineAtOffset(event.lineOffset);
+    int originalLine = line;
+    String s = editor.getText().getText();
+    event.bullet = getBullet(line);
+    event.bulletIndex = line;
+    if (cache.containsKey(line)) {
+      event.styles = cache.get(line);
+    } else {
+      java.util.List<StyleRange> list = new java.util.ArrayList<StyleRange>();
+      boolean done = false;
+      int index = event.lineOffset;
+      while (!done) {
+        int prevChar = (index == 0) ? ' ' : s.charAt(index - 1);
+        for (MultiLineRule rule : multiLineRules) {
+          if (s.startsWith(rule.getWord(), index)) {
+            int start = index;
+            boolean multiLineDone = false;
+            while (!multiLineDone) {
+              if (s.startsWith(rule.getEnd(), index) || index >= s.length()) {
+                multiLineDone = true;
+                StyleRange style = new StyleRange();
+                style.start = start;
+                style.length = (index + rule.getEnd().length()) - start;
+                style.fontStyle = SWT.UNDERLINE_SINGLE;
+                style.foreground = rule.getColor();
+                list.add(style);
+                index += rule.getEnd().length();
+              } else if (s.charAt(index) == '\n') {
+                StyleRange style = new StyleRange();
+                style.start = start;
+                style.length = (index + rule.getEnd().length()) - start;
+                style.fontStyle = SWT.UNDERLINE_SINGLE;
+                style.foreground = rule.getColor();
+                list.add(style);
+                cache.put(line, list.toArray(new StyleRange[0]));
+                list = new java.util.ArrayList<StyleRange>();
+                line++;
+                index++;
+              } else index++;
+            }
+            break;
+          }
+        }
+        for (WordRule rule : wordRules) {
+          StyleRange style = rule.match(s, index, prevChar);
+          if (style != null) {
+            list.add(style);
+            index += style.length;
+            break;
+          }
+        }
+        if (index >= s.length() || s.charAt(index) == '\n')
+          done = true;
+        else index++;
+      }
+      cache.put(line, list.toArray(new StyleRange[0]));
+      event.styles = cache.get(line);
     }
-    return null;
   }
 
   public void clearCache() {
@@ -110,27 +164,6 @@ public class LineStyler {
 
   public boolean getLineNumbers() {
     return lineNumbers;
-  }
-
-  public void refreshMultiLineStyles(String text) {
-    multiLineStyles.clear();
-    for (MultiLineRule rule : multiLineRules) {
-      int start = -1;
-      while (start < text.length()) {
-        start = text.indexOf(rule.getWord(), start + 1);
-        if (start == -1)
-          start = text.length();
-        else {
-          int end = text.indexOf(rule.getEnd(), start);
-          if (end == -1)
-            start = text.length();
-          else {
-            multiLineStyles.add(new MultiLineStyle(start, end, rule.getColor()));
-            start = end;
-          }
-        }
-      }
-    }
   }
 
 }
