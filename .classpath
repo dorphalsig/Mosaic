@@ -32,6 +32,8 @@
 	<classpathentry kind="lib" path="lib/kodkod.jar"/>
 	<classpathentry kind="lib" path="lib/org.sat4j.core.jar"/>
 	<classpathentry kind="lib" path="lib/MozillaInterfaces.jar"/>
+	<classpathentry kind="lib" path="lib/swt-4.5-cocoa-macosx-x86_64.jar"/>
+	<classpathentry kind="lib" path="lib/swt.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.gef_3.5.0.jar"/>
 	<classpathentry kind="src" path="src"/>
