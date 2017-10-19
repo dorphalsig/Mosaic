@@ -96,6 +96,7 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseMoveL
   Vector<ErrorListener> errorListeners = new Vector<ErrorListener>();
   Vector<FileError>     errors         = new Vector<FileError>();
   Vector<VarInfo>       varInfo        = new Vector<VarInfo>();
+  Vector<Tooltip>       tooltips       = new Vector<Tooltip>();
   VarInfo               mouseOverVar   = null;
   Tray                  tray           = new Tray();
   Timer                 syntaxTimer    = new Timer(SYNTAX_DELAY, SYNTAX_INC, () -> sendTextChanged(), () -> timerIncrement());
@@ -227,6 +228,22 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseMoveL
     }
   }
 
+  private boolean generalToolTip(int x, int y) {
+    for (Tooltip t : tooltips) {
+      Point p = text.getLocationAtOffset(t.getCharStart());
+      int x2 = p.x;
+      int y2 = p.y;
+      int dx = x - x2;
+      int dy = y - y2;
+      double distance = Math.sqrt((dx * dx) + (dy * dy));
+      if (distance < 20) {
+        setToolTip(x, y, t.getTooltip());
+        return true;
+      }
+    }
+    return false;
+  }
+
   private int getCurrentIndent() {
     String s = text.getText();
     int start = text.getOffsetAtLine(text.getLineAtOffset(text.getCaretOffset()));
@@ -330,9 +347,10 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseMoveL
   }
 
   public void modifyText(ExtendedModifyEvent event) {
-    //lineStyler.clearCache(text.getLineAtOffset(event.start), isNewline(event));
+    // lineStyler.clearCache(text.getLineAtOffset(event.start), isNewline(event));
     lineStyler.clearCache();
     varInfo.clear();
+    tooltips.clear();
     clearErrors();
     if (!dirty) {
       Message message = EditorClient.theClient().getHandler().newMessage("textDirty", 2);
@@ -348,10 +366,10 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseMoveL
     int index = event.start;
     int length = event.length;
     for (int i = 0; i < length; i++) {
-      char c = text.getText().charAt(i+index);
+      char c = text.getText().charAt(i + index);
       if (c == '\n') return true;
     }
-    for(int i = 0; i < event.replacedText.length();i++) {
+    for (int i = 0; i < event.replacedText.length(); i++) {
       char c = event.replacedText.charAt(i);
       if (c == '\n') return true;
     }
@@ -493,9 +511,11 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseMoveL
     int x = event.x;
     int y = event.y;
     Tool tool = selectTool(x, y);
-    if (tool == null)
-      MenuClient.popup(id, x, y);
-    else tool.rightClick(x, y);
+    if (tool == null) {
+      if (mouseOverVar != null) {
+        text.setSelection(mouseOverVar.getDecStart());
+      } else MenuClient.popup(id, x, y);
+    } else tool.rightClick(x, y);
   }
 
   public void save() {
@@ -639,10 +659,7 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseMoveL
   }
 
   private void toolTip(int x, int y) {
-    boolean toolTipDone = false;
-    toolTipDone = errorToolTip(x, y);
-    toolTipDone = toolTipDone || trayToolTip(x, y);
-    if (!toolTipDone) cancelToolTip();
+    if (!(errorToolTip(x, y) || trayToolTip(x, y) || generalToolTip(x, y))) cancelToolTip();
   }
 
   private boolean trayToolTip(int x, int y) {
@@ -728,5 +745,9 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseMoveL
     out.print(" toolTip='" + toolTip + "'");
     out.print(" editable='" + text.getEditable() + "'>");
     out.print("</TextEditor>");
+  }
+
+  public void setTooltip(String tooltip, int charStart, int charEnd) {
+    tooltips.add(new Tooltip(tooltip, charStart, charEnd));
   }
 }

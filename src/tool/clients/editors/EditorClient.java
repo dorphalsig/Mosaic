@@ -104,7 +104,15 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       addMultilineRule(id, start, end, 50, 50, 255);
     else if (color.equals("gray"))
       addMultilineRule(id, start, end, 120, 120, 120);
-    else System.err.println("unknown color: " + color);
+    else {
+      String[] colours = color.split(",");
+      if (colours.length == 3) {
+        int red = Integer.parseInt(colours[0]);
+        int blue = Integer.parseInt(colours[1]);
+        int green = Integer.parseInt(colours[2]);
+        addMultilineRule(id, start, end, red, blue, green);
+      } else System.err.println("unknown color: " + color);
+    }
   }
 
   private void addMultilineRule(String id, String start, String end, int red, int green, int blue) {
@@ -477,7 +485,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
           Class<?> textEditorClass = Class.forName(XModeler.textEditorClass);
           Constructor<?> cnstr = textEditorClass.getConstructor(new Class<?>[] { String.class, String.class, CTabFolder.class, Boolean.TYPE, Boolean.TYPE, String.class });
           ITextEditor editor = (ITextEditor) cnstr.newInstance(id, label, tabFolder, editable, lineNumbers, text);
-          //ITextEditor editor = new TextEditor(id, label, tabFolder, editable, lineNumbers, text);
+          // ITextEditor editor = new TextEditor(id, label, tabFolder, editable, lineNumbers, text);
           tabItem.setControl(editor.getText());
           editors.put(id, editor);
           tabFolder.setSelection(tabItem);
@@ -552,7 +560,22 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       varType(message);
     else if (message.hasName("varDec"))
       varDec(message);
+    else if (message.hasName("setTooltip"))
+      setTooltip(message);
     else super.sendMessage(message);
+  }
+
+  private void setTooltip(Message message) {
+    String id = message.args[0].strValue();
+    String tooltip = message.args[1].strValue();
+    int charStart = message.args[2].intValue;
+    int charEnd = message.args[3].intValue;
+    final ITextEditor editor = editors.get(id);
+    runOnDisplay(new Runnable() {
+      public void run() {
+        editor.setTooltip(tooltip, charStart, charEnd);
+      }
+    });
   }
 
   private void varDec(Message message) {

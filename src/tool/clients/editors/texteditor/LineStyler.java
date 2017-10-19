@@ -102,10 +102,9 @@ public class LineStyler {
       boolean done = false;
       int index = event.lineOffset;
       while (!done) {
-        int prevChar = (index == 0) ? ' ' : s.charAt(index - 1);
         for (MultiLineRule rule : multiLineRules) {
           if (s.startsWith(rule.getWord(), index)) {
-            int start = index;
+            int start = index++;
             boolean multiLineDone = false;
             while (!multiLineDone) {
               if (s.startsWith(rule.getEnd(), index) || index >= s.length()) {
@@ -133,11 +132,12 @@ public class LineStyler {
             break;
           }
         }
+        int prevChar = (index == 0) || index > s.length() ? ' ' : s.charAt(index - 1);
         for (WordRule rule : wordRules) {
           StyleRange style = rule.match(s, index, prevChar);
           if (style != null) {
             list.add(style);
-            index += style.length;
+            index += style.length-1;
             break;
           }
         }

@@ -1010,4 +1010,8 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
   public void clearErrors() {
     
   }
+
+  public void setTooltip(String tooltip, int charStart, int charEnd) {
+    
+  }
 }

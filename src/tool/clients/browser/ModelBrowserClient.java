@@ -449,10 +449,9 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
 	        selectNode(message);
 	      else if (message.hasName("setFocus"))
 	        setFocus(message);
-	      else if (message.hasName("setToolTipText"))
-	        setTooltipText(message);
-	      else {
-//System.out.println("------- Unknown ");    	
+        else if (message.hasName("setToolTipText"))
+          setTooltipText(message);
+	      else {	
 	      	super.sendMessage(message);
 	      }
    }

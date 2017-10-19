@@ -41,4 +41,6 @@ public interface ITextEditor {
 
   void writeXML(PrintStream out, boolean b, String text, String toolTipText);
 
+  void setTooltip(String tooltip, int charStart, int charEnd);
+
 }
