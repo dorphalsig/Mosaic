@@ -54,18 +54,19 @@ import xos.Value;
 
 public class TextEditor implements VerifyListener, VerifyKeyListener, MouseMoveListener, MouseListener, MouseWheelListener, LineBackgroundListener, ExtendedModifyListener, PaintObjectListener, SelectionListener, LineStyleListener, PaintListener, MouseTrackListener, ITextEditor {
 
-  private static final int   ZOOM          = 2;
-  private static final int   MAX_FONT_SIZE = 40;
-  private static final int   MIN_FONT_SIZE = 2;
-  private static final int   LEFT_BUTTON   = 1;
-  private static final int   MIDDLE_BUTTON = 2;
-  private static final int   RIGHT_BUTTON  = 3;
-  private static final int   TRAY_PAD      = 5;
-  private static final int   SYNTAX_DELAY  = 2000;
-  private static final int   SYNTAX_INC    = 200;
-  private static final Color RED           = Display.getDefault().getSystemColor(SWT.COLOR_RED);
-  private static final Color BLACK         = Display.getDefault().getSystemColor(SWT.COLOR_BLACK);
-  private static final Color VAR_DEC       = Display.getDefault().getSystemColor(SWT.COLOR_DARK_MAGENTA);
+  private static final int   ZOOM              = 2;
+  private static final int   MAX_FONT_SIZE     = 40;
+  private static final int   MIN_FONT_SIZE     = 2;
+  private static final int   LEFT_BUTTON       = 1;
+  private static final int   MIDDLE_BUTTON     = 2;
+  private static final int   RIGHT_BUTTON      = 3;
+  private static final int   TRAY_PAD          = 5;
+  private static final int   SYNTAX_DELAY      = 2000;
+  private static final int   SYNTAX_INC        = 200;
+  private static final Color RED               = Display.getDefault().getSystemColor(SWT.COLOR_RED);
+  private static final Color BLACK             = Display.getDefault().getSystemColor(SWT.COLOR_BLACK);
+  private static final Color BRACKET_HIGHLIGHT = Display.getDefault().getSystemColor(SWT.COLOR_BLACK);
+  private static final Color VAR_DEC           = Display.getDefault().getSystemColor(SWT.COLOR_DARK_MAGENTA);
 
   public static void drawArrow(GC gc, int x1, int y1, int x2, int y2, double arrowLength, double arrowAngle, Color arrowColor) {
     double theta = Math.atan2(y2 - y1, x2 - x1);
@@ -106,8 +107,9 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseMoveL
   boolean               checkingSyntax = true;
   boolean               rendering      = true;
   char                  lastChar       = '\0';
+  int                   flashBracket   = -1;
+  boolean               flashBracketOn = false;
   int                   errorPosition  = -1;
-
   String                errorMessage   = "";
 
   public TextEditor(String id, String label, CTabFolder parent, boolean editable, boolean lineNumbers, String s) {
@@ -330,6 +332,20 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseMoveL
     return event.button == 1;
   }
 
+  private boolean isNewline(ExtendedModifyEvent event) {
+    int index = event.start;
+    int length = event.length;
+    for (int i = 0; i < length; i++) {
+      char c = text.getText().charAt(i + index);
+      if (c == '\n') return true;
+    }
+    for (int i = 0; i < event.replacedText.length(); i++) {
+      char c = event.replacedText.charAt(i);
+      if (c == '\n') return true;
+    }
+    return false;
+  }
+
   public boolean isRendering() {
     return rendering;
   }
@@ -347,11 +363,11 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseMoveL
   }
 
   public void modifyText(ExtendedModifyEvent event) {
-    // lineStyler.clearCache(text.getLineAtOffset(event.start), isNewline(event));
     lineStyler.clearCache();
     varInfo.clear();
     tooltips.clear();
     clearErrors();
+    checkBracket(event);
     if (!dirty) {
       Message message = EditorClient.theClient().getHandler().newMessage("textDirty", 2);
       message.args[0] = new Value(getId());
@@ -362,18 +378,52 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseMoveL
     if (checkingSyntax) syntaxTimer.ping();
   }
 
-  private boolean isNewline(ExtendedModifyEvent event) {
-    int index = event.start;
-    int length = event.length;
-    for (int i = 0; i < length; i++) {
-      char c = text.getText().charAt(i + index);
-      if (c == '\n') return true;
-    }
-    for (int i = 0; i < event.replacedText.length(); i++) {
-      char c = event.replacedText.charAt(i);
-      if (c == '\n') return true;
-    }
-    return false;
+  private void checkBracket(ExtendedModifyEvent event) {
+
+    // Check to see if the inserted text is a close bracket. If so then
+    // try to flash the corresponding open bracket...
+
+    if (event.length == 1) {
+      String s = text.getText();
+      char closing = s.charAt(event.start);
+      if (isCloseBracket(closing)) {
+        char opening = getOpening(closing);
+        int i = event.start - 1;
+        int nesting = 0;
+        boolean found = false;
+        while (i >= 0 && !found) {
+          char c = s.charAt(i);
+          if (c == closing) {
+            nesting++;
+            i--;
+          } else if (c == opening) {
+            if (nesting == 0)
+              found = true;
+            else {
+              nesting--;
+              i--;
+            }
+          } else i--;
+        }
+        if (found) {
+          flashBracket = i;
+        } else flashBracket = -1;
+      } else flashBracket = -1;
+    } else flashBracket = -1;
+  }
+
+  private char getOpening(char closing) {
+    if (closing == ')')
+      return '(';
+    else if (closing == '}')
+      return '{';
+    else if (closing == ']')
+      return '[';
+    else throw new Error("unknown closing bracket " + closing);
+  }
+
+  private boolean isCloseBracket(char c) {
+    return c == ')' || c == ']' || c == '}';
   }
 
   public void mouseDoubleClick(MouseEvent event) {
@@ -439,6 +489,21 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseMoveL
     paintErrors(event.gc);
     paintVar(event.gc);
     paintTray(event.gc);
+    paintBracket(event.gc);
+  }
+
+  private void paintBracket(GC gc) {
+    if (flashBracket >= 0) {
+      if (flashBracketOn) {
+        Point p = text.getLocationAtOffset(flashBracket);
+        Color c = gc.getBackground();
+        int width = gc.getFontMetrics().getAverageCharWidth();
+        int height = gc.getFontMetrics().getHeight();
+        gc.setBackground(BRACKET_HIGHLIGHT);
+        gc.drawRectangle(p.x, p.y, width, height);
+        flashBracketOn = false;
+      } else flashBracketOn = true;
+    }
   }
 
   private void paintErrors(GC gc) {
@@ -620,6 +685,10 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseMoveL
     redraw();
   }
 
+  public void setTooltip(String tooltip, int charStart, int charEnd) {
+    tooltips.add(new Tooltip(tooltip, charStart, charEnd));
+  }
+
   private void setToolTip(int x, int y, String message) {
     if (toolTip == null || toolTip.isDisposed()) {
       toolTip = new ToolTip(text.getShell(), SWT.ICON_ERROR);
@@ -745,9 +814,5 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseMoveL
     out.print(" toolTip='" + toolTip + "'");
     out.print(" editable='" + text.getEditable() + "'>");
     out.print("</TextEditor>");
-  }
-
-  public void setTooltip(String tooltip, int charStart, int charEnd) {
-    tooltips.add(new Tooltip(tooltip, charStart, charEnd));
   }
 }

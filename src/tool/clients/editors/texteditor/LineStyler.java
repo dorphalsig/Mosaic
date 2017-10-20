@@ -1,7 +1,7 @@
 package tool.clients.editors.texteditor;
 
+import java.util.HashSet;
 import java.util.Hashtable;
-import java.util.List;
 import java.util.Vector;
 
 import org.eclipse.swt.SWT;
@@ -9,7 +9,6 @@ import org.eclipse.swt.custom.Bullet;
 import org.eclipse.swt.custom.LineStyleEvent;
 import org.eclipse.swt.custom.ST;
 import org.eclipse.swt.custom.StyleRange;
-import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.GlyphMetrics;
 import org.eclipse.swt.widgets.Display;
@@ -20,6 +19,8 @@ import tool.clients.editors.WordRule;
 import tool.xmodeler.XModeler;
 
 public class LineStyler {
+
+  private static final Color       BLACK          = Display.getDefault().getSystemColor(SWT.COLOR_BLACK);
 
   TextEditor                       editor;
   boolean                          lineNumbers    = true;
@@ -137,7 +138,7 @@ public class LineStyler {
           StyleRange style = rule.match(s, index, prevChar);
           if (style != null) {
             list.add(style);
-            index += style.length-1;
+            index += style.length - 1;
             break;
           }
         }
