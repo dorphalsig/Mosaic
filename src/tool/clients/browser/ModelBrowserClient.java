@@ -1,6 +1,7 @@
 package tool.clients.browser;
 
 import java.io.PrintStream;
+import java.util.HashSet;
 import java.util.Hashtable;
 
 import org.eclipse.swt.SWT;
@@ -10,8 +11,6 @@ import org.eclipse.swt.custom.CTabFolder2Listener;
 import org.eclipse.swt.custom.CTabFolderEvent;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.TreeEditor;
-import org.eclipse.swt.events.DisposeEvent;
-import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseEvent;
@@ -24,12 +23,10 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
@@ -38,7 +35,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import tool.clients.Client;
-import tool.clients.EventHandler;
 import tool.clients.menus.MenuClient;
 import tool.xmodeler.XModeler;
 import xos.Message;
@@ -58,18 +54,20 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
     return theClient;
   }
 
-//  static Font                        labelFont    = new Font(XModeler.getXModeler().getDisplay(), new FontData("Monaco", 12, SWT.NONE));
+  // static Font labelFont = new Font(XModeler.getXModeler().getDisplay(), new FontData("Monaco", 12, SWT.NONE));
 
-  final static int                   RIGHT_BUTTON = 3;
+  final static int                   RIGHT_BUTTON       = 3;
   static CTabFolder                  tabFolder;
   static ModelBrowserClient          theClient;
-  FontData			   fontData;
+  FontData                           fontData;
+  boolean                            rendering          = true;
+  HashSet<TreeItem>                  deferredExpansions = new HashSet<TreeItem>();
   static Font                        labelFont;
-  static Hashtable<String, TreeItem> items        = new Hashtable<String, TreeItem>();
-  static Hashtable<String, CTabItem> tabs         = new Hashtable<String, CTabItem>();
-  static Hashtable<String, Tree>     trees        = new Hashtable<String, Tree>();
-  static Hashtable<String, String>   images       = new Hashtable<String, String>();
-  static Hashtable<Tree, TreeItem>   selections   = new Hashtable<Tree, TreeItem>();
+  static Hashtable<String, TreeItem> items              = new Hashtable<String, TreeItem>();
+  static Hashtable<String, CTabItem> tabs               = new Hashtable<String, CTabItem>();
+  static Hashtable<String, Tree>     trees              = new Hashtable<String, Tree>();
+  static Hashtable<String, String>   images             = new Hashtable<String, String>();
+  static Hashtable<Tree, TreeItem>   selections         = new Hashtable<Tree, TreeItem>();
 
   public ModelBrowserClient() {
     super("com.ceteva.modelBrowser");
@@ -96,6 +94,12 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
       runOnDisplay(new Runnable() {
         public void run() {
           TreeItem parent = items.get(parentId);
+          if (!rendering) {
+            parent.setExpanded(false);
+            // Careful about the dummy nodes added to directories to ensure they
+            // show the handles...
+            if (text.trim().length() != 0) deferredExpansions.add(parent);
+          }
           String iconFile = "icons/" + icon + ".gif";
           ImageData data = new ImageData(iconFile);
           Image image = new Image(XModeler.getXModeler().getDisplay(), data);
@@ -106,16 +110,23 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
           item.setImage(image);
           item.setExpanded(expanded);
           item.setFont(labelFont);
-          //automatically open root-node, if child-node is created.
-          if( parent.getParentItem() == null){
-    	  	parent.setExpanded(true);
-      	  }
+          // automatically open root-node, if child-node is created.
+          if (parent.getParentItem() == null) {
+            if (rendering)
+              parent.setExpanded(true);
+            else {
+              parent.setExpanded(false);
+              // Careful about the dummy nodes added to directories to ensure they
+              // show the handles...
+              if (text.trim().length() != 0) deferredExpansions.add(parent);
+            }
+          }
           for (String id : trees.keySet())
             for (TreeItem i : trees.get(id).getItems())
               if (i == item) tabFolder.setSelection(tabs.get(id));
         }
       });
-    } else System.err.println("ModelBrowserClicnt.addNodeWithIcon: cannot find node " + parentId);
+    } else System.err.println("ModelBrowserClient.addNodeWithIcon: cannot find node " + parentId);
   }
 
   private void addRootNodeWithIcon(final String parentId, final String nodeId, final String text, boolean editable, final boolean expanded, final String icon, final int index) {
@@ -138,7 +149,7 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
   }
 
   private void addTree(final String id, final String name) {
-//	new RuntimeException("new Tab added...").printStackTrace();
+    // new RuntimeException("new Tab added...").printStackTrace();
     runOnDisplay(new Runnable() {
       public void run() {
         final CTabItem tabItem = new CTabItem(tabFolder, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL | SWT.CLOSE);
@@ -152,31 +163,31 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
         tree.addListener(SWT.Expand, ModelBrowserClient.this);
         tree.addListener(SWT.Selection, ModelBrowserClient.this);
         tabFolder.setSelection(tabItem);
-        
-        tabFolder.addCTabFolder2Listener(new CTabFolder2Adapter() {
-            public void close(CTabFolderEvent event) {
-              if (event.item.equals(tabItem)) {
 
-                Message m = getHandler().newMessage("modelBrowserClosed", 1);
-                m.args[0] = new Value(id);
-                getHandler().raiseEvent(m);
-              }
+        tabFolder.addCTabFolder2Listener(new CTabFolder2Adapter() {
+          public void close(CTabFolderEvent event) {
+            if (event.item.equals(tabItem)) {
+
+              Message m = getHandler().newMessage("modelBrowserClosed", 1);
+              m.args[0] = new Value(id);
+              getHandler().raiseEvent(m);
             }
-          });
-//        tabItem.getDisplay().addFilter(SWT.KeyDown, new Listener() {
-//	            public void handleEvent(Event event) {
-//	            	if(event.stateMask == SWT.CTRL) {
-//	            		if((int)(event.character) == 23) { // Ctrl + W 
-//	            			tabItem.dispose();
-//	            			Message m = getHandler().newMessage("modelBrowserClosed", 1);
-//	            			m.args[0] = new Value(id);
-//	            			getHandler().raiseEvent(m);
-//	            		}
-//	            	}
-//	            }
-//        	}
-//        );
-        
+          }
+        });
+        // tabItem.getDisplay().addFilter(SWT.KeyDown, new Listener() {
+        // public void handleEvent(Event event) {
+        // if(event.stateMask == SWT.CTRL) {
+        // if((int)(event.character) == 23) { // Ctrl + W
+        // tabItem.dispose();
+        // Message m = getHandler().newMessage("modelBrowserClosed", 1);
+        // m.args[0] = new Value(id);
+        // getHandler().raiseEvent(m);
+        // }
+        // }
+        // }
+        // }
+        // );
+
       }
     });
   }
@@ -203,38 +214,36 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
     Listener textListener = new Listener() {
       public void handleEvent(final Event e) {
         switch (e.type) {
-        case SWT.FocusOut:
-          updateText(item, text.getText());
-          composite.dispose();
-          break;
-        case SWT.Verify:
-          String newText = text.getText();
-          String leftText = newText.substring(0, e.start);
-          String rightText = newText.substring(e.end, newText.length());
-          GC gc = new GC(text);
-          Point size = gc.textExtent(leftText + e.text + rightText);
-          gc.dispose();
-          size = text.computeSize(size.x, SWT.DEFAULT);
-          editor.horizontalAlignment = SWT.LEFT;
-          Rectangle itemRect = item.getBounds(),
-          rect = tree.getClientArea();
-          editor.minimumWidth = Math.max(size.x, itemRect.width) + inset * 2;
-          int left = itemRect.x,
-          right = rect.x + rect.width;
-          editor.minimumWidth = Math.min(editor.minimumWidth, right - left);
-          editor.minimumHeight = size.y + inset * 2;
-          editor.layout();
-          break;
-        case SWT.Traverse:
-          switch (e.detail) {
-          case SWT.TRAVERSE_RETURN:
+          case SWT.FocusOut:
             updateText(item, text.getText());
-            // fall through.
-          case SWT.TRAVERSE_ESCAPE:
             composite.dispose();
-            e.doit = false;
-          }
-          break;
+            break;
+          case SWT.Verify:
+            String newText = text.getText();
+            String leftText = newText.substring(0, e.start);
+            String rightText = newText.substring(e.end, newText.length());
+            GC gc = new GC(text);
+            Point size = gc.textExtent(leftText + e.text + rightText);
+            gc.dispose();
+            size = text.computeSize(size.x, SWT.DEFAULT);
+            editor.horizontalAlignment = SWT.LEFT;
+            Rectangle itemRect = item.getBounds(), rect = tree.getClientArea();
+            editor.minimumWidth = Math.max(size.x, itemRect.width) + inset * 2;
+            int left = itemRect.x, right = rect.x + rect.width;
+            editor.minimumWidth = Math.min(editor.minimumWidth, right - left);
+            editor.minimumHeight = size.y + inset * 2;
+            editor.layout();
+            break;
+          case SWT.Traverse:
+            switch (e.detail) {
+              case SWT.TRAVERSE_RETURN:
+                updateText(item, text.getText());
+                // fall through.
+              case SWT.TRAVERSE_ESCAPE:
+                composite.dispose();
+                e.doit = false;
+            }
+            break;
         }
       }
     };
@@ -342,6 +351,10 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
     return event.button == RIGHT_BUTTON;
   }
 
+  private boolean isCtrl(MouseEvent event) {
+    return (event.stateMask & SWT.CTRL) != 0;
+  }
+
   public String itemId(TreeItem item) {
     for (String id : items.keySet())
       if (items.get(id) == item) return id;
@@ -366,7 +379,7 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
   }
 
   public void mouseDown(MouseEvent event) {
-    if (isRightClick(event) || isCommand(event)) {
+    if (isRightClick(event) || isCommand(event) || isCtrl(event)) {
       Tree tree = (Tree) event.widget;
       if (tree.getSelectionCount() == 1) {
         TreeItem item = tree.getSelection()[0];
@@ -386,7 +399,7 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
     if (clientName.strValue().equals("com.ceteva.browser")) {
       addTree(id.strValue(), name.strValue());
     }
-    
+
   }
 
   public boolean processMessage(Message message) {
@@ -432,29 +445,46 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
     }
   }
 
-  @Override
   public void sendMessage(final Message message) {
-//System.out.println("####### MESSAGE TO MODEL BROWSER CLIENT: "+message.output());    	
-	      if (message.hasName("newModelBrowser"))
-	        newModelBrowser(message);
-	      else if (message.hasName("addNodeWithIcon"))
-	        addNodeWithIcon(message);
-	      else if (message.hasName("removeNode"))
-	        removeNode(message);
-	      else if (message.hasName("setText"))
-	        setText(message);
-	      else if (message.hasName("setVisible"))
-	        setVisible(message);
-	      else if (message.hasName("selectNode"))
-	        selectNode(message);
-	      else if (message.hasName("setFocus"))
-	        setFocus(message);
-        else if (message.hasName("setToolTipText"))
-          setTooltipText(message);
-	      else {	
-	      	super.sendMessage(message);
-	      }
-   }
+    if (message.hasName("newModelBrowser"))
+      newModelBrowser(message);
+    else if (message.hasName("addNodeWithIcon"))
+      addNodeWithIcon(message);
+    else if (message.hasName("removeNode"))
+      removeNode(message);
+    else if (message.hasName("setText"))
+      setText(message);
+    else if (message.hasName("setVisible"))
+      setVisible(message);
+    else if (message.hasName("selectNode"))
+      selectNode(message);
+    else if (message.hasName("setFocus"))
+      setFocus(message);
+    else if (message.hasName("setToolTipText"))
+      setTooltipText(message);
+    else if (message.hasName("renderOn"))
+      renderOn();
+    else if (message.hasName("renderOff"))
+      renderOff();
+    else super.sendMessage(message);
+  }
+
+  private void renderOff() {
+    rendering = false;
+    deferredExpansions.clear();
+  }
+
+  private void renderOn() {
+    rendering = true;
+    runOnDisplay(new Runnable() {
+      public void run() {
+        for (TreeItem item : deferredExpansions) {
+          item.setExpanded(true);
+        }
+      }
+    });
+    deferredExpansions.clear();
+  }
 
   private void setFocus(Message message) {
     final Value id = message.args[0];
@@ -559,18 +589,18 @@ public class ModelBrowserClient extends Client implements MouseListener, Listene
   public void showList(CTabFolderEvent event) {
 
   }
-  
-	public final void setFont(String fileName, String name) {
-//		int oldHeight = fontData==null?10:fontData.getHeight();
-//		System.out.println("oldHeight: " + oldHeight + "("+(fontData!=null)+")");
-		FontData[] fontData = Display.getDefault().getSystemFont().getFontData();
-//		oldHeight = fontData==null?10:fontData[0].getHeight();
-//		int oldHeight = 
-//		System.out.println("oldHeight: " + oldHeight + "("+(fontData!=null)+")");
-		this.fontData = fontData[0];
-		XModeler.getXModeler().getDisplay().loadFont(fileName);
-		this.fontData.setName(name);
-//		this.fontData.setHeight(oldHeight);
-		labelFont = new Font(XModeler.getXModeler().getDisplay(), fontData);
-	}
+
+  public final void setFont(String fileName, String name) {
+    // int oldHeight = fontData==null?10:fontData.getHeight();
+    // System.out.println("oldHeight: " + oldHeight + "("+(fontData!=null)+")");
+    FontData[] fontData = Display.getDefault().getSystemFont().getFontData();
+    // oldHeight = fontData==null?10:fontData[0].getHeight();
+    // int oldHeight =
+    // System.out.println("oldHeight: " + oldHeight + "("+(fontData!=null)+")");
+    this.fontData = fontData[0];
+    XModeler.getXModeler().getDisplay().loadFont(fileName);
+    this.fontData.setName(name);
+    // this.fontData.setHeight(oldHeight);
+    labelFont = new Font(XModeler.getXModeler().getDisplay(), fontData);
+  }
 }
