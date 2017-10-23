@@ -57,9 +57,10 @@
 			</classpath>
 		</javac>
 		<echo>${compileAll}</echo>
-		<exec dir="${homeDir}" executable="${compileAll}">
+		<!--<exec dir="${homeDir}" executable="${compileAll}">
 			<arg value="${homeDir}" />
-		</exec> 
+		</exec> -->
+		<exec dir="." executable="./startRecompiler/xmodeler-linux64.sh" />
 		<exec dir="${homeDir}" executable="${makexmf}">
 			<arg value="." />
 		</exec>
