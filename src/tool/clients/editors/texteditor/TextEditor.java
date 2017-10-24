@@ -4,6 +4,8 @@ import java.io.PrintStream;
 import java.util.Vector;
 
 import org.eclipse.jface.text.JFaceTextUtil;
+import org.eclipse.jface.window.DefaultToolTip;
+import org.eclipse.jface.window.ToolTip;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.ExtendedModifyEvent;
@@ -18,6 +20,8 @@ import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.custom.VerifyKeyListener;
 import org.eclipse.swt.dnd.Clipboard;
 import org.eclipse.swt.dnd.ImageTransfer;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.MouseMoveListener;
@@ -39,7 +43,7 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.ScrollBar;
-import org.eclipse.swt.widgets.ToolTip;
+//import org.eclipse.swt.widgets.ToolTip;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -52,7 +56,7 @@ import tool.xmodeler.XModeler;
 import xos.Message;
 import xos.Value;
 
-public class TextEditor implements VerifyListener, VerifyKeyListener, MouseMoveListener, MouseListener, MouseWheelListener, LineBackgroundListener, ExtendedModifyListener, PaintObjectListener, SelectionListener, LineStyleListener, PaintListener, MouseTrackListener, ITextEditor {
+public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListener, MouseMoveListener, MouseListener, MouseWheelListener, LineBackgroundListener, ExtendedModifyListener, PaintObjectListener, SelectionListener, LineStyleListener, PaintListener, MouseTrackListener, ITextEditor {
 
   private static final int   ZOOM              = 2;
   private static final int   MAX_FONT_SIZE     = 40;
@@ -91,13 +95,15 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseMoveL
   String                label;
   StyledText            text;
   FontData              fontData;
-  ToolTip               toolTip;
+  DefaultToolTip        toolTip;
   LineStyler            lineStyler     = new LineStyler(this);
   Vector<Integer>       highlights     = new Vector<Integer>();
   Vector<ErrorListener> errorListeners = new Vector<ErrorListener>();
   Vector<FileError>     errors         = new Vector<FileError>();
   Vector<VarInfo>       varInfo        = new Vector<VarInfo>();
   Vector<Tooltip>       tooltips       = new Vector<Tooltip>();
+  AST                   ast            = null;
+  AST                   hover          = null;
   VarInfo               mouseOverVar   = null;
   Tray                  tray           = new Tray();
   Timer                 syntaxTimer    = new Timer(SYNTAX_DELAY, SYNTAX_INC, () -> sendTextChanged(), () -> timerIncrement());
@@ -141,10 +147,8 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseMoveL
   }
 
   private void cancelToolTip() {
-    if (toolTip != null && !toolTip.isDisposed()) {
-      toolTip.dispose();
-      toolTip = null;
-    }
+    if (toolTip != null) toolTip.deactivate();
+    toolTip = null;
   }
 
   public void clearErrors() {
@@ -155,6 +159,7 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseMoveL
     }
     errors.clear();
     redraw();
+    ast = new AST(text, "", 0, text.getText().length());
   }
 
   public void clearHighlights() {
@@ -453,8 +458,18 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseMoveL
     int y = event.y;
     toolTip(x, y);
     setMouseOverVar(x, y);
+    hover(x, y);
     mouseOverVar = selectVarInfo(x, y);
-    if (mouseOverVar != null) redraw();
+    if (mouseOverVar != null || hover != null) redraw();
+  }
+
+  private void hover(int x, int y) {
+    try {
+      int index = text.getOffsetAtLocation(new Point(x, y));
+      hover = ast.find(index);
+    } catch (Exception e) {
+      hover = null;
+    }
   }
 
   private boolean mouseNearParseError(int x1, int y1) {
@@ -490,6 +505,13 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseMoveL
     paintVar(event.gc);
     paintTray(event.gc);
     paintBracket(event.gc);
+    paintHover(event.gc);
+  }
+
+  private void paintHover(GC gc) {
+    if (hover != null) {
+      hover.paint(gc);
+    }
   }
 
   private void paintBracket(GC gc) {
@@ -639,6 +661,7 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseMoveL
     XModeler.getXModeler().getDisplay().syncExec(new Runnable() {
       public void run() {
         try {
+          ast = new AST(text, "", 0, text.getText().length());
           Message message = EditorClient.theClient().getHandler().newMessage("textChanged", 2);
           message.args[0] = new Value(getId());
           message.args[1] = new Value(text.getText());
@@ -690,13 +713,12 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseMoveL
   }
 
   private void setToolTip(int x, int y, String message) {
-    if (toolTip == null || toolTip.isDisposed()) {
-      toolTip = new ToolTip(text.getShell(), SWT.ICON_ERROR);
+    if (toolTip == null) {
+      toolTip = new DefaultToolTip(text, ToolTip.NO_RECREATE, false);
     }
-    if (toolTip != null && !toolTip.isDisposed()) {
-      toolTip.setMessage(message);
-      toolTip.setLocation(x, y);
-      toolTip.setVisible(true);
+    if (toolTip != null) {
+      toolTip.setHideDelay(2000);
+      toolTip.setText(message);
     }
   }
 
@@ -814,5 +836,17 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseMoveL
     out.print(" toolTip='" + toolTip + "'");
     out.print(" editable='" + text.getEditable() + "'>");
     out.print("</TextEditor>");
+  }
+
+  public void ast(String tooltip, int charStart, int charEnd) {
+    ast.add(new AST(text, tooltip, charStart, charEnd));
+  }
+
+  public void keyPressed(KeyEvent arg0) {
+    ast = new AST(text, "", 0, text.getText().length());
+  }
+
+  public void keyReleased(KeyEvent arg0) {
+
   }
 }

@@ -1014,4 +1014,10 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
   public void setTooltip(String tooltip, int charStart, int charEnd) {
     
   }
+
+  @Override
+  public void ast(String tooltip, int charStart, int charEnd) {
+    // TODO Auto-generated method stub
+    
+  }
 }

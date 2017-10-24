@@ -562,7 +562,22 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       varDec(message);
     else if (message.hasName("setTooltip"))
       setTooltip(message);
+    else if (message.hasName("ast"))
+      ast(message);
     else super.sendMessage(message);
+  }
+
+  private void ast(Message message) {
+    String id = message.args[0].strValue();
+    String tooltip = message.args[1].strValue();
+    int charStart = message.args[2].intValue;
+    int charEnd = message.args[3].intValue;
+    final ITextEditor editor = editors.get(id);
+    runOnDisplay(new Runnable() {
+      public void run() {
+        editor.ast(tooltip, charStart, charEnd);
+      }
+    });
   }
 
   private void setTooltip(Message message) {

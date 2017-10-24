@@ -43,4 +43,6 @@ public interface ITextEditor {
 
   void setTooltip(String tooltip, int charStart, int charEnd);
 
+  void ast(String tooltip, int charStart, int charEnd);
+
 }
