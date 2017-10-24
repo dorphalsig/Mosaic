@@ -146,9 +146,47 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     if (getId().equals(id)) lineStyler.addWordRule(id, text, red, green, blue);
   }
 
+  public void ast(String tooltip, int charStart, int charEnd) {
+    ast.add(new AST(text, tooltip, charStart, charEnd));
+  }
+
   private void cancelToolTip() {
     if (toolTip != null) toolTip.deactivate();
     toolTip = null;
+  }
+
+  private void checkBracket(ExtendedModifyEvent event) {
+
+    // Check to see if the inserted text is a close bracket. If so then
+    // try to flash the corresponding open bracket...
+
+    if (event.length == 1) {
+      String s = text.getText();
+      char closing = s.charAt(event.start);
+      if (isCloseBracket(closing)) {
+        char opening = getOpening(closing);
+        int i = event.start - 1;
+        int nesting = 0;
+        boolean found = false;
+        while (i >= 0 && !found) {
+          char c = s.charAt(i);
+          if (c == closing) {
+            nesting++;
+            i--;
+          } else if (c == opening) {
+            if (nesting == 0)
+              found = true;
+            else {
+              nesting--;
+              i--;
+            }
+          } else i--;
+        }
+        if (found) {
+          flashBracket = i;
+        } else flashBracket = -1;
+      } else flashBracket = -1;
+    } else flashBracket = -1;
   }
 
   public void clearErrors() {
@@ -190,7 +228,6 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     text.setBackground(bg);
     text.addLineStyleListener(this);
     text.setEditable(editable);
-    text.addVerifyListener(this);
     text.addMouseMoveListener(this);
     text.addMouseTrackListener(this);
     text.addPaintListener(this);
@@ -272,12 +309,31 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     return text.getLineCount();
   }
 
+  private char getOpening(char closing) {
+    if (closing == ')')
+      return '(';
+    else if (closing == '}')
+      return '{';
+    else if (closing == ']')
+      return '[';
+    else throw new Error("unknown closing bracket " + closing);
+  }
+
   public String getString() {
     return text.getText();
   }
 
   public StyledText getText() {
     return text;
+  }
+
+  private void hover(int x, int y) {
+    try {
+      int index = text.getOffsetAtLocation(new Point(x, y));
+      hover = ast.find(index);
+    } catch (Exception e) {
+      hover = null;
+    }
   }
 
   public void inflate(Node textEditor) {
@@ -298,7 +354,7 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     int red = Integer.parseInt(XModeler.attributeValue(item, "red"));
     int green = Integer.parseInt(XModeler.attributeValue(item, "green"));
     int blue = Integer.parseInt(XModeler.attributeValue(item, "blue"));
-    // WHAT TO DO ABOUT THIS?
+    addMultilineRule(getId(), word, end, red, green, blue);
   }
 
   private void inflateWordRule(Node item) {
@@ -306,7 +362,7 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     int red = Integer.parseInt(XModeler.attributeValue(item, "red"));
     int green = Integer.parseInt(XModeler.attributeValue(item, "green"));
     int blue = Integer.parseInt(XModeler.attributeValue(item, "blue"));
-    // WHAT TO DO ABOUT THIS?
+    addWordRule(getId(), word, red, green, blue);
   }
 
   private boolean isAlpha(char c) {
@@ -315,6 +371,10 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
 
   public boolean isCheckingSyntax() {
     return checkingSyntax;
+  }
+
+  private boolean isCloseBracket(char c) {
+    return c == ')' || c == ']' || c == '}';
   }
 
   private boolean isCntrl(MouseEvent e) {
@@ -337,19 +397,6 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     return event.button == 1;
   }
 
-  private boolean isNewline(ExtendedModifyEvent event) {
-    int index = event.start;
-    int length = event.length;
-    for (int i = 0; i < length; i++) {
-      char c = text.getText().charAt(i + index);
-      if (c == '\n') return true;
-    }
-    for (int i = 0; i < event.replacedText.length(); i++) {
-      char c = event.replacedText.charAt(i);
-      if (c == '\n') return true;
-    }
-    return false;
-  }
 
   public boolean isRendering() {
     return rendering;
@@ -357,6 +404,14 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
 
   private boolean isRightClick(MouseEvent event) {
     return event.button == RIGHT_BUTTON || isCntrl(event);
+  }
+
+  public void keyPressed(KeyEvent arg0) {
+    ast = new AST(text, "", 0, text.getText().length());
+  }
+
+  public void keyReleased(KeyEvent arg0) {
+
   }
 
   public void lineGetBackground(LineBackgroundEvent event) {
@@ -381,54 +436,6 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
       dirty = true;
     }
     if (checkingSyntax) syntaxTimer.ping();
-  }
-
-  private void checkBracket(ExtendedModifyEvent event) {
-
-    // Check to see if the inserted text is a close bracket. If so then
-    // try to flash the corresponding open bracket...
-
-    if (event.length == 1) {
-      String s = text.getText();
-      char closing = s.charAt(event.start);
-      if (isCloseBracket(closing)) {
-        char opening = getOpening(closing);
-        int i = event.start - 1;
-        int nesting = 0;
-        boolean found = false;
-        while (i >= 0 && !found) {
-          char c = s.charAt(i);
-          if (c == closing) {
-            nesting++;
-            i--;
-          } else if (c == opening) {
-            if (nesting == 0)
-              found = true;
-            else {
-              nesting--;
-              i--;
-            }
-          } else i--;
-        }
-        if (found) {
-          flashBracket = i;
-        } else flashBracket = -1;
-      } else flashBracket = -1;
-    } else flashBracket = -1;
-  }
-
-  private char getOpening(char closing) {
-    if (closing == ')')
-      return '(';
-    else if (closing == '}')
-      return '{';
-    else if (closing == ']')
-      return '[';
-    else throw new Error("unknown closing bracket " + closing);
-  }
-
-  private boolean isCloseBracket(char c) {
-    return c == ')' || c == ']' || c == '}';
   }
 
   public void mouseDoubleClick(MouseEvent event) {
@@ -463,15 +470,6 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     if (mouseOverVar != null || hover != null) redraw();
   }
 
-  private void hover(int x, int y) {
-    try {
-      int index = text.getOffsetAtLocation(new Point(x, y));
-      hover = ast.find(index);
-    } catch (Exception e) {
-      hover = null;
-    }
-  }
-
   private boolean mouseNearParseError(int x1, int y1) {
     if (errorPosition >= 0) {
       org.eclipse.swt.graphics.Point p = text.getLocationAtOffset(errorPosition);
@@ -499,21 +497,6 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
 
   }
 
-  public void paintControl(PaintEvent event) {
-    paintSyntaxError(event.gc);
-    paintErrors(event.gc);
-    paintVar(event.gc);
-    paintTray(event.gc);
-    paintBracket(event.gc);
-    paintHover(event.gc);
-  }
-
-  private void paintHover(GC gc) {
-    if (hover != null) {
-      hover.paint(gc);
-    }
-  }
-
   private void paintBracket(GC gc) {
     if (flashBracket >= 0) {
       if (flashBracketOn) {
@@ -526,6 +509,15 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
         flashBracketOn = false;
       } else flashBracketOn = true;
     }
+  }
+
+  public void paintControl(PaintEvent event) {
+    paintSyntaxError(event.gc);
+    paintErrors(event.gc);
+    paintVar(event.gc);
+    paintTray(event.gc);
+    paintBracket(event.gc);
+    paintHover(event.gc);
   }
 
   private void paintErrors(GC gc) {
@@ -547,6 +539,12 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
       }
     }
     gc.setForeground(c);
+  }
+
+  private void paintHover(GC gc) {
+    if (hover != null) {
+      hover.paint(gc);
+    }
   }
 
   public void paintObject(PaintObjectEvent event) {
@@ -808,16 +806,12 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
   }
 
   public void verifyText(VerifyEvent e) {
-    int start = e.start;
-    int replaceCharCount = e.end - e.start;
-    int newCharCount = e.text.length();
-    for (int i = 0; i < offsets.length; i++) {
-      int offset = offsets[i];
-      if (start <= offset && offset < start + replaceCharCount) {
-        offset = -1;
-      }
-      if (offset != -1 && offset >= start) offset += newCharCount - replaceCharCount;
-      offsets[i] = offset;
+    if(e.text.equals("\n")) {
+      int indent = getCurrentIndent();
+      char[] chars = new char[indent+1];
+      chars[0] = '\n';
+      for(int i = 0; i < indent;i++) chars[i+1] = ' ';
+      e.text = new String(chars);
     }
   }
 
@@ -836,17 +830,5 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     out.print(" toolTip='" + toolTip + "'");
     out.print(" editable='" + text.getEditable() + "'>");
     out.print("</TextEditor>");
-  }
-
-  public void ast(String tooltip, int charStart, int charEnd) {
-    ast.add(new AST(text, tooltip, charStart, charEnd));
-  }
-
-  public void keyPressed(KeyEvent arg0) {
-    ast = new AST(text, "", 0, text.getText().length());
-  }
-
-  public void keyReleased(KeyEvent arg0) {
-
   }
 }
