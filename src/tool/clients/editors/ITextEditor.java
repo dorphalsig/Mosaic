@@ -45,4 +45,6 @@ public interface ITextEditor {
 
   void ast(String tooltip, int charStart, int charEnd);
 
+  void terminates(String end, String start);
+
 }

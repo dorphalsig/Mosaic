@@ -1,6 +1,7 @@
 package tool.clients.editors.texteditor;
 
 import java.io.PrintStream;
+import java.util.Stack;
 import java.util.Vector;
 
 import org.eclipse.jface.text.JFaceTextUtil;
@@ -91,32 +92,36 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     gc.setForeground(cf);
   }
 
-  String                id;
-  String                label;
-  StyledText            text;
-  FontData              fontData;
-  DefaultToolTip        toolTip;
-  LineStyler            lineStyler     = new LineStyler(this);
-  Vector<Integer>       highlights     = new Vector<Integer>();
-  Vector<ErrorListener> errorListeners = new Vector<ErrorListener>();
-  Vector<FileError>     errors         = new Vector<FileError>();
-  Vector<VarInfo>       varInfo        = new Vector<VarInfo>();
-  Vector<Tooltip>       tooltips       = new Vector<Tooltip>();
-  AST                   ast            = null;
-  AST                   hover          = null;
-  VarInfo               mouseOverVar   = null;
-  Tray                  tray           = new Tray();
-  Timer                 syntaxTimer    = new Timer(SYNTAX_DELAY, SYNTAX_INC, () -> sendTextChanged(), () -> timerIncrement());
-  CheckSyntax           checkSyntax    = new CheckSyntax(this);
-  int[]                 offsets        = new int[] {};
-  boolean               dirty          = false;
-  boolean               checkingSyntax = true;
-  boolean               rendering      = true;
-  char                  lastChar       = '\0';
-  int                   flashBracket   = -1;
-  boolean               flashBracketOn = false;
-  int                   errorPosition  = -1;
-  String                errorMessage   = "";
+  String                  id;
+  String                  label;
+  StyledText              text;
+  FontData                fontData;
+  DefaultToolTip          toolTip;
+  LineStyler              lineStyler     = new LineStyler(this);
+  Vector<Integer>         highlights     = new Vector<Integer>();
+  Vector<ErrorListener>   errorListeners = new Vector<ErrorListener>();
+  Vector<FileError>       errors         = new Vector<FileError>();
+  Vector<VarInfo>         varInfo        = new Vector<VarInfo>();
+  Vector<Tooltip>         tooltips       = new Vector<Tooltip>();
+  Vector<Terminal>        terminals      = new Vector<Terminal>();
+  Stack<Vector<Terminal>> tStack         = new Stack<Vector<Terminal>>();
+  int                     terminalStart  = -1;
+  int                     terminalEnd    = -1;
+  AST                     ast            = null;
+  AST                     hover          = null;
+  VarInfo                 mouseOverVar   = null;
+  Tray                    tray           = new Tray();
+  Timer                   syntaxTimer    = new Timer(SYNTAX_DELAY, SYNTAX_INC, () -> sendTextChanged(), () -> timerIncrement());
+  CheckSyntax             checkSyntax    = new CheckSyntax(this);
+  int[]                   offsets        = new int[] {};
+  boolean                 dirty          = false;
+  boolean                 checkingSyntax = true;
+  boolean                 rendering      = true;
+  char                    lastChar       = '\0';
+  int                     flashBracket   = -1;
+  boolean                 flashBracketOn = false;
+  int                     errorPosition  = -1;
+  String                  errorMessage   = "";
 
   public TextEditor(String id, String label, CTabFolder parent, boolean editable, boolean lineNumbers, String s) {
     this.id = id;
@@ -397,7 +402,6 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     return event.button == 1;
   }
 
-
   public boolean isRendering() {
     return rendering;
   }
@@ -428,6 +432,7 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     tooltips.clear();
     clearErrors();
     checkBracket(event);
+    checkTerminals(event);
     if (!dirty) {
       Message message = EditorClient.theClient().getHandler().newMessage("textDirty", 2);
       message.args[0] = new Value(getId());
@@ -518,6 +523,17 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     paintTray(event.gc);
     paintBracket(event.gc);
     paintHover(event.gc);
+    paintTerminal(event.gc);
+  }
+
+  private void paintTerminal(GC gc) {
+    if (terminalStart >= 0 && terminalEnd >= 0) {
+      Point pStart = text.getLocationAtOffset(terminalStart);
+      int height = gc.getFontMetrics().getHeight();
+      Point p = gc.textExtent(text.getText().substring(terminalStart, terminalEnd));
+      gc.setAlpha(50);
+      gc.fillRectangle(pStart.x, pStart.y, p.x, height);
+    }
   }
 
   private void paintErrors(GC gc) {
@@ -806,11 +822,70 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
   }
 
   public void verifyText(VerifyEvent e) {
-    if(e.text.equals("\n")) {
+    checkNewline(e);
+  }
+
+  private void checkTerminals(ExtendedModifyEvent event) {
+    tStack.clear();
+    terminalStart = -1;
+    terminalEnd = -1;
+    int index = event.start + 1;
+    String s = text.getText();
+    Vector<Terminal> terminates = isTerminator(s, index);
+    if (terminates != null) {
+      tStack.push(terminates);
+      index--;
+      while (index >= 0 && !tStack.isEmpty()) {
+        terminates = isTerminator(s, index);
+        if (terminates != null) tStack.push(terminates);
+        int terminalLength = starts(s, index);
+        if (terminalLength >= 0) {
+          terminates = tStack.pop();
+          if (tStack.isEmpty()) {
+            terminalStart = index;
+            terminalEnd = terminalStart + terminalLength;
+          } else index--;
+        } else index--;
+      }
+    }
+  }
+
+  private int starts(String s, int index) {
+    if (tStack.isEmpty())
+      return -1;
+    else {
+      for (Terminal t : tStack.peek()) {
+        if (t.starts(s, index)) return t.getStart().length();
+      }
+      Vector<Terminal> ts = tStack.pop();
+      int starts = starts(s, index);
+      if (starts >= 0)
+        return starts;
+      else {
+        tStack.push(ts);
+        return starts;
+      }
+    }
+  }
+
+  private Vector<Terminal> isTerminator(String s, int index) {
+    Vector<Terminal> terminates = null;
+    for (Terminal t : terminals) {
+      if (t.terminates(s, index)) {
+        if (terminates == null) terminates = new Stack<Terminal>();
+        terminates.add(t);
+      }
+    }
+    return terminates;
+  }
+
+  private void checkNewline(VerifyEvent e) {
+    if (e.text.equals("\n")) {
       int indent = getCurrentIndent();
-      char[] chars = new char[indent+1];
+      char[] chars = new char[indent + 1];
       chars[0] = '\n';
-      for(int i = 0; i < indent;i++) chars[i+1] = ' ';
+      for (int i = 0; i < indent; i++)
+        chars[i + 1] = ' ';
       e.text = new String(chars);
     }
   }
@@ -830,5 +905,9 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     out.print(" toolTip='" + toolTip + "'");
     out.print(" editable='" + text.getEditable() + "'>");
     out.print("</TextEditor>");
+  }
+
+  public void terminates(String end, String start) {
+    terminals.add(new Terminal(end, start));
   }
 }

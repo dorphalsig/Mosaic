@@ -564,7 +564,21 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       setTooltip(message);
     else if (message.hasName("ast"))
       ast(message);
+    else if (message.hasName("addTerminates"))
+      terminates(message);
     else super.sendMessage(message);
+  }
+
+  private void terminates(Message message) {
+    String id = message.args[0].strValue();
+    String end = message.args[1].strValue();
+    String start = message.args[2].strValue();
+    final ITextEditor editor = editors.get(id);
+    runOnDisplay(new Runnable() {
+      public void run() {
+        editor.terminates(end,start);
+      }
+    });
   }
 
   private void ast(Message message) {

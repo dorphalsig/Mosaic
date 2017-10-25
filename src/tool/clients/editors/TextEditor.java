@@ -1015,4 +1015,8 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
 
   public void ast(String tooltip, int charStart, int charEnd) {
   }
+
+  public void terminates(String end, String start) {
+    
+  }
 }
