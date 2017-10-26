@@ -105,8 +105,7 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
   Vector<Tooltip>         tooltips       = new Vector<Tooltip>();
   Vector<Terminal>        terminals      = new Vector<Terminal>();
   Stack<Vector<Terminal>> tStack         = new Stack<Vector<Terminal>>();
-  int                     terminalStart  = -1;
-  int                     terminalEnd    = -1;
+  int[]                   terminal       = new int[] { -1, -1, -1, -1 };
   AST                     ast            = null;
   AST                     hover          = null;
   VarInfo                 mouseOverVar   = null;
@@ -527,13 +526,18 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
   }
 
   private void paintTerminal(GC gc) {
-    if (terminalStart >= 0 && terminalEnd >= 0) {
-      Point pStart = text.getLocationAtOffset(terminalStart);
-      int height = gc.getFontMetrics().getHeight();
-      Point p = gc.textExtent(text.getText().substring(terminalStart, terminalEnd));
-      gc.setAlpha(50);
-      gc.fillRectangle(pStart.x, pStart.y, p.x, height);
+    if (terminal[0] >=0) {
+      paintTerminal(gc,terminal[0],terminal[1]);
+      paintTerminal(gc,terminal[2],terminal[3]);
     }
+  }
+
+  private void paintTerminal(GC gc, int start, int end) {
+    Point pStart = text.getLocationAtOffset(start);
+    int height = gc.getFontMetrics().getHeight();
+    Point p = gc.textExtent(text.getText().substring(start, end));
+    gc.setAlpha(50);
+    gc.fillRectangle(pStart.x, pStart.y, p.x, height);
   }
 
   private void paintErrors(GC gc) {
@@ -827,12 +831,17 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
 
   private void checkTerminals(ExtendedModifyEvent event) {
     tStack.clear();
-    terminalStart = -1;
-    terminalEnd = -1;
+    terminal[0] = -1;
+    terminal[1] = -1;
+    terminal[2] = -1;
+    terminal[3] = -1;
     int index = event.start + 1;
     String s = text.getText();
     Vector<Terminal> terminates = isTerminator(s, index);
     if (terminates != null) {
+      String end = terminates.elementAt(0).getEnd();
+      terminal[2] = index - end.length();
+      terminal[3] = index;
       tStack.push(terminates);
       index--;
       while (index >= 0 && !tStack.isEmpty()) {
@@ -842,8 +851,8 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
         if (terminalLength >= 0) {
           terminates = tStack.pop();
           if (tStack.isEmpty()) {
-            terminalStart = index;
-            terminalEnd = terminalStart + terminalLength;
+            terminal[0] = index;
+            terminal[1] = index + terminalLength;
           } else index--;
         } else index--;
       }
