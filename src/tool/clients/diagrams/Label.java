@@ -225,21 +225,28 @@ public class Label implements Selectable {
     	gc.setForeground(new Color (org.eclipse.swt.widgets.Display.getCurrent(), red, green, blue));
     
     if(!pos.equals("start") && !pos.equals("end")){
+    	Transform oldTransform = new Transform(org.eclipse.swt.widgets.Display.getCurrent()); 
+    	gc.getTransform(oldTransform); // store old Transform
+    	float[] transform = new float[6]; oldTransform.getElements(transform); float zoomGC = transform[0]; // getZoom
+    	
     	Transform tr = new Transform(org.eclipse.swt.widgets.Display.getCurrent());
         double angle = 180/Math.PI*Math.atan2(edge.getTargetNode().getY()-edge.getSourceNode().getY(),edge.getTargetNode().getX()-edge.getSourceNode().getX());
+        tr.scale(zoomGC, zoomGC);
         tr.translate(getAbsoluteX(), getAbsoluteY());
 //        angle = (angle+450)%180-90;
         tr.rotate((float)((angle+450)%180-90));
-    	gc.setTransform(tr);
+    	gc.setTransform(tr); // Rotate and move canvas to draw label
     	Path path = new Path(org.eclipse.swt.widgets.Display.getCurrent());
         path.addString(text, 0, 0, gc.getFont());
         gc.fillPath(path);
         gc.drawPath(path);
         
         tr.dispose();
+        
         tr = new Transform(org.eclipse.swt.widgets.Display.getCurrent());
+        tr.scale(zoomGC, zoomGC);
         tr.translate(getAbsoluteX(), getAbsoluteY());
-        tr.rotate((float)(angle));
+        tr.rotate((float)(angle)); // Rotate again???
         gc.setTransform(tr);
         
 	  	Color cc = gc.getBackground();
@@ -257,7 +264,7 @@ public class Label implements Selectable {
 	  			 -20*zoom/100,  2*zoom/100});
 	  	gc.setBackground(cc);        
         
-        gc.setTransform(new Transform(org.eclipse.swt.widgets.Display.getCurrent()));
+        gc.setTransform(oldTransform); // restore to old Transform
         tr.dispose();
     }else{
     	gc.drawText(text, getAbsoluteX(), getAbsoluteY(), true);
