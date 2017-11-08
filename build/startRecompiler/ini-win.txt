@@ -1,15 +1,17 @@
 -arg
 user:XModeler
 -arg
-home:./../XMF/com.ceteva.xmf.system/xmf-src
+home:.\..\XMF\com.ceteva.xmf.system\xmf-src
 -image
-./../XMF/com.ceteva.xmf.system/xmf-img/recompiler.img
+.\..\XMF\com.ceteva.xmf.system\xmf-img\recompiler.img
 -imagedialog
 false
 -arg
 projects:
 -arg
 demos:
+-arg
+images:
 -arg
 saveSource:true
 -message
@@ -37,5 +39,7 @@ tool.console.ConsoleClient:com.ceteva.console
 15000
 -freeHeap
 80
+-arg
+projects:
 -arg
 version:Recompiler
