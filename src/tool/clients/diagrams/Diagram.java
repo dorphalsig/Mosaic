@@ -1020,13 +1020,13 @@ public class Diagram implements Display {
     redraw();
   }
   
-  public void setEditable(String id, boolean editable) { //Björn
+  public void setEditable(String id, boolean editable) { //Bjï¿½rn
 	  for (Node node : nodes)
    		node.setEditable(id, editable);
       redraw();  
   }
   
-  public void showEdges(String id, boolean top,boolean bottom,boolean left, boolean right) { //Björn
+  public void showEdges(String id, boolean top,boolean bottom,boolean left, boolean right) { //Bjï¿½rn
 	  for (Node node : nodes)
 	    node.showEdges(id, top, bottom, left,right);
 	  redraw();  

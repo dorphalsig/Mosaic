@@ -54,14 +54,14 @@ public class ConsoleView {
   StyledText           text            = null;
   History              history         = new History();
   int                  inputStart      = 0;
-  FontData			   fontData;
-//  Font                 textFont        = new Font(Display.getCurrent(), "Monaco", 14, SWT.NORMAL);
+  FontData             fontData;
+  // Font textFont = new Font(Display.getCurrent(), "Monaco", 14, SWT.NORMAL);
   Color                backgroundColor = ColorManager.getColor(new RGB(255, 255, 255));
   Color                foregroundColor = ColorManager.getColor(new RGB(0, 0, 0));
   int                  waterMark       = 1000;
   PrintStream          out             = null;
   Object               overflowLock    = new Object();
-  AutoComplete         autoComplete    = AutoComplete.newDefault(); // de-activated for now for better usability
+  AutoComplete         autoComplete    = AutoComplete.newDefault();                    // de-activated for now for better usability
 
   public ConsoleView(Composite parent, CTabItem tabItem) {
     Composite c1 = new Composite(parent, SWT.BORDER);
@@ -69,31 +69,31 @@ public class ConsoleView {
     text = new StyledText(c1, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
     text.setWordWrap(true);
     text.setBackground(backgroundColor);
-//    text.setFont(textFont);
+    // text.setFont(textFont);
     setFont("dejavu/DejaVuSansMono.ttf", "DejaVu Sans Mono");
     addVerifyListener(text);
     tabItem.setControl(c1);
   }
 
-	public final void setFont(String fileName, String name) {
-		int oldHeight = fontData==null?13:fontData.getHeight();
-		FontData[] fontData = Display.getDefault().getSystemFont().getFontData();
-		this.fontData = fontData[0];
-//		File root = getB
-//		URL url = ConsoleView.class.getResource(fileName);
-		XModeler.getXModeler().getDisplay().loadFont(fileName);
-		this.fontData.setName(name);
-		this.fontData.setHeight(oldHeight);
-		text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
-	}
+  public final void setFont(String fileName, String name) {
+    int oldHeight = fontData == null ? 13 : fontData.getHeight();
+    FontData[] fontData = Display.getDefault().getSystemFont().getFontData();
+    this.fontData = fontData[0];
+    // File root = getB
+    // URL url = ConsoleView.class.getResource(fileName);
+    XModeler.getXModeler().getDisplay().loadFont(fileName);
+    this.fontData.setName(name);
+    this.fontData.setHeight(oldHeight);
+    text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
+  }
 
-public void addCommand(StyledText text, String command) {
+  public void addCommand(StyledText text, String command) {
     int length = text.getCharCount() - inputStart;
     text.replaceTextRange(inputStart, length, command);
     goToEnd();
   }
 
- boolean fontToggleTest = false;
+  boolean fontToggleTest = false;
 
   public void addVerifyListener(final StyledText text) {
     text.addVerifyListener(new VerifyListener() {
@@ -111,11 +111,11 @@ public void addCommand(StyledText text, String command) {
     text.addVerifyKeyListener(new VerifyKeyListener() {
       public void verifyKey(VerifyEvent e) {
         if (overwriting(e.character)) {
-          try{
-        	  text.setCaretOffset(text.getCaretOffset() + 1);
+          try {
+            text.setCaretOffset(text.getCaretOffset() + 1);
           } catch (Exception err) {
-        	  System.err.println("something's wrong with a caret");
-        	  err.printStackTrace();
+            System.err.println("something's wrong with a caret");
+            err.printStackTrace();
           }
           e.doit = false;
         } else if (e.keyCode == SWT.ESC) {
@@ -130,19 +130,18 @@ public void addCommand(StyledText text, String command) {
           if (command != "") addCommand(text, command);
           e.doit = false;
         } else if (e.keyCode == '+' && ((e.stateMask & SWT.CTRL) == SWT.CTRL)) {
-		  fontData.setHeight(Math.min(fontData.getHeight() + FONT_INC, MAX_FONT_HEIGHT));
-	      text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
+          fontData.setHeight(Math.min(fontData.getHeight() + FONT_INC, MAX_FONT_HEIGHT));
+          text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
           e.doit = false;
         } else if (e.keyCode == '-' && ((e.stateMask & SWT.CTRL) == SWT.CTRL)) {
-		  fontData.setHeight(Math.max(MIN_FONT_HEIGHT, fontData.getHeight() - FONT_INC));
-	      text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
+          fontData.setHeight(Math.max(MIN_FONT_HEIGHT, fontData.getHeight() - FONT_INC));
+          text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
           e.doit = false;
         } else if (e.keyCode == 't' && ((e.stateMask & SWT.CTRL) == SWT.CTRL)) {
-	      fontToggleTest =! fontToggleTest;
-	      if(fontToggleTest) 
-	    	  setFont("dejavu/DejaVuSans.ttf", "DejaVu Sans");
-	      else 
-	    	  setFont("dejavu/DejaVuSansMono.ttf", "DejaVu Sans Mono");
+          fontToggleTest = !fontToggleTest;
+          if (fontToggleTest)
+            setFont("dejavu/DejaVuSans.ttf", "DejaVu Sans");
+          else setFont("dejavu/DejaVuSansMono.ttf", "DejaVu Sans Mono");
           e.doit = false;
         } else if (e.keyCode == 'a' && ((e.stateMask & SWT.CTRL) == SWT.CTRL)) {
           autoComplete.toggleMainSwitch();
@@ -162,16 +161,14 @@ public void addCommand(StyledText text, String command) {
           }
           goToEnd();
           inputStart = text.getContent().getCharCount();
-//        } else if (e.keyCode == '.' && ((e.stateMask & SWT.CTRL) == SWT.CTRL) && autoComplete.isDisplayOptions()) {
         } else if (e.character == '.' || e.keyCode == ' ' && ((e.stateMask & SWT.CTRL) == SWT.CTRL) && autoComplete.isDisplayOptions()) {
           // Display options based on the type of the input.
           StyledTextContent content = text.getContent();
-          if(text.getCaretOffset() >=  inputStart) {
-        	  String command = content.getTextRange(inputStart, text.getCaretOffset() - inputStart);
-//        	  if(e.keyCode == '.') insert(".");
-	          WorkbenchClient.theClient().dotConsole(command); 
+          if (text.getCaretOffset() >= inputStart) {
+            String command = content.getTextRange(inputStart, text.getCaretOffset() - inputStart);
+            WorkbenchClient.theClient().dotConsole(command);
           }
-        } else if (e.keyCode == ';' && ((e.stateMask & SWT.SHIFT) == SWT.SHIFT) && autoComplete.isColonAddPath()) {
+        } else if (e.character == ':' && autoComplete.isColonAddPath()) {
           // We might have a :: where there is a path to the left ...
           StyledTextContent content = text.getContent();
           String command = content.getTextRange(inputStart, text.getCaretOffset() - inputStart);
@@ -251,7 +248,7 @@ public void addCommand(StyledText text, String command) {
   }
 
   public void dispose() {
-//    textFont.dispose();
+    // textFont.dispose();
     backgroundColor.dispose();
     foregroundColor.dispose();
   }
@@ -261,7 +258,7 @@ public void addCommand(StyledText text, String command) {
   }
 
   public void getPreferences() {
-//    if (textFont != null) textFont.dispose();
+    // if (textFont != null) textFont.dispose();
     if (backgroundColor != null) backgroundColor.dispose();
     if (foregroundColor != null) foregroundColor.dispose();
   }
@@ -374,13 +371,29 @@ public void addCommand(StyledText text, String command) {
     XModeler.getXModeler().getDisplay().syncExec(new Runnable() {
       public void run() {
         try {
-//          Menu menu = getDotPopup(message);
           Point p = text.getCaret().getLocation();
           Point displayPoint = text.toDisplay(p);
           String insertText = new AutoCompleteBox(XModeler.getXModeler().getShell(), message).show(displayPoint);
-          if(insertText != null) insert(insertText);
-//          menu.setLocation(displayPoint);
-//          menu.setVisible(true);
+          if (insertText != null) insert(insertText);
+        } catch (Throwable t) {
+          t.printStackTrace();
+        }
+      }
+    });
+  }
+
+  public void namespace(final Message message) {
+    XModeler.getXModeler().getDisplay().syncExec(new Runnable() {
+      public void run() {
+        try {
+          Point p = text.getCaret().getLocation();
+          Point displayPoint = text.toDisplay(p);
+          for(int i = 0; i < message.args[0].values.length;i++) {
+            String name = message.args[0].values[i].strValue();
+            message.args[0].values[i].values = new Value[] {new Value(name),new Value(name)};
+          }
+          String insertText = new AutoCompleteBox(XModeler.getXModeler().getShell(), message).show(displayPoint);
+          if (insertText != null) insert(insertText);
         } catch (Throwable t) {
           t.printStackTrace();
         }
@@ -472,7 +485,8 @@ public void addCommand(StyledText text, String command) {
     return menu;
   }
 
-  public void namespace(final Message message) {
+  public void namespaceOld(final Message message) {
+    // Replaced to be consistent with the '.' dialog...
     XModeler.getXModeler().getDisplay().syncExec(new Runnable() {
       public void run() {
         try {

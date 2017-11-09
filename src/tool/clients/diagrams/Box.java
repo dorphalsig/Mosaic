@@ -25,9 +25,9 @@ public class Box implements Display {
   int             fillRed;
   int             fillGreen;
   int             fillBlue;
-  Vector<Display> displays = new Vector<Display>();
-  Diagram nestedDiagram = null;
-  
+  Vector<Display> displays      = new Vector<Display>();
+  Diagram         nestedDiagram = null;
+
   public Box(String id, int x, int y, int width, int height, int curve, boolean top, boolean right, boolean bottom, boolean left, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue) {
     super();
     this.id = id;
@@ -43,9 +43,12 @@ public class Box implements Display {
     this.lineRed = lineRed == -1 ? 0 : lineRed % 256;
     this.lineGreen = lineGreen == -1 ? 0 : lineGreen % 256;
     this.lineBlue = lineBlue == -1 ? 0 : lineBlue % 256;
-    this.fillRed = fillRed == -1 ? 255 : fillRed % 256;
-    this.fillGreen = fillGreen == -1 ? 255 : fillGreen % 256;
-    this.fillBlue = fillBlue == -1 ? 255 : fillBlue % 256;
+    // this.fillRed = fillRed == -1 ? 255 : fillRed % 256;
+    // this.fillGreen = fillGreen == -1 ? 255 : fillGreen % 256;
+    // this.fillBlue = fillBlue == -1 ? 255 : fillBlue % 256;
+    this.fillRed = fillRed == -1 ? -1 : fillRed % 256;
+    this.fillGreen = fillGreen == -1 ? -1 : fillGreen % 256;
+    this.fillBlue = fillBlue == -1 ? -1 : fillBlue % 256;
   }
 
   public void doubleClick(GC gc, Diagram diagram, int dx, int dy, int mouseX, int mouseY) {
@@ -154,15 +157,15 @@ public class Box implements Display {
       }
     }
   }
-  
+
   public void newNestedDiagram(String parentId, String id, int x, int y, int width, int height, org.eclipse.swt.widgets.Composite canvas) {
     if (getId().equals(parentId)) {
       DiagramClient.theClient().runOnDisplay(new Runnable() {
-          public void run() {
-        	  Diagram diagram = new Diagram(id, canvas, Box.this);
-        	  DiagramClient.newlyCreatedDiagrams.add(diagram);
-        	  Box.this.nestedDiagram = diagram;
-          }
+        public void run() {
+          Diagram diagram = new Diagram(id, canvas, Box.this);
+          DiagramClient.newlyCreatedDiagrams.add(diagram);
+          Box.this.nestedDiagram = diagram;
+        }
       });
     } else {
       for (Display display : displays) {
@@ -180,16 +183,15 @@ public class Box implements Display {
     }
   }
 
-  public void newShape(String parentId, String id, int x, int y, int width, int height, boolean showOutline, int lineRed,
-			int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue, int[] points) {
-	    if (parentId.equals(getId()))
-	        displays.add(new Shape(id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue,points));
-	      else {
-	        for (Display display : displays)
-	          display.newShape(parentId, id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue,points);
-	      }
-	}
-  
+  public void newShape(String parentId, String id, int x, int y, int width, int height, boolean showOutline, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue, int[] points) {
+    if (parentId.equals(getId()))
+      displays.add(new Shape(id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, points));
+    else {
+      for (Display display : displays)
+        display.newShape(parentId, id, x, y, width, height, showOutline, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, points);
+    }
+  }
+
   public void newMultilineText(String parentId, String id, String text, int x, int y, int width, int height, boolean editable, int lineRed, int lineGreen, int lineBlue, int fillRed, int fillGreen, int fillBlue, String font) {
     if (getId().equals(parentId)) {
       MultilineText t = new MultilineText(id, text, x, y, width, height, editable, lineRed, lineGreen, lineBlue, fillRed, fillGreen, fillBlue, font);
@@ -222,19 +224,21 @@ public class Box implements Display {
   public void paint(GC gc, int x, int y) {
     if (width > 0 && height > 0) {
       Color fillColor = gc.getBackground();
-      gc.setBackground(new Color(XModeler.getXModeler().getDisplay(), getFillRed(), getFillGreen(), getFillBlue()));
-      gc.fillRectangle(x + getX(), y + getY(), width, height);
+      if (getFillRed() != -1 && getFillGreen() != -1 && getFillBlue() != -1) {
+        gc.setBackground(new Color(XModeler.getXModeler().getDisplay(), getFillRed(), getFillGreen(), getFillBlue()));
+        gc.fillRectangle(x + getX(), y + getY(), width, height);
+      }
       gc.setBackground(fillColor);
       for (Display display : displays)
         display.paint(gc, x + getX(), y + getY());
-      if(top || bottom || left || right ) { //Björn
-    	  Color lineColor = gc.getForeground();
-      	gc.setForeground(new Color(XModeler.getXModeler().getDisplay(), getLineRed(), getLineGreen(), getLineBlue()));
-      	gc.drawRectangle(x + getX(), y + getY(), width, height);
-      	gc.setForeground(lineColor);
+      if (top || bottom || left || right) { // Bjï¿½rn
+        Color lineColor = gc.getForeground();
+        gc.setForeground(new Color(XModeler.getXModeler().getDisplay(), getLineRed(), getLineGreen(), getLineBlue()));
+        gc.drawRectangle(x + getX(), y + getY(), width, height);
+        gc.setForeground(lineColor);
       }
     }
-    if(nestedDiagram != null) nestedDiagram.paint(gc, x + getX(), y + getY());
+    if (nestedDiagram != null) nestedDiagram.paint(gc, x + getX(), y + getY());
   }
 
   public void paintHover(GC gc, int x, int y, int dx, int dy) {
@@ -265,9 +269,12 @@ public class Box implements Display {
 
   public void setFillColor(String id, int red, int green, int blue) {
     if (id.equals(getId())) {
-      fillRed = red == -1 ? 255 : red % 256;
-      fillGreen = green == -1 ? 255 : green % 256;
-      fillBlue = blue == -1 ? 255 : blue % 256;
+      // fillRed = red == -1 ? 255 : red % 256;
+      // fillGreen = green == -1 ? 255 : green % 256;
+      // fillBlue = blue == -1 ? 255 : blue % 256;
+      fillRed = red == -1 ? -1 : red % 256;
+      fillGreen = green == -1 ? -1 : green % 256;
+      fillBlue = blue == -1 ? -1 : blue % 256;
     } else for (Display display : displays)
       display.setFillColor(id, red, green, blue);
   }
@@ -276,15 +283,15 @@ public class Box implements Display {
     for (Display display : displays)
       display.setText(id, text);
   }
-  
-  public void showEdges(String id, boolean top, boolean bottom, boolean left,boolean right){ //Björn
-	    if (id.equals(getId())) {
-	        this.top = top;
-	        this.bottom = bottom;
-	        this.left = left;
-	        this.right = right;
-	      } else for (Display display : displays)
-	        display.showEdges(id, top, bottom, right, left); 
+
+  public void showEdges(String id, boolean top, boolean bottom, boolean left, boolean right) { // Bjï¿½rn
+    if (id.equals(getId())) {
+      this.top = top;
+      this.bottom = bottom;
+      this.left = left;
+      this.right = right;
+    } else for (Display display : displays)
+      display.showEdges(id, top, bottom, right, left);
   }
 
   public String toString() {
@@ -319,11 +326,10 @@ public class Box implements Display {
       display.setFont(id, fontData);
   }
 
-public void setEditable(String id, boolean editable) {
+  public void setEditable(String id, boolean editable) {
     for (Display display : displays)
-	      display.setEditable(id, editable);
-	
-}
+      display.setEditable(id, editable);
 
+  }
 
 }

@@ -5,6 +5,8 @@ import java.io.PrintStream;
 import org.eclipse.swt.widgets.Control;
 import org.w3c.dom.Node;
 
+import xos.Value;
+
 public interface ITextEditor {
 
   void addLineHighlight(int line);
@@ -46,5 +48,7 @@ public interface ITextEditor {
   void ast(String tooltip, int charStart, int charEnd);
 
   void terminates(String end, String start);
+
+  void setSignature(Value[] entries);
 
 }

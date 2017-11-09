@@ -28,12 +28,19 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
+import com.ceteva.oleBridge.OleBridgeClient;
+import com.ceteva.undo.UndoClient;
+
+import engine.Machine;
 import tool.clients.browser.ModelBrowserClient;
 import tool.clients.diagrams.DiagramClient;
 import tool.clients.dialogs.DialogsClient;
 import tool.clients.dialogs.notifier.NotificationType;
 import tool.clients.dialogs.notifier.NotifierDialog;
+import tool.clients.editors.BrowserResizeListener;
 import tool.clients.editors.EditorClient;
+import tool.clients.editors.EditorResizeListener;
+import tool.clients.editors.PropertyResizeListener;
 import tool.clients.forms.FormsClient;
 import tool.clients.menus.MenuClient;
 import tool.clients.screenGeneration.ScreenGenerationClient;
@@ -41,11 +48,6 @@ import tool.clients.workbench.WorkbenchClient;
 import tool.console.Console;
 import tool.console.ConsoleClient;
 import xos.OperatingSystem;
-
-import com.ceteva.oleBridge.OleBridgeClient;
-import com.ceteva.undo.UndoClient;
-
-import engine.Machine;
 
 public class XModeler {
 
@@ -55,35 +57,25 @@ public class XModeler {
   private static Integer DEVICE_ZOOM_PERCENT = null;
 
   static final String    NAME                = "XModeler";
-
   static String          busyMessage         = "";
-
   static int             TOOL_X              = 100;
-
   static int             TOOL_Y              = 100;
-
   static int             TOOL_WIDTH          = 1200;
-
   static int             TOOL_HEIGHT         = 900;
-
   static OperatingSystem xos                 = new OperatingSystem();
-
   static Shell           XModeler            = new Shell(SWT.BORDER | SWT.SHELL_TRIM);
-
-  static Display         display;
-
-  static Menu            menuBar;
-
-  static String          projDir;
-
+  static SashForm        outerSash           = null;
+  static SashForm        rightSash           = null;
+  static CTabFolder      editorTabFolder     = null;
+  static CTabFolder      propertyTabFolder   = null;
+  static CTabFolder      browserTabFolder    = null;
+  static Display         display             = null;
+  static Menu            menuBar             = null;
+  static String          projDir             = null;
   static String          loadedImagePath     = null;
-
   static String          version             = null;
-
-  static String[]        copyOfArgs;
-
+  static String[]        copyOfArgs          = null;
   static boolean         showLoad            = false;
-
   public static String   textEditorClass     = "tool.clients.editors.TextEditor";
 
   // private static boolean overwrite(final String file) {
@@ -402,7 +394,7 @@ public class XModeler {
   public static void startXModeler() {
     display = Display.getDefault();
 
-    DEVICE_ZOOM_PERCENT = display.getDPI().x * 100 / 96;
+    DEVICE_ZOOM_PERCENT = display.getDPI().x * 100 / 75;
     System.err.println("The zoom for this device was detected as " + DEVICE_ZOOM_PERCENT + "%.");
 
     setToolLabel();
@@ -413,16 +405,25 @@ public class XModeler {
     XModeler.setSize(new org.eclipse.swt.graphics.Point(TOOL_WIDTH, TOOL_HEIGHT));
     XModeler.addListener(SWT.Close, closeListener());
     menuBar = new Menu(XModeler, SWT.BAR);
-    SashForm outerSash = new SashForm(XModeler, SWT.HORIZONTAL);
-    CTabFolder browserTabFolder = new CTabFolder(outerSash, SWT.BORDER);
-    SashForm rightSash = new SashForm(outerSash, SWT.VERTICAL);
-    CTabFolder editorTabFolder = new CTabFolder(rightSash, SWT.BORDER);
-    CTabFolder propertyTabFolder = new CTabFolder(rightSash, SWT.BORDER);
+    outerSash = new SashForm(XModeler, SWT.HORIZONTAL);
+    browserTabFolder = new CTabFolder(outerSash, SWT.BORDER);
+    rightSash = new SashForm(outerSash, SWT.VERTICAL);
+    editorTabFolder = new CTabFolder(rightSash, SWT.BORDER);
+    propertyTabFolder = new CTabFolder(rightSash, SWT.BORDER);
     ToolBar propertyToolbar = new ToolBar(propertyTabFolder, SWT.HORIZONTAL | SWT.FLAT);
+    editorTabFolder.setMaximizeVisible(true);
+    editorTabFolder.setMinimizeVisible(true);
+    propertyTabFolder.setMaximizeVisible(true);
+    propertyTabFolder.setMinimizeVisible(true);
+    browserTabFolder.setMaximizeVisible(true);
+    browserTabFolder.setMinimizeVisible(true);
     propertyTabFolder.setTopRight(propertyToolbar);
     ModelBrowserClient.start(browserTabFolder, SWT.LEFT);
     outerSash.setWeights(new int[] { 1, 5 });
     EditorClient.start(editorTabFolder, SWT.BORDER);
+    editorTabFolder.addCTabFolder2Listener(new EditorResizeListener());
+    propertyTabFolder.addCTabFolder2Listener(new PropertyResizeListener());
+    browserTabFolder.addCTabFolder2Listener(new BrowserResizeListener());
     DiagramClient.start(editorTabFolder);
     FormsClient.start(propertyTabFolder, propertyToolbar, SWT.BORDER);
     ScreenGenerationClient.start(propertyTabFolder); // BB
@@ -488,6 +489,34 @@ public class XModeler {
       }
     };
     t.start();
+  }
+
+  public static void maximiseEditors() {
+    outerSash.setMaximizedControl(rightSash);
+    rightSash.setMaximizedControl(editorTabFolder);
+  }
+
+  public static void minimiseEditors() {
+    rightSash.setMaximizedControl(null);
+    outerSash.setMaximizedControl(null);
+  }
+
+  public static void maximiseProperties() {
+    outerSash.setMaximizedControl(rightSash);
+    rightSash.setMaximizedControl(propertyTabFolder);
+  }
+
+  public static void minimiseProperties() {
+    rightSash.setMaximizedControl(null);
+    outerSash.setMaximizedControl(null);
+  }
+
+  public static void maximiseBrowser() {
+    outerSash.setMaximizedControl(browserTabFolder);
+  }
+
+  public static void minimiseBrowser() {
+    outerSash.setMaximizedControl(null);
   }
 
 }

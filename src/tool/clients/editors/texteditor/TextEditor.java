@@ -44,7 +44,6 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.ScrollBar;
-//import org.eclipse.swt.widgets.ToolTip;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -89,7 +88,23 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     gc.fillPath(path);
     path.dispose();
     gc.setForeground(cf);
-    gc.setForeground(cf);
+    gc.setBackground(cb);
+  }
+
+  static boolean isCloseBracket(char c) {
+    return c == ')' || c == ']' || c == '}';
+  }
+
+  static boolean isCntrl(MouseEvent e) {
+    return (e.stateMask & SWT.CTRL) == SWT.CTRL || (e.stateMask & SWT.COMMAND) == SWT.COMMAND;
+  }
+
+  static boolean isCntrl(VerifyEvent e) {
+    return (e.stateMask & SWT.CTRL) == SWT.CTRL || (e.stateMask & SWT.COMMAND) == SWT.COMMAND;
+  }
+
+  static boolean isCommand(MouseEvent event) {
+    return (event.stateMask & SWT.COMMAND) != 0;
   }
 
   String                  id;
@@ -97,6 +112,7 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
   StyledText              text;
   FontData                fontData;
   DefaultToolTip          toolTip;
+  Signature               signature      = new Signature();
   LineStyler              lineStyler     = new LineStyler(this);
   Vector<Integer>         highlights     = new Vector<Integer>();
   Vector<ErrorListener>   errorListeners = new Vector<ErrorListener>();
@@ -193,6 +209,47 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     } else flashBracket = -1;
   }
 
+  private void checkNewline(VerifyEvent e) {
+    if (e.text.equals("\n")) {
+      int indent = getCurrentIndent();
+      char[] chars = new char[indent + 1];
+      chars[0] = '\n';
+      for (int i = 0; i < indent; i++)
+        chars[i + 1] = ' ';
+      e.text = new String(chars);
+    }
+  }
+
+  private void checkTerminals(ExtendedModifyEvent event) {
+    tStack.clear();
+    terminal[0] = -1;
+    terminal[1] = -1;
+    terminal[2] = -1;
+    terminal[3] = -1;
+    int index = event.start + 1;
+    String s = text.getText();
+    Vector<Terminal> terminates = isTerminator(s, index);
+    if (terminates != null) {
+      String end = terminates.elementAt(0).getEnd();
+      terminal[2] = index - end.length();
+      terminal[3] = index;
+      tStack.push(terminates);
+      index--;
+      while (index >= 0 && !tStack.isEmpty()) {
+        terminates = isTerminator(s, index);
+        if (terminates != null) tStack.push(terminates);
+        int terminalLength = starts(s, index);
+        if (terminalLength >= 0) {
+          terminates = tStack.pop();
+          if (tStack.isEmpty()) {
+            terminal[0] = index;
+            terminal[1] = index + terminalLength;
+          } else index--;
+        } else index--;
+      }
+    }
+  }
+
   public void clearErrors() {
     errorPosition = -1;
     errorMessage = "";
@@ -215,7 +272,7 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     if (tool != null) {
       tool.click(this);
       redraw();
-    }
+    } else signature.click(this, event);
   }
 
   private void createText(CTabFolder parent, boolean editable, String s) {
@@ -247,10 +304,12 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
 
   private void createTray() {
     ErrorTool errors = new ErrorTool();
+    ShowSignature showSignature = new ShowSignature(this);
     addErrorListener(errors);
     tray.addTool(checkSyntax);
     tray.addTool(errors);
     tray.addTool(syntaxTimer);
+    tray.addTool(showSignature);
   }
 
   private boolean errorToolTip(int x, int y) {
@@ -377,22 +436,6 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     return checkingSyntax;
   }
 
-  private boolean isCloseBracket(char c) {
-    return c == ')' || c == ']' || c == '}';
-  }
-
-  private boolean isCntrl(MouseEvent e) {
-    return (e.stateMask & SWT.CTRL) == SWT.CTRL || (e.stateMask & SWT.COMMAND) == SWT.COMMAND;
-  }
-
-  private boolean isCntrl(VerifyEvent e) {
-    return (e.stateMask & SWT.CTRL) == SWT.CTRL || (e.stateMask & SWT.COMMAND) == SWT.COMMAND;
-  }
-
-  private boolean isCommand(MouseEvent event) {
-    return (event.stateMask & SWT.COMMAND) != 0;
-  }
-
   public boolean isDirty() {
     return dirty;
   }
@@ -407,6 +450,17 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
 
   private boolean isRightClick(MouseEvent event) {
     return event.button == RIGHT_BUTTON || isCntrl(event);
+  }
+
+  private Vector<Terminal> isTerminator(String s, int index) {
+    Vector<Terminal> terminates = null;
+    for (Terminal t : terminals) {
+      if (t.terminates(s, index)) {
+        if (terminates == null) terminates = new Stack<Terminal>();
+        terminates.add(t);
+      }
+    }
+    return terminates;
   }
 
   public void keyPressed(KeyEvent arg0) {
@@ -429,6 +483,7 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     lineStyler.clearCache();
     varInfo.clear();
     tooltips.clear();
+    signature.clear();
     clearErrors();
     checkBracket(event);
     checkTerminals(event);
@@ -471,7 +526,7 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     setMouseOverVar(x, y);
     hover(x, y);
     mouseOverVar = selectVarInfo(x, y);
-    if (mouseOverVar != null || hover != null) redraw();
+    if (mouseOverVar != null || hover != null || signature.mouseOver(x, y)) redraw();
   }
 
   private boolean mouseNearParseError(int x1, int y1) {
@@ -511,6 +566,7 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
         gc.setBackground(BRACKET_HIGHLIGHT);
         gc.drawRectangle(p.x, p.y, width, height);
         flashBracketOn = false;
+        gc.setBackground(c);
       } else flashBracketOn = true;
     }
   }
@@ -523,26 +579,12 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     paintBracket(event.gc);
     paintHover(event.gc);
     paintTerminal(event.gc);
-  }
-
-  private void paintTerminal(GC gc) {
-    if (terminal[0] >=0) {
-      paintTerminal(gc,terminal[0],terminal[1]);
-      paintTerminal(gc,terminal[2],terminal[3]);
-    }
-  }
-
-  private void paintTerminal(GC gc, int start, int end) {
-    Point pStart = text.getLocationAtOffset(start);
-    int height = gc.getFontMetrics().getHeight();
-    Point p = gc.textExtent(text.getText().substring(start, end));
-    gc.setAlpha(50);
-    gc.fillRectangle(pStart.x, pStart.y, p.x, height);
+    paintSignature(event.gc);
   }
 
   private void paintErrors(GC gc) {
-    int bottomIndex = JFaceTextUtil.getPartialBottomIndex((StyledText) text);
-    int topIndex = JFaceTextUtil.getPartialTopIndex((StyledText) text);
+    int bottomIndex = JFaceTextUtil.getPartialBottomIndex(text);
+    int topIndex = JFaceTextUtil.getPartialTopIndex(text);
     int height = text.getFont().getFontData()[0].getHeight();
     Color c = gc.getForeground();
     gc.setForeground(RED);
@@ -570,6 +612,15 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
   public void paintObject(PaintObjectEvent event) {
   }
 
+  private void paintSignature(GC gc) {
+    int topIndex = JFaceTextUtil.getPartialTopIndex(text);
+    Point p = text.getLocationAtOffset(topIndex);
+    Rectangle r = text.getClientArea();
+    if (signature.isVisible()) {
+      signature.paint(r.width, gc);
+    }
+  }
+
   private void paintSyntaxError(GC gc) {
     if (errorPosition >= 0 && errorPosition < text.getText().length()) {
       org.eclipse.swt.graphics.Point p = text.getLocationAtOffset(errorPosition);
@@ -579,6 +630,23 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
       gc.drawLine(p.x - 10, p.y + height, p.x + 100, p.y + height);
       gc.setForeground(c);
     }
+  }
+
+  private void paintTerminal(GC gc) {
+    if (terminal[0] >= 0) {
+      paintTerminal(gc, terminal[0], terminal[1]);
+      paintTerminal(gc, terminal[2], terminal[3]);
+    }
+  }
+
+  private void paintTerminal(GC gc, int start, int end) {
+    Point pStart = text.getLocationAtOffset(start);
+    int height = gc.getFontMetrics().getHeight();
+    Point p = gc.textExtent(text.getText().substring(start, end));
+    int alpha = gc.getAlpha();
+    gc.setAlpha(50);
+    gc.fillRectangle(pStart.x, pStart.y, p.x, height);
+    gc.setAlpha(alpha);
   }
 
   private void paintTray(GC gc) {
@@ -608,7 +676,7 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     }
   }
 
-  private void redraw() {
+  void redraw() {
     if (rendering) text.redraw();
   }
 
@@ -710,6 +778,16 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     redraw();
   }
 
+  public void setSelection(int index) {
+    if (text.getText().length() > index) text.setSelection(index);
+  }
+
+  public void setSignature(Value[] entries) {
+    for (Value value : entries) {
+      signature.add(toSigEntry(value));
+    }
+  }
+
   public void setString(String text) {
     setText(text);
   }
@@ -745,6 +823,24 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     redraw();
   }
 
+  private int starts(String s, int index) {
+    if (tStack.isEmpty())
+      return -1;
+    else {
+      for (Terminal t : tStack.peek()) {
+        if (t.starts(s, index)) return t.getStart().length();
+      }
+      Vector<Terminal> ts = tStack.pop();
+      int starts = starts(s, index);
+      if (starts >= 0)
+        return starts;
+      else {
+        tStack.push(ts);
+        return starts;
+      }
+    }
+  }
+
   public void syntaxError(int pos, String error) {
     this.errorPosition = Math.min(pos - 10, text.getText().length() - 1);
     this.errorMessage = error;
@@ -753,6 +849,10 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     }
     errors.clear();
     redraw();
+  }
+
+  public void terminates(String end, String start) {
+    terminals.add(new Terminal(end, start));
   }
 
   private void timerIncrement() {
@@ -769,6 +869,19 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
 
   private void toolTip(int x, int y) {
     if (!(errorToolTip(x, y) || trayToolTip(x, y) || generalToolTip(x, y))) cancelToolTip();
+  }
+
+  private SignatureEntry toSigEntry(Value value) {
+    Value[] entry = value.values;
+    int charStart = entry[0].intValue;
+    String shortLabel = entry[1].strValue();
+    String longLabel = entry[2].strValue();
+    Value[] children = entry[3].values;
+    SignatureEntry sigEntry = new SignatureEntry(charStart, shortLabel, longLabel);
+    for (Value v : children) {
+      sigEntry.add(toSigEntry(v));
+    }
+    return sigEntry;
   }
 
   private boolean trayToolTip(int x, int y) {
@@ -829,76 +942,6 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     checkNewline(e);
   }
 
-  private void checkTerminals(ExtendedModifyEvent event) {
-    tStack.clear();
-    terminal[0] = -1;
-    terminal[1] = -1;
-    terminal[2] = -1;
-    terminal[3] = -1;
-    int index = event.start + 1;
-    String s = text.getText();
-    Vector<Terminal> terminates = isTerminator(s, index);
-    if (terminates != null) {
-      String end = terminates.elementAt(0).getEnd();
-      terminal[2] = index - end.length();
-      terminal[3] = index;
-      tStack.push(terminates);
-      index--;
-      while (index >= 0 && !tStack.isEmpty()) {
-        terminates = isTerminator(s, index);
-        if (terminates != null) tStack.push(terminates);
-        int terminalLength = starts(s, index);
-        if (terminalLength >= 0) {
-          terminates = tStack.pop();
-          if (tStack.isEmpty()) {
-            terminal[0] = index;
-            terminal[1] = index + terminalLength;
-          } else index--;
-        } else index--;
-      }
-    }
-  }
-
-  private int starts(String s, int index) {
-    if (tStack.isEmpty())
-      return -1;
-    else {
-      for (Terminal t : tStack.peek()) {
-        if (t.starts(s, index)) return t.getStart().length();
-      }
-      Vector<Terminal> ts = tStack.pop();
-      int starts = starts(s, index);
-      if (starts >= 0)
-        return starts;
-      else {
-        tStack.push(ts);
-        return starts;
-      }
-    }
-  }
-
-  private Vector<Terminal> isTerminator(String s, int index) {
-    Vector<Terminal> terminates = null;
-    for (Terminal t : terminals) {
-      if (t.terminates(s, index)) {
-        if (terminates == null) terminates = new Stack<Terminal>();
-        terminates.add(t);
-      }
-    }
-    return terminates;
-  }
-
-  private void checkNewline(VerifyEvent e) {
-    if (e.text.equals("\n")) {
-      int indent = getCurrentIndent();
-      char[] chars = new char[indent + 1];
-      chars[0] = '\n';
-      for (int i = 0; i < indent; i++)
-        chars[i + 1] = ' ';
-      e.text = new String(chars);
-    }
-  }
-
   public void widgetDefaultSelected(SelectionEvent event) {
   }
 
@@ -916,7 +959,11 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     out.print("</TextEditor>");
   }
 
-  public void terminates(String end, String start) {
-    terminals.add(new Terminal(end, start));
+  public boolean isShowingSignature() {
+    return signature.isVisible();
+  }
+
+  public void setShowingSignature(boolean b) {
+    signature.setIsVisible(b);
   }
 }

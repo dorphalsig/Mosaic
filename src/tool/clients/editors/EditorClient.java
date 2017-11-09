@@ -566,7 +566,20 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       ast(message);
     else if (message.hasName("addTerminates"))
       terminates(message);
+    else if (message.hasName("setSignature"))
+      setSignature(message);
     else super.sendMessage(message);
+  }
+
+  private void setSignature(Message message) {
+    String id = message.args[0].strValue();
+    Value[] entries = message.args[1].values;
+    final ITextEditor editor = editors.get(id);
+    runOnDisplay(new Runnable() {
+      public void run() {
+        editor.setSignature(entries);
+      }
+    });
   }
 
   private void terminates(Message message) {

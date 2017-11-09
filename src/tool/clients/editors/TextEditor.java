@@ -1019,4 +1019,8 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
   public void terminates(String end, String start) {
     
   }
+
+  public void setSignature(Value[] entries) {
+    
+  }
 }

@@ -17,7 +17,7 @@ public class Tray {
   }
 
   public void paint(GC gc, int width, int height) {
-    int trayWidth = TOOL_WIDTH * tools.size();
+    int trayWidth = TOOL_WIDTH * tools.size() + (tools.size() * SEPARATE);
     int x = width - trayWidth;
     int y = height - TOOL_HEIGHT;
     for (Tool tool : tools) {
@@ -27,7 +27,7 @@ public class Tray {
   }
 
   public Tool selectTool(int x0, int y0, int width, int height) {
-    int trayWidth = TOOL_WIDTH * tools.size();
+    int trayWidth = TOOL_WIDTH * tools.size() + (tools.size() * SEPARATE);
     int x = width - trayWidth;
     int y = height - TOOL_HEIGHT;
     for (Tool tool : tools) {
