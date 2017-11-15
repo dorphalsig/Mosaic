@@ -650,17 +650,21 @@ public class Diagram implements Display {
   
   
 
-  transient static boolean dontSelectNextWaypoint = false;
+  transient static boolean dontSelectNextWaypoint = false; // set, when a new Edge is created shortly before
   public void newWaypoint(String parentId, String id, int index, int x, int y, boolean skipSelection) {
     for (Edge edge : edges) {
       Waypoint w = edge.newWaypoint(parentId, id, index, x, y);
       if (w != null) {
         deselectAll();
-        if(!dontSelectNextWaypoint && !skipSelection) {
+//        if(!dontSelectNextWaypoint && !skipSelection) {
+//        	mode = MouseMode.SELECTED;
+//        	select(w);
+//        } else {
+//        	dontSelectNextWaypoint = false;
+//        }
+        if(render == 0) {
         	mode = MouseMode.SELECTED;
         	select(w);
-        } else {
-        	dontSelectNextWaypoint = false;
         }
       }
     }
@@ -1296,8 +1300,6 @@ public class Diagram implements Display {
 	    } else if (event.count == 2 && isLeft(event)) {
 	      mode = MouseMode.DOUBLE_CLICK;
 	      storeLastXY(event.x, event.y);
-//	      lastX = event.x;
-//	      lastY = event.y;
 	      redraw();
 	    }
 	  }
@@ -1306,8 +1308,6 @@ public class Diagram implements Display {
 	    if (nodeCreationType == null && edgeCreationType == null) {
 	      select(event.stateMask, event.x, event.y, false);
 	      storeLastXY(event.x, event.y);
-//	      lastX = event.x;
-//	      lastY = event.y;
 	      redraw();
 	    } else if (edgeCreationType != null) {
 	      deselectAll();
@@ -1320,8 +1320,6 @@ public class Diagram implements Display {
 	        firstY = y;
 		    storeFirstXY(x, y);
 		    storeLastXY(x, y);
-//		      lastX = x;
-//		      lastY = y;
 	        mode = MouseMode.NEW_EDGE;
 	      }
 	      redraw();
@@ -1600,32 +1598,22 @@ public class Diagram implements Display {
 //	    }
 	    if (mode == MouseMode.NEW_EDGE) {
 	      storeLastXY(event.x, event.y);
-//	      lastX = event.x;
-//	      lastY = event.y;
 	      redraw();
 	    }
 	    if (movingEdgeEnd()) {
 	      storeLastXY(event.x, event.y);
-//	      lastX = event.x;
-//	      lastY = event.y;
 	      redraw();
 	    }
 	    if (mode == MouseMode.NONE) {
 	      storeLastXY(event.x, event.y);
-//	      lastX = event.x;
-//	      lastY = event.y;
 	      redraw();
 	    }
 	    if (mode == MouseMode.RESIZE_BOTTOM_RIGHT) {
 		  storeLastXY(event.x, event.y);
-//		  lastX = event.x;
-//	      lastY = event.y;
 	      redraw();
 	    }
 	    if (mode == MouseMode.RUBBER_BAND) {
 		  storeLastXY(event.x, event.y);
-//		  lastX = event.x;
-//		  lastY = event.y;
 	      redraw();
 	    }
 	  }
@@ -1753,7 +1741,7 @@ public void copyToClipboard(String id) {
     for (Node node : nodes) {
       if (!selected && node.contains(x, y)) {
         // If all else fails we might be selecting a node.
-        // Trying no8des last allows the other elements behind
+        // Trying nodes last allows the other elements behind
         // nodes to be selected...
         mode = MouseMode.SELECTED;
         if (!isShift && !selected(node)) deselectAll();
