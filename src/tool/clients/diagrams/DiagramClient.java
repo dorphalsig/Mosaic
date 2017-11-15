@@ -298,8 +298,8 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
 
   private void inflateDiagramEdge(String parentId, Node edge) {
     String id = XModeler.attributeValue(edge, "id");
-    int refx = Integer.parseInt(XModeler.attributeValue(edge, "refx"));
-    int refy = Integer.parseInt(XModeler.attributeValue(edge, "refy"));
+//    int refx = Integer.parseInt(XModeler.attributeValue(edge, "refx"));
+//    int refy = Integer.parseInt(XModeler.attributeValue(edge, "refy"));
 //    String source = XModeler.attributeValue(edge, "source");
 //    String target = XModeler.attributeValue(edge, "target");
     String sourcePort = XModeler.attributeValue(edge, "sourcePort");
@@ -321,7 +321,7 @@ public class DiagramClient extends Client implements CTabFolder2Listener {
     	targetY = Integer.parseInt(XModeler.attributeValue(edge, "targetY"));
     } catch (Exception ex) {}
     if(sourceX == null || sourceY == null || targetX == null || targetY == null) System.err.println("No edge termination points specified. Using centre instead");
-    newEdge(parentId, id, sourcePort, targetPort, refx, refy, sourceHead, targetHead, lineStyle, red, green, blue, sourceX, sourceY, targetX, targetY);
+    newEdge(parentId, id, sourcePort, targetPort, -1, -1, sourceHead, targetHead, lineStyle, red, green, blue, sourceX, sourceY, targetX, targetY);
     NodeList children = edge.getChildNodes();
     for (int i = 0; i < children.getLength(); i++)
       inflateEdgeElement(id, children.item(i));
