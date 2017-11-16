@@ -580,11 +580,11 @@ public int getBlue() {
 	boolean checkTargetDistance = targetNode == node;
 	if(checkSourceDistance) {
 		Point p = intercept(node, true);
-		if(distance(p.x, p.y, x, y) < 10) return true;
+		if(p != null && distance(p.x, p.y, x, y) < 10) return true;
 	}
 	if(checkTargetDistance) {
 		Point p = intercept(node, false);
-		if(distance(p.x, p.y, x, y) < 10) return true;
+		if(p != null && distance(p.x, p.y, x, y) < 10) return true;
 	}	
 	return false;
   }
