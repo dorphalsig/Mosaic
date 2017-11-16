@@ -444,10 +444,10 @@ public class Diagram implements Display {
     Node e1Target = e1.getTargetNode();
     Node e2Source = e2.getSourceNode();
     Node e2Target = e2.getTargetNode();
-    Point source1 = e1.intercept(e1Source);
-    Point target1 = e1.intercept(e1Target);
-    Point source2 = e2.intercept(e2Source);
-    Point target2 = e2.intercept(e2Target);
+    Point source1 = e1.intercept(e1Source, true);
+    Point target1 = e1.intercept(e1Target, false);
+    Point source2 = e2.intercept(e2Source, true);
+    Point target2 = e2.intercept(e2Target, false);
     // Intercepts are degenerately null...
     minDistance = source1 == null || source2 == null ? minDistance : Math.min(minDistance, distance(source1, source2));
     minDistance = target1 == null || target2 == null ? minDistance : Math.min(minDistance, distance(target1, target2));

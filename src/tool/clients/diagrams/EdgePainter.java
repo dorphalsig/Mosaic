@@ -225,21 +225,21 @@ public class EdgePainter {
 	  }
 
 	  private void paintHeterogeneousEdgeDecorations(GC gc, Color color, int xOffset, int yOffset) {
-	    Point topIntercept = edge.intercept(edge.targetNode, Position.TOP);
+	    Point topIntercept = edge.intercept(edge.targetNode, Position.TOP, false);
 	    if (topIntercept != null && topIntercept.x >= 0 && topIntercept.y >= 0) drawTargetDecoration(gc, color, topIntercept.x + xOffset, topIntercept.y + yOffset, edge.penultimate().x + xOffset, edge.penultimate().y + yOffset);
-	    Point bottomIntercept = edge.intercept(edge.sourceNode, Position.BOTTOM);
+	    Point bottomIntercept = edge.intercept(edge.sourceNode, Position.BOTTOM, true);
 	    if (bottomIntercept != null && bottomIntercept.x >= 0 && bottomIntercept.y >= 0) drawSourceDecoration(gc, color, bottomIntercept.x + xOffset, bottomIntercept.y + yOffset, edge.second().x + xOffset, edge.second().y + yOffset);
-	    topIntercept = edge.intercept(edge.sourceNode, Position.TOP);
+	    topIntercept = edge.intercept(edge.sourceNode, Position.TOP, true);
 	    if (topIntercept != null && topIntercept.x >= 0 && topIntercept.y >= 0) drawSourceDecoration(gc, color, topIntercept.x + xOffset, topIntercept.y + yOffset, edge.second().x + xOffset, edge.second().y + yOffset);
-	    bottomIntercept = edge.intercept(edge.targetNode, Position.BOTTOM);
+	    bottomIntercept = edge.intercept(edge.targetNode, Position.BOTTOM, false);
 	    if (bottomIntercept != null && bottomIntercept.x >= 0 && bottomIntercept.y >= 0) drawTargetDecoration(gc, color, bottomIntercept.x + xOffset, bottomIntercept.y + yOffset, edge.penultimate().x + xOffset, edge.penultimate().y + yOffset);
-	    Point leftIntercept = edge.intercept(edge.sourceNode, Position.LEFT);
+	    Point leftIntercept = edge.intercept(edge.sourceNode, Position.LEFT, true);
 	    if (leftIntercept != null && leftIntercept.x >= 0 && leftIntercept.y >= 0) drawSourceDecoration(gc, color, leftIntercept.x + xOffset, leftIntercept.y + yOffset, edge.second().x + xOffset, edge.second().y + yOffset);
-	    Point rightIntercept = edge.intercept(edge.targetNode, Position.RIGHT);
+	    Point rightIntercept = edge.intercept(edge.targetNode, Position.RIGHT, false);
 	    if (rightIntercept != null && rightIntercept.x >= 0 && rightIntercept.y >= 0) drawTargetDecoration(gc, color, rightIntercept.x + xOffset, rightIntercept.y + yOffset, edge.penultimate().x + xOffset, edge.penultimate().y + yOffset);
-	    leftIntercept = edge.intercept(edge.targetNode, Position.LEFT);
+	    leftIntercept = edge.intercept(edge.targetNode, Position.LEFT, false);
 	    if (leftIntercept != null && leftIntercept.x >= 0 && leftIntercept.y >= 0) drawTargetDecoration(gc, color, leftIntercept.x + xOffset, leftIntercept.y + yOffset, edge.penultimate().x + xOffset, edge.penultimate().y + yOffset);
-	    rightIntercept = edge.intercept(edge.sourceNode, Position.RIGHT);
+	    rightIntercept = edge.intercept(edge.sourceNode, Position.RIGHT, true);
 	    if (rightIntercept != null && rightIntercept.x >= 0 && rightIntercept.y >= 0) drawSourceDecoration(gc, color, rightIntercept.x + xOffset, rightIntercept.y + yOffset, edge.second().x + xOffset, edge.second().y + yOffset);
 	  }
 

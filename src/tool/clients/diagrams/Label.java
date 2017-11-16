@@ -45,6 +45,7 @@ public class Label implements Selectable {
     this.edge = edge;
     this.id = id;
     this.text = text;
+    if(pos == null || "".equals(pos)) System.err.println("new Label(...), argument \"pos\" empty");
     this.pos = pos == null ? "end" : pos;
     this.x = x;
     this.y = y;
@@ -62,6 +63,13 @@ public class Label implements Selectable {
     this.arrow = arrow;
     this.hidden = hidden;
     this.fill = fill;
+    
+    if(edge.sourceNode == edge.targetNode) { // if label is for assoc-self, repair for hidden label
+    	System.err.println("repos label: " + this.x + "/" + this.y + " " + edge.sourceNode.x  +"/"+edge.sourceNode.y);
+    	while(edge.sourceNode.contains(this.getAbsoluteX() , this.getAbsoluteY())) {
+    		this.x+=10; this.y+=10;
+    	}
+    }
     
     //test
     {
@@ -365,7 +373,9 @@ public class Label implements Selectable {
 	      Point source = edge.sourceIntercept();
 	      Point target = edge.targetIntercept();
 	      if (source != null && target != null) {
-	        int startX = pos.equals("start") ? source.x : pos.equals("end") ? target.x : (target.x + source.x) / 2;
+	        int startX = pos.equals("start") ? source.x 
+	        		   : pos.equals("end")   ? target.x 
+	        				                 : (target.x + source.x) / 2;
 	        int startY = pos.equals("start") ? source.y : pos.equals("end") ? target.y : (target.y + source.y) / 2;
 	        gc.drawLine(startX, startY, getAbsoluteX() - 2, getAbsoluteY() - 2);
 	      }

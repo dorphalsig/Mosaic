@@ -76,7 +76,8 @@ public int getBlue() {
     return Math.abs((x - A.x) * (B.y - A.y) - (y - A.y) * (B.x - A.x)) / normalLength;
   }
 
-  /*PACKAGE ACCESS*/ Edge(String id, Node sourceNode, Port sourcePort, 
+  /*PACKAGE ACCESS*/ Edge(String id, 
+		  Node sourceNode, Port sourcePort, 
 		  int sourceX, int sourceY, 
 		  Node targetNode, Port targetPort, 
 		  int targetX, int targetY, 
@@ -85,8 +86,6 @@ public int getBlue() {
 		  int lineStyle, 
 		  int red, int green, int blue) {
     super();
-    System.err.println("sourceHead: " + sourceHead);
-    System.err.println("targetHead: " + targetHead);
     this.id = id;
     this.sourceNode = sourceNode;
     this.sourcePort = sourcePort;
@@ -479,26 +478,32 @@ public int getBlue() {
   /////// INTERCEPT //////
  
   /*PACKAGE ACCESS*/ Point targetIntercept() { // used by Label
-    return intercept(targetNode);
+    return intercept(targetNode, false);
   }
   
   /*PACKAGE ACCESS*/ Point sourceIntercept() { // used by Label
-    return intercept(sourceNode);
+    return intercept(sourceNode, true);
   }
 
-  /*PACKAGE ACCESS*/ Point intercept(Node node) {
-    Point p = intercept(node, Position.TOP);
-    p = p == null ? intercept(node, Position.LEFT) : p;
-    p = p == null ? intercept(node, Position.RIGHT) : p;
-    p = p == null ? intercept(node, Position.BOTTOM) : p;
+  /*PACKAGE ACCESS*/ Point intercept(Node node, boolean isSourceEnd) {
+    Point p = intercept(node, Position.TOP, isSourceEnd);
+    p = p == null ? intercept(node, Position.LEFT, isSourceEnd) : p;
+    p = p == null ? intercept(node, Position.RIGHT, isSourceEnd) : p;
+    p = p == null ? intercept(node, Position.BOTTOM, isSourceEnd) : p;
     return p;
   }
   
   enum Position{TOP, BOTTOM, LEFT, RIGHT}
   
-  /*PACKAGE ACCESS*/ Point intercept(Node node, Position position) {
-	  Waypoint firstOrLast = node.contains(start()) ? start() : end();
-	  Waypoint secondOrPenultimate = node.contains(start()) ? second() : penultimate();
+  /*PACKAGE ACCESS*/ Point intercept(Node node, Position position, boolean isSourceEnd) { 
+	  /* Find the point where the edge crosses the box's boundary.
+	     If the edge is between two different nodes, there is only one solution.
+	     If the edge is a loop, there are two, distinguishable as source and target
+	     It is tried to find a point where the edge meets the border which is guessed by position.
+	     The point, if found, or null is returned.
+	  */
+	  Waypoint firstOrLast = isSourceEnd ? start() : end();
+	  Waypoint secondOrPenultimate = isSourceEnd ? second() : penultimate();
 	  return intercept(node, firstOrLast, secondOrPenultimate, position);
   }
 
@@ -567,13 +572,21 @@ public int getBlue() {
   ///////// NEAR /////////
   
   public boolean near(Node node, int x, int y) {
-    Point p = intercept(node, Position.TOP);
-    p = p == null ? intercept(node, Position.BOTTOM) : p;
-    p = p == null ? intercept(node, Position.LEFT) : p;
-    p = p == null ? intercept(node, Position.RIGHT) : p;
-    if (p != null)
-      return distance(p.x, p.y, x, y) < 10;
-    else return false;
+	  /* We don't know if x/y is near source or target. 
+	   * We try to find out and decide then.
+	   * Could be both (assoc-self) or none (wrong node)?
+	   */
+	boolean checkSourceDistance = sourceNode == node;
+	boolean checkTargetDistance = targetNode == node;
+	if(checkSourceDistance) {
+		Point p = intercept(node, true);
+		if(distance(p.x, p.y, x, y) < 10) return true;
+	}
+	if(checkTargetDistance) {
+		Point p = intercept(node, false);
+		if(distance(p.x, p.y, x, y) < 10) return true;
+	}	
+	return false;
   }
   
   private double distance(int x1, int y1, int x2, int y2) {
