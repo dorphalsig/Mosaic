@@ -120,6 +120,7 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
   Vector<VarInfo>         varInfo        = new Vector<VarInfo>();
   Vector<Tooltip>         tooltips       = new Vector<Tooltip>();
   Vector<Terminal>        terminals      = new Vector<Terminal>();
+  Vector<Action>          actions        = new Vector<Action>();
   Stack<Vector<Terminal>> tStack         = new Stack<Vector<Terminal>>();
   int[]                   terminal       = new int[] { -1, -1, -1, -1 };
   AST                     ast            = null;
@@ -484,6 +485,7 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     varInfo.clear();
     tooltips.clear();
     signature.clear();
+    actions.clear();
     clearErrors();
     checkBracket(event);
     checkTerminals(event);
@@ -685,10 +687,21 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     int y = event.y;
     Tool tool = selectTool(x, y);
     if (tool == null) {
-      if (mouseOverVar != null) {
-        text.setSelection(mouseOverVar.getDecStart());
-      } else MenuClient.popup(id, x, y);
+      Action action = getAction(x, y);
+      if (action == null) {
+        if (mouseOverVar != null) {
+          text.setSelection(mouseOverVar.getDecStart());
+        } else MenuClient.popup(id, x, y);
+      } else action.perform(x, y);
     } else tool.rightClick(x, y);
+  }
+
+  private Action getAction(int x, int y) {
+    int offset = text.getOffsetAtLocation(new Point(x, y));
+    for (Action action : actions) {
+      if (action.containsOffset(offset)) return action;
+    }
+    return null;
   }
 
   public void save() {
@@ -965,5 +978,34 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
 
   public void setShowingSignature(boolean b) {
     signature.setIsVisible(b);
+  }
+
+  public void action(String name, Value[] args, int charStart, int charEnd) {
+    Object[] values = new Object[args.length];
+    for (int i = 0; i < values.length; i++) {
+      switch (args[i].type) {
+        case Value.INT:
+          values[i] = args[i].intValue;
+          break;
+        case Value.BOOL:
+          values[i] = args[i].boolValue;
+          break;
+        case Value.STRING:
+          values[i] = args[i].strValue();
+          break;
+        case Value.FLOAT:
+          values[i] = args[i].floatValue;
+          break;
+        case Value.BYTE:
+          values[i] = args[i].intValue;
+          break;
+        case Value.NEG:
+          values[i] = -args[i].intValue;
+          break;
+        default:
+          throw new Error("unknown action arg type: " + args[i]);
+      }
+    }
+    actions.add(new Action(name, values, charStart, charEnd));
   }
 }

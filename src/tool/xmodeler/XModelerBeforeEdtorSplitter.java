@@ -39,6 +39,7 @@ import tool.clients.dialogs.notifier.NotificationType;
 import tool.clients.dialogs.notifier.NotifierDialog;
 import tool.clients.editors.BrowserResizeListener;
 import tool.clients.editors.EditorClient;
+import tool.clients.editors.EditorResizeListener;
 import tool.clients.editors.PropertyResizeListener;
 import tool.clients.forms.FormsClient;
 import tool.clients.menus.MenuClient;
@@ -48,7 +49,7 @@ import tool.console.Console;
 import tool.console.ConsoleClient;
 import xos.OperatingSystem;
 
-public class XModeler {
+public class XModelerBeforeEdtorSplitter {
 
   // XModeler is a tool that controls and is controlled by the XMF VM that runs
   // on the XMF operating system.
@@ -65,8 +66,8 @@ public class XModeler {
   static Shell           XModeler            = new Shell(SWT.BORDER | SWT.SHELL_TRIM);
   static SashForm        outerSash           = null;
   static SashForm        rightSash           = null;
-  static SplitSashForm   editorSash          = null;
-  static SplitSashForm   propertySash        = null;
+  static CTabFolder      editorTabFolder     = null;
+  static CTabFolder      propertyTabFolder   = null;
   static CTabFolder      browserTabFolder    = null;
   static Display         display             = null;
   static Menu            menuBar             = null;
@@ -407,24 +408,31 @@ public class XModeler {
     outerSash = new SashForm(XModeler, SWT.HORIZONTAL);
     browserTabFolder = new CTabFolder(outerSash, SWT.BORDER);
     rightSash = new SashForm(outerSash, SWT.VERTICAL);
-    editorSash = new SplitSashForm(rightSash);
-    propertySash = new SplitSashForm(rightSash);
-    ToolBar propertyToolbar1 = new ToolBar(propertySash.getFolder1(), SWT.HORIZONTAL | SWT.FLAT);
-    ToolBar propertyToolbar2 = new ToolBar(propertySash.getFolder2(), SWT.HORIZONTAL | SWT.FLAT);
-    propertySash.getFolder1().setTopRight(propertyToolbar1);
-    propertySash.getFolder2().setTopRight(propertyToolbar2);
+    editorTabFolder = new CTabFolder(rightSash, SWT.BORDER);
+    propertyTabFolder = new CTabFolder(rightSash, SWT.BORDER);
+    ToolBar propertyToolbar = new ToolBar(propertyTabFolder, SWT.HORIZONTAL | SWT.FLAT);
+    editorTabFolder.setMaximizeVisible(true);
+    editorTabFolder.setMinimizeVisible(true);
+    propertyTabFolder.setMaximizeVisible(true);
+    propertyTabFolder.setMinimizeVisible(true);
+    browserTabFolder.setMaximizeVisible(true);
+    browserTabFolder.setMinimizeVisible(true);
+    propertyTabFolder.setTopRight(propertyToolbar);
     ModelBrowserClient.start(browserTabFolder, SWT.LEFT);
     outerSash.setWeights(new int[] { 1, 5 });
-    EditorClient.start(editorSash.getFolder1(), SWT.BORDER);
+    EditorClient.start(editorTabFolder, SWT.BORDER);
+    editorTabFolder.addCTabFolder2Listener(new EditorResizeListener());
+    propertyTabFolder.addCTabFolder2Listener(new PropertyResizeListener());
     browserTabFolder.addCTabFolder2Listener(new BrowserResizeListener());
-    DiagramClient.start(editorSash.getFolder1());
-    FormsClient.start(propertySash.getFolder1(), propertyToolbar1, SWT.BORDER);
-    ScreenGenerationClient.start(propertySash.getFolder1()); // BB
-    Console.start(propertySash.getFolder1());
+    DiagramClient.start(editorTabFolder);
+    FormsClient.start(propertyTabFolder, propertyToolbar, SWT.BORDER);
+    ScreenGenerationClient.start(propertyTabFolder); // BB
+    Console.start(propertyTabFolder);
     rightSash.setWeights(new int[] { 2, 1 });
     XModeler.open();
 
     XModeler.getDisplay().timerExec(3000, new Runnable() {
+
       public void run() {
         Menu exitMenu = new Menu(menuBar);
         MenuItem exit = new MenuItem(menuBar, SWT.CASCADE);
@@ -483,7 +491,7 @@ public class XModeler {
 
   public static void maximiseEditors() {
     outerSash.setMaximizedControl(rightSash);
-    rightSash.setMaximizedControl(editorSash);
+    rightSash.setMaximizedControl(editorTabFolder);
   }
 
   public static void minimiseEditors() {
@@ -493,7 +501,7 @@ public class XModeler {
 
   public static void maximiseProperties() {
     outerSash.setMaximizedControl(rightSash);
-    rightSash.setMaximizedControl(propertySash);
+    rightSash.setMaximizedControl(propertyTabFolder);
   }
 
   public static void minimiseProperties() {

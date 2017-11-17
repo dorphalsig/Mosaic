@@ -4,6 +4,7 @@ import java.io.PrintStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.Stack;
 import java.util.Vector;
@@ -111,7 +112,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
         int blue = Integer.parseInt(colours[1]);
         int green = Integer.parseInt(colours[2]);
         addMultilineRule(id, start, end, red, blue, green);
-      } else System.err.println("unknown color: " + color);
+      } else System.err.println("unknown color: " + Arrays.toString(colours));
     }
   }
 
@@ -187,7 +188,15 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       addWordRuleColor(id, text, 50, 50, 255);
     else if (color.equals("torquoise"))
       addWordRuleColor(id, text, 0, 120, 120);
-    else System.err.println("unknown color: " + color);
+    else {
+      String[] colours = color.split(",");
+      if (colours.length == 3) {
+        int red = Integer.parseInt(colours[0]);
+        int blue = Integer.parseInt(colours[1]);
+        int green = Integer.parseInt(colours[2]);
+        addWordRuleColor(id, text, red, blue, green);
+      } else System.err.println("unknown color: " + Arrays.toString(colours));
+    }
   }
 
   public Value callMessage(Message message) {
@@ -568,7 +577,23 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       terminates(message);
     else if (message.hasName("setSignature"))
       setSignature(message);
+    else if (message.hasName("action"))
+      action(message);
     else super.sendMessage(message);
+  }
+
+  private void action(Message message) {
+    String id = message.args[0].strValue();
+    String name = message.args[1].strValue();
+    Value[] args = message.args[2].values;
+    int charStart = message.args[3].intValue;
+    int charEnd = message.args[4].intValue;
+    final ITextEditor editor = editors.get(id);
+    runOnDisplay(new Runnable() {
+      public void run() {
+        editor.action(name,args,charStart,charEnd);
+      }
+    });
   }
 
   private void setSignature(Message message) {

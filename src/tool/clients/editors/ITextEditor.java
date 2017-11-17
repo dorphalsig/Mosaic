@@ -51,4 +51,6 @@ public interface ITextEditor {
 
   void setSignature(Value[] entries);
 
+  void action(String name, Value[] args, int charStart, int charEnd);
+
 }
