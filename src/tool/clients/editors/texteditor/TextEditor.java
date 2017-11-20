@@ -697,9 +697,12 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
   }
 
   private Action getAction(int x, int y) {
-    int offset = text.getOffsetAtLocation(new Point(x, y));
-    for (Action action : actions) {
-      if (action.containsOffset(offset)) return action;
+    try {
+      int offset = text.getOffsetAtLocation(new Point(x, y));
+      for (Action action : actions) {
+        if (action.containsOffset(offset)) return action;
+      }
+    } catch (Exception e) {
     }
     return null;
   }
