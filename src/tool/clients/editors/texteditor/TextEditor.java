@@ -585,24 +585,27 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
   }
 
   private void paintErrors(GC gc) {
-    int bottomIndex = JFaceTextUtil.getPartialBottomIndex(text);
-    int topIndex = JFaceTextUtil.getPartialTopIndex(text);
-    int height = text.getFont().getFontData()[0].getHeight();
-    Color c = gc.getForeground();
-    gc.setForeground(RED);
-    for (FileError e : errors) {
-      int start = e.getStart();
-      int end = e.getEnd();
-      if (validOffset(start) && validOffset(end)) {
-        int line = text.getLineAtOffset(start);
-        if (line >= topIndex && line <= bottomIndex) {
-          org.eclipse.swt.graphics.Point pStart = text.getLocationAtOffset(start);
-          org.eclipse.swt.graphics.Point pEnd = text.getLocationAtOffset(end);
-          gc.drawLine(pStart.x, pStart.y + height, pEnd.x, pEnd.y + height);
+    try {
+      int bottomIndex = JFaceTextUtil.getPartialBottomIndex(text);
+      int topIndex = JFaceTextUtil.getPartialTopIndex(text);
+      int height = text.getFont().getFontData()[0].getHeight();
+      Color c = gc.getForeground();
+      gc.setForeground(RED);
+      for (FileError e : errors) {
+        int start = e.getStart();
+        int end = e.getEnd();
+        if (validOffset(start) && validOffset(end)) {
+          int line = text.getLineAtOffset(start);
+          if (line >= topIndex && line <= bottomIndex) {
+            org.eclipse.swt.graphics.Point pStart = text.getLocationAtOffset(start);
+            org.eclipse.swt.graphics.Point pEnd = text.getLocationAtOffset(end);
+            gc.drawLine(pStart.x, pStart.y + height, pEnd.x, pEnd.y + height);
+          }
         }
       }
+      gc.setForeground(c);
+    } catch (Exception e) {
     }
-    gc.setForeground(c);
   }
 
   private void paintHover(GC gc) {
@@ -615,11 +618,14 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
   }
 
   private void paintSignature(GC gc) {
-    int topIndex = JFaceTextUtil.getPartialTopIndex(text);
-    Point p = text.getLocationAtOffset(topIndex);
-    Rectangle r = text.getClientArea();
-    if (signature.isVisible()) {
-      signature.paint(r.width, gc);
+    try {
+      int topIndex = JFaceTextUtil.getPartialTopIndex(text);
+      Point p = text.getLocationAtOffset(topIndex);
+      Rectangle r = text.getClientArea();
+      if (signature.isVisible()) {
+        signature.paint(r.width, gc);
+      }
+    } catch (Exception e) {
     }
   }
 

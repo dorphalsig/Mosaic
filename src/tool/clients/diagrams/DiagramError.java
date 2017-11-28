@@ -1,6 +1,6 @@
 package tool.clients.diagrams;
 
-import java.awt.Rectangle;
+import java.util.Vector;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
@@ -9,6 +9,7 @@ import org.eclipse.swt.graphics.GC;
 public class DiagramError {
 
   private static final int LINE_WIDTH = 1;
+  private static final int PAD        = 2;
 
   public static String getLongestString(String[] array) {
     int maxLength = 0;
@@ -22,12 +23,12 @@ public class DiagramError {
     return longestString;
   }
 
-  String id;
-  String error;
+  String         id;
+  Vector<String> errors = new Vector<String>();
 
   public DiagramError(String id, String error) {
     this.id = id;
-    this.error = error;
+    errors.add(error);
   }
 
   public static int getLineWidth() {
@@ -38,13 +39,9 @@ public class DiagramError {
     return id;
   }
 
-  public String getError() {
-    return error;
-  }
-
   public void paint(GC gc, Diagram diagram) {
     org.eclipse.swt.graphics.Rectangle r = diagram.scroller.getClientArea();
-    drawErrorBox(gc, 0, r.height);
+    drawErrorBox(gc, PAD, r.height - PAD);
   }
 
   protected int getWidth(GC gc) {
@@ -52,7 +49,15 @@ public class DiagramError {
   }
 
   private String[] getLines() {
-    return ("Diagram Error:-------------::" + error).split(":");
+    String s = "Diagram Error:-------------:";
+    for (int i = 0; i < errors.size(); i++) {
+      String[] ss = errors.get(i).split(":");
+      s = s + ":(" + (i + 1) + ") " + ss[0];
+      for (int j = 1; j < ss.length; j++) {
+        s = s + ":    " + ss[j];
+      }
+    }
+    return s.split(":");
   }
 
   protected void drawErrorBox(GC gc, int baseX, int baseY) {
@@ -88,7 +93,7 @@ public class DiagramError {
   }
 
   public void addError(String e) {
-    error = error + "::" + e;
+    errors.add(e);
   }
 
   public Node selectableNode() {
