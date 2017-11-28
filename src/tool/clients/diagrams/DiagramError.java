@@ -8,7 +8,7 @@ import org.eclipse.swt.graphics.GC;
 
 public class DiagramError {
 
-  private static final int LINE_WIDTH = 3;
+  private static final int LINE_WIDTH = 1;
 
   public static String getLongestString(String[] array) {
     int maxLength = 0;
@@ -76,7 +76,7 @@ public class DiagramError {
       x = baseX;
       y += height;
     }
-    gc.setForeground(Diagram.BLUE);
+    gc.setForeground(Diagram.RED);
     gc.setLineWidth(LINE_WIDTH);
     gc.setLineJoin(SWT.JOIN_ROUND);
     gc.drawRectangle(baseX, baseY - boxHeight, boxWidth, boxHeight);
