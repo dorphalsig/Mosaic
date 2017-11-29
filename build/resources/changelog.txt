@@ -1,3 +1,11 @@
+=== Version 1.0.9 ===== 29.11.2017
+- diagram repairs
+  - attribute and association edges
+  - diagram created from xmf
+  - box alignment
+- text editor syntax highlighting and other coding support
+- live diagram constraint checker
+
 === Version 1.0.8 ===== 30.10.2017
 - new prototypical texteditor
 - changes to compiler
