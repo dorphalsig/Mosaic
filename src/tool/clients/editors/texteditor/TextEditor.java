@@ -4,7 +4,10 @@ import java.io.PrintStream;
 import java.util.Stack;
 import java.util.Vector;
 
+import org.eclipse.jface.text.Document;
+import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.JFaceTextUtil;
+import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.window.DefaultToolTip;
 import org.eclipse.jface.window.ToolTip;
 import org.eclipse.swt.SWT;

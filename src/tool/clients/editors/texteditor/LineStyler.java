@@ -1,6 +1,6 @@
 package tool.clients.editors.texteditor;
 
-import java.util.HashSet;
+import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.Vector;
 
@@ -58,41 +58,8 @@ public class LineStyler {
     } else return null;
   }
 
-  private java.util.List<StyleRange> lineCreateStyle(LineStyleEvent event, int start, int end) {
-    java.util.List<StyleRange> styles = new java.util.ArrayList<StyleRange>();
-    String s = editor.getText().getText();
-    for (int i = start; i < end; i++) {
-      int prevChar = (event.lineOffset + i == 0) ? '\n' : s.charAt(event.lineOffset + i - 1);
-      for (WordRule rule : wordRules) {
-        StyleRange style = rule.match(s, event.lineOffset + i, prevChar);
-        if (style != null) {
-          styles.add(style);
-          i += style.length;
-          break;
-        }
-      }
-    }
-    return styles;
-  }
-
-  public void oldlineGetStyle(LineStyleEvent event) {
-    // MultiLineStyle mls = getMultiLineStyle(event.lineOffset);
-    int line = editor.getText().getLineAtOffset(event.lineOffset);
-    event.bullet = getBullet(line);
-    event.bulletIndex = line;
-    if (cache.containsKey(line)) {
-      event.styles = cache.get(line);
-    } else {
-      java.util.List<StyleRange> list = lineCreateStyle(event, 0, event.lineText.length());
-      StyleRange[] ranges = list.toArray(new StyleRange[0]);
-      cache.put(line, ranges);
-      event.styles = ranges;
-    }
-  }
-
   public void lineGetStyle(LineStyleEvent event) {
     int line = editor.getText().getLineAtOffset(event.lineOffset);
-    int originalLine = line;
     String s = editor.getText().getText();
     event.bullet = getBullet(line);
     event.bulletIndex = line;
