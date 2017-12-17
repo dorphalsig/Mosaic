@@ -317,24 +317,28 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
   }
 
   private boolean errorToolTip(int x, int y) {
-    if (mouseNearParseError(x, y)) {
-      org.eclipse.swt.graphics.Point p = text.getLocationAtOffset(errorPosition);
-      setToolTip(p.x, p.y, errorMessage);
-      return true;
-    } else {
-      for (FileError e : errors) {
-        org.eclipse.swt.graphics.Point p = text.getLocationAtOffset(e.getStart());
-        int x2 = p.x;
-        int y2 = p.y;
-        int dx = x - x2;
-        int dy = y - y2;
-        double distance = Math.sqrt((dx * dx) + (dy * dy));
-        if (distance < 20) {
-          p = text.getLocationAtOffset(e.getStart());
-          setToolTip(p.x, p.y, e.getMessage());
-          return true;
+    try {
+      if (mouseNearParseError(x, y)) {
+        org.eclipse.swt.graphics.Point p = text.getLocationAtOffset(errorPosition);
+        setToolTip(p.x, p.y, errorMessage);
+        return true;
+      } else {
+        for (FileError e : errors) {
+          org.eclipse.swt.graphics.Point p = text.getLocationAtOffset(e.getStart());
+          int x2 = p.x;
+          int y2 = p.y;
+          int dx = x - x2;
+          int dy = y - y2;
+          double distance = Math.sqrt((dx * dx) + (dy * dy));
+          if (distance < 20) {
+            p = text.getLocationAtOffset(e.getStart());
+            setToolTip(p.x, p.y, e.getMessage());
+            return true;
+          }
         }
+        return false;
       }
+    } catch (Exception e) {
       return false;
     }
   }
@@ -844,7 +848,9 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
   }
 
   public void showLine(int line) {
-    text.setCaretOffset(text.getOffsetAtLine(line));
+    int offset = text.getOffsetAtLine(line);
+    text.setCaretOffset(offset);
+    setSelection(offset);
     redraw();
   }
 
