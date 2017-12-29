@@ -4,10 +4,7 @@ import java.io.PrintStream;
 import java.util.Stack;
 import java.util.Vector;
 
-import org.eclipse.jface.text.Document;
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.JFaceTextUtil;
-import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.window.DefaultToolTip;
 import org.eclipse.jface.window.ToolTip;
 import org.eclipse.swt.SWT;
@@ -74,6 +71,7 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
   private static final Color BLACK             = Display.getDefault().getSystemColor(SWT.COLOR_BLACK);
   private static final Color BRACKET_HIGHLIGHT = Display.getDefault().getSystemColor(SWT.COLOR_BLACK);
   private static final Color VAR_DEC           = Display.getDefault().getSystemColor(SWT.COLOR_DARK_MAGENTA);
+  private static final Font  DEFAULT_FONT      = new Font(XModeler.getXModeler().getDisplay(), new FontData("Monaco", 10, SWT.NO));
 
   public static void drawArrow(GC gc, int x1, int y1, int x2, int y2, double arrowLength, double arrowAngle, Color arrowColor) {
     double theta = Math.atan2(y2 - y1, x2 - x1);
@@ -282,11 +280,8 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
   private void createText(CTabFolder parent, boolean editable, String s) {
     text = new StyledText(parent, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
     Color bg = Display.getDefault().getSystemColor(SWT.COLOR_WHITE);
-    FontData[] fontData = Display.getDefault().getSystemFont().getFontData();
-    this.fontData = fontData[0];
-    XModeler.getXModeler().getDisplay().loadFont("dejavu/DejaVuSansMono.ttf");
-    this.fontData.setName("DejaVu Sans Mono");
-    text.setFont(new Font(XModeler.getXModeler().getDisplay(), fontData));
+    text.setFont(DEFAULT_FONT);
+    fontData = DEFAULT_FONT.getFontData()[0];
     GC gc = new GC(text);
     gc.setTextAntialias(SWT.ON);
     text.setText(s);

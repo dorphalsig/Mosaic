@@ -5,8 +5,10 @@ import java.util.Vector;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Display;
 
 public class AST {
@@ -65,25 +67,38 @@ public class AST {
 
   public void paint(GC gc) {
     try {
-      Color c = gc.getForeground();
-      gc.setForeground(RED);
-      int height = gc.getFontMetrics().getHeight();
-      int gap = 2;
-      int width = 5;
-      Point pStart = text.getLocationAtOffset(charStart);
-      Point pEnd = text.getLocationAtOffset(charEnd);
-
-      gc.drawLine(pStart.x-gap, pStart.y + height, pStart.x-gap, pStart.y);
-      gc.drawLine(pStart.x-gap, pStart.y + height, pStart.x + width, pStart.y + height);
-      gc.drawLine(pStart.x-gap, pStart.y, pStart.x + width, pStart.y);
-
-      gc.drawLine(pEnd.x+gap, pEnd.y + height, pEnd.x+gap, pEnd.y);
-      gc.drawLine(pEnd.x+gap, pEnd.y + height, pEnd.x - width, pEnd.y + height);
-      gc.drawLine(pEnd.x+gap, pEnd.y, pEnd.x - width, pEnd.y);
-
-      gc.setForeground(c);
+      paintDelimiters(gc);
     } catch (Exception e) {
     }
+  }
+
+  public void paintDelimiters(GC gc) {
+
+    // Paint delimiters for the AST element...
+
+    Color c = gc.getForeground();
+    gc.setForeground(RED);
+    int height = gc.getFontMetrics().getHeight();
+    int gap = 2;
+    int width = 5;
+    int lStart = text.getLineAtOffset(charStart);
+    int lEnd = text.getLineAtOffset(charEnd);
+    Point pStart = text.getLocationAtOffset(charStart);
+    Point pEnd = text.getLocationAtOffset(charEnd);
+    if (lStart != lEnd) {
+      gc.drawLine(pStart.x, pStart.y + height/2, pStart.x - gap, pStart.y + height/2);
+      gc.drawLine(pStart.x - gap, pStart.y + height/2, pStart.x -gap, pEnd.y + height/2);
+      gc.drawLine(pStart.x - gap, pEnd.y + height/2, pStart.x, pEnd.y + height/2);
+    } else {
+      gc.drawLine(pStart.x - gap, pStart.y + height, pStart.x - gap, pStart.y);
+      gc.drawLine(pStart.x - gap, pStart.y + height, pStart.x + width, pStart.y + height);
+      gc.drawLine(pStart.x - gap, pStart.y, pStart.x + width, pStart.y);
+
+      gc.drawLine(pEnd.x + gap, pEnd.y + height, pEnd.x + gap, pEnd.y);
+      gc.drawLine(pEnd.x + gap, pEnd.y + height, pEnd.x - width, pEnd.y + height);
+      gc.drawLine(pEnd.x + gap, pEnd.y, pEnd.x - width, pEnd.y);
+    }
+    gc.setForeground(c);
   }
 
 }
