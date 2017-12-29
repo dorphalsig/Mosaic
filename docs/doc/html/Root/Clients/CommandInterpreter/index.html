@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+CommandInterpreter
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>CommandInterpreter</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+No Documentation Specified
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../Root/IO/XMLOutput/index.html">XMLOutput</A>
+,<A HREF="../../../Root/XCore/Contained/index.html">Contained</A>
+,<A HREF="../../../Root/IO/XMLData/index.html">XMLData</A>
+,<A HREF="../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+<TR><TD>CommandInterpreter(output)</TD><TD> No Documentation </TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR><TD><B>buffer</B></TD><TD><A HREF="../../../Root/XCore/Buffer/index.html">Buffer<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>bufferPos</B></TD><TD><A HREF="../../../Root/XCore/Integer/index.html">Integer<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>debug</B></TD><TD><A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>flush</B></TD><TD><A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>output</B></TD><TD><A HREF="../../../Root/IO/OutputChannel/index.html">OutputChannel<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>packetSize</B></TD><TD><A HREF="../../../Root/XCore/Integer/index.html">Integer<A></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/IO/XMLOutput/index.html">XMLOutput</A>: debug, name, output. <BR><B>From</B> <A HREF="../../../Root/XCore/Contained/index.html">Contained</A>: owner. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#allocateId">allocateId</a>(element:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#call">call</a>(message:<A HREF="../../../Root/XCore/String/index.html">String<A>,args:<A HREF="../../../Root/XCore/Element/index.html">Seq(Element)<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#debug">debug</a>(debug:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#debug">debug</a>(message:<A HREF="../../../Root/XCore/String/index.html">String<A>,args:<A HREF="../../../Root/XCore/Element/index.html">Seq(Element)<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#flush">flush</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setFlush">setFlush</a>(v:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setPacketSize">setPacketSize</a>(size:<A HREF="../../../Root/XCore/Integer/index.html">Integer<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#toString">toString</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#writeCommand">writeCommand</a>(message:<A HREF="../../../Root/XCore/String/index.html">String<A>,args:<A HREF="../../../Root/XCore/Element/index.html">Seq(Element)<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/IO/XMLOutput/index.html">XMLOutput</A>: chars, createOutput, debug, endDocument, endElement, flush, startDocument, startElement. <BR><B>From</B> <A HREF="../../../Root/XCore/Contained/index.html">Contained</A>: addTo, allOwners, deleteRecursive, delete_client, delete_client_check, delete_client_redirect, getDefaultClipboardSource, owner, removeFromOwner, setOwner. <BR><B>From</B> <A HREF="../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="allocateId"/><FONT FACE="Courier" SIZE="1">@Operation&#160;allocateId(element&#160;:&#160;ClientElement):XCore::Element<br>&#160;&#160;if&#160;owner&#160;&lt;&gt;&#160;null<br>&#160;&#160;then&#160;owner.allocateId(element)<br>&#160;&#160;else&#160;self.error("Command&#160;interpreter&#160;has&#160;not&#160;owner!")<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="call"/><FONT FACE="Courier" SIZE="1">@Operation&#160;call(message&#160;:&#160;String,args&#160;:&#160;Seq(Element)):XCore::Element<br>&#160;&#160;self.debug("CALL&#160;~S&lt;,&gt;~{&lt;,&gt;~;~S~}&lt;!&gt;~%",Seq{message,args});<br>&#160;&#160;let&#160;v&#160;=&#160;Vector(1&#160;+&#160;args-&gt;size)<br>&#160;&#160;in&#160;v.put(0,message);<br>&#160;&#160;&#160;&#160;&#160;@Count&#160;x&#160;from&#160;0&#160;to&#160;args-&gt;size&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;v.put(x&#160;+&#160;1,args-&gt;at(x))<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;Kernel_call(owner.name,v)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="debug"/><FONT FACE="Courier" SIZE="1">@Operation&#160;debug(debug&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.debug&#160;:=&#160;debug<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="debug"/><FONT FACE="Courier" SIZE="1">@Operation&#160;debug(message&#160;:&#160;String,args&#160;:&#160;Seq(Element)):XCore::Element<br>&#160;&#160;if&#160;debug<br>&#160;&#160;then&#160;format(stdout,message,args)<br>&#160;&#160;else&#160;false<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="flush"/><FONT FACE="Courier" SIZE="1">@Operation&#160;flush():XCore::Element<br>&#160;&#160;Kernel_writePacket(owner.name,buffer,bufferPos);<br>&#160;&#160;self.bufferPos&#160;:=&#160;0<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setFlush"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setFlush[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.flush&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setPacketSize"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setPacketSize(size&#160;:&#160;Integer):XCore::Element<br>&#160;&#160;self.flush();<br>&#160;&#160;self.packetSize&#160;:=&#160;size<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="toString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;toString():String<br>&#160;&#160;try<br>&#160;&#160;&#160;&#160;self.of().name.toString()&#160;+&#160;"("&#160;+&#160;if&#160;self.hasSlot("output")<br>&#160;&#160;&#160;&#160;then&#160;self.output.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"output"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;")"<br>&#160;&#160;catch(exception)<br>&#160;&#160;&#160;&#160;self.of().name&#160;+&#160;"(Constructor&#160;Error!)"<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="writeCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;writeCommand(message&#160;:&#160;String,args&#160;:&#160;Seq(Element)):XCore::Element<br>&#160;&#160;buffer.put(bufferPos,Seq{message&#160;|&#160;args});<br>&#160;&#160;self.bufferPos&#160;:=&#160;bufferPos&#160;+&#160;1;<br>&#160;&#160;if&#160;bufferPos&#160;=&#160;packetSize<br>&#160;&#160;then&#160;self.flush()<br>&#160;&#160;else&#160;false<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

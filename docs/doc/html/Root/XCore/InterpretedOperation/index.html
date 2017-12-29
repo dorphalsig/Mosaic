@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+InterpretedOperation
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>InterpretedOperation</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+
+      An interpreted operation is created when we evaluate an operation definition.
+    
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../Root/XCore/Operation/index.html">Operation</A>
+,<A HREF="../../../Root/XCore/BehaviouralFeature/index.html">BehaviouralFeature</A>
+,<A HREF="../../../Root/XCore/TypedElement/index.html">TypedElement</A>
+,<A HREF="../../../Root/XCore/DocumentedElement/index.html">DocumentedElement</A>
+,<A HREF="../../../Root/XCore/NamedElement/index.html">NamedElement</A>
+,<A HREF="../../../Root/XCore/Contained/index.html">Contained</A>
+,<A HREF="../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+<TR><TD>InterpretedOperation(name,parameters,isVarArgs,env,target,imports,documentation,body)</TD><TD> No Documentation </TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR><TD><B>arity</B></TD><TD><A HREF="../../../Root/XCore/Integer/index.html">Integer<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>body</B></TD><TD><A HREF="../../../Root/XCore/Performable/index.html">Performable<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>dynamics</B></TD><TD><A HREF="../../../Root/XCore/Element/index.html">Seq(Element)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>env</B></TD><TD><A HREF="../../../Root/XCore/Element/index.html">Seq(Element)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>imports</B></TD><TD><A HREF="../../../Root/XCore/NameSpace/index.html">Seq(NameSpace)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>isVarArgs</B></TD><TD><A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>parameters</B></TD><TD><A HREF="../../../Root/OCL/Pattern/index.html">Seq(Pattern)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>target</B></TD><TD><A HREF="../../../Root/XCore/Element/index.html">Element<A></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/TypedElement/index.html">TypedElement</A>: type. <BR><B>From</B> <A HREF="../../../Root/XCore/DocumentedElement/index.html">DocumentedElement</A>: documentation. <BR><B>From</B> <A HREF="../../../Root/XCore/NamedElement/index.html">NamedElement</A>: name. <BR><B>From</B> <A HREF="../../../Root/XCore/Contained/index.html">Contained</A>: owner. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#arity">arity</a>():<A HREF="../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#bindParams">bindParams</a>(patterns:<A HREF="../../../Root/OCL/Pattern/index.html">Seq(Pattern)<A>,values:<A HREF="../../../Root/XCore/Element/index.html">Seq(Element)<A>,target:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,env:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,imports:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#compile">compile</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#deployXOCL">deployXOCL</a>(dir:<A HREF="../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#dynamicEnv">dynamicEnv</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#dynamics">dynamics</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#importNameSpace">importNameSpace</a>(nameSpace:<A HREF="../../../Root/XCore/NameSpace/index.html">NameSpace<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#importNameSpaces">importNameSpaces</a>(nameSpaces:<A HREF="../../../Root/XCore/NameSpace/index.html">Seq(NameSpace)<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#invoke">invoke</a>(target:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,args:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#isVarArgs">isVarArgs</a>():<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#name">name</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setDynamics">setDynamics</a>(v:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setSupers">setSupers</a>(supers:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#target">target</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Operation/index.html">Operation</A>: arity, break, breakFun, calcChildrenSlots, deployJava, dynamics, fork, fork, getDerivedValue, globals, invoke, invoke, invokes, isKindOf, javaTypeName, labelString, legalNameChangeCheck, matchesId, matchesSignature, matchesTarget, name, paramNames, setDynamics, setGlobals, setSupers, setTarget, sig, source, supers, target, toNamedElement, toType, trace, traceFun, traced, unbreak, untrace. <BR><B>From</B> <A HREF="../../../Root/XCore/DocumentedElement/index.html">DocumentedElement</A>: doc, ensureDoc, setDoc. <BR><B>From</B> <A HREF="../../../Root/XCore/NamedElement/index.html">NamedElement</A>: getNamedElement, href, labelString, legalNameChangeCheck, name, path, pathSeq, repopulate, setName, toString. <BR><B>From</B> <A HREF="../../../Root/XCore/Contained/index.html">Contained</A>: addTo, allOwners, deleteRecursive, delete_client, delete_client_check, delete_client_redirect, getDefaultClipboardSource, owner, removeFromOwner, setOwner. <BR><B>From</B> <A HREF="../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="arity"/><FONT FACE="Courier" SIZE="1">@Operation&#160;arity():Integer<br>&#160;&#160;parameters-&gt;size<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="bindParams"/><FONT FACE="Courier" SIZE="1">@Operation&#160;bindParams(patterns&#160;:&#160;Seq(Pattern),values&#160;:&#160;Seq(Element),target&#160;:&#160;XCore::Element,env&#160;:&#160;XCore::Element,imports&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;if&#160;patterns-&gt;isEmpty<br>&#160;&#160;then&#160;env<br>&#160;&#160;else&#160;self.bindParams(patterns-&gt;tail,values-&gt;tail,target,patterns-&gt;head.bind(values-&gt;head,target,env,imports),imports)<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="compile"/><FONT FACE="Courier" SIZE="1">@Operation&#160;compile():XCore::Element<br>&#160;&#160;Compiler::compileToFun(name,body,parameters.name,dynamics,true)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="deployXOCL"/><FONT FACE="Courier" SIZE="1">@Operation&#160;deployXOCL(dir&#160;:&#160;String):XCore::Element<br>&#160;&#160;try<br>&#160;&#160;&#160;&#160;@WithOpenFile(fout&#160;-&gt;&#160;dir&#160;+&#160;"/"&#160;+&#160;self.pathSeq().separateWith("_")&#160;+&#160;".xmf")<br>&#160;&#160;&#160;&#160;&#160;&#160;format(fout,"parserImport&#160;XOCL;~%~%");<br>&#160;&#160;&#160;&#160;&#160;&#160;format(fout,"import&#160;~{::~;~S~};~%~%",Seq{self.owner().pathSeq()});<br>&#160;&#160;&#160;&#160;&#160;&#160;format(fout,"context&#160;!&#160;~{::~;~S~}~%~%",Seq{self.owner().pathSeq()});<br>&#160;&#160;&#160;&#160;&#160;&#160;format(fout,"&#160;&#160;~S~%&#160;",Seq{self.compile().source()});<br>&#160;&#160;&#160;&#160;&#160;&#160;fout.close()<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;catch(exception)<br>&#160;&#160;&#160;&#160;format(stdout,"Error&#160;writing&#160;operation&#160;source:&#160;~S~%",Seq{exception})<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="dynamicEnv"/><FONT FACE="Courier" SIZE="1">@Operation&#160;dynamicEnv():XCore::Element<br>&#160;&#160;dynamics-&gt;select(pair&#160;|<br>&#160;&#160;&#160;&#160;pair-&gt;head&#160;=&#160;1)-&gt;iterate(pair&#160;env&#160;=&#160;env&#160;|<br>&#160;&#160;&#160;&#160;env.bind(pair-&gt;tail-&gt;head-&gt;toString,pair-&gt;tail-&gt;tail))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="dynamics"/><FONT FACE="Courier" SIZE="1">@Operation&#160;dynamics[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.dynamics<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="importNameSpace"/><FONT FACE="Courier" SIZE="1">@Operation&#160;importNameSpace(nameSpace&#160;:&#160;NameSpace):XCore::Element<br>&#160;&#160;if&#160;not&#160;imports-&gt;includes(nameSpace)<br>&#160;&#160;then&#160;self.imports&#160;:=&#160;Seq{nameSpace&#160;|&#160;imports}<br>&#160;&#160;else&#160;self<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="importNameSpaces"/><FONT FACE="Courier" SIZE="1">@Operation&#160;importNameSpaces(nameSpaces&#160;:&#160;Seq(NameSpace)):XCore::Element<br>&#160;&#160;@For&#160;n&#160;in&#160;nameSpaces&#160;do<br>&#160;&#160;&#160;&#160;self.importNameSpace(n)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="invoke"/><FONT FACE="Courier" SIZE="1">@Operation&#160;invoke(target&#160;:&#160;XCore::Element,args&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;if&#160;args-&gt;size&#160;=&#160;parameters-&gt;size&#160;and&#160;not&#160;isVarArgs<br>&#160;&#160;then&#160;body.eval(target,self.bindParams(parameters,args,target,self.dynamicEnv(),imports),imports)<br>&#160;&#160;elseif&#160;isVarArgs&#160;and&#160;args-&gt;size&#160;&gt;=&#160;parameters-&gt;size&#160;-&#160;1<br>&#160;&#160;then&#160;body.eval(target,self.bindParams(parameters,args-&gt;take(self.arity()&#160;-&#160;1)&#160;+&#160;Seq{args-&gt;drop(self.arity()&#160;-&#160;1)},target,self.dynamicEnv(),imports),imports)<br>&#160;&#160;else&#160;throw&#160;ArityError(self,args)<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="isVarArgs"/><FONT FACE="Courier" SIZE="1">@Operation&#160;isVarArgs():Boolean<br>&#160;&#160;false<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="name"/><FONT FACE="Courier" SIZE="1">@Operation&#160;name():XCore::Element<br>&#160;&#160;name<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setDynamics"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setDynamics[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.dynamics&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setSupers"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setSupers(supers&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;format(stdout,"Warning:&#160;ignoring&#160;set&#160;supers&#160;for&#160;interpreted&#160;operation.~%")<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="target"/><FONT FACE="Courier" SIZE="1">@Operation&#160;target[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.target<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

@@ -1,0 +1,345 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+DiagramCommandInterpreter
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>DiagramCommandInterpreter</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+
+       This class defines a command interpreter over diagrams. It can be used as the basis
+       for defining event driven mappings. The mapping handles the following output
+       commands by sen-ding them in the appropriate format to the client.
+          // These are incomplete - please update the list...
+          // [deleteCommand(element)]
+          // [deleteRightClickMenu]
+          // [moveCommand(element,x,y)]
+          // [newBoxCommand(nodeId,box)]
+          // [newGroupCommand(nodeId,subDiagram)]
+          // [newDiagramCommand(diagram)]
+          // [renameDiagramCommand(diagram,label)]
+          // [showDiagramCommand(diagram)]
+          // [newEdgeCommand(edge)]
+          // [newEdgeTextCommand(edgeId,label)]
+          // [newEllipse(parentId,id,x,y,w,h,showOutline)]
+          // [newLineCommand(parentId,id,x1,y1,x2,y2)]
+          // [newNodeCommand(parentId,node)]
+          // [newImageCommand(parentId,image)]
+          // [newShapeCommand(parentId,shape)]
+          // [redrawShapeCommand(shape)]
+          // [newPortCommand(nodeId,port)]
+          // [newRightClickMenu(ownerId,menuId,option)]
+          // [newTextCommand(parentId,text,x,y,editable,r,g,b,font)]
+          // [clearToolPaletteCommand(diagramId)]
+          // [newToolCommand(diagramId,groupName,label,typeName,isEdge,iconPath)]
+          // [newToggleCommand(diagramId,groupName,label,typeName,state,iconPath)]
+          // [newActionCommand(diagramId,groupName,label,typeName,iconPath)]
+          // [removeAnyCommand(diagram,toolName)]
+          // [renameAnyCommand(diagram,toolName)]
+          // [newToolGroupCommand(diagramId,groupId,toolName,isEdge)]
+          // [newWayPointCommand(wayPoint)]
+          // [resizeCommand(element,width,height)]
+          // [repositionEdgeEndsCommand(edgeId,)]
+          // [setEdgeSourceCommand(edgeId,portId)]
+          // [setEdgeTargetCommand(edgeId,portId)]
+          // [setItaliciseCommand(textId,italicise)]
+          // [setTextCommand(textId,newText)]
+          // [setUnderlineCommand(textId,underline)]
+          // [setFill(id,boolean)]
+          // [resizeLineCommand(line)]
+          // [getTextDimension(text,eventHandler)]
+       
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../../Root/Clients/XMLCommandInterpreter/index.html">XMLCommandInterpreter</A>
+,<A HREF="../../../../Root/Clients/CommandInterpreter/index.html">CommandInterpreter</A>
+,<A HREF="../../../../Root/IO/XMLOutput/index.html">XMLOutput</A>
+,<A HREF="../../../../Root/XCore/Contained/index.html">Contained</A>
+,<A HREF="../../../../Root/IO/XMLData/index.html">XMLData</A>
+,<A HREF="../../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../../Root/Clients/CommandInterpreter/index.html">CommandInterpreter</A>: buffer, bufferPos, debug, flush, output, packetSize. <BR><B>From</B> <A HREF="../../../../Root/IO/XMLOutput/index.html">XMLOutput</A>: debug, name, output. <BR><B>From</B> <A HREF="../../../../Root/XCore/Contained/index.html">Contained</A>: owner. <BR><B>From</B> <A HREF="../../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#circulate">circulate</a>(diagram:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#clearToolPaletteCommand">clearToolPaletteCommand</a>(diagram:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#closeNonDisplayedDiagrams">closeNonDisplayedDiagrams</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#copyDiagramToClipboard">copyDiagramToClipboard</a>(diagram:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#deleteCommand">deleteCommand</a>(element:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#deleteGroup">deleteGroup</a>(diagram:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,name:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#deleteRightClickMenuCommand">deleteRightClickMenuCommand</a>(element:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#editText">editText</a>(element:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#enableDrag">enableDrag</a>(element:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#enableDrop">enableDrop</a>(element:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#error">error</a>(element:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,reason:<A HREF="../../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#exportImage">exportImage</a>(diagram:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,filename:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,format:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#getPalette">getPalette</a>(diagram:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Seq(String)/index.html">Seq(Seq(String))<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#getTextDimension">getTextDimension</a>(text:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#getTextDimensionWithFont">getTextDimensionWithFont</a>(text:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#globalRenderOff">globalRenderOff</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#globalRenderOn">globalRenderOn</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#hideCommand">hideCommand</a>(element:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#moveCommand">moveCommand</a>(element:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,x:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,y:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#nestedZoomTo">nestedZoomTo</a>(diagram:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,percent:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newActionCommand">newActionCommand</a>(diagram:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,groupName:<A HREF="../../../../Root/XCore/String/index.html">String<A>,label:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,toolName:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,iconPath:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newBoxCommand">newBoxCommand</a>(parent:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,box:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newDiagramCommand">newDiagramCommand</a>(diagram:<A HREF="../../../../Root/Clients/Diagrams/Diagram/index.html">Diagram<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newEdgeCommand">newEdgeCommand</a>(parent:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,edge:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newEdgeTextCommand">newEdgeTextCommand</a>(parent:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,label:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newEllipseCommand">newEllipseCommand</a>(parent:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,ellipse:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newGroupCommand">newGroupCommand</a>(parent:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,group:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newImageCommand">newImageCommand</a>(parent:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,image:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newLineCommand">newLineCommand</a>(parent:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,line:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newMultilineLabelCommand">newMultilineLabelCommand</a>(parent:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,label:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newMultilineTextCommand">newMultilineTextCommand</a>(parent:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,text:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newNodeCommand">newNodeCommand</a>(parent:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,node:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newPortCommand">newPortCommand</a>(parent:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,port:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newRightClickMenuCommand">newRightClickMenuCommand</a>(parent:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,menuItem:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newShapeCommand">newShapeCommand</a>(parent:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,shape:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newTextCommand">newTextCommand</a>(parent:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,text:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,textString:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newToggleCommand">newToggleCommand</a>(diagram:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,groupName:<A HREF="../../../../Root/XCore/String/index.html">String<A>,label:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,toolName:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,state:<A HREF="../../../../Root/XCore/Boolean/index.html">Boolean<A>,iconTruePath:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,iconFalsePath:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newToolCommand">newToolCommand</a>(diagram:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,groupName:<A HREF="../../../../Root/XCore/String/index.html">String<A>,label:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,toolName:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,isEdge:<A HREF="../../../../Root/XCore/Boolean/index.html">Boolean<A>,iconPath:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newToolGroupCommand">newToolGroupCommand</a>(diagram:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,groupName:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newWayPointCommand">newWayPointCommand</a>(parent:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,wayPoint:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,skipSelection:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#redrawShapeCommand">redrawShapeCommand</a>(shape:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#refreshZoom">refreshZoom</a>(diagram:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#removeAnyCommand">removeAnyCommand</a>(diagram:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,toolName:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#renameAnyCommand">renameAnyCommand</a>(diagram:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,newName:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,oldName:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#resetErrors">resetErrors</a>(diagram:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#resizeCommand">resizeCommand</a>(element:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,width:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,height:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#resizeLineCommand">resizeLineCommand</a>(line:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setBorderCommand">setBorderCommand</a>(text:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,border:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setColor">setColor</a>(element:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,color:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setDiagramTextCommand">setDiagramTextCommand</a>(diagram:<A HREF="../../../../Root/Clients/Diagrams/Diagram/index.html">Diagram<A>,label:<A HREF="../../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setEdgeSourceCommand">setEdgeSourceCommand</a>(edge:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,port:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setEdgeStyle">setEdgeStyle</a>(edge:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,style:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setEdgeTargetCommand">setEdgeTargetCommand</a>(edge:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,port:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setEdgeType">setEdgeType</a>(edge:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,type:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setEdgeWidth">setEdgeWidth</a>(edge:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,width:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setEditable">setEditable</a>(text:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,editable:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setFill">setFill</a>(element:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,fill:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setFillColor">setFillColor</a>(element:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,fillColor:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setFillCommand">setFillCommand</a>(text:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,fill:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setFont">setFont</a>(text:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,font:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setImage">setImage</a>(image:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setItaliciseCommand">setItaliciseCommand</a>(text:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,italicise:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setLineColor">setLineColor</a>(element:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,lineColor:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setMagneticWaypoints">setMagneticWaypoints</a>(diagram:<A HREF="../../../../Root/Clients/Diagrams/Diagram/index.html">Diagram<A>,state:<A HREF="../../../../Root/XCore/Boolean/index.html">Boolean<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setRefPointCommand">setRefPointCommand</a>(edge:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,x:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,y:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setShowAssociationEdges">setShowAssociationEdges</a>(diagram:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,state:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setShowAttributeEdges">setShowAttributeEdges</a>(diagram:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,state:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setShowInheritanceEdges">setShowInheritanceEdges</a>(diagram:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,state:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setShowInstantiationLevel">setShowInstantiationLevel</a>(diagram:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,state:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setShowMultiplicity">setShowMultiplicity</a>(diagram:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,state:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setTextColor">setTextColor</a>(element:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,textColor:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setTextCommand">setTextCommand</a>(text:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,newText:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setUnderlineCommand">setUnderlineCommand</a>(text:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,underline:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setVisible">setVisible</a>(diagram:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,id:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,state:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#showBoxEdges">showBoxEdges</a>(box:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#showCommand">showCommand</a>(element:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#showDiagram">showDiagram</a>(diagram:<A HREF="../../../../Root/Clients/Diagrams/Diagram/index.html">Diagram<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#startRender">startRender</a>(diagram:<A HREF="../../../../Root/Clients/Diagrams/Diagram/index.html">Diagram<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#stopRender">stopRender</a>(diagram:<A HREF="../../../../Root/Clients/Diagrams/Diagram/index.html">Diagram<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#zoomIn">zoomIn</a>(diagram:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#zoomOne">zoomOne</a>(diagram:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#zoomOut">zoomOut</a>(diagram:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#zoomTo">zoomTo</a>(diagram:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,percent:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../../Root/Clients/XMLCommandInterpreter/index.html">XMLCommandInterpreter</A>: endDocument, endElement, startDocument, startElement. <BR><B>From</B> <A HREF="../../../../Root/Clients/CommandInterpreter/index.html">CommandInterpreter</A>: allocateId, call, debug, debug, flush, setFlush, setPacketSize, toString, writeCommand. <BR><B>From</B> <A HREF="../../../../Root/IO/XMLOutput/index.html">XMLOutput</A>: chars, createOutput, debug, endDocument, endElement, flush, startDocument, startElement. <BR><B>From</B> <A HREF="../../../../Root/XCore/Contained/index.html">Contained</A>: addTo, allOwners, deleteRecursive, delete_client, delete_client_check, delete_client_redirect, getDefaultClipboardSource, owner, removeFromOwner, setOwner. <BR><B>From</B> <A HREF="../../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="circulate"/><FONT FACE="Courier" SIZE="1">@Operation&#160;circulate(diagram&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;abf34d&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="clearToolPaletteCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;clearToolPaletteCommand(diagram&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;abf6b5&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="closeNonDisplayedDiagrams"/><FONT FACE="Courier" SIZE="1">@Operation&#160;closeNonDisplayedDiagrams():XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;abf44b&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="copyDiagramToClipboard"/><FONT FACE="Courier" SIZE="1">@Operation&#160;copyDiagramToClipboard(diagram&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;abf55b&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="deleteCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;deleteCommand(element&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;abf811&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="deleteGroup"/><FONT FACE="Courier" SIZE="1">@Operation&#160;deleteGroup(diagram&#160;:&#160;XCore::Element,name&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;abfb01&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="deleteRightClickMenuCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;deleteRightClickMenuCommand(element&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;abf96f&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="editText"/><FONT FACE="Courier" SIZE="1">@Operation&#160;editText(element&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;abfcad&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="enableDrag"/><FONT FACE="Courier" SIZE="1">@Operation&#160;enableDrag(element&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;id&#160;=&#160;element.id()<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;abfe17&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;id<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="enableDrop"/><FONT FACE="Courier" SIZE="1">@Operation&#160;enableDrop(element&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;id&#160;=&#160;element.id()<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;ac006d&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;id<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="error"/><FONT FACE="Courier" SIZE="1">@Operation&#160;error(element&#160;:&#160;XCore::Element,reason&#160;:&#160;String):XCore::Element<br>&#160;&#160;let&#160;id&#160;=&#160;element.id()<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;ac02c9&gt;<br>&#160;&#160;&#160;&#160;&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="exportImage"/><FONT FACE="Courier" SIZE="1">@Operation&#160;exportImage(diagram&#160;:&#160;XCore::Element,filename&#160;:&#160;XCore::Element,format&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;aca25f&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="getPalette"/><FONT FACE="Courier" SIZE="1">@Operation&#160;getPalette(diagram&#160;:&#160;XCore::Element):Seq(Seq(String))<br>&#160;&#160;let&#160;nestedVectors&#160;=&#160;self.call("getPalette",Seq{diagram.id})&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;lists&#160;=&#160;nestedVectors.asSeq()<br>&#160;&#160;in&#160;lists-&gt;collect(v&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;e&#160;=&#160;v.asSeq()<br>&#160;&#160;&#160;&#160;&#160;in&#160;Seq{e-&gt;head&#160;|&#160;e-&gt;tail-&gt;collect(p&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;p.asSeq())}<br>&#160;&#160;&#160;&#160;&#160;end)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="getTextDimension"/><FONT FACE="Courier" SIZE="1">@Operation&#160;getTextDimension(text&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;result&#160;=&#160;self.call("getTextDimension",Seq{text.text(),text.italicise()})<br>&#160;&#160;in&#160;Seq{result-&gt;at(0),result-&gt;at(1)}<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="getTextDimensionWithFont"/><FONT FACE="Courier" SIZE="1">@Operation&#160;getTextDimensionWithFont(text&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;result&#160;=&#160;self.call("getTextDimensionWithFont",Seq{text.text(),text.font()})<br>&#160;&#160;in&#160;Seq{result-&gt;at(0),result-&gt;at(1)}<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="globalRenderOff"/><FONT FACE="Courier" SIZE="1">@Operation&#160;globalRenderOff():XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;ac04e9&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="globalRenderOn"/><FONT FACE="Courier" SIZE="1">@Operation&#160;globalRenderOn():XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;ac05b5&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="hideCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;hideCommand(element&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;ac06db&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="moveCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;moveCommand(element&#160;:&#160;XCore::Element,x&#160;:&#160;XCore::Element,y&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;ac0a23&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="nestedZoomTo"/><FONT FACE="Courier" SIZE="1">@Operation&#160;nestedZoomTo(diagram&#160;:&#160;XCore::Element,percent&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;aca4cb&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newActionCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newActionCommand(diagram&#160;:&#160;XCore::Element,groupName&#160;:&#160;String,label&#160;:&#160;XCore::Element,toolName&#160;:&#160;XCore::Element,iconPath&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;ac0d01&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newBoxCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newBoxCommand(parent&#160;:&#160;XCore::Element,box&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;boxId&#160;=&#160;self.allocateId(box)<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;ac172d&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;boxId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newDiagramCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newDiagramCommand(diagram&#160;:&#160;Diagram):XCore::Element<br>&#160;&#160;let&#160;diagramId&#160;=&#160;self.allocateId(diagram)<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;ac1efb&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;diagramId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newEdgeCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newEdgeCommand(parent&#160;:&#160;XCore::Element,edge&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;edgeId&#160;=&#160;self.allocateId(edge)<br>&#160;&#160;in&#160;if&#160;edge.hasSlot("xStart")<br>&#160;&#160;&#160;&#160;&#160;then&#160;//&#160;&lt;SendCommand&#160;ac2ef1&gt;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<br>&#160;&#160;&#160;&#160;&#160;else&#160;//&#160;&lt;SendCommand&#160;ac3475&gt;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<br>&#160;&#160;&#160;&#160;&#160;end&#160;;<br>&#160;&#160;&#160;&#160;&#160;edgeId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newEdgeTextCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newEdgeTextCommand(parent&#160;:&#160;XCore::Element,label&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;labelId&#160;=&#160;self.allocateId(label)<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;ac3fef&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;labelId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newEllipseCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newEllipseCommand(parent&#160;:&#160;XCore::Element,ellipse&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;ellipseId&#160;=&#160;self.allocateId(ellipse)<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;ac4875&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;ellipseId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newGroupCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newGroupCommand(parent&#160;:&#160;XCore::Element,group&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;groupId&#160;=&#160;self.allocateId(group)<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;ac1bd1&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;groupId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newImageCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newImageCommand(parent&#160;:&#160;XCore::Element,image&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;imageId&#160;=&#160;self.allocateId(image)<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;ac4d6d&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;imageId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newLineCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newLineCommand(parent&#160;:&#160;XCore::Element,line&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;lineId&#160;=&#160;self.allocateId(line)<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;ac68fd&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;lineId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newMultilineLabelCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newMultilineLabelCommand(parent&#160;:&#160;XCore::Element,label&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;id&#160;=&#160;self.allocateId(label)<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;ac8f5d&gt;<br>&#160;&#160;&#160;&#160;&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newMultilineTextCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newMultilineTextCommand(parent&#160;:&#160;XCore::Element,text&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;id&#160;=&#160;self.allocateId(text)<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;ac8787&gt;<br>&#160;&#160;&#160;&#160;&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newNodeCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newNodeCommand(parent&#160;:&#160;XCore::Element,node&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;nodeId&#160;=&#160;self.allocateId(node)<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;ac6e1f&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;nodeId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newPortCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newPortCommand(parent&#160;:&#160;XCore::Element,port&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;portId&#160;=&#160;self.allocateId(port)<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;ac72df&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;portId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newRightClickMenuCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newRightClickMenuCommand(parent&#160;:&#160;XCore::Element,menuItem&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;menuItemId&#160;=&#160;self.allocateId(menuItem)<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;ac7681&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;menuItemId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newShapeCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newShapeCommand(parent&#160;:&#160;XCore::Element,shape&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;shapeId&#160;=&#160;self.allocateId(shape)&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;points&#160;=&#160;Seq{}<br>&#160;&#160;in&#160;@For&#160;point&#160;in&#160;shape.points()&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;points&#160;:=&#160;points.append(Seq{point.x(),point.y()})<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;//&#160;&lt;SendCommand&#160;ac5641&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;shapeId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newTextCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newTextCommand(parent&#160;:&#160;XCore::Element,text&#160;:&#160;XCore::Element,textString&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;textId&#160;=&#160;self.allocateId(text)<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;ac7e0b&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;textId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newToggleCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newToggleCommand(diagram&#160;:&#160;XCore::Element,groupName&#160;:&#160;String,label&#160;:&#160;XCore::Element,toolName&#160;:&#160;XCore::Element,state&#160;:&#160;Boolean,iconTruePath&#160;:&#160;XCore::Element,iconFalsePath&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;ac9c5d&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newToolCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newToolCommand(diagram&#160;:&#160;XCore::Element,groupName&#160;:&#160;String,label&#160;:&#160;XCore::Element,toolName&#160;:&#160;XCore::Element,isEdge&#160;:&#160;Boolean,iconPath&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;ac97f1&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newToolGroupCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newToolGroupCommand(diagram&#160;:&#160;XCore::Element,groupName&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;aca007&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newWayPointCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newWayPointCommand(parent&#160;:&#160;XCore::Element,wayPoint&#160;:&#160;XCore::Element,skipSelection&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;wayPointId&#160;=&#160;self.allocateId(wayPoint)<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;aca875&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;wayPointId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="redrawShapeCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;redrawShapeCommand(shape&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;points&#160;=&#160;Seq{}<br>&#160;&#160;in&#160;@For&#160;point&#160;in&#160;shape.points()&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;points&#160;:=&#160;points.append(Seq{point.x(),point.y()})<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;//&#160;&lt;SendCommand&#160;ac5e17&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;shape.id()<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="refreshZoom"/><FONT FACE="Courier" SIZE="1">@Operation&#160;refreshZoom(diagram&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;ac6259&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="removeAnyCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;removeAnyCommand(diagram&#160;:&#160;XCore::Element,toolName&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;ac925b&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="renameAnyCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;renameAnyCommand(diagram&#160;:&#160;XCore::Element,newName&#160;:&#160;XCore::Element,oldName&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;ac94ab&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="resetErrors"/><FONT FACE="Courier" SIZE="1">@Operation&#160;resetErrors(diagram&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;ac63e7&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="resizeCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;resizeCommand(element&#160;:&#160;XCore::Element,width&#160;:&#160;XCore::Element,height&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;acac25&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="resizeLineCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;resizeLineCommand(line&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;ace2fd&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setBorderCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setBorderCommand(text&#160;:&#160;XCore::Element,border&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;acd44f&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setColor"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setColor(element&#160;:&#160;XCore::Element,color&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;acaf7f&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setDiagramTextCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setDiagramTextCommand(diagram&#160;:&#160;Diagram,label&#160;:&#160;String):XCore::Element<br>&#160;&#160;let&#160;diagramId&#160;=&#160;diagram.id()<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;ac21b1&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;diagramId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setEdgeSourceCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setEdgeSourceCommand(edge&#160;:&#160;XCore::Element,port&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;acb1d5&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setEdgeStyle"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setEdgeStyle(edge&#160;:&#160;XCore::Element,style&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;acb405&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setEdgeTargetCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setEdgeTargetCommand(edge&#160;:&#160;XCore::Element,port&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;acb65f&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setEdgeType"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setEdgeType(edge&#160;:&#160;XCore::Element,type&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;acbac9&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setEdgeWidth"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setEdgeWidth(edge&#160;:&#160;XCore::Element,width&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;acb893&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setEditable"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setEditable(text&#160;:&#160;XCore::Element,editable&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;ad0d71&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setFill"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setFill(element&#160;:&#160;XCore::Element,fill&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;acbd01&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setFillColor"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setFillColor(element&#160;:&#160;XCore::Element,fillColor&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;acc01d&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setFillCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setFillCommand(text&#160;:&#160;XCore::Element,fill&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;acd69b&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setFont"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setFont(text&#160;:&#160;XCore::Element,font&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;acc259&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setImage"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setImage(image&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;accb05&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setItaliciseCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setItaliciseCommand(text&#160;:&#160;XCore::Element,italicise&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;acd8e9&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setLineColor"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setLineColor(element&#160;:&#160;XCore::Element,lineColor&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;acc579&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setMagneticWaypoints"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setMagneticWaypoints(diagram&#160;:&#160;Diagram,state&#160;:&#160;Boolean):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;acccff&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setRefPointCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setRefPointCommand(edge&#160;:&#160;XCore::Element,x&#160;:&#160;XCore::Element,y&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;accf71&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setShowAssociationEdges"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setShowAssociationEdges(diagram&#160;:&#160;XCore::Element,state&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;ad00d9&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setShowAttributeEdges"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setShowAttributeEdges(diagram&#160;:&#160;XCore::Element,state&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;acfe75&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setShowInheritanceEdges"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setShowInheritanceEdges(diagram&#160;:&#160;XCore::Element,state&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;ad033f&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setShowInstantiationLevel"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setShowInstantiationLevel(diagram&#160;:&#160;XCore::Element,state&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;ad0811&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setShowMultiplicity"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setShowMultiplicity(diagram&#160;:&#160;XCore::Element,state&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;ad05a7&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setTextColor"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setTextColor(element&#160;:&#160;XCore::Element,textColor&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;acc89b&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setTextCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setTextCommand(text&#160;:&#160;XCore::Element,newText&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;acd205&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setUnderlineCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setUnderlineCommand(text&#160;:&#160;XCore::Element,underline&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;acdb39&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setVisible"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setVisible(diagram&#160;:&#160;XCore::Element,id&#160;:&#160;XCore::Element,state&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;ad0ab1&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="showBoxEdges"/><FONT FACE="Courier" SIZE="1">@Operation&#160;showBoxEdges(box&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;acf45d&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="showCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;showCommand(element&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;ac084b&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="showDiagram"/><FONT FACE="Courier" SIZE="1">@Operation&#160;showDiagram(diagram&#160;:&#160;Diagram):XCore::Element<br>&#160;&#160;let&#160;diagramId&#160;=&#160;diagram.id()<br>&#160;&#160;in&#160;if&#160;xmf.clientManager().idManager.hasId(diagramId)<br>&#160;&#160;&#160;&#160;&#160;then&#160;//&#160;&lt;SendCommand&#160;ac2503&gt;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<br>&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="startRender"/><FONT FACE="Courier" SIZE="1">@Operation&#160;startRender(diagram&#160;:&#160;Diagram):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;acdd59&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="stopRender"/><FONT FACE="Courier" SIZE="1">@Operation&#160;stopRender(diagram&#160;:&#160;Diagram):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;acdf91&gt;<br>&#160;&#160;;<br>&#160;&#160;self.setFlush(false)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="zoomIn"/><FONT FACE="Courier" SIZE="1">@Operation&#160;zoomIn(diagram&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;acf63b&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="zoomOne"/><FONT FACE="Courier" SIZE="1">@Operation&#160;zoomOne(diagram&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;acf81b&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="zoomOut"/><FONT FACE="Courier" SIZE="1">@Operation&#160;zoomOut(diagram&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;acf9fd&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="zoomTo"/><FONT FACE="Courier" SIZE="1">@Operation&#160;zoomTo(diagram&#160;:&#160;XCore::Element,percent&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;acfc13&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

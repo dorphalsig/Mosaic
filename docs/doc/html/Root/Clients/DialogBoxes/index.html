@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+DialogBoxes
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>DialogBoxes</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+
+       This package defines a model for a dialog box client.
+     
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Packages</B></FONT></TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Classes</B></FONT></TD>
+</TR>
+<TR><TD><B><A HREF="../../../Root/Clients/DialogBoxes/BusyDialog/index.html">BusyDialog</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/DialogBoxes/ColorDialog/index.html">ColorDialog</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/DialogBoxes/ConfirmDialog/index.html">ConfirmDialog</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/DialogBoxes/DialogBoxClient/index.html">DialogBoxClient</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/DialogBoxes/DialogCommandInterpreter/index.html">DialogCommandInterpreter</A></B></TD><TD>
+       This class defines a command interpreter over dialogs. The mapping handles the 
+       following output commands by sen-ding them in the appropriate format to the 
+       client connected
+           [newColorDialog(message,dialog)]
+           [newMessageDialog(dialogId,message)]
+           [newWarningDialog(dialogId,message)]
+           [newErrorDialog(dialogId,message)]
+           [newQuestionDialog(dialogId,message)]
+           [newQuestionDialogYesNoCancel(dialogId,message)]
+           [newQuestionDialogYesOnly(dialogId,message)]
+           [newConfirmDialog(dialogId,message)]
+           //[newMultioptionDialog(dialogId,message,type)]
+           [newFileDialog(dialogId,type,dir,ext)]
+           [newInputDialog(dialogId,title,question,value)]
+           [newOrderingDialog(dialogId,title,command,options)]
+           [newDirectoryDialog(dialogId,dir)]
+           [newSelectionDialog(dialogId,multi,title,message,options)]
+           [newTextAreaDialog(dialogId,type,message,text)]
+           [newProgressDialog(dialogId,workToBeDone)]
+           [addWork(dialogId,work)]
+           [finishWork(dialogId)]
+           [newBusyDialog(dialogId,title)]
+           [noLongerBusy(dialodId)]
+    </TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/DialogBoxes/DialogEventHandler/index.html">DialogEventHandler</A></B></TD><TD>
+      This class defines operations to handle the following incoming
+      events from the client. 
+        [dialogReply(dialogId,replyString)]
+    </TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/DialogBoxes/DirectoryDialog/index.html">DirectoryDialog</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/DialogBoxes/ErrorDialog/index.html">ErrorDialog</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/DialogBoxes/FileDialog/index.html">FileDialog</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/DialogBoxes/FontDialog/index.html">FontDialog</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/DialogBoxes/InputDialog/index.html">InputDialog</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/DialogBoxes/MessageDialog/index.html">MessageDialog</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/DialogBoxes/MultioptionDialog/index.html">MultioptionDialog</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/DialogBoxes/OrderingDialog/index.html">OrderingDialog</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/DialogBoxes/OrderingDialog2/index.html">OrderingDialog2</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/DialogBoxes/ProgressDialog/index.html">ProgressDialog</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/DialogBoxes/QuestionDialog/index.html">QuestionDialog</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/DialogBoxes/QuestionDialogYesNoCancel/index.html">QuestionDialogYesNoCancel</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/DialogBoxes/QuestionDialogYesOnly/index.html">QuestionDialogYesOnly</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/DialogBoxes/SelectionDialog/index.html">SelectionDialog</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/DialogBoxes/TextAreaDialog/index.html">TextAreaDialog</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/DialogBoxes/TreeDialog/index.html">TreeDialog</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/DialogBoxes/WarningDialog/index.html">WarningDialog</A></B></TD><TD>No Documentation Specified</TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+</TABLE>
+</HTML>

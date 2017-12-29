@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<!--
+	Hielo by TEMPLATED	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)-->
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>XModeler</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/css/main.css">
+  </head>
+  <body> <!-- Header -->
+    <header id="header" class="alt">
+      <div class="logo"><a href="index.html">XModeler</a></div>
+      <a href="#menu">Menu</a> </header>
+    <!-- Nav -->
+    <nav id="menu">
+      <ul class="links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="generic.html">Download</a></li>
+        <li><a href="doc/html/index.html">Documentation</a></li>
+      </ul>
+    </nav>
+    <!-- Banner -->
+    <section class="banner full">
+      <article> <img src="images/slide01.jpg" alt="">
+        <div class="inner">
+          <header>
+            <p>Meta Programming</p>
+            <h2>The XModeler</h2>
+          </header>
+        </div>
+      </article>
+      <article> <img src="images/slide02.jpg" alt="">
+        <div class="inner">
+          <header>
+            <p>Meta Modeling</p>
+            <h2>The XModeler</h2>
+          </header>
+        </div>
+      </article>
+      <article> <img src="images/slide03.jpg" alt="">
+        <div class="inner">
+          <header>
+            <p>Meta Tooling</p>
+            <h2>The XModeler</h2>
+          </header>
+        </div>
+      </article>
+      <article> <img src="images/slide04.jpg" alt="">
+        <div class="inner">
+          <header>
+            <p>Meta Data</p>
+            <h2>The XModeler</h2>
+          </header>
+        </div>
+      </article>
+      <article> <img src="images/slide05.jpg" alt="">
+        <div class="inner">
+          <header>
+            <p>Meta Levels</p>
+            <h2>The XModeler</h2>
+          </header>
+        </div>
+      </article>
+    </section>
+    <!-- One -->
+    <section id="one" class="">
+      <div class="inner">
+        <div class="grid-style">
+          <div>
+            <div class="box">
+              <div class="content">
+                <header class="align-center">
+                  <p>Meta Modelling</p>
+                  <h2>Applied Meta-Modeling</h2>
+                </header>
+                <p> XModeler is based on a self-describing meta-model called XCore.
+                    Everything in XModeler is an instance of something from XCore 
+                    (even XCore itself). The XModeler is based on a
+                    language-based approach to meta-modelling. Click on the button below to see the
+                    an XModeler-based book describing a language-based approach
+                    to meta-modelling.</p>
+                <footer class="align-center"> <a href="doc/books/appliedmetamodelling.pdf" class="button alt">Learn
+                    More</a> </footer>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="box">
+              <div class="content">
+                <header class="align-center">
+                  <p>Meta Tooling</p>
+                  <h2>XCore</h2>
+                </header>
+                <p> The XModeler is a collection of tools based on a meta-model
+                    called XCore. You can extend and change the XModeler tool-set and
+                    define your own tools. The documentation for the whole of XModeler
+                    including the source code is provided as a collection of web-pages
+                    accessible from the button below.</p>
+                <footer class="align-center"> <a href="doc/html/index.html" class="button alt">Learn
+                    More</a> </footer>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="box">
+              <div class="content">
+                <header class="align-center">
+                  <p>Meta Programming</p>
+                  <h2>XOCL</h2>
+                </header>
+                <p> XModeler is written in a language called XOCL. The language has been
+                    designed to make writing XModeler applications straightforward and
+                  is supported by XModeler tools (that are also written in XOCL). 
+                  You can easily extend XOCL to support your own programming abstractions
+                  and even define complete domain-specific languages.
+                  Click on the button below to find out more about XOCL.
+                </p>
+                <footer class="align-center"> <a href="doc/books/superlanguages.pdf" class="button alt">Learn
+                    More</a> </footer>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="box">
+              <div class="content">
+                <header class="align-center">
+                  <p>Meta Levels</p>
+                  <h2>XOCL</h2>
+                </header>
+                <p> Meta-data is a key feature of modern system design. The XModeler
+                    allows data, types and meta-type information to be mixed within a
+                    single application. This means that models can be executable, and
+                    applications can reflect on their own definitions via access to
+                    type-level information. XModeler is the basis of a project that
+                    integrates meta-modelling with executable-modelling. Click on the
+                  button below for more information.
+                </p>
+                <footer class="align-center"> <a href="https://www.wi-inf.uni-duisburg-essen.de/LE4MM/" class="button alt">Learn
+                    More</a> </footer>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Two -->
+    
+    <!-- Footer -->
+    <footer id="footer">
+      <div class="container">
+        <ul class="icons">
+          <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+          <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+          <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+          <li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+        </ul>
+      </div>
+      <div class="copyright"> © XModeler. All rights reserved. </div>
+    </footer>
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/skel.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

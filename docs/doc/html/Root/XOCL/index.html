@@ -1,0 +1,278 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+XOCL
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>XOCL</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+No Documentation Specified
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Packages</B></FONT></TD>
+</TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Selection/index.html">Selection</A></B></TD><TD>No Documentation Specified</TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Classes</B></FONT></TD>
+</TR>
+<TR><TD><B><A HREF="../../Root/XOCL/AbstractDoc/index.html">AbstractDoc</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/AbstractOp/index.html">AbstractOp</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/AsPacket/index.html">AsPacket</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Attribute/index.html">Attribute</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/AttributeModifiers/index.html">AttributeModifiers</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Bind/index.html">Bind</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Busy/index.html">Busy</A></B></TD><TD>
+      Displays a busy message while some processing is performed and ensures that
+      the busy message is disposed.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/CallCommand/index.html">CallCommand</A></B></TD><TD>
+      Use this form to perform calls to a command interpreter. It allows a variable
+      number of arguments to be sent as part of the call without allocating any
+      storage for them.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Case/index.html">Case</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/CaseArm/index.html">CaseArm</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/CaseInt/index.html">CaseInt</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/CaseIntClause/index.html">CaseIntClause</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/CaseIntConst/index.html">CaseIntConst</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/CaseIntRange/index.html">CaseIntRange</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/CaseIntValue/index.html">CaseIntValue</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/CaseObj/index.html">CaseObj</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Character/index.html">Character</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Class/index.html">Class</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Clause/index.html">Clause</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/ColorObjectNode/index.html">ColorObjectNode</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Command/index.html">Command</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Constraint/index.html">Constraint</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Constructor/index.html">Constructor</A></B></TD><TD>
+      A constructor describes how to initialise a newly created instance of
+      a class. Each class may define a number of constructors that are used
+      when an instance of the class is sent an 'init/1' message. The constructor
+      is a sequence of attribute names and an optional body. When an instance
+      is initialised, the matching constructor is selected from the class.
+      A constructor matches the initialisation arguments when it defines the
+      same number of attribute names as the length of the initialization 
+      arguments. The effect of using the selected constructor is to set
+      the slots with the appropriate names in the constructor from the 
+      initialization arguments and then to perform the body of the constructor.
+      If defined, the body of the constructor must return 'self'. A constructor
+      may optionally specify that it is a template for transforming an object
+      into a string, it does so by including the optional modifier '!' after
+      the sequence of names. If present, the body of the constructor is evaluated
+      in a scope where the names of the object slots specified in the name list are
+      bound to the supplied values.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Count/index.html">Count</A></B></TD><TD>
+      The count construct specifies a loop from a lower limit to an upper limit.
+      The lower limit is the initial value of a loop variable and the upper
+      limit is 1 greater than the final value of the variable.
+      
+      Constructor: Count(var,lower,upper,body)
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Def/index.html">Def</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Derived/index.html">Derived</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Doc/index.html">Doc</A></B></TD><TD>
+      This class represents a documentation definition. It is
+      sugar for an expression that constructs a kernel documentation
+      object containing a documentation string.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Enum/index.html">Enum</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Exp/index.html">Exp</A></B></TD><TD> 
+      An expression is a wrapped element of type Performable. An expression evaluates
+      to itself, but wraps the performable element as an operation. The wrapping ensures
+      that the element can be performed in its correct environment when the operation
+      is called. In addition the operation will be compiled by the compiler to produce
+      efficient code. Often we want to get the underlying performable element at
+      run-time. This is calculated on demand from the source code retained as a string.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/ExtendClass/index.html">ExtendClass</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Find/index.html">Find</A></B></TD><TD>
+      A find construct is used to perform an action in terms of an element
+      of a collection. Typically we want to find the first element in a 
+      collection that satisfies a given predicate and to perform an action.
+      If no value exists that satisfies the predicate then we optionally
+      want to perform some other action. This construct captures the pattern.
+      Constructor: Find(collection,name,test,action,alternative)
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/For/index.html">For</A></B></TD><TD>
+      A for loop selects elements from a sequence in turn and 
+      performs an action. The for directives can be used to indicate
+      looping through a collection or parts of a table. Using the
+      directives for tables can be much more efficient because an
+      intermediate collection is not constructed. 
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Fork/index.html">Fork</A></B></TD><TD>
+      The fork construct creates a new execution thread. The body of the
+      Fork construct is the expression to be evaluated by the thread when 
+      it starts up. A forked thread does not start immediately. At any given
+      time there is a current thread that can choose to YIELD control. At
+      this point in time, if there are any other threads waiting to
+      run then one is (re)started. The order in which threads are activated
+      via yield is in the order of thread creation.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/IconizeNode/index.html">IconizeNode</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Imports/index.html">Imports</A></B></TD><TD>
+      The imports expression is used to grab the current collection of
+      imported name spaces. Imports are lexically scoped so it is necessary
+      to grab the dynamics from the current stack frame.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Include/index.html">Include</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Index/index.html">Index</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Letrec/index.html">Letrec</A></B></TD><TD>
+      A letrec construct allows bindings to be established for a local
+      scope. The bindings are mutually recursive. Since XMF has eager
+      evaluation, this means that the values of the bindings should be
+      operations.
+     
+      Constructor: Letrec(bindings,body)
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Map/index.html">Map</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Menu/index.html">Menu</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/MultiLevelConstraint/index.html">MultiLevelConstraint</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/NameSpace/index.html">NameSpace</A></B></TD><TD>
+       A name space is a named container of named elements. This construct allows a name
+       space to be defined statically together with some bindings. Once created, new
+       named elements can be added or existing ones removed.
+     
+       Constructor: NameSpace(bindings)
+         Each binding is an instance of OCL::ValueBinding.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/NotNull/index.html">NotNull</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Open/index.html">Open</A></B></TD><TD>
+      Open a collection of name-spaces for the scope of an expression.
+      Currently this will only work in compiled code.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Package/index.html">Package</A></B></TD><TD>
+      A package definition is represented as an instance of this class.
+      When the instance is performed it creates a new kernel package.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Record/index.html">Record</A></B></TD><TD>
+      The record construct is a way of constructing a new object that
+      by-passes the MOP instantiation protocol. It creates a new 
+      instance of the class with just the specified slots.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Repeat/index.html">Repeat</A></B></TD><TD>
+      Implements a repeat command until test loop.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/SendCommand/index.html">SendCommand</A></B></TD><TD>
+      Use this form to sen-d messages to a command interpreter. It allows a variable
+      number of arguments to be sent as part of the command without allocating any
+      storage for them.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Service/index.html">Service</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Snapshot/index.html">Snapshot</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Stats/index.html">Stats</A></B></TD><TD>
+      Binds the amount of memory used and the time taken when an 
+      expression is performed. Returns the value of the expression.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Sugar/index.html">Sugar</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Syntax/index.html">Syntax</A></B></TD><TD> 
+      A syntax class defines a special type of performable element that
+      evaluates to itself instead of to a performable element whose semantics
+      is already known. The benefit of this is that the structure of the
+      syntax element is not lost when the language feature is evaluated. 
+      The consequence of desugaring to itself is that the element must specify 
+      its own semantics.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/SyntaxConstant/index.html">SyntaxConstant</A></B></TD><TD> 
+      A syntax constant evaluates to itself. The difference
+      between XOCL::Syntax and XOCL::SyntaxConstant is that
+      the constant expects to be literal data whereas basic
+      syntax may include operations. The difference lies in
+      getting variables into scope in the operations. Operations
+      must be evaluated to produce a closure and therefore
+      XOCL::Syntax uses lift() to produce an expression to
+      be evaluated whereas XOCL::SyntaxConstant treats the data
+      as a literal with no subsequent evaluation and no run-time
+      evaluation.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/SyntaxNameSpace/index.html">SyntaxNameSpace</A></B></TD><TD> 
+      A syntax name space is a container of named syntax elements.
+      This deals with the issue of lifting the imported name spaces
+      that should be referenced by name not lifted.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/TableGet/index.html">TableGet</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Theme/index.html">Theme</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Todo/index.html">Todo</A></B></TD><TD>
+      This class describes a type of documentation describing an
+      outstanding task which is todo
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Type/index.html">Type</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/TypeCase/index.html">TypeCase</A></B></TD><TD>
+       A typecase defines a dispatch table for an element based on
+       its type. The type case value expression is evaluated and each
+       type case arm is tried in turn. A typecase arm consists of a
+       type and a body. If the value is of the specified type then the 
+       arm body is performed and produces the value of the typecase.
+       If no arm matches then there may be an optional default expression
+       which is evaluated and produces the value of the typecase. If no
+       arm matches and no default is specified then an error is signaled.
+       
+       Constructor: TypeCase(value,arms,default)
+         The value is an expression, the arms is a sequence of type case
+         arms. The default is an expression.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/TypeCaseArm/index.html">TypeCaseArm</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/Undoable/index.html">Undoable</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/When/index.html">When</A></B></TD><TD>
+      This class defines a new syntax construct that allows
+      conditional statements. The body of the when-statement
+      is performed providing that the guard evaluates to true.
+      Otherwise the string GUARD FAILS is returned.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/While/index.html">While</A></B></TD><TD>
+      A basic loop with a test. The test is performed at least once before the
+      loop is entered each time. When the loop test returnes false, the loop terminates.
+      The return value of a while expression is undefined.
+      
+      Constructor: While(test,body)
+        Both args should be expressions. The test should return a boolean value.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/WithOpenFile/index.html">WithOpenFile</A></B></TD><TD>
+      Used to bind a name to an input or output file channel such that the
+      closing of the channel is guaranteed even in the event of an exception
+      being raised.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/WithoutDaemons/index.html">WithoutDaemons</A></B></TD><TD>
+      The without daemons expression is used to turn daemons off for the
+      evaluation of an expression in the context of an object. Often a
+      daemon will fire and the code that handles the daemon should not
+      cause recursive daemon invocation. This form can be used to safely
+      turn off daemons temporarily for the scope of the handler.
+      
+      Constructor: WithoutDaemons(object,body)
+        The object and body should be expressions. Daemons are switched 
+        off for the scope of the evaluation of the body.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/WithoutLocalNames/index.html">WithoutLocalNames</A></B></TD><TD>
+      Turns off local name recording for the duration of the
+      body of the construct. This can slow down code that must 
+      be highly efficient.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/WithoutRendering/index.html">WithoutRendering</A></B></TD><TD>
+      Prevents ren-dering of diagrams for the scope of an expression. 
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XOCL/WithoutSourcePos/index.html">WithoutSourcePos</A></B></TD><TD>
+      Turns off source position recording for the duration of the
+      body of the construct. Source positions are maintained by
+      emitted instructions into the executable. This can slow down
+      code that must be highly efficient.
+    </TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B>Exps(es)</B></TD><TD>No Documentation Specified</TD></TR>
+</TABLE>
+</HTML>

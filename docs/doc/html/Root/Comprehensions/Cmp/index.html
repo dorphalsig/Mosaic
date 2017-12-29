@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+Cmp
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>Cmp</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+No Documentation Specified
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../Root/XOCL/Sugar/index.html">Sugar</A>
+,<A HREF="../../../Root/XCore/Performable/index.html">Performable</A>
+,<A HREF="../../../Root/XCore/Located/index.html">Located</A>
+,<A HREF="../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+<TR><TD>Cmp(modifier,body,clauses)</TD><TD> No Documentation </TD></TR>
+<TR><TD>Cmp(body,clauses)</TD><TD> No Documentation </TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR><TD><B>body</B></TD><TD><A HREF="../../../Root/XCore/Performable/index.html">Performable<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>clauses</B></TD><TD><A HREF="../../../Root/Comprehensions/Clause/index.html">Seq(Clause)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>modifier</B></TD><TD><A HREF="../../../Root/XCore/String/index.html">String<A></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Performable/index.html">Performable</A>: endLine, line. <BR><B>From</B> <A HREF="../../../Root/XCore/Located/index.html">Located</A>: charEnd, charStart. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#desugar">desugar</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugarSeq">desugarSeq</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugarSet">desugarSet</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#toString">toString</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XOCL/Sugar/index.html">Sugar</A>: FV, compile, desugar, eval, lift, maxLocals, typeExp. <BR><B>From</B> <A HREF="../../../Root/XCore/Performable/index.html">Performable</A>: FV, compile, endLine, eval, line, maxLocals, pprint, pprint, pprint, setEndLine, setLine. <BR><B>From</B> <A HREF="../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="desugar"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugar():XCore::Element<br>&#160;&#160;@Case&#160;modifier&#160;of<br>&#160;&#160;&#160;&#160;[&#160;"Seq"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.desugarSeq()<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"Set"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.desugarSet()<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;else&#160;self.error("Unknown&#160;Cmp&#160;modifier&#160;"&#160;+&#160;modifier)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugarSeq"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugarSeq():XCore::Element<br>&#160;&#160;@Case&#160;self&#160;of<br>&#160;&#160;&#160;&#160;Cmp(body&#160;:&#160;XCore::Element,[&#160;Seq{}&#160;])&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;[|&#160;Seq{&lt;body&gt;}&#160;|]<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;Cmp(body&#160;:&#160;XCore::Element,Seq{Bind(n&#160;:&#160;XCore::Element,t&#160;:&#160;XCore::Element,v&#160;:&#160;XCore::Element)&#160;|&#160;[&#160;Seq{}&#160;]})&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;[|&#160;&lt;v&gt;-&gt;select(x&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;x.isKindOf(&lt;t&gt;))-&gt;asSeq-&gt;collect(Drop(Var(n,57))&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;body&gt;)&#160;|]<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;Cmp(body&#160;:&#160;XCore::Element,Seq{Bind(n&#160;:&#160;XCore::Element,t&#160;:&#160;XCore::Element,v&#160;:&#160;XCore::Element)&#160;|&#160;clauses&#160;:&#160;XCore::Element})&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;[|&#160;&lt;Cmp(Cmp(body,clauses),Seq{Bind(n,t,v)})&gt;.flatten()&#160;|]<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;Cmp(body&#160;:&#160;XCore::Element,Seq{Filter(e&#160;:&#160;XCore::Element)&#160;|&#160;clauses&#160;:&#160;XCore::Element})&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;[|&#160;if&#160;&lt;e&gt;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;&lt;Cmp(body,clauses)&gt;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;Seq{}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;&#160;|]<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugarSet"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugarSet():XCore::Element<br>&#160;&#160;@Case&#160;self&#160;of<br>&#160;&#160;&#160;&#160;Cmp(body&#160;:&#160;XCore::Element,[&#160;Seq{}&#160;])&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;[|&#160;Set{&lt;body&gt;}&#160;|]<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;Cmp(body&#160;:&#160;XCore::Element,Seq{Bind(n&#160;:&#160;XCore::Element,t&#160;:&#160;XCore::Element,v&#160;:&#160;XCore::Element)&#160;|&#160;[&#160;Seq{}&#160;]})&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;[|&#160;&lt;v&gt;-&gt;select(x&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;x.isKindOf(&lt;t&gt;))-&gt;asSet-&gt;collect(Drop(Var(n,74))&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;body&gt;)&#160;|]<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;Cmp(body&#160;:&#160;XCore::Element,Seq{Bind(n&#160;:&#160;XCore::Element,t&#160;:&#160;XCore::Element,v&#160;:&#160;XCore::Element)&#160;|&#160;clauses&#160;:&#160;XCore::Element})&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;[|&#160;&lt;Cmp("Set",Cmp("Set",body,clauses),Seq{Bind(n,t,v)})&gt;.flatten()&#160;|]<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;Cmp(body&#160;:&#160;XCore::Element,Seq{Filter(e&#160;:&#160;XCore::Element)&#160;|&#160;clauses&#160;:&#160;XCore::Element})&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;[|&#160;if&#160;&lt;e&gt;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;&lt;Cmp("Set",body,clauses)&gt;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;Set{}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;&#160;|]<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="toString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;toString():String<br>&#160;&#160;try<br>&#160;&#160;&#160;&#160;self.of().name.toString()&#160;+&#160;"("&#160;+&#160;if&#160;self.hasSlot("modifier")<br>&#160;&#160;&#160;&#160;then&#160;self.modifier.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"modifier"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("body")<br>&#160;&#160;&#160;&#160;then&#160;self.body.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"body"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("clauses")<br>&#160;&#160;&#160;&#160;then&#160;self.clauses.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"clauses"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;")"<br>&#160;&#160;catch(exception)<br>&#160;&#160;&#160;&#160;self.of().name&#160;+&#160;"(Constructor&#160;Error!)"<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=1><FONT SIZE="+2">
+<B>Grammar</B></FONT></TD>
+</TR>
+<TD><PRE>
+Bind ::=  Name   = n   BindType   = t   '<-'   Exp   = e  { Bind(n,t,e) }.
+SetCmpExp ::=  LinePos   = l   '{'   CommaSepExps   = es   '}'   !  { SetExp(l,"Set",es) } |  LinePos   = l   '{'   Exp   = e   '|'   CmpClause   = c   SetCmpExp-Star0   = cs   '}'  { Comprehensions::Cmp("Set",e,Seq{c | cs}) }.
+BindType ::=  ':'   Exp  | { [| Element |] }.
+AddPattern-Dis0 ::=  '+'   AddPattern   = p2  { Addp(p1,p2) } |  <VarRef 28e813> .
+Clause ::=  Bind  |  Filter .
+BindValue ::=  OptType   = type   '='   SimpleExp   = value  { ValueBinding(name,type,value) }.
+Filter ::=  '?'   Exp   = e  { Filter(e) }.
+Def ::=  'context'   Def-Dis0   = isForward   ImportPath   = path   PushChar   Exp   PopChar   = exp  { ContextDef(path,exp,isForward) }.
+Clauses ::=  'where'   Clause   = c   Clauses-Star0   = cs   <Pair 542476>  |  Seq{} .
+LocalParserImport-Star0 ::=  '::'   Name   = $head   LocalParserImport-Star0   = $tail   Cons  |  Nil .
+Modifier ::=  '['   Name   ']'  |  Seq .
+NonEmptySeqTail ::=  PushChar   Expr   PopChar   = e   PairOrElements .
+Cmp ::=  Modifier   = modifier   Exp   = body   Clauses   = cs   'end'  { Cmp(modifier,body,cs) }.
+Import ::=  PushChar   'import'   ImportPath   = path   ';'  { Import(path) }  PopChar .
+Clauses-Star0 ::=  ','   Clause   = $head   Clauses-Star0   = $tail   Cons  |  Nil .
+Varp ::=  AName   = name   Varp-Dis0   = pattern   Varp-Dis1   = type  { Varp(name,pattern,type) }.
+Keywordp ::=  Name   = name   Keywordp-Star0   = names   '['   Keyps   = keys   ']'  { Keywordp(name,names,keys) }.
+IfTail ::=  'else'   PushChar   Expr   PopChar   'end'  |  LinePos   = l   'elseif'   PushChar   Expr   PopChar   = e1   'then'   PushChar   Expr   PopChar   = e2   IfTail   = e3  { If(l,e1,e2,e3) } |  'end'  { BoolExp(false) }.
+SeqCmpExp-Star0 ::=  ','   CmpClause   = $head   SeqCmpExp-Star0   = $tail   Cons  |  Nil .
+AddPattern ::=  AtomicPattern   = p1   AddPattern-Dis0 .
+EvaluationUnit ::=  EvaluationUnit-Star0   EvaluationUnit-Star1   = imports   EvaluationUnit-Star2   = exps   EOF  { Evaluator::EvaluationUnit(imports,exps) }.
+Keyps-Star0 ::=  ','   Keyp   = $head   Keyps-Star0   = $tail   Cons  |  Nil .
+Atom ::=  PushChar   VarExp   PopChar   !  |  PushChar   Self   PopChar   !  |  PushChar   StrExp   PopChar   !  |  PushChar   IntExp   PopChar   !  |  PushChar   IfExp   PopChar   !  |  PushChar   BoolExp   PopChar   !  |  PushChar   LetExp   PopChar   !  |  PushChar   CollExp   PopChar   !  |  Parentheses  |  PushChar   Drop   PopChar  |  PushChar   Lift   PopChar  |  PushChar   Throw   PopChar  |  PushChar   Try   PopChar  |  PushChar   ImportIn   PopChar  |  PushChar   FloatExp   PopChar  |  PushChar   LocalParserImport   PopChar  |  PushChar   AtExp   PopChar .
+VarExp ::=  Name   = name   LinePos   = l  { Var(name,l) }.
+EvaluationUnit-Star2-Dis0 ::=  Def  |  TopLevelExp .
+BindingList ::=  PushChar   Binding   PopChar   = binding   BindingList-Star0   = bindings   <Pair 3246ba> .
+Syntaxp ::=  '[|'   PushChar   Exp   PopChar   = e   '|]'  { Syntaxp(e) }.
+Objectp ::=  Name   = name   Objectp-Star0   = names   '('   Patterns   = slots   ')'  { Objectp(name,names,slots) }.
+CollMessage ::=  '('   CommaSepExps   = as   ')'  { CollExp(c,n,as) }.
+SeqCmpExp ::=  LinePos   = l   '['   CommaSepExps   = es   ']'   !  { SetExp(l,"Seq",es) } |  LinePos   = l   '['   Exp   = e   '|'   CmpClause   = c   SeqCmpExp-Star0   = cs   ']'  { Comprehensions::Cmp(e,Seq{c | cs}) }.
+PathExp ::=  PushChar   Atom   PopChar   = atom   PathExp-Dis0 .
+Constp ::=  Intp  |  Strp  |  Boolp  |  Expp .
+Parentheses ::=  '('   PushChar   Expr   PopChar   = e   ')'  { Parentheses(e) }.
+SeqExp ::=  LinePos   = l   'Seq{'   SeqExp-Dis0 .
+CollOp ::=  CollMessage  |  Collect  |  Iterate  | { CollExp(c,n,Seq{}) }.
+ArgsTail-Star0 ::=  ','   PushChar   Expr   PopChar   = $head   ArgsTail-Star0   = $tail   Cons  |  Nil .
+Throw ::=  LinePos   = l   'throw'   PushChar   SimpleExp   PopChar   = value  { Throw(l,value) }.
+BindFunArgsTail ::=  Pattern   = p   BindFunArgsTail-Star0   = ps   ')'   <Pair 3f82ff>  |  ')'   Seq{} .
+EvaluationUnit-Star2 ::=  EvaluationUnit-Star2-Dis0   = $head   EvaluationUnit-Star2   = $tail   Cons  |  Nil .
+Drop ::=  '<'   DropExp   = e   '>'  { Drop(resolve(order(e))) } |  '<|'   Pattern   = p   '|>'  { DropPattern(p) }.
+ArrowTail ::=  Name   = n   CollOp   = x   Arrow .
+Objectp-Star0 ::=  '::'   Name   = $head   Objectp-Star0   = $tail   Cons  |  Nil .
+Exp ::=  PushChar   Expr   PopChar   = e   !  { resolve(order(e)) }.
+LogicalExp ::=  PushChar   SimpleExp   PopChar   = e  { resolve(order(e)) }.
+SetCmpExp-Star0 ::=  ','   CmpClause   = $head   SetCmpExp-Star0   = $tail   Cons  |  Nil .
+ImportPath ::=  Name   = n   ImportPath-Star0   = ns   <Pair 24cdc> .
+KeyArg ::=  Name   = name   '='   PushChar   Expr   PopChar   = exp  { KeyArg(name,exp) }.
+Varp-Dis0 ::=  '='   PushChar   Pattern   PopChar  |  null .
+Keyps ::=  Keyp   = key   Keyps-Star0   = keys   <Pair 16071e>  |  Seq{} .
+IfExp ::=  LinePos   = l   'if'   PushChar   Expr   PopChar   = e1   'then'   PushChar   Expr   PopChar   = e2   IfTail   = e3  { If(l,e1,e2,e3) }.
+Patterns-Star0 ::=  ','   Pattern   = $head   Patterns-Star0   = $tail   Cons  |  Nil .
+AName ::=  Name   !  |  Drop .
+EmptySeqTail ::=  '}'  { SetExp(l,"Seq",Seq{}) }.
+Keywordp-Star0 ::=  '::'   Name   = $head   Keywordp-Star0   = $tail   Cons  |  Nil .
+AtExp ::=  LinePos   = l   '@'   PushChar  At  PopChar   = e  { e.setLine(l) }.
+Try ::=  LinePos   = l   'try'   PushChar   Expr   PopChar   = body   'catch'   '('   Name   = name   ')'   PushChar   Expr   PopChar   = handler   'end'  { Try(l,body,name,handler) }.
+Def-Dis0 ::=  '!'  { true } | { false }.
+Bindings ::=  BindingList  |  Drop .
+Strp ::=  Str   = s  { Constp(StrExp(s)) }.
+Op ::=  BinOp   !  |  ';'   ; .
+Collect ::=  '('   AName   = v   '|'   PushChar   Expr   PopChar   = e   ')'  { IterExp(c,n,v,e) }.
+SetExp ::=  LinePos   = l   'Set{'   CommaSepExps   = es   '}'  { SetExp(l,"Set",es) }.
+Pattern ::=  AddPattern   = p   Pattern-Star0   = es  { es->iterate(e s = p |
+  Includingp(s,e)) }  = p   PatternGuard .
+Consp ::=  Pairp  |  Seqp  |  Emptyp .
+ParserImport ::=  'parserImport'   Name   = name   ParserImport-Star0   = names   ';'   <Pair 3dd7ab>  ImportAt { ParserImport(Seq{name} + names,null) }.
+Seqp ::=  'Seq{'   Pattern   = head   SeqpTail   = tail  { Consp(head,tail) }.
+CollExp ::=  PushChar   SetExp   PopChar   !  |  PushChar   SeqExp   PopChar   !  |  PushChar   SetCmpExp   PopChar   !  |  PushChar   SeqCmpExp   PopChar   ! .
+BindFunArgsTail-Star0 ::=  ','   Pattern   = $head   BindFunArgsTail-Star0   = $tail   Cons  |  Nil .
+TopLevelExp ::=  PushChar   SimpleExp   PopChar   = s   ';'  { resolve(order(s)) }.
+BindFunArgs ::=  '('   BindFunArgsTail .
+EvaluationUnit-Star1 ::=  EImport   = $head   EvaluationUnit-Star1   = $tail   Cons  |  Nil .
+DropExp ::=  'not'   DropExp   = e  { Negate(e) } |  PushChar   Apply   PopChar   = a   DropExpTail .
+ArgsTail ::=  ')'   Seq{}  |  PushChar   Expr   PopChar   = arg   ArgsTail-Star0   = args   ')'   <Pair 39e8e0> .
+PairOrElements-Star0 ::=  ','   PushChar   Expr   PopChar   = $head   PairOrElements-Star0   = $tail   Cons  |  Nil .
+Expr ::=  'not'   PushChar   Expr   PopChar   = e  { Negate(e) } |  '-'   PushChar   SimpleExp   PopChar   = e  { BinExp(IntExp(0),"-",e) } |  PushChar   Apply   PopChar   = a   ExpTail .
+LocalParserImport ::=  'parserImport'   Name   = name   LocalParserImport-Star0   = names   <Pair 560665>  ImportAt  'in'   PushChar   Expr   PopChar   = e   'end'  { ParserImport(Seq{name | names},e) }.
+SeqExp-Dis0 ::=  EmptySeqTail  |  NonEmptySeqTail .
+ImportIn ::=  'import'   ImportPath   = path   'in'   PushChar   Exp   PopChar   = body   'end'  { ImportIn(path,body) }.
+KeyArgs ::=  '['   KeyArgs-Dis0 .
+Varp-Dis1 ::=  ':'   PushChar   TypeExp   PopChar  | { NamedType() }.
+Keyp ::=  Name   = name   '='   Pattern   = pattern  { Keyp(name,pattern) }.
+FloatExp ::=  LinePos   = l   Float   = f  { f.lift().line := l }.
+Pattern-Star0 ::=  PatternTail   = $head   Pattern-Star0   = $tail   Cons  |  Nil .
+Apply ::=  PushChar   Atom   PopChar   = a   ApplyTail   = e   Arrow .
+Emptyp ::=  'Seq{'   '}'  { Constp(SetExp("Seq",Seq{})) } |  'Set{'   '}'  { Constp(SetExp("Set",Seq{})) }.
+KeyArgs-Dis0 ::=  ']'   Seq{}  |  KeyArg   = arg   KeyArgs-Dis0-Star0   = args   ']'   <Pair 39ea3e> .
+AtomicPattern ::=  PushChar   Varp   PopChar  |  PushChar   Constp   PopChar  |  PushChar   Objectp   PopChar  |  PushChar   Consp   PopChar  |  PushChar   Keywordp   PopChar  |  PushChar   Syntaxp   PopChar  |  '('   PushChar   Pattern   PopChar   ')' .
+TypePath ::=  Name   = name   TypePath-Star0   = names  { Seq{name | names}->collect(n |
+  Symbol(n)) }.
+CompilationUnit-Star0 ::=  ParserImport   = $head   CompilationUnit-Star0   = $tail   Cons  |  Nil .
+BinOp ::=  '<'   <  |  '<='   <=  |  '>'   >  |  '>='   >=  |  '<>'   <>  |  '='   =  |  '::'   ::  |  ':='   :=  |  '.'   .  |  'and'   and  |  'andthen'   andthen  |  'implies'   implies  |  'or'   or  |  'orelse'   orelse  |  '+'   +  |  '-'   -  |  '*'   *  |  '/'   / .
+StrExp ::=  LinePos   = l   Str   = e  { StrExp(l,e) }.
+OpType ::=  TypeArgs   = domains   '->'   PushChar   TypeExp   PopChar   = range  { OpType(domains,range) }.
+CommaSepExps ::=  PushChar   Expr   PopChar   = e   CommaSepExps-Star0   = es   <Pair 424079>  |  Seq{} .
+Self ::=  LinePos   = l   'self'  { Self(l) }.
+PatternGuard ::=  'when'   PushChar   Exp   PopChar   = e  { Condp(p,e) } |  <VarRef 3f8102> .
+CompilationBodyExps ::=  CompilationBody   = b   !   CompilationBodyExps   = bs   <Pair 443e80>  |  Seq{} .
+Pairp ::=  'Seq{'   Pattern   = head   '|'   Pattern   = tail   '}'  { Consp(head,tail) }.
+SeqpTail ::=  ','   Pattern   = head   SeqpTail   = tail  { Consp(head,tail) } |  '}'  { Constp(SetExp("Seq",Seq{})) }.
+CmpClause ::=  Name   = n   OptType   = t   '<-'   PushChar   Exp   PopChar   = e  { Comprehensions::Bind(n,t.toExp(),e) } |  '?'   PushChar   Exp   PopChar   = e  { Comprehensions::Filter(e) }.
+BindingList-Star0 ::=  ';'   PushChar   Binding   PopChar   = $head   BindingList-Star0   = $tail   Cons  |  Nil .
+TopLevelCommand ::=  PushChar   SimpleExp   PopChar   = c   pState   = p  { p.consumeToken := false }  ';'  { resolve(order(c)) }.
+BindFun ::=  BindFunArgs   = args   OptType   = type   '='   PushChar   SimpleExp   PopChar   = value  { FunBinding(name,args,type,value) }.
+EvaluationUnit-Star0 ::=  ParserImport   = $head   EvaluationUnit-Star0   = $tail   Cons  |  Nil .
+DropExpTail ::=  DropOp   = o   !   DropExp   = e  { BinExp(a,o,e) } |  <VarRef 423e9d> .
+Args ::=  '('   ArgsTail .
+ParserImport-Star0 ::=  '::'   Name   = $head   ParserImport-Star0   = $tail   Cons  |  Nil .
+ExpTail ::=  Op   = o   !   PushChar   Expr   PopChar   = e  { BinExp(a,o,e) } |  <VarRef 406d36> .
+Lift ::=  LinePos   = l   '[|'   PushChar   Exp   PopChar   = e   '|]'  { Lift(l,e) }.
+TypeExp-Dis0 ::=  TypeArgs   = args  { ParametricType(path,args) } | { NamedType(path) }.
+IntExp ::=  LinePos   = l   Int   = e  { IntExp(l,e) }.
+Iterate ::=  '('   AName   = v1   AName   = v2   '='   PushChar   Expr   PopChar   = init   '|'   PushChar   Expr   PopChar   = body   ')'  { Iterate(c,v1,v2,init,body) }.
+TypePath-Star0 ::=  '::'   Name   = $head   TypePath-Star0   = $tail   Cons  |  Nil .
+LetBody ::=  'in'   PushChar   Expr   PopChar   = body   <VarRef 49277b>  |  PushChar   'then'   PushChar   Bindings   PopChar   = bindings   LetBody   = body  { Let(bindings,body) }  PopChar .
+Expp ::=  '['   PushChar   Exp   PopChar   = exp   ']'  { Constp(exp) }.
+PathExp-Dis0 ::=  '::'   AName   = name   PathExp-Dis0-Star0   = names  { Path(atom,Seq{name | names}) } |  <VarRef 39eb9b> .
+ApplyTail ::=  Args   = args   !  { Apply(a,args) } |  KeyArgs   = args   !  { Instantiate(a,args) } |  <VarRef f37b0> .
+EImport ::=  'import'   TopLevelExp   = exp  { Evaluator::Import(exp) }.
+KeyArgs-Dis0-Star0 ::=  ','   KeyArg   = $head   KeyArgs-Dis0-Star0   = $tail   Cons  |  Nil .
+Binding ::=  AName   = name   BindingTail .
+TypeArgs ::=  '('   PushChar   TypeExp   PopChar   = arg   TypeArgs-Star0   = args   ')'   <Pair 4404e9> .
+CompilationUnit-Star1 ::=  Import   = $head   CompilationUnit-Star1   = $tail   Cons  |  Nil .
+BoolExp ::=  LinePos   = l   'true'  { BoolExp(l,true) } |  LinePos   = l   'false'  { BoolExp(l,false) }.
+SimpleExpTail ::=  BinOp   = o   !   PushChar   SimpleExp   PopChar   = e  { BinExp(a,o,e) } |  <VarRef f37a8> .
+OptType ::=  ':'   PushChar   TypeExp   PopChar  | { NamedType() }.
+CompilationUnit ::=  CompilationUnit-Star0   = parserImports   CompilationUnit-Star1   = imports   CompilationBodyExps   = exps   EOF   pState   = s  { CompilationUnit("",imports,exps,s.getSource(),parserImports) }.
+Patterns ::=  Pattern   = head   Patterns-Star0   = tail   <Pair 5dce40>  |  Seq{} .
+PatternTail ::=  '->'   Name   '('   Pattern   = p   ')'   <VarRef 47cd42> .
+CompilationBody ::=  Def  |  TopLevelExp .
+PairOrElements ::=  '|'   PushChar   Expr   PopChar   = t   '}'  { ConsExp(e,t) } |  PairOrElements-Star0   = es   '}'  { SetExp(l,"Seq",Seq{e | es}) }.
+SimpleExp ::=  'not'   PushChar   SimpleExp   PopChar   = e  { Negate(e) } |  '-'   PushChar   SimpleExp   PopChar   = e  { BinExp(IntExp(0),"-",e) } |  PushChar   Apply   PopChar   = a   SimpleExpTail .
+Boolp ::=  'true'  { Constp(BoolExp(true)) } |  'false'  { Constp(BoolExp(false)) }.
+CommaSepExps-Star0 ::=  ','   PushChar   Expr   PopChar   = $head   CommaSepExps-Star0   = $tail   Cons  |  Nil .
+TypeExp ::=  TypePath   = path   TypeExp-Dis0  |  '['   PushChar   TypeExp   PopChar   = t   ']'  { ParametricType(Seq{"Seq"},Seq{t}) } |  '{'   PushChar   TypeExp   PopChar   = t   '}'  { ParametricType(Seq{"Set"},Seq{t}) } |  Drop  |  OpType .
+BindingTail ::=  BindFun  |  BindValue .
+ImportPath-Star0 ::=  '::'   Name   = $head   ImportPath-Star0   = $tail   Cons  |  Nil .
+DropOp ::=  '<'   <  |  '<='   <=  |  '<>'   <>  |  '='   =  |  '::'   ::  |  ':='   :=  |  '.'   .  |  'and'   and  |  'andthen'   andthen  |  'implies'   implies  |  'or'   or  |  'orelse'   orelse  |  '+'   +  |  '-'   -  |  '*'   *  |  '/'   / .
+Arrow ::=  '->'   !   ArrowTail  |  <VarRef 2aacd0> .
+PathExp-Dis0-Star0 ::=  '::'   AName   = $head   PathExp-Dis0-Star0   = $tail   Cons  |  Nil .
+Exp1 ::=  PushChar   Exp   PopChar   EOF .
+LetExp ::=  LinePos   = l   'let'   PushChar   Bindings   PopChar   = bindings   LetBody   = body   'end'  { Let(l,bindings,body) }.
+TypeArgs-Star0 ::=  ','   PushChar   TypeExp   PopChar   = $head   TypeArgs-Star0   = $tail   Cons  |  Nil .
+Intp ::=  Int   = i  { Constp(IntExp(i)) }.
+</PRE></TD>
+</TABLE>
+</HTML>

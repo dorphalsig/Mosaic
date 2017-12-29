@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+Daemon
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>Daemon</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+
+      Daemons monitor the state of objects and perform actions when the object changes 
+      state. Daemon technology is the key to implementing a variety of modular reusable 
+      tool architectures such as the observer pattern. XMF-Mosaic uses daemons extensively 
+      to synchronize data across multiple tools. User defined tools can use daemons 
+      to make tools reactive and to ensure data is always consistent. 
+    
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR><TD><B>action</B></TD><TD><A HREF="../../../Root/XCore/Operation/index.html">Operation<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>id</B></TD><TD><A HREF="../../../Root/XCore/Element/index.html">Element<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>persistent</B></TD><TD><A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>slot</B></TD><TD><A HREF="../../../Root/XCore/Symbol/index.html">Symbol<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>target</B></TD><TD><A HREF="../../../Root/XCore/Element/index.html">Element<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>traced</B></TD><TD><A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>type</B></TD><TD><A HREF="../../../Root/XCore/Integer/index.html">Integer<A></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#action">action</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#addDaemon">addDaemon</a>(d:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#addMultiDaemon">addMultiDaemon</a>(d:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,target:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#addMultiTarget">addMultiTarget</a>(object:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,target:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#addToDaemonTable">addToDaemonTable</a>(d:<A HREF="../../../Root/XCore/Daemon/index.html">Daemon<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#addToMultiDaemonTable">addToMultiDaemonTable</a>(key:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,d:<A HREF="../../../Root/XCore/Daemon/index.html">Daemon<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#daemons">daemons</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#get">get</a>(name:<A HREF="../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#getMultiDaemon">getMultiDaemon</a>(key:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#getStructuralFeatureNames">getStructuralFeatureNames</a>():<A HREF="../../../Root/XCore/String/index.html">Set(String)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#getTarget">getTarget</a>(object:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#hasMultiDaemon">hasMultiDaemon</a>(key:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#hasSlot">hasSlot</a>(name:<A HREF="../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#id">id</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#init">init</a>(args:<A HREF="../../../Root/XCore/Element/index.html">Seq(Element)<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#invoke">invoke</a>(target:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,args:<A HREF="../../../Root/XCore/Element/index.html">Seq(Element)<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#invokeAction">invokeAction</a>(target:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,args:<A HREF="../../../Root/XCore/Element/index.html">Seq(Element)<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#isMultiDaemon">isMultiDaemon</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#matchesId">matchesId</a>(id:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#matchesTarget">matchesTarget</a>(object:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,target:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#name">name</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#persistent">persistent</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#removeDaemon">removeDaemon</a>(d:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,target:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#removeFromDaemonTable">removeFromDaemonTable</a>(d:<A HREF="../../../Root/XCore/Daemon/index.html">Daemon<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#removeMultiTarget">removeMultiTarget</a>(object:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,target:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#set">set</a>(name:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,value:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#slot">slot</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#target">target</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#toString">toString</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#trace">trace</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#traceAll">traceAll</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Trace all current daemons. Trace will print a message
+      when the daemon fires.
+    </TD></TR>
+<TR><TD><B><a href="#traced">traced</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#type">type</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#untrace">untrace</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#untraceAll">untraceAll</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Untrace all currently traced daemons.
+    </TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="action"/><FONT FACE="Courier" SIZE="1">@Operation&#160;action():XCore::Element<br>&#160;&#160;self.action<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addDaemon"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addDaemon(d&#160;:&#160;XCore::Element):Element<br>&#160;&#160;self<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addMultiDaemon"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addMultiDaemon(d&#160;:&#160;XCore::Element,target&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addMultiTarget"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addMultiTarget(object&#160;:&#160;XCore::Element,target&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;if&#160;self.target.hasKey(object)<br>&#160;&#160;then&#160;let&#160;targetSet&#160;=&#160;self.target.get(object)-&gt;including(target)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;self.target.remove(object);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.target.put(object,targetSet)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;else<br>&#160;&#160;&#160;&#160;object.addDaemon(self);<br>&#160;&#160;&#160;&#160;self.target.put(object,Set{target})<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addToDaemonTable"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addToDaemonTable(d&#160;:&#160;Daemon):XCore::Element<br>&#160;&#160;Daemon::allDaemons&#160;:=Daemon::allDaemons-&gt;prepend(d)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addToMultiDaemonTable"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addToMultiDaemonTable(key&#160;:&#160;XCore::Element,d&#160;:&#160;Daemon):XCore::Element<br>&#160;&#160;Daemon::multiDaemons.put(key,d)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="daemons"/><FONT FACE="Courier" SIZE="1">@Operation&#160;daemons():XCore::Element<br>&#160;&#160;Seq{}<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="get"/><FONT FACE="Courier" SIZE="1">@Operation&#160;get(name&#160;:&#160;String):XCore::Element<br>&#160;&#160;@Case&#160;name.toString()&#160;of<br>&#160;&#160;&#160;&#160;[&#160;"id"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;Kernel_daemonId(self)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"type"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;Kernel_daemonType(self)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"slot"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;Kernel_daemonSlot(self)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"action"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;Kernel_daemonAction(self)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"persistent"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;Kernel_daemonPersistent(self)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"traced"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;Kernel_daemonTraced(self)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"target"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;Kernel_daemonTarget(self)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"roleFiller"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;""<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;else&#160;self.error(self.toString()&#160;+&#160;"&#160;has&#160;no&#160;slot&#160;named&#160;"&#160;+&#160;name)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="getMultiDaemon"/><FONT FACE="Courier" SIZE="1">@Operation&#160;getMultiDaemon(key&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;if&#160;Daemon::multiDaemons.hasKey(key)<br>&#160;&#160;then&#160;Daemon::multiDaemons.get(key)<br>&#160;&#160;else&#160;null<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="getStructuralFeatureNames"/><FONT FACE="Courier" SIZE="1">@Operation&#160;getStructuralFeatureNames():Set(String)<br>&#160;&#160;Daemon.attributes.name-&gt;map("toString")<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="getTarget"/><FONT FACE="Courier" SIZE="1">@Operation&#160;getTarget(object&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;if&#160;self.isMultiDaemon()<br>&#160;&#160;then&#160;if&#160;self.target.hasKey(object)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;self.target.get(object)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;null<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;else&#160;Kernel_daemonTarget(self)<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="hasMultiDaemon"/><FONT FACE="Courier" SIZE="1">@Operation&#160;hasMultiDaemon(key&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;Daemon::multiDaemons.hasKey(key)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="hasSlot"/><FONT FACE="Courier" SIZE="1">@Operation&#160;hasSlot(name&#160;:&#160;String):Boolean<br>&#160;&#160;self.getStructuralFeatureNames()-&gt;includes(name-&gt;toString)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="id"/><FONT FACE="Courier" SIZE="1">@Operation&#160;id():XCore::Element<br>&#160;&#160;Kernel_daemonId(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="init"/><FONT FACE="Courier" SIZE="1">@Operation&#160;init(args&#160;:&#160;Seq(Element)):XCore::Element<br>&#160;&#160;if&#160;args-&gt;size&#160;=&#160;7<br>&#160;&#160;then&#160;let&#160;daemon&#160;=&#160;Kernel_mkDaemon();<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;id&#160;=&#160;args-&gt;at(0);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;type&#160;=&#160;args-&gt;at(1);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;slot&#160;=&#160;args-&gt;at(2);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;action&#160;=&#160;args-&gt;at(3);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;persistent&#160;=&#160;args-&gt;at(4);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;traced&#160;=&#160;args-&gt;at(5);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;target&#160;=&#160;args-&gt;at(6)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;Daemon::addToDaemonTable(daemon);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;daemon.id&#160;:=&#160;id;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;daemon.type&#160;:=&#160;type;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;daemon.slot&#160;:=&#160;slot;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;daemon.action&#160;:=&#160;action;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;daemon.persistent&#160;:=&#160;persistent;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;daemon.traced&#160;:=&#160;traced;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;daemon.target&#160;:=&#160;target<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;else&#160;self.error("Illegal&#160;args&#160;to&#160;Daemon&#160;creation:&#160;"&#160;+&#160;args.toString())<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="invoke"/><FONT FACE="Courier" SIZE="1">@Operation&#160;invoke(target&#160;:&#160;Element,args&#160;:&#160;Seq(Element)):Element<br>&#160;&#160;@CaseInt[4]&#160;self.type&#160;of<br>&#160;&#160;&#160;&#160;Daemon::ANY&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;if&#160;self.traced<br>&#160;&#160;&#160;&#160;&#160;&#160;then&#160;format(stdout,"Fire&#160;~S(~S,~{,~;~S~})~%~%",Seq{self,target,args})<br>&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;end&#160;;<br>&#160;&#160;&#160;&#160;&#160;&#160;self.invokeAction(target,Seq{target&#160;|&#160;args})<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;Daemon::VALUE&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;if&#160;self.slot&#160;=&#160;args-&gt;at(0)<br>&#160;&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;self.traced<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;format(stdout,"Fire&#160;~S(~S,~{,~;~S~})~%~%",Seq{self,target,args})<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.invokeAction(target,Seq{target&#160;|&#160;args})<br>&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;Daemon::ADD&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;if&#160;self.slot&#160;=&#160;args-&gt;at(0)<br>&#160;&#160;&#160;&#160;&#160;&#160;then&#160;let&#160;newValues&#160;=&#160;args-&gt;at(1);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;oldValues&#160;=&#160;args-&gt;at(2)&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;values&#160;=&#160;newValues&#160;-&#160;oldValues<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;if&#160;not&#160;values-&gt;isEmpty<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;@For&#160;value&#160;in&#160;values&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;self.traced<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;format(stdout,"Fire&#160;+&#160;~S(~S,~S)~%~%",Seq{self,target,value})<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.invokeAction(target,Seq{target,self.slot,value})<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;Daemon::SUB&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;if&#160;self.slot&#160;=&#160;args-&gt;at(0)<br>&#160;&#160;&#160;&#160;&#160;&#160;then&#160;let&#160;newValues&#160;=&#160;args-&gt;at(1);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;oldValues&#160;=&#160;args-&gt;at(2)&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;values&#160;=&#160;oldValues&#160;-&#160;newValues<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;if&#160;not&#160;values-&gt;isEmpty<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;@For&#160;value&#160;in&#160;values&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;self.traced<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;format(stdout,"Fire&#160;-&#160;~S(~S,~S)~%~%",Seq{self,target,value})<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.invokeAction(target,Seq{target,self.slot,value})<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="invokeAction"/><FONT FACE="Courier" SIZE="1">@Operation&#160;invokeAction(target&#160;:&#160;Element,args&#160;:&#160;Seq(Element)):Element<br>&#160;&#160;let&#160;handlerTarget&#160;=&#160;self.getTarget(target)<br>&#160;&#160;in&#160;if&#160;handlerTarget&#160;=&#160;null<br>&#160;&#160;&#160;&#160;&#160;then&#160;self.action.invoke(target,args)<br>&#160;&#160;&#160;&#160;&#160;elseif&#160;self.isMultiDaemon()<br>&#160;&#160;&#160;&#160;&#160;then&#160;@For&#160;t&#160;in&#160;handlerTarget&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.action.invoke(t,args)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;else&#160;self.action.invoke(handlerTarget,args)<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="isMultiDaemon"/><FONT FACE="Courier" SIZE="1">@Operation&#160;isMultiDaemon():XCore::Element<br>&#160;&#160;self.target&#160;&lt;&gt;&#160;null&#160;andthen&#160;self.target.isKindOf(Table)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="matchesId"/><FONT FACE="Courier" SIZE="1">@Operation&#160;matchesId(id&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.id&#160;=&#160;id<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="matchesTarget"/><FONT FACE="Courier" SIZE="1">@Operation&#160;matchesTarget(object&#160;:&#160;XCore::Element,target&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;if&#160;self.isMultiDaemon()<br>&#160;&#160;then&#160;let&#160;targetSet&#160;=&#160;self.target.get(object)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;targetSet-&gt;includes(target)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;else&#160;self.target&#160;=&#160;target<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="name"/><FONT FACE="Courier" SIZE="1">@Operation&#160;name():XCore::Element<br>&#160;&#160;Kernel_daemonId(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="persistent"/><FONT FACE="Courier" SIZE="1">@Operation&#160;persistent():XCore::Element<br>&#160;&#160;Kernel_daemonPersistent(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="removeDaemon"/><FONT FACE="Courier" SIZE="1">@Operation&#160;removeDaemon(d&#160;:&#160;XCore::Element,target&#160;:&#160;XCore::Element):Element<br>&#160;&#160;self<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="removeFromDaemonTable"/><FONT FACE="Courier" SIZE="1">@Operation&#160;removeFromDaemonTable(d&#160;:&#160;Daemon):XCore::Element<br>&#160;&#160;Daemon::allDaemons&#160;:=Daemon::allDaemons-&gt;excluding(d)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="removeMultiTarget"/><FONT FACE="Courier" SIZE="1">@Operation&#160;removeMultiTarget(object&#160;:&#160;XCore::Element,target&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;if&#160;self.target.hasKey(object)<br>&#160;&#160;then&#160;let&#160;targetSet&#160;=&#160;self.target.get(object)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;targetSet&#160;:=&#160;targetSet-&gt;excluding(target);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;targetSet-&gt;isEmpty<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.target.remove(object);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;object.setDaemons(object.daemons()-&gt;excluding(self))<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.target.remove(object);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.target.put(object,targetSet)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;else&#160;false<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="set"/><FONT FACE="Courier" SIZE="1">@Operation&#160;set(name&#160;:&#160;XCore::Element,value&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@Case&#160;name.toString()&#160;of<br>&#160;&#160;&#160;&#160;[&#160;"id"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;Kernel_daemonSetId(self,value)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"type"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;Kernel_daemonSetType(self,value)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"slot"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;Kernel_daemonSetSlot(self,value.asSymbol())<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"action"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;Kernel_daemonSetAction(self,value)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"persistent"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;Kernel_daemonSetPersistent(self,value)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"traced"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;Kernel_daemonSetTraced(self,value)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"target"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;Kernel_daemonSetTarget(self,value)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="slot"/><FONT FACE="Courier" SIZE="1">@Operation&#160;slot():XCore::Element<br>&#160;&#160;Kernel_daemonSlot(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="target"/><FONT FACE="Courier" SIZE="1">@Operation&#160;target():XCore::Element<br>&#160;&#160;Kernel_daemonTarget(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="toString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;toString():String<br>&#160;&#160;"&lt;Daemon&#160;"&#160;+&#160;self.id&#160;+&#160;",&#160;target="&#160;+&#160;self.target.toString()&#160;+&#160;"&gt;"<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="trace"/><FONT FACE="Courier" SIZE="1">@Operation&#160;trace():XCore::Element<br>&#160;&#160;self.traced&#160;:=&#160;true<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="traceAll"/><FONT FACE="Courier" SIZE="1">@Operation&#160;traceAll():XCore::Element<br>&#160;&#160;@For&#160;daemon&#160;in&#160;Daemon::allDaemons&#160;do<br>&#160;&#160;&#160;&#160;daemon.trace()<br>&#160;&#160;end;<br>&#160;&#160;Daemon::traceDaemons&#160;:=true<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="traced"/><FONT FACE="Courier" SIZE="1">@Operation&#160;traced():XCore::Element<br>&#160;&#160;Kernel_daemonTraced(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="type"/><FONT FACE="Courier" SIZE="1">@Operation&#160;type():XCore::Element<br>&#160;&#160;Kernel_daemonType(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="untrace"/><FONT FACE="Courier" SIZE="1">@Operation&#160;untrace():XCore::Element<br>&#160;&#160;self.traced&#160;:=&#160;false<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="untraceAll"/><FONT FACE="Courier" SIZE="1">@Operation&#160;untraceAll():XCore::Element<br>&#160;&#160;@For&#160;daemon&#160;in&#160;Daemon::allDaemons&#160;do<br>&#160;&#160;&#160;&#160;daemon.untrace()<br>&#160;&#160;end;<br>&#160;&#160;Daemon::traceDaemons&#160;:=false<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

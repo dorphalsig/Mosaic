@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+Forms
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>Forms</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+
+       This package defines a model for a forms client.
+     
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Packages</B></FONT></TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Classes</B></FONT></TD>
+</TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Forms/Form/index.html">Form</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Forms/FormActiveComboBox/index.html">FormActiveComboBox</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Forms/FormButton/index.html">FormButton</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Forms/FormCheckBox/index.html">FormCheckBox</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Forms/FormClient/index.html">FormClient</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Forms/FormComboBox/index.html">FormComboBox</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Forms/FormCommandInterpreter/index.html">FormCommandInterpreter</A></B></TD><TD>
+       This class defines a command interpreter over forms. It can be used as the basis
+       for defining event driven mappings. The mapping handles the following output
+       commands by sen-ding them in the appropriate format to the client connected to the
+       output channel:
+           [newFormCommandCommand(form)] 
+       </TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Forms/FormElement/index.html">FormElement</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Forms/FormEventHandler/index.html">FormEventHandler</A></B></TD><TD>
+       This class defines operations to handle the following incoming
+       events from the client. In each case the event is a sequence of strings
+       and integers. Each event has a fixed arity. Raising an event in the mapping
+       causes the appropriate form element (usually the containing element) to be
+       sent a message with the supplied arguments + the mapping. The form element
+       is then responsible for updating the form model and using the commands
+       listed above to update the client. Users of the mapping should always raise
+       events and not perform the commands directly. New types of form element can
+       handle the events in different ways. New types of form mapping can exten-d
+       the interface of events that can be raised.
+           [buttonPressed(buttonId)]
+           [formClosed(formId)]
+           [focusGained(formId)]
+           [focusLost(formId)]
+           [textChanged(textfieldId,text)]
+           [resetText(textcomponentId)]
+           [getEditableText(itemId)]
+           [setBoolean(checkBoxId,value)]
+           [selected(itemId)]
+           [doubleSelected(itemId)]
+           [rightClickMenuSelected(itemId)]
+           [undo(formId)]
+           [redo{formId)]
+    </TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Forms/FormIdError/index.html">FormIdError</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Forms/FormLabel/index.html">FormLabel</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Forms/FormList/index.html">FormList</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Forms/FormTable/index.html">FormTable</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Forms/FormTextBox/index.html">FormTextBox</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Forms/FormTextField/index.html">FormTextField</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Forms/FormTree/index.html">FormTree</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Forms/FormWithHistory/index.html">FormWithHistory</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Forms/ListElement/index.html">ListElement</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Forms/LockableForm/index.html">LockableForm</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Forms/LockableFormWithHistory/index.html">LockableFormWithHistory</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Forms/TextComponent/index.html">TextComponent</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Forms/TreeNode/index.html">TreeNode</A></B></TD><TD>No Documentation Specified</TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+</TABLE>
+</HTML>

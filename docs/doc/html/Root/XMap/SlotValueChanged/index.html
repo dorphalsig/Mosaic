@@ -1,0 +1,316 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+SlotValueChanged
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>SlotValueChanged</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+
+     This construct adds a daemon that fires when the given slot value changes. The
+     construct allows the new value and old value to be bound. The body of the
+     construct is any expression. Modifiers allow this construct to control whether
+     it is fired when a slot value changes, when new values are added or when existing
+     values are removed. A daemon can be a reference to an existing operation or
+     can define the required operation in-line. A daemon may be persistent in which
+     case it is saved when the owning object is saved. The daemon operation involves
+     TWO objects: that which is in scope when the daemon is defined and the object
+     that is monitored. The value of SELF in the daemon operation is always that which
+     is in scope when the daemon is created. The object that is monitored is supplied
+     to the daemon operation as the first argument.
+   
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../Root/XOCL/Sugar/index.html">Sugar</A>
+,<A HREF="../../../Root/XCore/Performable/index.html">Performable</A>
+,<A HREF="../../../Root/XCore/Located/index.html">Located</A>
+,<A HREF="../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+<TR><TD>SlotValueChanged(id,multi,guarded,modifier,persistent,path,object,slot,names,body)</TD><TD> No Documentation </TD></TR>
+<TR><TD>SlotValueChanged(id,multi,guarded,modifier,path,object,slot,names,body)</TD><TD> No Documentation </TD></TR>
+<TR><TD>SlotValueChanged(id,multi,guarded,modifier,persistent,path,object,slot)</TD><TD> No Documentation </TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR><TD><B>body</B></TD><TD><A HREF="../../../Root/XCore/Performable/index.html">Performable<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>guarded</B></TD><TD><A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>id</B></TD><TD><A HREF="../../../Root/XCore/Performable/index.html">Performable<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>modifier</B></TD><TD><A HREF="../../../Root/XCore/String/index.html">String<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>multi</B></TD><TD><A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>names</B></TD><TD><A HREF="../../../Root/XCore/String/index.html">Seq(String)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>object</B></TD><TD><A HREF="../../../Root/XCore/Performable/index.html">Performable<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>path</B></TD><TD><A HREF="../../../Root/XCore/String/index.html">Seq(String)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>persistent</B></TD><TD><A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>slot</B></TD><TD><A HREF="../../../Root/XCore/Performable/index.html">Performable<A></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Performable/index.html">Performable</A>: endLine, line. <BR><B>From</B> <A HREF="../../../Root/XCore/Located/index.html">Located</A>: charEnd, charStart. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#applyExistingMultiDaemon">applyExistingMultiDaemon</a>(key:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,object:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,target:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#daemonChangeType">daemonChangeType</a>():<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugar">desugar</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugarAdd">desugarAdd</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugarAddDefined">desugarAddDefined</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugarAddReferenced">desugarAddReferenced</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugarChanged">desugarChanged</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugarChangedDefined">desugarChangedDefined</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugarChangedReferenced">desugarChangedReferenced</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugarCheckMulti">desugarCheckMulti</a>(addDaemon:<A HREF="../../../Root/XCore/Performable/index.html">Performable<A>):<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugarDaemon">desugarDaemon</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugarGuard">desugarGuard</a>(addDaemon:<A HREF="../../../Root/XCore/Performable/index.html">Performable<A>):<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugarRemove">desugarRemove</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugarRemoveDefined">desugarRemoveDefined</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugarRemoveReferenced">desugarRemoveReferenced</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#elementName">elementName</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#getTarget">getTarget</a>(target:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,multi:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#lift">lift</a>():<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newName">newName</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#objectName">objectName</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#oldName">oldName</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#path">path</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#pprint">pprint</a>(out:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,indent:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#processDaemon">processDaemon</a>(daemon:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,object:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,target:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setId">setId</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setPath">setPath</a>(v:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#toString">toString</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XOCL/Sugar/index.html">Sugar</A>: FV, compile, desugar, eval, lift, maxLocals, typeExp. <BR><B>From</B> <A HREF="../../../Root/XCore/Performable/index.html">Performable</A>: FV, compile, endLine, eval, line, maxLocals, pprint, pprint, pprint, setEndLine, setLine. <BR><B>From</B> <A HREF="../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="applyExistingMultiDaemon"/><FONT FACE="Courier" SIZE="1">@Operation&#160;applyExistingMultiDaemon(key&#160;:&#160;XCore::Element,object&#160;:&#160;XCore::Element,target&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;slotValueChangedDaemon&#160;=&#160;Daemon::getMultiDaemon(key)<br>&#160;&#160;in&#160;XMap::SlotValueChanged::processDaemon(slotValueChangedDaemon,object,target);<br>&#160;&#160;&#160;&#160;&#160;slotValueChangedDaemon<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="daemonChangeType"/><FONT FACE="Courier" SIZE="1">@Operation&#160;daemonChangeType():Performable<br>&#160;&#160;@Case&#160;slot&#160;of<br>&#160;&#160;&#160;&#160;StrExp([&#160;"*"&#160;])&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;[|&#160;XCore::Daemon::ANY&#160;|]<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;else&#160;[|&#160;XCore::Daemon::VALUE&#160;|]<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugar"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugar():XCore::Element<br>&#160;&#160;self.desugarGuard(self.desugarCheckMulti(self.desugarDaemon()))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugarAdd"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugarAdd():XCore::Element<br>&#160;&#160;if&#160;body&#160;=&#160;null<br>&#160;&#160;then&#160;self.desugarAddReferenced()<br>&#160;&#160;else&#160;self.desugarAddDefined()<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugarAddDefined"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugarAddDefined():XCore::Element<br>&#160;&#160;[|&#160;let&#160;slotValueChangedDaemon&#160;=&#160;XCore::Daemon(&lt;id&gt;,XCore::Daemon::ADD,&lt;slot&gt;,@Operation&#160;anonymous(Drop(Send(&lt;Self&#160;a7650a&gt;,objectName,Seq{}))&#160;:&#160;XCore::Element,s&#160;:&#160;XCore::Element,Drop(Send(&lt;Self&#160;a765fc&gt;,elementName,Seq{}))&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;body&gt;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end,&lt;BoolExp(persistent)&gt;,XCore::Daemon::traceDaemons,XMap::SlotValueChanged::getTarget(self,&lt;BoolExp(multi)&gt;))<br>&#160;&#160;&#160;&#160;in&#160;XMap::SlotValueChanged::processDaemon(slotValueChangedDaemon,&lt;object&gt;,self);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;slotValueChangedDaemon<br>&#160;&#160;&#160;&#160;end&#160;|]<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugarAddReferenced"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugarAddReferenced():XCore::Element<br>&#160;&#160;[|&#160;let&#160;slotValueChangedDaemon&#160;=&#160;XCore::Daemon(&lt;id&gt;,XCore::Daemon::ADD,&lt;slot&gt;,&lt;OCL::Path::toPath(path)&gt;,&lt;BoolExp(persistent)&gt;,XCore::Daemon::traceDaemons,XMap::SlotValueChanged::getTarget(self,&lt;BoolExp(multi)&gt;))<br>&#160;&#160;&#160;&#160;in&#160;XMap::SlotValueChanged::processDaemon(slotValueChangedDaemon,&lt;object&gt;,self);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;slotValueChangedDaemon<br>&#160;&#160;&#160;&#160;end&#160;|]<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugarChanged"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugarChanged():XCore::Element<br>&#160;&#160;if&#160;body&#160;=&#160;null<br>&#160;&#160;then&#160;self.desugarChangedReferenced()<br>&#160;&#160;else&#160;self.desugarChangedDefined()<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugarChangedDefined"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugarChangedDefined():XCore::Element<br>&#160;&#160;[|&#160;let&#160;slotValueChangedDaemon&#160;=&#160;XCore::Daemon(&lt;id&gt;,&lt;self.daemonChangeType()&gt;,&lt;slot&gt;,@Operation&#160;anonymous(Drop(Send(&lt;Self&#160;a8e9e5&gt;,objectName,Seq{}))&#160;:&#160;XCore::Element,s&#160;:&#160;XCore::Element,Drop(Send(&lt;Self&#160;a8ead7&gt;,newName,Seq{}))&#160;:&#160;XCore::Element,Drop(Send(&lt;Self&#160;a8eb83&gt;,oldName,Seq{}))&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;body&gt;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end,&lt;BoolExp(persistent)&gt;,XCore::Daemon::traceDaemons,XMap::SlotValueChanged::getTarget(self,&lt;BoolExp(multi)&gt;))<br>&#160;&#160;&#160;&#160;in&#160;XMap::SlotValueChanged::processDaemon(slotValueChangedDaemon,&lt;object&gt;,self);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;slotValueChangedDaemon<br>&#160;&#160;&#160;&#160;end&#160;|]<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugarChangedReferenced"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugarChangedReferenced():XCore::Element<br>&#160;&#160;[|&#160;let&#160;slotValueChangedDaemon&#160;=&#160;XCore::Daemon(&lt;id&gt;,&lt;self.daemonChangeType()&gt;,&lt;slot&gt;,&lt;OCL::Path::toPath(path)&gt;,&lt;BoolExp(persistent)&gt;,XCore::Daemon::traceDaemons,XMap::SlotValueChanged::getTarget(self,&lt;BoolExp(multi)&gt;))<br>&#160;&#160;&#160;&#160;in&#160;XMap::SlotValueChanged::processDaemon(slotValueChangedDaemon,&lt;object&gt;,self);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;slotValueChangedDaemon<br>&#160;&#160;&#160;&#160;end&#160;|]<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugarCheckMulti"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugarCheckMulti(addDaemon&#160;:&#160;Performable):Performable<br>&#160;&#160;let&#160;pathExp&#160;=&#160;if&#160;path.equals(Seq{"AnonymousDaemon"})<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;[|&#160;"AnonymousDaemon"&#160;|]<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;OCL::Path::toPath(path)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;in&#160;[|&#160;if&#160;&lt;BoolExp(multi)&gt;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;let&#160;key&#160;=&#160;Set{&lt;pathExp&gt;,&lt;slot&gt;-&gt;asSymbol}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;if&#160;Daemon::hasMultiDaemon(key)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;XMap::SlotValueChanged::applyExistingMultiDaemon(key,&lt;object&gt;,self)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;&lt;addDaemon&gt;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;&lt;addDaemon&gt;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;&#160;|]<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugarDaemon"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugarDaemon():XCore::Element<br>&#160;&#160;@Case&#160;modifier&#160;of<br>&#160;&#160;&#160;&#160;[&#160;"+"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.desugarAdd()<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"-"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.desugarRemove()<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;else&#160;self.desugarChanged()<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugarGuard"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugarGuard(addDaemon&#160;:&#160;Performable):Performable<br>&#160;&#160;if&#160;guarded<br>&#160;&#160;then&#160;[|&#160;if&#160;not&#160;&lt;object&gt;.hasDaemonWithIdAndTarget(&lt;id&gt;,self)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;&lt;addDaemon&gt;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;null<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;&#160;|]<br>&#160;&#160;else&#160;addDaemon<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugarRemove"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugarRemove():XCore::Element<br>&#160;&#160;if&#160;body&#160;=&#160;null<br>&#160;&#160;then&#160;self.desugarRemoveReferenced()<br>&#160;&#160;else&#160;self.desugarRemoveDefined()<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugarRemoveDefined"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugarRemoveDefined():XCore::Element<br>&#160;&#160;[|&#160;let&#160;slotValueChangedDaemon&#160;=&#160;XCore::Daemon(&lt;id&gt;,XCore::Daemon::SUB,&lt;slot&gt;,@Operation&#160;anonymous(Drop(Send(&lt;Self&#160;ab1b3d&gt;,objectName,Seq{}))&#160;:&#160;XCore::Element,s&#160;:&#160;XCore::Element,Drop(Send(&lt;Self&#160;ab1c2f&gt;,elementName,Seq{}))&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;body&gt;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end,&lt;BoolExp(persistent)&gt;,XCore::Daemon::traceDaemons,XMap::SlotValueChanged::getTarget(self,&lt;BoolExp(multi)&gt;))<br>&#160;&#160;&#160;&#160;in&#160;XMap::SlotValueChanged::processDaemon(slotValueChangedDaemon,&lt;object&gt;,self);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;slotValueChangedDaemon<br>&#160;&#160;&#160;&#160;end&#160;|]<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugarRemoveReferenced"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugarRemoveReferenced():XCore::Element<br>&#160;&#160;[|&#160;let&#160;slotValueChangedDaemon&#160;=&#160;XCore::Daemon(&lt;id&gt;,XCore::Daemon::SUB,&lt;slot&gt;,&lt;OCL::Path::toPath(path)&gt;,&lt;BoolExp(persistent)&gt;,XCore::Daemon::traceDaemons,XMap::SlotValueChanged::getTarget(self,&lt;BoolExp(multi)&gt;))<br>&#160;&#160;&#160;&#160;in&#160;XMap::SlotValueChanged::processDaemon(slotValueChangedDaemon,&lt;object&gt;,self);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;slotValueChangedDaemon<br>&#160;&#160;&#160;&#160;end&#160;|]<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="elementName"/><FONT FACE="Courier" SIZE="1">@Operation&#160;elementName():String<br>&#160;&#160;if&#160;names-&gt;size&#160;=&#160;2<br>&#160;&#160;then&#160;names-&gt;at(1)<br>&#160;&#160;else&#160;names-&gt;at(0)<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="getTarget"/><FONT FACE="Courier" SIZE="1">@Operation&#160;getTarget(target&#160;:&#160;XCore::Element,multi&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;if&#160;multi<br>&#160;&#160;then&#160;Table(10)<br>&#160;&#160;else&#160;target<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="lift"/><FONT FACE="Courier" SIZE="1">@Operation&#160;lift():Performable<br>&#160;&#160;XCore::Element::lift.invoke(self,Seq{})<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newName"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newName():String<br>&#160;&#160;if&#160;names-&gt;size&#160;=&#160;3<br>&#160;&#160;then&#160;names-&gt;at(1)<br>&#160;&#160;else&#160;names-&gt;at(0)<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="objectName"/><FONT FACE="Courier" SIZE="1">@Operation&#160;objectName():String<br>&#160;&#160;@Case&#160;modifier&#160;of<br>&#160;&#160;&#160;&#160;[&#160;"+"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;if&#160;names-&gt;size&#160;=&#160;2<br>&#160;&#160;&#160;&#160;&#160;&#160;then&#160;names-&gt;at(0)<br>&#160;&#160;&#160;&#160;&#160;&#160;else&#160;"modifiedObject"<br>&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"-"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;if&#160;names-&gt;size&#160;=&#160;2<br>&#160;&#160;&#160;&#160;&#160;&#160;then&#160;names-&gt;at(0)<br>&#160;&#160;&#160;&#160;&#160;&#160;else&#160;"modifiedObject"<br>&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;""&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;if&#160;names-&gt;size&#160;=&#160;3<br>&#160;&#160;&#160;&#160;&#160;&#160;then&#160;names-&gt;at(0)<br>&#160;&#160;&#160;&#160;&#160;&#160;else&#160;"modifiedObject"<br>&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="oldName"/><FONT FACE="Courier" SIZE="1">@Operation&#160;oldName():String<br>&#160;&#160;if&#160;names-&gt;size&#160;=&#160;3<br>&#160;&#160;then&#160;names-&gt;at(2)<br>&#160;&#160;else&#160;names-&gt;at(1)<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="path"/><FONT FACE="Courier" SIZE="1">@Operation&#160;path[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.path<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="pprint"/><FONT FACE="Courier" SIZE="1">@Operation&#160;pprint(out&#160;:&#160;XCore::Element,indent&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;format(out,"@SlotValueChanged&#160;");<br>&#160;&#160;if&#160;id&#160;&lt;&gt;&#160;null<br>&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;format(out,"[");<br>&#160;&#160;&#160;&#160;id.pprint(out,indent);<br>&#160;&#160;&#160;&#160;format(out,"]")<br>&#160;&#160;else&#160;false<br>&#160;&#160;end&#160;;<br>&#160;&#160;if&#160;modifier.isKindOf(Performable)<br>&#160;&#160;then&#160;modifier.pprint(out,0)<br>&#160;&#160;else&#160;format(out,"~S&#160;",Seq{modifier})<br>&#160;&#160;end&#160;;<br>&#160;&#160;format(out,"~S&#160;~{::~;~S~}(",Seq{if&#160;persistent<br>&#160;&#160;then&#160;"&#160;!&#160;"<br>&#160;&#160;else&#160;""<br>&#160;&#160;end&#160;,path});<br>&#160;&#160;object.pprint(out,0);<br>&#160;&#160;format(out,",");<br>&#160;&#160;slot.pprint(out,0);<br>&#160;&#160;format(out,",");<br>&#160;&#160;@For&#160;name&#160;in&#160;names&#160;do<br>&#160;&#160;&#160;&#160;if&#160;name.isKindOf(Performable)<br>&#160;&#160;&#160;&#160;then&#160;name.pprint(out,0)<br>&#160;&#160;&#160;&#160;else&#160;format(out,"~S",Seq{name})<br>&#160;&#160;&#160;&#160;end&#160;;<br>&#160;&#160;&#160;&#160;if&#160;not&#160;isLast<br>&#160;&#160;&#160;&#160;then&#160;format(out,",")<br>&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end;<br>&#160;&#160;format(out,")~%~V",Seq{indent&#160;+&#160;2});<br>&#160;&#160;if&#160;body&#160;&lt;&gt;&#160;null<br>&#160;&#160;then&#160;body.pprint(out,indent&#160;+&#160;2)<br>&#160;&#160;else&#160;false<br>&#160;&#160;end&#160;;<br>&#160;&#160;format(out,"~%~Vend",Seq{indent})<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="processDaemon"/><FONT FACE="Courier" SIZE="1">@Operation&#160;processDaemon(daemon&#160;:&#160;XCore::Element,object&#160;:&#160;XCore::Element,target&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;id&#160;=&#160;daemon.id;<br>&#160;&#160;&#160;&#160;&#160;&#160;multi&#160;=&#160;daemon.isMultiDaemon()<br>&#160;&#160;in&#160;if&#160;not&#160;multi<br>&#160;&#160;&#160;&#160;&#160;then&#160;object.addDaemon(daemon)<br>&#160;&#160;&#160;&#160;&#160;else<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;object.addMultiDaemon(daemon,target);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;key&#160;=&#160;Set{daemon.action,daemon.slot}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;if&#160;not&#160;Daemon::hasMultiDaemon(key)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;Daemon::addToMultiDaemonTable(key,daemon)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setId"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setId():XCore::Element<br>&#160;&#160;self.id&#160;:=&#160;if&#160;id&#160;=&#160;null<br>&#160;&#160;then&#160;if&#160;body&#160;=&#160;null<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;[|&#160;&lt;OCL::Path::toPath(path)&gt;.name.toString()&#160;|]<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;StrExp(path-&gt;last)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;else&#160;id<br>&#160;&#160;end&#160;;<br>&#160;&#160;self<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setPath"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setPath[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.path&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="toString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;toString():String<br>&#160;&#160;try<br>&#160;&#160;&#160;&#160;self.of().name.toString()&#160;+&#160;"("&#160;+&#160;if&#160;self.hasSlot("id")<br>&#160;&#160;&#160;&#160;then&#160;self.id.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"id"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("multi")<br>&#160;&#160;&#160;&#160;then&#160;self.multi.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"multi"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("guarded")<br>&#160;&#160;&#160;&#160;then&#160;self.guarded.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"guarded"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("modifier")<br>&#160;&#160;&#160;&#160;then&#160;self.modifier.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"modifier"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("persistent")<br>&#160;&#160;&#160;&#160;then&#160;self.persistent.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"persistent"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("path")<br>&#160;&#160;&#160;&#160;then&#160;self.path.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"path"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("object")<br>&#160;&#160;&#160;&#160;then&#160;self.object.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"object"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("slot")<br>&#160;&#160;&#160;&#160;then&#160;self.slot.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"slot"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("names")<br>&#160;&#160;&#160;&#160;then&#160;self.names.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"names"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("body")<br>&#160;&#160;&#160;&#160;then&#160;self.body.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"body"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;")"<br>&#160;&#160;catch(exception)<br>&#160;&#160;&#160;&#160;self.of().name&#160;+&#160;"(Constructor&#160;Error!)"<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=1><FONT SIZE="+2">
+<B>Grammar</B></FONT></TD>
+</TR>
+<TD><PRE>
+Modifier ::=  '+'   +  |  '-'   -  |    |  Drop .
+SetCmpExp ::=  LinePos   = l   '{'   CommaSepExps   = es   '}'   !  { SetExp(l,"Set",es) } |  LinePos   = l   '{'   Exp   = e   '|'   CmpClause   = c   SetCmpExp-Star0   = cs   '}'  { Comprehensions::Cmp("Set",e,Seq{c | cs}) }.
+Guarded ::=  'once'  { true } | { false }.
+AddPattern-Dis0 ::=  '+'   AddPattern   = p2  { Addp(p1,p2) } |  <VarRef 28e813> .
+Names ::=  AName   = name   Names-Star0   = names   <Pair 473d44> .
+BindValue ::=  OptType   = type   '='   SimpleExp   = value  { ValueBinding(name,type,value) }.
+Multi ::=  'multi'  { true } | { false }.
+Def ::=  'context'   Def-Dis0   = isForward   ImportPath   = path   PushChar   Exp   PopChar   = exp  { ContextDef(path,exp,isForward) }.
+DaemonName ::=  Name  |  AnonymousDaemon .
+LocalParserImport-Star0 ::=  '::'   Name   = $head   LocalParserImport-Star0   = $tail   Cons  |  Nil .
+DaemonId ::=  '['   Exp   ']'  |  null .
+NonEmptySeqTail ::=  PushChar   Expr   PopChar   = e   PairOrElements .
+DaemonPath ::=  Name   = name   DaemonPath-Star0   = names   <Pair 4c76c7> .
+Import ::=  PushChar   'import'   ImportPath   = path   ';'  { Import(path) }  PopChar .
+ReferencedSVC ::=  DaemonId   = id   Multi   = multi   Guarded   = guarded   Modifier   = mod   Persistent   = persistent   DaemonPath   = path   '('   Exp   = object   ','   Exp   = slot   ')'   'end'  { SlotValueChanged(id,multi,guarded,mod,persistent,path,object,slot) }.
+Varp ::=  AName   = name   Varp-Dis0   = pattern   Varp-Dis1   = type  { Varp(name,pattern,type) }.
+Persistent ::=  '!'  { true } | { false }.
+IfTail ::=  'else'   PushChar   Expr   PopChar   'end'  |  LinePos   = l   'elseif'   PushChar   Expr   PopChar   = e1   'then'   PushChar   Expr   PopChar   = e2   IfTail   = e3  { If(l,e1,e2,e3) } |  'end'  { BoolExp(false) }.
+DefinedSVC ::=  DaemonId   = id   Multi   = multi   Guarded   = guarded   Modifier   = mod   Persistent   = persistent   DaemonName   = name   '('   Exp   = object   ','   Exp   = slot   ','   Names   = names   ')'   Exp   = body   'end'  { SlotValueChanged(id,multi,guarded,mod,persistent,Seq{name},object,slot,names,body) }.
+AddPattern ::=  AtomicPattern   = p1   AddPattern-Dis0 .
+DaemonPath-Star0 ::=  '::'   Name   = $head   DaemonPath-Star0   = $tail   Cons  |  Nil .
+Keyps-Star0 ::=  ','   Keyp   = $head   Keyps-Star0   = $tail   Cons  |  Nil .
+SlotValueChanged ::=  DefinedSVC  |  ReferencedSVC .
+VarExp ::=  Name   = name   LinePos   = l  { Var(name,l) }.
+Names-Star0 ::=  ','   AName   = $head   Names-Star0   = $tail   Cons  |  Nil .
+BindingList ::=  PushChar   Binding   PopChar   = binding   BindingList-Star0   = bindings   <Pair 3246ba> .
+Keywordp ::=  Name   = name   Keywordp-Star0   = names   '['   Keyps   = keys   ']'  { Keywordp(name,names,keys) }.
+Objectp ::=  Name   = name   Objectp-Star0   = names   '('   Patterns   = slots   ')'  { Objectp(name,names,slots) }.
+SeqCmpExp-Star0 ::=  ','   CmpClause   = $head   SeqCmpExp-Star0   = $tail   Cons  |  Nil .
+SeqCmpExp ::=  LinePos   = l   '['   CommaSepExps   = es   ']'   !  { SetExp(l,"Seq",es) } |  LinePos   = l   '['   Exp   = e   '|'   CmpClause   = c   SeqCmpExp-Star0   = cs   ']'  { Comprehensions::Cmp(e,Seq{c | cs}) }.
+EvaluationUnit ::=  EvaluationUnit-Star0   EvaluationUnit-Star1   = imports   EvaluationUnit-Star2   = exps   EOF  { Evaluator::EvaluationUnit(imports,exps) }.
+Constp ::=  Intp  |  Strp  |  Boolp  |  Expp .
+Atom ::=  PushChar   VarExp   PopChar   !  |  PushChar   Self   PopChar   !  |  PushChar   StrExp   PopChar   !  |  PushChar   IntExp   PopChar   !  |  PushChar   IfExp   PopChar   !  |  PushChar   BoolExp   PopChar   !  |  PushChar   LetExp   PopChar   !  |  PushChar   CollExp   PopChar   !  |  Parentheses  |  PushChar   Drop   PopChar  |  PushChar   Lift   PopChar  |  PushChar   Throw   PopChar  |  PushChar   Try   PopChar  |  PushChar   ImportIn   PopChar  |  PushChar   FloatExp   PopChar  |  PushChar   LocalParserImport   PopChar  |  PushChar   AtExp   PopChar .
+SeqExp ::=  LinePos   = l   'Seq{'   SeqExp-Dis0 .
+EvaluationUnit-Star2-Dis0 ::=  Def  |  TopLevelExp .
+ArgsTail-Star0 ::=  ','   PushChar   Expr   PopChar   = $head   ArgsTail-Star0   = $tail   Cons  |  Nil .
+Syntaxp ::=  '[|'   PushChar   Exp   PopChar   = e   '|]'  { Syntaxp(e) }.
+BindFunArgsTail ::=  Pattern   = p   BindFunArgsTail-Star0   = ps   ')'   <Pair 3f82ff>  |  ')'   Seq{} .
+CollMessage ::=  '('   CommaSepExps   = as   ')'  { CollExp(c,n,as) }.
+Drop ::=  '<'   DropExp   = e   '>'  { Drop(resolve(order(e))) } |  '<|'   Pattern   = p   '|>'  { DropPattern(p) }.
+PathExp ::=  PushChar   Atom   PopChar   = atom   PathExp-Dis0 .
+Objectp-Star0 ::=  '::'   Name   = $head   Objectp-Star0   = $tail   Cons  |  Nil .
+Parentheses ::=  '('   PushChar   Expr   PopChar   = e   ')'  { Parentheses(e) }.
+LogicalExp ::=  PushChar   SimpleExp   PopChar   = e  { resolve(order(e)) }.
+CollOp ::=  CollMessage  |  Collect  |  Iterate  | { CollExp(c,n,Seq{}) }.
+ImportPath ::=  Name   = n   ImportPath-Star0   = ns   <Pair 24cdc> .
+Throw ::=  LinePos   = l   'throw'   PushChar   SimpleExp   PopChar   = value  { Throw(l,value) }.
+Varp-Dis0 ::=  '='   PushChar   Pattern   PopChar  |  null .
+EvaluationUnit-Star2 ::=  EvaluationUnit-Star2-Dis0   = $head   EvaluationUnit-Star2   = $tail   Cons  |  Nil .
+IfExp ::=  LinePos   = l   'if'   PushChar   Expr   PopChar   = e1   'then'   PushChar   Expr   PopChar   = e2   IfTail   = e3  { If(l,e1,e2,e3) }.
+ArrowTail ::=  Name   = n   CollOp   = x   Arrow .
+AName ::=  Name   !  |  Drop .
+Exp ::=  PushChar   Expr   PopChar   = e   !  { resolve(order(e)) }.
+Keywordp-Star0 ::=  '::'   Name   = $head   Keywordp-Star0   = $tail   Cons  |  Nil .
+SetCmpExp-Star0 ::=  ','   CmpClause   = $head   SetCmpExp-Star0   = $tail   Cons  |  Nil .
+Try ::=  LinePos   = l   'try'   PushChar   Expr   PopChar   = body   'catch'   '('   Name   = name   ')'   PushChar   Expr   PopChar   = handler   'end'  { Try(l,body,name,handler) }.
+KeyArg ::=  Name   = name   '='   PushChar   Expr   PopChar   = exp  { KeyArg(name,exp) }.
+Bindings ::=  BindingList  |  Drop .
+Keyps ::=  Keyp   = key   Keyps-Star0   = keys   <Pair 16071e>  |  Seq{} .
+Op ::=  BinOp   !  |  ';'   ; .
+Patterns-Star0 ::=  ','   Pattern   = $head   Patterns-Star0   = $tail   Cons  |  Nil .
+SetExp ::=  LinePos   = l   'Set{'   CommaSepExps   = es   '}'  { SetExp(l,"Set",es) }.
+EmptySeqTail ::=  '}'  { SetExp(l,"Seq",Seq{}) }.
+Consp ::=  Pairp  |  Seqp  |  Emptyp .
+AtExp ::=  LinePos   = l   '@'   PushChar  At  PopChar   = e  { e.setLine(l) }.
+Seqp ::=  'Seq{'   Pattern   = head   SeqpTail   = tail  { Consp(head,tail) }.
+Def-Dis0 ::=  '!'  { true } | { false }.
+BindFunArgsTail-Star0 ::=  ','   Pattern   = $head   BindFunArgsTail-Star0   = $tail   Cons  |  Nil .
+Strp ::=  Str   = s  { Constp(StrExp(s)) }.
+BindFunArgs ::=  '('   BindFunArgsTail .
+Collect ::=  '('   AName   = v   '|'   PushChar   Expr   PopChar   = e   ')'  { IterExp(c,n,v,e) }.
+DropExp ::=  'not'   DropExp   = e  { Negate(e) } |  PushChar   Apply   PopChar   = a   DropExpTail .
+Pattern ::=  AddPattern   = p   Pattern-Star0   = es  { es->iterate(e s = p |
+  Includingp(s,e)) }  = p   PatternGuard .
+PairOrElements-Star0 ::=  ','   PushChar   Expr   PopChar   = $head   PairOrElements-Star0   = $tail   Cons  |  Nil .
+ParserImport ::=  'parserImport'   Name   = name   ParserImport-Star0   = names   ';'   <Pair 3dd7ab>  ImportAt { ParserImport(Seq{name} + names,null) }.
+LocalParserImport ::=  'parserImport'   Name   = name   LocalParserImport-Star0   = names   <Pair 560665>  ImportAt  'in'   PushChar   Expr   PopChar   = e   'end'  { ParserImport(Seq{name | names},e) }.
+CollExp ::=  PushChar   SetExp   PopChar   !  |  PushChar   SeqExp   PopChar   !  |  PushChar   SetCmpExp   PopChar   !  |  PushChar   SeqCmpExp   PopChar   ! .
+ImportIn ::=  'import'   ImportPath   = path   'in'   PushChar   Exp   PopChar   = body   'end'  { ImportIn(path,body) }.
+TopLevelExp ::=  PushChar   SimpleExp   PopChar   = s   ';'  { resolve(order(s)) }.
+Varp-Dis1 ::=  ':'   PushChar   TypeExp   PopChar  | { NamedType() }.
+EvaluationUnit-Star1 ::=  EImport   = $head   EvaluationUnit-Star1   = $tail   Cons  |  Nil .
+FloatExp ::=  LinePos   = l   Float   = f  { f.lift().line := l }.
+ArgsTail ::=  ')'   Seq{}  |  PushChar   Expr   PopChar   = arg   ArgsTail-Star0   = args   ')'   <Pair 39e8e0> .
+Apply ::=  PushChar   Atom   PopChar   = a   ApplyTail   = e   Arrow .
+Expr ::=  'not'   PushChar   Expr   PopChar   = e  { Negate(e) } |  '-'   PushChar   SimpleExp   PopChar   = e  { BinExp(IntExp(0),"-",e) } |  PushChar   Apply   PopChar   = a   ExpTail .
+KeyArgs-Dis0 ::=  ']'   Seq{}  |  KeyArg   = arg   KeyArgs-Dis0-Star0   = args   ']'   <Pair 39ea3e> .
+SeqExp-Dis0 ::=  EmptySeqTail  |  NonEmptySeqTail .
+TypePath ::=  Name   = name   TypePath-Star0   = names  { Seq{name | names}->collect(n |
+  Symbol(n)) }.
+KeyArgs ::=  '['   KeyArgs-Dis0 .
+BinOp ::=  '<'   <  |  '<='   <=  |  '>'   >  |  '>='   >=  |  '<>'   <>  |  '='   =  |  '::'   ::  |  ':='   :=  |  '.'   .  |  'and'   and  |  'andthen'   andthen  |  'implies'   implies  |  'or'   or  |  'orelse'   orelse  |  '+'   +  |  '-'   -  |  '*'   *  |  '/'   / .
+Keyp ::=  Name   = name   '='   Pattern   = pattern  { Keyp(name,pattern) }.
+OpType ::=  TypeArgs   = domains   '->'   PushChar   TypeExp   PopChar   = range  { OpType(domains,range) }.
+Pattern-Star0 ::=  PatternTail   = $head   Pattern-Star0   = $tail   Cons  |  Nil .
+Self ::=  LinePos   = l   'self'  { Self(l) }.
+Emptyp ::=  'Seq{'   '}'  { Constp(SetExp("Seq",Seq{})) } |  'Set{'   '}'  { Constp(SetExp("Set",Seq{})) }.
+CompilationBodyExps ::=  CompilationBody   = b   !   CompilationBodyExps   = bs   <Pair 443e80>  |  Seq{} .
+AtomicPattern ::=  PushChar   Varp   PopChar  |  PushChar   Constp   PopChar  |  PushChar   Objectp   PopChar  |  PushChar   Consp   PopChar  |  PushChar   Keywordp   PopChar  |  PushChar   Syntaxp   PopChar  |  '('   PushChar   Pattern   PopChar   ')' .
+SeqpTail ::=  ','   Pattern   = head   SeqpTail   = tail  { Consp(head,tail) } |  '}'  { Constp(SetExp("Seq",Seq{})) }.
+CompilationUnit-Star0 ::=  ParserImport   = $head   CompilationUnit-Star0   = $tail   Cons  |  Nil .
+BindingList-Star0 ::=  ';'   PushChar   Binding   PopChar   = $head   BindingList-Star0   = $tail   Cons  |  Nil .
+StrExp ::=  LinePos   = l   Str   = e  { StrExp(l,e) }.
+BindFun ::=  BindFunArgs   = args   OptType   = type   '='   PushChar   SimpleExp   PopChar   = value  { FunBinding(name,args,type,value) }.
+CommaSepExps ::=  PushChar   Expr   PopChar   = e   CommaSepExps-Star0   = es   <Pair 424079>  |  Seq{} .
+DropExpTail ::=  DropOp   = o   !   DropExp   = e  { BinExp(a,o,e) } |  <VarRef 423e9d> .
+PatternGuard ::=  'when'   PushChar   Exp   PopChar   = e  { Condp(p,e) } |  <VarRef 3f8102> .
+ParserImport-Star0 ::=  '::'   Name   = $head   ParserImport-Star0   = $tail   Cons  |  Nil .
+Pairp ::=  'Seq{'   Pattern   = head   '|'   Pattern   = tail   '}'  { Consp(head,tail) }.
+Lift ::=  LinePos   = l   '[|'   PushChar   Exp   PopChar   = e   '|]'  { Lift(l,e) }.
+CmpClause ::=  Name   = n   OptType   = t   '<-'   PushChar   Exp   PopChar   = e  { Comprehensions::Bind(n,t.toExp(),e) } |  '?'   PushChar   Exp   PopChar   = e  { Comprehensions::Filter(e) }.
+IntExp ::=  LinePos   = l   Int   = e  { IntExp(l,e) }.
+TopLevelCommand ::=  PushChar   SimpleExp   PopChar   = c   pState   = p  { p.consumeToken := false }  ';'  { resolve(order(c)) }.
+TypePath-Star0 ::=  '::'   Name   = $head   TypePath-Star0   = $tail   Cons  |  Nil .
+EvaluationUnit-Star0 ::=  ParserImport   = $head   EvaluationUnit-Star0   = $tail   Cons  |  Nil .
+Expp ::=  '['   PushChar   Exp   PopChar   = exp   ']'  { Constp(exp) }.
+Args ::=  '('   ArgsTail .
+ApplyTail ::=  Args   = args   !  { Apply(a,args) } |  KeyArgs   = args   !  { Instantiate(a,args) } |  <VarRef f37b0> .
+ExpTail ::=  Op   = o   !   PushChar   Expr   PopChar   = e  { BinExp(a,o,e) } |  <VarRef 406d36> .
+KeyArgs-Dis0-Star0 ::=  ','   KeyArg   = $head   KeyArgs-Dis0-Star0   = $tail   Cons  |  Nil .
+TypeExp-Dis0 ::=  TypeArgs   = args  { ParametricType(path,args) } | { NamedType(path) }.
+TypeArgs ::=  '('   PushChar   TypeExp   PopChar   = arg   TypeArgs-Star0   = args   ')'   <Pair 4404e9> .
+Iterate ::=  '('   AName   = v1   AName   = v2   '='   PushChar   Expr   PopChar   = init   '|'   PushChar   Expr   PopChar   = body   ')'  { Iterate(c,v1,v2,init,body) }.
+BoolExp ::=  LinePos   = l   'true'  { BoolExp(l,true) } |  LinePos   = l   'false'  { BoolExp(l,false) }.
+LetBody ::=  'in'   PushChar   Expr   PopChar   = body   <VarRef 49277b>  |  PushChar   'then'   PushChar   Bindings   PopChar   = bindings   LetBody   = body  { Let(bindings,body) }  PopChar .
+OptType ::=  ':'   PushChar   TypeExp   PopChar  | { NamedType() }.
+PathExp-Dis0 ::=  '::'   AName   = name   PathExp-Dis0-Star0   = names  { Path(atom,Seq{name | names}) } |  <VarRef 39eb9b> .
+Patterns ::=  Pattern   = head   Patterns-Star0   = tail   <Pair 5dce40>  |  Seq{} .
+EImport ::=  'import'   TopLevelExp   = exp  { Evaluator::Import(exp) }.
+CompilationBody ::=  Def  |  TopLevelExp .
+Binding ::=  AName   = name   BindingTail .
+SimpleExp ::=  'not'   PushChar   SimpleExp   PopChar   = e  { Negate(e) } |  '-'   PushChar   SimpleExp   PopChar   = e  { BinExp(IntExp(0),"-",e) } |  PushChar   Apply   PopChar   = a   SimpleExpTail .
+CompilationUnit-Star1 ::=  Import   = $head   CompilationUnit-Star1   = $tail   Cons  |  Nil .
+CommaSepExps-Star0 ::=  ','   PushChar   Expr   PopChar   = $head   CommaSepExps-Star0   = $tail   Cons  |  Nil .
+SimpleExpTail ::=  BinOp   = o   !   PushChar   SimpleExp   PopChar   = e  { BinExp(a,o,e) } |  <VarRef f37a8> .
+BindingTail ::=  BindFun  |  BindValue .
+CompilationUnit ::=  CompilationUnit-Star0   = parserImports   CompilationUnit-Star1   = imports   CompilationBodyExps   = exps   EOF   pState   = s  { CompilationUnit("",imports,exps,s.getSource(),parserImports) }.
+DropOp ::=  '<'   <  |  '<='   <=  |  '<>'   <>  |  '='   =  |  '::'   ::  |  ':='   :=  |  '.'   .  |  'and'   and  |  'andthen'   andthen  |  'implies'   implies  |  'or'   or  |  'orelse'   orelse  |  '+'   +  |  '-'   -  |  '*'   *  |  '/'   / .
+PatternTail ::=  '->'   Name   '('   Pattern   = p   ')'   <VarRef 47cd42> .
+PathExp-Dis0-Star0 ::=  '::'   AName   = $head   PathExp-Dis0-Star0   = $tail   Cons  |  Nil .
+PairOrElements ::=  '|'   PushChar   Expr   PopChar   = t   '}'  { ConsExp(e,t) } |  PairOrElements-Star0   = es   '}'  { SetExp(l,"Seq",Seq{e | es}) }.
+LetExp ::=  LinePos   = l   'let'   PushChar   Bindings   PopChar   = bindings   LetBody   = body   'end'  { Let(l,bindings,body) }.
+Boolp ::=  'true'  { Constp(BoolExp(true)) } |  'false'  { Constp(BoolExp(false)) }.
+Intp ::=  Int   = i  { Constp(IntExp(i)) }.
+TypeExp ::=  TypePath   = path   TypeExp-Dis0  |  '['   PushChar   TypeExp   PopChar   = t   ']'  { ParametricType(Seq{"Seq"},Seq{t}) } |  '{'   PushChar   TypeExp   PopChar   = t   '}'  { ParametricType(Seq{"Set"},Seq{t}) } |  Drop  |  OpType .
+TypeArgs-Star0 ::=  ','   PushChar   TypeExp   PopChar   = $head   TypeArgs-Star0   = $tail   Cons  |  Nil .
+ImportPath-Star0 ::=  '::'   Name   = $head   ImportPath-Star0   = $tail   Cons  |  Nil .
+Exp1 ::=  PushChar   Exp   PopChar   EOF .
+Arrow ::=  '->'   !   ArrowTail  |  <VarRef 2aacd0> .
+</PRE></TD>
+</TABLE>
+</HTML>

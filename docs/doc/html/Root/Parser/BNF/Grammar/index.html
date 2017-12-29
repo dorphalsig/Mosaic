@@ -1,0 +1,367 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+Grammar
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>Grammar</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+No Documentation Specified
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../../Root/XCore/Performable/index.html">Performable</A>
+,<A HREF="../../../../Root/XCore/NameSpace/index.html">NameSpace</A>
+,<A HREF="../../../../Root/XCore/Located/index.html">Located</A>
+,<A HREF="../../../../Root/XCore/IndexedContainer/index.html">IndexedContainer</A>
+,<A HREF="../../../../Root/XCore/NamedElement/index.html">NamedElement</A>
+,<A HREF="../../../../Root/XCore/DocumentedElement/index.html">DocumentedElement</A>
+,<A HREF="../../../../Root/XCore/Container/index.html">Container</A>
+,<A HREF="../../../../Root/XCore/Contained/index.html">Contained</A>
+,<A HREF="../../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR><TD><B>clauseCache</B></TD><TD><A HREF="../../../../Root/XCore/Table/index.html">Table<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>clauses</B></TD><TD><A HREF="../../../../Root/Parser/BNF/Clause/index.html">Set(Clause)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>debug</B></TD><TD><A HREF="../../../../Root/XCore/Boolean/index.html">Boolean<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>dynamics</B></TD><TD><A HREF="../../../../Root/XCore/Element/index.html">Seq(Element)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>parents</B></TD><TD><A HREF="../../../../Root/Parser/BNF/Grammar/index.html">Set(Grammar)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>startingSymbol</B></TD><TD><A HREF="../../../../Root/XCore/String/index.html">String<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>terminals</B></TD><TD><A HREF="../../../../Root/XCore/String/index.html">Set(String)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../../Root/XCore/Performable/index.html">Performable</A>: endLine, line. <BR><B>From</B> <A HREF="../../../../Root/XCore/NameSpace/index.html">NameSpace</A>: bindings, imports. <BR><B>From</B> <A HREF="../../../../Root/XCore/Located/index.html">Located</A>: charEnd, charStart. <BR><B>From</B> <A HREF="../../../../Root/XCore/IndexedContainer/index.html">IndexedContainer</A>: contents. <BR><B>From</B> <A HREF="../../../../Root/XCore/NamedElement/index.html">NamedElement</A>: name. <BR><B>From</B> <A HREF="../../../../Root/XCore/DocumentedElement/index.html">DocumentedElement</A>: documentation. <BR><B>From</B> <A HREF="../../../../Root/XCore/Contained/index.html">Contained</A>: owner. <BR><B>From</B> <A HREF="../../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#FV">FV</a>():<A HREF="../../../../Root/XCore/String/index.html">Set(String)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#add">add</a>(namedElement:<A HREF="../../../../Root/XCore/NamedElement/index.html">NamedElement<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#addClause">addClause</a>(clause:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#allClauses">allClauses</a>(name:<A HREF="../../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../../Root/Parser/BNF/Clause/index.html">Set(Clause)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#allClauses">allClauses</a>():<A HREF="../../../../Root/Parser/BNF/Clause/index.html">Set(Clause)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#cacheTerminals">cacheTerminals</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#calculateSets">calculateSets</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#checkClauseOverlaps">checkClauseOverlaps</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#clauseNamed">clauseNamed</a>(name:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#clean">clean</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#cleanClauses">cleanClauses</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#cnf">cnf</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#compile">compile</a>(env:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,frame:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,isLast:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,saveSource:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#compile">compile</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#dprint">dprint</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#eval">eval</a>(target:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,env:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,imports:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#getChildren">getChildren</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#inheritClauses">inheritClauses</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#inheritedClauses">inheritedClauses</a>(name:<A HREF="../../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../../Root/Parser/BNF/Clause/index.html">Set(Clause)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#inheritedClauses">inheritedClauses</a>():<A HREF="../../../../Root/Parser/BNF/Clause/index.html">Set(Clause)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#inheritedTerminals">inheritedTerminals</a>():<A HREF="../../../../Root/XCore/String/index.html">Set(String)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#init">init</a>(args:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#last">last</a>(name:<A HREF="../../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../../Root/XCore/String/index.html">Set(String)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#last">last</a>():<A HREF="../../../../Root/XCore/String/index.html">Set(String)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#lift">lift</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#liftOrs">liftOrs</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#localClauses">localClauses</a>(name:<A HREF="../../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../../Root/Parser/BNF/Clause/index.html">Set(Clause)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#localTerminals">localTerminals</a>():<A HREF="../../../../Root/XCore/String/index.html">Set(String)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#maxLocals">maxLocals</a>():<A HREF="../../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newClauseName">newClauseName</a>(prefix:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#parseFile">parseFile</a>(file:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,startNT:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,imports:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,tokenizer:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#parseFile">parseFile</a>(file:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,startNT:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,imports:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#parseFile">parseFile</a>(name:<A HREF="../../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#parseString">parseString</a>(s:<A HREF="../../../../Root/XCore/String/index.html">String<A>,startNT:<A HREF="../../../../Root/XCore/String/index.html">String<A>,imports:<A HREF="../../../../Root/XCore/NameSpace/index.html">Seq(NameSpace)<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#parseString">parseString</a>(s:<A HREF="../../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#parseString">parseString</a>(s:<A HREF="../../../../Root/XCore/String/index.html">String<A>,startNT:<A HREF="../../../../Root/XCore/String/index.html">String<A>,args:<A HREF="../../../../Root/XCore/Element/index.html">Seq(Element)<A>,imports:<A HREF="../../../../Root/XCore/NameSpace/index.html">Seq(NameSpace)<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#pprint">pprint</a>(indent:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#pprint">pprint</a>(outputChannel:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,indent:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#predict">predict</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#terminals">terminals</a>():<A HREF="../../../../Root/XCore/String/index.html">Set(String)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#toString">toString</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#transform">transform</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../../Root/XCore/Performable/index.html">Performable</A>: FV, compile, endLine, eval, line, maxLocals, pprint, pprint, pprint, setEndLine, setLine. <BR><B>From</B> <A HREF="../../../../Root/XCore/NameSpace/index.html">NameSpace</A>: add, addBinding, addImport, allHTMLEntries, allHTMLPackages, allImports, createSnapshot, define, generateHTML, getChildren, getContents, getElement, getInstantiableClasses, graphViz, hasBinding, hasElement, importedFrom, imports, init, init, initBindings, lift, liveDoc, lookupPath, nameChanged, names, newName, populateGraphViz, putElement, redefine, remove, removeBinding, removeImport, resolveNameClash, syntaxClasses, toGraphVizPage, toHTML, toHTMLDoc, toType, writeEcore. <BR><B>From</B> <A HREF="../../../../Root/XCore/IndexedContainer/index.html">IndexedContainer</A>: add, add, addContentDaemon, contentDaemons, contents, index, indices, init, initContents, remove, removeContentDaemon. <BR><B>From</B> <A HREF="../../../../Root/XCore/NamedElement/index.html">NamedElement</A>: getNamedElement, href, labelString, legalNameChangeCheck, name, path, pathSeq, repopulate, setName, toString. <BR><B>From</B> <A HREF="../../../../Root/XCore/DocumentedElement/index.html">DocumentedElement</A>: doc, ensureDoc, setDoc. <BR><B>From</B> <A HREF="../../../../Root/XCore/Container/index.html">Container</A>: add, addContentDaemon, allContents, allContentsOf, allContentsThat, checkConstraints, checkConstraints, containerCutHandler, containerPastePostHandler, containerPastePreHandler, contentDaemons, contents, contentsOf, contentsThat, deleteContainedDiagrams, deleteRecursive, find, getChildren, getChildrenToolTips, includes, init, initContents, loadXTO, remove, removeContentDaemon, traceAll, untraceAll. <BR><B>From</B> <A HREF="../../../../Root/XCore/Contained/index.html">Contained</A>: addTo, allOwners, deleteRecursive, delete_client, delete_client_check, delete_client_redirect, getDefaultClipboardSource, owner, removeFromOwner, setOwner. <BR><B>From</B> <A HREF="../../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="FV"/><FONT FACE="Courier" SIZE="1">@Operation&#160;FV():Set(String)<br>&#160;&#160;self.lift().FV()<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="add"/><FONT FACE="Courier" SIZE="1">@Operation&#160;add(namedElement&#160;:&#160;NamedElement):XCore::Element<br>&#160;&#160;if&#160;namedElement.isKindOf(Clause)<br>&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;self.addClause(namedElement);<br>&#160;&#160;&#160;&#160;super(namedElement)<br>&#160;&#160;else&#160;super(namedElement)<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addClause"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addClause(clause&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;clause.setOwner(self);<br>&#160;&#160;self.clauses&#160;:=&#160;clauses-&gt;including(clause)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="allClauses"/><FONT FACE="Courier" SIZE="1">@Operation&#160;allClauses(name&#160;:&#160;String):Set(Clause)<br>&#160;&#160;self.localClauses(name)-&gt;union(self.inheritedClauses(name))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="allClauses"/><FONT FACE="Courier" SIZE="1">@Operation&#160;allClauses():Set(Clause)<br>&#160;&#160;self.clauses-&gt;union(self.inheritedClauses())<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="cacheTerminals"/><FONT FACE="Courier" SIZE="1">@Operation&#160;cacheTerminals():XCore::Element<br>&#160;&#160;self.terminals&#160;:=&#160;self.localTerminals()-&gt;union(self.inheritedTerminals())<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="calculateSets"/><FONT FACE="Courier" SIZE="1">@Operation&#160;calculateSets():XCore::Element<br>&#160;&#160;let&#160;changed&#160;=&#160;false<br>&#160;&#160;in&#160;@Repeat<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;changed&#160;:=&#160;false;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;@For&#160;clause&#160;in&#160;clauses&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;changed&#160;:=&#160;changed&#160;or&#160;clause.calculateSets(self)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;until&#160;not&#160;changed<br>&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="checkClauseOverlaps"/><FONT FACE="Courier" SIZE="1">@Operation&#160;checkClauseOverlaps():XCore::Element<br>&#160;&#160;let&#160;C&#160;=&#160;self.inheritedClauses()<br>&#160;&#160;in&#160;@For&#160;clause&#160;in&#160;clauses&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;C-&gt;exists(c&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;c.name().toString()&#160;=&#160;clause.name().toString())<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;format(stdout,"~%~%Warning:&#160;local&#160;clause&#160;definition&#160;for&#160;~S&#160;conflicts&#160;with&#160;inherited&#160;clause.~%~%",Seq{clause.name()})<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="clauseNamed"/><FONT FACE="Courier" SIZE="1">@Operation&#160;clauseNamed(name&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;if&#160;clauseCache.hasKey(name)<br>&#160;&#160;then&#160;clauseCache.get(name)<br>&#160;&#160;else&#160;let&#160;findSeq&#160;=&#160;clauses-&gt;asSeq;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;=&#160;false;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;=&#160;null<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;declare(hidden,findSeq);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;declare(hidden,findDone);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;declare(hidden,findResult);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@While&#160;not&#160;findSeq-&gt;isEmpty&#160;and&#160;not&#160;findDone&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;clause&#160;=&#160;findSeq-&gt;head&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findElement&#160;=&#160;findSeq-&gt;head<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;declare(hidden,findElement);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;clause.name().toString()&#160;=&#160;name<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;:=&#160;true;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;:=&#160;clauseCache.put(name,clause);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;clause<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;findSeq&#160;:=&#160;findSeq-&gt;tail<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;not&#160;findDone<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;null<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;findResult<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="clean"/><FONT FACE="Courier" SIZE="1">@Operation&#160;clean():XCore::Element<br>&#160;&#160;@For&#160;clause&#160;in&#160;clauses&#160;do<br>&#160;&#160;&#160;&#160;clause.clean()<br>&#160;&#160;end;<br>&#160;&#160;self.cleanClauses();<br>&#160;&#160;clauseCache.clear()<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="cleanClauses"/><FONT FACE="Courier" SIZE="1">@Operation&#160;cleanClauses():XCore::Element<br>&#160;&#160;let&#160;cleanClauses&#160;=&#160;Set{}<br>&#160;&#160;in&#160;@For&#160;c&#160;in&#160;clauses&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;findSeq&#160;=&#160;self.inheritedClauses(c.name())-&gt;asSeq;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;=&#160;false;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;=&#160;null<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;declare(hidden,findSeq);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;declare(hidden,findDone);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;declare(hidden,findResult);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@While&#160;not&#160;findSeq-&gt;isEmpty&#160;and&#160;not&#160;findDone&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;clause&#160;=&#160;findSeq-&gt;head&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findElement&#160;=&#160;findSeq-&gt;head<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;declare(hidden,findElement);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;clause.equal(c)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;:=&#160;true;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;:=&#160;cleanClauses&#160;:=&#160;cleanClauses-&gt;including(clause)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;findSeq&#160;:=&#160;findSeq-&gt;tail<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;not&#160;findDone<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;cleanClauses&#160;:=&#160;cleanClauses-&gt;including(c)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;findResult<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;self.clauses&#160;:=&#160;cleanClauses<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="cnf"/><FONT FACE="Courier" SIZE="1">@Operation&#160;cnf():XCore::Element<br>&#160;&#160;let&#160;newClauses&#160;=&#160;clauses-&gt;collect(c&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;c.cnf(self))&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;starClauses&#160;=&#160;clauses-&gt;reject(c&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;newClauses-&gt;exists(cc&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;c.name()&#160;=&#160;cc.name()))<br>&#160;&#160;in&#160;self.clauses&#160;:=&#160;newClauses&#160;+&#160;starClauses<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="compile"/><FONT FACE="Courier" SIZE="1">@Operation&#160;compile(env&#160;:&#160;XCore::Element,frame&#160;:&#160;XCore::Element,isLast&#160;:&#160;XCore::Element,saveSource&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.lift().compile(env.incNameSpaceRefs(),frame,isLast,saveSource)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="compile"/><FONT FACE="Courier" SIZE="1">@Operation&#160;compile():XCore::Element<br>&#160;&#160;self.checkClauseOverlaps();<br>&#160;&#160;self.inheritClauses();<br>&#160;&#160;self.cnf();<br>&#160;&#160;self.calculateSets();<br>&#160;&#160;self.predict();<br>&#160;&#160;self.clean();<br>&#160;&#160;self<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="dprint"/><FONT FACE="Courier" SIZE="1">@Operation&#160;dprint():XCore::Element<br>&#160;&#160;@For&#160;clause&#160;in&#160;clauses&#160;do<br>&#160;&#160;&#160;&#160;clause.dprint()<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="eval"/><FONT FACE="Courier" SIZE="1">@Operation&#160;eval(target&#160;:&#160;XCore::Element,env&#160;:&#160;XCore::Element,imports&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.dynamics&#160;:=&#160;imports-&gt;collect(i&#160;|<br>&#160;&#160;&#160;&#160;Seq{2&#160;|&#160;i.contents});<br>&#160;&#160;self.transform()<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="getChildren"/><FONT FACE="Courier" SIZE="1">@Operation&#160;getChildren():XCore::Element<br>&#160;&#160;Seq{}<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="inheritClauses"/><FONT FACE="Courier" SIZE="1">@Operation&#160;inheritClauses():XCore::Element<br>&#160;&#160;self.clauses&#160;:=&#160;clauses&#160;+&#160;parents-&gt;iterate(parent&#160;C&#160;=&#160;Set{}&#160;|<br>&#160;&#160;&#160;&#160;C&#160;+&#160;parent.clauses-&gt;map("copy"))-&gt;reject(c&#160;|<br>&#160;&#160;&#160;&#160;c.isKindOf(StarClause))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="inheritedClauses"/><FONT FACE="Courier" SIZE="1">@Operation&#160;inheritedClauses(name&#160;:&#160;String):Set(Clause)<br>&#160;&#160;parents-&gt;iterate(parent&#160;clauses&#160;=&#160;Set{}&#160;|<br>&#160;&#160;&#160;&#160;clauses-&gt;union(parent.allClauses(name)))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="inheritedClauses"/><FONT FACE="Courier" SIZE="1">@Operation&#160;inheritedClauses():Set(Clause)<br>&#160;&#160;parents-&gt;iterate(parent&#160;clauses&#160;=&#160;Set{}&#160;|<br>&#160;&#160;&#160;&#160;clauses-&gt;union(parent.allClauses()))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="inheritedTerminals"/><FONT FACE="Courier" SIZE="1">@Operation&#160;inheritedTerminals():Set(String)<br>&#160;&#160;parents-&gt;iterate(parent&#160;terminals&#160;=&#160;Set{}&#160;|<br>&#160;&#160;&#160;&#160;terminals-&gt;union(parent.terminals()))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="init"/><FONT FACE="Courier" SIZE="1">@Operation&#160;init(args&#160;:&#160;XCore::Element):Element<br>&#160;&#160;super(args);<br>&#160;&#160;self.parents&#160;:=&#160;args-&gt;at(0);<br>&#160;&#160;@For&#160;clause&#160;in&#160;args-&gt;at(1)&#160;do<br>&#160;&#160;&#160;&#160;self.add(clause)<br>&#160;&#160;end;<br>&#160;&#160;self.startingSymbol&#160;:=&#160;args-&gt;at(2);<br>&#160;&#160;if&#160;args-&gt;size&#160;=&#160;4<br>&#160;&#160;then&#160;self.imports&#160;:=&#160;args-&gt;at(3)<br>&#160;&#160;else&#160;self<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="last"/><FONT FACE="Courier" SIZE="1">@Operation&#160;last(name&#160;:&#160;String):Set(String)<br>&#160;&#160;if&#160;self.clauseNamed(name)&#160;=&#160;null<br>&#160;&#160;then&#160;Set{}<br>&#160;&#160;else&#160;self.clauseNamed(name).last(self,Seq{})<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="last"/><FONT FACE="Courier" SIZE="1">@Operation&#160;last():Set(String)<br>&#160;&#160;if&#160;startingSymbol&#160;&lt;&gt;&#160;null<br>&#160;&#160;then&#160;self.last(startingSymbol)<br>&#160;&#160;else&#160;Set{}<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="lift"/><FONT FACE="Courier" SIZE="1">@Operation&#160;lift():XCore::Element<br>&#160;&#160;self.liftOrs();<br>&#160;&#160;let&#160;parentExps&#160;=&#160;SetExp("Set",parents-&gt;asSeq);<br>&#160;&#160;&#160;&#160;&#160;&#160;clauseExps&#160;=&#160;SetExp("Seq",clauses-&gt;collect(clause&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;clause.lift())-&gt;asSeq);<br>&#160;&#160;&#160;&#160;&#160;&#160;startingSymbolExp&#160;=&#160;StrExp(startingSymbol);<br>&#160;&#160;&#160;&#160;&#160;&#160;importExps&#160;=&#160;SetExp("Seq",imports)<br>&#160;&#160;in&#160;[|&#160;Root::Parser::BNF::Grammar(&lt;parentExps&gt;,&lt;clauseExps&gt;,&lt;startingSymbolExp&gt;,&lt;importExps&gt;).compile()&#160;|]<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="liftOrs"/><FONT FACE="Courier" SIZE="1">@Operation&#160;liftOrs():XCore::Element<br>&#160;&#160;@For&#160;clause&#160;in&#160;clauses&#160;do<br>&#160;&#160;&#160;&#160;clause.liftOrs(self)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="localClauses"/><FONT FACE="Courier" SIZE="1">@Operation&#160;localClauses(name&#160;:&#160;String):Set(Clause)<br>&#160;&#160;clauses-&gt;select(clause&#160;|<br>&#160;&#160;&#160;&#160;clause.name&#160;=&#160;name)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="localTerminals"/><FONT FACE="Courier" SIZE="1">@Operation&#160;localTerminals():Set(String)<br>&#160;&#160;clauses-&gt;iterate(clause&#160;terminals&#160;=&#160;Set{}&#160;|<br>&#160;&#160;&#160;&#160;terminals-&gt;union(clause.body.terminals()))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="maxLocals"/><FONT FACE="Courier" SIZE="1">@Operation&#160;maxLocals():Integer<br>&#160;&#160;self.lift().maxLocals()<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newClauseName"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newClauseName(prefix&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;i&#160;=&#160;0<br>&#160;&#160;in&#160;@While&#160;self.clauseNamed(prefix&#160;+&#160;i)&#160;&lt;&gt;&#160;null&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;i&#160;:=&#160;i&#160;+&#160;1<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;prefix&#160;+&#160;i<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="parseFile"/><FONT FACE="Courier" SIZE="1">@Operation&#160;parseFile(file&#160;:&#160;XCore::Element,startNT&#160;:&#160;XCore::Element,imports&#160;:&#160;XCore::Element,tokenizer&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;engine&#160;=&#160;Machine::Engine()<br>&#160;&#160;in&#160;engine.parse(null,self,Seq{Call(startNT)},tokenizer,imports&#160;+&#160;Seq{XCore,Root})<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="parseFile"/><FONT FACE="Courier" SIZE="1">@Operation&#160;parseFile(file&#160;:&#160;XCore::Element,startNT&#160;:&#160;XCore::Element,imports&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@WithOpenFile(fin&#160;&lt;-&#160;file)<br>&#160;&#160;&#160;&#160;self.parseFile(file,startNT,imports,Tokenizer(fin))<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="parseFile"/><FONT FACE="Courier" SIZE="1">@Operation&#160;parseFile(name&#160;:&#160;String):Element<br>&#160;&#160;self.parseFile(name,startingSymbol,Seq{})<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="parseString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;parseString(s&#160;:&#160;String,startNT&#160;:&#160;String,imports&#160;:&#160;Seq(NameSpace)):Element<br>&#160;&#160;self.parseString(s,startNT,Seq{},imports)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="parseString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;parseString(s&#160;:&#160;String):Element<br>&#160;&#160;self.parseString(s,startingSymbol,Seq{})<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="parseString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;parseString(s&#160;:&#160;String,startNT&#160;:&#160;String,args&#160;:&#160;Seq(Element),imports&#160;:&#160;Seq(NameSpace)):Element<br>&#160;&#160;let&#160;e&#160;=&#160;Machine::Engine();<br>&#160;&#160;&#160;&#160;&#160;&#160;sin&#160;=&#160;StringInputChannel(s);<br>&#160;&#160;&#160;&#160;&#160;&#160;argNames&#160;=&#160;Seq{};<br>&#160;&#160;&#160;&#160;&#160;&#160;argMap&#160;=&#160;0.to(args-&gt;size&#160;-&#160;1)<br>&#160;&#160;in&#160;e.parse(args,null,self,Seq{Call(startNT,argNames,argMap)},Tokenizer(sin),imports&#160;+&#160;Seq{XCore,Root})<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="pprint"/><FONT FACE="Courier" SIZE="1">@Operation&#160;pprint(indent&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;out&#160;=&#160;StringOutputChannel()<br>&#160;&#160;in&#160;self.pprint(out,indent);<br>&#160;&#160;&#160;&#160;&#160;out.getString()<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="pprint"/><FONT FACE="Courier" SIZE="1">@Operation&#160;pprint(outputChannel&#160;:&#160;XCore::Element,indent&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;C&#160;=&#160;clauses-&gt;asSeq<br>&#160;&#160;in&#160;@While&#160;not&#160;C-&gt;isEmpty&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;C-&gt;head.code(outputChannel,indent);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;C&#160;:=&#160;C-&gt;tail<br>&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="predict"/><FONT FACE="Courier" SIZE="1">@Operation&#160;predict():XCore::Element<br>&#160;&#160;@For&#160;clause&#160;in&#160;clauses&#160;do<br>&#160;&#160;&#160;&#160;clause.predict(self)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="terminals"/><FONT FACE="Courier" SIZE="1">@Operation&#160;terminals():Set(String)<br>&#160;&#160;if&#160;terminals&#160;=&#160;Set{}<br>&#160;&#160;then&#160;self.cacheTerminals()<br>&#160;&#160;else&#160;self<br>&#160;&#160;end&#160;;<br>&#160;&#160;terminals<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="toString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;toString():XCore::Element<br>&#160;&#160;"&lt;Grammar"&#160;+&#160;if&#160;owner.isReallyKindOf(NamedElement)<br>&#160;&#160;then&#160;"&#160;for&#160;"&#160;+&#160;owner.name()<br>&#160;&#160;else&#160;""<br>&#160;&#160;end&#160;&#160;+&#160;"&gt;"<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="transform"/><FONT FACE="Courier" SIZE="1">@Operation&#160;transform():XCore::Element<br>&#160;&#160;let&#160;C&#160;=&#160;clauses-&gt;asSeq<br>&#160;&#160;in&#160;@While&#160;C&#160;&lt;&gt;&#160;Seq{}&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;C-&gt;head.transform();<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;C&#160;:=&#160;C-&gt;tail<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;self<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=1><FONT SIZE="+2">
+<B>Grammar</B></FONT></TD>
+</TR>
+<TD><PRE>
+XBNF_Not ::=  'Not'   '('   XBNF_Sequence   = parser   ')'  { (Parser::BNF.getElement("Not"))(parser) }.
+SetCmpExp ::=  LinePos   = l   '{'   CommaSepExps   = es   '}'   !  { SetExp(l,"Set",es) } |  LinePos   = l   '{'   Exp   = e   '|'   CmpClause   = c   SetCmpExp-Star0   = cs   '}'  { Comprehensions::Cmp("Set",e,Seq{c | cs}) }.
+XBNF_NewToken ::=  'NewToken'   '('   Name   = n   ','   Int   = t   ')'  { (Parser::BNF.getElement("NewToken"))(n,t) }.
+AddPattern-Dis0 ::=  '+'   AddPattern   = p2  { Addp(p1,p2) } |  <VarRef 2a69db> .
+XBNF_Optional ::=  '['   XBNF_Disjunction   = opt   ']'  { Opt(opt) }.
+BindValue ::=  OptType   = type   '='   SimpleExp   = value  { ValueBinding(name,type,value) }.
+XBNF_Literal ::=  'Char'  { (Parser::BNF.getElement("Char"))() } |  'Line'  { (Parser::BNF.getElement("Line"))() } |  'Str'  { (Parser::BNF.getElement("Str"))() } |  'Terminal'  { (Parser::BNF.getElement("Term"))() } |  'Token'  { (Parser::BNF.getElement("Tok"))() } |  'Int'  { (Parser::BNF.getElement("Int"))() } |  'Float'  { (Parser::BNF.getElement("Float"))() } |  'Name'  { (Parser::BNF.getElement("Name"))() } |  'EOF'  { (Parser::BNF.getElement("EOF"))() } |  '!'  { (Parser::BNF.getElement("Cut"))() } |  '@'  { (Parser::BNF.getElement("At"))() } |  'ImportAt'  { (Parser::BNF.getElement("ImportAt"))() } |  'pState'  { (Parser::BNF.getElement("PState"))() } |  'LinePos'  { (Parser::BNF.getElement("LinePos"))() } |  XBNF_NewToken  |  Str   = terminal  { (Parser::BNF.getElement("Terminal"))(terminal) }.
+Def ::=  'context'   Def-Dis0   = isForward   ImportPath   = path   PushChar   Exp   PopChar   = exp  { ContextDef(path,exp,isForward) }.
+XBNF_Path ::=  Name   = name   XBNF_Path-Star0   = names   <Pair 28b1d7> .
+LocalParserImport-Star0 ::=  '::'   Name   = $head   LocalParserImport-Star0   = $tail   Cons  |  Nil .
+XBNF_GrammarParents ::=  'extends'   Exp   = parent   XBNF_GrammarParents-Star0   = parents  { parents->asSet->including(parent) } | { Set{} }.
+NonEmptySeqTail ::=  PushChar   Expr   PopChar   = e   PairOrElements .
+XBNF_TypeCheck ::=  XBNF_Atom   = element   XBNF_TypeCheck-Dis0 .
+Import ::=  PushChar   'import'   ImportPath   = path   ';'  { Import(path) }  PopChar .
+XBNF_GrammarImports ::=  'import'   Exp   = class   XBNF_GrammarImports-Star0   = classes   <Pair 2cf429>  |  Seq{} .
+Varp ::=  AName   = name   Varp-Dis0   = pattern   Varp-Dis1   = type  { Varp(name,pattern,type) }.
+XBNF_Sequence ::=  XBNF_TypeCheck   = element   XBNF_Sequence-Dis0 .
+IfTail ::=  'else'   PushChar   Expr   PopChar   'end'  |  LinePos   = l   'elseif'   PushChar   Expr   PopChar   = e1   'then'   PushChar   Expr   PopChar   = e2   IfTail   = e3  { If(l,e1,e2,e3) } |  'end'  { BoolExp(false) }.
+Grammar ::=  XBNF_GrammarParents   = parents   XBNF_GrammarImports   = imports   Grammar-Star0   = clauses   'end'  { Grammar(parents,clauses->asSet,"",imports) }.
+AddPattern ::=  AtomicPattern   = p1   AddPattern-Dis0 .
+XBNF_Sequence-Dis0 ::=  '*'  { StarCons(element) } |  '+'  { PlusCons(element) } |  <VarRef 2cf31f> .
+Keyps-Star0 ::=  ','   Keyp   = $head   Keyps-Star0   = $tail   Cons  |  Nil .
+XBNF_Element ::=  XBNF_Optional  |  XBNF_Binding  |  XBNF_Sequence .
+VarExp ::=  Name   = name   LinePos   = l  { Var(name,l) }.
+XBNF_TypeCheck-Dis0 ::=  ':'   XBNF_Path   = type  { And(element,TypeCheck(type)) } |  <VarRef 26989f> .
+BindingList ::=  PushChar   Binding   PopChar   = binding   BindingList-Star0   = bindings   <Pair 31dc6e> .
+XBNF_Disjunction ::=  XBNF_Conjunction   = element   XBNF_Disjunction-Dis0 .
+Objectp ::=  Name   = name   Objectp-Star0   = names   '('   Patterns   = slots   ')'  { Objectp(name,names,slots) }.
+XBNF_Path-Star0 ::=  '::'   Name   = $head   XBNF_Path-Star0   = $tail   Cons  |  Nil .
+SeqCmpExp ::=  LinePos   = l   '['   CommaSepExps   = es   ']'   !  { SetExp(l,"Seq",es) } |  LinePos   = l   '['   Exp   = e   '|'   CmpClause   = c   SeqCmpExp-Star0   = cs   ']'  { Comprehensions::Cmp(e,Seq{c | cs}) }.
+XBNF_Conjunction ::=  XBNF_Conjunction-PlusCons0   = elements  { elements->tail->iterate(e conj = elements->head |
+  And(conj,e)) }.
+Constp ::=  Intp  |  Strp  |  Boolp  |  Expp .
+XBNF_GrammarParents-Star0 ::=  ','   Exp   = $head   XBNF_GrammarParents-Star0   = $tail   Cons  |  Nil .
+SeqExp ::=  LinePos   = l   'Seq{'   SeqExp-Dis0 .
+XBNF_ClauseArgs ::=  '('   Name   = n   XBNF_ClauseArgs-Star0   = ns   ')'   <Pair 28b24b>  |  Seq{} .
+ArgsTail-Star0 ::=  ','   PushChar   Expr   PopChar   = $head   ArgsTail-Star0   = $tail   Cons  |  Nil .
+XBNF_GrammarImports-Star0 ::=  ','   Exp   = $head   XBNF_GrammarImports-Star0   = $tail   Cons  |  Nil .
+BindFunArgsTail ::=  Pattern   = p   BindFunArgsTail-Star0   = ps   ')'   <Pair 3f53cf>  |  ')'   Seq{} .
+XBNF_Clause ::=  Name   = name   XBNF_ClauseArgs   = args   '::='   XBNF_Disjunction   = body   '.'  { Clause(name,args,body) }.
+Drop ::=  '<'   DropExp   = e   '>'  { Drop(resolve(order(e))) } |  '<|'   Pattern   = p   '|>'  { DropPattern(p) }.
+Grammar-Star0 ::=  XBNF_Clause   = $head   Grammar-Star0   = $tail   Cons  |  Nil .
+Objectp-Star0 ::=  '::'   Name   = $head   Objectp-Star0   = $tail   Cons  |  Nil .
+XBNF_CallArgs ::=  '^'   '('   Name   = n   XBNF_CallArgs-Star0   = ns   ')'   <Pair 28b1bf>  |  Seq{} .
+LogicalExp ::=  PushChar   SimpleExp   PopChar   = e  { resolve(order(e)) }.
+XBNF_Disjunction-Dis0 ::=  '|'   XBNF_Disjunction   = rest  { Or(element,rest) } |  <VarRef 1fffb4> .
+ImportPath ::=  Name   = n   ImportPath-Star0   = ns   <Pair 43733a> .
+XBNF_Call ::=  Name   = name   XBNF_CallArgs   = args  { Call(name,args) }.
+Varp-Dis0 ::=  '='   PushChar   Pattern   PopChar  |  null .
+XBNF_Conjunction-PlusCons0 ::=  XBNF_Element   = $head   XBNF_Conjunction-PlusCons0-Star0   = $tail   Cons .
+IfExp ::=  LinePos   = l   'if'   PushChar   Expr   PopChar   = e1   'then'   PushChar   Expr   PopChar   = e2   IfTail   = e3  { If(l,e1,e2,e3) }.
+XBNF_Binding ::=  Name   = name   '='   XBNF_Sequence   = atom  { And(atom,Bind(name)) }.
+AName ::=  Name   !  |  Drop .
+XBNF_Conjunction-PlusCons0-Star0 ::=  XBNF_Element   = $head   XBNF_Conjunction-PlusCons0-Star0   = $tail   Cons  |  Nil .
+Keywordp-Star0 ::=  '::'   Name   = $head   Keywordp-Star0   = $tail   Cons  |  Nil .
+XBNF_Atom ::=  XBNF_Action  |  XBNF_Literal  |  XBNF_Call  |  XBNF_Not  |  '('   XBNF_Disjunction   ')'  |  '<<'   XBNF_Disjunction   = d   '>>'  { And(PushChar(),And(d,PopChar())) }.
+Try ::=  LinePos   = l   'try'   PushChar   Expr   PopChar   = body   'catch'   '('   Name   = name   ')'   PushChar   Expr   PopChar   = handler   'end'  { Try(l,body,name,handler) }.
+XBNF_ClauseArgs-Star0 ::=  ','   Name   = $head   XBNF_ClauseArgs-Star0   = $tail   Cons  |  Nil .
+Bindings ::=  BindingList  |  Drop .
+XBNF_Action ::=  '{'   Exp   = exp   '}'  { PreAction(exp) } |  '?'   Exp   = boolExp  { PrePredicate(boolExp) }.
+Op ::=  BinOp   !  |  ';'   ; .
+XBNF_CallArgs-Star0 ::=  ','   Name   = $head   XBNF_CallArgs-Star0   = $tail   Cons  |  Nil .
+SetExp ::=  LinePos   = l   'Set{'   CommaSepExps   = es   '}'  { SetExp(l,"Set",es) }.
+Keywordp ::=  Name   = name   Keywordp-Star0   = names   '['   Keyps   = keys   ']'  { Keywordp(name,names,keys) }.
+Consp ::=  Pairp  |  Seqp  |  Emptyp .
+SeqCmpExp-Star0 ::=  ','   CmpClause   = $head   SeqCmpExp-Star0   = $tail   Cons  |  Nil .
+Seqp ::=  'Seq{'   Pattern   = head   SeqpTail   = tail  { Consp(head,tail) }.
+EvaluationUnit ::=  EvaluationUnit-Star0   EvaluationUnit-Star1   = imports   EvaluationUnit-Star2   = exps   EOF  { Evaluator::EvaluationUnit(imports,exps) }.
+BindFunArgsTail-Star0 ::=  ','   Pattern   = $head   BindFunArgsTail-Star0   = $tail   Cons  |  Nil .
+Atom ::=  PushChar   VarExp   PopChar   !  |  PushChar   Self   PopChar   !  |  PushChar   StrExp   PopChar   !  |  PushChar   IntExp   PopChar   !  |  PushChar   IfExp   PopChar   !  |  PushChar   BoolExp   PopChar   !  |  PushChar   LetExp   PopChar   !  |  PushChar   CollExp   PopChar   !  |  Parentheses  |  PushChar   Drop   PopChar  |  PushChar   Lift   PopChar  |  PushChar   Throw   PopChar  |  PushChar   Try   PopChar  |  PushChar   ImportIn   PopChar  |  PushChar   FloatExp   PopChar  |  PushChar   LocalParserImport   PopChar  |  PushChar   AtExp   PopChar .
+BindFunArgs ::=  '('   BindFunArgsTail .
+EvaluationUnit-Star2-Dis0 ::=  Def  |  TopLevelExp .
+DropExp ::=  'not'   DropExp   = e  { Negate(e) } |  PushChar   Apply   PopChar   = a   DropExpTail .
+Syntaxp ::=  '[|'   PushChar   Exp   PopChar   = e   '|]'  { Syntaxp(e) }.
+PairOrElements-Star0 ::=  ','   PushChar   Expr   PopChar   = $head   PairOrElements-Star0   = $tail   Cons  |  Nil .
+CollMessage ::=  '('   CommaSepExps   = as   ')'  { CollExp(c,n,as) }.
+LocalParserImport ::=  'parserImport'   Name   = name   LocalParserImport-Star0   = names   <Pair 6112ec>  ImportAt  'in'   PushChar   Expr   PopChar   = e   'end'  { ParserImport(Seq{name | names},e) }.
+PathExp ::=  PushChar   Atom   PopChar   = atom   PathExp-Dis0 .
+ImportIn ::=  'import'   ImportPath   = path   'in'   PushChar   Exp   PopChar   = body   'end'  { ImportIn(path,body) }.
+Parentheses ::=  '('   PushChar   Expr   PopChar   = e   ')'  { Parentheses(e) }.
+Varp-Dis1 ::=  ':'   PushChar   TypeExp   PopChar  | { NamedType() }.
+CollOp ::=  CollMessage  |  Collect  |  Iterate  | { CollExp(c,n,Seq{}) }.
+FloatExp ::=  LinePos   = l   Float   = f  { f.lift().line := l }.
+Throw ::=  LinePos   = l   'throw'   PushChar   SimpleExp   PopChar   = value  { Throw(l,value) }.
+Apply ::=  PushChar   Atom   PopChar   = a   ApplyTail   = e   Arrow .
+EvaluationUnit-Star2 ::=  EvaluationUnit-Star2-Dis0   = $head   EvaluationUnit-Star2   = $tail   Cons  |  Nil .
+KeyArgs-Dis0 ::=  ']'   Seq{}  |  KeyArg   = arg   KeyArgs-Dis0-Star0   = args   ']'   <Pair 39f9c8> .
+ArrowTail ::=  Name   = n   CollOp   = x   Arrow .
+TypePath ::=  Name   = name   TypePath-Star0   = names  { Seq{name | names}->collect(n |
+  Symbol(n)) }.
+Exp ::=  PushChar   Expr   PopChar   = e   !  { resolve(order(e)) }.
+BinOp ::=  '<'   <  |  '<='   <=  |  '>'   >  |  '>='   >=  |  '<>'   <>  |  '='   =  |  '::'   ::  |  ':='   :=  |  '.'   .  |  'and'   and  |  'andthen'   andthen  |  'implies'   implies  |  'or'   or  |  'orelse'   orelse  |  '+'   +  |  '-'   -  |  '*'   *  |  '/'   / .
+SetCmpExp-Star0 ::=  ','   CmpClause   = $head   SetCmpExp-Star0   = $tail   Cons  |  Nil .
+OpType ::=  TypeArgs   = domains   '->'   PushChar   TypeExp   PopChar   = range  { OpType(domains,range) }.
+KeyArg ::=  Name   = name   '='   PushChar   Expr   PopChar   = exp  { KeyArg(name,exp) }.
+Self ::=  LinePos   = l   'self'  { Self(l) }.
+Keyps ::=  Keyp   = key   Keyps-Star0   = keys   <Pair 4e9609>  |  Seq{} .
+CompilationBodyExps ::=  CompilationBody   = b   !   CompilationBodyExps   = bs   <Pair 4374d6>  |  Seq{} .
+Patterns-Star0 ::=  ','   Pattern   = $head   Patterns-Star0   = $tail   Cons  |  Nil .
+SeqpTail ::=  ','   Pattern   = head   SeqpTail   = tail  { Consp(head,tail) } |  '}'  { Constp(SetExp("Seq",Seq{})) }.
+EmptySeqTail ::=  '}'  { SetExp(l,"Seq",Seq{}) }.
+BindingList-Star0 ::=  ';'   PushChar   Binding   PopChar   = $head   BindingList-Star0   = $tail   Cons  |  Nil .
+AtExp ::=  LinePos   = l   '@'   PushChar  At  PopChar   = e  { e.setLine(l) }.
+BindFun ::=  BindFunArgs   = args   OptType   = type   '='   PushChar   SimpleExp   PopChar   = value  { FunBinding(name,args,type,value) }.
+Def-Dis0 ::=  '!'  { true } | { false }.
+DropExpTail ::=  DropOp   = o   !   DropExp   = e  { BinExp(a,o,e) } |  <VarRef 41e63c> .
+Strp ::=  Str   = s  { Constp(StrExp(s)) }.
+ParserImport-Star0 ::=  '::'   Name   = $head   ParserImport-Star0   = $tail   Cons  |  Nil .
+Collect ::=  '('   AName   = v   '|'   PushChar   Expr   PopChar   = e   ')'  { IterExp(c,n,v,e) }.
+Lift ::=  LinePos   = l   '[|'   PushChar   Exp   PopChar   = e   '|]'  { Lift(l,e) }.
+Pattern ::=  AddPattern   = p   Pattern-Star0   = es  { es->iterate(e s = p |
+  Includingp(s,e)) }  = p   PatternGuard .
+IntExp ::=  LinePos   = l   Int   = e  { IntExp(l,e) }.
+ParserImport ::=  'parserImport'   Name   = name   ParserImport-Star0   = names   ';'   <Pair 4914f1>  ImportAt { ParserImport(Seq{name} + names,null) }.
+TypePath-Star0 ::=  '::'   Name   = $head   TypePath-Star0   = $tail   Cons  |  Nil .
+CollExp ::=  PushChar   SetExp   PopChar   !  |  PushChar   SeqExp   PopChar   !  |  PushChar   SetCmpExp   PopChar   !  |  PushChar   SeqCmpExp   PopChar   ! .
+Expp ::=  '['   PushChar   Exp   PopChar   = exp   ']'  { Constp(exp) }.
+TopLevelExp ::=  PushChar   SimpleExp   PopChar   = s   ';'  { resolve(order(s)) }.
+ApplyTail ::=  Args   = args   !  { Apply(a,args) } |  KeyArgs   = args   !  { Instantiate(a,args) } |  <VarRef f2a38> .
+EvaluationUnit-Star1 ::=  EImport   = $head   EvaluationUnit-Star1   = $tail   Cons  |  Nil .
+KeyArgs-Dis0-Star0 ::=  ','   KeyArg   = $head   KeyArgs-Dis0-Star0   = $tail   Cons  |  Nil .
+ArgsTail ::=  ')'   Seq{}  |  PushChar   Expr   PopChar   = arg   ArgsTail-Star0   = args   ')'   <Pair 39f82f> .
+TypeArgs ::=  '('   PushChar   TypeExp   PopChar   = arg   TypeArgs-Star0   = args   ')'   <Pair 43460e> .
+Expr ::=  'not'   PushChar   Expr   PopChar   = e  { Negate(e) } |  '-'   PushChar   SimpleExp   PopChar   = e  { BinExp(IntExp(0),"-",e) } |  PushChar   Apply   PopChar   = a   ExpTail .
+BoolExp ::=  LinePos   = l   'true'  { BoolExp(l,true) } |  LinePos   = l   'false'  { BoolExp(l,false) }.
+SeqExp-Dis0 ::=  EmptySeqTail  |  NonEmptySeqTail .
+OptType ::=  ':'   PushChar   TypeExp   PopChar  | { NamedType() }.
+KeyArgs ::=  '['   KeyArgs-Dis0 .
+Patterns ::=  Pattern   = head   Patterns-Star0   = tail   <Pair 5d503d>  |  Seq{} .
+Keyp ::=  Name   = name   '='   Pattern   = pattern  { Keyp(name,pattern) }.
+CompilationBody ::=  Def  |  TopLevelExp .
+Pattern-Star0 ::=  PatternTail   = $head   Pattern-Star0   = $tail   Cons  |  Nil .
+SimpleExp ::=  'not'   PushChar   SimpleExp   PopChar   = e  { Negate(e) } |  '-'   PushChar   SimpleExp   PopChar   = e  { BinExp(IntExp(0),"-",e) } |  PushChar   Apply   PopChar   = a   SimpleExpTail .
+Emptyp ::=  'Seq{'   '}'  { Constp(SetExp("Seq",Seq{})) } |  'Set{'   '}'  { Constp(SetExp("Set",Seq{})) }.
+CommaSepExps-Star0 ::=  ','   PushChar   Expr   PopChar   = $head   CommaSepExps-Star0   = $tail   Cons  |  Nil .
+AtomicPattern ::=  PushChar   Varp   PopChar  |  PushChar   Constp   PopChar  |  PushChar   Objectp   PopChar  |  PushChar   Consp   PopChar  |  PushChar   Keywordp   PopChar  |  PushChar   Syntaxp   PopChar  |  '('   PushChar   Pattern   PopChar   ')' .
+BindingTail ::=  BindFun  |  BindValue .
+CompilationUnit-Star0 ::=  ParserImport   = $head   CompilationUnit-Star0   = $tail   Cons  |  Nil .
+DropOp ::=  '<'   <  |  '<='   <=  |  '<>'   <>  |  '='   =  |  '::'   ::  |  ':='   :=  |  '.'   .  |  'and'   and  |  'andthen'   andthen  |  'implies'   implies  |  'or'   or  |  'orelse'   orelse  |  '+'   +  |  '-'   -  |  '*'   *  |  '/'   / .
+StrExp ::=  LinePos   = l   Str   = e  { StrExp(l,e) }.
+PathExp-Dis0-Star0 ::=  '::'   AName   = $head   PathExp-Dis0-Star0   = $tail   Cons  |  Nil .
+CommaSepExps ::=  PushChar   Expr   PopChar   = e   CommaSepExps-Star0   = es   <Pair 41e965>  |  Seq{} .
+LetExp ::=  LinePos   = l   'let'   PushChar   Bindings   PopChar   = bindings   LetBody   = body   'end'  { Let(l,bindings,body) }.
+PatternGuard ::=  'when'   PushChar   Exp   PopChar   = e  { Condp(p,e) } |  <VarRef 3f5172> .
+Intp ::=  Int   = i  { Constp(IntExp(i)) }.
+Pairp ::=  'Seq{'   Pattern   = head   '|'   Pattern   = tail   '}'  { Consp(head,tail) }.
+TypeArgs-Star0 ::=  ','   PushChar   TypeExp   PopChar   = $head   TypeArgs-Star0   = $tail   Cons  |  Nil .
+CmpClause ::=  Name   = n   OptType   = t   '<-'   PushChar   Exp   PopChar   = e  { Comprehensions::Bind(n,t.toExp(),e) } |  '?'   PushChar   Exp   PopChar   = e  { Comprehensions::Filter(e) }.
+Exp1 ::=  PushChar   Exp   PopChar   EOF .
+TopLevelCommand ::=  PushChar   SimpleExp   PopChar   = c   pState   = p  { p.consumeToken := false }  ';'  { resolve(order(c)) }.
+Arrow ::=  '->'   !   ArrowTail  |  <VarRef 2a6ae1> .
+EvaluationUnit-Star0 ::=  ParserImport   = $head   EvaluationUnit-Star0   = $tail   Cons  |  Nil .
+ImportPath-Star0 ::=  '::'   Name   = $head   ImportPath-Star0   = $tail   Cons  |  Nil .
+Args ::=  '('   ArgsTail .
+TypeExp ::=  TypePath   = path   TypeExp-Dis0  |  '['   PushChar   TypeExp   PopChar   = t   ']'  { ParametricType(Seq{"Seq"},Seq{t}) } |  '{'   PushChar   TypeExp   PopChar   = t   '}'  { ParametricType(Seq{"Set"},Seq{t}) } |  Drop  |  OpType .
+ExpTail ::=  Op   = o   !   PushChar   Expr   PopChar   = e  { BinExp(a,o,e) } |  <VarRef 401f53> .
+Boolp ::=  'true'  { Constp(BoolExp(true)) } |  'false'  { Constp(BoolExp(false)) }.
+TypeExp-Dis0 ::=  TypeArgs   = args  { ParametricType(path,args) } | { NamedType(path) }.
+PairOrElements ::=  '|'   PushChar   Expr   PopChar   = t   '}'  { ConsExp(e,t) } |  PairOrElements-Star0   = es   '}'  { SetExp(l,"Seq",Seq{e | es}) }.
+Iterate ::=  '('   AName   = v1   AName   = v2   '='   PushChar   Expr   PopChar   = init   '|'   PushChar   Expr   PopChar   = body   ')'  { Iterate(c,v1,v2,init,body) }.
+PatternTail ::=  '->'   Name   '('   Pattern   = p   ')'   <VarRef 472aa1> .
+LetBody ::=  'in'   PushChar   Expr   PopChar   = body   <VarRef 4860c9>  |  PushChar   'then'   PushChar   Bindings   PopChar   = bindings   LetBody   = body  { Let(bindings,body) }  PopChar .
+CompilationUnit ::=  CompilationUnit-Star0   = parserImports   CompilationUnit-Star1   = imports   CompilationBodyExps   = exps   EOF   pState   = s  { CompilationUnit("",imports,exps,s.getSource(),parserImports) }.
+PathExp-Dis0 ::=  '::'   AName   = name   PathExp-Dis0-Star0   = names  { Path(atom,Seq{name | names}) } |  <VarRef 39fb59> .
+SimpleExpTail ::=  BinOp   = o   !   PushChar   SimpleExp   PopChar   = e  { BinExp(a,o,e) } |  <VarRef f2a30> .
+EImport ::=  'import'   TopLevelExp   = exp  { Evaluator::Import(exp) }.
+CompilationUnit-Star1 ::=  Import   = $head   CompilationUnit-Star1   = $tail   Cons  |  Nil .
+Binding ::=  AName   = name   BindingTail .
+</PRE></TD>
+</TABLE>
+</HTML>

@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+Thread
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>Thread</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+
+      A thread is a unit of concurrent execution. When a thread is created, it 
+      continues processing on the XVM until either it performs a read operation 
+      that blocks on input or when it explicitly calls yield. All XOCL values 
+      implement the yield operation. In both cases the thread is said to 
+      yield control. When a thread yields control, the XOS schedules another 
+      thread that is waiting. The scheduling algorithm aims to ensure that all 
+      waiting threads get scheduled providing that they yield.
+    
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#asSeq">asSeq</a>():<A HREF="../../../Root/XCore/Thread/index.html">Seq(Thread)<A></B></TD><TD> 
+      Returns all the threads in the system by chaining down
+      the linked list of threads from the receiver.
+    </TD></TR>
+<TR><TD><B><a href="#id">id</a>():<A HREF="../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#kill">kill</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD> 
+      A thread can commit suicide by calling this operation on itself.
+    </TD></TR>
+<TR><TD><B><a href="#next">next</a>():<A HREF="../../../Root/XCore/Thread/index.html">Thread<A></B></TD><TD>
+      Returns the thread that will be scheduled next.
+    </TD></TR>
+<TR><TD><B><a href="#sleep">sleep</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Sets the live-status of the receiver to SLEEP. The receiver
+      cannot be rescheduled until it has been woken up.
+    </TD></TR>
+<TR><TD><B><a href="#state">state</a>():<A HREF="../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD>
+      Returns the live-status of the receiver.
+    </TD></TR>
+<TR><TD><B><a href="#stateString">stateString</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>
+      Returns the live-status of the receiver as a symbolic string.
+    </TD></TR>
+<TR><TD><B><a href="#toString">toString</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#wake">wake</a>(result:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Changes the live-status of the receiver to be ACTIVE
+      and therefore ready for rescheduling.
+    </TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="asSeq"/><FONT FACE="Courier" SIZE="1">@Operation&#160;asSeq():Seq(Thread)<br>&#160;&#160;let&#160;t&#160;=&#160;self;<br>&#160;&#160;&#160;&#160;&#160;&#160;seq&#160;=&#160;Seq{self}<br>&#160;&#160;in&#160;t&#160;:=&#160;t.next();<br>&#160;&#160;&#160;&#160;&#160;@While&#160;t&#160;&lt;&gt;&#160;self&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;seq&#160;:=&#160;seq&#160;+&#160;Seq{t};<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;t&#160;:=&#160;t.next()<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;seq<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="id"/><FONT FACE="Courier" SIZE="1">@Operation&#160;id():Integer<br>&#160;&#160;Kernel_threadId(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="kill"/><FONT FACE="Courier" SIZE="1">@Operation&#160;kill():XCore::Element<br>&#160;&#160;Kernel_threadKill(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="next"/><FONT FACE="Courier" SIZE="1">@Operation&#160;next():Thread<br>&#160;&#160;Kernel_threadNext(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="sleep"/><FONT FACE="Courier" SIZE="1">@Operation&#160;sleep():XCore::Element<br>&#160;&#160;Kernel_sleep(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="state"/><FONT FACE="Courier" SIZE="1">@Operation&#160;state():Integer<br>&#160;&#160;Kernel_threadState(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="stateString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;stateString():String<br>&#160;&#160;@Case&#160;self.state()&#160;of<br>&#160;&#160;&#160;&#160;[&#160;0&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;"ACTIVE"<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;1&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;"BLOCK_READ"<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;2&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;"BLOCK_CONNECT"<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;3&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;"SLEEPING"<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;else&#160;"DEAD"<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="toString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;toString():String<br>&#160;&#160;"Thread[id="&#160;+&#160;self.id()&#160;+&#160;",state="&#160;+&#160;self.stateString()&#160;+&#160;"]"<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="wake"/><FONT FACE="Courier" SIZE="1">@Operation&#160;wake(result&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;Kernel_wake(self,result)<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

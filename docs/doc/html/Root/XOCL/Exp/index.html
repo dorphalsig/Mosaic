@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+Exp
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>Exp</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+ 
+      An expression is a wrapped element of type Performable. An expression evaluates
+      to itself, but wraps the performable element as an operation. The wrapping ensures
+      that the element can be performed in its correct environment when the operation
+      is called. In addition the operation will be compiled by the compiler to produce
+      efficient code. Often we want to get the underlying performable element at
+      run-time. This is calculated on demand from the source code retained as a string.
+    
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../Root/XOCL/Sugar/index.html">Sugar</A>
+,<A HREF="../../../Root/XCore/Performable/index.html">Performable</A>
+,<A HREF="../../../Root/XCore/Located/index.html">Located</A>
+,<A HREF="../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+<TR><TD>Exp(exp)</TD><TD> No Documentation </TD></TR>
+<TR><TD>Exp(exp,op)</TD><TD> No Documentation </TD></TR>
+<TR><TD>Exp(exp,args,op)</TD><TD> No Documentation </TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR><TD><B>args</B></TD><TD><A HREF="../../../Root/XCore/String/index.html">Seq(String)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>exp</B></TD><TD><A HREF="../../../Root/XCore/Performable/index.html">Performable<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>op</B></TD><TD><A HREF="../../../Root/XCore/Operation/index.html">Operation<A></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Performable/index.html">Performable</A>: endLine, line. <BR><B>From</B> <A HREF="../../../Root/XCore/Located/index.html">Located</A>: charEnd, charStart. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#args">args</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugar">desugar</a>():<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#exp">exp</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#expChanged">expChanged</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#keyApply">keyApply</a>(env:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#keyInvoke">keyInvoke</a>(target:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,env:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#mkEnv">mkEnv</a>(names:<A HREF="../../../Root/XCore/String/index.html">Seq(String)<A>,values:<A HREF="../../../Root/XCore/Element/index.html">Seq(Element)<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#op">op</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#perform">perform</a>(target:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,args:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,env:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,imports:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#perform">perform</a>(target:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,env:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,imports:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#perform">perform</a>(args:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#perform">perform</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#perform">perform</a>(target:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,args:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setArgs">setArgs</a>(v:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setExp">setExp</a>(v:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setOp">setOp</a>(v:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#source">source</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#toString">toString</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XOCL/Sugar/index.html">Sugar</A>: FV, compile, desugar, eval, lift, maxLocals, typeExp. <BR><B>From</B> <A HREF="../../../Root/XCore/Performable/index.html">Performable</A>: FV, compile, endLine, eval, line, maxLocals, pprint, pprint, pprint, setEndLine, setLine. <BR><B>From</B> <A HREF="../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="args"/><FONT FACE="Courier" SIZE="1">@Operation&#160;args[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.args<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugar"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugar():Performable<br>&#160;&#160;[|&#160;&lt;Path::toPath(self.of().pathSeq())&gt;(&lt;exp.lift()&gt;,&lt;args.lift()&gt;,&lt;OCL::Operation("",args-&gt;collect(arg&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;OCL::Varp(arg)),OCL::NamedType(),exp)&gt;)&#160;|]<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="exp"/><FONT FACE="Courier" SIZE="1">@Operation&#160;exp[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.exp<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="expChanged"/><FONT FACE="Courier" SIZE="1">@Operation&#160;expChanged():XCore::Element<br>&#160;&#160;let&#160;dynamics&#160;=&#160;Seq{Seq{1&#160;|&#160;Seq{Symbol("Root")&#160;|&#160;Root}}}<br>&#160;&#160;in&#160;self.op&#160;:=&#160;Compiler::compileToFun("",exp,args,dynamics,true)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="keyApply"/><FONT FACE="Courier" SIZE="1">@Operation&#160;keyApply(env&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.keyInvoke(null,env)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="keyInvoke"/><FONT FACE="Courier" SIZE="1">@Operation&#160;keyInvoke(target&#160;:&#160;XCore::Element,env&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;args&#160;=&#160;op.paramNames()-&gt;collect(name&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;env-&gt;lookup(name))<br>&#160;&#160;in&#160;op.invoke(target,args)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="mkEnv"/><FONT FACE="Courier" SIZE="1">@Operation&#160;mkEnv(names&#160;:&#160;Seq(String),values&#160;:&#160;Seq(Element)):XCore::Element<br>&#160;&#160;@For&#160;name,value&#160;in&#160;names,values&#160;produce<br>&#160;&#160;&#160;&#160;Seq{1&#160;|&#160;Seq{name.asSymbol()&#160;|&#160;value}}<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="op"/><FONT FACE="Courier" SIZE="1">@Operation&#160;op[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.op<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="perform"/><FONT FACE="Courier" SIZE="1">@Operation&#160;perform(target&#160;:&#160;XCore::Element,args&#160;:&#160;XCore::Element,env&#160;:&#160;XCore::Element,imports&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;if&#160;op&#160;=&#160;null<br>&#160;&#160;then&#160;self.error("Cannot&#160;perform&#160;an&#160;eval&#160;"&#160;+&#160;self.toString())<br>&#160;&#160;else<br>&#160;&#160;&#160;&#160;op.setDynamics(env&#160;+&#160;op.dynamics());<br>&#160;&#160;&#160;&#160;op.invoke(target,args)<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="perform"/><FONT FACE="Courier" SIZE="1">@Operation&#160;perform(target&#160;:&#160;XCore::Element,env&#160;:&#160;XCore::Element,imports&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.perform(target,Seq{},env,imports)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="perform"/><FONT FACE="Courier" SIZE="1">@Operation&#160;perform(args&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.perform(null,args)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="perform"/><FONT FACE="Courier" SIZE="1">@Operation&#160;perform():Element<br>&#160;&#160;self.perform(Seq{})<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="perform"/><FONT FACE="Courier" SIZE="1">@Operation&#160;perform(target&#160;:&#160;XCore::Element,args&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.perform(target,args,Seq{},Seq{})<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setArgs"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setArgs[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.args&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setExp"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setExp[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.exp&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setOp"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setOp[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.op&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="source"/><FONT FACE="Courier" SIZE="1">@Operation&#160;source():String<br>&#160;&#160;exp.pprint()<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="toString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;toString():String<br>&#160;&#160;"[|&#160;"&#160;+&#160;exp.pprint()&#160;+&#160;"&#160;|]"<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

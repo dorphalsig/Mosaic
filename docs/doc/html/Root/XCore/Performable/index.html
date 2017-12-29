@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+Performable
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>Performable</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+
+     A performable element can be executed on the XMF VM. It must provide a
+     collection of operations that support its evaluation or its translation
+     into VM machine instructions. In particular it must support 'compile/4',
+     'FV/0', 'maxLocals/0' and 'eval/3'. Performable is the root class for
+     all extensions to executable XMF. For example OCL is a sub-class of
+     Performable. If you inte-nd to define your own languages in XMF then
+     they should exte-nd Performable.
+    
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../Root/XCore/Located/index.html">Located</A>
+,<A HREF="../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR><TD><B>endLine</B></TD><TD><A HREF="../../../Root/XCore/Integer/index.html">Integer<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>line</B></TD><TD><A HREF="../../../Root/XCore/Integer/index.html">Integer<A></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Located/index.html">Located</A>: charEnd, charStart. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#FV">FV</a>():<A HREF="../../../Root/XCore/String/index.html">Set(String)<A></B></TD><TD>
+      All performable things contain variables. If the variables are not
+      bound then they are free. This returns the set of free variables
+      in a performable thing.
+    </TD></TR>
+<TR><TD><B><a href="#compile">compile</a>(env:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,frame:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,isLast:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,saveSource:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Every performable thing must be able to be compiled.
+      The arguments are as follows: env contains information about the context;
+      frame defines how statically nested inside binding contours we are;
+      isLast is a boolean determining whether we are the last performable thing;
+      saveSource controls whether or not source is dumped to the output.
+    </TD></TR>
+<TR><TD><B><a href="#endLine">endLine</a>():<A HREF="../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#eval">eval</a>(target:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,env:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,imports:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Every performable thing can be evaluated (as opposed to compiled and 
+      then performed).Evaluation occurs in a context that includes the value
+      of 'self' (i.e. the target of the evaluating message), an
+      environment of local variables and a sequence of imported name spaces.
+    </TD></TR>
+<TR><TD><B><a href="#line">line</a>():<A HREF="../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#maxLocals">maxLocals</a>():<A HREF="../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD>
+      Any performable thing requires some local storage. This will
+      occur in the machine stack frame. It is possible to statically 
+      determine how much storage is required and this operation returns
+      the amount of storage needed.
+    </TD></TR>
+<TR><TD><B><a href="#pprint">pprint</a>(out:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,indent:<A HREF="../../../Root/XCore/Integer/index.html">Integer<A>):<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>
+      Any performable thing can be turned into code. The default
+      behaviour is to produce a comment. All performable subclasses
+      should redefined this operation as appropriate.
+    </TD></TR>
+<TR><TD><B><a href="#pprint">pprint</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>
+      Pretty prints the receiver to a string.
+    </TD></TR>
+<TR><TD><B><a href="#pprint">pprint</a>(indent:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>
+      Pretty prints the receiver to a string.
+    </TD></TR>
+<TR><TD><B><a href="#setEndLine">setEndLine</a>(endLine:<A HREF="../../../Root/XCore/Integer/index.html">Integer<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setLine">setLine</a>(line:<A HREF="../../../Root/XCore/Integer/index.html">Integer<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="FV"/><FONT FACE="Courier" SIZE="1">@Operation&#160;FV():Set(String)<br>&#160;&#160;Set{}<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="compile"/><FONT FACE="Courier" SIZE="1">@Operation&#160;compile(env&#160;:&#160;XCore::Element,frame&#160;:&#160;XCore::Element,isLast&#160;:&#160;XCore::Element,saveSource&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.error("I&#160;don&apos;t&#160;know&#160;how&#160;to&#160;perform&#160;compile&#160;for&#160;"&#160;+&#160;self.toString())<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="endLine"/><FONT FACE="Courier" SIZE="1">@Operation&#160;endLine():Integer<br>&#160;&#160;endLine<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="eval"/><FONT FACE="Courier" SIZE="1">@Operation&#160;eval(target&#160;:&#160;XCore::Element,env&#160;:&#160;XCore::Element,imports&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.error("I&#160;don&apos;t&#160;know&#160;how&#160;to&#160;perform&#160;eval&#160;for&#160;"&#160;+&#160;self.toString())<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="line"/><FONT FACE="Courier" SIZE="1">@Operation&#160;line():Integer<br>&#160;&#160;line<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="maxLocals"/><FONT FACE="Courier" SIZE="1">@Operation&#160;maxLocals():Integer<br>&#160;&#160;0<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="pprint"/><FONT FACE="Courier" SIZE="1">@Operation&#160;pprint(out&#160;:&#160;XCore::Element,indent&#160;:&#160;Integer):String<br>&#160;&#160;format(out,"//&#160;~S~%~V",Seq{self.toString(),indent})<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="pprint"/><FONT FACE="Courier" SIZE="1">@Operation&#160;pprint():String<br>&#160;&#160;self.pprint(0)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="pprint"/><FONT FACE="Courier" SIZE="1">@Operation&#160;pprint(indent&#160;:&#160;XCore::Element):String<br>&#160;&#160;let&#160;out&#160;=&#160;IO::StringOutputChannel()<br>&#160;&#160;in&#160;self.pprint(out,indent);<br>&#160;&#160;&#160;&#160;&#160;out.getString()<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setEndLine"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setEndLine(endLine&#160;:&#160;Integer):XCore::Element<br>&#160;&#160;self.endLine&#160;:=&#160;endLine<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setLine"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setLine(line&#160;:&#160;Integer):XCore::Element<br>&#160;&#160;self.line&#160;:=&#160;line<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

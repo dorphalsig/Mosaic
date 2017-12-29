@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+ConstraintReport
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>ConstraintReport</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+ 
+      A constraint report is produced by sen-ding a classify message
+      to an element or a check constraints message to a classifier.
+      A report is a tree structured element describing the constraints
+      that were performed and their outcomes. Note that internal
+      nodes of the tree may have dummy constraint reports used as
+      containers of sub-constraint reports. Such dummies have a
+      null constraint and an empty reason, but the satisfied boolean
+      is the conjunction of the sub-reports.
+    
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+<TR><TD>ConstraintReport(candidate,constraint,satisfied)</TD><TD> No Documentation </TD></TR>
+<TR><TD>ConstraintReport(candidate,constraint,satisfied,reason,children)</TD><TD> No Documentation </TD></TR>
+<TR><TD>ConstraintReport(candidate,constraint,satisfied,reason)</TD><TD> No Documentation </TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR><TD><B>candidate</B></TD><TD><A HREF="../../../Root/XCore/Element/index.html">Element<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>children</B></TD><TD><A HREF="../../../Root/XCore/ConstraintReport/index.html">Seq(ConstraintReport)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>constraint</B></TD><TD><A HREF="../../../Root/XCore/Constraint/index.html">Constraint<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>reason</B></TD><TD><A HREF="../../../Root/XCore/String/index.html">String<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>satisfied</B></TD><TD><A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#addToChildren">addToChildren</a>(v:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#candidate">candidate</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#children">children</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#constraint">constraint</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#doubleClick">doubleClick</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#edit">edit</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#failures">failures</a>():<A HREF="../../../Root/XCore/ConstraintReport/index.html">Seq(ConstraintReport)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#getLink">getLink</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#nodeText">nodeText</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#reason">reason</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#reportString">reportString</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#satisfied">satisfied</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#satisfiedHTMLColour">satisfiedHTMLColour</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#toHTMLDoc">toHTMLDoc</a>(fout:<A HREF="../../../Root/IO/OutputChannel/index.html">OutputChannel<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#toString">toString</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#writeHTML">writeHTML</a>(path:<A HREF="../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#writeHTMLChecks">writeHTMLChecks</a>(out:<A HREF="../../../Root/IO/OutputChannel/index.html">OutputChannel<A>,withLinks:<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#writeHTMLChildSummary">writeHTMLChildSummary</a>(out:<A HREF="../../../Root/IO/OutputChannel/index.html">OutputChannel<A>,withLinks:<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#writeHTMLReport">writeHTMLReport</a>(out:<A HREF="../../../Root/IO/OutputChannel/index.html">OutputChannel<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#writeReport">writeReport</a>(out:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="addToChildren"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addToChildren[EXTENDER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.children&#160;:=&#160;self.children-&gt;including(v)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="candidate"/><FONT FACE="Courier" SIZE="1">@Operation&#160;candidate[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.candidate<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="children"/><FONT FACE="Courier" SIZE="1">@Operation&#160;children[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.children<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="constraint"/><FONT FACE="Courier" SIZE="1">@Operation&#160;constraint[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.constraint<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="doubleClick"/><FONT FACE="Courier" SIZE="1">@Operation&#160;doubleClick():XCore::Element<br>&#160;&#160;let&#160;con&#160;=&#160;self.constraint()<br>&#160;&#160;in&#160;if&#160;con&#160;&lt;&gt;&#160;null<br>&#160;&#160;&#160;&#160;&#160;then&#160;con.edit()<br>&#160;&#160;&#160;&#160;&#160;else&#160;self<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="edit"/><FONT FACE="Courier" SIZE="1">@Operation&#160;edit():XCore::Element<br>&#160;&#160;let&#160;formsClient&#160;=&#160;xmf.findClient(Clients::Forms::FormClient)&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;constraintViewer&#160;=&#160;Clients::ReportConstraint::Report(self)<br>&#160;&#160;in&#160;if&#160;formsClient&#160;&lt;&gt;&#160;null<br>&#160;&#160;&#160;&#160;&#160;then&#160;formsClient.newForm(constraintViewer)<br>&#160;&#160;&#160;&#160;&#160;else&#160;format(stdout,"Forms&#160;client&#160;not&#160;available.~%")<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end;<br>&#160;&#160;self<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="failures"/><FONT FACE="Courier" SIZE="1">@Operation&#160;failures():Seq(ConstraintReport)<br>&#160;&#160;children-&gt;iterate(report&#160;F&#160;=&#160;Seq{}&#160;|<br>&#160;&#160;&#160;&#160;if&#160;report.satisfied()<br>&#160;&#160;then&#160;F&#160;+&#160;report.failures()<br>&#160;&#160;else&#160;F-&gt;including(report)&#160;+&#160;report.failures()<br>&#160;&#160;end&#160;)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="getLink"/><FONT FACE="Courier" SIZE="1">@Operation&#160;getLink():String<br>&#160;&#160;let&#160;basicString&#160;=&#160;candidate.toString()&#160;+&#160;if&#160;constraint&#160;&lt;&gt;&#160;null<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;constraint.name<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;"Checks"<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;in&#160;basicString.stripNonAlphaChars()<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="nodeText"/><FONT FACE="Courier" SIZE="1">@Operation&#160;nodeText():String<br>&#160;&#160;if&#160;constraint&#160;&lt;&gt;&#160;null<br>&#160;&#160;then&#160;"Constraint&#160;"&#160;+&#160;constraint.name<br>&#160;&#160;else&#160;"Checks&#160;for&#160;"&#160;+&#160;candidate.toString()<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="reason"/><FONT FACE="Courier" SIZE="1">@Operation&#160;reason[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.reason<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="reportString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;reportString():String<br>&#160;&#160;let&#160;out&#160;=&#160;IO::StringOutputChannel()<br>&#160;&#160;in&#160;self.writeReport(out);<br>&#160;&#160;&#160;&#160;&#160;out.getString()<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="satisfied"/><FONT FACE="Courier" SIZE="1">@Operation&#160;satisfied[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.satisfied<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="satisfiedHTMLColour"/><FONT FACE="Courier" SIZE="1">@Operation&#160;satisfiedHTMLColour():String<br>&#160;&#160;let&#160;green&#160;=&#160;"#64C832";<br>&#160;&#160;&#160;&#160;&#160;&#160;red&#160;=&#160;"#FA6E64"<br>&#160;&#160;in&#160;if&#160;satisfied<br>&#160;&#160;&#160;&#160;&#160;then&#160;green<br>&#160;&#160;&#160;&#160;&#160;else&#160;red<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="toHTMLDoc"/><FONT FACE="Courier" SIZE="1">@Operation&#160;toHTMLDoc(fout&#160;:&#160;OutputChannel):XCore::Element<br>&#160;&#160;format(fout,"&lt;!DOCTYPE&#160;HTML&#160;PUBLIC&#160;"-//W3C//DTD&#160;HTML&#160;4.01&#160;Frameset//EN"&#160;"http://www.w3.org/TR/html4/frameset.dtd"&gt;~%");<br>&#160;&#160;format(fout,"&lt;HTML&gt;~%&lt;HEAD&gt;~%&lt;TITLE&gt;~%Constraint&#160;Report~%&lt;/TITLE&gt;~%&lt;/HEAD&gt;~%");<br>&#160;&#160;format(fout,"&lt;FONT&#160;SIZE="+2"&gt;&lt;B&gt;Constraint&#160;Report&#160;(~S)&lt;/B&gt;&lt;/FONT&gt;&lt;BR&gt;&lt;BR&gt;&lt;HR&gt;~%",Seq{xmf.date()});<br>&#160;&#160;self.writeHTMLChecks(fout,false);<br>&#160;&#160;format(fout,"&lt;/HTML&gt;~%")<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="toString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;toString():String<br>&#160;&#160;try<br>&#160;&#160;&#160;&#160;self.of().name.toString()&#160;+&#160;"("&#160;+&#160;if&#160;self.hasSlot("candidate")<br>&#160;&#160;&#160;&#160;then&#160;self.candidate.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"candidate"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("constraint")<br>&#160;&#160;&#160;&#160;then&#160;self.constraint.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"constraint"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("satisfied")<br>&#160;&#160;&#160;&#160;then&#160;self.satisfied.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"satisfied"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("reason")<br>&#160;&#160;&#160;&#160;then&#160;self.reason.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"reason"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;")"<br>&#160;&#160;catch(exception)<br>&#160;&#160;&#160;&#160;self.of().name&#160;+&#160;"(Constructor&#160;Error!)"<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="writeHTML"/><FONT FACE="Courier" SIZE="1">@Operation&#160;writeHTML(path&#160;:&#160;String):XCore::Element<br>&#160;&#160;let&#160;fout&#160;=&#160;FileOutputChannel(path)<br>&#160;&#160;in&#160;format(fout,"&lt;!DOCTYPE&#160;HTML&#160;PUBLIC&#160;"-//W3C//DTD&#160;HTML&#160;4.01&#160;Frameset//EN"&#160;"http://www.w3.org/TR/html4/frameset.dtd"&gt;~%");<br>&#160;&#160;&#160;&#160;&#160;format(fout,"&lt;HTML&gt;~%&lt;HEAD&gt;~%&lt;TITLE&gt;~%Constraint&#160;Report~%&lt;/TITLE&gt;~%&lt;/HEAD&gt;~%");<br>&#160;&#160;&#160;&#160;&#160;format(fout,"&lt;FONT&#160;SIZE="+2"&gt;&lt;B&gt;Constraint&#160;Report&#160;(~S)&lt;/B&gt;&lt;/FONT&gt;&lt;BR&gt;&lt;BR&gt;&lt;HR&gt;~%",Seq{xmf.date()});<br>&#160;&#160;&#160;&#160;&#160;self.writeHTMLChecks(fout,true);<br>&#160;&#160;&#160;&#160;&#160;format(fout,"&lt;/HTML&gt;~%");<br>&#160;&#160;&#160;&#160;&#160;fout.close()<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="writeHTMLChecks"/><FONT FACE="Courier" SIZE="1">@Operation&#160;writeHTMLChecks(out&#160;:&#160;OutputChannel,withLinks&#160;:&#160;Boolean):XCore::Element<br>&#160;&#160;format(out,"&lt;TABLE&#160;BORDER="1"&#160;WIDTH="100%"&#160;CELLPADDING="3"&#160;CELLSPACING="0"&#160;SUMMARY=""&gt;~%");<br>&#160;&#160;format(out,"&lt;TR&#160;BGCOLOR="~S"&#160;CLASS="TableHeadingColor"&gt;~%",Seq{self.satisfiedHTMLColour()});<br>&#160;&#160;format(out,"&lt;TD&#160;COLSPAN=2&gt;&lt;FONT&#160;SIZE="+2"&gt;~%");<br>&#160;&#160;format(out,"&lt;A&#160;NAME="~S"&gt;&lt;/A&gt;",Seq{self.getLink()});<br>&#160;&#160;format(out,"&lt;B&gt;~S&lt;/B&gt;&lt;/FONT&gt;&lt;/TD&gt;~%&lt;/TR&gt;~%",Seq{self.nodeText().asHTML()});<br>&#160;&#160;if&#160;constraint&#160;&lt;&gt;&#160;null<br>&#160;&#160;then&#160;self.writeHTMLReport(out)<br>&#160;&#160;else&#160;self.writeHTMLChildSummary(out,withLinks)<br>&#160;&#160;end&#160;;<br>&#160;&#160;format(out,"&lt;/TABLE&gt;&lt;BR&gt;&lt;BR&gt;~%");<br>&#160;&#160;@For&#160;child&#160;in&#160;children&#160;do<br>&#160;&#160;&#160;&#160;child.writeHTMLChecks(out,withLinks)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="writeHTMLChildSummary"/><FONT FACE="Courier" SIZE="1">@Operation&#160;writeHTMLChildSummary(out&#160;:&#160;OutputChannel,withLinks&#160;:&#160;Boolean):Element<br>&#160;&#160;format(out,"&lt;TR&#160;BGCOLOR="White"&#160;CLASS="TableHeadingColor"&gt;~%");<br>&#160;&#160;format(out,"&lt;TD&#160;COLSPAN=2&gt;&lt;FONT&#160;SIZE="+2"&gt;~%");<br>&#160;&#160;format(out,"&lt;B&gt;Dependent&#160;checks&lt;/B&gt;&lt;/FONT&gt;&lt;/TD&gt;~%&lt;/TR&gt;~%",Seq{});<br>&#160;&#160;@For&#160;child&#160;in&#160;children&#160;do<br>&#160;&#160;&#160;&#160;let&#160;nodeText&#160;=&#160;child.nodeText()&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;unlinkedNodeText&#160;=&#160;nodeText.asHTML();<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;nodeLink&#160;=&#160;"#"&#160;+&#160;child.getLink()&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;linkedNodeText&#160;=&#160;"&lt;A&#160;HREF=""&#160;+&#160;nodeLink&#160;+&#160;""&gt;"&#160;+&#160;unlinkedNodeText&#160;+&#160;"&lt;/A&gt;"&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;actualNodeText&#160;=&#160;if&#160;withLinks<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;linkedNodeText<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;unlinkedNodeText<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;satisfiedText&#160;=&#160;if&#160;child.satisfied<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;"successful"<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;"failed"<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;in&#160;format(out,"&lt;TR&gt;&lt;TD&gt;&lt;B&gt;~S&lt;/B&gt;&lt;/TD&gt;&lt;TD&#160;BGCOLOR=~S&gt;~S&lt;/TD&gt;&lt;/TR&gt;~%",Seq{actualNodeText,child.satisfiedHTMLColour(),satisfiedText.asHTML()})<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="writeHTMLReport"/><FONT FACE="Courier" SIZE="1">@Operation&#160;writeHTMLReport(out&#160;:&#160;OutputChannel):Element<br>&#160;&#160;format(out,"&lt;TR&#160;BGCOLOR="White"&#160;CLASS="TableHeadingColor"&gt;~%");<br>&#160;&#160;format(out,"&lt;TD&#160;COLSPAN=2&gt;&lt;FONT&#160;SIZE="+2"&gt;~%");<br>&#160;&#160;format(out,"&lt;B&gt;Candidate&#160;~S&lt;/B&gt;&lt;/FONT&gt;&lt;/TD&gt;~%&lt;/TR&gt;~%",Seq{candidate.toString().asHTML()});<br>&#160;&#160;@For&#160;slot&#160;in&#160;candidate.getStructuralFeatureNames()-&gt;asSeq&#160;do<br>&#160;&#160;&#160;&#160;format(out,"&lt;TR&gt;&lt;TD&gt;&lt;B&gt;~S&lt;/B&gt;&lt;/TD&gt;&lt;TD&gt;~S&lt;/TD&gt;&lt;/TR&gt;~%",Seq{slot,candidate.get(slot).toString().asHTML()})<br>&#160;&#160;end;<br>&#160;&#160;format(out,"&lt;TR&#160;BGCOLOR="White"&#160;CLASS="TableHeadingColor"&gt;~%");<br>&#160;&#160;format(out,"&lt;TD&#160;COLSPAN=2&gt;&lt;FONT&#160;SIZE="+2"&gt;~%");<br>&#160;&#160;format(out,"&lt;B&gt;Invariant&#160;&lt;PRE&gt;~S&lt;/PRE&gt;&lt;/B&gt;&lt;/FONT&gt;&lt;/TD&gt;~%&lt;/TR&gt;~%",Seq{constraint.body.source().asHTML()});<br>&#160;&#160;if&#160;not&#160;satisfied<br>&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;format(out,"&lt;TR&#160;BGCOLOR=""&#160;+&#160;self.satisfiedHTMLColour()&#160;+&#160;""&#160;CLASS="TableHeadingColor"&gt;~%");<br>&#160;&#160;&#160;&#160;format(out,"&lt;TD&#160;COLSPAN=2&gt;&lt;FONT&#160;SIZE="+2"&gt;~%");<br>&#160;&#160;&#160;&#160;format(out,"&lt;B&gt;Failure&#160;Reason&#160;&lt;PRE&gt;~S&lt;/PRE&gt;&lt;/B&gt;&lt;/FONT&gt;&lt;/TD&gt;~%&lt;/TR&gt;~%",Seq{reason.asHTML()})<br>&#160;&#160;else&#160;false<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="writeReport"/><FONT FACE="Courier" SIZE="1">@Operation&#160;writeReport(out&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;success&#160;=&#160;if&#160;satisfied<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;"succeeded"<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;"failed"<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;in&#160;if&#160;constraint&#160;&lt;&gt;&#160;null<br>&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;format(out,"The&#160;constraint&#160;~S&#160;~S&#160;~S&#160;",Seq{constraint.name(),success,candidate});<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;reason&#160;=&#160;""<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;format(out,"(no&#160;reason&#160;given)~%")<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;format(out,"~S~%",Seq{reason})<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;end&#160;;<br>&#160;&#160;&#160;&#160;&#160;@For&#160;child&#160;in&#160;children&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;format(out,"~%");<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;child.writeReport(out)<br>&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

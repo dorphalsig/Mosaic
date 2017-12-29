@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+ModelBrowsers
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>ModelBrowsers</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+
+       This package defines a model for a model browser client.
+     
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Packages</B></FONT></TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Classes</B></FONT></TD>
+</TR>
+<TR><TD><B><A HREF="../../../Root/Clients/ModelBrowsers/AbstractMappingClient/index.html">AbstractMappingClient</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/ModelBrowsers/Dummy/index.html">Dummy</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/ModelBrowsers/ModelBrowser/index.html">ModelBrowser</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/ModelBrowsers/ModelBrowserClient/index.html">ModelBrowserClient</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/ModelBrowsers/ModelBrowserCommandInterpreter/index.html">ModelBrowserCommandInterpreter</A></B></TD><TD>
+       This class defines a command interpreter over model browsers. It can be used as the basis
+       for defining event driven mappings. The mapping handles the following output
+       commands by sen-ding them in the appropriate format to the client connected to the
+       output channel:
+           [newModelBrowserCommandCommand(modelBrowser)]
+       </TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/ModelBrowsers/ModelBrowserEventHandler/index.html">ModelBrowserEventHandler</A></B></TD><TD>
+       This class defines operations to handle the following incoming
+       events from the client. In each case the event is a sequence of strings
+       and integers. Each event has a fixed arity. Raising an event in the mapping
+       causes the appropriate model browser element (usually the containing element) to be
+       sent a message with the supplied arguments + the mapping. The model browser element
+       is then responsible for updating the model browser model and using the commands
+       listed above to update the client. Users of the mapping should always raise
+       events and not perform the commands directly. New types of model browser element can
+       handle the events in different ways. New types of model browser mapping can exten-d
+       the interface of events that can be raised.
+           [modelBrowserClosed(modelBrowserId)]
+           [focusGained(modelBrowserId)]
+           [focusLost(modelBrowserId)]
+           [textChanged(nodeId,text)]
+           [getEditableText(nodeId)]
+           [selected(nodeId)]
+           [doubleSelected(nodeId)]
+           [expanded(nodeId)]
+           [rightClickMenuSelected(ownerId,option)]
+           [undo(diagramId)]
+           [redo{diagramId)]
+     </TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/ModelBrowsers/ModelBrowserIdError/index.html">ModelBrowserIdError</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/ModelBrowsers/ModelBrowserNode/index.html">ModelBrowserNode</A></B></TD><TD>No Documentation Specified</TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+</TABLE>
+</HTML>

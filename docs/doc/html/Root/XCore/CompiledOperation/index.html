@@ -1,0 +1,369 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+CompiledOperation
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>CompiledOperation</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+
+      CompiledOperation is the type of all XMF compiled operations. A compiled
+      operation can be invoked using 'invoke/2' or by applying it to its arguments.
+      A compiled operation consists of machine code instructions. A compiled
+      operation may be associated with its source code to aid debugging.
+    
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../Root/XCore/Operation/index.html">Operation</A>
+,<A HREF="../../../Root/XCore/BehaviouralFeature/index.html">BehaviouralFeature</A>
+,<A HREF="../../../Root/XCore/TypedElement/index.html">TypedElement</A>
+,<A HREF="../../../Root/XCore/DocumentedElement/index.html">DocumentedElement</A>
+,<A HREF="../../../Root/XCore/NamedElement/index.html">NamedElement</A>
+,<A HREF="../../../Root/XCore/Contained/index.html">Contained</A>
+,<A HREF="../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR><TD><B>arity</B></TD><TD><A HREF="../../../Root/XCore/Integer/index.html">Integer<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>codeBox</B></TD><TD><A HREF="../../../Root/XCore/Element/index.html">Element<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>dynamics</B></TD><TD><A HREF="../../../Root/XCore/Element/index.html">Seq(Element)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>globals</B></TD><TD><A HREF="../../../Root/XCore/Element/index.html">Element<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>instLevel</B></TD><TD><A HREF="../../../Root/XCore/Integer/index.html">Integer<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>isIntrinsic</B></TD><TD><A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>isVarArgs</B></TD><TD><A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>properties</B></TD><TD><A HREF="../../../Root/XCore/Element/index.html">Seq(Element)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>sig</B></TD><TD><A HREF="../../../Root/XCore/Element/index.html">Seq(Element)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>supers</B></TD><TD><A HREF="../../../Root/XCore/Element/index.html">Seq(Element)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>target</B></TD><TD><A HREF="../../../Root/XCore/Element/index.html">Element<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>traced</B></TD><TD><A HREF="../../../Root/XCore/Element/index.html">Element<A></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/TypedElement/index.html">TypedElement</A>: type. <BR><B>From</B> <A HREF="../../../Root/XCore/DocumentedElement/index.html">DocumentedElement</A>: documentation. <BR><B>From</B> <A HREF="../../../Root/XCore/NamedElement/index.html">NamedElement</A>: name. <BR><B>From</B> <A HREF="../../../Root/XCore/Contained/index.html">Contained</A>: owner. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#addDaemon">addDaemon</a>(daemon:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Add a daemon to the operation. Any state changes to
+      the operation causes the daemon to fire.
+    </TD></TR>
+<TR><TD><B><a href="#addNameChangedDaemon">addNameChangedDaemon</a>(d:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,actionSource:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Use this operation to add a daemon that monitors the name of
+      a compiled operation for changes. The args for the daemon are
+      the new name and the old name.
+    </TD></TR>
+<TR><TD><B><a href="#arity">arity</a>():<A HREF="../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD>
+      Returns the number of arguments expected by the operation.
+    </TD></TR>
+<TR><TD><B><a href="#break">break</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Causes the operation to enter a break-loop when it is called.
+    </TD></TR>
+<TR><TD><B><a href="#codeBox">codeBox</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Returns the code-box for the operation. The code-box
+      contains the static part of the operation.
+    </TD></TR>
+<TR><TD><B><a href="#daemons">daemons</a>():<A HREF="../../../Root/XCore/Operation/index.html">Seq(Operation)<A></B></TD><TD>
+      Return all the daemons for the operation.
+    </TD></TR>
+<TR><TD><B><a href="#dependencies">dependencies</a>():<A HREF="../../../Root/XCore/Element/index.html">Set(Element)<A></B></TD><TD>
+      Calculate the set of name-spaces tht this operation relies on.
+    </TD></TR>
+<TR><TD><B><a href="#deployXOCL">deployXOCL</a>(dir:<A HREF="../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#disassemble">disassemble</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#disassemble">disassemble</a>(out:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,indent:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#doc">doc</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#dynamics">dynamics</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Returns the imported name-spaces and gobl variables for this
+      operation. The dynamics are a sequence of pairs where the
+      head of each pair is a tag (1 or 2) and the tail is either 
+      a binding or a table of bindings. Usually, a table of bindings
+      will be the contents table of a name-space.
+    </TD></TR>
+<TR><TD><B><a href="#fire">fire</a>(slot:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,newValue:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,oldValue:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#get">get</a>(name:<A HREF="../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Handles access to the state of a compiled-operation as
+      though the operation is an object.
+    </TD></TR>
+<TR><TD><B><a href="#getProperty">getProperty</a>(name:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,default:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#getStructuralFeatureNames">getStructuralFeatureNames</a>():<A HREF="../../../Root/XCore/String/index.html">Set(String)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#globalValues">globalValues</a>():<A HREF="../../../Root/XCore/Element/index.html">Seq(Element)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#globals">globals</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Returns the closed-in variable storage for the operation.
+      The storage is a linked-list of vectors. The first vector
+      is local to the operation. The rest of the vectors are the
+      storage for lexically enclosing operations. The linked list
+      is implemented as vector pairs.
+    </TD></TR>
+<TR><TD><B><a href="#hasProperty">hasProperty</a>(property:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#hasSlot">hasSlot</a>(name:<A HREF="../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#importNameSpace">importNameSpace</a>(n:<A HREF="../../../Root/XCore/NameSpace/index.html">NameSpace<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Imports the supplied name space and its contents to the
+      receiver. If the name space is already imported then no
+      change is made. Otherwise the name space is added as the
+      most specific imported name space.
+    </TD></TR>
+<TR><TD><B><a href="#importNameSpaces">importNameSpaces</a>(N:<A HREF="../../../Root/XCore/NameSpace/index.html">Seq(NameSpace)<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Import all the supplied name-spaces into the
+      operation.
+    </TD></TR>
+<TR><TD><B><a href="#imports">imports</a>(n:<A HREF="../../../Root/XCore/NameSpace/index.html">NameSpace<A>):<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>
+      Returns true when the receiver imports the supplied
+      name space.
+    </TD></TR>
+<TR><TD><B><a href="#imports">imports</a>():<A HREF="../../../Root/XCore/Element/index.html">Seq(Element)<A></B></TD><TD>
+      Returns all of the name-spaces that the operation
+      imports in most-specific to least-specific order.
+    </TD></TR>
+<TR><TD><B><a href="#init">init</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#instLevel">instLevel</a>():<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#isIntrinsic">isIntrinsic</a>():<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#isVarArgs">isVarArgs</a>():<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>
+      If a compiled operation has variable arguments then it may
+      be supplied with more than the required positional args. The
+      rest of the arguments are processed by building a sequence
+      from them and supplying the sequence as the value of the 
+      last argument.
+    </TD></TR>
+<TR><TD><B><a href="#lift">lift</a>():<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#locals">locals</a>():<A HREF="../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD> 
+      The number of locals required when the compiled operation
+      is called. Does not include the arguments.
+    </TD></TR>
+<TR><TD><B><a href="#name">name</a>():<A HREF="../../../Root/XCore/Symbol/index.html">Symbol<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newListenerFor">newListenerFor</a>(class:<A HREF="../../../Root/XCore/Classifier/index.html">Classifier<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#owner">owner</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#paramNames">paramNames</a>():<A HREF="../../../Root/XCore/String/index.html">Seq(String)<A></B></TD><TD>
+      Returns the sequence of parameter names for the
+      operation.
+    </TD></TR>
+<TR><TD><B><a href="#paramTypes">paramTypes</a>():<A HREF="../../../Root/XCore/Classifier/index.html">Seq(Classifier)<A></B></TD><TD> 
+      Returns the sequence of parameter types that
+      were declared for the operation.
+    </TD></TR>
+<TR><TD><B><a href="#parserImports">parserImports</a>():<A HREF="../../../Root/XCore/NameSpace/index.html">Seq(NameSpace)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#properties">properties</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Get the properties of the operation. The properties
+      are pairs of the form Seq{NAME | VALUE}.
+    </TD></TR>
+<TR><TD><B><a href="#property">property</a>(property:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Returns the value of the supplied property or
+      null if no property is defined.
+    </TD></TR>
+<TR><TD><B><a href="#removeDaemon">removeDaemon</a>(daemon:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,target:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#removeNameSpace">removeNameSpace</a>(n:<A HREF="../../../Root/XCore/NameSpace/index.html">NameSpace<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Removes the supplied name space from the receiver so that
+      it no longer imports all the names defined by the name
+      space.
+    </TD></TR>
+<TR><TD><B><a href="#resetDynamics">resetDynamics</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#set">set</a>(name:<A HREF="../../../Root/XCore/String/index.html">String<A>,value:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Use set to treat the state of the compiled operation as
+      an object.
+    </TD></TR>
+<TR><TD><B><a href="#setArity">setArity</a>(arity:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setCodeBox">setCodeBox</a>(codeBox:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setDaemons">setDaemons</a>(daemons:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setDoc">setDoc</a>(doc:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setDynamics">setDynamics</a>(dynamics:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setGlobals">setGlobals</a>(globals:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setInstLevel">setInstLevel</a>(instLevel:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setIsIntrinsic">setIsIntrinsic</a>(isintrinsic:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setName">setName</a>(name:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setOwner">setOwner</a>(owner:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setProperties">setProperties</a>(properties:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setProperty">setProperty</a>(property:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,value:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Set the property value. The property is created if
+      necessary.
+    </TD></TR>
+<TR><TD><B><a href="#setSig">setSig</a>(sig:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setSource">setSource</a>(source:<A HREF="../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setSupers">setSupers</a>(supers:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setTarget">setTarget</a>(target:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setTraced">setTraced</a>(trace:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#sig">sig</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Returns the signature of the operation. This is a
+      sequence of the parameters and the return type. The
+      parameters are encoded as pairs being the name and
+      the type. The signature types are encoded and can be
+      decoded by Classifier::mapType.
+    </TD></TR>
+<TR><TD><B><a href="#source">source</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#supers">supers</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#target">target</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#toString">toString</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#trace">trace</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Sets the operation to be traced. The operation prints out
+      debugging information when it is entered and exited. Note
+      that tracing is implemented by setting the traced slot of
+      the operation to a special operation that the VM will call
+      as a proxy.
+    </TD></TR>
+<TR><TD><B><a href="#traced">traced</a>():<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#type">type</a>():<A HREF="../../../Root/XCore/Classifier/index.html">Classifier<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#untrace">untrace</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#update">update</a>(newOp:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Operation/index.html">Operation</A>: arity, break, breakFun, calcChildrenSlots, deployJava, dynamics, fork, fork, getDerivedValue, globals, invoke, invoke, invokes, isKindOf, javaTypeName, labelString, legalNameChangeCheck, matchesId, matchesSignature, matchesTarget, name, paramNames, setDynamics, setGlobals, setSupers, setTarget, sig, source, supers, target, toNamedElement, toType, trace, traceFun, traced, unbreak, untrace. <BR><B>From</B> <A HREF="../../../Root/XCore/DocumentedElement/index.html">DocumentedElement</A>: doc, ensureDoc, setDoc. <BR><B>From</B> <A HREF="../../../Root/XCore/NamedElement/index.html">NamedElement</A>: getNamedElement, href, labelString, legalNameChangeCheck, name, path, pathSeq, repopulate, setName, toString. <BR><B>From</B> <A HREF="../../../Root/XCore/Contained/index.html">Contained</A>: addTo, allOwners, deleteRecursive, delete_client, delete_client_check, delete_client_redirect, getDefaultClipboardSource, owner, removeFromOwner, setOwner. <BR><B>From</B> <A HREF="../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="addDaemon"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addDaemon(daemon&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.setDaemons(self.daemons()&#160;+&#160;Seq{daemon})<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addNameChangedDaemon"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addNameChangedDaemon(d&#160;:&#160;XCore::Element,actionSource&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.addDaemon(@Operation&#160;anonymous(slot&#160;:&#160;XCore::Element,newValue&#160;:&#160;XCore::Element,oldValue&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;if&#160;slot.name.toString()&#160;=&#160;"name"&#160;and&#160;newValue&#160;&lt;&gt;&#160;oldValue<br>&#160;&#160;&#160;&#160;then&#160;d.invoke(actionSource,Seq{newValue,oldValue})<br>&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="arity"/><FONT FACE="Courier" SIZE="1">@Operation&#160;arity():Integer<br>&#160;&#160;Kernel_funArity(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="break"/><FONT FACE="Courier" SIZE="1">@Operation&#160;break():XCore::Element<br>&#160;&#160;if&#160;self.name().toString()&#160;&lt;&gt;&#160;"toString"&#160;and&#160;self.name().toString()&#160;&lt;&gt;&#160;"name"&#160;and&#160;not&#160;self.traced()<br>&#160;&#160;then&#160;Kernel_funSetTraced(self,self.breakFun(self))<br>&#160;&#160;else&#160;false<br>&#160;&#160;end&#160;;<br>&#160;&#160;self<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="codeBox"/><FONT FACE="Courier" SIZE="1">@Operation&#160;codeBox():XCore::Element<br>&#160;&#160;Kernel_funCodeBox(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="daemons"/><FONT FACE="Courier" SIZE="1">@Operation&#160;daemons():Seq(Operation)<br>&#160;&#160;if&#160;not&#160;self.hasProperty("daemons")<br>&#160;&#160;then&#160;Seq{}<br>&#160;&#160;else&#160;self.property("daemons")<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="dependencies"/><FONT FACE="Courier" SIZE="1">@Operation&#160;dependencies():Set(Element)<br>&#160;&#160;self.imports()-&gt;asSet&#160;+&#160;self.globalValues()-&gt;asSet<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="deployXOCL"/><FONT FACE="Courier" SIZE="1">@Operation&#160;deployXOCL(dir&#160;:&#160;String):XCore::Element<br>&#160;&#160;try<br>&#160;&#160;&#160;&#160;@WithOpenFile(fout&#160;-&gt;&#160;dir&#160;+&#160;"/"&#160;+&#160;self.pathSeq().separateWith("_")&#160;+&#160;".xmf")<br>&#160;&#160;&#160;&#160;&#160;&#160;format(fout,"parserImport&#160;XOCL;~%~%");<br>&#160;&#160;&#160;&#160;&#160;&#160;format(fout,"import&#160;~{::~;~S~};~%~%",Seq{self.owner().pathSeq()});<br>&#160;&#160;&#160;&#160;&#160;&#160;format(fout,"context&#160;!&#160;~{::~;~S~}~%~%",Seq{self.owner().pathSeq()});<br>&#160;&#160;&#160;&#160;&#160;&#160;format(fout,"&#160;&#160;~S~%&#160;",Seq{self.source()});<br>&#160;&#160;&#160;&#160;&#160;&#160;fout.close()<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;catch(exception)<br>&#160;&#160;&#160;&#160;format(stdout,"Error&#160;writing&#160;operation&#160;source:&#160;~S~%",Seq{exception})<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="disassemble"/><FONT FACE="Courier" SIZE="1">@Operation&#160;disassemble():String<br>&#160;&#160;let&#160;out&#160;=&#160;StringOutputChannel()<br>&#160;&#160;in&#160;self.disassemble(out,0);<br>&#160;&#160;&#160;&#160;&#160;out.getString()<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="disassemble"/><FONT FACE="Courier" SIZE="1">@Operation&#160;disassemble(out&#160;:&#160;XCore::Element,indent&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@Count&#160;i&#160;from&#160;0&#160;to&#160;self.paramNames()-&gt;size&#160;do<br>&#160;&#160;&#160;&#160;format(out,"~V[ARG~S]&#160;~S~%",Seq{indent,i,self.paramNames()-&gt;at(i)})<br>&#160;&#160;end;<br>&#160;&#160;self.codeBox().disassemble(out,indent)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="doc"/><FONT FACE="Courier" SIZE="1">@Operation&#160;doc():XCore::Element<br>&#160;&#160;self.ensureDoc(Kernel_funDoc(self))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="dynamics"/><FONT FACE="Courier" SIZE="1">@Operation&#160;dynamics():XCore::Element<br>&#160;&#160;Kernel_funDynamics(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="fire"/><FONT FACE="Courier" SIZE="1">@Operation&#160;fire(slot&#160;:&#160;XCore::Element,newValue&#160;:&#160;XCore::Element,oldValue&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@For&#160;daemon&#160;in&#160;self.daemons()&#160;do<br>&#160;&#160;&#160;&#160;daemon.invoke(self,Seq{slot,newValue,oldValue})<br>&#160;&#160;end;<br>&#160;&#160;self<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="get"/><FONT FACE="Courier" SIZE="1">@Operation&#160;get(name&#160;:&#160;String):XCore::Element<br>&#160;&#160;@Case&#160;name.toString()&#160;of<br>&#160;&#160;&#160;&#160;[&#160;"arity"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.arity()<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"codeBox"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.codeBox()<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"documentation"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.doc()<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"dynamics"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.dynamics()<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"globals"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.globals()<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"instLevel"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.instLevel()<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"isIntrinsic"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.isIntrinsic()<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"isVarArgs"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.isVarArgs()<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"name"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.name()<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"owner"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.owner()<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"properties"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.properties()<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"target"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.target()<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"sig"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.sig()<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"source"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.source()<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"supers"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.supers()<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"traced"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.traced()<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"type"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;Element<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"roleFiller"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;""<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;else&#160;self.error("No&#160;slot&#160;named&#160;"&#160;+&#160;name.toString())<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="getProperty"/><FONT FACE="Courier" SIZE="1">@Operation&#160;getProperty(name&#160;:&#160;XCore::Element,default&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;if&#160;self.hasProperty(name)<br>&#160;&#160;then&#160;self.properties()-&gt;lookup(name)<br>&#160;&#160;else&#160;default<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="getStructuralFeatureNames"/><FONT FACE="Courier" SIZE="1">@Operation&#160;getStructuralFeatureNames():Set(String)<br>&#160;&#160;Set{"arity","codeBox","documentation","dynamics","globals","instLevel","isInstrinsic","isVarArgs","name","owner","properties","target","sig","supers","traced","type"}<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="globalValues"/><FONT FACE="Courier" SIZE="1">@Operation&#160;globalValues():Seq(Element)<br>&#160;&#160;let&#160;globals&#160;=&#160;self.globals();<br>&#160;&#160;&#160;&#160;&#160;&#160;globalValues&#160;=&#160;Seq{}<br>&#160;&#160;in&#160;@While&#160;globals&#160;&lt;&gt;&#160;null&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;values&#160;=&#160;globals.ref(0)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;@Count&#160;i&#160;from&#160;0&#160;to&#160;values-&gt;size&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;value&#160;=&#160;values.ref(i)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;if&#160;value.isKindOf(NamedElement)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;if&#160;not&#160;globalValues-&gt;includes(value)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;globalValues&#160;:=&#160;globalValues&#160;+&#160;Seq{value}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;globals&#160;:=&#160;globals.ref(1)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;globalValues<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="globals"/><FONT FACE="Courier" SIZE="1">@Operation&#160;globals():XCore::Element<br>&#160;&#160;Kernel_funGlobals(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="hasProperty"/><FONT FACE="Courier" SIZE="1">@Operation&#160;hasProperty(property&#160;:&#160;XCore::Element):Boolean<br>&#160;&#160;self.properties()-&gt;binds(property)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="hasSlot"/><FONT FACE="Courier" SIZE="1">@Operation&#160;hasSlot(name&#160;:&#160;String):Boolean<br>&#160;&#160;self.getStructuralFeatureNames()-&gt;includes(name-&gt;toString)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="importNameSpace"/><FONT FACE="Courier" SIZE="1">@Operation&#160;importNameSpace(n&#160;:&#160;NameSpace):XCore::Element<br>&#160;&#160;if&#160;not&#160;self.imports(n)<br>&#160;&#160;then&#160;self.setDynamics(Seq{Seq{2&#160;|&#160;n.contents}&#160;|&#160;self.dynamics()})<br>&#160;&#160;else&#160;self<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="importNameSpaces"/><FONT FACE="Courier" SIZE="1">@Operation&#160;importNameSpaces(N&#160;:&#160;Seq(NameSpace)):XCore::Element<br>&#160;&#160;@For&#160;nameSpace&#160;in&#160;N-&gt;reverse&#160;do<br>&#160;&#160;&#160;&#160;self.importNameSpace(nameSpace)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="imports"/><FONT FACE="Courier" SIZE="1">@Operation&#160;imports(n&#160;:&#160;NameSpace):Boolean<br>&#160;&#160;self.dynamics()-&gt;exists(pair&#160;|<br>&#160;&#160;&#160;&#160;pair-&gt;head&#160;=&#160;2&#160;and&#160;pair-&gt;tail&#160;=&#160;n.contents)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="imports"/><FONT FACE="Courier" SIZE="1">@Operation&#160;imports():Seq(Element)<br>&#160;&#160;let&#160;imports&#160;=&#160;Seq{};<br>&#160;&#160;&#160;&#160;&#160;&#160;globals&#160;=&#160;self.globals()<br>&#160;&#160;in&#160;@For&#160;dynamic&#160;in&#160;self.dynamics()&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;dynamic-&gt;head&#160;=&#160;2&#160;and&#160;dynamic-&gt;tail&#160;&lt;&gt;&#160;Root.contents&#160;and&#160;dynamic-&gt;tail&#160;&lt;&gt;&#160;XCore.contents<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;let&#160;table&#160;=&#160;dynamic-&gt;tail<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;@For&#160;value&#160;inTableValues&#160;table&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;value.isKindOf(XCore::Contained)&#160;and&#160;not&#160;value.isKindOf(XCore::Operation)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;if&#160;value.owner&#160;&lt;&gt;&#160;null&#160;andthen&#160;not&#160;imports-&gt;includes(value.owner)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;imports&#160;:=&#160;imports&#160;+&#160;Seq{value.owner}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;imports&#160;+&#160;Seq{XCore,Root}<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="init"/><FONT FACE="Courier" SIZE="1">@Operation&#160;init():XCore::Element<br>&#160;&#160;if&#160;self.dynamics().isKindOf(Operation)<br>&#160;&#160;then&#160;self.setDynamics((self.dynamics())())<br>&#160;&#160;else&#160;self<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="instLevel"/><FONT FACE="Courier" SIZE="1">@Operation&#160;instLevel():Boolean<br>&#160;&#160;Kernel_funInstLevel(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="isIntrinsic"/><FONT FACE="Courier" SIZE="1">@Operation&#160;isIntrinsic():Boolean<br>&#160;&#160;Kernel_funIsIntrinsic(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="isVarArgs"/><FONT FACE="Courier" SIZE="1">@Operation&#160;isVarArgs():Boolean<br>&#160;&#160;Kernel_funIsVarArgs(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="lift"/><FONT FACE="Courier" SIZE="1">@Operation&#160;lift():Performable<br>&#160;&#160;try<br>&#160;&#160;&#160;&#160;OCL::OCL.grammar.parseString(self.source(),"Exp",Seq{XOCL})<br>&#160;&#160;catch(exception)<br>&#160;&#160;&#160;&#160;format(stdout,"Error&#160;~S&#160;lifing&#160;compiled&#160;operation&#160;~S",Seq{exception,self});<br>&#160;&#160;&#160;&#160;[|&#160;self.error(&lt;StrExp("Missing&#160;operation&#160;"&#160;+&#160;self.name().toString())&gt;)&#160;|]<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="locals"/><FONT FACE="Courier" SIZE="1">@Operation&#160;locals():Integer<br>&#160;&#160;self.codeBox().locals()<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="name"/><FONT FACE="Courier" SIZE="1">@Operation&#160;name():Symbol<br>&#160;&#160;Kernel_codeBoxName(Kernel_funCodeBox(self))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newListenerFor"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newListenerFor(class&#160;:&#160;Classifier):XCore::Element<br>&#160;&#160;let&#160;table&#160;=&#160;Kernel_newListeners()<br>&#160;&#160;in&#160;if&#160;self.hasProperty(Symbol("newListener"))<br>&#160;&#160;&#160;&#160;&#160;then&#160;let&#160;classes&#160;=&#160;self.property(Symbol("newListener"))<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;self.setProperty(Symbol("newListener"),Seq{class&#160;|&#160;classes})<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;else&#160;self.setProperty(Symbol("newListener"),Seq{class})<br>&#160;&#160;&#160;&#160;&#160;end&#160;;<br>&#160;&#160;&#160;&#160;&#160;if&#160;table.hasKey(class)<br>&#160;&#160;&#160;&#160;&#160;then&#160;table.put(class,Seq{self&#160;|&#160;table.get(class)})<br>&#160;&#160;&#160;&#160;&#160;else&#160;table.put(class,Seq{self})<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="owner"/><FONT FACE="Courier" SIZE="1">@Operation&#160;owner():XCore::Element<br>&#160;&#160;Kernel_funOwner(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="paramNames"/><FONT FACE="Courier" SIZE="1">@Operation&#160;paramNames():Seq(String)<br>&#160;&#160;let&#160;sig&#160;=&#160;Kernel_funSig(self)<br>&#160;&#160;in&#160;if&#160;sig&#160;&lt;&gt;&#160;null&#160;and&#160;sig&#160;&lt;&gt;&#160;Seq{}<br>&#160;&#160;&#160;&#160;&#160;then&#160;let&#160;args&#160;=&#160;sig-&gt;butLast<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;args-&gt;collect(arg&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;arg-&gt;head)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;else&#160;Seq{}<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="paramTypes"/><FONT FACE="Courier" SIZE="1">@Operation&#160;paramTypes():Seq(Classifier)<br>&#160;&#160;let&#160;sig&#160;=&#160;Kernel_funSig(self)<br>&#160;&#160;in&#160;if&#160;sig&#160;&lt;&gt;&#160;null&#160;and&#160;sig&#160;&lt;&gt;&#160;Seq{}<br>&#160;&#160;&#160;&#160;&#160;then&#160;let&#160;args&#160;=&#160;sig-&gt;butLast<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;args-&gt;collect(arg&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;try<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Classifier::mapType(arg-&gt;at(1),self.imports())<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;catch(x)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;else&#160;Seq{}<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="parserImports"/><FONT FACE="Courier" SIZE="1">@Operation&#160;parserImports():Seq(NameSpace)<br>&#160;&#160;if&#160;not&#160;self.hasProperty(Symbol("parserImports"))<br>&#160;&#160;then&#160;Seq{XOCL,XCore,Root}<br>&#160;&#160;else&#160;let&#160;paths&#160;=&#160;self.property(Symbol("parserImports"))<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;paths-&gt;collect(path&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;try<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;path-&gt;ref(Seq{Root})<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;catch(x)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Root<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end)&#160;+&#160;Seq{XCore,Root}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="properties"/><FONT FACE="Courier" SIZE="1">@Operation&#160;properties():XCore::Element<br>&#160;&#160;Kernel_funProperties(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="property"/><FONT FACE="Courier" SIZE="1">@Operation&#160;property(property&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.properties()-&gt;lookup(property)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="removeDaemon"/><FONT FACE="Courier" SIZE="1">@Operation&#160;removeDaemon(daemon&#160;:&#160;XCore::Element,target&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.setDaemons(self.daemons()-&gt;excluding(daemon))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="removeNameSpace"/><FONT FACE="Courier" SIZE="1">@Operation&#160;removeNameSpace(n&#160;:&#160;NameSpace):XCore::Element<br>&#160;&#160;let&#160;findSeq&#160;=&#160;self.dynamics()-&gt;asSeq;<br>&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;=&#160;false;<br>&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;=&#160;null<br>&#160;&#160;in&#160;declare(hidden,findSeq);<br>&#160;&#160;&#160;&#160;&#160;declare(hidden,findDone);<br>&#160;&#160;&#160;&#160;&#160;declare(hidden,findResult);<br>&#160;&#160;&#160;&#160;&#160;@While&#160;not&#160;findSeq-&gt;isEmpty&#160;and&#160;not&#160;findDone&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;pair&#160;=&#160;findSeq-&gt;head&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findElement&#160;=&#160;findSeq-&gt;head<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;declare(hidden,findElement);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;pair-&gt;head&#160;=&#160;2&#160;and&#160;pair-&gt;tail&#160;=&#160;n.contents<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;:=&#160;true;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;:=&#160;self.setDynamics(self.dynamics()-&gt;excluding(pair,false))<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;findSeq&#160;:=&#160;findSeq-&gt;tail<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;if&#160;not&#160;findDone<br>&#160;&#160;&#160;&#160;&#160;then&#160;false<br>&#160;&#160;&#160;&#160;&#160;else&#160;findResult<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="resetDynamics"/><FONT FACE="Courier" SIZE="1">@Operation&#160;resetDynamics():XCore::Element<br>&#160;&#160;let&#160;owner&#160;=&#160;self.owner()<br>&#160;&#160;in&#160;if&#160;owner.isReallyKindOf(XCore::NameSpace)<br>&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.setDynamics(Seq{});<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.importNameSpace(Root);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.importNameSpace(XCore);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;@For&#160;nameSpace&#160;in&#160;self.owner().allOwners()-&gt;butLast&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.importNameSpace(nameSpace)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;@For&#160;nameSpace&#160;in&#160;self.owner().imports&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.importNameSpace(nameSpace)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.importNameSpace(owner)<br>&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="set"/><FONT FACE="Courier" SIZE="1">@Operation&#160;set(name&#160;:&#160;String,value&#160;:&#160;Element):XCore::Element<br>&#160;&#160;@Case&#160;name.toString()&#160;of<br>&#160;&#160;&#160;&#160;[&#160;"arity"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.setArity(value)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"codeBox"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.setCodeBox(value)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"documentation"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.setDoc(value)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"dynamics"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.setDynamics(value)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"globals"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.setGlobals(value)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"instLevel"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.setInstLevel(value)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"isIntrinsic"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.setIsIntrinsic(value)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"isVarArgs"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.setIsVarArgs(value)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"properties"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.setProperties(value)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"name"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.setName(value.toString())<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"owner"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.setOwner(value)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"sig"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.setSig(value)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"source"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.setSource(value)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"supers"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.setSupers(value)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"target"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.setTarget(value)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"traced"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.setTraced(value)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;else&#160;self.error("No&#160;slot&#160;named&#160;"&#160;+&#160;name.toString())<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setArity"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setArity(arity&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;oldArity&#160;=&#160;self.arity()<br>&#160;&#160;in&#160;Kernel_funSetArity(self,arity);<br>&#160;&#160;&#160;&#160;&#160;self.fire(Symbol("arity"),arity,oldArity)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setCodeBox"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setCodeBox(codeBox&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;oldCodeBox&#160;=&#160;self.codeBox()<br>&#160;&#160;in&#160;Kernel_funSetCodeBox(self,codeBox);<br>&#160;&#160;&#160;&#160;&#160;self.fire(Symbol("codeBox"),codeBox,oldCodeBox)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setDaemons"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setDaemons(daemons&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;oldDaemons&#160;=&#160;self.daemons()<br>&#160;&#160;in&#160;self.setProperty("daemons",daemons)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setDoc"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setDoc(doc&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;oldDoc&#160;=&#160;self.doc();<br>&#160;&#160;&#160;&#160;&#160;&#160;newDoc&#160;=&#160;self.ensureDoc(doc)<br>&#160;&#160;in&#160;Kernel_funSetDoc(self,newDoc);<br>&#160;&#160;&#160;&#160;&#160;self.fire(Symbol("documentation"),newDoc,oldDoc)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setDynamics"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setDynamics(dynamics&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;oldDynamics&#160;=&#160;self.dynamics()<br>&#160;&#160;in&#160;Kernel_funSetDynamics(self,dynamics);<br>&#160;&#160;&#160;&#160;&#160;self.fire(Symbol("dynamics"),dynamics,oldDynamics)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setGlobals"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setGlobals(globals&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;oldGlobals&#160;=&#160;self.globals()<br>&#160;&#160;in&#160;Kernel_funSetGlobals(self,globals);<br>&#160;&#160;&#160;&#160;&#160;self.fire(Symbol("globals"),globals,oldGlobals)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setInstLevel"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setInstLevel(instLevel&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;oldInstLevel&#160;=&#160;self.instLevel()<br>&#160;&#160;in&#160;Kernel_funSetInstLevel(self,instLevel);<br>&#160;&#160;&#160;&#160;&#160;self.fire(Symbol("instLevel"),instLevel,oldInstLevel)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setIsIntrinsic"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setIsIntrinsic(isintrinsic&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;oldIsintrinsic&#160;=&#160;self.isIntrinsic()<br>&#160;&#160;in&#160;Kernel_funSetIsIntrinsic(self,isintrinsic);<br>&#160;&#160;&#160;&#160;&#160;self.fire(Symbol("isIntrinsic"),isintrinsic,oldIsintrinsic)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setName"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setName(name&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;oldName&#160;=&#160;self.name()<br>&#160;&#160;in&#160;Kernel_funSetCodeBox(self,Kernel_funCodeBox(self).copy());<br>&#160;&#160;&#160;&#160;&#160;Kernel_funSetName(self,Symbol(name.toString()));<br>&#160;&#160;&#160;&#160;&#160;self.fire(Symbol("name"),name,oldName);<br>&#160;&#160;&#160;&#160;&#160;if&#160;self.owner()&#160;&lt;&gt;&#160;null&#160;and&#160;self.owner().isKindOf(NameSpace)<br>&#160;&#160;&#160;&#160;&#160;then&#160;self.owner().nameChanged(self,Symbol(name.toString()),oldName)<br>&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;end&#160;;<br>&#160;&#160;&#160;&#160;&#160;self<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setOwner"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setOwner(owner&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;oldOwner&#160;=&#160;self.owner()<br>&#160;&#160;in&#160;Kernel_funSetOwner(self,owner);<br>&#160;&#160;&#160;&#160;&#160;self.fire(Symbol("owner"),owner,oldOwner)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setProperties"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setProperties(properties&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;oldProperties&#160;=&#160;self.properties()<br>&#160;&#160;in&#160;Kernel_funSetProperties(self,properties)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setProperty"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setProperty(property&#160;:&#160;XCore::Element,value&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.setProperties(self.properties()-&gt;set(property,value))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setSig"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setSig(sig&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;oldSig&#160;=&#160;self.sig()<br>&#160;&#160;in&#160;Kernel_funSetSig(self,sig);<br>&#160;&#160;&#160;&#160;&#160;self.fire(Symbol("sig"),sig,oldSig)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setSource"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setSource(source&#160;:&#160;String):XCore::Element<br>&#160;&#160;let&#160;oldSource&#160;=&#160;self.source()<br>&#160;&#160;in&#160;Kernel_funSetCodeBox(self,Kernel_funCodeBox(self).copy());<br>&#160;&#160;&#160;&#160;&#160;Kernel_codeBoxSetSource(Kernel_funCodeBox(self),source);<br>&#160;&#160;&#160;&#160;&#160;self.fire(Symbol("source"),source,oldSource)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setSupers"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setSupers(supers&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;oldSupers&#160;=&#160;self.supers()<br>&#160;&#160;in&#160;Kernel_funSetSupers(self,supers);<br>&#160;&#160;&#160;&#160;&#160;self.fire(Symbol("supers"),supers,oldSupers)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setTarget"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setTarget(target&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;oldTarget&#160;=&#160;self.target()<br>&#160;&#160;in&#160;Kernel_funSetSelf(self,target);<br>&#160;&#160;&#160;&#160;&#160;self.fire(Symbol("target"),target,oldTarget)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setTraced"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setTraced(trace&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;oldTraced&#160;=&#160;self.traced()<br>&#160;&#160;in&#160;Kernel_funSetTraced(self,trace);<br>&#160;&#160;&#160;&#160;&#160;self.fire(Symbol("traced"),traced,oldTraced)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="sig"/><FONT FACE="Courier" SIZE="1">@Operation&#160;sig():XCore::Element<br>&#160;&#160;Kernel_funSig(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="source"/><FONT FACE="Courier" SIZE="1">@Operation&#160;source():String<br>&#160;&#160;Kernel_codeBoxSource(Kernel_funCodeBox(self))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="supers"/><FONT FACE="Courier" SIZE="1">@Operation&#160;supers():XCore::Element<br>&#160;&#160;Kernel_funSupers(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="target"/><FONT FACE="Courier" SIZE="1">@Operation&#160;target():Element<br>&#160;&#160;Kernel_funSelf(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="toString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;toString():String<br>&#160;&#160;"&lt;Op&#160;"&#160;+&#160;self.name()&#160;+&#160;"&gt;"<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="trace"/><FONT FACE="Courier" SIZE="1">@Operation&#160;trace():XCore::Element<br>&#160;&#160;if&#160;self.name().toString()&#160;&lt;&gt;&#160;"toString"&#160;and&#160;self.name().toString()&#160;&lt;&gt;&#160;"name"&#160;and&#160;not&#160;self.traced()<br>&#160;&#160;then&#160;Kernel_funSetTraced(self,self.traceFun(self))<br>&#160;&#160;else&#160;false<br>&#160;&#160;end&#160;;<br>&#160;&#160;self<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="traced"/><FONT FACE="Courier" SIZE="1">@Operation&#160;traced():Boolean<br>&#160;&#160;Kernel_funTraced(self)&#160;&lt;&gt;&#160;null<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="type"/><FONT FACE="Courier" SIZE="1">@Operation&#160;type():Classifier<br>&#160;&#160;let&#160;sig&#160;=&#160;Kernel_funSig(self)<br>&#160;&#160;in&#160;if&#160;sig&#160;&lt;&gt;&#160;null&#160;and&#160;sig&#160;&lt;&gt;&#160;Seq{}<br>&#160;&#160;&#160;&#160;&#160;then&#160;Classifier::mapType(sig-&gt;last,self.imports())<br>&#160;&#160;&#160;&#160;&#160;else&#160;Element<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="untrace"/><FONT FACE="Courier" SIZE="1">@Operation&#160;untrace():XCore::Element<br>&#160;&#160;Kernel_funSetTraced(self,null)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="update"/><FONT FACE="Courier" SIZE="1">@Operation&#160;update(newOp&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.setName(newOp.name);<br>&#160;&#160;self.setCodeBox(newOp.codeBox);<br>&#160;&#160;self.setArity(newOp.arity);<br>&#160;&#160;self.setDoc(newOp.documentation);<br>&#160;&#160;self.setSig(newOp.sig);<br>&#160;&#160;let&#160;oldInst&#160;=&#160;self.instLevel;<br>&#160;&#160;&#160;&#160;&#160;&#160;oldIsInst&#160;=&#160;self.isIntrinsic;<br>&#160;&#160;&#160;&#160;&#160;&#160;oldDaemons&#160;=&#160;self.daemons()<br>&#160;&#160;in&#160;self.setProperties(newOp.properties);<br>&#160;&#160;&#160;&#160;&#160;self.instLevel&#160;:=&#160;oldInst;<br>&#160;&#160;&#160;&#160;&#160;self.isIntrinsic&#160;:=&#160;oldIsInst;<br>&#160;&#160;&#160;&#160;&#160;self.setDaemons(oldDaemons)<br>&#160;&#160;end;<br>&#160;&#160;self.resetDynamics()<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

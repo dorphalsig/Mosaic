@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+Walkers
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>Walkers</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+No Documentation Specified
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Packages</B></FONT></TD>
+</TR>
+<TR><TD><B><A HREF="../../Root/Walkers/Code/index.html">Code</A></B></TD><TD>No Documentation Specified</TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Classes</B></FONT></TD>
+</TR>
+<TR><TD><B><A HREF="../../Root/Walkers/ConstraintReporter/index.html">ConstraintReporter</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/Walkers/DispatchError/index.html">DispatchError</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/Walkers/Dispatcher/index.html">Dispatcher</A></B></TD><TD>
+       A dispatcher, like a walker, passes over an element performing a
+       task. The difference between a dispatcher and a walker is that 
+       the dispatcher can be programmed on a type-by-type basis and then
+       dispatches to handlers whereas the types in a walker are fixed.
+       A walker may be slightly more efficient, but less extensible and
+       modular.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/Walkers/DispatchingObject/index.html">DispatchingObject</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/Walkers/Find/index.html">Find</A></B></TD><TD>
+      An instance of this class can be used to find all element in a given XMF
+      value that satisfy the supplied predicate. To use this, construct with a 
+      single argument predicate and supply the root of the walk to the 'walk'
+      operation. The second argument to 'walk' may be an integer to limit the depth
+      of the walk or -1 for no limit.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/Walkers/FindBound/index.html">FindBound</A></B></TD><TD>
+      An instance of this class can be used to find all element in a given XMF
+      value that satisfy the first supplied predicate AND whose walk tree is bound by
+      the second supplied predicate (i.e. if an object does not satisfy the boundary
+      predicate, the walk stops at that branch. To use this, construct with two 
+      predicate arguments (match followed by boundary predicates) and supply the
+      root of the walk to the 'walk' operation. The second argument to 'walk' may
+      be an integer to limit the depth of the walk or null for no limit.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/Walkers/FindByType/index.html">FindByType</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/Walkers/Fix/index.html">Fix</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/Walkers/Flatten/index.html">Flatten</A></B></TD><TD>
+      An instance of this class can be used to flatten a value to produce a sequence
+      of constituent values. The predicate limits the extent of the walk.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/Walkers/Handler/index.html">Handler</A></B></TD><TD>
+      A dispatch handler defines the code that is performed when a particular
+      type of value is walked. The form of a handler is:
+      @Handler <TYPE> in <DISP> (<VALUE>,<ARG>,<ENCOUNTER>) <EXP> en-d
+      here the handler is invoked when a value of the given type is
+      walked. The DISP expression defines the dispatcher object to which
+      the handler is added. The names VALUE ARG and ENCOUNTER are bound to
+      the walked object, the walker argument (often null) and whether this
+      is a subsequent encounter or not.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/Walkers/Lift/index.html">Lift</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/Walkers/NameRefFinder/index.html">NameRefFinder</A></B></TD><TD>
+      This is a ref finder that looks for any element that matches the name.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/Walkers/PPrint/index.html">PPrint</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/Walkers/RefFinder/index.html">RefFinder</A></B></TD><TD>
+      This is a special kind of walker that is used to determine whether any 
+      references exists for a given element - as such, it is useful for tracing
+      the cause of memory leaks. It is used as follows:
+      
+      (1) For a given element 'e' that you want to search, create a RefFinder
+          as follows:
+             w := RefFinder(e);
+          Alternatively, you can construct the walker without parameters and use:
+             w.setSearch(e);
+          You can set the start element of the root using:
+             w.setWalk(root);
+          If the root is not explicitly set, it will use 'Root'
+      
+      (2) When you are ready to search for the element (this is usually after removing
+          known references to it), run the walker as follows:
+             w.walk();
+      
+      (3) When the walk is completed, it will print a report saying whether the search
+          element has been found, and if it has it will print out a reference trace
+          from the search element back to the root element. The 'objectTrace' sequence
+          will also be set to that trace, with its first element being the last object
+          that referenced the search element, and the last element being the root of
+          the search, so each element of the trace can be examined in turn by editing
+          it.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/Walkers/RelinkOwner/index.html">RelinkOwner</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/Walkers/Search/index.html">Search</A></B></TD><TD>
+      An instance of this class can be used to find all element in a given XMF
+      value that satisfy the supplied predicate. To use this, construct with a 
+      single argument predicate and supply the root of the walk to the 'walk'
+      operation. The second argument to 'walk' may be an integer to limit the depth
+      of the walk or null for no limit. A search node is produced that can be
+      viewed in Mosaic by editing it. Produces null if there are no matches. The
+      body of the search spcial form should be an action that is performed when the 
+      node in the search tree is double clicked.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/Walkers/Subst/index.html">Subst</A></B></TD><TD>
+      A substitution walks over an XMF value and replaces all occurrences
+      of an 'old' value with a 'new' value. The updated value is returned.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/Walkers/SyntaxPattern/index.html">SyntaxPattern</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/Walkers/TypeCheckError/index.html">TypeCheckError</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/Walkers/TypeCheckReport/index.html">TypeCheckReport</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/Walkers/TypeChecker/index.html">TypeChecker</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/Walkers/Walk/index.html">Walk</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/Walkers/Walker/index.html">Walker</A></B></TD><TD>No Documentation Specified</TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+</TABLE>
+</HTML>

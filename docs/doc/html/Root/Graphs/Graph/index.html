@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+Graph
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>Graph</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+No Documentation Specified
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+<TR><TD>Graph()</TD><TD> No Documentation </TD></TR>
+<TR><TD>Graph(nodes,edges)</TD><TD> No Documentation </TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR><TD><B>edges</B></TD><TD><A HREF="../../../Root/Graphs/Edge/index.html">Set(Edge)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>nodes</B></TD><TD><A HREF="../../../Root/Graphs/Node/index.html">Set(Node)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#add">add</a>(element:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+        Use this operation to add nodes and edges to a graph.
+      </TD></TR>
+<TR><TD><B><a href="#addEdge">addEdge</a>(edge:<A HREF="../../../Root/Graphs/Edge/index.html">Edge<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#addNode">addNode</a>(node:<A HREF="../../../Root/Graphs/Node/index.html">Node<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#addToEdges">addToEdges</a>(v:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#addToNodes">addToNodes</a>(v:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#containsEdge">containsEdge</a>(edge:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#containsNode">containsNode</a>(node:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#deleteFromEdges">deleteFromEdges</a>(v:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#deleteFromNodes">deleteFromNodes</a>(v:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#edgeFor">edgeFor</a>(data:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/Graphs/Edge/index.html">Set(Edge)<A></B></TD><TD>
+        Returns the set of edges labelled with the
+        supplied data.
+      </TD></TR>
+<TR><TD><B><a href="#edges">edges</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#edgesBetween">edgesBetween</a>(n1:<A HREF="../../../Root/Graphs/Node/index.html">Node<A>,n2:<A HREF="../../../Root/Graphs/Node/index.html">Node<A>):<A HREF="../../../Root/Graphs/Edge/index.html">Set(Edge)<A></B></TD><TD>  
+        Returns the set of edges with source node n1
+        and with target node n2.
+      </TD></TR>
+<TR><TD><B><a href="#edgesFrom">edgesFrom</a>(n:<A HREF="../../../Root/Graphs/Node/index.html">Node<A>):<A HREF="../../../Root/Graphs/Edge/index.html">Set(Edge)<A></B></TD><TD>
+        Returns the set of edges with source node n.
+      </TD></TR>
+<TR><TD><B><a href="#edgesTo">edgesTo</a>(n:<A HREF="../../../Root/Graphs/Node/index.html">Node<A>):<A HREF="../../../Root/Graphs/Edge/index.html">Set(Edge)<A></B></TD><TD>
+        Returns the set of edges with the supplied target node.
+      </TD></TR>
+<TR><TD><B><a href="#equals">equals</a>(other:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>
+        Two graphs are equal when they are both sub-graphs
+        of each other.
+      </TD></TR>
+<TR><TD><B><a href="#inDegree">inDegree</a>(n:<A HREF="../../../Root/Graphs/Node/index.html">Node<A>):<A HREF="../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD>
+        The number of edges incident on the supplied node.
+      </TD></TR>
+<TR><TD><B><a href="#largestSubGraphSatisfying">largestSubGraphSatisfying</a>(pred:<A HREF="../../../Root/XCore/Operation/index.html">Operation<A>):<A HREF="../../../Root/Graphs/Graph/index.html">Graph<A></B></TD><TD>
+        Returns a largest sub-graph satisfying the predicate 
+        or null if there is no such sub-graph.
+      </TD></TR>
+<TR><TD><B><a href="#nodeFor">nodeFor</a>(data:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/Graphs/Node/index.html">Node<A></B></TD><TD>
+        Returns a node labelled with the supplied data.
+      </TD></TR>
+<TR><TD><B><a href="#nodes">nodes</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#outDegree">outDegree</a>(n:<A HREF="../../../Root/Graphs/Node/index.html">Node<A>):<A HREF="../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD>
+        The number of edges from the supplied node.
+      </TD></TR>
+<TR><TD><B><a href="#paths">paths</a>(node:<A HREF="../../../Root/Graphs/Node/index.html">Node<A>):<A HREF="../../../Seq(Node)/index.html">Set(Seq(Node))<A></B></TD><TD>
+        Returns the set of non-cyclic paths from this node 
+        in the graph. If a path cycles then it is truncated
+        so that it contains no duplicates.
+      </TD></TR>
+<TR><TD><B><a href="#paths">paths</a>():<A HREF="../../../Seq(Node)/index.html">Set(Seq(Node))<A></B></TD><TD>
+        Get all the paths for all nodes.
+      </TD></TR>
+<TR><TD><B><a href="#power">power</a>():<A HREF="../../../Root/Graphs/Graph/index.html">Set(Graph)<A></B></TD><TD>
+        Produces the set of all sub-graphs including the receiver.
+      </TD></TR>
+<TR><TD><B><a href="#pprint">pprint</a>(out:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#predecessors">predecessors</a>(n:<A HREF="../../../Root/Graphs/Node/index.html">Node<A>):<A HREF="../../../Root/Graphs/Node/index.html">Set(Node)<A></B></TD><TD>
+        Returns the set of all nodes that are the source
+        of edges leading to the supplied node.
+      </TD></TR>
+<TR><TD><B><a href="#reduce">reduce</a>(n:<A HREF="../../../Root/Graphs/Node/index.html">Node<A>,G:<A HREF="../../../Root/Graphs/Graph/index.html">Graph<A>):<A HREF="../../../Root/Graphs/Graph/index.html">Graph<A></B></TD><TD>
+        Replaces the sub-graph G with the node n.
+      </TD></TR>
+<TR><TD><B><a href="#remove">remove</a>(element:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+        Removes the supplied node or edge from the receiver.
+      </TD></TR>
+<TR><TD><B><a href="#removeNode">removeNode</a>(node:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+        Removes the node from the receiver and removes
+        all dangling edges.
+      </TD></TR>
+<TR><TD><B><a href="#roots">roots</a>():<A HREF="../../../Root/Graphs/Node/index.html">Set(Node)<A></B></TD><TD>
+        Returns the set of nodes that are the target of
+        no edges in the receiver.
+      </TD></TR>
+<TR><TD><B><a href="#subGraph">subGraph</a>(g:<A HREF="../../../Root/Graphs/Graph/index.html">Graph<A>):<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>
+        Returns true when the supplied graph is a sub-graph
+        of the receiver.
+      </TD></TR>
+<TR><TD><B><a href="#subGraphRootedAt">subGraphRootedAt</a>(N:<A HREF="../../../Root/Graphs/Node/index.html">Set(Node)<A>):<A HREF="../../../Root/Graphs/Graph/index.html">Graph<A></B></TD><TD>
+        Returns the sub-graph of the receiver that has roots
+        in the set of nodes supplied to the operation.
+      </TD></TR>
+<TR><TD><B><a href="#successors">successors</a>(n:<A HREF="../../../Root/Graphs/Node/index.html">Node<A>):<A HREF="../../../Root/Graphs/Node/index.html">Seq(Node)<A></B></TD><TD>
+        Returns the sequence of nodes that are the target of
+        edges whose source is the supplied node.
+      </TD></TR>
+<TR><TD><B><a href="#terminals">terminals</a>():<A HREF="../../../Root/Graphs/Node/index.html">Set(Node)<A></B></TD><TD>
+        Returns the set of nodes that are the source of
+        no edges in the receiver.
+      </TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="add"/><FONT FACE="Courier" SIZE="1">@Operation&#160;add(element&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@TypeCase(element)<br>&#160;&#160;&#160;&#160;Edge&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.addEdge(element)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;Node&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.addNode(element)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addEdge"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addEdge(edge&#160;:&#160;Edge):XCore::Element<br>&#160;&#160;self.edges&#160;:=&#160;edges-&gt;including(edge)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addNode"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addNode(node&#160;:&#160;Node):XCore::Element<br>&#160;&#160;self.nodes&#160;:=&#160;nodes-&gt;including(node)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addToEdges"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addToEdges[EXTENDER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.edges&#160;:=&#160;self.edges-&gt;including(v)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addToNodes"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addToNodes[EXTENDER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.nodes&#160;:=&#160;self.nodes-&gt;including(v)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="containsEdge"/><FONT FACE="Courier" SIZE="1">@Operation&#160;containsEdge(edge&#160;:&#160;XCore::Element):Boolean<br>&#160;&#160;edges-&gt;includes(edge)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="containsNode"/><FONT FACE="Courier" SIZE="1">@Operation&#160;containsNode(node&#160;:&#160;XCore::Element):Boolean<br>&#160;&#160;nodes-&gt;includes(node)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="deleteFromEdges"/><FONT FACE="Courier" SIZE="1">@Operation&#160;deleteFromEdges[REDUCER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.edges&#160;:=&#160;self.edges-&gt;excluding(v)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="deleteFromNodes"/><FONT FACE="Courier" SIZE="1">@Operation&#160;deleteFromNodes[REDUCER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.nodes&#160;:=&#160;self.nodes-&gt;excluding(v)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="edgeFor"/><FONT FACE="Courier" SIZE="1">@Operation&#160;edgeFor(data&#160;:&#160;XCore::Element):Set(Edge)<br>&#160;&#160;let&#160;findSeq&#160;=&#160;edges-&gt;asSeq;<br>&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;=&#160;false;<br>&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;=&#160;null<br>&#160;&#160;in&#160;declare(hidden,findSeq);<br>&#160;&#160;&#160;&#160;&#160;declare(hidden,findDone);<br>&#160;&#160;&#160;&#160;&#160;declare(hidden,findResult);<br>&#160;&#160;&#160;&#160;&#160;@While&#160;not&#160;findSeq-&gt;isEmpty&#160;and&#160;not&#160;findDone&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;edge&#160;=&#160;findSeq-&gt;head&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findElement&#160;=&#160;findSeq-&gt;head<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;declare(hidden,findElement);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;edge.data()&#160;=&#160;data<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;:=&#160;true;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;:=&#160;findElement<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;findSeq&#160;:=&#160;findSeq-&gt;tail<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;if&#160;not&#160;findDone<br>&#160;&#160;&#160;&#160;&#160;then&#160;null<br>&#160;&#160;&#160;&#160;&#160;else&#160;findResult<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="edges"/><FONT FACE="Courier" SIZE="1">@Operation&#160;edges[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.edges<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="edgesBetween"/><FONT FACE="Courier" SIZE="1">@Operation&#160;edgesBetween(n1&#160;:&#160;Node,n2&#160;:&#160;Node):Set(Edge)<br>&#160;&#160;self.edgesFrom(n1)-&gt;intersection(self.edgesTo(n2))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="edgesFrom"/><FONT FACE="Courier" SIZE="1">@Operation&#160;edgesFrom(n&#160;:&#160;Node):Set(Edge)<br>&#160;&#160;edges-&gt;select(e&#160;|<br>&#160;&#160;&#160;&#160;e.source()&#160;=&#160;n)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="edgesTo"/><FONT FACE="Courier" SIZE="1">@Operation&#160;edgesTo(n&#160;:&#160;Node):Set(Edge)<br>&#160;&#160;edges-&gt;select(e&#160;|<br>&#160;&#160;&#160;&#160;e.target()&#160;=&#160;n)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="equals"/><FONT FACE="Courier" SIZE="1">@Operation&#160;equals(other&#160;:&#160;Element):Boolean<br>&#160;&#160;if&#160;other.isKindOf(Graph)<br>&#160;&#160;then&#160;self.subGraph(other)&#160;and&#160;other.subGraph(self)<br>&#160;&#160;else&#160;false<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="inDegree"/><FONT FACE="Courier" SIZE="1">@Operation&#160;inDegree(n&#160;:&#160;Node):Integer<br>&#160;&#160;edges-&gt;select(e&#160;|<br>&#160;&#160;&#160;&#160;e.target()&#160;=&#160;n)-&gt;size<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="largestSubGraphSatisfying"/><FONT FACE="Courier" SIZE="1">@Operation&#160;largestSubGraphSatisfying(pred&#160;:&#160;Operation):Graph<br>&#160;&#160;let&#160;subGs&#160;=&#160;self.power()-&gt;select(G&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;pred(G))&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;findSeq&#160;=&#160;subGs-&gt;asSeq;<br>&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;=&#160;false;<br>&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;=&#160;null<br>&#160;&#160;in&#160;declare(hidden,findSeq);<br>&#160;&#160;&#160;&#160;&#160;declare(hidden,findDone);<br>&#160;&#160;&#160;&#160;&#160;declare(hidden,findResult);<br>&#160;&#160;&#160;&#160;&#160;@While&#160;not&#160;findSeq-&gt;isEmpty&#160;and&#160;not&#160;findDone&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;G&#160;=&#160;findSeq-&gt;head&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findElement&#160;=&#160;findSeq-&gt;head<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;declare(hidden,findElement);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;not&#160;subGs-&gt;exists(H&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;G.subGraph(H)&#160;and&#160;not&#160;G&#160;=&#160;H)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;:=&#160;true;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;:=&#160;findElement<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;findSeq&#160;:=&#160;findSeq-&gt;tail<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;if&#160;not&#160;findDone<br>&#160;&#160;&#160;&#160;&#160;then&#160;null<br>&#160;&#160;&#160;&#160;&#160;else&#160;findResult<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="nodeFor"/><FONT FACE="Courier" SIZE="1">@Operation&#160;nodeFor(data&#160;:&#160;XCore::Element):Node<br>&#160;&#160;let&#160;findSeq&#160;=&#160;nodes-&gt;asSeq;<br>&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;=&#160;false;<br>&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;=&#160;null<br>&#160;&#160;in&#160;declare(hidden,findSeq);<br>&#160;&#160;&#160;&#160;&#160;declare(hidden,findDone);<br>&#160;&#160;&#160;&#160;&#160;declare(hidden,findResult);<br>&#160;&#160;&#160;&#160;&#160;@While&#160;not&#160;findSeq-&gt;isEmpty&#160;and&#160;not&#160;findDone&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;node&#160;=&#160;findSeq-&gt;head&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findElement&#160;=&#160;findSeq-&gt;head<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;declare(hidden,findElement);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;node.data()&#160;=&#160;data<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;:=&#160;true;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;:=&#160;findElement<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;findSeq&#160;:=&#160;findSeq-&gt;tail<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;if&#160;not&#160;findDone<br>&#160;&#160;&#160;&#160;&#160;then&#160;null<br>&#160;&#160;&#160;&#160;&#160;else&#160;findResult<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="nodes"/><FONT FACE="Courier" SIZE="1">@Operation&#160;nodes[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.nodes<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="outDegree"/><FONT FACE="Courier" SIZE="1">@Operation&#160;outDegree(n&#160;:&#160;Node):Integer<br>&#160;&#160;edges-&gt;select(e&#160;|<br>&#160;&#160;&#160;&#160;e.source()&#160;=&#160;n)-&gt;size<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="paths"/><FONT FACE="Courier" SIZE="1">@Operation&#160;paths(node&#160;:&#160;Node):Set(Seq(Node))<br>&#160;&#160;@Letrec&#160;<br>&#160;&#160;&#160;&#160;paths&#160;=&#160;@Operation&#160;anonymous(V&#160;:&#160;Set(Node),n&#160;:&#160;Node):Set(Seq(Node))<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;E&#160;=&#160;edges-&gt;select(e&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;e.source()&#160;=&#160;n)&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;N&#160;=&#160;E-&gt;collect(e&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;e.target())-&gt;reject(n&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;V-&gt;includes(n))&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;nextPaths&#160;=&#160;N-&gt;collect(n&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;paths(V-&gt;including(n),n))-&gt;flatten<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;nextPaths-&gt;collect(p&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Seq{n&#160;|&#160;p})&#160;+&#160;Set{Seq{n}}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;in&#160;paths(Set{node},node)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="paths"/><FONT FACE="Courier" SIZE="1">@Operation&#160;paths():Set(Seq(Node))<br>&#160;&#160;nodes-&gt;collect(n&#160;|<br>&#160;&#160;&#160;&#160;self.paths(n))-&gt;flatten<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="power"/><FONT FACE="Courier" SIZE="1">@Operation&#160;power():Set(Graph)<br>&#160;&#160;let&#160;N&#160;=&#160;nodes-&gt;power;<br>&#160;&#160;&#160;&#160;&#160;&#160;E&#160;=&#160;edges-&gt;power<br>&#160;&#160;in&#160;N-&gt;collect(nodes&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;legalEdgeSets&#160;=&#160;E-&gt;select(edges&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;edges-&gt;forAll(edge&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;nodes-&gt;includes(edge.source())&#160;and&#160;nodes-&gt;includes(edge.target())))<br>&#160;&#160;&#160;&#160;&#160;in&#160;legalEdgeSets-&gt;collect(edges&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Graph(nodes,edges))<br>&#160;&#160;&#160;&#160;&#160;end)-&gt;flatten<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="pprint"/><FONT FACE="Courier" SIZE="1">@Operation&#160;pprint(out&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;format(out,"Nodes:~%");<br>&#160;&#160;@For&#160;n&#160;in&#160;nodes&#160;do<br>&#160;&#160;&#160;&#160;format(out,"&#160;&#160;");<br>&#160;&#160;&#160;&#160;n.pprint(out);<br>&#160;&#160;&#160;&#160;format(out,"~%")<br>&#160;&#160;end;<br>&#160;&#160;format(out,"Edges:~%");<br>&#160;&#160;@For&#160;e&#160;in&#160;edges&#160;do<br>&#160;&#160;&#160;&#160;format(out,"&#160;&#160;");<br>&#160;&#160;&#160;&#160;e.pprint(out);<br>&#160;&#160;&#160;&#160;format(out,"~%")<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="predecessors"/><FONT FACE="Courier" SIZE="1">@Operation&#160;predecessors(n&#160;:&#160;Node):Set(Node)<br>&#160;&#160;self.edgesTo(n)-&gt;map("source")<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="reduce"/><FONT FACE="Courier" SIZE="1">@Operation&#160;reduce(n&#160;:&#160;Node,G&#160;:&#160;Graph):Graph<br>&#160;&#160;let&#160;N&#160;=&#160;nodes&#160;-&#160;G.nodes();<br>&#160;&#160;&#160;&#160;&#160;&#160;E&#160;=&#160;edges&#160;-&#160;G.edges()&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;E&#160;=&#160;E-&gt;collect(e&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;G.nodes()-&gt;includes(e.source())<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;Edge(e.data(),n,e.target())<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;e<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;)&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;E&#160;=&#160;E-&gt;collect(e&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;G.nodes()-&gt;includes(e.target())<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;Edge(e.data(),e.source(),n)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;e<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;)<br>&#160;&#160;in&#160;Graph(N-&gt;including(n),E)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="remove"/><FONT FACE="Courier" SIZE="1">@Operation&#160;remove(element&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@TypeCase(element)<br>&#160;&#160;&#160;&#160;Edge&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.deleteFromEdges(element)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;Node&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.removeNode(element)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="removeNode"/><FONT FACE="Courier" SIZE="1">@Operation&#160;removeNode(node&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.deleteFromNodes(node);<br>&#160;&#160;@For&#160;edge&#160;in&#160;edges&#160;do<br>&#160;&#160;&#160;&#160;if&#160;edge.source&#160;=&#160;node&#160;or&#160;edge.target&#160;=&#160;node<br>&#160;&#160;&#160;&#160;then&#160;self.deleteFromEdges(edge)<br>&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="roots"/><FONT FACE="Courier" SIZE="1">@Operation&#160;roots():Set(Node)<br>&#160;&#160;nodes-&gt;select(n&#160;|<br>&#160;&#160;&#160;&#160;not&#160;edges-&gt;exists(e&#160;|<br>&#160;&#160;&#160;&#160;e.target()&#160;=&#160;n))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="subGraph"/><FONT FACE="Courier" SIZE="1">@Operation&#160;subGraph(g&#160;:&#160;Graph):Boolean<br>&#160;&#160;nodes-&gt;forAll(n1&#160;|<br>&#160;&#160;&#160;&#160;g.nodes()-&gt;exists(n2&#160;|<br>&#160;&#160;&#160;&#160;n1.equals(n2)))&#160;and&#160;edges-&gt;forAll(e1&#160;|<br>&#160;&#160;&#160;&#160;g.edges()-&gt;exists(e2&#160;|<br>&#160;&#160;&#160;&#160;e1.equals(e2)))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="subGraphRootedAt"/><FONT FACE="Courier" SIZE="1">@Operation&#160;subGraphRootedAt(N&#160;:&#160;Set(Node)):Graph<br>&#160;&#160;let&#160;G&#160;=&#160;Graph(Set{},Set{})<br>&#160;&#160;in&#160;@While&#160;not&#160;N-&gt;isEmpty&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;n&#160;=&#160;N-&gt;sel<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;G&#160;:=&#160;Graph(G.nodes()-&gt;including(n),G.edges()&#160;+&#160;G.edgesFrom(n));<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;N&#160;:=&#160;N-&gt;excluding(n)&#160;+&#160;G.edgesFrom(n)-&gt;map("target")<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;G<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="successors"/><FONT FACE="Courier" SIZE="1">@Operation&#160;successors(n&#160;:&#160;Node):Seq(Node)<br>&#160;&#160;self.edgesFrom(n)-&gt;map("target")<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="terminals"/><FONT FACE="Courier" SIZE="1">@Operation&#160;terminals():Set(Node)<br>&#160;&#160;nodes-&gt;select(n&#160;|<br>&#160;&#160;&#160;&#160;not&#160;edges-&gt;exists(e&#160;|<br>&#160;&#160;&#160;&#160;e.source()&#160;=&#160;n))<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

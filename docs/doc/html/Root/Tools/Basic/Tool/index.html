@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+Tool
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>Tool</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+
+      A tool provides an interface over an element. The interface may be realised in
+      a number of different ways (for example a diagram or a form). Changes to the 
+      interface cause events to be raised and handled by an element manager. Changes
+      to the element and its sub-components (may) cause events to be raised and
+      handled by the element manager.
+    
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../../Root/XCore/Contained/index.html">Contained</A>
+,<A HREF="../../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR><TD><B>element</B></TD><TD><A HREF="../../../../Root/XCore/Element/index.html">Element<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>elementManager</B></TD><TD><A HREF="../../../../Root/Tools/Events/ElementManager/index.html">ElementManager<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>handleEvents</B></TD><TD><A HREF="../../../../Root/XCore/Boolean/index.html">Boolean<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>id</B></TD><TD><A HREF="../../../../Root/XCore/String/index.html">String<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>observedObjects</B></TD><TD><A HREF="../../../../Root/XCore/Element/index.html">Set(Element)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>subTools</B></TD><TD><A HREF="../../../../Root/Tools/Basic/Tool/index.html">Seq(Tool)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>type</B></TD><TD><A HREF="../../../../Root/Tools/Basic/ToolType/index.html">ToolType<A></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../../Root/XCore/Contained/index.html">Contained</A>: owner. <BR><B>From</B> <A HREF="../../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#addToObservedObjects">addToObservedObjects</a>(v:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#addTool">addTool</a>(tool:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#allTools">allTools</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#calcChildrenSlots">calcChildrenSlots</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#checkLegacyUpgrade">checkLegacyUpgrade</a>(xmfVersion:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#deleteFromObservedObjects">deleteFromObservedObjects</a>(v:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#deregister">deregister</a>(element:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#deregisterEdge">deregisterEdge</a>(source:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,key:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,target:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#element">element</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#elementManager">elementManager</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#find">find</a>(element:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#findEdge">findEdge</a>(source:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,key:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,target:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#handleEvents">handleEvents</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#handleObjectStateChange">handleObjectStateChange</a>(object:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,slot:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,new:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,old:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#id">id</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#isRegistered">isRegistered</a>(element:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#isRegisteredEdge">isRegisteredEdge</a>(source:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,key:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,target:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#isSubTool">isSubTool</a>():<A HREF="../../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#raise">raise</a>(event:<A HREF="../../../../Root/Tools/Events/Event/index.html">Event<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#register">register</a>(e1:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,e2:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#registerEdge">registerEdge</a>(source:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,key:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,target:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,edge:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#removeDaemons">removeDaemons</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#removeFromOwner">removeFromOwner</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#removeTool">removeTool</a>(tool:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#rootTool">rootTool</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setElement">setElement</a>(v:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setHandleEvents">setHandleEvents</a>(v:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#subTools">subTools</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#toString">toString</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#toolData">toolData</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#tooledElement">tooledElement</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#type">type</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../../Root/XCore/Contained/index.html">Contained</A>: addTo, allOwners, deleteRecursive, delete_client, delete_client_check, delete_client_redirect, getDefaultClipboardSource, owner, removeFromOwner, setOwner. <BR><B>From</B> <A HREF="../../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="addToObservedObjects"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addToObservedObjects[EXTENDER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.observedObjects&#160;:=&#160;self.observedObjects-&gt;including(v)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addTool"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addTool(tool&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.subTools&#160;:=&#160;Seq{tool}&#160;+&#160;self.subTools;<br>&#160;&#160;tool.owner&#160;:=&#160;self<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="allTools"/><FONT FACE="Courier" SIZE="1">@Operation&#160;allTools():XCore::Element<br>&#160;&#160;let&#160;allTools&#160;=&#160;Set{self}<br>&#160;&#160;in&#160;@For&#160;tool&#160;in&#160;subTools&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;allTools&#160;:=&#160;allTools-&gt;union(tool.allTools())<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;allTools<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="calcChildrenSlots"/><FONT FACE="Courier" SIZE="1">@Operation&#160;calcChildrenSlots():XCore::Element<br>&#160;&#160;Seq{"subTools"}<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="checkLegacyUpgrade"/><FONT FACE="Courier" SIZE="1">@Operation&#160;checkLegacyUpgrade(xmfVersion&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;null<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="deleteFromObservedObjects"/><FONT FACE="Courier" SIZE="1">@Operation&#160;deleteFromObservedObjects[REDUCER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.observedObjects&#160;:=&#160;self.observedObjects-&gt;excluding(v)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="deregister"/><FONT FACE="Courier" SIZE="1">@Operation&#160;deregister(element&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;elementManager.deregister(element)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="deregisterEdge"/><FONT FACE="Courier" SIZE="1">@Operation&#160;deregisterEdge(source&#160;:&#160;XCore::Element,key&#160;:&#160;XCore::Element,target&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;elementManager.deregisterEdge(source,key,target)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="element"/><FONT FACE="Courier" SIZE="1">@Operation&#160;element[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.element<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="elementManager"/><FONT FACE="Courier" SIZE="1">@Operation&#160;elementManager[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.elementManager<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="find"/><FONT FACE="Courier" SIZE="1">@Operation&#160;find(element&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;elementManager.findElement(element)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="findEdge"/><FONT FACE="Courier" SIZE="1">@Operation&#160;findEdge(source&#160;:&#160;XCore::Element,key&#160;:&#160;XCore::Element,target&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;elementManager.findEdge(source,key,target)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="handleEvents"/><FONT FACE="Courier" SIZE="1">@Operation&#160;handleEvents[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.handleEvents<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="handleObjectStateChange"/><FONT FACE="Courier" SIZE="1">@Operation&#160;handleObjectStateChange(object&#160;:&#160;XCore::Element,slot&#160;:&#160;XCore::Element,new&#160;:&#160;XCore::Element,old&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;elementManager.handleObjectStateChange(self,object,slot,new,old)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="id"/><FONT FACE="Courier" SIZE="1">@Operation&#160;id[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.id<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="isRegistered"/><FONT FACE="Courier" SIZE="1">@Operation&#160;isRegistered(element&#160;:&#160;XCore::Element):Boolean<br>&#160;&#160;elementManager.isRegistered(element)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="isRegisteredEdge"/><FONT FACE="Courier" SIZE="1">@Operation&#160;isRegisteredEdge(source&#160;:&#160;XCore::Element,key&#160;:&#160;XCore::Element,target&#160;:&#160;XCore::Element):Boolean<br>&#160;&#160;elementManager.isRegisteredEdge(source,key,target)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="isSubTool"/><FONT FACE="Courier" SIZE="1">@Operation&#160;isSubTool():Boolean<br>&#160;&#160;owner.isReallyKindOf(Tool)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="raise"/><FONT FACE="Courier" SIZE="1">@Operation&#160;raise(event&#160;:&#160;Event):XCore::Element<br>&#160;&#160;if&#160;handleEvents<br>&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;event.setTool(self);<br>&#160;&#160;&#160;&#160;elementManager.raise(event)<br>&#160;&#160;else&#160;false<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="register"/><FONT FACE="Courier" SIZE="1">@Operation&#160;register(e1&#160;:&#160;XCore::Element,e2&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;elementManager.register(e1,e2)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="registerEdge"/><FONT FACE="Courier" SIZE="1">@Operation&#160;registerEdge(source&#160;:&#160;XCore::Element,key&#160;:&#160;XCore::Element,target&#160;:&#160;XCore::Element,edge&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;elementManager.registerEdge(source,key,target,edge)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="removeDaemons"/><FONT FACE="Courier" SIZE="1">@Operation&#160;removeDaemons():XCore::Element<br>&#160;&#160;@For&#160;t&#160;in&#160;self.allTools()&#160;do<br>&#160;&#160;&#160;&#160;@For&#160;o&#160;in&#160;t.observedObjects&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;o.removeDaemonsWithTarget(t,true)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="removeFromOwner"/><FONT FACE="Courier" SIZE="1">@Operation&#160;removeFromOwner():XCore::Element<br>&#160;&#160;if&#160;owner&#160;&lt;&gt;&#160;null<br>&#160;&#160;then&#160;owner.removeTool(self)<br>&#160;&#160;else&#160;false<br>&#160;&#160;end&#160;;<br>&#160;&#160;self.removeDaemons()<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="removeTool"/><FONT FACE="Courier" SIZE="1">@Operation&#160;removeTool(tool&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.subTools&#160;:=&#160;self.subTools-&gt;excluding(tool);<br>&#160;&#160;tool.owner&#160;:=&#160;null<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="rootTool"/><FONT FACE="Courier" SIZE="1">@Operation&#160;rootTool():XCore::Element<br>&#160;&#160;if&#160;owner&#160;=&#160;null<br>&#160;&#160;then&#160;null<br>&#160;&#160;elseif&#160;not&#160;(owner.isKindOf(Basic::Tool))<br>&#160;&#160;then&#160;self<br>&#160;&#160;else&#160;owner.rootTool()<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setElement"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setElement[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.element&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setHandleEvents"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setHandleEvents[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.handleEvents&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="subTools"/><FONT FACE="Courier" SIZE="1">@Operation&#160;subTools[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.subTools<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="toString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;toString():XCore::Element<br>&#160;&#160;self.of().nameString()&#160;+&#160;"["&#160;+&#160;self.tooledElement().toString()&#160;+&#160;"]"<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="toolData"/><FONT FACE="Courier" SIZE="1">@Operation&#160;toolData():XCore::Element<br>&#160;&#160;XToolData(elementManager.toolData())<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="tooledElement"/><FONT FACE="Courier" SIZE="1">@Operation&#160;tooledElement():XCore::Element<br>&#160;&#160;self.element()<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="type"/><FONT FACE="Courier" SIZE="1">@Operation&#160;type[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.type<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

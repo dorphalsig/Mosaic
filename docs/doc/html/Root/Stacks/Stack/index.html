@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+Stack
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>Stack</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+No Documentation Specified
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR><TD><B>elements</B></TD><TD><A HREF="../../../Root/XCore/Vector/index.html">Vector<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>index</B></TD><TD><A HREF="../../../Root/XCore/Integer/index.html">Integer<A></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#asSeq">asSeq</a>():<A HREF="../../../Root/XCore/Element/index.html">Seq(Element)<A></B></TD><TD>
+        Returns the elements of the stack as a sequence.
+      </TD></TR>
+<TR><TD><B><a href="#empty">empty</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+        Empties the stack of all elements.
+      </TD></TR>
+<TR><TD><B><a href="#expand">expand</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#indexOf">indexOf</a>(e:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD> 
+        Returns the first index of the supplied element in
+        the stack or -1 if it does not exist.
+      </TD></TR>
+<TR><TD><B><a href="#isEmpty">isEmpty</a>():<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>
+        Returns true when the stack has no elements.
+      </TD></TR>
+<TR><TD><B><a href="#isFull">isFull</a>():<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>
+        Returns true when the stack storage is full.
+        Note that push() expands the storage if necessary.
+      </TD></TR>
+<TR><TD><B><a href="#pop">pop</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+        Returns and removes the head element of the
+        stack. Raises a StackUnderflow exception if the
+        stack is empty.
+      </TD></TR>
+<TR><TD><B><a href="#push">push</a>(e:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+        Adds the element to the head of the stack, If the
+        storage is full then the stack is expanded.
+      </TD></TR>
+<TR><TD><B><a href="#put">put</a>(index:<A HREF="../../../Root/XCore/Integer/index.html">Integer<A>,e:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+        Updates the element at the supplied index.
+      </TD></TR>
+<TR><TD><B><a href="#ref">ref</a>(index:<A HREF="../../../Root/XCore/Integer/index.html">Integer<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+        Returns the element at the supplied index.
+      </TD></TR>
+<TR><TD><B><a href="#size">size</a>():<A HREF="../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD>
+        Returns the current storage size.
+      </TD></TR>
+<TR><TD><B><a href="#top">top</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+        Returns the top element of the stack without removing 
+        it. Raises an exception if the stack is empty.
+      </TD></TR>
+<TR><TD><B><a href="#topIndex">topIndex</a>():<A HREF="../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD>
+        Returns the index of the top element. Note that
+        this may be different from the size of the storage.
+      </TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="asSeq"/><FONT FACE="Courier" SIZE="1">@Operation&#160;asSeq():Seq(Element)<br>&#160;&#160;let&#160;s&#160;=&#160;Seq{};<br>&#160;&#160;&#160;&#160;&#160;&#160;i&#160;=&#160;index&#160;-&#160;1<br>&#160;&#160;in&#160;@While&#160;i&#160;&gt;=&#160;0&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;s&#160;:=&#160;Seq{elements.ref(i)&#160;|&#160;s};<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;i&#160;:=&#160;i&#160;-&#160;1<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;s<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="empty"/><FONT FACE="Courier" SIZE="1">@Operation&#160;empty():XCore::Element<br>&#160;&#160;self.index&#160;:=&#160;0<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="expand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;expand():XCore::Element<br>&#160;&#160;let&#160;newElements&#160;=&#160;Vector(elements.size()&#160;*&#160;2)<br>&#160;&#160;in&#160;newElements.copyInto(elements);<br>&#160;&#160;&#160;&#160;&#160;self.elements&#160;:=&#160;newElements<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="indexOf"/><FONT FACE="Courier" SIZE="1">@Operation&#160;indexOf(e&#160;:&#160;XCore::Element):Integer<br>&#160;&#160;let&#160;i&#160;=&#160;0;<br>&#160;&#160;&#160;&#160;&#160;&#160;found&#160;=&#160;false<br>&#160;&#160;in&#160;@While&#160;i&#160;&lt;&#160;elements.size()&#160;and&#160;not&#160;found&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;elements.ref(i)&#160;=&#160;e<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;found&#160;:=&#160;true<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;i&#160;:=&#160;i&#160;+&#160;1<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;if&#160;found<br>&#160;&#160;&#160;&#160;&#160;then&#160;i<br>&#160;&#160;&#160;&#160;&#160;else&#160;(0&#160;-&#160;1)<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="isEmpty"/><FONT FACE="Courier" SIZE="1">@Operation&#160;isEmpty():Boolean<br>&#160;&#160;index&#160;=&#160;0<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="isFull"/><FONT FACE="Courier" SIZE="1">@Operation&#160;isFull():Boolean<br>&#160;&#160;elements.size()&#160;=&#160;index<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="pop"/><FONT FACE="Courier" SIZE="1">@Operation&#160;pop():XCore::Element<br>&#160;&#160;if&#160;self.isEmpty()<br>&#160;&#160;then&#160;throw&#160;StackUnderflow(self)<br>&#160;&#160;else<br>&#160;&#160;&#160;&#160;self.index&#160;:=&#160;index&#160;-&#160;1;<br>&#160;&#160;&#160;&#160;elements.ref(index)<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="push"/><FONT FACE="Courier" SIZE="1">@Operation&#160;push(e&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;if&#160;self.isFull()<br>&#160;&#160;then&#160;self.expand()<br>&#160;&#160;else&#160;false<br>&#160;&#160;end&#160;;<br>&#160;&#160;elements.put(index,e);<br>&#160;&#160;self.index&#160;:=&#160;index&#160;+&#160;1;<br>&#160;&#160;self<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="put"/><FONT FACE="Courier" SIZE="1">@Operation&#160;put(index&#160;:&#160;Integer,e&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;elements.put(index,e)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="ref"/><FONT FACE="Courier" SIZE="1">@Operation&#160;ref(index&#160;:&#160;Integer):XCore::Element<br>&#160;&#160;elements.ref(index)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="size"/><FONT FACE="Courier" SIZE="1">@Operation&#160;size():Integer<br>&#160;&#160;elements.size()<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="top"/><FONT FACE="Courier" SIZE="1">@Operation&#160;top():XCore::Element<br>&#160;&#160;if&#160;self.isEmpty()<br>&#160;&#160;then&#160;throw&#160;StackUnderflow(self)<br>&#160;&#160;else&#160;elements.ref(index&#160;-&#160;1)<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="topIndex"/><FONT FACE="Courier" SIZE="1">@Operation&#160;topIndex():Integer<br>&#160;&#160;index&#160;-&#160;1<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+Container
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>Container</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+
+      A container has a slot 'contents' that is a table. The table maintains the
+      contained elements indexed by keys. By default the leys for the elements in
+      the table are the elements themselves, but sub-classes of container will
+      modify this feature accordingly. Container provides operations for accessing
+      and managing its contents.
+    
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#add">add</a>(element:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Container/index.html">Container<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#addContentDaemon">addContentDaemon</a>(actionSource:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,daemon:<A HREF="../../../Root/XCore/Operation/index.html">Operation<A>):<A HREF="../../../Root/XCore/Container/index.html">Container<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#allContents">allContents</a>():<A HREF="../../../Root/XCore/Element/index.html">Set(Element)<A></B></TD><TD> 
+      Returns all the contents of the receiver and all the contents of all
+      containers that it contains.
+    </TD></TR>
+<TR><TD><B><a href="#allContentsOf">allContentsOf</a>(type:<A HREF="../../../Root/XCore/Classifier/index.html">Classifier<A>):<A HREF="../../../Root/XCore/Element/index.html">Set(Element)<A></B></TD><TD> 
+      Returns all the contents of the receiver and all the contents of all
+      containers that it contains. The elements are filtered by the classifier
+      suppplied as an argument.
+    </TD></TR>
+<TR><TD><B><a href="#allContentsThat">allContentsThat</a>(predicate:<A HREF="../../../Root/XCore/Operation/index.html">Operation<A>):<A HREF="../../../Root/XCore/Element/index.html">Set(Element)<A></B></TD><TD> 
+      Returns all the contents of the receiver and all the contents of all
+      containers that it contains. The elements are filtered using the
+      supplied predicate.
+    </TD></TR>
+<TR><TD><B><a href="#checkConstraints">checkConstraints</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#checkConstraints">checkConstraints</a>(contents:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#containerCutHandler">containerCutHandler</a>(element:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#containerPastePostHandler">containerPastePostHandler</a>(element:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#containerPastePreHandler">containerPastePreHandler</a>(element:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#contentDaemons">contentDaemons</a>():<A HREF="../../../Root/XCore/Operation/index.html">Seq(Operation)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#contents">contents</a>():<A HREF="../../../Root/XCore/Collection(Element)/index.html">Collection(Element)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#contentsOf">contentsOf</a>(type:<A HREF="../../../Root/XCore/Classifier/index.html">Classifier<A>):<A HREF="../../../Root/XCore/Element/index.html">Set(Element)<A></B></TD><TD>
+      Returns a set of contained elements of the
+      supplied type.
+    </TD></TR>
+<TR><TD><B><a href="#contentsThat">contentsThat</a>(predicate:<A HREF="../../../Root/XCore/Operation/index.html">Operation<A>):<A HREF="../../../Root/XCore/Element/index.html">Set(Element)<A></B></TD><TD>
+      Returns a set of contained elements that satisfy the
+      supplied predicate.
+    </TD></TR>
+<TR><TD><B><a href="#deleteContainedDiagrams">deleteContainedDiagrams</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#deleteRecursive">deleteRecursive</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#find">find</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#getChildren">getChildren</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#getChildrenToolTips">getChildrenToolTips</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#includes">includes</a>(element:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#init">init</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#initContents">initContents</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#loadXTO">loadXTO</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#remove">remove</a>(element:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Container/index.html">Container<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#removeContentDaemon">removeContentDaemon</a>(daemon:<A HREF="../../../Root/XCore/Operation/index.html">Operation<A>):<A HREF="../../../Root/XCore/Container/index.html">Container<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#traceAll">traceAll</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Causes all the operations transitively contained in the
+      receiver to be traced.
+    </TD></TR>
+<TR><TD><B><a href="#untraceAll">untraceAll</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Causes all the operations transitively contained in the
+      receiver to be untraced.
+    </TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="add"/><FONT FACE="Courier" SIZE="1">@Operation&#160;add(element&#160;:&#160;Element):Container<br>&#160;&#160;self.error("I&#160;don&apos;t&#160;know&#160;how&#160;to&#160;perform&#160;add&#160;for&#160;"&#160;+&#160;self.toString())<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addContentDaemon"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addContentDaemon(actionSource&#160;:&#160;XCore::Element,daemon&#160;:&#160;Operation):Container<br>&#160;&#160;self.error("I&#160;don&apos;t&#160;know&#160;how&#160;to&#160;perform&#160;addContentDaemon&#160;for&#160;"&#160;+&#160;self.toString())<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="allContents"/><FONT FACE="Courier" SIZE="1">@Operation&#160;allContents():Set(Element)<br>&#160;&#160;let&#160;C&#160;=&#160;Seq{self};<br>&#160;&#160;&#160;&#160;&#160;&#160;allContents&#160;=&#160;Seq{}<br>&#160;&#160;in&#160;@While&#160;not&#160;C-&gt;isEmpty&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;container&#160;=&#160;C-&gt;head&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;S&#160;=&#160;container.contents()<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;C&#160;:=&#160;C-&gt;tail;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@For&#160;e&#160;in&#160;S&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;allContents&#160;:=&#160;allContents-&gt;prepend(e);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;e&#160;&lt;&gt;&#160;container&#160;and&#160;e&#160;&lt;&gt;&#160;null&#160;and&#160;e&#160;&lt;&gt;&#160;self&#160;and&#160;e.isKindOf(Container)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;C&#160;:=&#160;Seq{e&#160;|&#160;C}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;allContents-&gt;asSet<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="allContentsOf"/><FONT FACE="Courier" SIZE="1">@Operation&#160;allContentsOf(type&#160;:&#160;Classifier):Set(Element)<br>&#160;&#160;let&#160;C&#160;=&#160;Seq{self};<br>&#160;&#160;&#160;&#160;&#160;&#160;allContents&#160;=&#160;Set{}<br>&#160;&#160;in&#160;@While&#160;not&#160;C-&gt;isEmpty&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;container&#160;=&#160;C-&gt;head&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;S&#160;=&#160;container.contents()<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;C&#160;:=&#160;C-&gt;tail;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@For&#160;e&#160;in&#160;S&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;e&#160;&lt;&gt;&#160;null&#160;and&#160;e.isKindOf(type)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;allContents&#160;:=&#160;allContents-&gt;including(e)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;e&#160;&lt;&gt;&#160;self&#160;and&#160;e&#160;&lt;&gt;&#160;null&#160;and&#160;e.isKindOf(Container)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;C&#160;:=&#160;Seq{e&#160;|&#160;C}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;allContents<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="allContentsThat"/><FONT FACE="Courier" SIZE="1">@Operation&#160;allContentsThat(predicate&#160;:&#160;Operation):Set(Element)<br>&#160;&#160;let&#160;C&#160;=&#160;Seq{self};<br>&#160;&#160;&#160;&#160;&#160;&#160;allContents&#160;=&#160;Set{}<br>&#160;&#160;in&#160;@While&#160;not&#160;C-&gt;isEmpty&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;container&#160;=&#160;C-&gt;head&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;S&#160;=&#160;container.contents()<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;C&#160;:=&#160;C-&gt;tail;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@For&#160;e&#160;in&#160;S&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;predicate(e)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;allContents&#160;:=&#160;allContents-&gt;including(e)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;e&#160;&lt;&gt;&#160;self&#160;and&#160;e&#160;&lt;&gt;&#160;null&#160;and&#160;e.isKindOf(Container)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;C&#160;:=&#160;Seq{e&#160;|&#160;C}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;allContents<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="checkConstraints"/><FONT FACE="Courier" SIZE="1">@Operation&#160;checkConstraints():XCore::Element<br>&#160;&#160;let&#160;selfReport&#160;=&#160;Element::checkConstraints.invoke(self,Seq{});<br>&#160;&#160;&#160;&#160;&#160;&#160;elementReports&#160;=&#160;self.contents()-&gt;collect(e&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;e.checkConstraints())-&gt;asSeq<br>&#160;&#160;in&#160;@For&#160;report&#160;in&#160;elementReports&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;selfReport.addToChildren(report)<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;let&#160;childrenSatisfied&#160;=&#160;selfReport.children-&gt;forAll(r&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;r.satisfied())<br>&#160;&#160;&#160;&#160;&#160;in&#160;selfReport.satisfied&#160;:=&#160;selfReport.satisfied&#160;and&#160;childrenSatisfied<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;selfReport<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="checkConstraints"/><FONT FACE="Courier" SIZE="1">@Operation&#160;checkConstraints(contents&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;selfReport&#160;=&#160;Element::checkConstraints.invoke(self,Seq{});<br>&#160;&#160;&#160;&#160;&#160;&#160;elementReports&#160;=&#160;contents-&gt;collect(e&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;e.checkConstraints())-&gt;asSeq<br>&#160;&#160;in&#160;@For&#160;report&#160;in&#160;elementReports&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;selfReport.addToChildren(report)<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;let&#160;childrenSatisfied&#160;=&#160;selfReport.children-&gt;forAll(r&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;r.satisfied())<br>&#160;&#160;&#160;&#160;&#160;in&#160;selfReport.satisfied&#160;:=&#160;selfReport.satisfied&#160;and&#160;childrenSatisfied<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;selfReport<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="containerCutHandler"/><FONT FACE="Courier" SIZE="1">@Operation&#160;containerCutHandler(element&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.remove(element)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="containerPastePostHandler"/><FONT FACE="Courier" SIZE="1">@Operation&#160;containerPastePostHandler(element&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.add(element)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="containerPastePreHandler"/><FONT FACE="Courier" SIZE="1">@Operation&#160;containerPastePreHandler(element&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="contentDaemons"/><FONT FACE="Courier" SIZE="1">@Operation&#160;contentDaemons():Seq(Operation)<br>&#160;&#160;self.error("I&#160;don&apos;t&#160;know&#160;how&#160;to&#160;perform&#160;contentDaemons&#160;for&#160;"&#160;+&#160;self.toString())<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="contents"/><FONT FACE="Courier" SIZE="1">@Operation&#160;contents():Collection(Element)<br>&#160;&#160;self.error("I&#160;don&apos;t&#160;know&#160;how&#160;to&#160;perform&#160;contents&#160;for&#160;"&#160;+&#160;self.toString())<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="contentsOf"/><FONT FACE="Courier" SIZE="1">@Operation&#160;contentsOf(type&#160;:&#160;Classifier):Set(Element)<br>&#160;&#160;self.contents()-&gt;select(e&#160;|<br>&#160;&#160;&#160;&#160;e.isKindOf(type))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="contentsThat"/><FONT FACE="Courier" SIZE="1">@Operation&#160;contentsThat(predicate&#160;:&#160;Operation):Set(Element)<br>&#160;&#160;self.contents()-&gt;select(e&#160;|<br>&#160;&#160;&#160;&#160;predicate(e))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="deleteContainedDiagrams"/><FONT FACE="Courier" SIZE="1">@Operation&#160;deleteContainedDiagrams():XCore::Element<br>&#160;&#160;let&#160;diagramManager&#160;=&#160;xmf.diagramManager()<br>&#160;&#160;in&#160;if&#160;diagramManager&#160;&lt;&gt;&#160;null<br>&#160;&#160;&#160;&#160;&#160;then&#160;let&#160;contents&#160;=&#160;self.allContents()-&gt;including(self)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;@For&#160;content&#160;in&#160;contents&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;diagrams&#160;=&#160;diagramManager.diagramsFor(content)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;@For&#160;diagram&#160;in&#160;diagrams&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;diagram.diagram().delete()<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="deleteRecursive"/><FONT FACE="Courier" SIZE="1">@Operation&#160;deleteRecursive():XCore::Element<br>&#160;&#160;super();<br>&#160;&#160;@For&#160;c&#160;in&#160;self.contents()&#160;do<br>&#160;&#160;&#160;&#160;c.deleteRecursive()<br>&#160;&#160;end;<br>&#160;&#160;self<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="find"/><FONT FACE="Courier" SIZE="1">@Operation&#160;find():XCore::Element<br>&#160;&#160;let&#160;message&#160;=&#160;"Type&#160;a&#160;predicate&#160;expression&#160;to&#160;be&#160;applied&#160;to&#160;each&#160;element&#160;in&#160;"&#160;+&#160;self.toString()&#160;+&#160;".<br>"&#160;+&#160;"The&#160;name&#160;self&#160;is&#160;used&#160;for&#160;each&#160;candidate&#160;element.<br>"&#160;+&#160;"The&#160;result&#160;of&#160;the&#160;operation&#160;is&#160;a&#160;collection&#160;of&#160;candidates<br>"&#160;+&#160;"that&#160;satisfy&#160;the&#160;predicate."&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;predicate&#160;=&#160;xmf.getExp("Find",message)<br>&#160;&#160;in&#160;if&#160;predicate&#160;&lt;&gt;&#160;null<br>&#160;&#160;&#160;&#160;&#160;then&#160;let&#160;fun&#160;=&#160;Compiler::compileToFun("",predicate,Seq{},Seq{Seq{2&#160;|&#160;Root.contents},Seq{2&#160;|&#160;XCore.contents}},false);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;results&#160;=&#160;Seq{};<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;contents&#160;=&#160;self.allContents()-&gt;asSeq&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;progress&#160;=&#160;xmf.progress(contents-&gt;size)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;@For&#160;x&#160;in&#160;contents&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;try<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;fun.invoke(x,Seq{})<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;catch(x)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;results&#160;:=&#160;Seq{x&#160;|&#160;results};<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;progress.addWork("+&#160;"&#160;+&#160;x.toString(),1)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;progress.addWork("-&#160;"&#160;+&#160;x.toString(),1)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;progress.finishWork("Find&#160;Completed");<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;LabelledCollection("Results&#160;for&#160;"&#160;+&#160;predicate.pprint().subst("","<br>",true),results)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="getChildren"/><FONT FACE="Courier" SIZE="1">@Operation&#160;getChildren():XCore::Element<br>&#160;&#160;if&#160;self&#160;&lt;&gt;&#160;Root&#160;andthen&#160;self&#160;&lt;&gt;&#160;Daemon<br>&#160;&#160;then&#160;self.contents()-&gt;asSeq.excluding(self.doc())<br>&#160;&#160;elseif&#160;self&#160;=&#160;Root<br>&#160;&#160;then&#160;self.contents()-&gt;asSeq.excluding(self).excluding(self.doc())<br>&#160;&#160;elseif&#160;self&#160;=&#160;Daemon<br>&#160;&#160;then&#160;self.operations-&gt;asSeq<br>&#160;&#160;else&#160;false<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="getChildrenToolTips"/><FONT FACE="Courier" SIZE="1">@Operation&#160;getChildrenToolTips():XCore::Element<br>&#160;&#160;self.getChildren()-&gt;collect(e&#160;|<br>&#160;&#160;&#160;&#160;"")<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="includes"/><FONT FACE="Courier" SIZE="1">@Operation&#160;includes(element&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.contents()-&gt;includes(element)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="init"/><FONT FACE="Courier" SIZE="1">@Operation&#160;init():XCore::Element<br>&#160;&#160;self.initContents();<br>&#160;&#160;super()<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="initContents"/><FONT FACE="Courier" SIZE="1">@Operation&#160;initContents():XCore::Element<br>&#160;&#160;@For&#160;e&#160;in&#160;self.contents()&#160;do<br>&#160;&#160;&#160;&#160;e.init()<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="loadXTO"/><FONT FACE="Courier" SIZE="1">@Operation&#160;loadXTO():XCore::Element<br>&#160;&#160;let&#160;file&#160;=&#160;xmf.openFile(xmf.projDir(),"*.xto")&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;element&#160;=&#160;xmf.toolManager().loadXTO(file)<br>&#160;&#160;in&#160;self.add(element)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="remove"/><FONT FACE="Courier" SIZE="1">@Operation&#160;remove(element&#160;:&#160;Element):Container<br>&#160;&#160;self.error("I&#160;don&apos;t&#160;know&#160;how&#160;to&#160;perform&#160;remove&#160;for&#160;"&#160;+&#160;self.toString())<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="removeContentDaemon"/><FONT FACE="Courier" SIZE="1">@Operation&#160;removeContentDaemon(daemon&#160;:&#160;Operation):Container<br>&#160;&#160;self.error("I&#160;don&apos;t&#160;know&#160;how&#160;to&#160;perform&#160;removeContentDaemon&#160;for&#160;"&#160;+&#160;self.toString())<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="traceAll"/><FONT FACE="Courier" SIZE="1">@Operation&#160;traceAll():XCore::Element<br>&#160;&#160;@For&#160;op&#160;in&#160;self.contentsOf(Operation)&#160;when&#160;op&#160;&lt;&gt;&#160;null&#160;do<br>&#160;&#160;&#160;&#160;op.trace()<br>&#160;&#160;end;<br>&#160;&#160;@For&#160;container&#160;in&#160;self.contentsOf(Container)-&gt;excluding(self)&#160;when&#160;container&#160;&lt;&gt;&#160;null&#160;do<br>&#160;&#160;&#160;&#160;container.traceAll()<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="untraceAll"/><FONT FACE="Courier" SIZE="1">@Operation&#160;untraceAll():XCore::Element<br>&#160;&#160;@For&#160;op&#160;in&#160;self.contentsOf(Operation)&#160;when&#160;op&#160;&lt;&gt;&#160;null&#160;do<br>&#160;&#160;&#160;&#160;op.untrace()<br>&#160;&#160;end;<br>&#160;&#160;@For&#160;container&#160;in&#160;self.contentsOf(Container)-&gt;excluding(self)&#160;when&#160;container&#160;&lt;&gt;&#160;null&#160;do<br>&#160;&#160;&#160;&#160;container.untraceAll()<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

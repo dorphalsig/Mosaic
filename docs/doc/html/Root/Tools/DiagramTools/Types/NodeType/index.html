@@ -1,0 +1,352 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+NodeType
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>NodeType</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+
+      A node type names and describes the display structure for
+      a class of nodes on a diagram. Node types may inherit which
+      allows edges to be defined between multiple node types.
+      Nodes are containers of display elements and as such define
+      the layout of their contents.
+    
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../../../Root/Tools/DiagramTools/Layout/Formatted/index.html">Formatted</A>
+,<A HREF="../../../../../Root/Tools/DiagramTools/Types/DisplayTypes/AbstractDisplayType/index.html">AbstractDisplayType</A>
+,<A HREF="../../../../../Root/Tools/Basic/XToolsRefNamedElement/index.html">XToolsRefNamedElement</A>
+,<A HREF="../../../../../Root/XCore/NamedElement/index.html">NamedElement</A>
+,<A HREF="../../../../../Root/XCore/Contained/index.html">Contained</A>
+,<A HREF="../../../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+<TR><TD>NodeType(name,parents)</TD><TD> No Documentation </TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR><TD><B>displays</B></TD><TD><A HREF="../../../../../Root/Tools/DiagramTools/Types/DisplayTypes/DisplayType/index.html">Seq(DisplayType)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>hasPort</B></TD><TD><A HREF="../../../../../Root/XCore/Boolean/index.html">Boolean<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>layout</B></TD><TD><A HREF="../../../../../Root/XCore/String/index.html">String<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>maxHeight</B></TD><TD><A HREF="../../../../../Root/XCore/Integer/index.html">Integer<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>maxWidth</B></TD><TD><A HREF="../../../../../Root/XCore/Integer/index.html">Integer<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>menu</B></TD><TD><A HREF="../../../../../Root/Tools/Menus/Menu/index.html">Menu<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>minHeight</B></TD><TD><A HREF="../../../../../Root/XCore/Integer/index.html">Integer<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>minWidth</B></TD><TD><A HREF="../../../../../Root/XCore/Integer/index.html">Integer<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>parents</B></TD><TD><A HREF="../../../../../Root/XCore/String/index.html">Seq(String)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../../../Root/Tools/DiagramTools/Layout/Formatted/index.html">Formatted</A>: contentLayout, manager. <BR><B>From</B> <A HREF="../../../../../Root/Tools/Basic/XToolsRefNamedElement/index.html">XToolsRefNamedElement</A>: refName, refOwner. <BR><B>From</B> <A HREF="../../../../../Root/XCore/NamedElement/index.html">NamedElement</A>: name. <BR><B>From</B> <A HREF="../../../../../Root/XCore/Contained/index.html">Contained</A>: owner. <BR><B>From</B> <A HREF="../../../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#add">add</a>(element:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#addToDisplays">addToDisplays</a>(v:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#addToParents">addToParents</a>(v:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#allDisplayTypes">allDisplayTypes</a>(T:<A HREF="../../../../../Root/Tools/DiagramTools/Types/DisplayTypes/AbstractDisplayType/index.html">Seq(AbstractDisplayType)<A>):<A HREF="../../../../../Root/Tools/DiagramTools/Types/DisplayTypes/AbstractDisplayType/index.html">Seq(AbstractDisplayType)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#contains">contains</a>(type:<A HREF="../../../../../Root/Tools/DiagramTools/Types/DisplayTypes/DisplayType/index.html">DisplayType<A>):<A HREF="../../../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#deleteFromDisplays">deleteFromDisplays</a>(v:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#deleteFromParents">deleteFromParents</a>(v:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#deployDef">deployDef</a>(dir:<A HREF="../../../../../Root/XCore/String/index.html">String<A>,toolName:<A HREF="../../../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#deref">deref</a>(env:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#displays">displays</a>():<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#hasPort">hasPort</a>():<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#inheritsFrom">inheritsFrom</a>(typeName:<A HREF="../../../../../Root/XCore/String/index.html">String<A>,tool:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#layout">layout</a>():<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#maxHeight">maxHeight</a>():<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#maxWidth">maxWidth</a>():<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#menu">menu</a>():<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#merge">merge</a>(inherited:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#minHeight">minHeight</a>():<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#minWidth">minWidth</a>():<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#mkClicksHandler">mkClicksHandler</a>(tool:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>,node:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#mkDeselectionHandler">mkDeselectionHandler</a>(tool:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>,node:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#mkMoveHandler">mkMoveHandler</a>(tool:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>,node:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#mkResizeHandler">mkResizeHandler</a>(tool:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>,node:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#mkSelectionHandler">mkSelectionHandler</a>(tool:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>,node:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#new">new</a>(x:<A HREF="../../../../../Root/XCore/Integer/index.html">Integer<A>,y:<A HREF="../../../../../Root/XCore/Integer/index.html">Integer<A>,tool:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#new">new</a>(x:<A HREF="../../../../../Root/XCore/Integer/index.html">Integer<A>,y:<A HREF="../../../../../Root/XCore/Integer/index.html">Integer<A>,tool:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>,diagram:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newNode">newNode</a>(x:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>,y:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#parents">parents</a>():<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setDisplays">setDisplays</a>(v:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setGlobalMenu">setGlobalMenu</a>(node:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>,tool:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>,path:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setGlobalMenu">setGlobalMenu</a>(node:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>,tool:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>,path:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>,sendSetCommand:<A HREF="../../../../../Root/XCore/Boolean/index.html">Boolean<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setMaxHeight">setMaxHeight</a>(v:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setMaxWidth">setMaxWidth</a>(v:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setMinHeight">setMinHeight</a>(v:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setMinWidth">setMinWidth</a>(v:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setParents">setParents</a>(v:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#toolTypes">toolTypes</a>(T:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../../Root/Tools/DiagramTools/Types/ToolType/index.html">Seq(ToolType)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#upgradeMenuTree">upgradeMenuTree</a>():<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../../../Root/Tools/DiagramTools/Layout/Formatted/index.html">Formatted</A>: contentLayout, layout, setContentLayout. <BR><B>From</B> <A HREF="../../../../../Root/Tools/DiagramTools/Types/DisplayTypes/AbstractDisplayType/index.html">AbstractDisplayType</A>: allDisplayTypes. <BR><B>From</B> <A HREF="../../../../../Root/Tools/Basic/XToolsRefNamedElement/index.html">XToolsRefNamedElement</A>: getRefNameSpace, initRef, refName, refOwner, setRefName, setRefOwner. <BR><B>From</B> <A HREF="../../../../../Root/XCore/NamedElement/index.html">NamedElement</A>: getNamedElement, href, labelString, legalNameChangeCheck, name, path, pathSeq, repopulate, setName, toString. <BR><B>From</B> <A HREF="../../../../../Root/XCore/Contained/index.html">Contained</A>: addTo, allOwners, deleteRecursive, delete_client, delete_client_check, delete_client_redirect, getDefaultClipboardSource, owner, removeFromOwner, setOwner. <BR><B>From</B> <A HREF="../../../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="add"/><FONT FACE="Courier" SIZE="1">@Operation&#160;add(element&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@TypeCase(element)<br>&#160;&#160;&#160;&#160;Menu&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.menu&#160;:=&#160;element<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;DisplayType&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;element.setOwner(self);<br>&#160;&#160;&#160;&#160;&#160;&#160;self.addToDisplays(element)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addToDisplays"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addToDisplays[EXTENDER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.displays&#160;:=&#160;self.displays-&gt;including(v)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addToParents"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addToParents[EXTENDER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.parents&#160;:=&#160;self.parents-&gt;including(v)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="allDisplayTypes"/><FONT FACE="Courier" SIZE="1">@Operation&#160;allDisplayTypes(T&#160;:&#160;Seq(AbstractDisplayType)):Seq(AbstractDisplayType)<br>&#160;&#160;T&#160;:=&#160;super(T);<br>&#160;&#160;@For&#160;d&#160;in&#160;self.displays&#160;do<br>&#160;&#160;&#160;&#160;T&#160;:=&#160;d.allDisplayTypes(T)<br>&#160;&#160;end;<br>&#160;&#160;T<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="contains"/><FONT FACE="Courier" SIZE="1">@Operation&#160;contains(type&#160;:&#160;DisplayType):Boolean<br>&#160;&#160;displays-&gt;includes(type)&#160;orelse&#160;displays-&gt;exists(display&#160;|<br>&#160;&#160;&#160;&#160;display.contains(type))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="deleteFromDisplays"/><FONT FACE="Courier" SIZE="1">@Operation&#160;deleteFromDisplays[REDUCER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.displays&#160;:=&#160;self.displays-&gt;excluding(v)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="deleteFromParents"/><FONT FACE="Courier" SIZE="1">@Operation&#160;deleteFromParents[REDUCER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.parents&#160;:=&#160;self.parents-&gt;excluding(v)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="deployDef"/><FONT FACE="Courier" SIZE="1">@Operation&#160;deployDef(dir&#160;:&#160;String,toolName&#160;:&#160;String):XCore::Element<br>&#160;&#160;@WithOpenFile(fout&#160;-&gt;&#160;dir&#160;+&#160;"/"&#160;+&#160;name&#160;+&#160;".xmf")<br>&#160;&#160;&#160;&#160;format(fout,"parserImport&#160;XOCL;~%");<br>&#160;&#160;&#160;&#160;format(fout,"parserImport&#160;Tools::DiagramTools::Types;~%~%");<br>&#160;&#160;&#160;&#160;format(fout,"context&#160;~S~%",Seq{toolName});<br>&#160;&#160;&#160;&#160;format(fout,"&#160;&#160;@NodeType&#160;~S(~S,~S)~%",Seq{name,layout,contentLayout});<br>&#160;&#160;&#160;&#160;@For&#160;type&#160;in&#160;displays&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;null<br>&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;format(fout,"&#160;&#160;end~%")<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="deref"/><FONT FACE="Courier" SIZE="1">@Operation&#160;deref(env&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;env&#160;=&#160;displays-&gt;iterate(d&#160;env&#160;=&#160;env&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;d.bind(env))<br>&#160;&#160;in&#160;self.displays&#160;:=&#160;displays-&gt;collect(d&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;d.deref(env))<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="displays"/><FONT FACE="Courier" SIZE="1">@Operation&#160;displays[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.displays<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="hasPort"/><FONT FACE="Courier" SIZE="1">@Operation&#160;hasPort[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.hasPort<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="inheritsFrom"/><FONT FACE="Courier" SIZE="1">@Operation&#160;inheritsFrom(typeName&#160;:&#160;String,tool&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;name.toString()&#160;=&#160;typeName&#160;orelse&#160;parents-&gt;exists(parentName&#160;|<br>&#160;&#160;&#160;&#160;tool.nodeType(parentName).inheritsFrom(typeName,tool))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="layout"/><FONT FACE="Courier" SIZE="1">@Operation&#160;layout[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.layout<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="maxHeight"/><FONT FACE="Courier" SIZE="1">@Operation&#160;maxHeight[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.maxHeight<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="maxWidth"/><FONT FACE="Courier" SIZE="1">@Operation&#160;maxWidth[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.maxWidth<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="menu"/><FONT FACE="Courier" SIZE="1">@Operation&#160;menu[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.menu<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="merge"/><FONT FACE="Courier" SIZE="1">@Operation&#160;merge(inherited&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;menu.merge(inherited.menu());<br>&#160;&#160;@For&#160;inheritedDisplay&#160;in&#160;inherited.displays()&#160;do<br>&#160;&#160;&#160;&#160;let&#160;findSeq&#160;=&#160;displays-&gt;asSeq;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;=&#160;false;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;=&#160;null<br>&#160;&#160;&#160;&#160;in&#160;declare(hidden,findSeq);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;declare(hidden,findDone);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;declare(hidden,findResult);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;@While&#160;not&#160;findSeq-&gt;isEmpty&#160;and&#160;not&#160;findDone&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;localDisplay&#160;=&#160;findSeq-&gt;head&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findElement&#160;=&#160;findSeq-&gt;head<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;declare(hidden,findElement);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;inheritedDisplay.name().toString()&#160;=&#160;localDisplay.name().toString()<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;:=&#160;true;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;:=&#160;localDisplay.merge(inheritedDisplay)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;findSeq&#160;:=&#160;findSeq-&gt;tail<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;not&#160;findDone<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;self.add(inheritedDisplay)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;findResult<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="minHeight"/><FONT FACE="Courier" SIZE="1">@Operation&#160;minHeight[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.minHeight<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="minWidth"/><FONT FACE="Courier" SIZE="1">@Operation&#160;minWidth[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.minWidth<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="mkClicksHandler"/><FONT FACE="Courier" SIZE="1">@Operation&#160;mkClicksHandler(tool&#160;:&#160;XCore::Element,node&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@Operation&#160;anonymous[closure="Tools::DiagramTools::Types::NodeType::mkClicksHandler"](clicks&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;tool.raise(Tools::DiagramTools::DiagramEvents::Clicks(node,clicks))<br>&#160;&#160;end.setProperty("closure","Tools::DiagramTools::Types::NodeType::mkClicksHandler").setOwner(null)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="mkDeselectionHandler"/><FONT FACE="Courier" SIZE="1">@Operation&#160;mkDeselectionHandler(tool&#160;:&#160;XCore::Element,node&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@Operation&#160;anonymous[closure="Tools::DiagramTools::Types::NodeType::mkDeselectionHandler"]():XCore::Element<br>&#160;&#160;&#160;&#160;tool.raise(Tools::DiagramTools::DiagramEvents::Selection(node,false))<br>&#160;&#160;end.setProperty("closure","Tools::DiagramTools::Types::NodeType::mkDeselectionHandler").setOwner(null)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="mkMoveHandler"/><FONT FACE="Courier" SIZE="1">@Operation&#160;mkMoveHandler(tool&#160;:&#160;XCore::Element,node&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@Operation&#160;anonymous[closure="Tools::DiagramTools::Types::NodeType::mkMoveHandler"](nx&#160;:&#160;XCore::Element,ny&#160;:&#160;XCore::Element,ox&#160;:&#160;XCore::Element,oy&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;tool.raise(Tools::DiagramTools::DiagramEvents::Move(node,nx,ny,ox,oy))<br>&#160;&#160;end.setProperty("closure","Tools::DiagramTools::Types::NodeType::mkMoveHandler").setOwner(null)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="mkResizeHandler"/><FONT FACE="Courier" SIZE="1">@Operation&#160;mkResizeHandler(tool&#160;:&#160;XCore::Element,node&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@Operation&#160;anonymous[closure="Tools::DiagramTools::Types::NodeType::mkResizeHandler"](nw&#160;:&#160;XCore::Element,nh&#160;:&#160;XCore::Element,ow&#160;:&#160;XCore::Element,oh&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;tool.raise(Tools::DiagramTools::DiagramEvents::Resize(node,nw,nh,ow,oh))<br>&#160;&#160;end.setProperty("closure","Tools::DiagramTools::Types::NodeType::mkResizeHandler").setOwner(null)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="mkSelectionHandler"/><FONT FACE="Courier" SIZE="1">@Operation&#160;mkSelectionHandler(tool&#160;:&#160;XCore::Element,node&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@Operation&#160;anonymous[closure="Tools::DiagramTools::Types::NodeType::mkSelectionHandler"]():XCore::Element<br>&#160;&#160;&#160;&#160;tool.raise(Tools::DiagramTools::DiagramEvents::Selection(node,true))<br>&#160;&#160;end.setProperty("closure","Tools::DiagramTools::Types::NodeType::mkSelectionHandler").setOwner(null)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="new"/><FONT FACE="Courier" SIZE="1">@Operation&#160;new(x&#160;:&#160;Integer,y&#160;:&#160;Integer,tool&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.new(x,y,tool,tool.diagram())<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="new"/><FONT FACE="Courier" SIZE="1">@Operation&#160;new(x&#160;:&#160;Integer,y&#160;:&#160;Integer,tool&#160;:&#160;XCore::Element,diagram&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;node&#160;=&#160;self.newNode(x,y);<br>&#160;&#160;&#160;&#160;&#160;&#160;env&#160;=&#160;displays-&gt;iterate(d&#160;env&#160;=&#160;NullEnv()&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;env.bind(d.name().toString(),d))&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;selectionHandler&#160;=&#160;NodeType::mkSelectionHandler(tool,node);<br>&#160;&#160;&#160;&#160;&#160;&#160;deselectionHandler&#160;=&#160;NodeType::mkDeselectionHandler(tool,node);<br>&#160;&#160;&#160;&#160;&#160;&#160;clickHandler&#160;=&#160;NodeType::mkClicksHandler(tool,node);<br>&#160;&#160;&#160;&#160;&#160;&#160;moveHandler&#160;=&#160;NodeType::mkMoveHandler(tool,node);<br>&#160;&#160;&#160;&#160;&#160;&#160;resizeHandler&#160;=&#160;NodeType::mkResizeHandler(tool,node)&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;dia&#160;=&#160;tool.diagram()<br>&#160;&#160;in&#160;if&#160;dia.hasCommandInterpreter()<br>&#160;&#160;&#160;&#160;&#160;then&#160;let&#160;command&#160;=&#160;dia.commandInterpreter()<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;command.setPacketSize(30);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;command.stopRender(dia);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;try<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;result&#160;=&#160;node.setType(self);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;node.setMinWidth(minWidth);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;node.setMinHeight(minHeight);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;node.setMaxWidth(maxWidth);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;node.setMaxHeight(maxHeight);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@For&#160;display&#160;in&#160;displays&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;display.new(node,node,Seq{name.toString()},tool,env)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;hasPort<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;node.addPortAssociation(node)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;node.new(diagram);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;node.initDiagrams(tool);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.setGlobalMenu(node,tool,Seq{self.name.toString()});<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;node.setSelectionHandler(selectionHandler);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;node.setDeselectionHandler(deselectionHandler);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;node.setClickHandler(clickHandler);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;node.setMoveHandler(moveHandler);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;node.setResizeHandler(resizeHandler);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;diagram.add(node);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;node.layout();<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;node<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;command.startRender(dia);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;command.setPacketSize(1);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;result<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;catch(exception)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;command.startRender(dia);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;command.setPacketSize(1);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;throw&#160;exception<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;else<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;node.setType(self);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;node.setMinWidth(minWidth);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;node.setMinHeight(minHeight);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;node.setMaxWidth(maxWidth);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;node.setMaxHeight(maxHeight);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;@For&#160;display&#160;in&#160;displays&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;display.new(node,node,Seq{name.toString()},tool,env)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;hasPort<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;node.addPortAssociation(node)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;node.new(diagram);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;node.initDiagrams(tool);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.setGlobalMenu(node,tool,Seq{self.name.toString()});<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;node.setSelectionHandler(selectionHandler);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;node.setDeselectionHandler(deselectionHandler);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;node.setClickHandler(clickHandler);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;node.setMoveHandler(moveHandler);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;node.setResizeHandler(resizeHandler);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;diagram.add(node);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;node.layout();<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;node<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newNode"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newNode(x&#160;:&#160;XCore::Element,y&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;Node(x,y)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="parents"/><FONT FACE="Courier" SIZE="1">@Operation&#160;parents[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.parents<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setDisplays"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setDisplays[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.displays&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setGlobalMenu"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setGlobalMenu(node&#160;:&#160;XCore::Element,tool&#160;:&#160;XCore::Element,path&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.setGlobalMenu(node,tool,path,true)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setGlobalMenu"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setGlobalMenu(node&#160;:&#160;XCore::Element,tool&#160;:&#160;XCore::Element,path&#160;:&#160;XCore::Element,sendSetCommand&#160;:&#160;Boolean):XCore::Element<br>&#160;&#160;self.menu.setGlobalMenu(node,node,tool,path,Set{self,tool},sendSetCommand)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setMaxHeight"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setMaxHeight[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.maxHeight&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setMaxWidth"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setMaxWidth[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.maxWidth&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setMinHeight"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setMinHeight[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.minHeight&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setMinWidth"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setMinWidth[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.minWidth&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setParents"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setParents[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.parents&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="toolTypes"/><FONT FACE="Courier" SIZE="1">@Operation&#160;toolTypes(T&#160;:&#160;XCore::Element):Seq(ToolType)<br>&#160;&#160;displays-&gt;iterate(d&#160;T&#160;=&#160;T&#160;|<br>&#160;&#160;&#160;&#160;d.toolTypes(T))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="upgradeMenuTree"/><FONT FACE="Courier" SIZE="1">@Operation&#160;upgradeMenuTree():XCore::Element<br>&#160;&#160;MDC::upgradeMenuTree(self.menu);<br>&#160;&#160;@For&#160;displayType&#160;in&#160;displays&#160;do<br>&#160;&#160;&#160;&#160;displayType.upgradeMenuTree()<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=1><FONT SIZE="+2">
+<B>Grammar</B></FONT></TD>
+</TR>
+<TD><PRE>
+Atts ::=  Atts-Star0   = atts  { atts->iterate(att e = AttEnv() |
+  att + e) }.
+SetCmpExp ::=  LinePos   = l   '{'   CommaSepExps   = es   '}'   !  { SetExp(l,"Set",es) } |  LinePos   = l   '{'   Exp   = e   '|'   CmpClause   = c   SetCmpExp-Star0   = cs   '}'  { Comprehensions::Cmp("Set",e,Seq{c | cs}) }.
+Att ::=  Name   = name   '='   AttValue   = value  { AttEnv().bind(name,value) }.
+AddPattern-Dis0 ::=  '+'   AddPattern   = p2  { Addp(p1,p2) } |  <VarRef 283229> .
+Properties ::=  '('   Name   = name   Properties-Star0   = names   ')'   <Pair 466241>  |  Seq{} .
+BindValue ::=  OptType   = type   '='   SimpleExp   = value  { ValueBinding(name,type,value) }.
+AttValue ::=  Str  |  Name  |  Int .
+Def ::=  'context'   Def-Dis0   = isForward   ImportPath   = path   PushChar   Exp   PopChar   = exp  { ContextDef(path,exp,isForward) }.
+NoParents ::=  Seq{} .
+LocalParserImport-Star0 ::=  '::'   Name   = $head   LocalParserImport-Star0   = $tail   Cons  |  Nil .
+Atts-Star0 ::=  Att   = $head   Atts-Star0   = $tail   Cons  |  Nil .
+NonEmptySeqTail ::=  PushChar   Expr   PopChar   = e   PairOrElements .
+SomeParents ::=  'extends'   Name   = parent   SomeParents-Star0   = parents  { Seq{OCL::StrExp(parent) | parents->collect(p |
+  OCL::StrExp(p))} }.
+Import ::=  PushChar   'import'   ImportPath   = path   ';'  { Import(path) }  PopChar .
+Properties-Star0 ::=  ','   Name   = $head   Properties-Star0   = $tail   Cons  |  Nil .
+Varp ::=  AName   = name   Varp-Dis0   = pattern   Varp-Dis1   = type  { Varp(name,pattern,type) }.
+NodeTypeParents ::=  SomeParents  |  NoParents .
+IfTail ::=  'else'   PushChar   Expr   PopChar   'end'  |  LinePos   = l   'elseif'   PushChar   Expr   PopChar   = e1   'then'   PushChar   Expr   PopChar   = e2   IfTail   = e3  { If(l,e1,e2,e3) } |  'end'  { BoolExp(false) }.
+SomeParents-Star0 ::=  ','   Name   = $head   SomeParents-Star0   = $tail   Cons  |  Nil .
+AddPattern ::=  AtomicPattern   = p1   AddPattern-Dis0 .
+NodeType ::=  Name   = name   Properties   = props   NodeTypeParents   = parents   Atts   = atts   NodeType-Star0   = defs   'end'  { [| let node = <defs->iterate(def exp = [| Tools::DiagramTools::Types::NodeType(<OCL::StrExp(name)>,<OCL::SetExp("Seq",parents)>) |] |
+               [| <exp>.add(<def>) |])>
+  in node.contentLayout := <OCL::StrExp(filterContentLayout(props))>;
+     node.hasPort := <OCL::BoolExp(props->includes("hasport"))>;
+     node.minWidth := <OCL::IntExp(atts.lookup("minWidth",0))>;
+     node.minHeight := <OCL::IntExp(atts.lookup("minHeight",0))>;
+     node.maxWidth := <OCL::IntExp(atts.lookup("maxWidth",9999))>;
+     node.maxHeight := <OCL::IntExp(atts.lookup("maxHeight",9999))>;
+     node
+  end |] }.
+Keyps-Star0 ::=  ','   Keyp   = $head   Keyps-Star0   = $tail   Cons  |  Nil .
+NodeType-Star0 ::=  Exp   = $head   NodeType-Star0   = $tail   Cons  |  Nil .
+VarExp ::=  Name   = name   LinePos   = l  { Var(name,l) }.
+Keywordp ::=  Name   = name   Keywordp-Star0   = names   '['   Keyps   = keys   ']'  { Keywordp(name,names,keys) }.
+BindingList ::=  PushChar   Binding   PopChar   = binding   BindingList-Star0   = bindings   <Pair 30e002> .
+SeqCmpExp-Star0 ::=  ','   CmpClause   = $head   SeqCmpExp-Star0   = $tail   Cons  |  Nil .
+Objectp ::=  Name   = name   Objectp-Star0   = names   '('   Patterns   = slots   ')'  { Objectp(name,names,slots) }.
+EvaluationUnit ::=  EvaluationUnit-Star0   EvaluationUnit-Star1   = imports   EvaluationUnit-Star2   = exps   EOF  { Evaluator::EvaluationUnit(imports,exps) }.
+SeqCmpExp ::=  LinePos   = l   '['   CommaSepExps   = es   ']'   !  { SetExp(l,"Seq",es) } |  LinePos   = l   '['   Exp   = e   '|'   CmpClause   = c   SeqCmpExp-Star0   = cs   ']'  { Comprehensions::Cmp(e,Seq{c | cs}) }.
+Atom ::=  PushChar   VarExp   PopChar   !  |  PushChar   Self   PopChar   !  |  PushChar   StrExp   PopChar   !  |  PushChar   IntExp   PopChar   !  |  PushChar   IfExp   PopChar   !  |  PushChar   BoolExp   PopChar   !  |  PushChar   LetExp   PopChar   !  |  PushChar   CollExp   PopChar   !  |  Parentheses  |  PushChar   Drop   PopChar  |  PushChar   Lift   PopChar  |  PushChar   Throw   PopChar  |  PushChar   Try   PopChar  |  PushChar   ImportIn   PopChar  |  PushChar   FloatExp   PopChar  |  PushChar   LocalParserImport   PopChar  |  PushChar   AtExp   PopChar .
+Constp ::=  Intp  |  Strp  |  Boolp  |  Expp .
+EvaluationUnit-Star2-Dis0 ::=  Def  |  TopLevelExp .
+SeqExp ::=  LinePos   = l   'Seq{'   SeqExp-Dis0 .
+Syntaxp ::=  '[|'   PushChar   Exp   PopChar   = e   '|]'  { Syntaxp(e) }.
+ArgsTail-Star0 ::=  ','   PushChar   Expr   PopChar   = $head   ArgsTail-Star0   = $tail   Cons  |  Nil .
+CollMessage ::=  '('   CommaSepExps   = as   ')'  { CollExp(c,n,as) }.
+BindFunArgsTail ::=  Pattern   = p   BindFunArgsTail-Star0   = ps   ')'   <Pair 3e3445>  |  ')'   Seq{} .
+PathExp ::=  PushChar   Atom   PopChar   = atom   PathExp-Dis0 .
+Drop ::=  '<'   DropExp   = e   '>'  { Drop(resolve(order(e))) } |  '<|'   Pattern   = p   '|>'  { DropPattern(p) }.
+Parentheses ::=  '('   PushChar   Expr   PopChar   = e   ')'  { Parentheses(e) }.
+Objectp-Star0 ::=  '::'   Name   = $head   Objectp-Star0   = $tail   Cons  |  Nil .
+CollOp ::=  CollMessage  |  Collect  |  Iterate  | { CollExp(c,n,Seq{}) }.
+LogicalExp ::=  PushChar   SimpleExp   PopChar   = e  { resolve(order(e)) }.
+Throw ::=  LinePos   = l   'throw'   PushChar   SimpleExp   PopChar   = value  { Throw(l,value) }.
+ImportPath ::=  Name   = n   ImportPath-Star0   = ns   <Pair 42a147> .
+EvaluationUnit-Star2 ::=  EvaluationUnit-Star2-Dis0   = $head   EvaluationUnit-Star2   = $tail   Cons  |  Nil .
+Varp-Dis0 ::=  '='   PushChar   Pattern   PopChar  |  null .
+ArrowTail ::=  Name   = n   CollOp   = x   Arrow .
+IfExp ::=  LinePos   = l   'if'   PushChar   Expr   PopChar   = e1   'then'   PushChar   Expr   PopChar   = e2   IfTail   = e3  { If(l,e1,e2,e3) }.
+Exp ::=  PushChar   Expr   PopChar   = e   !  { resolve(order(e)) }.
+AName ::=  Name   !  |  Drop .
+SetCmpExp-Star0 ::=  ','   CmpClause   = $head   SetCmpExp-Star0   = $tail   Cons  |  Nil .
+Keywordp-Star0 ::=  '::'   Name   = $head   Keywordp-Star0   = $tail   Cons  |  Nil .
+KeyArg ::=  Name   = name   '='   PushChar   Expr   PopChar   = exp  { KeyArg(name,exp) }.
+Try ::=  LinePos   = l   'try'   PushChar   Expr   PopChar   = body   'catch'   '('   Name   = name   ')'   PushChar   Expr   PopChar   = handler   'end'  { Try(l,body,name,handler) }.
+Keyps ::=  Keyp   = key   Keyps-Star0   = keys   <Pair 4cbf7f>  |  Seq{} .
+Bindings ::=  BindingList  |  Drop .
+Patterns-Star0 ::=  ','   Pattern   = $head   Patterns-Star0   = $tail   Cons  |  Nil .
+Op ::=  BinOp   !  |  ';'   ; .
+EmptySeqTail ::=  '}'  { SetExp(l,"Seq",Seq{}) }.
+SetExp ::=  LinePos   = l   'Set{'   CommaSepExps   = es   '}'  { SetExp(l,"Set",es) }.
+AtExp ::=  LinePos   = l   '@'   PushChar  At  PopChar   = e  { e.setLine(l) }.
+Consp ::=  Pairp  |  Seqp  |  Emptyp .
+Def-Dis0 ::=  '!'  { true } | { false }.
+Seqp ::=  'Seq{'   Pattern   = head   SeqpTail   = tail  { Consp(head,tail) }.
+Strp ::=  Str   = s  { Constp(StrExp(s)) }.
+BindFunArgsTail-Star0 ::=  ','   Pattern   = $head   BindFunArgsTail-Star0   = $tail   Cons  |  Nil .
+Collect ::=  '('   AName   = v   '|'   PushChar   Expr   PopChar   = e   ')'  { IterExp(c,n,v,e) }.
+BindFunArgs ::=  '('   BindFunArgsTail .
+Pattern ::=  AddPattern   = p   Pattern-Star0   = es  { es->iterate(e s = p |
+  Includingp(s,e)) }  = p   PatternGuard .
+DropExp ::=  'not'   DropExp   = e  { Negate(e) } |  PushChar   Apply   PopChar   = a   DropExpTail .
+ParserImport ::=  'parserImport'   Name   = name   ParserImport-Star0   = names   ';'   <Pair 476d3f>  ImportAt { ParserImport(Seq{name} + names,null) }.
+PairOrElements-Star0 ::=  ','   PushChar   Expr   PopChar   = $head   PairOrElements-Star0   = $tail   Cons  |  Nil .
+CollExp ::=  PushChar   SetExp   PopChar   !  |  PushChar   SeqExp   PopChar   !  |  PushChar   SetCmpExp   PopChar   !  |  PushChar   SeqCmpExp   PopChar   ! .
+LocalParserImport ::=  'parserImport'   Name   = name   LocalParserImport-Star0   = names   <Pair 5e7878>  ImportAt  'in'   PushChar   Expr   PopChar   = e   'end'  { ParserImport(Seq{name | names},e) }.
+TopLevelExp ::=  PushChar   SimpleExp   PopChar   = s   ';'  { resolve(order(s)) }.
+ImportIn ::=  'import'   ImportPath   = path   'in'   PushChar   Exp   PopChar   = body   'end'  { ImportIn(path,body) }.
+EvaluationUnit-Star1 ::=  EImport   = $head   EvaluationUnit-Star1   = $tail   Cons  |  Nil .
+Varp-Dis1 ::=  ':'   PushChar   TypeExp   PopChar  | { NamedType() }.
+ArgsTail ::=  ')'   Seq{}  |  PushChar   Expr   PopChar   = arg   ArgsTail-Star0   = args   ')'   <Pair 38e3eb> .
+FloatExp ::=  LinePos   = l   Float   = f  { f.lift().line := l }.
+Expr ::=  'not'   PushChar   Expr   PopChar   = e  { Negate(e) } |  '-'   PushChar   SimpleExp   PopChar   = e  { BinExp(IntExp(0),"-",e) } |  PushChar   Apply   PopChar   = a   ExpTail .
+Apply ::=  PushChar   Atom   PopChar   = a   ApplyTail   = e   Arrow .
+SeqExp-Dis0 ::=  EmptySeqTail  |  NonEmptySeqTail .
+KeyArgs-Dis0 ::=  ']'   Seq{}  |  KeyArg   = arg   KeyArgs-Dis0-Star0   = args   ']'   <Pair 38e548> .
+KeyArgs ::=  '['   KeyArgs-Dis0 .
+TypePath ::=  Name   = name   TypePath-Star0   = names  { Seq{name | names}->collect(n |
+  Symbol(n)) }.
+Keyp ::=  Name   = name   '='   Pattern   = pattern  { Keyp(name,pattern) }.
+BinOp ::=  '<'   <  |  '<='   <=  |  '>'   >  |  '>='   >=  |  '<>'   <>  |  '='   =  |  '::'   ::  |  ':='   :=  |  '.'   .  |  'and'   and  |  'andthen'   andthen  |  'implies'   implies  |  'or'   or  |  'orelse'   orelse  |  '+'   +  |  '-'   -  |  '*'   *  |  '/'   / .
+Pattern-Star0 ::=  PatternTail   = $head   Pattern-Star0   = $tail   Cons  |  Nil .
+OpType ::=  TypeArgs   = domains   '->'   PushChar   TypeExp   PopChar   = range  { OpType(domains,range) }.
+Emptyp ::=  'Seq{'   '}'  { Constp(SetExp("Seq",Seq{})) } |  'Set{'   '}'  { Constp(SetExp("Set",Seq{})) }.
+Self ::=  LinePos   = l   'self'  { Self(l) }.
+AtomicPattern ::=  PushChar   Varp   PopChar  |  PushChar   Constp   PopChar  |  PushChar   Objectp   PopChar  |  PushChar   Consp   PopChar  |  PushChar   Keywordp   PopChar  |  PushChar   Syntaxp   PopChar  |  '('   PushChar   Pattern   PopChar   ')' .
+CompilationBodyExps ::=  CompilationBody   = b   !   CompilationBodyExps   = bs   <Pair 18dc16>  |  Seq{} .
+CompilationUnit-Star0 ::=  ParserImport   = $head   CompilationUnit-Star0   = $tail   Cons  |  Nil .
+SeqpTail ::=  ','   Pattern   = head   SeqpTail   = tail  { Consp(head,tail) } |  '}'  { Constp(SetExp("Seq",Seq{})) }.
+StrExp ::=  LinePos   = l   Str   = e  { StrExp(l,e) }.
+BindingList-Star0 ::=  ';'   PushChar   Binding   PopChar   = $head   BindingList-Star0   = $tail   Cons  |  Nil .
+CommaSepExps ::=  PushChar   Expr   PopChar   = e   CommaSepExps-Star0   = es   <Pair 40fb36>  |  Seq{} .
+BindFun ::=  BindFunArgs   = args   OptType   = type   '='   PushChar   SimpleExp   PopChar   = value  { FunBinding(name,args,type,value) }.
+PatternGuard ::=  'when'   PushChar   Exp   PopChar   = e  { Condp(p,e) } |  <VarRef 3e3257> .
+DropExpTail ::=  DropOp   = o   !   DropExp   = e  { BinExp(a,o,e) } |  <VarRef 1e6c3f> .
+Pairp ::=  'Seq{'   Pattern   = head   '|'   Pattern   = tail   '}'  { Consp(head,tail) }.
+ParserImport-Star0 ::=  '::'   Name   = $head   ParserImport-Star0   = $tail   Cons  |  Nil .
+CmpClause ::=  Name   = n   OptType   = t   '<-'   PushChar   Exp   PopChar   = e  { Comprehensions::Bind(n,t.toExp(),e) } |  '?'   PushChar   Exp   PopChar   = e  { Comprehensions::Filter(e) }.
+Lift ::=  LinePos   = l   '[|'   PushChar   Exp   PopChar   = e   '|]'  { Lift(l,e) }.
+TopLevelCommand ::=  PushChar   SimpleExp   PopChar   = c   pState   = p  { p.consumeToken := false }  ';'  { resolve(order(c)) }.
+IntExp ::=  LinePos   = l   Int   = e  { IntExp(l,e) }.
+EvaluationUnit-Star0 ::=  ParserImport   = $head   EvaluationUnit-Star0   = $tail   Cons  |  Nil .
+TypePath-Star0 ::=  '::'   Name   = $head   TypePath-Star0   = $tail   Cons  |  Nil .
+Args ::=  '('   ArgsTail .
+Expp ::=  '['   PushChar   Exp   PopChar   = exp   ']'  { Constp(exp) }.
+ExpTail ::=  Op   = o   !   PushChar   Expr   PopChar   = e  { BinExp(a,o,e) } |  <VarRef 17c593> .
+ApplyTail ::=  Args   = args   !  { Apply(a,args) } |  KeyArgs   = args   !  { Instantiate(a,args) } |  <VarRef f2521> .
+TypeExp-Dis0 ::=  TypeArgs   = args  { ParametricType(path,args) } | { NamedType(path) }.
+KeyArgs-Dis0-Star0 ::=  ','   KeyArg   = $head   KeyArgs-Dis0-Star0   = $tail   Cons  |  Nil .
+Iterate ::=  '('   AName   = v1   AName   = v2   '='   PushChar   Expr   PopChar   = init   '|'   PushChar   Expr   PopChar   = body   ')'  { Iterate(c,v1,v2,init,body) }.
+TypeArgs ::=  '('   PushChar   TypeExp   PopChar   = arg   TypeArgs-Star0   = args   ')'   <Pair 42a222> .
+LetBody ::=  'in'   PushChar   Expr   PopChar   = body   <VarRef 28338c>  |  PushChar   'then'   PushChar   Bindings   PopChar   = bindings   LetBody   = body  { Let(bindings,body) }  PopChar .
+BoolExp ::=  LinePos   = l   'true'  { BoolExp(l,true) } |  LinePos   = l   'false'  { BoolExp(l,false) }.
+PathExp-Dis0 ::=  '::'   AName   = name   PathExp-Dis0-Star0   = names  { Path(atom,Seq{name | names}) } |  <VarRef 246c9b> .
+OptType ::=  ':'   PushChar   TypeExp   PopChar  | { NamedType() }.
+EImport ::=  'import'   TopLevelExp   = exp  { Evaluator::Import(exp) }.
+Patterns ::=  Pattern   = head   Patterns-Star0   = tail   <Pair 53dcce>  |  Seq{} .
+Binding ::=  AName   = name   BindingTail .
+CompilationBody ::=  Def  |  TopLevelExp .
+CompilationUnit-Star1 ::=  Import   = $head   CompilationUnit-Star1   = $tail   Cons  |  Nil .
+SimpleExp ::=  'not'   PushChar   SimpleExp   PopChar   = e  { Negate(e) } |  '-'   PushChar   SimpleExp   PopChar   = e  { BinExp(IntExp(0),"-",e) } |  PushChar   Apply   PopChar   = a   SimpleExpTail .
+SimpleExpTail ::=  BinOp   = o   !   PushChar   SimpleExp   PopChar   = e  { BinExp(a,o,e) } |  <VarRef f2519> .
+CommaSepExps-Star0 ::=  ','   PushChar   Expr   PopChar   = $head   CommaSepExps-Star0   = $tail   Cons  |  Nil .
+CompilationUnit ::=  CompilationUnit-Star0   = parserImports   CompilationUnit-Star1   = imports   CompilationBodyExps   = exps   EOF   pState   = s  { CompilationUnit("",imports,exps,s.getSource(),parserImports) }.
+BindingTail ::=  BindFun  |  BindValue .
+PatternTail ::=  '->'   Name   '('   Pattern   = p   ')'   <VarRef 412c7e> .
+DropOp ::=  '<'   <  |  '<='   <=  |  '<>'   <>  |  '='   =  |  '::'   ::  |  ':='   :=  |  '.'   .  |  'and'   and  |  'andthen'   andthen  |  'implies'   implies  |  'or'   or  |  'orelse'   orelse  |  '+'   +  |  '-'   -  |  '*'   *  |  '/'   / .
+PairOrElements ::=  '|'   PushChar   Expr   PopChar   = t   '}'  { ConsExp(e,t) } |  PairOrElements-Star0   = es   '}'  { SetExp(l,"Seq",Seq{e | es}) }.
+PathExp-Dis0-Star0 ::=  '::'   AName   = $head   PathExp-Dis0-Star0   = $tail   Cons  |  Nil .
+Boolp ::=  'true'  { Constp(BoolExp(true)) } |  'false'  { Constp(BoolExp(false)) }.
+LetExp ::=  LinePos   = l   'let'   PushChar   Bindings   PopChar   = bindings   LetBody   = body   'end'  { Let(l,bindings,body) }.
+TypeExp ::=  TypePath   = path   TypeExp-Dis0  |  '['   PushChar   TypeExp   PopChar   = t   ']'  { ParametricType(Seq{"Seq"},Seq{t}) } |  '{'   PushChar   TypeExp   PopChar   = t   '}'  { ParametricType(Seq{"Set"},Seq{t}) } |  Drop  |  OpType .
+Intp ::=  Int   = i  { Constp(IntExp(i)) }.
+ImportPath-Star0 ::=  '::'   Name   = $head   ImportPath-Star0   = $tail   Cons  |  Nil .
+TypeArgs-Star0 ::=  ','   PushChar   TypeExp   PopChar   = $head   TypeArgs-Star0   = $tail   Cons  |  Nil .
+Arrow ::=  '->'   !   ArrowTail  |  <VarRef 29ec99> .
+Exp1 ::=  PushChar   Exp   PopChar   EOF .
+</PRE></TD>
+</TABLE>
+</HTML>

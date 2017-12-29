@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+Flatten
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>Flatten</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+
+      An instance of this class can be used to flatten a value to produce a sequence
+      of constituent values. The predicate limits the extent of the walk.
+    
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../Root/Walkers/Walker/index.html">Walker</A>
+,<A HREF="../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+<TR><TD>Flatten(predicate)</TD><TD> No Documentation </TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR><TD><B>predicate</B></TD><TD><A HREF="../../../Root/XCore/Operation/index.html">Operation<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>results</B></TD><TD><A HREF="../../../Root/XCore/Element/index.html">Set(Element)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/Walkers/Walker/index.html">Walker</A>: refCount, table, visited. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#addToResults">addToResults</a>(v:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#defaultWalk">defaultWalk</a>(e:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,limit:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#reWalk">reWalk</a>(v:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,limit:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#results">results</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#toString">toString</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walk">walk</a>(element:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,limit:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkBoolean">walkBoolean</a>(b:<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A>,limit:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkInteger">walkInteger</a>(i:<A HREF="../../../Root/XCore/Integer/index.html">Integer<A>,limit:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkNull">walkNull</a>(limit:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkSeq">walkSeq</a>(s:<A HREF="../../../Root/XCore/Element/index.html">Seq(Element)<A>,limit:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkSet">walkSet</a>(s:<A HREF="../../../Root/XCore/Element/index.html">Set(Element)<A>,limit:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkSlot">walkSlot</a>(o:<A HREF="../../../Root/XCore/Object/index.html">Object<A>,s:<A HREF="../../../Root/XCore/String/index.html">String<A>,value:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,limit:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkString">walkString</a>(s:<A HREF="../../../Root/XCore/String/index.html">String<A>,limit:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkSymbol">walkSymbol</a>(s:<A HREF="../../../Root/XCore/Symbol/index.html">Symbol<A>,limit:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkTable">walkTable</a>(t:<A HREF="../../../Root/XCore/Table/index.html">Table<A>,limit:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkVector">walkVector</a>(v:<A HREF="../../../Root/XCore/Vector/index.html">Vector<A>,limit:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/Walkers/Walker/index.html">Walker</A>: defaultWalk, encounter, encounter, encountered, getRef, initWalker, newRef, reWalk, reset, visited, walk, walkBigInt, walkBoolean, walkBuffer, walkClient, walkCode, walkCodeBox, walkCont, walkDaemon, walkFloat, walkForeignFun, walkForeignObj, walkFun, walkInputChannel, walkInteger, walkNil, walkNull, walkObject, walkOutputChannel, walkSeq, walkSet, walkSlot, walkString, walkSymbol, walkTable, walkThread, walkVector. <BR><B>From</B> <A HREF="../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="addToResults"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addToResults[EXTENDER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.results&#160;:=&#160;self.results-&gt;including(v)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="defaultWalk"/><FONT FACE="Courier" SIZE="1">@Operation&#160;defaultWalk(e&#160;:&#160;Element,limit&#160;:&#160;Element):Element<br>&#160;&#160;null<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="reWalk"/><FONT FACE="Courier" SIZE="1">@Operation&#160;reWalk(v&#160;:&#160;Element,limit&#160;:&#160;Element):Element<br>&#160;&#160;null<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="results"/><FONT FACE="Courier" SIZE="1">@Operation&#160;results():XCore::Element<br>&#160;&#160;results<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="toString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;toString():String<br>&#160;&#160;try<br>&#160;&#160;&#160;&#160;self.of().name.toString()&#160;+&#160;"("&#160;+&#160;if&#160;self.hasSlot("predicate")<br>&#160;&#160;&#160;&#160;then&#160;self.predicate.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"predicate"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;")"<br>&#160;&#160;catch(exception)<br>&#160;&#160;&#160;&#160;self.of().name&#160;+&#160;"(Constructor&#160;Error!)"<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walk"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walk(element&#160;:&#160;Element,limit&#160;:&#160;Element):Element<br>&#160;&#160;if&#160;limit&#160;&lt;&gt;&#160;0<br>&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;self.addToResults(element);<br>&#160;&#160;&#160;&#160;if&#160;predicate(element)<br>&#160;&#160;&#160;&#160;then&#160;super(element,limit)<br>&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;else&#160;false<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkBoolean"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkBoolean(b&#160;:&#160;Boolean,limit&#160;:&#160;Element):Element<br>&#160;&#160;self.addToResults(b)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkInteger"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkInteger(i&#160;:&#160;Integer,limit&#160;:&#160;Element):Element<br>&#160;&#160;self.addToResults(i)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkNull"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkNull(limit&#160;:&#160;Element):Element<br>&#160;&#160;self.addToResults(null)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkSeq"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkSeq(s&#160;:&#160;SeqOfElement,limit&#160;:&#160;Element):Element<br>&#160;&#160;self.addToResults(s);<br>&#160;&#160;if&#160;not&#160;s-&gt;isEmpty<br>&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;self.walk(s-&gt;head,if&#160;limit&#160;=&#160;null<br>&#160;&#160;&#160;&#160;then&#160;null<br>&#160;&#160;&#160;&#160;else&#160;limit&#160;-&#160;1<br>&#160;&#160;&#160;&#160;end&#160;);<br>&#160;&#160;&#160;&#160;self.walk(s-&gt;tail,if&#160;limit&#160;=&#160;null<br>&#160;&#160;&#160;&#160;then&#160;null<br>&#160;&#160;&#160;&#160;else&#160;limit&#160;-&#160;1<br>&#160;&#160;&#160;&#160;end&#160;)<br>&#160;&#160;else&#160;false<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkSet"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkSet(s&#160;:&#160;SetOfElement,limit&#160;:&#160;Element):Element<br>&#160;&#160;self.addToResults(s);<br>&#160;&#160;@For&#160;x&#160;in&#160;s&#160;do<br>&#160;&#160;&#160;&#160;self.walk(x,if&#160;limit&#160;=&#160;null<br>&#160;&#160;&#160;&#160;then&#160;null<br>&#160;&#160;&#160;&#160;else&#160;limit&#160;-&#160;1<br>&#160;&#160;&#160;&#160;end&#160;)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkSlot"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkSlot(o&#160;:&#160;Object,s&#160;:&#160;String,value&#160;:&#160;XCore::Element,limit&#160;:&#160;Element):XCore::Element<br>&#160;&#160;self.walk(value,if&#160;limit&#160;=&#160;null<br>&#160;&#160;then&#160;null<br>&#160;&#160;else&#160;limit&#160;-&#160;1<br>&#160;&#160;end&#160;)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkString(s&#160;:&#160;String,limit&#160;:&#160;Element):Element<br>&#160;&#160;self.addToResults(s)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkSymbol"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkSymbol(s&#160;:&#160;Symbol,limit&#160;:&#160;Element):Element<br>&#160;&#160;self.addToResults(s)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkTable"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkTable(t&#160;:&#160;Table,limit&#160;:&#160;Element):Element<br>&#160;&#160;self.addToResults(t);<br>&#160;&#160;@For&#160;key&#160;in&#160;t.keys()&#160;do<br>&#160;&#160;&#160;&#160;self.walk(key,if&#160;limit&#160;=&#160;null<br>&#160;&#160;&#160;&#160;then&#160;null<br>&#160;&#160;&#160;&#160;else&#160;limit&#160;-&#160;1<br>&#160;&#160;&#160;&#160;end&#160;);<br>&#160;&#160;&#160;&#160;self.walk(t.get(key),if&#160;limit&#160;=&#160;null<br>&#160;&#160;&#160;&#160;then&#160;null<br>&#160;&#160;&#160;&#160;else&#160;limit&#160;-&#160;1<br>&#160;&#160;&#160;&#160;end&#160;)<br>&#160;&#160;end;<br>&#160;&#160;t<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkVector"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkVector(v&#160;:&#160;Vector,limit&#160;:&#160;Element):Element<br>&#160;&#160;self.addToResults(v);<br>&#160;&#160;@Count&#160;i&#160;from&#160;0&#160;to&#160;v.size()&#160;-&#160;1&#160;do<br>&#160;&#160;&#160;&#160;self.walk(v.ref(i),if&#160;limit&#160;=&#160;null<br>&#160;&#160;&#160;&#160;then&#160;null<br>&#160;&#160;&#160;&#160;else&#160;limit&#160;-&#160;1<br>&#160;&#160;&#160;&#160;end&#160;)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

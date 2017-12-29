@@ -1,0 +1,331 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+Manifest
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>Manifest</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+No Documentation Specified
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../Root/XCore/NamedElement/index.html">NamedElement</A>
+,<A HREF="../../../Root/Manifests/ManifestAction/index.html">ManifestAction</A>
+,<A HREF="../../../Root/XCore/Contained/index.html">Contained</A>
+,<A HREF="../../../Root/Manifests/ManifestEntry/index.html">ManifestEntry</A>
+,<A HREF="../../../Root/XOCL/Syntax/index.html">Syntax</A>
+,<A HREF="../../../Root/XCore/Performable/index.html">Performable</A>
+,<A HREF="../../../Root/XCore/Located/index.html">Located</A>
+,<A HREF="../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+<TR><TD>Manifest(name,path,bindings,guard,loadAction)</TD><TD> No Documentation </TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR><TD><B>bindings</B></TD><TD><A HREF="../../../Root/Manifests/ManifestBinding/index.html">Seq(ManifestBinding)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>requires</B></TD><TD><A HREF="../../../Root/XCore/String/index.html">Seq(String)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>stale</B></TD><TD><A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/NamedElement/index.html">NamedElement</A>: name. <BR><B>From</B> <A HREF="../../../Root/Manifests/ManifestAction/index.html">ManifestAction</A>: guard, loadAction. <BR><B>From</B> <A HREF="../../../Root/XCore/Contained/index.html">Contained</A>: owner. <BR><B>From</B> <A HREF="../../../Root/Manifests/ManifestEntry/index.html">ManifestEntry</A>: compilerDirectives, loadTime, path. <BR><B>From</B> <A HREF="../../../Root/XCore/Performable/index.html">Performable</A>: endLine, line. <BR><B>From</B> <A HREF="../../../Root/XCore/Located/index.html">Located</A>: charEnd, charStart. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#addFile">addFile</a>(path:<A HREF="../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#addRef">addRef</a>(path:<A HREF="../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#addToBindings">addToBindings</a>(v:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#build">build</a>(dir:<A HREF="../../../Root/XCore/String/index.html">String<A>,doAll:<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A>,results:<A HREF="../../../Root/XCore/Table/index.html">Table<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#build">build</a>(dir:<A HREF="../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#buildAndLoad">buildAndLoad</a>(dir:<A HREF="../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#deleteBinary">deleteBinary</a>(dir:<A HREF="../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#deleteFromBindings">deleteFromBindings</a>(v:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#deref">deref</a>(dir:<A HREF="../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#display">display</a>(out:<A HREF="../../../Root/IO/OutputChannel/index.html">OutputChannel<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+        Writes out the manifest to the supplied output
+        channel as source code.
+      </TD></TR>
+<TR><TD><B><a href="#getChildren">getChildren</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#labelString">labelString</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#load">load</a>(dir:<A HREF="../../../Root/XCore/String/index.html">String<A>,reEnter:<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A>,loadSource:<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#load">load</a>(dir:<A HREF="../../../Root/XCore/String/index.html">String<A>,loadSource:<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#load">load</a>(dir:<A HREF="../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#module">module</a>(dir:<A HREF="../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../Root/OCL/CompilationUnit/index.html">CompilationUnit<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#parse">parse</a>(dir:<A HREF="../../../Root/XCore/String/index.html">String<A>,doAll:<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A>,results:<A HREF="../../../Root/XCore/Table/index.html">Table<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#parse">parse</a>(dir:<A HREF="../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#performAction">performAction</a>(dir:<A HREF="../../../Root/XCore/String/index.html">String<A>,names:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,values:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,reEnter:<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A>,loadSource:<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#processChangedFiles">processChangedFiles</a>(dir:<A HREF="../../../Root/XCore/String/index.html">String<A>,changedFiles:<A HREF="../../../Root/XCore/String/index.html">Seq(String)<A>,parse:<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A>,compile:<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A>,load:<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A>,results:<A HREF="../../../Root/XCore/Table/index.html">Table<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#refresh">refresh</a>(dir:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#removeEntry">removeEntry</a>(path:<A HREF="../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setStale">setStale</a>(v:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#stale">stale</a>():<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#syntaxInit">syntaxInit</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#toString">toString</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#touch">touch</a>(dir:<A HREF="../../../Root/XCore/String/index.html">String<A>,source:<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#unxip">unxip</a>(zipFile:<A HREF="../../../Root/IO/ZipFile/index.html">ZipFile<A>,prefix:<A HREF="../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#unxipFile">unxipFile</a>(file:<A HREF="../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#unxipManifest">unxipManifest</a>(zipFile:<A HREF="../../../Root/IO/ZipFile/index.html">ZipFile<A>,prefix:<A HREF="../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#writeBoot">writeBoot</a>(out:<A HREF="../../../Root/IO/OutputChannel/index.html">OutputChannel<A>,dir:<A HREF="../../../Root/XCore/String/index.html">String<A>,indent:<A HREF="../../../Root/XCore/Integer/index.html">Integer<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#writeBootFile">writeBootFile</a>(file:<A HREF="../../../Root/XCore/String/index.html">String<A>,dir:<A HREF="../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#xip">xip</a>(dir:<A HREF="../../../Root/XCore/String/index.html">String<A>,prefix:<A HREF="../../../Root/XCore/String/index.html">String<A>,zout:<A HREF="../../../Root/IO/ZipOutputChannel/index.html">ZipOutputChannel<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#xip">xip</a>(dir:<A HREF="../../../Root/XCore/String/index.html">String<A>,fileName:<A HREF="../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/NamedElement/index.html">NamedElement</A>: getNamedElement, href, labelString, legalNameChangeCheck, name, path, pathSeq, repopulate, setName, toString. <BR><B>From</B> <A HREF="../../../Root/Manifests/ManifestAction/index.html">ManifestAction</A>: toString. <BR><B>From</B> <A HREF="../../../Root/XCore/Contained/index.html">Contained</A>: addTo, allOwners, deleteRecursive, delete_client, delete_client_check, delete_client_redirect, getDefaultClipboardSource, owner, removeFromOwner, setOwner. <BR><B>From</B> <A HREF="../../../Root/Manifests/ManifestEntry/index.html">ManifestEntry</A>: build, buildAfterCompilerDirectives, buildAfterCompilerDirectives, deleteBinary, deref, display, load, module, parse, refresh, stale, touch, writeBoot. <BR><B>From</B> <A HREF="../../../Root/XOCL/Syntax/index.html">Syntax</A>: compile, eval, lift, liftKeyArgs, liftValue, maxLocals, syntaxInit. <BR><B>From</B> <A HREF="../../../Root/XCore/Performable/index.html">Performable</A>: FV, compile, endLine, eval, line, maxLocals, pprint, pprint, pprint, setEndLine, setLine. <BR><B>From</B> <A HREF="../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="addFile"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addFile(path&#160;:&#160;String):XCore::Element<br>&#160;&#160;self.addToBindings(ManifestBinding("",Manifests::File(path,[|&#160;true&#160;|],null)))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addRef"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addRef(path&#160;:&#160;String):XCore::Element<br>&#160;&#160;self.addToBindings(ManifestBinding("",Manifests::Ref([|&#160;true&#160;|],path,Seq{},RunTime,"Manifest")))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addToBindings"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addToBindings[EXTENDER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.bindings&#160;:=&#160;self.bindings-&gt;including(v)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="build"/><FONT FACE="Courier" SIZE="1">@Operation&#160;build(dir&#160;:&#160;String,doAll&#160;:&#160;Boolean,results&#160;:&#160;Table):XCore::Element<br>&#160;&#160;@For&#160;binding&#160;in&#160;bindings&#160;do<br>&#160;&#160;&#160;&#160;binding.build(dir,doAll,results)<br>&#160;&#160;end;<br>&#160;&#160;results<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="build"/><FONT FACE="Courier" SIZE="1">@Operation&#160;build(dir&#160;:&#160;String):XCore::Element<br>&#160;&#160;self.build(dir,false,Table(10))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="buildAndLoad"/><FONT FACE="Courier" SIZE="1">@Operation&#160;buildAndLoad(dir&#160;:&#160;String):XCore::Element<br>&#160;&#160;self.build(dir);<br>&#160;&#160;self.load(dir)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="deleteBinary"/><FONT FACE="Courier" SIZE="1">@Operation&#160;deleteBinary(dir&#160;:&#160;String):XCore::Element<br>&#160;&#160;@For&#160;binding&#160;in&#160;bindings&#160;do<br>&#160;&#160;&#160;&#160;binding.deleteBinary(dir)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="deleteFromBindings"/><FONT FACE="Courier" SIZE="1">@Operation&#160;deleteFromBindings[REDUCER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.bindings&#160;:=&#160;self.bindings-&gt;excluding(v)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="deref"/><FONT FACE="Courier" SIZE="1">@Operation&#160;deref(dir&#160;:&#160;String):XCore::Element<br>&#160;&#160;Manifest(name,path,bindings-&gt;collect(b&#160;|<br>&#160;&#160;&#160;&#160;b.deref(dir)),guard,loadAction)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="display"/><FONT FACE="Courier" SIZE="1">@Operation&#160;display(out&#160;:&#160;OutputChannel):XCore::Element<br>&#160;&#160;format(out,"@Manifest&#160;~S~%",Seq{name});<br>&#160;&#160;@For&#160;binding&#160;in&#160;bindings&#160;do<br>&#160;&#160;&#160;&#160;format(out,"&#160;&#160;");<br>&#160;&#160;&#160;&#160;binding.display(out);<br>&#160;&#160;&#160;&#160;format(out,"~%")<br>&#160;&#160;end;<br>&#160;&#160;if&#160;self.loadAction&#160;&lt;&gt;&#160;null<br>&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;format(out,"do~%&#160;&#160;");<br>&#160;&#160;&#160;&#160;loadAction.exp.pprint(out,2);<br>&#160;&#160;&#160;&#160;format(out,"~%")<br>&#160;&#160;else&#160;false<br>&#160;&#160;end&#160;;<br>&#160;&#160;format(out,"end;~%")<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="getChildren"/><FONT FACE="Courier" SIZE="1">@Operation&#160;getChildren():XCore::Element<br>&#160;&#160;bindings-&gt;collect(b&#160;|<br>&#160;&#160;&#160;&#160;b.entry())<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="labelString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;labelString():XCore::Element<br>&#160;&#160;name.toString()<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="load"/><FONT FACE="Courier" SIZE="1">@Operation&#160;load(dir&#160;:&#160;String,reEnter&#160;:&#160;Boolean,loadSource&#160;:&#160;Boolean):XCore::Element<br>&#160;&#160;let&#160;dir&#160;=&#160;if&#160;path&#160;=&#160;""<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;dir<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;dir&#160;+&#160;"/"&#160;+&#160;path<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;names&#160;=&#160;Seq{"dir"};<br>&#160;&#160;&#160;&#160;&#160;&#160;values&#160;=&#160;Seq{dir}<br>&#160;&#160;in&#160;if&#160;guard.perform(self,Seq{Seq{2&#160;|&#160;Root.contents},Seq{2&#160;|&#160;XCore.contents}},Seq{})<br>&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;@For&#160;binding&#160;in&#160;bindings&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;value&#160;=&#160;binding.load(dir,loadSource)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;if&#160;binding.name&#160;&lt;&gt;&#160;""<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;names&#160;:=&#160;names&#160;+&#160;Seq{binding.name};<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;values&#160;:=&#160;values&#160;+&#160;Seq{value}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;loadAction&#160;&lt;&gt;&#160;null<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;let&#160;value&#160;=&#160;loadAction.perform(self,Exp::mkEnv(names,values),Seq{})<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;if&#160;not&#160;reEnter<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;value.init()<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;value.isReallyKindOf(Manifest)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;value.build(dir);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;value.load(dir,loadSource)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;value<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;null<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="load"/><FONT FACE="Courier" SIZE="1">@Operation&#160;load(dir&#160;:&#160;String,loadSource&#160;:&#160;Boolean):XCore::Element<br>&#160;&#160;self.load(dir,false,loadSource)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="load"/><FONT FACE="Courier" SIZE="1">@Operation&#160;load(dir&#160;:&#160;String):XCore::Element<br>&#160;&#160;self.load(dir,false,false)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="module"/><FONT FACE="Courier" SIZE="1">@Operation&#160;module(dir&#160;:&#160;String):CompilationUnit<br>&#160;&#160;CompilationModule(dir,bindings-&gt;collect(b&#160;|<br>&#160;&#160;&#160;&#160;b.module(dir)))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="parse"/><FONT FACE="Courier" SIZE="1">@Operation&#160;parse(dir&#160;:&#160;String,doAll&#160;:&#160;Boolean,results&#160;:&#160;Table):XCore::Element<br>&#160;&#160;@For&#160;binding&#160;in&#160;bindings&#160;do<br>&#160;&#160;&#160;&#160;binding.parse(dir,doAll,results)<br>&#160;&#160;end;<br>&#160;&#160;results<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="parse"/><FONT FACE="Courier" SIZE="1">@Operation&#160;parse(dir&#160;:&#160;String):XCore::Element<br>&#160;&#160;self.parse(dir,false,Table(10))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="performAction"/><FONT FACE="Courier" SIZE="1">@Operation&#160;performAction(dir&#160;:&#160;String,names&#160;:&#160;XCore::Element,values&#160;:&#160;XCore::Element,reEnter&#160;:&#160;Boolean,loadSource&#160;:&#160;Boolean):XCore::Element<br>&#160;&#160;if&#160;loadAction&#160;&lt;&gt;&#160;null<br>&#160;&#160;then&#160;let&#160;value&#160;=&#160;loadAction.perform(self,Exp::mkEnv(Seq{"dir"&#160;|&#160;names},Seq{dir&#160;|&#160;values}),Seq{})<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;if&#160;not&#160;reEnter<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;value.init()<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;value.isReallyKindOf(Manifest)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;value.build(dir);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;value.load(dir,loadSource)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;value<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;else&#160;null<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="processChangedFiles"/><FONT FACE="Courier" SIZE="1">@Operation&#160;processChangedFiles(dir&#160;:&#160;String,changedFiles&#160;:&#160;Seq(String),parse&#160;:&#160;Boolean,compile&#160;:&#160;Boolean,load&#160;:&#160;Boolean,results&#160;:&#160;Table):XCore::Element<br>&#160;&#160;@For&#160;binding&#160;in&#160;bindings&#160;do<br>&#160;&#160;&#160;&#160;binding.processChangedFiles(dir,changedFiles,parse,compile,load,results)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="refresh"/><FONT FACE="Courier" SIZE="1">@Operation&#160;refresh(dir&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@For&#160;b&#160;in&#160;bindings&#160;do<br>&#160;&#160;&#160;&#160;b.refresh(dir)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="removeEntry"/><FONT FACE="Courier" SIZE="1">@Operation&#160;removeEntry(path&#160;:&#160;String):XCore::Element<br>&#160;&#160;let&#160;findSeq&#160;=&#160;bindings-&gt;asSeq;<br>&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;=&#160;false;<br>&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;=&#160;null<br>&#160;&#160;in&#160;declare(hidden,findSeq);<br>&#160;&#160;&#160;&#160;&#160;declare(hidden,findDone);<br>&#160;&#160;&#160;&#160;&#160;declare(hidden,findResult);<br>&#160;&#160;&#160;&#160;&#160;@While&#160;not&#160;findSeq-&gt;isEmpty&#160;and&#160;not&#160;findDone&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;binding&#160;=&#160;findSeq-&gt;head&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findElement&#160;=&#160;findSeq-&gt;head<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;declare(hidden,findElement);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;path&#160;=&#160;binding.entry().path<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;:=&#160;true;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;:=&#160;self.deleteFromBindings(binding)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;findSeq&#160;:=&#160;findSeq-&gt;tail<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;if&#160;not&#160;findDone<br>&#160;&#160;&#160;&#160;&#160;then&#160;false<br>&#160;&#160;&#160;&#160;&#160;else&#160;findResult<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setStale"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setStale[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.stale&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="stale"/><FONT FACE="Courier" SIZE="1">@Operation&#160;stale():Boolean<br>&#160;&#160;self.setStale(bindings-&gt;exists(b&#160;|<br>&#160;&#160;&#160;&#160;b.stale()));<br>&#160;&#160;stale<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="syntaxInit"/><FONT FACE="Courier" SIZE="1">@Operation&#160;syntaxInit():XCore::Element<br>&#160;&#160;xmf.manifestManager().add(self.name(),self);<br>&#160;&#160;self<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="toString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;toString():String<br>&#160;&#160;try<br>&#160;&#160;&#160;&#160;self.of().name.toString()&#160;+&#160;"("&#160;+&#160;if&#160;self.hasSlot("name")<br>&#160;&#160;&#160;&#160;then&#160;self.name.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"name"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("path")<br>&#160;&#160;&#160;&#160;then&#160;self.path.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"path"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("bindings")<br>&#160;&#160;&#160;&#160;then&#160;self.bindings.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"bindings"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("guard")<br>&#160;&#160;&#160;&#160;then&#160;self.guard.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"guard"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("loadAction")<br>&#160;&#160;&#160;&#160;then&#160;self.loadAction.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"loadAction"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;")"<br>&#160;&#160;catch(exception)<br>&#160;&#160;&#160;&#160;self.of().name&#160;+&#160;"(Constructor&#160;Error!)"<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="touch"/><FONT FACE="Courier" SIZE="1">@Operation&#160;touch(dir&#160;:&#160;String,source&#160;:&#160;Boolean):XCore::Element<br>&#160;&#160;@For&#160;binding&#160;in&#160;bindings&#160;do<br>&#160;&#160;&#160;&#160;binding.touch(dir,source)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="unxip"/><FONT FACE="Courier" SIZE="1">@Operation&#160;unxip(zipFile&#160;:&#160;ZipFile,prefix&#160;:&#160;String):XCore::Element<br>&#160;&#160;let&#160;names&#160;=&#160;Seq{};<br>&#160;&#160;&#160;&#160;&#160;&#160;values&#160;=&#160;Seq{}<br>&#160;&#160;in&#160;@For&#160;binding&#160;in&#160;bindings&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;value&#160;=&#160;binding.unxip(zipFile,prefix)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;if&#160;binding.name&#160;&lt;&gt;&#160;""<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;names&#160;:=&#160;names&#160;+&#160;Seq{binding.name};<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;values&#160;:=&#160;values&#160;+&#160;Seq{value}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;self.performAction(".",names,values,true,false)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="unxipFile"/><FONT FACE="Courier" SIZE="1">@Operation&#160;unxipFile(file&#160;:&#160;String):XCore::Element<br>&#160;&#160;let&#160;zipFile&#160;=&#160;ZipFile(file)<br>&#160;&#160;in&#160;Manifest::unxipManifest(zipFile,".");<br>&#160;&#160;&#160;&#160;&#160;zipFile.close()<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="unxipManifest"/><FONT FACE="Courier" SIZE="1">@Operation&#160;unxipManifest(zipFile&#160;:&#160;ZipFile,prefix&#160;:&#160;String):XCore::Element<br>&#160;&#160;let&#160;inch&#160;=&#160;zipFile.inputChannel(prefix&#160;+&#160;"/Manifest")&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;binch&#160;=&#160;BinaryInputChannel(inch)&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;manifest&#160;=&#160;binch.readBinary()<br>&#160;&#160;in&#160;manifest.unxip(zipFile,prefix)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="writeBoot"/><FONT FACE="Courier" SIZE="1">@Operation&#160;writeBoot(out&#160;:&#160;OutputChannel,dir&#160;:&#160;String,indent&#160;:&#160;Integer):XCore::Element<br>&#160;&#160;format(out,"~V//&#160;****************&#160;Start&#160;~S&#160;****************~%",Seq{indent,name});<br>&#160;&#160;format(out,"~Vtry~%",Seq{indent});<br>&#160;&#160;format(out,"~V&#160;&#160;println("Booting&#160;~S");~%",Seq{indent,name});<br>&#160;&#160;@For&#160;binding&#160;in&#160;bindings&#160;do<br>&#160;&#160;&#160;&#160;binding.writeBoot(out,dir,indent&#160;+&#160;2)<br>&#160;&#160;end;<br>&#160;&#160;format(out,"~V&#160;&#160;println("Completed&#160;~S")~%",Seq{indent,name});<br>&#160;&#160;format(out,"~Vcatch(exception)~%",Seq{indent});<br>&#160;&#160;format(out,"~V&#160;&#160;print("Error&#160;booting&#160;~S:&#160;"&#160;+&#160;exception.message&#160;+&#160;"\n")~%",Seq{indent,name});<br>&#160;&#160;format(out,"~Vend;~%",Seq{indent});<br>&#160;&#160;format(out,"~V//&#160;****************&#160;End&#160;~S&#160;****************~%",Seq{indent,name})<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="writeBootFile"/><FONT FACE="Courier" SIZE="1">@Operation&#160;writeBootFile(file&#160;:&#160;String,dir&#160;:&#160;String):XCore::Element<br>&#160;&#160;@WithOpenFile(fout&#160;-&gt;&#160;file)<br>&#160;&#160;&#160;&#160;format(fout,"//&#160;Manifest&#160;generated&#160;boot&#160;file&#160;for&#160;~S~%",Seq{name});<br>&#160;&#160;&#160;&#160;format(fout,"//&#160;Generated&#160;by&#160;~S&#160;on&#160;~S.~%",Seq{xmf.user(),xmf.date()});<br>&#160;&#160;&#160;&#160;format(fout,"//&#160;Individual&#160;files&#160;are&#160;listed&#160;below&#160;in&#160;load&#160;order.~%");<br>&#160;&#160;&#160;&#160;format(fout,"//&#160;Indentation&#160;shows&#160;module&#160;grouping.~%~%");<br>&#160;&#160;&#160;&#160;self.writeBoot(fout,dir,0)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="xip"/><FONT FACE="Courier" SIZE="1">@Operation&#160;xip(dir&#160;:&#160;String,prefix&#160;:&#160;String,zout&#160;:&#160;ZipOutputChannel):XCore::Element<br>&#160;&#160;@For&#160;binding&#160;in&#160;bindings&#160;do<br>&#160;&#160;&#160;&#160;binding.xip(dir,prefix,zout)<br>&#160;&#160;end;<br>&#160;&#160;zout.newEntry(prefix&#160;+&#160;"/Manifest");<br>&#160;&#160;@WithOpenFile(fin&#160;&lt;-&#160;dir&#160;+&#160;"/Manifest.o")<br>&#160;&#160;&#160;&#160;@While&#160;not&#160;fin.eof()&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;zout.write(fin.read())<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="xip"/><FONT FACE="Courier" SIZE="1">@Operation&#160;xip(dir&#160;:&#160;String,fileName&#160;:&#160;String):XCore::Element<br>&#160;&#160;@WithOpenFile(fout&#160;-&gt;&#160;fileName)<br>&#160;&#160;&#160;&#160;let&#160;zout&#160;=&#160;ZipOutputChannel(fout)<br>&#160;&#160;&#160;&#160;in&#160;self.xip(dir,".",zout);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;zout.flush();<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;zout.close()<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=1><FONT SIZE="+2">
+<B>Grammar</B></FONT></TD>
+</TR>
+<TD><PRE>
+NameOrString ::=  Name  |  Str .
+Consp ::=  Pairp  |  Seqp  |  Emptyp .
+OptPath ::=  '['   MPath   ']'  |   .
+ActionGuard ::=  '['   Exp   = e   ']'  { Exp(e) } | { Exp([| true |]) }.
+DottedName ::=  NameOrString   = n   DottedName-Star0   = ns  { Seq{n | ns}->separateWith(".") }.
+Objectp ::=  Name   = name   Objectp-Star0   = names   '('   Patterns   = slots   ')'  { Objectp(name,names,slots) }.
+MBind ::=  Name   = n   '='   Exp   : ManifestEntry  = e  { ManifestBinding(n,e) } |  Exp   : ManifestEntry  = e  { ManifestBinding("",e) }.
+OptBuilds ::=  '{'   Name   = n   OptBuilds-Star0   = ns   '}'  { ns->asSet->including(n) } | { Set{} }.
+OptName ::=  DottedName  |  Anon .
+PatternGuard ::=  'when'   PushChar   Exp   PopChar   = e  { Condp(p,e) } |  <VarRef 3e3257> .
+DottedName-Star0 ::=  '.'   NameOrString   = $head   DottedName-Star0   = $tail   Cons  |  Nil .
+CollExp ::=  PushChar   SetExp   PopChar   !  |  PushChar   SeqExp   PopChar   !  |  PushChar   SetCmpExp   PopChar   !  |  PushChar   SeqCmpExp   PopChar   ! .
+Manifest ::=  OptName   = name   OptPath   = path   ActionGuard   = guard   Manifest-Star0   = bindings   LoadAction   = loadAction   'end'  { Manifest(name,path,bindings,guard,loadAction) }.
+LocalParserImport-Star0 ::=  '::'   Name   = $head   LocalParserImport-Star0   = $tail   Cons  |  Nil .
+Manifest-Star0 ::=  MBind   = $head   Manifest-Star0   = $tail   Cons  |  Nil .
+Keyps ::=  Keyp   = key   Keyps-Star0   = keys   <Pair 4cbf7f>  |  Seq{} .
+EImport ::=  'import'   TopLevelExp   = exp  { Evaluator::Import(exp) }.
+Boolp ::=  'true'  { Constp(BoolExp(true)) } |  'false'  { Constp(BoolExp(false)) }.
+CollOp ::=  CollMessage  |  Collect  |  Iterate  | { CollExp(c,n,Seq{}) }.
+LoadAction ::=  'do'   Exp   = e  { Exp(e) } |  null .
+ImportIn ::=  'import'   ImportPath   = path   'in'   PushChar   Exp   PopChar   = body   'end'  { ImportIn(path,body) }.
+ImportPath ::=  Name   = n   ImportPath-Star0   = ns   <Pair 42a147> .
+CommaSepExps-Star0 ::=  ','   PushChar   Expr   PopChar   = $head   CommaSepExps-Star0   = $tail   Cons  |  Nil .
+OpType ::=  TypeArgs   = domains   '->'   PushChar   TypeExp   PopChar   = range  { OpType(domains,range) }.
+Keyp ::=  Name   = name   '='   Pattern   = pattern  { Keyp(name,pattern) }.
+KeyArgs-Dis0-Star0 ::=  ','   KeyArg   = $head   KeyArgs-Dis0-Star0   = $tail   Cons  |  Nil .
+LanguagePath ::=  Name   = n   LanguagePath-Star0   = ns   <Pair 3bed38> .
+CompilerDirective ::=  '+'   CompilerDirective-Dis0 .
+Expp ::=  '['   PushChar   Exp   PopChar   = exp   ']'  { Constp(exp) }.
+SeqExp-Dis0 ::=  EmptySeqTail  |  NonEmptySeqTail .
+CompilationBodyExps ::=  CompilationBody   = b   !   CompilationBodyExps   = bs   <Pair 18dc16>  |  Seq{} .
+CompilationBody ::=  Def  |  TopLevelExp .
+IfExp ::=  LinePos   = l   'if'   PushChar   Expr   PopChar   = e1   'then'   PushChar   Expr   PopChar   = e2   IfTail   = e3  { If(l,e1,e2,e3) }.
+FloatExp ::=  LinePos   = l   Float   = f  { f.lift().line := l }.
+Syntaxp ::=  '[|'   PushChar   Exp   PopChar   = e   '|]'  { Syntaxp(e) }.
+PathExp ::=  PushChar   Atom   PopChar   = atom   PathExp-Dis0 .
+ImportPath-Star0 ::=  '::'   Name   = $head   ImportPath-Star0   = $tail   Cons  |  Nil .
+LetBody ::=  'in'   PushChar   Expr   PopChar   = body   <VarRef 28338c>  |  PushChar   'then'   PushChar   Bindings   PopChar   = bindings   LetBody   = body  { Let(bindings,body) }  PopChar .
+EmptySeqTail ::=  '}'  { SetExp(l,"Seq",Seq{}) }.
+CompilationUnit-Star1 ::=  Import   = $head   CompilationUnit-Star1   = $tail   Cons  |  Nil .
+Import ::=  PushChar   'import'   ImportPath   = path   ';'  { Import(path) }  PopChar .
+EvaluationUnit-Star2 ::=  EvaluationUnit-Star2-Dis0   = $head   EvaluationUnit-Star2   = $tail   Cons  |  Nil .
+Pattern ::=  AddPattern   = p   Pattern-Star0   = es  { es->iterate(e s = p |
+  Includingp(s,e)) }  = p   PatternGuard .
+PairOrElements-Star0 ::=  ','   PushChar   Expr   PopChar   = $head   PairOrElements-Star0   = $tail   Cons  |  Nil .
+CmpClause ::=  Name   = n   OptType   = t   '<-'   PushChar   Exp   PopChar   = e  { Comprehensions::Bind(n,t.toExp(),e) } |  '?'   PushChar   Exp   PopChar   = e  { Comprehensions::Filter(e) }.
+DropOp ::=  '<'   <  |  '<='   <=  |  '<>'   <>  |  '='   =  |  '::'   ::  |  ':='   :=  |  '.'   .  |  'and'   and  |  'andthen'   andthen  |  'implies'   implies  |  'or'   or  |  'orelse'   orelse  |  '+'   +  |  '-'   -  |  '*'   *  |  '/'   / .
+Keywordp ::=  Name   = name   Keywordp-Star0   = names   '['   Keyps   = keys   ']'  { Keywordp(name,names,keys) }.
+Emptyp ::=  'Seq{'   '}'  { Constp(SetExp("Seq",Seq{})) } |  'Set{'   '}'  { Constp(SetExp("Set",Seq{})) }.
+VarExp ::=  Name   = name   LinePos   = l  { Var(name,l) }.
+LanguagePath-Star0 ::=  '::'   Name   = $head   LanguagePath-Star0   = $tail   Cons  |  Nil .
+ParserImport-Star0 ::=  '::'   Name   = $head   ParserImport-Star0   = $tail   Cons  |  Nil .
+IntExp ::=  LinePos   = l   Int   = e  { IntExp(l,e) }.
+BindFunArgsTail-Star0 ::=  ','   Pattern   = $head   BindFunArgsTail-Star0   = $tail   Cons  |  Nil .
+BindingList-Star0 ::=  ';'   PushChar   Binding   PopChar   = $head   BindingList-Star0   = $tail   Cons  |  Nil .
+MPath ::=  MPathEntry   = n   MPath-Star0   = ns  { Seq{n | ns}->separateWith("/") } |  Str .
+Keywordp-Star0 ::=  '::'   Name   = $head   Keywordp-Star0   = $tail   Cons  |  Nil .
+Op ::=  BinOp   !  |  ';'   ; .
+Atom ::=  PushChar   VarExp   PopChar   !  |  PushChar   Self   PopChar   !  |  PushChar   StrExp   PopChar   !  |  PushChar   IntExp   PopChar   !  |  PushChar   IfExp   PopChar   !  |  PushChar   BoolExp   PopChar   !  |  PushChar   LetExp   PopChar   !  |  PushChar   CollExp   PopChar   !  |  Parentheses  |  PushChar   Drop   PopChar  |  PushChar   Lift   PopChar  |  PushChar   Throw   PopChar  |  PushChar   Try   PopChar  |  PushChar   ImportIn   PopChar  |  PushChar   FloatExp   PopChar  |  PushChar   LocalParserImport   PopChar  |  PushChar   AtExp   PopChar .
+Intp ::=  Int   = i  { Constp(IntExp(i)) }.
+Exp1 ::=  PushChar   Exp   PopChar   EOF .
+Constp ::=  Intp  |  Strp  |  Boolp  |  Expp .
+Def-Dis0 ::=  '!'  { true } | { false }.
+SetCmpExp-Star0 ::=  ','   CmpClause   = $head   SetCmpExp-Star0   = $tail   Cons  |  Nil .
+IfTail ::=  'else'   PushChar   Expr   PopChar   'end'  |  LinePos   = l   'elseif'   PushChar   Expr   PopChar   = e1   'then'   PushChar   Expr   PopChar   = e2   IfTail   = e3  { If(l,e1,e2,e3) } |  'end'  { BoolExp(false) }.
+StrExp ::=  LinePos   = l   Str   = e  { StrExp(l,e) }.
+Strp ::=  Str   = s  { Constp(StrExp(s)) }.
+ExpTail ::=  Op   = o   !   PushChar   Expr   PopChar   = e  { BinExp(a,o,e) } |  <VarRef 17c593> .
+EvaluationUnit-Star0 ::=  ParserImport   = $head   EvaluationUnit-Star0   = $tail   Cons  |  Nil .
+BindValue ::=  OptType   = type   '='   SimpleExp   = value  { ValueBinding(name,type,value) }.
+EvaluationUnit ::=  EvaluationUnit-Star0   EvaluationUnit-Star1   = imports   EvaluationUnit-Star2   = exps   EOF  { Evaluator::EvaluationUnit(imports,exps) }.
+TypePath ::=  Name   = name   TypePath-Star0   = names  { Seq{name | names}->collect(n |
+  Symbol(n)) }.
+AddPattern ::=  AtomicPattern   = p1   AddPattern-Dis0 .
+PatternTail ::=  '->'   Name   '('   Pattern   = p   ')'   <VarRef 412c7e> .
+BindFun ::=  BindFunArgs   = args   OptType   = type   '='   PushChar   SimpleExp   PopChar   = value  { FunBinding(name,args,type,value) }.
+EvaluationUnit-Star1 ::=  EImport   = $head   EvaluationUnit-Star1   = $tail   Cons  |  Nil .
+DropExp ::=  'not'   DropExp   = e  { Negate(e) } |  PushChar   Apply   PopChar   = a   DropExpTail .
+Objectp-Star0 ::=  '::'   Name   = $head   Objectp-Star0   = $tail   Cons  |  Nil .
+MPathEntry ::=  Name  |  Str  |  'Kernel'   Kernel  |  '.'   .  |  '.'   '.'   .. .
+OptType ::=  ':'   PushChar   TypeExp   PopChar  | { NamedType() }.
+Try ::=  LinePos   = l   'try'   PushChar   Expr   PopChar   = body   'catch'   '('   Name   = name   ')'   PushChar   Expr   PopChar   = handler   'end'  { Try(l,body,name,handler) }.
+BoolExp ::=  LinePos   = l   'true'  { BoolExp(l,true) } |  LinePos   = l   'false'  { BoolExp(l,false) }.
+PathExp-Dis0-Star0 ::=  '::'   AName   = $head   PathExp-Dis0-Star0   = $tail   Cons  |  Nil .
+Drop ::=  '<'   DropExp   = e   '>'  { Drop(resolve(order(e))) } |  '<|'   Pattern   = p   '|>'  { DropPattern(p) }.
+ArgsTail-Star0 ::=  ','   PushChar   Expr   PopChar   = $head   ArgsTail-Star0   = $tail   Cons  |  Nil .
+ArgsTail ::=  ')'   Seq{}  |  PushChar   Expr   PopChar   = arg   ArgsTail-Star0   = args   ')'   <Pair 38e3eb> .
+ArrowTail ::=  Name   = n   CollOp   = x   Arrow .
+CompilationUnit ::=  CompilationUnit-Star0   = parserImports   CompilationUnit-Star1   = imports   CompilationBodyExps   = exps   EOF   pState   = s  { CompilationUnit("",imports,exps,s.getSource(),parserImports) }.
+AtomicPattern ::=  PushChar   Varp   PopChar  |  PushChar   Constp   PopChar  |  PushChar   Objectp   PopChar  |  PushChar   Consp   PopChar  |  PushChar   Keywordp   PopChar  |  PushChar   Syntaxp   PopChar  |  '('   PushChar   Pattern   PopChar   ')' .
+KeyArgs-Dis0 ::=  ']'   Seq{}  |  KeyArg   = arg   KeyArgs-Dis0-Star0   = args   ']'   <Pair 38e548> .
+Iterate ::=  '('   AName   = v1   AName   = v2   '='   PushChar   Expr   PopChar   = init   '|'   PushChar   Expr   PopChar   = body   ')'  { Iterate(c,v1,v2,init,body) }.
+AddPattern-Dis0 ::=  '+'   AddPattern   = p2  { Addp(p1,p2) } |  <VarRef 283229> .
+SetCmpExp ::=  LinePos   = l   '{'   CommaSepExps   = es   '}'   !  { SetExp(l,"Set",es) } |  LinePos   = l   '{'   Exp   = e   '|'   CmpClause   = c   SetCmpExp-Star0   = cs   '}'  { Comprehensions::Cmp("Set",e,Seq{c | cs}) }.
+TypeExp-Dis0 ::=  TypeArgs   = args  { ParametricType(path,args) } | { NamedType(path) }.
+Apply ::=  PushChar   Atom   PopChar   = a   ApplyTail   = e   Arrow .
+CompilationUnit-Star0 ::=  ParserImport   = $head   CompilationUnit-Star0   = $tail   Cons  |  Nil .
+SimpleExpTail ::=  BinOp   = o   !   PushChar   SimpleExp   PopChar   = e  { BinExp(a,o,e) } |  <VarRef f2519> .
+Exp ::=  PushChar   Expr   PopChar   = e   !  { resolve(order(e)) }.
+Expr ::=  'not'   PushChar   Expr   PopChar   = e  { Negate(e) } |  '-'   PushChar   SimpleExp   PopChar   = e  { BinExp(IntExp(0),"-",e) } |  PushChar   Apply   PopChar   = a   ExpTail .
+SeqExp ::=  LinePos   = l   'Seq{'   SeqExp-Dis0 .
+BindFunArgsTail ::=  Pattern   = p   BindFunArgsTail-Star0   = ps   ')'   <Pair 3e3445>  |  ')'   Seq{} .
+LetExp ::=  LinePos   = l   'let'   PushChar   Bindings   PopChar   = bindings   LetBody   = body   'end'  { Let(l,bindings,body) }.
+TypeArgs ::=  '('   PushChar   TypeExp   PopChar   = arg   TypeArgs-Star0   = args   ')'   <Pair 42a222> .
+Bindings ::=  BindingList  |  Drop .
+Patterns ::=  Pattern   = head   Patterns-Star0   = tail   <Pair 53dcce>  |  Seq{} .
+CompilerDirective-Dis0 ::=  'WithoutSourcePos'  { WithoutSourcePos } |  'WithoutLocalNames'  { WithoutLocalNames } |  'Language'   '('   LanguagePath   = p   ')'  { Language(p.lookup()) }.
+LogicalExp ::=  PushChar   SimpleExp   PopChar   = e  { resolve(order(e)) }.
+BindFunArgs ::=  '('   BindFunArgsTail .
+TopLevelExp ::=  PushChar   SimpleExp   PopChar   = s   ';'  { resolve(order(s)) }.
+DropExpTail ::=  DropOp   = o   !   DropExp   = e  { BinExp(a,o,e) } |  <VarRef 1e6c3f> .
+PairOrElements ::=  '|'   PushChar   Expr   PopChar   = t   '}'  { ConsExp(e,t) } |  PairOrElements-Star0   = es   '}'  { SetExp(l,"Seq",Seq{e | es}) }.
+Keyps-Star0 ::=  ','   Keyp   = $head   Keyps-Star0   = $tail   Cons  |  Nil .
+BinOp ::=  '<'   <  |  '<='   <=  |  '>'   >  |  '>='   >=  |  '<>'   <>  |  '='   =  |  '::'   ::  |  ':='   :=  |  '.'   .  |  'and'   and  |  'andthen'   andthen  |  'implies'   implies  |  'or'   or  |  'orelse'   orelse  |  '+'   +  |  '-'   -  |  '*'   *  |  '/'   / .
+SeqCmpExp-Star0 ::=  ','   CmpClause   = $head   SeqCmpExp-Star0   = $tail   Cons  |  Nil .
+Def ::=  'context'   Def-Dis0   = isForward   ImportPath   = path   PushChar   Exp   PopChar   = exp  { ContextDef(path,exp,isForward) }.
+TopLevelCommand ::=  PushChar   SimpleExp   PopChar   = c   pState   = p  { p.consumeToken := false }  ';'  { resolve(order(c)) }.
+Args ::=  '('   ArgsTail .
+Collect ::=  '('   AName   = v   '|'   PushChar   Expr   PopChar   = e   ')'  { IterExp(c,n,v,e) }.
+CommaSepExps ::=  PushChar   Expr   PopChar   = e   CommaSepExps-Star0   = es   <Pair 40fb36>  |  Seq{} .
+Varp ::=  AName   = name   Varp-Dis0   = pattern   Varp-Dis1   = type  { Varp(name,pattern,type) }.
+KeyArg ::=  Name   = name   '='   PushChar   Expr   PopChar   = exp  { KeyArg(name,exp) }.
+AtExp ::=  LinePos   = l   '@'   PushChar  At  PopChar   = e  { e.setLine(l) }.
+SeqCmpExp ::=  LinePos   = l   '['   CommaSepExps   = es   ']'   !  { SetExp(l,"Seq",es) } |  LinePos   = l   '['   Exp   = e   '|'   CmpClause   = c   SeqCmpExp-Star0   = cs   ']'  { Comprehensions::Cmp(e,Seq{c | cs}) }.
+Arrow ::=  '->'   !   ArrowTail  |  <VarRef 29ec99> .
+TypeArgs-Star0 ::=  ','   PushChar   TypeExp   PopChar   = $head   TypeArgs-Star0   = $tail   Cons  |  Nil .
+EvaluationUnit-Star2-Dis0 ::=  Def  |  TopLevelExp .
+SetExp ::=  LinePos   = l   'Set{'   CommaSepExps   = es   '}'  { SetExp(l,"Set",es) }.
+AName ::=  Name   !  |  Drop .
+MPath-Star0 ::=  '/'   MPathEntry   = $head   MPath-Star0   = $tail   Cons  |  Nil .
+SeqpTail ::=  ','   Pattern   = head   SeqpTail   = tail  { Consp(head,tail) } |  '}'  { Constp(SetExp("Seq",Seq{})) }.
+Seqp ::=  'Seq{'   Pattern   = head   SeqpTail   = tail  { Consp(head,tail) }.
+TypePath-Star0 ::=  '::'   Name   = $head   TypePath-Star0   = $tail   Cons  |  Nil .
+Lift ::=  LinePos   = l   '[|'   PushChar   Exp   PopChar   = e   '|]'  { Lift(l,e) }.
+LoadTime ::=  '^'   LoadDirective  | { RunTime }.
+BindingList ::=  PushChar   Binding   PopChar   = binding   BindingList-Star0   = bindings   <Pair 30e002> .
+Pattern-Star0 ::=  PatternTail   = $head   Pattern-Star0   = $tail   Cons  |  Nil .
+OptBuilds-Star0 ::=  ','   Name   = $head   OptBuilds-Star0   = $tail   Cons  |  Nil .
+BindingTail ::=  BindFun  |  BindValue .
+Pairp ::=  'Seq{'   Pattern   = head   '|'   Pattern   = tail   '}'  { Consp(head,tail) }.
+LocalParserImport ::=  'parserImport'   Name   = name   LocalParserImport-Star0   = names   <Pair 5e7878>  ImportAt  'in'   PushChar   Expr   PopChar   = e   'end'  { ParserImport(Seq{name | names},e) }.
+ParserImport ::=  'parserImport'   Name   = name   ParserImport-Star0   = names   ';'   <Pair 476d3f>  ImportAt { ParserImport(Seq{name} + names,null) }.
+Throw ::=  LinePos   = l   'throw'   PushChar   SimpleExp   PopChar   = value  { Throw(l,value) }.
+NonEmptySeqTail ::=  PushChar   Expr   PopChar   = e   PairOrElements .
+Binding ::=  AName   = name   BindingTail .
+Patterns-Star0 ::=  ','   Pattern   = $head   Patterns-Star0   = $tail   Cons  |  Nil .
+PathExp-Dis0 ::=  '::'   AName   = name   PathExp-Dis0-Star0   = names  { Path(atom,Seq{name | names}) } |  <VarRef 246c9b> .
+TypeExp ::=  TypePath   = path   TypeExp-Dis0  |  '['   PushChar   TypeExp   PopChar   = t   ']'  { ParametricType(Seq{"Seq"},Seq{t}) } |  '{'   PushChar   TypeExp   PopChar   = t   '}'  { ParametricType(Seq{"Set"},Seq{t}) } |  Drop  |  OpType .
+Parentheses ::=  '('   PushChar   Expr   PopChar   = e   ')'  { Parentheses(e) }.
+CollMessage ::=  '('   CommaSepExps   = as   ')'  { CollExp(c,n,as) }.
+Varp-Dis1 ::=  ':'   PushChar   TypeExp   PopChar  | { NamedType() }.
+Varp-Dis0 ::=  '='   PushChar   Pattern   PopChar  |  null .
+SimpleExp ::=  'not'   PushChar   SimpleExp   PopChar   = e  { Negate(e) } |  '-'   PushChar   SimpleExp   PopChar   = e  { BinExp(IntExp(0),"-",e) } |  PushChar   Apply   PopChar   = a   SimpleExpTail .
+Self ::=  LinePos   = l   'self'  { Self(l) }.
+KeyArgs ::=  '['   KeyArgs-Dis0 .
+ApplyTail ::=  Args   = args   !  { Apply(a,args) } |  KeyArgs   = args   !  { Instantiate(a,args) } |  <VarRef f2521> .
+LoadDirective ::=  'CompileTime'  { CompileTime } |  'RunTime'  { RunTime } |  'Both'  { Both } |  'Kernel'  { Kernel } |  'None'  { None }.
+</PRE></TD>
+</TABLE>
+</HTML>

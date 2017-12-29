@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+CompilerWalker
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>CompilerWalker</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+No Documentation Specified
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../../Root/XOCLWalker/index.html">XOCLWalker</A>
+,<A HREF="../../../../Root/Walkers/Code/OCLWalker/index.html">OCLWalker</A>
+,<A HREF="../../../../Root/Walkers/Walker/index.html">Walker</A>
+,<A HREF="../../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../../Root/Walkers/Walker/index.html">Walker</A>: refCount, table, visited. <BR><B>From</B> <A HREF="../../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#walkCompilationModule">walkCompilationModule</a>(resource:<A HREF="../../../../Root/XCore/String/index.html">String<A>,elements:<A HREF="../../../../Root/OCL/CompilationModuleElement/index.html">Seq(CompilationModuleElement)<A>,arg:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkCompilationUnit">walkCompilationUnit</a>(resource:<A HREF="../../../../Root/XCore/String/index.html">String<A>,exps:<A HREF="../../../../Root/XCore/Performable/index.html">Seq(Performable)<A>,imports:<A HREF="../../../../Root/OCL/Import/index.html">Seq(Import)<A>,source:<A HREF="../../../../Root/XCore/String/index.html">String<A>,parserImports:<A HREF="../../../../Root/OCL/ParserImport/index.html">Seq(ParserImport)<A>,arg:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkImport">walkImport</a>(nameSpace:<A HREF="../../../../Root/XCore/Performable/index.html">Performable<A>,arg:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkObject">walkObject</a>(o:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,arg:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../../Root/XOCLWalker/index.html">XOCLWalker</A>: walkAbstractOp, walkAttribute, walkAttributeModifiers, walkBind, walkCase, walkCaseArm, walkCaseInt, walkCaseIntClause, walkCaseIntConst, walkCaseIntRange, walkCaseObj, walkCharacter, walkClass, walkClause, walkConstraint, walkConstructor, walkCount, walkDispatchObject, walkDoc, walkEnum, walkExtendClass, walkFind, walkFor, walkFork, walkImports, walkIndex, walkLetrec, walkMap, walkMultiLevelConstraint, walkNameSpace, walkNotNull, walkObject, walkPackage, walkRecord, walkRepeat, walkSendCommand, walkSnapshot, walkStats, walkTableGet, walkTodo, walkTypeCase, walkTypeCaseArm, walkUndoable, walkWhen, walkWhile, walkWithOpenFile, walkWithoutDaemons, walkWithoutLocalNames, walkWithoutSourcePos. <BR><B>From</B> <A HREF="../../../../Root/Walkers/Code/OCLWalker/index.html">OCLWalker</A>: walkAddp, walkApply, walkBinExp, walkBinding, walkBoolExp, walkCollExp, walkCondp, walkConsExp, walkConsp, walkConst, walkConstp, walkContextDef, walkDispatchObject, walkDot, walkDrop, walkDropPattern, walkFloatExp, walkFunBinding, walkHeadUpdate, walkIf, walkImportIn, walkIncludingp, walkInstantiate, walkIntExp, walkIterExp, walkIterate, walkKeyArg, walkKeyp, walkKeywordp, walkLet, walkLift, walkNamedType, walkNegate, walkObject, walkObjectp, walkOpType, walkOperation, walkOrder, walkParametricType, walkParentheses, walkParserImport, walkPath, walkPathUpdate, walkSelf, walkSend, walkSetExp, walkSlotUpdate, walkStrExp, walkSyntaxp, walkTailUpdate, walkThrow, walkTry, walkValueBinding, walkVar, walkVarUpdate, walkVarp. <BR><B>From</B> <A HREF="../../../../Root/Walkers/Walker/index.html">Walker</A>: defaultWalk, encounter, encounter, encountered, getRef, initWalker, newRef, reWalk, reset, visited, walk, walkBigInt, walkBoolean, walkBuffer, walkClient, walkCode, walkCodeBox, walkCont, walkDaemon, walkFloat, walkForeignFun, walkForeignObj, walkFun, walkInputChannel, walkInteger, walkNil, walkNull, walkObject, walkOutputChannel, walkSeq, walkSet, walkSlot, walkString, walkSymbol, walkTable, walkThread, walkVector. <BR><B>From</B> <A HREF="../../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="walkCompilationModule"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkCompilationModule(resource&#160;:&#160;String,elements&#160;:&#160;Seq(CompilationModuleElement),arg&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;CompilationModule[resource&#160;=&#160;self.walk(resource,arg),elements&#160;=&#160;elements-&gt;collect(x&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;self.walk(x,arg))]<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkCompilationUnit"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkCompilationUnit(resource&#160;:&#160;String,exps&#160;:&#160;Seq(Performable),imports&#160;:&#160;Seq(Import),source&#160;:&#160;String,parserImports&#160;:&#160;Seq(ParserImport),arg&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;CompilationUnit[resource&#160;=&#160;self.walk(resource,arg),exps&#160;=&#160;exps-&gt;collect(x&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;self.walk(x,arg)),imports&#160;=&#160;imports-&gt;collect(x&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;self.walk(x,arg)),source&#160;=&#160;self.walk(source,arg),parserImports&#160;=&#160;parserImports-&gt;collect(p&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;self.walk(p,arg))]<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkImport"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkImport(nameSpace&#160;:&#160;Performable,arg&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;Import[nameSpace&#160;=&#160;self.walk(nameSpace,arg)]<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkObject"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkObject(o&#160;:&#160;XCore::Element,arg&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;caseObj&#160;=&#160;o&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;caseObjType&#160;=&#160;caseObj.of()<br>&#160;&#160;in&#160;if&#160;caseObjType&#160;=&#160;Import<br>&#160;&#160;&#160;&#160;&#160;then&#160;let&#160;nameSpace&#160;=&#160;caseObj.nameSpace<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;self.walkImport(nameSpace,arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;elseif&#160;caseObjType&#160;=&#160;CompilationUnit<br>&#160;&#160;&#160;&#160;&#160;then&#160;let&#160;parserImports&#160;=&#160;caseObj.parserImports&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;source&#160;=&#160;caseObj.source&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;imports&#160;=&#160;caseObj.imports&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;exps&#160;=&#160;caseObj.exps&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;resource&#160;=&#160;caseObj.resource<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;self.walkCompilationUnit(resource,exps,imports,source,parserImports,arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;elseif&#160;caseObjType&#160;=&#160;CompilationModule<br>&#160;&#160;&#160;&#160;&#160;then&#160;let&#160;resource&#160;=&#160;caseObj.resource&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elements&#160;=&#160;caseObj.elements<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;self.walkCompilationModule(resource,elements,arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;else&#160;super(o,arg)<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

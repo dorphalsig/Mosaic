@@ -1,0 +1,369 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+XCore
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>XCore</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+No Documentation Specified
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Packages</B></FONT></TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Classes</B></FONT></TD>
+</TR>
+<TR><TD><B><A HREF="../../Root/XCore/Array/index.html">Array</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Attribute/index.html">Attribute</A></B></TD><TD>
+     An attribute is a structural feature of a class. It defines the
+     name and type of a slot of the instances of the class. When the
+     class is instantiated, a new object is created and a slot is added 
+     for each attribute defined and inherited by the class. Each slot
+     is initialised to contain the default value for the type of the
+     corresponding attribute.
+     Constructor: Attribute(name,type)
+     The name is a string and the type is a classifier.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/BasicArray/index.html">BasicArray</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/BehaviouralFeature/index.html">BehaviouralFeature</A></B></TD><TD>
+      A behavioural feature is a typed element that can be invoked.
+      Typically a behavioural feature is an operation.
+     </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Bind/index.html">Bind</A></B></TD><TD>
+      A binding is a named value.
+      Constructor: Bind(name,value)
+        Constructs a binding, the name is a string and the value is
+        any element.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Buffer/index.html">Buffer</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Class/index.html">Class</A></B></TD><TD>
+      A class is a classifier with structural features (i.e. attributes).
+      Instances of classes are always objects with slots for the attributes
+      of the class. A class is instantiated using the 'new/0' and 'new/1'
+      operations (inherited from Classifier). The former takes no initialization
+      arguments whereas the latter takes a sequence of initialization arguments.
+      The preferred way of instantiating a class is by applying it as an 
+      operator to the initialization arguments, as in C() or C(1,2,3). This
+      instantiates the class and calls 'init/1' on the resulting instance.
+      Typically classes will redefine 'init/1' to initialize new instances
+      on a class-by-class basis. Typically you will create a class using the 
+      @Class ... en-d notation.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Classifier/index.html">Classifier</A></B></TD><TD>
+      A classifier is a name space for operations and constraints. A classifier 
+      is generalizable and has parents from which it inherits operations and 
+      constraints. A classifier can be instantiated via 'new/0' and 'new/1'. In
+      both cases the default behaviour is to return a default value as an instance.
+      If the classifier is a datatype then the basic value for the datatype is
+      returned otherwise 'null' is returned as the default value. A classifier can
+      also be applied to arguments (0 or more) in order to instantiate it. Typically
+      you will not create a Classifier directly, but create a class or an instance 
+      of a sub-class of Class.
+     </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/CodeBox/index.html">CodeBox</A></B></TD><TD>
+      A CodeBox contains compiled code that can be executed on the XMF VM.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Collection/index.html">Collection</A></B></TD><TD>
+      The root class for all collection types.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/CompiledOperation/index.html">CompiledOperation</A></B></TD><TD>
+      CompiledOperation is the type of all XMF compiled operations. A compiled
+      operation can be invoked using 'invoke/2' or by applying it to its arguments.
+      A compiled operation consists of machine code instructions. A compiled
+      operation may be associated with its source code to aid debugging.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Constraint/index.html">Constraint</A></B></TD><TD>
+      A constraint is a named boolean expression owned by a classifier. Constraints
+      are defined by classifiers to be performed with respect to their instances and
+      as such any occurrences of 'self' in a constraint will refer to the instance
+      that is being checked.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/ConstraintReport/index.html">ConstraintReport</A></B></TD><TD> 
+      A constraint report is produced by sen-ding a classify message
+      to an element or a check constraints message to a classifier.
+      A report is a tree structured element describing the constraints
+      that were performed and their outcomes. Note that internal
+      nodes of the tree may have dummy constraint reports used as
+      containers of sub-constraint reports. Such dummies have a
+      null constraint and an empty reason, but the satisfied boolean
+      is the conjunction of the sub-reports.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Constructor/index.html">Constructor</A></B></TD><TD>
+      A constructor contains a code body that is invoked on instantiation of
+      a classifier.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Contained/index.html">Contained</A></B></TD><TD>
+      A contained element has an owner. The owner is set when the contained element is
+      added to a container. Removing an owned element from a container and adding
+      it to another container will change the value of 'owner' in the contained element.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Container/index.html">Container</A></B></TD><TD>
+      A container has a slot 'contents' that is a table. The table maintains the
+      contained elements indexed by keys. By default the leys for the elements in
+      the table are the elements themselves, but sub-classes of container will
+      modify this feature accordingly. Container provides operations for accessing
+      and managing its contents.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Daemon/index.html">Daemon</A></B></TD><TD>
+      Daemons monitor the state of objects and perform actions when the object changes 
+      state. Daemon technology is the key to implementing a variety of modular reusable 
+      tool architectures such as the observer pattern. XMF-Mosaic uses daemons extensively 
+      to synchronize data across multiple tools. User defined tools can use daemons 
+      to make tools reactive and to ensure data is always consistent. 
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/DataType/index.html">DataType</A></B></TD><TD>
+      DataType is a sub-class of Classifier that designates the non-object
+      classifiers that are basic to the XMF system. An instance of DataType is
+      a classifier for values (the instances of the data type). For example
+      Boolean is an instance of DataType - it classifies the values 'true' and
+      'false'. For example Integer is an instance of DataType - it classifies
+      the values 1, 2, etc.
+     </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Dependency/index.html">Dependency</A></B></TD><TD>
+      A depen-dency occurs between a source and a target model element.
+      When a depen-dency is created, the attach operation is performed
+      and when it is removed the detach operation is performed. These
+      operations allow sub-classes of Depen-dency to have semantics.
+      
+      In addition, a depen-dency has a set of names, which are translated
+      into labels on diagrams. Subclasses of depen-dency can set any number
+      of names as are needed, each of which can be associated with the source,
+      target or the depen-dency itself, and as with attach and detach, the
+      'setNameValue' can be redefined to provide the necessary semantics.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/DependencyName/index.html">DependencyName</A></B></TD><TD>
+      A depen-dency name is a name that can be associated with a depen-dency
+      and can represent any textual information relating to that depen-dency.
+      It can be associated to the source, target or the depen-dency itself, and
+      can be set as modifiable or not (this will determine whether or not the
+      diagram labels will be editable).
+      
+      This class is not itself expected to be sub-classed. Instead, the semantics
+      of setting the values of these names is specified by over-riding the
+      'setNameValue' in sub-classes of Depen-dency.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Doc/index.html">Doc</A></B></TD><TD>
+      A class used to represent documentation.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/DocumentedElement/index.html">DocumentedElement</A></B></TD><TD>
+      A documented element has an attribute doc:Doc, which is used to store documentation
+      relating to the element. Any class that can be documented should specialize this class.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Element/index.html">Element</A></B></TD><TD>
+      Element is the root class of the XMF type hierarchy. It has no super-classes.
+      Everything is an instance of Element. Operations defined on Element are
+      available to every data value in XMF. Use this as a type when you want to
+      use heterogeneous values (for example as the type of an attribute). An element
+      always has a classifier which is the value of the 'of/0' message. An element
+      can always be sent messages using 'sen-d/2' where the first argument is the
+      name of the message and the second argument is a sequence of message arguments.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Enum/index.html">Enum</A></B></TD><TD>
+      The enumerated data type. Create an instance of this class to
+      create a new named enumeration type. The names passed to the
+      constructor are the names of the unique elements of the
+      enumeration. On creation, the names are mapped to instances
+      of the new enumeration type and can be referenced via their name
+      using getElement (or ::).
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/EnumChoice/index.html">EnumChoice</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Exception/index.html">Exception</A></B></TD><TD>
+      An exception is raised when something goes wrong. An exception contains a
+      message that reports what went wrong. An exception also contains a sequence
+      of stack frames that defines the history of computation at the point the
+      exception was raised. An exception may optionally contain information 
+      about where in the source file the error occurred. This is encoded as the
+      lineCount.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/ForeignObject/index.html">ForeignObject</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/ForeignOperation/index.html">ForeignOperation</A></B></TD><TD>
+      Provides an interface to operations written in external programming
+      languages, such as Java.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/ForwardRef/index.html">ForwardRef</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/IndexedContainer/index.html">IndexedContainer</A></B></TD><TD>
+      An indexed container is a class that manages a hashtable associating
+      keys with values. The Container::add/1 operation is implemented by
+      IndexedContainer to add the argument as both an index and a value. The
+      class IndexedContainer provides a 2-place operation for 'add' that
+      allows the index to be different from the value. Note that 'remove/1'
+      expects to be supplied with the index.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/InitialisedAttribute/index.html">InitialisedAttribute</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/InterpretedOperation/index.html">InterpretedOperation</A></B></TD><TD>
+      An interpreted operation is created when we evaluate an operation definition.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Located/index.html">Located</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/MachineException/index.html">MachineException</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/NameSpace/index.html">NameSpace</A></B></TD><TD>
+      A name space is a container of named elements. A name space defines two
+      operations 'getElement/1' and 'hasElement/1' that are used to get an element
+      by name and check for an element by name. Typically a name space will contain
+      different categories of elements in which case the name space will place
+      the contained elements in its contents table and in a type specific collection.
+      For example, a class is a container for operations, attributes and constraints.
+      Each of these elements are placed in the contents table for the class and in
+      a slot containing a collection with the names 'operations', 'attributes';
+      and 'constraints' respectively. The special syntax '::' is used to invoke the
+      'getElement/1' operation on a name space.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/NamedElement/index.html">NamedElement</A></B></TD><TD>
+      A named element is an owned element with a name. The name may be a 
+      string or a symbol. typically we use symbols where the lookup of the name
+      needs to be efficient.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Object/index.html">Object</A></B></TD><TD>
+      Object is the super-class of all classes with structural features in XMF.
+      Object provides access to slots via the 'get/1' and 'set/2' operations.
+      Object is the default super-class for a class definition - if you do not specify
+      a super-class then Object is assumed.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/OpType/index.html">OpType</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Operation/index.html">Operation</A></B></TD><TD>
+      Operation is the abstract super-class of all operations in XMF. An operation
+      can be compiled or interpreted. All operations have parameters, a return type
+      and a body. The body must be performable. An operation is invoked using 
+      'invoke/2' where the first argument is the value of 'self' in the operation 
+      body and the second argument is a sequence of parameter values.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/OrderedContainer/index.html">OrderedContainer</A></B></TD><TD>
+      A container that wraps a collection of ordered elements.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Package/index.html">Package</A></B></TD><TD>
+     XMF supports name spaces that contain collections of named elements. The 
+     XCore class Package is used to structure collections of class and sub-package 
+     definitions. XMF-Mosaic is structured as a tree of packages containing 
+     definitions of all aspects of the system (including XCore). The root name 
+     space is called Root; all XMF classes can be referenced via Root. Unlike 
+     UML and MOF, XCore packages are subclasses of Class. They can therefore be 
+     instantiated and can have operations, attributes and constraints.
+   </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Parameter/index.html">Parameter</A></B></TD><TD>
+      A parameter is a typed element that occurs in operations.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Performable/index.html">Performable</A></B></TD><TD>
+     A performable element can be executed on the XMF VM. It must provide a
+     collection of operations that support its evaluation or its translation
+     into VM machine instructions. In particular it must support 'compile/4',
+     'FV/0', 'maxLocals/0' and 'eval/3'. Performable is the root class for
+     all extensions to executable XMF. For example OCL is a sub-class of
+     Performable. If you inte-nd to define your own languages in XMF then
+     they should exte-nd Performable.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Resource/index.html">Resource</A></B></TD><TD>
+      A resource records where the resource originated via a resource name.
+      For example a definition is a resource that records the file where it
+      was loaded from.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Seq/index.html">Seq</A></B></TD><TD>
+      Seq is a sub-class of DataType. All sequence data types are an instance of
+      Seq. Seq defines an attribute 'elementType' that is used to record the
+       type of the elements in a sequence data type.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Set/index.html">Set</A></B></TD><TD>
+      Set is a sub-class of DataType. All set data types are an instance of
+      Set. Set defines an attribute 'elementType' that is used to record the
+      type of the elements in a set data type.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Slot/index.html">Slot</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Snapshot/index.html">Snapshot</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/StructuralFeature/index.html">StructuralFeature</A></B></TD><TD>
+      This is an abstract class that is the super-class of all classes that
+      describe structural features. For example Attribute is a sub-class of
+      StructuralFeature. Other types of structural feature are possible by 
+      managing the internal structure of objects via a MOP.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Table/index.html">Table</A></B></TD><TD>
+      A table associates keys with values. Any element can be used as a key.
+      A table has an initial size and can support any number of values. Use 'hasKey/1'
+      to determine whether a table contains a key. Use 'get/1' to access a table
+      via a key and 'put/2' to update a table given a key and a value. Use 'keys/0'
+      to access the set of keys for a table.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Thread/index.html">Thread</A></B></TD><TD>
+      A thread is a unit of concurrent execution. When a thread is created, it 
+      continues processing on the XVM until either it performs a read operation 
+      that blocks on input or when it explicitly calls yield. All XOCL values 
+      implement the yield operation. In both cases the thread is said to 
+      yield control. When a thread yields control, the XOS schedules another 
+      thread that is waiting. The scheduling algorithm aims to ensure that all 
+      waiting threads get scheduled providing that they yield.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/TypedElement/index.html">TypedElement</A></B></TD><TD>
+      A typed element is a named element with an associated type. The type is
+      a classifier. This is an abstract class and is used (for example) to define
+      Attribute.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/UnorderedContainer/index.html">UnorderedContainer</A></B></TD><TD>
+      A container that wraps a collection of unordered elements. 
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Vector/index.html">Vector</A></B></TD><TD>
+       A vector is a fixed length array of elements. They are created using
+       the constructor Vector(<size>). Vectors provide very efficient
+       insert ('put/2') and lookup operations ('ref/1').
+     </TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>DataTypes</B></FONT></TD>
+</TR>
+<TR><TD><B><A HREF="../../Root/XCore/Boolean/index.html">Boolean</A></B></TD><TD>
+       The data type for boolean values. A boolean value is either
+       true or false. The default value is false.
+     </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Collection(Element)/index.html">Collection(Element)</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Float/index.html">Float</A></B></TD><TD>
+      The data type for real values. The default value is 0.0
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Integer/index.html">Integer</A></B></TD><TD>
+      The data type for integer values The default value is 0.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Null/index.html">Null</A></B></TD><TD>
+       Null is the data type for the special value 'null'. The special value
+       'null' is an instance of all classifiers. It is the default value for all
+       instances of Class.
+     </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Number/index.html">Number</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Seq(Element)/index.html">Seq(Element)</A></B></TD><TD>
+      An instance of Seq where the element type is Element. This is the super-type
+      of all sequence data types.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Set(Element)/index.html">Set(Element)</A></B></TD><TD>
+      An instance of Set where the element type is Element. This is the super-type 
+      of all set data types
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/String/index.html">String</A></B></TD><TD>
+      The data type for strings. The default value is the empty string.
+    </TD></TR>
+<TR><TD><B><A HREF="../../Root/XCore/Symbol/index.html">Symbol</A></B></TD><TD>
+      Symbol is a sub-class of String. Whereas there may be two different strings 
+      with the same sequence of characters, there can only be one symbol with the 
+      same sequence of characters. This is useful when using names as the basis for
+      lookup (in tables). For example XMF ensures that classes, packages, operations,
+      slots are named using symbols so that the lookup of these features by name is
+      as efficient as possible. If strings were used the lookup would necessarily
+      involve a character by character comparison. Using symbols the lookup can use 
+      the symbols identity as the comparison operator. You can reference a symbol
+      by constructing an instance: Symbol(name).
+    </TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B>noDoc()</B></TD><TD>No Documentation Specified</TD></TR>
+</TABLE>
+</HTML>

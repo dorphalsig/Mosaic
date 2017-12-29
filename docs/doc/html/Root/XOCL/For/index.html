@@ -1,0 +1,299 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+For
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>For</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+
+      A for loop selects elements from a sequence in turn and 
+      performs an action. The for directives can be used to indicate
+      looping through a collection or parts of a table. Using the
+      directives for tables can be much more efficient because an
+      intermediate collection is not constructed. 
+    
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../Root/XOCL/Sugar/index.html">Sugar</A>
+,<A HREF="../../../Root/XCore/Performable/index.html">Performable</A>
+,<A HREF="../../../Root/XCore/Located/index.html">Located</A>
+,<A HREF="../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+<TR><TD>For(names,directive,colls,guard,body,isExp)</TD><TD> No Documentation </TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR><TD><B>body</B></TD><TD><A HREF="../../../Root/XCore/Performable/index.html">Performable<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>colls</B></TD><TD><A HREF="../../../Root/XCore/Performable/index.html">Seq(Performable)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>directive</B></TD><TD><A HREF="../../../Root/XCore/String/index.html">String<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>guard</B></TD><TD><A HREF="../../../Root/XCore/Performable/index.html">Performable<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>isExp</B></TD><TD><A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>names</B></TD><TD><A HREF="../../../Root/XCore/String/index.html">Seq(String)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Performable/index.html">Performable</A>: endLine, line. <BR><B>From</B> <A HREF="../../../Root/XCore/Located/index.html">Located</A>: charEnd, charStart. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#bindIndices">bindIndices</a>():<A HREF="../../../Root/OCL/ValueBinding/index.html">Seq(ValueBinding)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#bindNames">bindNames</a>():<A HREF="../../../Root/OCL/ValueBinding/index.html">Seq(ValueBinding)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#collBindings">collBindings</a>():<A HREF="../../../Root/OCL/ValueBinding/index.html">Seq(ValueBinding)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#decIndices">decIndices</a>():<A HREF="../../../Root/OCL/ValueBinding/index.html">Seq(ValueBinding)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugar">desugar</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugarClassifiedBy">desugarClassifiedBy</a>():<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugarInReverse">desugarInReverse</a>():<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugarInReverseAction">desugarInReverseAction</a>():<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugarInReverseExp">desugarInReverseExp</a>():<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugarInSeq">desugarInSeq</a>():<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugarInSeqAction">desugarInSeqAction</a>():<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugarInSeqExp">desugarInSeqExp</a>():<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugarInTableKeys">desugarInTableKeys</a>():<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugarInTableKeys">desugarInTableKeys</a>(name:<A HREF="../../../Root/XCore/String/index.html">String<A>,coll:<A HREF="../../../Root/XCore/Performable/index.html">Performable<A>):<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugarInTableValues">desugarInTableValues</a>(name:<A HREF="../../../Root/XCore/String/index.html">String<A>,coll:<A HREF="../../../Root/XCore/Performable/index.html">Performable<A>):<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugarInTableValues">desugarInTableValues</a>():<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#emptyCollCheck">emptyCollCheck</a>():<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#indexCheck">indexCheck</a>(n:<A HREF="../../../Root/XCore/Integer/index.html">Integer<A>):<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#indexNames">indexNames</a>():<A HREF="../../../Root/OCL/ValueBinding/index.html">Seq(ValueBinding)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#lift">lift</a>():<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#pprint">pprint</a>(out:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,indent:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#protect">protect</a>(exp:<A HREF="../../../Root/XCore/Performable/index.html">Performable<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#takeTails">takeTails</a>():<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#toString">toString</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkerBindings">walkerBindings</a>():<A HREF="../../../Root/OCL/ValueBinding/index.html">Seq(ValueBinding)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkerResults">walkerResults</a>():<A HREF="../../../Root/XCore/Performable/index.html">Seq(Performable)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkerSetup">walkerSetup</a>():<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XOCL/Sugar/index.html">Sugar</A>: FV, compile, desugar, eval, lift, maxLocals, typeExp. <BR><B>From</B> <A HREF="../../../Root/XCore/Performable/index.html">Performable</A>: FV, compile, endLine, eval, line, maxLocals, pprint, pprint, pprint, setEndLine, setLine. <BR><B>From</B> <A HREF="../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="bindIndices"/><FONT FACE="Courier" SIZE="1">@Operation&#160;bindIndices():Seq(ValueBinding)<br>&#160;&#160;0.to(names-&gt;size&#160;-&#160;1)-&gt;collect(i&#160;|<br>&#160;&#160;&#160;&#160;ValueBinding(names-&gt;at(i)&#160;+&#160;"Index",[|&#160;&lt;Var("forColl"&#160;+&#160;i)&gt;-&gt;size&#160;-&#160;1&#160;|]))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="bindNames"/><FONT FACE="Courier" SIZE="1">@Operation&#160;bindNames():Seq(ValueBinding)<br>&#160;&#160;0.to(names-&gt;size&#160;-&#160;1)-&gt;collect(i&#160;|<br>&#160;&#160;&#160;&#160;ValueBinding(names-&gt;at(i),[|&#160;&lt;Var("forColl"&#160;+&#160;i)&gt;-&gt;head&#160;|]))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="collBindings"/><FONT FACE="Courier" SIZE="1">@Operation&#160;collBindings():Seq(ValueBinding)<br>&#160;&#160;0.to(colls-&gt;size&#160;-&#160;1)-&gt;collect(i&#160;|<br>&#160;&#160;&#160;&#160;ValueBinding("forColl"&#160;+&#160;i,[|&#160;&lt;colls-&gt;at(i)&gt;-&gt;asSeq&#160;|]))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="decIndices"/><FONT FACE="Courier" SIZE="1">@Operation&#160;decIndices():Seq(ValueBinding)<br>&#160;&#160;0.to(names-&gt;size&#160;-&#160;1)-&gt;iterate(i&#160;decs&#160;=&#160;[|&#160;null&#160;|]&#160;|<br>&#160;&#160;&#160;&#160;[|&#160;&lt;decs&gt;;<br>&#160;&#160;&#160;&#160;&lt;Var(names-&gt;at(i)&#160;+&#160;"Index")&gt;&#160;:=&#160;&lt;Var(names-&gt;at(i)&#160;+&#160;"Index")&gt;&#160;-&#160;1&#160;|])<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugar"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugar():XCore::Element<br>&#160;&#160;if&#160;names-&gt;size&#160;=&#160;colls-&gt;size<br>&#160;&#160;then&#160;@Case&#160;directive&#160;of<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[&#160;"classifiedBy"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.desugarClassifiedBy()<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[&#160;"in"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.desugarInSeq()<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[&#160;"inReverse"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.desugarInReverse()<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[&#160;"inTableKeys"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.desugarInTableKeys()<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[&#160;"inTableValues"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.desugarInTableValues()<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[&#160;"inSeq"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.desugarInSeq()<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;self.error("Unknown&#160;for&#160;directive:&#160;"&#160;+&#160;directive)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;else&#160;self.error("For:&#160;controlled&#160;variables&#160;do&#160;not&#160;match&#160;collections:&#160;"&#160;+&#160;self.pprint())<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugarClassifiedBy"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugarClassifiedBy():Performable<br>&#160;&#160;[|&#160;let&#160;<br>&#160;&#160;&#160;&#160;in&#160;&lt;self.walkerSetup()&gt;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;For(names,"in",self.walkerResults(),guard,body,isExp)&gt;<br>&#160;&#160;&#160;&#160;end&#160;|]<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugarInReverse"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugarInReverse():Performable<br>&#160;&#160;if&#160;isExp<br>&#160;&#160;then&#160;self.desugarInReverseExp()<br>&#160;&#160;else&#160;self.desugarInReverseAction()<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugarInReverseAction"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugarInReverseAction():Performable<br>&#160;&#160;[|&#160;let&#160;&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;isLast&#160;=&#160;true<br>&#160;&#160;&#160;&#160;in&#160;declare(hidden,isLast);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;@While&#160;not&#160;&lt;self.indexCheck(0&#160;-&#160;1)&gt;&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;isFirst&#160;=&#160;&lt;self.indexCheck(0)&gt;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;declare(hidden,isFirst);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;self.protect(body)&gt;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;self.decIndices()&gt;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;isLast&#160;:=&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;end&#160;|]<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugarInReverseExp"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugarInReverseExp():Performable<br>&#160;&#160;[|&#160;let&#160;&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;isLast&#160;=&#160;true;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;forResults&#160;=&#160;Seq{}<br>&#160;&#160;&#160;&#160;in&#160;declare(hidden,isLast);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;declare(hidden,forResults);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;@While&#160;not&#160;&lt;self.indexCheck(0&#160;-&#160;1)&gt;&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;isFirst&#160;=&#160;&lt;self.indexCheck(0)&gt;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;declare(hidden,isFirst);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;self.protect(body)&gt;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;self.decIndices()&gt;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;isLast&#160;:=&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;forResults-&gt;reverse<br>&#160;&#160;&#160;&#160;end&#160;|]<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugarInSeq"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugarInSeq():Performable<br>&#160;&#160;if&#160;isExp<br>&#160;&#160;then&#160;self.desugarInSeqExp()<br>&#160;&#160;else&#160;self.desugarInSeqAction()<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugarInSeqAction"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugarInSeqAction():Performable<br>&#160;&#160;[|&#160;let&#160;&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;isFirst&#160;=&#160;true<br>&#160;&#160;&#160;&#160;in&#160;declare(hidden,isFirst);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;@While&#160;not&#160;&lt;self.emptyCollCheck()&gt;&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;&lt;self.takeTails()&gt;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;isLast&#160;=&#160;&lt;self.emptyCollCheck()&gt;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;declare(hidden,isLast);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;self.protect(body)&gt;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;isFirst&#160;:=&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;end&#160;|]<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugarInSeqExp"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugarInSeqExp():Performable<br>&#160;&#160;[|&#160;let&#160;&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;isFirst&#160;=&#160;true;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;forResults&#160;=&#160;Seq{}<br>&#160;&#160;&#160;&#160;in&#160;declare(hidden,isFirst);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;declare(hidden,forResults);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;@While&#160;not&#160;&lt;self.emptyCollCheck()&gt;&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;&lt;self.takeTails()&gt;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;isLast&#160;=&#160;&lt;self.emptyCollCheck()&gt;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;declare(hidden,isLast);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;self.protect(body)&gt;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;isFirst&#160;:=&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;forResults-&gt;reverse<br>&#160;&#160;&#160;&#160;end&#160;|]<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugarInTableKeys"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugarInTableKeys():Performable<br>&#160;&#160;if&#160;names-&gt;size&#160;=&#160;1<br>&#160;&#160;then&#160;self.desugarInTableKeys(names-&gt;head,colls-&gt;head)<br>&#160;&#160;else&#160;self.error("For:&#160;multiple&#160;binding&#160;not&#160;supported&#160;for&#160;inTableKeys&#160;directive:&#160;"&#160;+&#160;self.pprint())<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugarInTableKeys"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugarInTableKeys(name&#160;:&#160;String,coll&#160;:&#160;Performable):Performable<br>&#160;&#160;[|&#160;let&#160;forTable&#160;=&#160;&lt;coll&gt;.asVector()<br>&#160;&#160;&#160;&#160;in&#160;declare(hidden,forTable);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;@Count&#160;forIndex&#160;from&#160;0&#160;to&#160;forTable-&gt;size&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;forBucket&#160;=&#160;forTable.ref(forIndex)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;declare(hidden,forBucket);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@For&#160;forCell&#160;in&#160;forBucket&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;Drop(Var(name,304))&#160;=&#160;forCell-&gt;head;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;isFirst&#160;=&#160;isFirst&#160;and&#160;forIndex&#160;=&#160;0;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;isLast&#160;=&#160;isLast&#160;and&#160;(forIndex&#160;=&#160;forTable-&gt;size&#160;-&#160;1)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;declare(hidden,isFirst);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;declare(hidden,isLast);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;self.protect(body)&gt;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;isFirst&#160;:=&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;end&#160;|]<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugarInTableValues"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugarInTableValues(name&#160;:&#160;String,coll&#160;:&#160;Performable):Performable<br>&#160;&#160;[|&#160;let&#160;forTable&#160;=&#160;&lt;coll&gt;.asVector()<br>&#160;&#160;&#160;&#160;in&#160;declare(hidden,forTable);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;@Count&#160;forIndex&#160;from&#160;0&#160;to&#160;forTable-&gt;size&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;forBucket&#160;=&#160;forTable.ref(forIndex)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;declare(hidden,forBucket);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@For&#160;forCell&#160;in&#160;forBucket&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;Drop(Var(name,333))&#160;=&#160;forCell-&gt;tail;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;isFirst&#160;=&#160;isFirst&#160;and&#160;forIndex&#160;=&#160;0;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;isLast&#160;=&#160;isLast&#160;and&#160;(forIndex&#160;=&#160;forTable-&gt;size&#160;-&#160;1)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;declare(hidden,isFirst);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;declare(hidden,isLast);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;self.protect(body)&gt;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;isFirst&#160;:=&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;end&#160;|]<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugarInTableValues"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugarInTableValues():Performable<br>&#160;&#160;if&#160;names-&gt;size&#160;=&#160;1<br>&#160;&#160;then&#160;self.desugarInTableValues(names-&gt;head,colls-&gt;head)<br>&#160;&#160;else&#160;self.error("For:&#160;multiple&#160;bindings&#160;not&#160;supported&#160;for&#160;inTableValuesdirective:&#160;"&#160;+&#160;self.pprint())<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="emptyCollCheck"/><FONT FACE="Courier" SIZE="1">@Operation&#160;emptyCollCheck():Performable<br>&#160;&#160;1.to(colls-&gt;size&#160;-&#160;1)-&gt;iterate(i&#160;test&#160;=&#160;[|&#160;&lt;Var("forColl0")&gt;-&gt;isEmpty&#160;|]&#160;|<br>&#160;&#160;&#160;&#160;[|&#160;&lt;test&gt;&#160;or&#160;&lt;Var("forColl"&#160;+&#160;i)&gt;-&gt;isEmpty&#160;|])<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="indexCheck"/><FONT FACE="Courier" SIZE="1">@Operation&#160;indexCheck(n&#160;:&#160;Integer):Performable<br>&#160;&#160;1.to(colls-&gt;size&#160;-&#160;1)-&gt;iterate(i&#160;test&#160;=&#160;[|&#160;&lt;Var(names-&gt;at(0)&#160;+&#160;"Index")&gt;&#160;=&#160;&lt;IntExp(n)&gt;&#160;|]&#160;|<br>&#160;&#160;&#160;&#160;[|&#160;&lt;test&gt;&#160;or&#160;&lt;Var(names-&gt;at(i)&#160;+&#160;"Index")&gt;&#160;=&#160;&lt;IntExp(n)&gt;&#160;|])<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="indexNames"/><FONT FACE="Courier" SIZE="1">@Operation&#160;indexNames():Seq(ValueBinding)<br>&#160;&#160;0.to(names-&gt;size&#160;-&#160;1)-&gt;collect(i&#160;|<br>&#160;&#160;&#160;&#160;ValueBinding(names-&gt;at(i),[|&#160;&lt;Var("forColl"&#160;+&#160;i)&gt;-&gt;at(&lt;Var(names-&gt;at(i)&#160;+&#160;"Index")&gt;)&#160;|]))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="lift"/><FONT FACE="Courier" SIZE="1">@Operation&#160;lift():Performable<br>&#160;&#160;Apply(self.typeExp(),Seq{names.lift(),StrExp(directive),colls.lift(),guard.lift(),body.lift(),isExp.lift()})<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="pprint"/><FONT FACE="Courier" SIZE="1">@Operation&#160;pprint(out&#160;:&#160;XCore::Element,indent&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;format(out,"@For&#160;~{,~;~S~}&#160;~S&#160;",Seq{names,directive});<br>&#160;&#160;@For&#160;coll&#160;in&#160;colls&#160;do<br>&#160;&#160;&#160;&#160;coll.pprint(out,indent);<br>&#160;&#160;&#160;&#160;if&#160;not&#160;isLast<br>&#160;&#160;&#160;&#160;then&#160;format(out,",")<br>&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end;<br>&#160;&#160;if&#160;guard&#160;&lt;&gt;&#160;null<br>&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;format(out,"&#160;when&#160;");<br>&#160;&#160;&#160;&#160;guard.pprint(out,indent)<br>&#160;&#160;else&#160;false<br>&#160;&#160;end&#160;;<br>&#160;&#160;if&#160;isExp<br>&#160;&#160;then&#160;format(out,"&#160;produce~%~V",Seq{indent&#160;+&#160;2})<br>&#160;&#160;else&#160;format(out,"&#160;do~%~V",Seq{indent&#160;+&#160;2})<br>&#160;&#160;end&#160;;<br>&#160;&#160;body.pprint(out,indent&#160;+&#160;2);<br>&#160;&#160;format(out,"~%~Vend",Seq{indent})<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="protect"/><FONT FACE="Courier" SIZE="1">@Operation&#160;protect(exp&#160;:&#160;Performable):XCore::Element<br>&#160;&#160;if&#160;guard&#160;=&#160;null<br>&#160;&#160;then&#160;if&#160;isExp<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;[|&#160;forResults&#160;:=&#160;Seq{&lt;exp&gt;&#160;|&#160;forResults}&#160;|]<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;exp<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;elseif&#160;isExp<br>&#160;&#160;then&#160;[|&#160;if&#160;&lt;guard&gt;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;forResults&#160;:=&#160;Seq{&lt;exp&gt;&#160;|&#160;forResults}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;&#160;|]<br>&#160;&#160;else&#160;[|&#160;if&#160;&lt;guard&gt;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;&lt;exp&gt;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;&#160;|]<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="takeTails"/><FONT FACE="Courier" SIZE="1">@Operation&#160;takeTails():Performable<br>&#160;&#160;1.to(colls-&gt;size&#160;-&#160;1)-&gt;iterate(i&#160;updates&#160;=&#160;[|&#160;&lt;Var("forColl0")&gt;&#160;:=&#160;&lt;Var("forColl0")&gt;-&gt;tail&#160;|]&#160;|<br>&#160;&#160;&#160;&#160;[|&#160;&lt;updates&gt;;<br>&#160;&#160;&#160;&#160;&lt;Var("forColl"&#160;+&#160;i)&gt;&#160;:=&#160;&lt;Var("forColl"&#160;+&#160;i)&gt;-&gt;tail&#160;|])<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="toString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;toString():String<br>&#160;&#160;try<br>&#160;&#160;&#160;&#160;self.of().name.toString()&#160;+&#160;"("&#160;+&#160;if&#160;self.hasSlot("names")<br>&#160;&#160;&#160;&#160;then&#160;self.names.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"names"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("directive")<br>&#160;&#160;&#160;&#160;then&#160;self.directive.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"directive"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("colls")<br>&#160;&#160;&#160;&#160;then&#160;self.colls.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"colls"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("guard")<br>&#160;&#160;&#160;&#160;then&#160;self.guard.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"guard"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("body")<br>&#160;&#160;&#160;&#160;then&#160;self.body.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"body"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("isExp")<br>&#160;&#160;&#160;&#160;then&#160;self.isExp.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"isExp"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;")"<br>&#160;&#160;catch(exception)<br>&#160;&#160;&#160;&#160;self.of().name&#160;+&#160;"(Constructor&#160;Error!)"<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkerBindings"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkerBindings():Seq(ValueBinding)<br>&#160;&#160;0.to(colls-&gt;size&#160;-&#160;1)-&gt;collect(i&#160;|<br>&#160;&#160;&#160;&#160;ValueBinding("forWalker"&#160;+&#160;i,[|&#160;Walkers::Find(@Operation&#160;anonymous(o&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;o.isReallyKindOf(&lt;colls-&gt;at(i)&gt;)<br>&#160;&#160;&#160;&#160;end)&#160;|]))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkerResults"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkerResults():Seq(Performable)<br>&#160;&#160;0.to(colls-&gt;size&#160;-&#160;1)-&gt;collect(i&#160;|<br>&#160;&#160;&#160;&#160;[|&#160;&lt;Var("forWalker"&#160;+&#160;i)&gt;.results()&#160;|])<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkerSetup"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkerSetup():Performable<br>&#160;&#160;0.to(colls-&gt;size&#160;-&#160;1)-&gt;iterate(i&#160;walkers&#160;=&#160;[|&#160;null&#160;|]&#160;|<br>&#160;&#160;&#160;&#160;[|&#160;&lt;walkers&gt;;<br>&#160;&#160;&#160;&#160;&lt;Var("forWalker"&#160;+&#160;i)&gt;.walk(Root,null)&#160;|])<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=1><FONT SIZE="+2">
+<B>Grammar</B></FONT></TD>
+</TR>
+<TD><PRE>
+ForNames ::=  AName   = name   ForNames-Star0   = names   <Pair 21e30d> .
+SetCmpExp ::=  LinePos   = l   '{'   CommaSepExps   = es   '}'   !  { SetExp(l,"Set",es) } |  LinePos   = l   '{'   Exp   = e   '|'   CmpClause   = c   SetCmpExp-Star0   = cs   '}'  { Comprehensions::Cmp("Set",e,Seq{c | cs}) }.
+ForType ::=  'do'  { false } |  'produce'  { true }.
+AddPattern-Dis0 ::=  '+'   AddPattern   = p2  { Addp(p1,p2) } |  <VarRef 2697c7> .
+ForDirective ::=  'classifiedBy'   classifiedBy  |  'in'   in  |  'inReverse'   inReverse  |  'inTableKeys'   inTableKeys  |  'inTableValues'   inTableValues  |  'inSeq'   inSeq .
+BindValue ::=  OptType   = type   '='   SimpleExp   = value  { ValueBinding(name,type,value) }.
+ForNames-Star0 ::=  ','   AName   = $head   ForNames-Star0   = $tail   Cons  |  Nil .
+Def ::=  'context'   Def-Dis0   = isForward   ImportPath   = path   PushChar   Exp   PopChar   = exp  { ContextDef(path,exp,isForward) }.
+ForColls ::=  PushChar   Exp   PopChar   = exp   ForColls-Star0   = exps   <Pair 1ff63b> .
+LocalParserImport-Star0 ::=  '::'   Name   = $head   LocalParserImport-Star0   = $tail   Cons  |  Nil .
+ForColls-Star0 ::=  ','   PushChar   Exp   PopChar   = $head   ForColls-Star0   = $tail   Cons  |  Nil .
+NonEmptySeqTail ::=  PushChar   Expr   PopChar   = e   PairOrElements .
+For ::=  ForNames   = names   ForDirective   = dir   ForColls   = colls   For-Dis0   = guard   ForType   = isExp   PushChar   Exp   PopChar   = body   'end'  { For(names,dir,colls,guard,body,isExp) }.
+Import ::=  PushChar   'import'   ImportPath   = path   ';'  { Import(path) }  PopChar .
+For-Dis0 ::=  'when'   PushChar   Exp   PopChar  |  null .
+Varp ::=  AName   = name   Varp-Dis0   = pattern   Varp-Dis1   = type  { Varp(name,pattern,type) }.
+Keywordp ::=  Name   = name   Keywordp-Star0   = names   '['   Keyps   = keys   ']'  { Keywordp(name,names,keys) }.
+IfTail ::=  'else'   PushChar   Expr   PopChar   'end'  |  LinePos   = l   'elseif'   PushChar   Expr   PopChar   = e1   'then'   PushChar   Expr   PopChar   = e2   IfTail   = e3  { If(l,e1,e2,e3) } |  'end'  { BoolExp(false) }.
+SeqCmpExp-Star0 ::=  ','   CmpClause   = $head   SeqCmpExp-Star0   = $tail   Cons  |  Nil .
+AddPattern ::=  AtomicPattern   = p1   AddPattern-Dis0 .
+EvaluationUnit ::=  EvaluationUnit-Star0   EvaluationUnit-Star1   = imports   EvaluationUnit-Star2   = exps   EOF  { Evaluator::EvaluationUnit(imports,exps) }.
+Keyps-Star0 ::=  ','   Keyp   = $head   Keyps-Star0   = $tail   Cons  |  Nil .
+Atom ::=  PushChar   VarExp   PopChar   !  |  PushChar   Self   PopChar   !  |  PushChar   StrExp   PopChar   !  |  PushChar   IntExp   PopChar   !  |  PushChar   IfExp   PopChar   !  |  PushChar   BoolExp   PopChar   !  |  PushChar   LetExp   PopChar   !  |  PushChar   CollExp   PopChar   !  |  Parentheses  |  PushChar   Drop   PopChar  |  PushChar   Lift   PopChar  |  PushChar   Throw   PopChar  |  PushChar   Try   PopChar  |  PushChar   ImportIn   PopChar  |  PushChar   FloatExp   PopChar  |  PushChar   LocalParserImport   PopChar  |  PushChar   AtExp   PopChar .
+VarExp ::=  Name   = name   LinePos   = l  { Var(name,l) }.
+EvaluationUnit-Star2-Dis0 ::=  Def  |  TopLevelExp .
+BindingList ::=  PushChar   Binding   PopChar   = binding   BindingList-Star0   = bindings   <Pair 3293c2> .
+Syntaxp ::=  '[|'   PushChar   Exp   PopChar   = e   '|]'  { Syntaxp(e) }.
+Objectp ::=  Name   = name   Objectp-Star0   = names   '('   Patterns   = slots   ')'  { Objectp(name,names,slots) }.
+CollMessage ::=  '('   CommaSepExps   = as   ')'  { CollExp(c,n,as) }.
+SeqCmpExp ::=  LinePos   = l   '['   CommaSepExps   = es   ']'   !  { SetExp(l,"Seq",es) } |  LinePos   = l   '['   Exp   = e   '|'   CmpClause   = c   SeqCmpExp-Star0   = cs   ']'  { Comprehensions::Cmp(e,Seq{c | cs}) }.
+PathExp ::=  PushChar   Atom   PopChar   = atom   PathExp-Dis0 .
+Constp ::=  Intp  |  Strp  |  Boolp  |  Expp .
+Parentheses ::=  '('   PushChar   Expr   PopChar   = e   ')'  { Parentheses(e) }.
+SeqExp ::=  LinePos   = l   'Seq{'   SeqExp-Dis0 .
+CollOp ::=  CollMessage  |  Collect  |  Iterate  | { CollExp(c,n,Seq{}) }.
+ArgsTail-Star0 ::=  ','   PushChar   Expr   PopChar   = $head   ArgsTail-Star0   = $tail   Cons  |  Nil .
+Throw ::=  LinePos   = l   'throw'   PushChar   SimpleExp   PopChar   = value  { Throw(l,value) }.
+BindFunArgsTail ::=  Pattern   = p   BindFunArgsTail-Star0   = ps   ')'   <Pair 3ffa11>  |  ')'   Seq{} .
+EvaluationUnit-Star2 ::=  EvaluationUnit-Star2-Dis0   = $head   EvaluationUnit-Star2   = $tail   Cons  |  Nil .
+Drop ::=  '<'   DropExp   = e   '>'  { Drop(resolve(order(e))) } |  '<|'   Pattern   = p   '|>'  { DropPattern(p) }.
+ArrowTail ::=  Name   = n   CollOp   = x   Arrow .
+Objectp-Star0 ::=  '::'   Name   = $head   Objectp-Star0   = $tail   Cons  |  Nil .
+Exp ::=  PushChar   Expr   PopChar   = e   !  { resolve(order(e)) }.
+LogicalExp ::=  PushChar   SimpleExp   PopChar   = e  { resolve(order(e)) }.
+SetCmpExp-Star0 ::=  ','   CmpClause   = $head   SetCmpExp-Star0   = $tail   Cons  |  Nil .
+ImportPath ::=  Name   = n   ImportPath-Star0   = ns   <Pair 440787> .
+KeyArg ::=  Name   = name   '='   PushChar   Expr   PopChar   = exp  { KeyArg(name,exp) }.
+Varp-Dis0 ::=  '='   PushChar   Pattern   PopChar  |  null .
+Keyps ::=  Keyp   = key   Keyps-Star0   = keys   <Pair 508072>  |  Seq{} .
+IfExp ::=  LinePos   = l   'if'   PushChar   Expr   PopChar   = e1   'then'   PushChar   Expr   PopChar   = e2   IfTail   = e3  { If(l,e1,e2,e3) }.
+Patterns-Star0 ::=  ','   Pattern   = $head   Patterns-Star0   = $tail   Cons  |  Nil .
+AName ::=  Name   !  |  Drop .
+EmptySeqTail ::=  '}'  { SetExp(l,"Seq",Seq{}) }.
+Keywordp-Star0 ::=  '::'   Name   = $head   Keywordp-Star0   = $tail   Cons  |  Nil .
+AtExp ::=  LinePos   = l   '@'   PushChar  At  PopChar   = e  { e.setLine(l) }.
+Try ::=  LinePos   = l   'try'   PushChar   Expr   PopChar   = body   'catch'   '('   Name   = name   ')'   PushChar   Expr   PopChar   = handler   'end'  { Try(l,body,name,handler) }.
+Def-Dis0 ::=  '!'  { true } | { false }.
+Bindings ::=  BindingList  |  Drop .
+Strp ::=  Str   = s  { Constp(StrExp(s)) }.
+Op ::=  BinOp   !  |  ';'   ; .
+Collect ::=  '('   AName   = v   '|'   PushChar   Expr   PopChar   = e   ')'  { IterExp(c,n,v,e) }.
+SetExp ::=  LinePos   = l   'Set{'   CommaSepExps   = es   '}'  { SetExp(l,"Set",es) }.
+Pattern ::=  AddPattern   = p   Pattern-Star0   = es  { es->iterate(e s = p |
+  Includingp(s,e)) }  = p   PatternGuard .
+Consp ::=  Pairp  |  Seqp  |  Emptyp .
+ParserImport ::=  'parserImport'   Name   = name   ParserImport-Star0   = names   ';'   <Pair 4a0997>  ImportAt { ParserImport(Seq{name} + names,null) }.
+Seqp ::=  'Seq{'   Pattern   = head   SeqpTail   = tail  { Consp(head,tail) }.
+CollExp ::=  PushChar   SetExp   PopChar   !  |  PushChar   SeqExp   PopChar   !  |  PushChar   SetCmpExp   PopChar   !  |  PushChar   SeqCmpExp   PopChar   ! .
+BindFunArgsTail-Star0 ::=  ','   Pattern   = $head   BindFunArgsTail-Star0   = $tail   Cons  |  Nil .
+TopLevelExp ::=  PushChar   SimpleExp   PopChar   = s   ';'  { resolve(order(s)) }.
+BindFunArgs ::=  '('   BindFunArgsTail .
+EvaluationUnit-Star1 ::=  EImport   = $head   EvaluationUnit-Star1   = $tail   Cons  |  Nil .
+DropExp ::=  'not'   DropExp   = e  { Negate(e) } |  PushChar   Apply   PopChar   = a   DropExpTail .
+ArgsTail ::=  ')'   Seq{}  |  PushChar   Expr   PopChar   = arg   ArgsTail-Star0   = args   ')'   <Pair 3a65d6> .
+PairOrElements-Star0 ::=  ','   PushChar   Expr   PopChar   = $head   PairOrElements-Star0   = $tail   Cons  |  Nil .
+Expr ::=  'not'   PushChar   Expr   PopChar   = e  { Negate(e) } |  '-'   PushChar   SimpleExp   PopChar   = e  { BinExp(IntExp(0),"-",e) } |  PushChar   Apply   PopChar   = a   ExpTail .
+LocalParserImport ::=  'parserImport'   Name   = name   LocalParserImport-Star0   = names   <Pair 62a07c>  ImportAt  'in'   PushChar   Expr   PopChar   = e   'end'  { ParserImport(Seq{name | names},e) }.
+SeqExp-Dis0 ::=  EmptySeqTail  |  NonEmptySeqTail .
+ImportIn ::=  'import'   ImportPath   = path   'in'   PushChar   Exp   PopChar   = body   'end'  { ImportIn(path,body) }.
+KeyArgs ::=  '['   KeyArgs-Dis0 .
+Varp-Dis1 ::=  ':'   PushChar   TypeExp   PopChar  | { NamedType() }.
+Keyp ::=  Name   = name   '='   Pattern   = pattern  { Keyp(name,pattern) }.
+FloatExp ::=  LinePos   = l   Float   = f  { f.lift().line := l }.
+Pattern-Star0 ::=  PatternTail   = $head   Pattern-Star0   = $tail   Cons  |  Nil .
+Apply ::=  PushChar   Atom   PopChar   = a   ApplyTail   = e   Arrow .
+Emptyp ::=  'Seq{'   '}'  { Constp(SetExp("Seq",Seq{})) } |  'Set{'   '}'  { Constp(SetExp("Set",Seq{})) }.
+KeyArgs-Dis0 ::=  ']'   Seq{}  |  KeyArg   = arg   KeyArgs-Dis0-Star0   = args   ']'   <Pair 3b0762> .
+AtomicPattern ::=  PushChar   Varp   PopChar  |  PushChar   Constp   PopChar  |  PushChar   Objectp   PopChar  |  PushChar   Consp   PopChar  |  PushChar   Keywordp   PopChar  |  PushChar   Syntaxp   PopChar  |  '('   PushChar   Pattern   PopChar   ')' .
+TypePath ::=  Name   = name   TypePath-Star0   = names  { Seq{name | names}->collect(n |
+  Symbol(n)) }.
+CompilationUnit-Star0 ::=  ParserImport   = $head   CompilationUnit-Star0   = $tail   Cons  |  Nil .
+BinOp ::=  '<'   <  |  '<='   <=  |  '>'   >  |  '>='   >=  |  '<>'   <>  |  '='   =  |  '::'   ::  |  ':='   :=  |  '.'   .  |  'and'   and  |  'andthen'   andthen  |  'implies'   implies  |  'or'   or  |  'orelse'   orelse  |  '+'   +  |  '-'   -  |  '*'   *  |  '/'   / .
+StrExp ::=  LinePos   = l   Str   = e  { StrExp(l,e) }.
+OpType ::=  TypeArgs   = domains   '->'   PushChar   TypeExp   PopChar   = range  { OpType(domains,range) }.
+CommaSepExps ::=  PushChar   Expr   PopChar   = e   CommaSepExps-Star0   = es   <Pair 420768>  |  Seq{} .
+Self ::=  LinePos   = l   'self'  { Self(l) }.
+PatternGuard ::=  'when'   PushChar   Exp   PopChar   = e  { Condp(p,e) } |  <VarRef 3d2c84> .
+CompilationBodyExps ::=  CompilationBody   = b   !   CompilationBodyExps   = bs   <Pair 4408cf>  |  Seq{} .
+Pairp ::=  'Seq{'   Pattern   = head   '|'   Pattern   = tail   '}'  { Consp(head,tail) }.
+SeqpTail ::=  ','   Pattern   = head   SeqpTail   = tail  { Consp(head,tail) } |  '}'  { Constp(SetExp("Seq",Seq{})) }.
+CmpClause ::=  Name   = n   OptType   = t   '<-'   PushChar   Exp   PopChar   = e  { Comprehensions::Bind(n,t.toExp(),e) } |  '?'   PushChar   Exp   PopChar   = e  { Comprehensions::Filter(e) }.
+BindingList-Star0 ::=  ';'   PushChar   Binding   PopChar   = $head   BindingList-Star0   = $tail   Cons  |  Nil .
+TopLevelCommand ::=  PushChar   SimpleExp   PopChar   = c   pState   = p  { p.consumeToken := false }  ';'  { resolve(order(c)) }.
+BindFun ::=  BindFunArgs   = args   OptType   = type   '='   PushChar   SimpleExp   PopChar   = value  { FunBinding(name,args,type,value) }.
+EvaluationUnit-Star0 ::=  ParserImport   = $head   EvaluationUnit-Star0   = $tail   Cons  |  Nil .
+DropExpTail ::=  DropOp   = o   !   DropExp   = e  { BinExp(a,o,e) } |  <VarRef 4204ab> .
+Args ::=  '('   ArgsTail .
+ParserImport-Star0 ::=  '::'   Name   = $head   ParserImport-Star0   = $tail   Cons  |  Nil .
+ExpTail ::=  Op   = o   !   PushChar   Expr   PopChar   = e  { BinExp(a,o,e) } |  <VarRef 3d45e4> .
+Lift ::=  LinePos   = l   '[|'   PushChar   Exp   PopChar   = e   '|]'  { Lift(l,e) }.
+TypeExp-Dis0 ::=  TypeArgs   = args  { ParametricType(path,args) } | { NamedType(path) }.
+IntExp ::=  LinePos   = l   Int   = e  { IntExp(l,e) }.
+Iterate ::=  '('   AName   = v1   AName   = v2   '='   PushChar   Expr   PopChar   = init   '|'   PushChar   Expr   PopChar   = body   ')'  { Iterate(c,v1,v2,init,body) }.
+TypePath-Star0 ::=  '::'   Name   = $head   TypePath-Star0   = $tail   Cons  |  Nil .
+LetBody ::=  'in'   PushChar   Expr   PopChar   = body   <VarRef 4696ed>  |  PushChar   'then'   PushChar   Bindings   PopChar   = bindings   LetBody   = body  { Let(bindings,body) }  PopChar .
+Expp ::=  '['   PushChar   Exp   PopChar   = exp   ']'  { Constp(exp) }.
+PathExp-Dis0 ::=  '::'   AName   = name   PathExp-Dis0-Star0   = names  { Path(atom,Seq{name | names}) } |  <VarRef 3b08e9> .
+ApplyTail ::=  Args   = args   !  { Apply(a,args) } |  KeyArgs   = args   !  { Instantiate(a,args) } |  <VarRef c857c> .
+EImport ::=  'import'   TopLevelExp   = exp  { Evaluator::Import(exp) }.
+KeyArgs-Dis0-Star0 ::=  ','   KeyArg   = $head   KeyArgs-Dis0-Star0   = $tail   Cons  |  Nil .
+Binding ::=  AName   = name   BindingTail .
+TypeArgs ::=  '('   PushChar   TypeExp   PopChar   = arg   TypeArgs-Star0   = args   ')'   <Pair 42e119> .
+CompilationUnit-Star1 ::=  Import   = $head   CompilationUnit-Star1   = $tail   Cons  |  Nil .
+BoolExp ::=  LinePos   = l   'true'  { BoolExp(l,true) } |  LinePos   = l   'false'  { BoolExp(l,false) }.
+SimpleExpTail ::=  BinOp   = o   !   PushChar   SimpleExp   PopChar   = e  { BinExp(a,o,e) } |  <VarRef c8574> .
+OptType ::=  ':'   PushChar   TypeExp   PopChar  | { NamedType() }.
+CompilationUnit ::=  CompilationUnit-Star0   = parserImports   CompilationUnit-Star1   = imports   CompilationBodyExps   = exps   EOF   pState   = s  { CompilationUnit("",imports,exps,s.getSource(),parserImports) }.
+Patterns ::=  Pattern   = head   Patterns-Star0   = tail   <Pair 600125>  |  Seq{} .
+PatternTail ::=  '->'   Name   '('   Pattern   = p   ')'   <VarRef 47f572> .
+CompilationBody ::=  Def  |  TopLevelExp .
+PairOrElements ::=  '|'   PushChar   Expr   PopChar   = t   '}'  { ConsExp(e,t) } |  PairOrElements-Star0   = es   '}'  { SetExp(l,"Seq",Seq{e | es}) }.
+SimpleExp ::=  'not'   PushChar   SimpleExp   PopChar   = e  { Negate(e) } |  '-'   PushChar   SimpleExp   PopChar   = e  { BinExp(IntExp(0),"-",e) } |  PushChar   Apply   PopChar   = a   SimpleExpTail .
+Boolp ::=  'true'  { Constp(BoolExp(true)) } |  'false'  { Constp(BoolExp(false)) }.
+CommaSepExps-Star0 ::=  ','   PushChar   Expr   PopChar   = $head   CommaSepExps-Star0   = $tail   Cons  |  Nil .
+TypeExp ::=  TypePath   = path   TypeExp-Dis0  |  '['   PushChar   TypeExp   PopChar   = t   ']'  { ParametricType(Seq{"Seq"},Seq{t}) } |  '{'   PushChar   TypeExp   PopChar   = t   '}'  { ParametricType(Seq{"Set"},Seq{t}) } |  Drop  |  OpType .
+BindingTail ::=  BindFun  |  BindValue .
+ImportPath-Star0 ::=  '::'   Name   = $head   ImportPath-Star0   = $tail   Cons  |  Nil .
+DropOp ::=  '<'   <  |  '<='   <=  |  '<>'   <>  |  '='   =  |  '::'   ::  |  ':='   :=  |  '.'   .  |  'and'   and  |  'andthen'   andthen  |  'implies'   implies  |  'or'   or  |  'orelse'   orelse  |  '+'   +  |  '-'   -  |  '*'   *  |  '/'   / .
+Arrow ::=  '->'   !   ArrowTail  |  <VarRef 2af4ba> .
+PathExp-Dis0-Star0 ::=  '::'   AName   = $head   PathExp-Dis0-Star0   = $tail   Cons  |  Nil .
+Exp1 ::=  PushChar   Exp   PopChar   EOF .
+LetExp ::=  LinePos   = l   'let'   PushChar   Bindings   PopChar   = bindings   LetBody   = body   'end'  { Let(l,bindings,body) }.
+TypeArgs-Star0 ::=  ','   PushChar   TypeExp   PopChar   = $head   TypeArgs-Star0   = $tail   Cons  |  Nil .
+Intp ::=  Int   = i  { Constp(IntExp(i)) }.
+</PRE></TD>
+</TABLE>
+</HTML>

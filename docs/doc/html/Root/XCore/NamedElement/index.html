@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+NamedElement
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>NamedElement</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+
+      A named element is an owned element with a name. The name may be a 
+      string or a symbol. typically we use symbols where the lookup of the name
+      needs to be efficient.
+    
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../Root/XCore/Contained/index.html">Contained</A>
+,<A HREF="../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+<TR><TD>NamedElement(name)</TD><TD> No Documentation </TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR><TD><B>name</B></TD><TD><A HREF="../../../Root/XCore/String/index.html">String<A></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Contained/index.html">Contained</A>: owner. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#getNamedElement">getNamedElement</a>(namedElements:<A HREF="../../../Root/XCore/NamedElement/index.html">Set(NamedElement)<A>,name:<A HREF="../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../Root/XCore/NamedElement/index.html">NamedElement<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#href">href</a>(currentPath:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>
+        Returns the path used in an href to the receiver. It assumes
+        that we are relative to a root that contains the root name space.
+      </TD></TR>
+<TR><TD><B><a href="#labelString">labelString</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#legalNameChangeCheck">legalNameChangeCheck</a>(newName:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,oldName:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#name">name</a>():<A HREF="../../../Root/XCore/Symbol/index.html">Symbol<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#path">path</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#pathSeq">pathSeq</a>():<A HREF="../../../Root/XCore/String/index.html">Seq(String)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#repopulate">repopulate</a>(other:<A HREF="../../../Root/XCore/NamedElement/index.html">NamedElement<A>):<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setName">setName</a>(name:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#toString">toString</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Contained/index.html">Contained</A>: addTo, allOwners, deleteRecursive, delete_client, delete_client_check, delete_client_redirect, getDefaultClipboardSource, owner, removeFromOwner, setOwner. <BR><B>From</B> <A HREF="../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="getNamedElement"/><FONT FACE="Courier" SIZE="1">@Operation&#160;getNamedElement(namedElements&#160;:&#160;Set(NamedElement),name&#160;:&#160;String):NamedElement<br>&#160;&#160;let&#160;es&#160;=&#160;namedElements-&gt;select(e&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;e.name.toString()&#160;=&#160;name.toString())<br>&#160;&#160;in&#160;if&#160;es-&gt;size&#160;=&#160;0<br>&#160;&#160;&#160;&#160;&#160;then&#160;null<br>&#160;&#160;&#160;&#160;&#160;else&#160;es-&gt;sel<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="href"/><FONT FACE="Courier" SIZE="1">@Operation&#160;href(currentPath&#160;:&#160;XCore::Element):String<br>&#160;&#160;currentPath-&gt;collect(x&#160;|<br>&#160;&#160;&#160;&#160;"..")-&gt;separateWith("/")&#160;+&#160;"/"&#160;+&#160;self.pathSeq()-&gt;separateWith("/")&#160;+&#160;"/index.html"<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="labelString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;labelString():XCore::Element<br>&#160;&#160;let&#160;name&#160;=&#160;self.name.toString()<br>&#160;&#160;in&#160;if&#160;not&#160;name&#160;=&#160;""<br>&#160;&#160;&#160;&#160;&#160;then&#160;name<br>&#160;&#160;&#160;&#160;&#160;else&#160;"&lt;anon&#160;:&#160;"&#160;+&#160;self.of().nameString()&#160;+&#160;"&gt;"<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="legalNameChangeCheck"/><FONT FACE="Courier" SIZE="1">@Operation&#160;legalNameChangeCheck(newName&#160;:&#160;XCore::Element,oldName&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;newName&#160;:=&#160;Symbol(newName.toString());<br>&#160;&#160;if&#160;newName.toString()&#160;=&#160;""<br>&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;xmf.warning("Cannot&#160;set&#160;name&#160;of&#160;"&#160;+&#160;oldName&#160;+&#160;"&#160;to&#160;""&#160;+&#160;newName&#160;+&#160;"".&#160;The&#160;empty&#160;string&#160;is&#160;"&#160;+&#160;"not&#160;a&#160;valid&#160;name&#160;for&#160;a&#160;named&#160;element.");<br>&#160;&#160;&#160;&#160;false<br>&#160;&#160;elseif&#160;not&#160;newName.isValidName()<br>&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;xmf.warning("Cannot&#160;set&#160;name&#160;of&#160;"&#160;+&#160;oldName&#160;+&#160;"&#160;to&#160;""&#160;+&#160;newName&#160;+&#160;""&#160;as&#160;the&#160;name&#160;is&#160;illegal.&#160;"&#160;+&#160;"A&#160;valid&#160;name&#160;must&#160;start&#160;with&#160;a&#160;letter,&#160;followed&#160;by&#160;letters,&#160;numbers&#160;or&#160;an&#160;underscore.");<br>&#160;&#160;&#160;&#160;false<br>&#160;&#160;elseif&#160;owner&#160;&lt;&gt;&#160;null&#160;andthen&#160;owner.contents.keys().includes(newName)&#160;andthen&#160;owner.getContents(newName)&#160;&lt;&gt;&#160;self<br>&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;xmf.warning("Cannot&#160;set&#160;name&#160;of&#160;"&#160;+&#160;oldName&#160;+&#160;"&#160;to&#160;""&#160;+&#160;newName&#160;+&#160;""&#160;as&#160;an&#160;element&#160;"&#160;+&#160;"already&#160;exists&#160;in&#160;"&#160;+&#160;self.owner().toString()&#160;+&#160;"&#160;with&#160;the&#160;same&#160;name.");<br>&#160;&#160;&#160;&#160;false<br>&#160;&#160;else&#160;true<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="name"/><FONT FACE="Courier" SIZE="1">@Operation&#160;name():Symbol<br>&#160;&#160;self.name<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="path"/><FONT FACE="Courier" SIZE="1">@Operation&#160;path():String<br>&#160;&#160;self.pathSeq()-&gt;separateWith("::")<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="pathSeq"/><FONT FACE="Courier" SIZE="1">@Operation&#160;pathSeq():Seq(String)<br>&#160;&#160;if&#160;self.owner()&#160;=&#160;self&#160;or&#160;self.owner()&#160;=&#160;null<br>&#160;&#160;then&#160;Seq{self.name.toString()}<br>&#160;&#160;else&#160;self.owner().pathSeq()&#160;+&#160;Seq{self.name.toString()}<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="repopulate"/><FONT FACE="Courier" SIZE="1">@Operation&#160;repopulate(other&#160;:&#160;NamedElement):Boolean<br>&#160;&#160;false<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setName"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setName(name&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;oldName&#160;=&#160;self.name<br>&#160;&#160;in&#160;if&#160;not&#160;name.isKindOf(Symbol)&#160;and&#160;not&#160;name.isKindOf(String)<br>&#160;&#160;&#160;&#160;&#160;then&#160;self.error("Cannot&#160;set&#160;the&#160;name&#160;of&#160;a&#160;named&#160;element&#160;to&#160;"&#160;+&#160;name)<br>&#160;&#160;&#160;&#160;&#160;else&#160;let&#160;newName&#160;=&#160;Symbol(name.toString())<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;self.name&#160;:=&#160;newName;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;owner&#160;&lt;&gt;&#160;null&#160;and&#160;owner.isKindOf(NameSpace)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;owner.nameChanged(self,newName,oldName)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end;<br>&#160;&#160;self<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="toString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;toString():String<br>&#160;&#160;"&lt;"&#160;+&#160;self.of().name.toString()&#160;+&#160;"&#160;"&#160;+&#160;self.name.toString()&#160;+&#160;"&gt;"<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

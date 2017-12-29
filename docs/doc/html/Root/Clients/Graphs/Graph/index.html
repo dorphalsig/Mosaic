@@ -1,0 +1,232 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+Graph
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>Graph</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+
+      This class allows you to construct and display a graph. Add features to the
+      graph (lines, labels etc) and then showGraph(). If you do not care that the
+      graph records the information it is displaying then use the various drawing
+      operations (such as line(x1,y1,x2,y2)) directly. The width and height of the
+      graph define how big it will be when drawn. The xscale and yscale define the
+      limits of the x and y co-ordinates. Points are scaled appropriately when given
+      relative to the x and y scales. Translate points by dx and dy. The axes are
+      annotated with a scale using divisions defined by xdivMaj/Min and ydivMaj/Min
+      where the Maj and Min refer to the major and minor divisions.
+    
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../../Root/Clients/Diagrams/Diagram/index.html">Diagram</A>
+,<A HREF="../../../../Root/Clients/ElementViewerInterface/index.html">ElementViewerInterface</A>
+,<A HREF="../../../../Root/Clients/ModelClipboard/DroppableClientElement/index.html">DroppableClientElement</A>
+,<A HREF="../../../../Root/Clients/Diagrams/DisplayContainer/index.html">DisplayContainer</A>
+,<A HREF="../../../../Root/Clients/Diagrams/Display/index.html">Display</A>
+,<A HREF="../../../../Root/Clients/ModelClipboard/DropHandler/index.html">DropHandler</A>
+,<A HREF="../../../../Root/Clients/Diagrams/ContainedDiagramElement/index.html">ContainedDiagramElement</A>
+,<A HREF="../../../../Root/Clients/Menus/RightClickable/index.html">RightClickable</A>
+,<A HREF="../../../../Root/Clients/ModelClipboard/PasteHandler/index.html">PasteHandler</A>
+,<A HREF="../../../../Root/Clients/ContainedClientElement/index.html">ContainedClientElement</A>
+,<A HREF="../../../../Root/Clients/ClientElement/index.html">ClientElement</A>
+,<A HREF="../../../../Root/XCore/Contained/index.html">Contained</A>
+,<A HREF="../../../../Root/Clients/Commandable/index.html">Commandable</A>
+,<A HREF="../../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+<TR><TD>Graph(name,width,height,xscale,yscale)</TD><TD> No Documentation </TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR><TD><B>canvas</B></TD><TD><A HREF="../../../../Root/Clients/Graphs/Canvas/index.html">Canvas<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>dx</B></TD><TD><A HREF="../../../../Root/XCore/Integer/index.html">Integer<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>dy</B></TD><TD><A HREF="../../../../Root/XCore/Integer/index.html">Integer<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>highlightPoints</B></TD><TD><A HREF="../../../../Root/XCore/Boolean/index.html">Boolean<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>labels</B></TD><TD><A HREF="../../../../Root/Clients/Graphs/Label/index.html">Seq(Label)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>lines</B></TD><TD><A HREF="../../../../Root/Clients/Graphs/Line/index.html">Seq(Line)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>xdivMaj</B></TD><TD><A HREF="../../../../Root/XCore/Integer/index.html">Integer<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>xdivMin</B></TD><TD><A HREF="../../../../Root/XCore/Integer/index.html">Integer<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>xscale</B></TD><TD><A HREF="../../../../Root/XCore/Integer/index.html">Integer<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>ydivMaj</B></TD><TD><A HREF="../../../../Root/XCore/Integer/index.html">Integer<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>ydivMin</B></TD><TD><A HREF="../../../../Root/XCore/Integer/index.html">Integer<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>yscale</B></TD><TD><A HREF="../../../../Root/XCore/Integer/index.html">Integer<A></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../../Root/Clients/Diagrams/Diagram/index.html">Diagram</A>: actionHandlers, backgroundColor, graph, isOpen, isSubDiagram, listeners, magneticWaypoints, name, nestedZoom, newHandlers, selected, toggleHandlers, zoom. <BR><B>From</B> <A HREF="../../../../Root/Clients/ModelClipboard/DroppableClientElement/index.html">DroppableClientElement</A>: dropEnabled. <BR><B>From</B> <A HREF="../../../../Root/Clients/Diagrams/DisplayContainer/index.html">DisplayContainer</A>: displays. <BR><B>From</B> <A HREF="../../../../Root/Clients/Diagrams/Display/index.html">Display</A>: height, hidden, refname, shown, width, x, y. <BR><B>From</B> <A HREF="../../../../Root/Clients/Menus/RightClickable/index.html">RightClickable</A>: menuKey, rightClickMenu. <BR><B>From</B> <A HREF="../../../../Root/Clients/ClientElement/index.html">ClientElement</A>: id. <BR><B>From</B> <A HREF="../../../../Root/XCore/Contained/index.html">Contained</A>: owner. <BR><B>From</B> <A HREF="../../../../Root/Clients/Commandable/index.html">Commandable</A>: commandInterpreter. <BR><B>From</B> <A HREF="../../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#addToLabels">addToLabels</a>(v:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#addToLines">addToLines</a>(v:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#canvas">canvas</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#deleteFromLabels">deleteFromLabels</a>(v:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#deleteFromLines">deleteFromLines</a>(v:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#dispose">dispose</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#drawAxes">drawAxes</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#drawGraph">drawGraph</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#drawXAxis">drawXAxis</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#drawYAxis">drawYAxis</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#dx">dx</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#dy">dy</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#ellipse">ellipse</a>(x:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,y:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,width:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,height:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#highlightPoints">highlightPoints</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#htick">htick</a>(x:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,y:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,length:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#label">label</a>(text:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,x:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,y:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#labels">labels</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#line">line</a>(x1:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,y1:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,x2:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,y2:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,color:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#lines">lines</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newId">newId</a>():<A HREF="../../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#point">point</a>(x:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,y:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#redrawGraph">redrawGraph</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#reset">reset</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setDx">setDx</a>(v:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setDy">setDy</a>(v:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setHighlightPoints">setHighlightPoints</a>(v:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setLabels">setLabels</a>(v:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setLines">setLines</a>(v:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setXdivMaj">setXdivMaj</a>(v:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setXdivMin">setXdivMin</a>(v:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setXscale">setXscale</a>(v:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setYdivMaj">setYdivMaj</a>(v:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setYdivMin">setYdivMin</a>(v:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setYscale">setYscale</a>(v:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#showGraph">showGraph</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#textHeight">textHeight</a>(text:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#textWidth">textWidth</a>(text:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#toString">toString</a>():<A HREF="../../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#vtick">vtick</a>(x:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,y:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,length:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#x">x</a>(x:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#xAxisLabel">xAxisLabel</a>(text:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,x:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#xdivMaj">xdivMaj</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#xdivMin">xdivMin</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#xscale">xscale</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#y">y</a>(y:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#yAxisLabel">yAxisLabel</a>(text:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,y:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#ydivMaj">ydivMaj</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#ydivMin">ydivMin</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#yscale">yscale</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../../Root/Clients/Diagrams/Diagram/index.html">Diagram</A>: action, add, addEdge, addGroup, addNewButton, addNode, addToListeners, applyLayout, backgroundColor, buildGlobalMenu, calcChildrenSlots, cardLayout, circulateGraph, clone, close, containsEdge, containsNode, copyDiagramToClipboard, create, debug, deepContains, defineActionHandler, defineActionHandler, defineActions, defineEdgeToolGroups, defineNewHandler, defineNewHandler, defineNewHandler, defineNodeToolGroups, defineToggleHandler, defineToggleHandler, defineToggleHandler, defineToggles, defineToolGroup, defineToolGroupTypes, defineToolGroups, delete, deleteButton, deleteFromListeners, deleteGroup, deleteGroupNamed, deleteNode, delete_check, deselectAll, diagramId, diagramZoomTo, dispose, disposeId, doubleClick, drop, edges, editMenuOperation, element, enableDrop, expandHeight, expandWidth, exportImageMenuOperation, exportSVG, exportSVGMenuOperation, findElement, focusGained, focusLost, getClipboardTarget, getGroupNames, getPalette, getTopLevelDiagram, hasGroup, hasNewHandler, hideSelected, invokeMenuOperation, isOpen, labelString, layout, layoutData, legalNameChangeCheck, loadLayout, loadLayout, maxHeight, maxWidth, minHeight, minWidth, name, new, new, newEdge, newNode, nodes, oldLoadLayout, oldLoadLayout, packHeight, packWidth, preferenceChange, raiseEvent, readLayout, refreshBackgroundColor, refreshName, refreshZoom, remove, removeAnyHandler, removeEdge, removeFromManager, removeNode, renameAnyHandler, renew, renew, renewZoom, resize, saveLayout, saveLayoutInFile, selected, selectedX, selectedY, setBackgroundColor, setBackgroundColor, setFocus, setMagneticWaypoints, setName, setName, setSelected, show, showMenuOperation, startRender, stopRender, synchronise, tileLayout, toString, toggle, updateValues, writeJpeg, zoomChanged, zoomIn, zoomOne, zoomOut, zoomTo, zoomToFit. <BR><B>From</B> <A HREF="../../../../Root/Clients/ElementViewerInterface/index.html">ElementViewerInterface</A>: element. <BR><B>From</B> <A HREF="../../../../Root/Clients/ModelClipboard/DroppableClientElement/index.html">DroppableClientElement</A>: acceptDrop, acceptMultipleDrop, drop, dropEnabled, enableDrop, setDropEnabled, setDroppable. <BR><B>From</B> <A HREF="../../../../Root/Clients/Diagrams/DisplayContainer/index.html">DisplayContainer</A>: add, addDisplays, addToDisplays, deleteFromDisplays, hide, newDisplays, pack, remove, renewDisplays, setFont, show. <BR><B>From</B> <A HREF="../../../../Root/Clients/Diagrams/Display/index.html">Display</A>: clicks, deepContains, delete, diagramId, disposeId, expand, expandHeight, expandWidth, getDisplay, height, hidden, hide, maxHeight, maxWidth, minHeight, minWidth, move, moveBy, new, pack, packHeight, packWidth, preferenceChange, refname, removeFromOwner, removeTheme, renew, renewHidden, resize, resized, setFont, setHeight, setHidden, setRefname, setShown, setWidth, setX, setY, show, shown, sychronise, toSVG, width, x, y. <BR><B>From</B> <A HREF="../../../../Root/Clients/ModelClipboard/DropHandler/index.html">DropHandler</A>: acceptDrop, acceptMultipleDrop, drop. <BR><B>From</B> <A HREF="../../../../Root/Clients/Diagrams/ContainedDiagramElement/index.html">ContainedDiagramElement</A>: diagram, engine, new, raiseEvent. <BR><B>From</B> <A HREF="../../../../Root/Clients/Menus/RightClickable/index.html">RightClickable</A>: addRightClickMenuItem, addRightClickMenuItems, buildGlobalMenu, buildMenuTreeFromRegistry, clearRightClickMenu, clearRightClickMenu, globalMenu, globalMenu, globalMenu, menuKey, newRightClickMenu, renewRightClickMenu, selfTarget, setMenuKey, setRightClickMenu. <BR><B>From</B> <A HREF="../../../../Root/Clients/ModelClipboard/PasteHandler/index.html">PasteHandler</A>: acceptPaste, chooseContribution, contributionStringOp, getClipboardTarget, pasteFromClipboard, postHandlePaste, preHandlePaste. <BR><B>From</B> <A HREF="../../../../Root/Clients/ContainedClientElement/index.html">ContainedClientElement</A>: commandInterpreter, dispose, eventHandler, hasCommandInterpreter. <BR><B>From</B> <A HREF="../../../../Root/Clients/ClientElement/index.html">ClientElement</A>: dispose, disposeCollection, disposeId, disposeIdCollection, id, removeFromIdManager, setId. <BR><B>From</B> <A HREF="../../../../Root/XCore/Contained/index.html">Contained</A>: addTo, allOwners, deleteRecursive, delete_client, delete_client_check, delete_client_redirect, getDefaultClipboardSource, owner, removeFromOwner, setOwner. <BR><B>From</B> <A HREF="../../../../Root/Clients/Commandable/index.html">Commandable</A>: commandInterpreter. <BR><B>From</B> <A HREF="../../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="addToLabels"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addToLabels[EXTENDER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.labels&#160;:=&#160;self.labels-&gt;including(v)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addToLines"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addToLines[EXTENDER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.lines&#160;:=&#160;self.lines-&gt;including(v)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="canvas"/><FONT FACE="Courier" SIZE="1">@Operation&#160;canvas[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.canvas<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="deleteFromLabels"/><FONT FACE="Courier" SIZE="1">@Operation&#160;deleteFromLabels[REDUCER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.labels&#160;:=&#160;self.labels-&gt;excluding(v)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="deleteFromLines"/><FONT FACE="Courier" SIZE="1">@Operation&#160;deleteFromLines[REDUCER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.lines&#160;:=&#160;self.lines-&gt;excluding(v)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="dispose"/><FONT FACE="Courier" SIZE="1">@Operation&#160;dispose():XCore::Element<br>&#160;&#160;self.disposeCollection(lines);<br>&#160;&#160;self.disposeCollection(labels);<br>&#160;&#160;super()<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="drawAxes"/><FONT FACE="Courier" SIZE="1">@Operation&#160;drawAxes():XCore::Element<br>&#160;&#160;self.line(0,0,0,height,Diagrams::Color());<br>&#160;&#160;self.line(0,0,width,0,Diagrams::Color());<br>&#160;&#160;self.drawXAxis();<br>&#160;&#160;self.drawYAxis()<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="drawGraph"/><FONT FACE="Courier" SIZE="1">@Operation&#160;drawGraph():XCore::Element<br>&#160;&#160;canvas.new(self,true);<br>&#160;&#160;canvas.move(10,10);<br>&#160;&#160;self.drawAxes();<br>&#160;&#160;@For&#160;line&#160;in&#160;lines&#160;do<br>&#160;&#160;&#160;&#160;self.line(line.x,line.y,line.x2,line.y2,line.color());<br>&#160;&#160;&#160;&#160;if&#160;highlightPoints<br>&#160;&#160;&#160;&#160;then&#160;let&#160;size&#160;=&#160;4<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;self.point(line.x,line.y);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.point(line.x2,line.y2)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end;<br>&#160;&#160;@For&#160;label&#160;in&#160;labels&#160;do<br>&#160;&#160;&#160;&#160;self.label(label.text,label.x,label.y)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="drawXAxis"/><FONT FACE="Courier" SIZE="1">@Operation&#160;drawXAxis():XCore::Element<br>&#160;&#160;let&#160;x&#160;=&#160;0<br>&#160;&#160;in&#160;@While&#160;x&#160;&lt;&#160;xscale&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;major&#160;=&#160;x.mod(xdivMaj)&#160;=&#160;0&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;markerLength&#160;=&#160;if&#160;major<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;10<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;4<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;self.vtick(x,0,markerLength);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;major<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;self.xAxisLabel(x.toString(),x)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;x&#160;:=&#160;x&#160;+&#160;xdivMin<br>&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="drawYAxis"/><FONT FACE="Courier" SIZE="1">@Operation&#160;drawYAxis():XCore::Element<br>&#160;&#160;let&#160;y&#160;=&#160;0<br>&#160;&#160;in&#160;@While&#160;y&#160;&lt;&#160;yscale&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;major&#160;=&#160;y.mod(ydivMaj)&#160;=&#160;0&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;markerLength&#160;=&#160;if&#160;major<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;10<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;4<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;self.htick(0,y,markerLength);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;major<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;self.yAxisLabel(y.toString(),y)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;y&#160;:=&#160;y&#160;+&#160;ydivMin<br>&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="dx"/><FONT FACE="Courier" SIZE="1">@Operation&#160;dx[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.dx<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="dy"/><FONT FACE="Courier" SIZE="1">@Operation&#160;dy[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.dy<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="ellipse"/><FONT FACE="Courier" SIZE="1">@Operation&#160;ellipse(x&#160;:&#160;XCore::Element,y&#160;:&#160;XCore::Element,width&#160;:&#160;XCore::Element,height&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;x&#160;=&#160;self.x(x);<br>&#160;&#160;&#160;&#160;&#160;&#160;y&#160;=&#160;self.y(y);<br>&#160;&#160;&#160;&#160;&#160;&#160;width&#160;=&#160;((self.width&#160;/&#160;xscale)&#160;*&#160;width).floor();<br>&#160;&#160;&#160;&#160;&#160;&#160;height&#160;=&#160;((self.height&#160;/&#160;yscale)&#160;*&#160;height).floor();<br>&#160;&#160;&#160;&#160;&#160;&#160;c&#160;=&#160;Color()<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;c61d8d&gt;<br>&#160;&#160;&#160;&#160;&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="highlightPoints"/><FONT FACE="Courier" SIZE="1">@Operation&#160;highlightPoints[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.highlightPoints<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="htick"/><FONT FACE="Courier" SIZE="1">@Operation&#160;htick(x&#160;:&#160;XCore::Element,y&#160;:&#160;XCore::Element,length&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;x&#160;=&#160;self.x(x);<br>&#160;&#160;&#160;&#160;&#160;&#160;y&#160;=&#160;self.y(y)<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;c64df3&gt;<br>&#160;&#160;&#160;&#160;&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="label"/><FONT FACE="Courier" SIZE="1">@Operation&#160;label(text&#160;:&#160;XCore::Element,x&#160;:&#160;XCore::Element,y&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;x&#160;=&#160;self.x(x);<br>&#160;&#160;&#160;&#160;&#160;&#160;y&#160;=&#160;self.y(y);<br>&#160;&#160;&#160;&#160;&#160;&#160;c&#160;=&#160;Color()<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;c62851&gt;<br>&#160;&#160;&#160;&#160;&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="labels"/><FONT FACE="Courier" SIZE="1">@Operation&#160;labels[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.labels<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="line"/><FONT FACE="Courier" SIZE="1">@Operation&#160;line(x1&#160;:&#160;XCore::Element,y1&#160;:&#160;XCore::Element,x2&#160;:&#160;XCore::Element,y2&#160;:&#160;XCore::Element,color&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;x1&#160;=&#160;self.x(x1);<br>&#160;&#160;&#160;&#160;&#160;&#160;y1&#160;=&#160;self.y(y1);<br>&#160;&#160;&#160;&#160;&#160;&#160;x2&#160;=&#160;self.x(x2);<br>&#160;&#160;&#160;&#160;&#160;&#160;y2&#160;=&#160;self.y(y2)<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;c62f2b&gt;<br>&#160;&#160;&#160;&#160;&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="lines"/><FONT FACE="Courier" SIZE="1">@Operation&#160;lines[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.lines<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newId"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newId():String<br>&#160;&#160;Kernel_valueToString(self.commandInterpreter().allocateId(null))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="point"/><FONT FACE="Courier" SIZE="1">@Operation&#160;point(x&#160;:&#160;XCore::Element,y&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;x&#160;=&#160;self.x(x)&#160;-&#160;3;<br>&#160;&#160;&#160;&#160;&#160;&#160;y&#160;=&#160;self.y(y)&#160;-&#160;3;<br>&#160;&#160;&#160;&#160;&#160;&#160;c&#160;=&#160;Color()<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;c614f5&gt;<br>&#160;&#160;&#160;&#160;&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="redrawGraph"/><FONT FACE="Courier" SIZE="1">@Operation&#160;redrawGraph():XCore::Element<br>&#160;&#160;canvas.delete();<br>&#160;&#160;self.canvas&#160;:=&#160;Canvas();<br>&#160;&#160;self.add(self.canvas);<br>&#160;&#160;self.drawGraph()<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="reset"/><FONT FACE="Courier" SIZE="1">@Operation&#160;reset():XCore::Element<br>&#160;&#160;self.setLines(Seq{});<br>&#160;&#160;self.setLabels(Seq{})<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setDx"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setDx[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.dx&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setDy"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setDy[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.dy&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setHighlightPoints"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setHighlightPoints[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.highlightPoints&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setLabels"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setLabels[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.labels&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setLines"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setLines[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.lines&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setXdivMaj"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setXdivMaj[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.xdivMaj&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setXdivMin"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setXdivMin[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.xdivMin&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setXscale"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setXscale[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.xscale&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setYdivMaj"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setYdivMaj[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.ydivMaj&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setYdivMin"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setYdivMin[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.ydivMin&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setYscale"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setYscale[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.yscale&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="showGraph"/><FONT FACE="Courier" SIZE="1">@Operation&#160;showGraph():XCore::Element<br>&#160;&#160;let&#160;findSeq&#160;=&#160;xmf.clientManager().clients-&gt;asSeq;<br>&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;=&#160;false;<br>&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;=&#160;null<br>&#160;&#160;in&#160;declare(hidden,findSeq);<br>&#160;&#160;&#160;&#160;&#160;declare(hidden,findDone);<br>&#160;&#160;&#160;&#160;&#160;declare(hidden,findResult);<br>&#160;&#160;&#160;&#160;&#160;@While&#160;not&#160;findSeq-&gt;isEmpty&#160;and&#160;not&#160;findDone&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;client&#160;=&#160;findSeq-&gt;head&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findElement&#160;=&#160;findSeq-&gt;head<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;declare(hidden,findElement);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;client.name&#160;=&#160;"com.ceteva.diagram"<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;:=&#160;true;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;:=&#160;if&#160;client.hasDiagram(self)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;client.showDiagram(self)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;client.newDiagram(self)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.drawGraph();<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;findSeq&#160;:=&#160;findSeq-&gt;tail<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;if&#160;not&#160;findDone<br>&#160;&#160;&#160;&#160;&#160;then&#160;false<br>&#160;&#160;&#160;&#160;&#160;else&#160;findResult<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="textHeight"/><FONT FACE="Courier" SIZE="1">@Operation&#160;textHeight(text&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;12<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="textWidth"/><FONT FACE="Courier" SIZE="1">@Operation&#160;textWidth(text&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;text-&gt;size&#160;*&#160;7<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="toString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;toString():String<br>&#160;&#160;try<br>&#160;&#160;&#160;&#160;self.of().name.toString()&#160;+&#160;"("&#160;+&#160;if&#160;self.hasSlot("name")<br>&#160;&#160;&#160;&#160;then&#160;self.name.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"name"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("width")<br>&#160;&#160;&#160;&#160;then&#160;self.width.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"width"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("height")<br>&#160;&#160;&#160;&#160;then&#160;self.height.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"height"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("xscale")<br>&#160;&#160;&#160;&#160;then&#160;self.xscale.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"xscale"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("yscale")<br>&#160;&#160;&#160;&#160;then&#160;self.yscale.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"yscale"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;")"<br>&#160;&#160;catch(exception)<br>&#160;&#160;&#160;&#160;self.of().name&#160;+&#160;"(Constructor&#160;Error!)"<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="vtick"/><FONT FACE="Courier" SIZE="1">@Operation&#160;vtick(x&#160;:&#160;XCore::Element,y&#160;:&#160;XCore::Element,length&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;x&#160;=&#160;self.x(x);<br>&#160;&#160;&#160;&#160;&#160;&#160;y&#160;=&#160;self.y(y)<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;c654c5&gt;<br>&#160;&#160;&#160;&#160;&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="x"/><FONT FACE="Courier" SIZE="1">@Operation&#160;x(x&#160;:&#160;XCore::Element):Integer<br>&#160;&#160;((width&#160;/&#160;xscale)&#160;*&#160;x).floor()&#160;+&#160;self.dx()<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="xAxisLabel"/><FONT FACE="Courier" SIZE="1">@Operation&#160;xAxisLabel(text&#160;:&#160;XCore::Element,x&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;x&#160;=&#160;self.x(x);<br>&#160;&#160;&#160;&#160;&#160;&#160;y&#160;=&#160;height&#160;-&#160;self.dy();<br>&#160;&#160;&#160;&#160;&#160;&#160;c&#160;=&#160;Color()<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;c65f33&gt;<br>&#160;&#160;&#160;&#160;&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="xdivMaj"/><FONT FACE="Courier" SIZE="1">@Operation&#160;xdivMaj[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.xdivMaj<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="xdivMin"/><FONT FACE="Courier" SIZE="1">@Operation&#160;xdivMin[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.xdivMin<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="xscale"/><FONT FACE="Courier" SIZE="1">@Operation&#160;xscale[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.xscale<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="y"/><FONT FACE="Courier" SIZE="1">@Operation&#160;y(y&#160;:&#160;XCore::Element):Integer<br>&#160;&#160;(height&#160;-&#160;((height&#160;/&#160;yscale)&#160;*&#160;y).floor())&#160;-&#160;self.dy()<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="yAxisLabel"/><FONT FACE="Courier" SIZE="1">@Operation&#160;yAxisLabel(text&#160;:&#160;XCore::Element,y&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;x&#160;=&#160;self.dx();<br>&#160;&#160;&#160;&#160;&#160;&#160;y&#160;=&#160;self.y(y);<br>&#160;&#160;&#160;&#160;&#160;&#160;c&#160;=&#160;Color()<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;c66b53&gt;<br>&#160;&#160;&#160;&#160;&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="ydivMaj"/><FONT FACE="Courier" SIZE="1">@Operation&#160;ydivMaj[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.ydivMaj<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="ydivMin"/><FONT FACE="Courier" SIZE="1">@Operation&#160;ydivMin[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.ydivMin<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="yscale"/><FONT FACE="Courier" SIZE="1">@Operation&#160;yscale[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.yscale<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

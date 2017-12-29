@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+ModelBrowserEventHandler
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>ModelBrowserEventHandler</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+
+       This class defines operations to handle the following incoming
+       events from the client. In each case the event is a sequence of strings
+       and integers. Each event has a fixed arity. Raising an event in the mapping
+       causes the appropriate model browser element (usually the containing element) to be
+       sent a message with the supplied arguments + the mapping. The model browser element
+       is then responsible for updating the model browser model and using the commands
+       listed above to update the client. Users of the mapping should always raise
+       events and not perform the commands directly. New types of model browser element can
+       handle the events in different ways. New types of model browser mapping can exten-d
+       the interface of events that can be raised.
+           [modelBrowserClosed(modelBrowserId)]
+           [focusGained(modelBrowserId)]
+           [focusLost(modelBrowserId)]
+           [textChanged(nodeId,text)]
+           [getEditableText(nodeId)]
+           [selected(nodeId)]
+           [doubleSelected(nodeId)]
+           [expanded(nodeId)]
+           [rightClickMenuSelected(ownerId,option)]
+           [undo(diagramId)]
+           [redo{diagramId)]
+     
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../../Root/Clients/ModelClipboard/DroppableEventHandler/index.html">DroppableEventHandler</A>
+,<A HREF="../../../../Root/Clients/EventHandler/index.html">EventHandler</A>
+,<A HREF="../../../../Root/XCore/Contained/index.html">Contained</A>
+,<A HREF="../../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../../Root/Clients/EventHandler/index.html">EventHandler</A>: calls, debug, input, thread. <BR><B>From</B> <A HREF="../../../../Root/XCore/Contained/index.html">Contained</A>: owner. <BR><B>From</B> <A HREF="../../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#dispatchEvent">dispatchEvent</a>(message:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,parameters:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#focusGained">focusGained</a>(modelBrowserId:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#focusLost">focusLost</a>(modelBrowserId:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#getEditableText">getEditableText</a>(nodeId:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#modelBrowserClosed">modelBrowserClosed</a>(modelBrowserId:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#nodeDeselected">nodeDeselected</a>(nodeId:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#nodeDoubleSelected">nodeDoubleSelected</a>(nodeId:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#nodeExpanded">nodeExpanded</a>(nodeId:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#nodeSelected">nodeSelected</a>(nodeId:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#readDeselected">readDeselected</a>(parameters:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#readDoubleSelected">readDoubleSelected</a>(parameters:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#readExpanded">readExpanded</a>(parameters:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#readFocusGained">readFocusGained</a>(parameters:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#readFocusLost">readFocusLost</a>(parameters:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#readGetEditableText">readGetEditableText</a>(parameters:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#readModelBrowserClosed">readModelBrowserClosed</a>(parameters:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#readRightClickMenuSelected">readRightClickMenuSelected</a>(parameters:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#readSelected">readSelected</a>(parameters:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#readTextChanged">readTextChanged</a>(parameters:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#redo">redo</a>(browserId:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#rightClickMenuSelected">rightClickMenuSelected</a>(menuId:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#textChanged">textChanged</a>(nodeId:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,text:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#undo">undo</a>(browserId:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../../Root/Clients/ModelClipboard/DroppableEventHandler/index.html">DroppableEventHandler</A>: acceptDrop, dragAndDrop, getIdSequence, handleDragAndDrop, readAcceptDrop, readDragAndDrop. <BR><B>From</B> <A HREF="../../../../Root/Clients/EventHandler/index.html">EventHandler</A>: addToCalls, call, callSelf, debug, debug, deleteFromCalls, dispatchEvent, find, processEvent, readEvent, start, toString. <BR><B>From</B> <A HREF="../../../../Root/XCore/Contained/index.html">Contained</A>: addTo, allOwners, deleteRecursive, delete_client, delete_client_check, delete_client_redirect, getDefaultClipboardSource, owner, removeFromOwner, setOwner. <BR><B>From</B> <A HREF="../../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="dispatchEvent"/><FONT FACE="Courier" SIZE="1">@Operation&#160;dispatchEvent(message&#160;:&#160;XCore::Element,parameters&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@Case&#160;message.name&#160;of<br>&#160;&#160;&#160;&#160;[&#160;"modelBrowserClosed"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.readModelBrowserClosed(parameters)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"focusGained"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.readFocusGained(parameters)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"focusLost"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.readFocusLost(parameters)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"textChanged"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.readTextChanged(parameters)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"getEditableText"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.readGetEditableText(parameters)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"deselected"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.readDeselected(parameters)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"selected"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.readSelected(parameters)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"doubleSelected"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.readDoubleSelected(parameters)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"expanded"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.readExpanded(parameters)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"rightClickMenuSelected"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.readRightClickMenuSelected(parameters)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"acceptDrop"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.readAcceptDrop(parameters)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"dragAndDrop"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.readDragAndDrop(parameters)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;end;<br>&#160;&#160;self<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="focusGained"/><FONT FACE="Courier" SIZE="1">@Operation&#160;focusGained(modelBrowserId&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.debug("focusGained[~S]~%",Seq{modelBrowserId});<br>&#160;&#160;if&#160;xmf.clientManager().idManager.hasId(modelBrowserId)<br>&#160;&#160;then&#160;self.find(modelBrowserId).focusGained()<br>&#160;&#160;else&#160;self.debug("&#160;&#160;id&#160;~S&#160;disposed~%",Seq{modelBrowserId})<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="focusLost"/><FONT FACE="Courier" SIZE="1">@Operation&#160;focusLost(modelBrowserId&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.debug("focusLost[~S]~%",Seq{modelBrowserId});<br>&#160;&#160;if&#160;xmf.clientManager().idManager.hasId(modelBrowserId)<br>&#160;&#160;then&#160;self.find(modelBrowserId).focusLost()<br>&#160;&#160;else&#160;self.debug("&#160;&#160;id&#160;~S&#160;disposed~%",Seq{modelBrowserId})<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="getEditableText"/><FONT FACE="Courier" SIZE="1">@Operation&#160;getEditableText(nodeId&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.debug("getEditableText[~S]~%",Seq{nodeId});<br>&#160;&#160;if&#160;xmf.clientManager().idManager.hasId(nodeId)<br>&#160;&#160;then&#160;self.find(nodeId).getEditableText()<br>&#160;&#160;else&#160;self.debug("&#160;&#160;id&#160;~S&#160;disposed~%",Seq{nodeId})<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="modelBrowserClosed"/><FONT FACE="Courier" SIZE="1">@Operation&#160;modelBrowserClosed(modelBrowserId&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.debug("modelBrowserClosed[~S]~%",Seq{modelBrowserId});<br>&#160;&#160;self.find(modelBrowserId).close()<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="nodeDeselected"/><FONT FACE="Courier" SIZE="1">@Operation&#160;nodeDeselected(nodeId&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.debug("deselected[~S]~%",Seq{nodeId});<br>&#160;&#160;if&#160;xmf.clientManager().idManager.hasId(nodeId)<br>&#160;&#160;then&#160;self.find(nodeId).deselected()<br>&#160;&#160;else&#160;self.debug("&#160;&#160;id&#160;~S&#160;disposed~%",Seq{nodeId})<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="nodeDoubleSelected"/><FONT FACE="Courier" SIZE="1">@Operation&#160;nodeDoubleSelected(nodeId&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.debug("doubleSelected[~S]~%",Seq{nodeId});<br>&#160;&#160;if&#160;xmf.clientManager().idManager.hasId(nodeId)<br>&#160;&#160;then&#160;self.find(nodeId).doubleSelected()<br>&#160;&#160;else&#160;self.debug("&#160;&#160;id&#160;~S&#160;disposed~%",Seq{nodeId})<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="nodeExpanded"/><FONT FACE="Courier" SIZE="1">@Operation&#160;nodeExpanded(nodeId&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.debug("expanded[~S]~%",Seq{nodeId});<br>&#160;&#160;if&#160;xmf.clientManager().idManager.hasId(nodeId)<br>&#160;&#160;then&#160;self.find(nodeId).expand()<br>&#160;&#160;else&#160;self.debug("&#160;&#160;id&#160;~S&#160;disposed~%",Seq{nodeId})<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="nodeSelected"/><FONT FACE="Courier" SIZE="1">@Operation&#160;nodeSelected(nodeId&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.debug("selected[~S]~%",Seq{nodeId});<br>&#160;&#160;if&#160;xmf.clientManager().idManager.hasId(nodeId)<br>&#160;&#160;then&#160;self.find(nodeId).selected()<br>&#160;&#160;else&#160;self.debug("&#160;&#160;id&#160;~S&#160;disposed~%",Seq{nodeId})<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="readDeselected"/><FONT FACE="Courier" SIZE="1">@Operation&#160;readDeselected(parameters&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;nodeId&#160;=&#160;parameters.at(0)<br>&#160;&#160;in&#160;self.nodeDeselected(nodeId)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="readDoubleSelected"/><FONT FACE="Courier" SIZE="1">@Operation&#160;readDoubleSelected(parameters&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;nodeId&#160;=&#160;parameters.at(0)<br>&#160;&#160;in&#160;self.nodeDoubleSelected(nodeId)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="readExpanded"/><FONT FACE="Courier" SIZE="1">@Operation&#160;readExpanded(parameters&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;nodeId&#160;=&#160;parameters.at(0)<br>&#160;&#160;in&#160;self.nodeExpanded(nodeId)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="readFocusGained"/><FONT FACE="Courier" SIZE="1">@Operation&#160;readFocusGained(parameters&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;modelBrowserId&#160;=&#160;parameters.at(0)<br>&#160;&#160;in&#160;self.focusGained(modelBrowserId)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="readFocusLost"/><FONT FACE="Courier" SIZE="1">@Operation&#160;readFocusLost(parameters&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;modelBrowserId&#160;=&#160;parameters.at(0)<br>&#160;&#160;in&#160;self.focusLost(modelBrowserId)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="readGetEditableText"/><FONT FACE="Courier" SIZE="1">@Operation&#160;readGetEditableText(parameters&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;nodeId&#160;=&#160;parameters.at(0)<br>&#160;&#160;in&#160;self.getEditableText(nodeId)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="readModelBrowserClosed"/><FONT FACE="Courier" SIZE="1">@Operation&#160;readModelBrowserClosed(parameters&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;modelBrowserId&#160;=&#160;parameters.at(0)<br>&#160;&#160;in&#160;self.modelBrowserClosed(modelBrowserId)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="readRightClickMenuSelected"/><FONT FACE="Courier" SIZE="1">@Operation&#160;readRightClickMenuSelected(parameters&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;menuId&#160;=&#160;parameters.at(0)<br>&#160;&#160;in&#160;self.rightClickMenuSelected(menuId)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="readSelected"/><FONT FACE="Courier" SIZE="1">@Operation&#160;readSelected(parameters&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;nodeId&#160;=&#160;parameters.at(0)<br>&#160;&#160;in&#160;self.nodeSelected(nodeId)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="readTextChanged"/><FONT FACE="Courier" SIZE="1">@Operation&#160;readTextChanged(parameters&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;nodeId&#160;=&#160;parameters.at(0)&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;text&#160;=&#160;parameters.at(1)<br>&#160;&#160;in&#160;self.textChanged(nodeId,text)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="redo"/><FONT FACE="Courier" SIZE="1">@Operation&#160;redo(browserId&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.debug("redo[~S]~%",Seq{browserId});<br>&#160;&#160;self.find(browserId).redo()<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="rightClickMenuSelected"/><FONT FACE="Courier" SIZE="1">@Operation&#160;rightClickMenuSelected(menuId&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.debug("rightClickMenuSelected[~S]~%",Seq{menuId});<br>&#160;&#160;self.find(menuId).select()<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="textChanged"/><FONT FACE="Courier" SIZE="1">@Operation&#160;textChanged(nodeId&#160;:&#160;XCore::Element,text&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.debug("textChanged[~S,~S]~%",Seq{nodeId,text});<br>&#160;&#160;if&#160;xmf.clientManager().idManager.hasId(nodeId)<br>&#160;&#160;then&#160;self.find(nodeId).textChangedIn(text)<br>&#160;&#160;else&#160;self.debug("&#160;&#160;id&#160;~S&#160;disposed~%",Seq{nodeId})<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="undo"/><FONT FACE="Courier" SIZE="1">@Operation&#160;undo(browserId&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.debug("undo[~S]~%",Seq{browserId});<br>&#160;&#160;self.find(browserId).undo()<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

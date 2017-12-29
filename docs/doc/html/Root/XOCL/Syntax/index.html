@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+Syntax
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>Syntax</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+ 
+      A syntax class defines a special type of performable element that
+      evaluates to itself instead of to a performable element whose semantics
+      is already known. The benefit of this is that the structure of the
+      syntax element is not lost when the language feature is evaluated. 
+      The consequence of desugaring to itself is that the element must specify 
+      its own semantics.
+    
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../Root/XCore/Performable/index.html">Performable</A>
+,<A HREF="../../../Root/XCore/Located/index.html">Located</A>
+,<A HREF="../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Performable/index.html">Performable</A>: endLine, line. <BR><B>From</B> <A HREF="../../../Root/XCore/Located/index.html">Located</A>: charEnd, charStart. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#compile">compile</a>(env:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,frame:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,isLast:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,saveSource:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#eval">eval</a>(target:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,env:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,imports:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#lift">lift</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#liftKeyArgs">liftKeyArgs</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#liftValue">liftValue</a>(value:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#maxLocals">maxLocals</a>():<A HREF="../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#syntaxInit">syntaxInit</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Performable/index.html">Performable</A>: FV, compile, endLine, eval, line, maxLocals, pprint, pprint, pprint, setEndLine, setLine. <BR><B>From</B> <A HREF="../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="compile"/><FONT FACE="Courier" SIZE="1">@Operation&#160;compile(env&#160;:&#160;XCore::Element,frame&#160;:&#160;XCore::Element,isLast&#160;:&#160;XCore::Element,saveSource&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;[|&#160;&lt;self.lift()&gt;.syntaxInit()&#160;|].compile(env,frame,isLast,saveSource)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="eval"/><FONT FACE="Courier" SIZE="1">@Operation&#160;eval(target&#160;:&#160;XCore::Element,env&#160;:&#160;XCore::Element,imports&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.lift().eval(target,env,imports).syntaxInit()<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="lift"/><FONT FACE="Courier" SIZE="1">@Operation&#160;lift():XCore::Element<br>&#160;&#160;let&#160;keyArgs&#160;=&#160;self.liftKeyArgs();<br>&#160;&#160;&#160;&#160;&#160;&#160;class&#160;=&#160;Path::toPath(self.of().pathSeq())<br>&#160;&#160;in&#160;Instantiate(class,keyArgs)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="liftKeyArgs"/><FONT FACE="Courier" SIZE="1">@Operation&#160;liftKeyArgs():XCore::Element<br>&#160;&#160;self.getStructuralFeatureNames()-&gt;asSeq-&gt;collect(n&#160;|<br>&#160;&#160;&#160;&#160;KeyArg(n,self.liftValue(self.get(n))))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="liftValue"/><FONT FACE="Courier" SIZE="1">@Operation&#160;liftValue(value&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@TypeCase(value)<br>&#160;&#160;&#160;&#160;Null&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;[|&#160;null&#160;|]<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;Symbol&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;[|&#160;XCore::Symbol(&lt;StrExp(value.toString())&gt;)&#160;|]<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;String&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;StrExp(value)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;Integer&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;IntExp(value)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;Boolean&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;BoolExp(value)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;Float&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;let&#160;pair&#160;=&#160;value.toString().splitBy(".",0,0)<br>&#160;&#160;&#160;&#160;&#160;&#160;in&#160;FloatExp(pair-&gt;at(0),pair-&gt;at(1))<br>&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;Set(Element)&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;SetExp("Set",value-&gt;asSeq-&gt;collect(v&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.liftValue(v)))<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;Seq(Element)&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;SetExp("Seq",value-&gt;collect(v&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.liftValue(v)))<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;Sugar&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;value.desugar()<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="maxLocals"/><FONT FACE="Courier" SIZE="1">@Operation&#160;maxLocals():Integer<br>&#160;&#160;self.lift().maxLocals()<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="syntaxInit"/><FONT FACE="Courier" SIZE="1">@Operation&#160;syntaxInit():XCore::Element<br>&#160;&#160;self<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+Container
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>Container</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+ 
+      A container has a sequence of display element types and a sequence of 
+      display elements (essentially a node or a box). Each type in the container
+      type is named as is the contents. Therefore elements can be referenced by
+      supplying a path from the receiver to a referenced element. A slight
+      complication occurs when referenced elements occur as part of a STAR-ed
+      type. This means that references produce sequences of elements.
+    
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR><TD><B>orHandlers</B></TD><TD><A HREF="../../../../../Root/XCore/Table/index.html">Table<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>starHandlers</B></TD><TD><A HREF="../../../../../Root/XCore/Table/index.html">Table<A></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#addNew">addNew</a>(name:<A HREF="../../../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#addStarHandler">addStarHandler</a>(name:<A HREF="../../../../../Root/XCore/String/index.html">String<A>,handler:<A HREF="../../../../../Root/XCore/Operation/index.html">Operation<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#changeTo">changeTo</a>(orName:<A HREF="../../../../../Root/XCore/String/index.html">String<A>,type:<A HREF="../../../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#contents">contents</a>():<A HREF="../../../../../Root/Tools/DiagramTools/Diagrams/Display/index.html">Seq(Display)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#layoutHeight">layoutHeight</a>():<A HREF="../../../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#layoutWidth">layoutWidth</a>():<A HREF="../../../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#maxLayoutHeight">maxLayoutHeight</a>():<A HREF="../../../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#maxLayoutWidth">maxLayoutWidth</a>():<A HREF="../../../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#minLayoutHeight">minLayoutHeight</a>():<A HREF="../../../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#minLayoutWidth">minLayoutWidth</a>():<A HREF="../../../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#orderContents">orderContents</a>():<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#ref">ref</a>(path:<A HREF="../../../../../Root/XCore/String/index.html">Seq(String)<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Seq(Element)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#ref1">ref1</a>(path:<A HREF="../../../../../Root/XCore/String/index.html">Seq(String)<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setOrHandler">setOrHandler</a>(orType:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>,root:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>,parent:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>,path:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>,tool:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>,env:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>,display:<A HREF="../../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#types">types</a>():<A HREF="../../../../../Root/XCore/Element/index.html">Seq(Element)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#userOrderContents">userOrderContents</a>():<A HREF="../../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="addNew"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addNew(name&#160;:&#160;String):XCore::Element<br>&#160;&#160;if&#160;starHandlers.hasKey(name)<br>&#160;&#160;then&#160;(starHandlers.get(name))(self)<br>&#160;&#160;else&#160;self.error("addNew:&#160;"&#160;+&#160;self.toString()&#160;+&#160;"&#160;unknown&#160;type:&#160;"&#160;+&#160;name&#160;+&#160;"&#160;known&#160;types&#160;are:&#160;"&#160;+&#160;starHandlers.keys().toString())<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addStarHandler"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addStarHandler(name&#160;:&#160;String,handler&#160;:&#160;Operation):XCore::Element<br>&#160;&#160;starHandlers.put(name.toString(),handler)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="changeTo"/><FONT FACE="Courier" SIZE="1">@Operation&#160;changeTo(orName&#160;:&#160;String,type&#160;:&#160;String):XCore::Element<br>&#160;&#160;if&#160;orHandlers.hasKey(orName)<br>&#160;&#160;then&#160;(orHandlers.get(orName))(type)<br>&#160;&#160;else&#160;self.error("Cannot&#160;find&#160;or&#160;type&#160;named&#160;"&#160;+&#160;orName&#160;+&#160;"&#160;in&#160;"&#160;+&#160;orHandlers.keys()-&gt;asSeq-&gt;separateWith(","))<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="contents"/><FONT FACE="Courier" SIZE="1">@Operation&#160;contents():Seq(Tools::DiagramTools::Diagrams::Display)<br>&#160;&#160;self.error("I&#160;don&apos;t&#160;know&#160;how&#160;to&#160;perform&#160;contents&#160;for&#160;"&#160;+&#160;self.toString())<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="layoutHeight"/><FONT FACE="Courier" SIZE="1">@Operation&#160;layoutHeight():Integer<br>&#160;&#160;@Case&#160;self.type().contentLayout()&#160;of<br>&#160;&#160;&#160;&#160;[&#160;"HORIZONTAL"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;(self.contents()-&gt;iterate(d&#160;h&#160;=&#160;0&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;h.max(d.layoutHeight()))&#160;+&#160;padTop&#160;+&#160;padBottom).max(minHeight).min(maxHeight)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"OVERLAY"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;(self.contents()-&gt;iterate(d&#160;h&#160;=&#160;0&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;h.max(d.layoutHeight()))&#160;+&#160;padTop&#160;+&#160;padBottom).max(minHeight).min(maxHeight)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"VERTICAL"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;(self.contents()-&gt;iterate(d&#160;h&#160;=&#160;0&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;h&#160;+&#160;d.layoutHeight())&#160;+&#160;padTop&#160;+&#160;padBottom).max(minHeight).min(maxHeight)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="layoutWidth"/><FONT FACE="Courier" SIZE="1">@Operation&#160;layoutWidth():Integer<br>&#160;&#160;@Case&#160;self.type().contentLayout()&#160;of<br>&#160;&#160;&#160;&#160;[&#160;"HORIZONTAL"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;(self.contents()-&gt;iterate(d&#160;h&#160;=&#160;0&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;h&#160;+&#160;d.layoutWidth())&#160;+&#160;padLeft&#160;+&#160;padRight).max(minWidth).min(maxWidth)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"OVERLAY"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;(self.contents()-&gt;iterate(d&#160;h&#160;=&#160;0&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;h.max(d.layoutWidth()))&#160;+&#160;padLeft&#160;+&#160;padRight).max(minWidth).min(maxWidth)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;[&#160;"VERTICAL"&#160;]&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;(self.contents()-&gt;iterate(d&#160;h&#160;=&#160;0&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;h.max(d.layoutWidth()))&#160;+&#160;padLeft&#160;+&#160;padRight).max(minWidth).min(maxWidth)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="maxLayoutHeight"/><FONT FACE="Courier" SIZE="1">@Operation&#160;maxLayoutHeight():Integer<br>&#160;&#160;self.contents()-&gt;iterate(d&#160;h&#160;=&#160;0&#160;|<br>&#160;&#160;&#160;&#160;h&#160;+&#160;d.maxLayoutHeight()).min(maxHeight)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="maxLayoutWidth"/><FONT FACE="Courier" SIZE="1">@Operation&#160;maxLayoutWidth():Integer<br>&#160;&#160;self.contents()-&gt;iterate(d&#160;w&#160;=&#160;maxWidth&#160;|<br>&#160;&#160;&#160;&#160;w.min(d.maxLayoutWidth()))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="minLayoutHeight"/><FONT FACE="Courier" SIZE="1">@Operation&#160;minLayoutHeight():Integer<br>&#160;&#160;self.contents()-&gt;iterate(d&#160;h&#160;=&#160;minHeight&#160;|<br>&#160;&#160;&#160;&#160;h.max(d.minLayoutHeight()))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="minLayoutWidth"/><FONT FACE="Courier" SIZE="1">@Operation&#160;minLayoutWidth():Integer<br>&#160;&#160;self.contents()-&gt;iterate(d&#160;w&#160;=&#160;minWidth&#160;|<br>&#160;&#160;&#160;&#160;w.max(d.minLayoutWidth()))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="orderContents"/><FONT FACE="Courier" SIZE="1">@Operation&#160;orderContents():XCore::Element<br>&#160;&#160;let&#160;ordered&#160;=&#160;Seq{};<br>&#160;&#160;&#160;&#160;&#160;&#160;unordered&#160;=&#160;displays<br>&#160;&#160;in&#160;@For&#160;type&#160;in&#160;self.types()&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;ordered&#160;:=&#160;ordered&#160;+&#160;unordered-&gt;select(d&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;type.underlyingTypes()-&gt;includes(d.type()))<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;self.displays&#160;:=&#160;ordered<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="ref"/><FONT FACE="Courier" SIZE="1">@Operation&#160;ref(path&#160;:&#160;Seq(String)):Seq(Element)<br>&#160;&#160;let&#160;values&#160;=&#160;Seq{self}<br>&#160;&#160;in&#160;@While&#160;not&#160;path-&gt;isEmpty&#160;and&#160;not&#160;values-&gt;isEmpty&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;newValues&#160;=&#160;Seq{}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;@For&#160;value&#160;in&#160;values&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;contents&#160;=&#160;value.contents()<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;newValues&#160;:=&#160;newValues&#160;+&#160;contents-&gt;select(v&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;v.type().name().toString()&#160;=&#160;path-&gt;head)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;values&#160;:=&#160;newValues;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;path&#160;:=&#160;path-&gt;tail<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;values<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="ref1"/><FONT FACE="Courier" SIZE="1">@Operation&#160;ref1(path&#160;:&#160;Seq(String)):Element<br>&#160;&#160;let&#160;elements&#160;=&#160;self.ref(path)<br>&#160;&#160;in&#160;if&#160;elements-&gt;size&#160;=&#160;1<br>&#160;&#160;&#160;&#160;&#160;then&#160;elements-&gt;head<br>&#160;&#160;&#160;&#160;&#160;else&#160;self.error("ref1&#160;for&#160;"&#160;+&#160;path.toString()&#160;+&#160;"&#160;in&#160;"&#160;+&#160;self.toString()&#160;+&#160;"&#160;produced&#160;"&#160;+&#160;elements.toString())<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setOrHandler"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setOrHandler(orType&#160;:&#160;XCore::Element,root&#160;:&#160;XCore::Element,parent&#160;:&#160;XCore::Element,path&#160;:&#160;XCore::Element,tool&#160;:&#160;XCore::Element,env&#160;:&#160;XCore::Element,display&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;orHandlers.put(orType.name().toString(),@Operation&#160;anonymous(name&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;if&#160;orType.hasTypeNamed(name)<br>&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;display.delete(false);<br>&#160;&#160;&#160;&#160;&#160;&#160;let&#160;newType&#160;=&#160;orType.typeNamed(name)&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;newDisplay&#160;=&#160;newType.new(root,parent,path,tool,env)<br>&#160;&#160;&#160;&#160;&#160;&#160;in&#160;newDisplay.new(parent);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.orderContents();<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;root.layout();<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.setOrHandler(orType,root,parent,path,tool,env,newDisplay);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;tool.raise(DiagramEvents::ChangeTo(root,path,orType.name().toString(),parent,name,newDisplay,display))<br>&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;else&#160;self.error("There&#160;is&#160;no&#160;type&#160;called&#160;"&#160;+&#160;name&#160;+&#160;"&#160;in&#160;"&#160;+&#160;orType.toString())<br>&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="types"/><FONT FACE="Courier" SIZE="1">@Operation&#160;types():Seq(Element)<br>&#160;&#160;self.error("I&#160;don&apos;t&#160;know&#160;how&#160;to&#160;perform&#160;types&#160;for&#160;"&#160;+&#160;self.toString())<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="userOrderContents"/><FONT FACE="Courier" SIZE="1">@Operation&#160;userOrderContents():XCore::Element<br>&#160;&#160;let&#160;newDisplays&#160;=&#160;xmf.order("Order&#160;Contents","Select&#160;and&#160;order&#160;contents",displays)<br>&#160;&#160;in&#160;if&#160;newDisplays-&gt;size&#160;&lt;&gt;&#160;displays-&gt;size<br>&#160;&#160;&#160;&#160;&#160;then&#160;if&#160;xmf.question("Number&#160;of&#160;contents&#160;has&#160;changed.&#160;Proceed?")<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.displays&#160;:=&#160;newDisplays;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.layout()<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;else<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.displays&#160;:=&#160;newDisplays;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.layout()<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

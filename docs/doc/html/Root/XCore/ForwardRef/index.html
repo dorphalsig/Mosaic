@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+ForwardRef
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>ForwardRef</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+No Documentation Specified
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#addListener">addListener</a>(listener:<A HREF="../../../Root/XCore/Operation/index.html">Operation<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#doubleClick">doubleClick</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#labelString">labelString</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#listeners">listeners</a>():<A HREF="../../../Root/XCore/Operation/index.html">Seq(Operation)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#path">path</a>():<A HREF="../../../Root/XCore/Symbol/index.html">Seq(Symbol)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#resolve">resolve</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setListeners">setListeners</a>(listeners:<A HREF="../../../Root/XCore/Operation/index.html">Seq(Operation)<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setPath">setPath</a>(path:<A HREF="../../../Root/XCore/Symbol/index.html">Seq(Symbol)<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setValue">setValue</a>(value:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#toString">toString</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#value">value</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="addListener"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addListener(listener&#160;:&#160;Operation):XCore::Element<br>&#160;&#160;self.setListeners(self.listeners()-&gt;including(listener))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="doubleClick"/><FONT FACE="Courier" SIZE="1">@Operation&#160;doubleClick():XCore::Element<br>&#160;&#160;let&#160;newPath&#160;=&#160;xmf.getString("Set&#160;Path","Type&#160;new&#160;path",self.path()-&gt;separateWith("::"))<br>&#160;&#160;in&#160;if&#160;newPath&#160;&lt;&gt;&#160;null<br>&#160;&#160;&#160;&#160;&#160;then&#160;self.setPath(newPath-&gt;subst("=","::",true)-&gt;splitBy("=",0,0))<br>&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="labelString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;labelString():XCore::Element<br>&#160;&#160;self.path()-&gt;separateWith("::")<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="listeners"/><FONT FACE="Courier" SIZE="1">@Operation&#160;listeners():Seq(Operation)<br>&#160;&#160;Kernel_forwardRefListeners(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="path"/><FONT FACE="Courier" SIZE="1">@Operation&#160;path():Seq(Symbol)<br>&#160;&#160;Kernel_forwardRefPath(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="resolve"/><FONT FACE="Courier" SIZE="1">@Operation&#160;resolve():XCore::Element<br>&#160;&#160;let&#160;value&#160;=&#160;self.path().ref(Seq{Root})<br>&#160;&#160;in&#160;if&#160;value&#160;&lt;&gt;&#160;null<br>&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.setValue(value);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;@For&#160;l&#160;in&#160;self.listeners()&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;l(value)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setListeners"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setListeners(listeners&#160;:&#160;Seq(Operation)):XCore::Element<br>&#160;&#160;Kernel_forwardRefSetListeners(self,listeners)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setPath"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setPath(path&#160;:&#160;Seq(Symbol)):XCore::Element<br>&#160;&#160;Kernel_forwardRefSetPath(self,path)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setValue"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setValue(value&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;Kernel_forwardRefSetValue(self,value)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="toString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;toString():String<br>&#160;&#160;formats("&lt;Ref&#160;~{::~;~S~}&gt;",Seq{Kernel_forwardRefPath(self)})<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="value"/><FONT FACE="Courier" SIZE="1">@Operation&#160;value():XCore::Element<br>&#160;&#160;Kernel_forwardRefValue(self)<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+ModelBrowserCommandInterpreter
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>ModelBrowserCommandInterpreter</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+
+       This class defines a command interpreter over model browsers. It can be used as the basis
+       for defining event driven mappings. The mapping handles the following output
+       commands by sen-ding them in the appropriate format to the client connected to the
+       output channel:
+           [newModelBrowserCommandCommand(modelBrowser)]
+       
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../../Root/Clients/XMLCommandInterpreter/index.html">XMLCommandInterpreter</A>
+,<A HREF="../../../../Root/Clients/CommandInterpreter/index.html">CommandInterpreter</A>
+,<A HREF="../../../../Root/IO/XMLOutput/index.html">XMLOutput</A>
+,<A HREF="../../../../Root/XCore/Contained/index.html">Contained</A>
+,<A HREF="../../../../Root/IO/XMLData/index.html">XMLData</A>
+,<A HREF="../../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+<TR><TD>ModelBrowserCommandInterpreter()</TD><TD> No Documentation </TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../../Root/Clients/CommandInterpreter/index.html">CommandInterpreter</A>: buffer, bufferPos, debug, flush, output, packetSize. <BR><B>From</B> <A HREF="../../../../Root/IO/XMLOutput/index.html">XMLOutput</A>: debug, name, output. <BR><B>From</B> <A HREF="../../../../Root/XCore/Contained/index.html">Contained</A>: owner. <BR><B>From</B> <A HREF="../../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#closeModelBrowserCommand">closeModelBrowserCommand</a>(modelBrowser:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#deselectModelBrowserNodeCommand">deselectModelBrowserNodeCommand</a>(node:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#enableDrag">enableDrag</a>(clientElement:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#enableDrop">enableDrop</a>(clientElement:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#expandModelBrowserNodeCommand">expandModelBrowserNodeCommand</a>(node:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#moveModelBrowserNodeCommand">moveModelBrowserNodeCommand</a>(node:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,parent:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,index:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newModelBrowserCommand">newModelBrowserCommand</a>(modelBrowser:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newModelBrowserNodeCommand">newModelBrowserNodeCommand</a>(parent:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,node:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,index:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newModelBrowserNodeCommand">newModelBrowserNodeCommand</a>(parent:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,node:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newRightClickMenuCommand">newRightClickMenuCommand</a>(parent:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,menuItem:<A HREF="../../../../Root/Clients/Menus/MenuItem/index.html">MenuItem<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#removeModelBrowserNodeCommand">removeModelBrowserNodeCommand</a>(node:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#renderOff">renderOff</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#renderOn">renderOn</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#selectModelBrowserNodeCommand">selectModelBrowserNodeCommand</a>(node:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,doExpand:<A HREF="../../../../Root/XCore/Boolean/index.html">Boolean<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setEditableNodeCommand">setEditableNodeCommand</a>(node:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,editable:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setEditableTextCommand">setEditableTextCommand</a>(node:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,text:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setFocus">setFocus</a>(modelBrowser:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setModelBrowserClosableCommand">setModelBrowserClosableCommand</a>(modelBrowser:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setModelBrowserTextCommand">setModelBrowserTextCommand</a>(modelBrowser:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,text:<A HREF="../../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setNodeIconCommand">setNodeIconCommand</a>(node:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,icon:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setNodeTextCommand">setNodeTextCommand</a>(node:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,text:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setToolTipTextCommand">setToolTipTextCommand</a>(node:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,text:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setVisible">setVisible</a>(modelBrowser:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#showDiagramCommand">showDiagramCommand</a>(node:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#showPropertiesCommand">showPropertiesCommand</a>(node:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../../Root/Clients/XMLCommandInterpreter/index.html">XMLCommandInterpreter</A>: endDocument, endElement, startDocument, startElement. <BR><B>From</B> <A HREF="../../../../Root/Clients/CommandInterpreter/index.html">CommandInterpreter</A>: allocateId, call, debug, debug, flush, setFlush, setPacketSize, toString, writeCommand. <BR><B>From</B> <A HREF="../../../../Root/IO/XMLOutput/index.html">XMLOutput</A>: chars, createOutput, debug, endDocument, endElement, flush, startDocument, startElement. <BR><B>From</B> <A HREF="../../../../Root/XCore/Contained/index.html">Contained</A>: addTo, allOwners, deleteRecursive, delete_client, delete_client_check, delete_client_redirect, getDefaultClipboardSource, owner, removeFromOwner, setOwner. <BR><B>From</B> <A HREF="../../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="closeModelBrowserCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;closeModelBrowserCommand(modelBrowser&#160;:&#160;ModelBrowser):XCore::Element<br>&#160;&#160;let&#160;modelBrowserId&#160;=&#160;modelBrowser.id()<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;21bdf0&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;modelBrowserId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="deselectModelBrowserNodeCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;deselectModelBrowserNodeCommand(node&#160;:&#160;ModelBrowserNode):XCore::Element<br>&#160;&#160;let&#160;nodeId&#160;=&#160;node.id()<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;e68e4f&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;nodeId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="enableDrag"/><FONT FACE="Courier" SIZE="1">@Operation&#160;enableDrag(clientElement&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;clientElementId&#160;=&#160;clientElement.id()<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;2acff6&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;clientElementId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="enableDrop"/><FONT FACE="Courier" SIZE="1">@Operation&#160;enableDrop(clientElement&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;clientElementId&#160;=&#160;clientElement.id()<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;2d30e7&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;clientElementId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="expandModelBrowserNodeCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;expandModelBrowserNodeCommand(node&#160;:&#160;ModelBrowserNode):XCore::Element<br>&#160;&#160;let&#160;nodeId&#160;=&#160;node.id()<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;e69093&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;nodeId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="moveModelBrowserNodeCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;moveModelBrowserNodeCommand(node&#160;:&#160;ModelBrowserNode,parent&#160;:&#160;ModelBrowserNode,index&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;nodeId&#160;=&#160;node.id();<br>&#160;&#160;&#160;&#160;&#160;&#160;parentId&#160;=&#160;parent.id()<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;e694eb&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;//&#160;&lt;SendCommand&#160;e69459&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;nodeId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newModelBrowserCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newModelBrowserCommand(modelBrowser&#160;:&#160;ModelBrowser):XCore::Element<br>&#160;&#160;let&#160;modelBrowserId&#160;=&#160;self.allocateId(modelBrowser)<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;e69921&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;modelBrowserId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newModelBrowserNodeCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newModelBrowserNodeCommand(parent&#160;:&#160;XCore::Element,node&#160;:&#160;ModelBrowserNode,index&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;nodeId&#160;=&#160;self.allocateId(node)<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;1ec1a6&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;nodeId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newModelBrowserNodeCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newModelBrowserNodeCommand(parent&#160;:&#160;XCore::Element,node&#160;:&#160;ModelBrowserNode):XCore::Element<br>&#160;&#160;let&#160;nodeId&#160;=&#160;self.allocateId(node)<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;e69cf5&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;nodeId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newRightClickMenuCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newRightClickMenuCommand(parent&#160;:&#160;XCore::Element,menuItem&#160;:&#160;MenuItem):XCore::Element<br>&#160;&#160;let&#160;menuItemId&#160;=&#160;self.allocateId(menuItem)<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;202fd5&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;menuItemId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="removeModelBrowserNodeCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;removeModelBrowserNodeCommand(node&#160;:&#160;ModelBrowserNode):XCore::Element<br>&#160;&#160;let&#160;nodeId&#160;=&#160;node.id()<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;23396a&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;nodeId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="renderOff"/><FONT FACE="Courier" SIZE="1">@Operation&#160;renderOff():XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;102bf2&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="renderOn"/><FONT FACE="Courier" SIZE="1">@Operation&#160;renderOn():XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;11324d&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="selectModelBrowserNodeCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;selectModelBrowserNodeCommand(node&#160;:&#160;ModelBrowserNode,doExpand&#160;:&#160;Boolean):XCore::Element<br>&#160;&#160;let&#160;nodeId&#160;=&#160;node.id()<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;28a3d9&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;nodeId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setEditableNodeCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setEditableNodeCommand(node&#160;:&#160;ModelBrowserNode,editable&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;nodeId&#160;=&#160;node.id()<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;2fea13&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;nodeId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setEditableTextCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setEditableTextCommand(node&#160;:&#160;ModelBrowserNode,text&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;nodeId&#160;=&#160;node.id()<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;32a5e1&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;nodeId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setFocus"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setFocus(modelBrowser&#160;:&#160;ModelBrowser):XCore::Element<br>&#160;&#160;let&#160;modelBrowserId&#160;=&#160;modelBrowser.id()<br>&#160;&#160;in&#160;if&#160;xmf.clientManager().idManager.hasId(modelBrowserId)<br>&#160;&#160;&#160;&#160;&#160;then&#160;//&#160;&lt;SendCommand&#160;37f046&gt;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<br>&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setModelBrowserClosableCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setModelBrowserClosableCommand(modelBrowser&#160;:&#160;ModelBrowser):XCore::Element<br>&#160;&#160;let&#160;modelBrowserId&#160;=&#160;modelBrowser.id()<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;37f055&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;modelBrowserId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setModelBrowserTextCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setModelBrowserTextCommand(modelBrowser&#160;:&#160;ModelBrowser,text&#160;:&#160;String):XCore::Element<br>&#160;&#160;let&#160;modelBrowserId&#160;=&#160;modelBrowser.id()<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;3ab5da&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;modelBrowserId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setNodeIconCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setNodeIconCommand(node&#160;:&#160;ModelBrowserNode,icon&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;nodeId&#160;=&#160;node.id()<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;3cf898&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;nodeId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setNodeTextCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setNodeTextCommand(node&#160;:&#160;ModelBrowserNode,text&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;nodeId&#160;=&#160;node.id()<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;3f916b&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;nodeId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setToolTipTextCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setToolTipTextCommand(node&#160;:&#160;ModelBrowserNode,text&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;nodeId&#160;=&#160;node.id()<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;421495&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;nodeId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setVisible"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setVisible(modelBrowser&#160;:&#160;ModelBrowser):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;1ec273&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="showDiagramCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;showDiagramCommand(node&#160;:&#160;ModelBrowserNode):XCore::Element<br>&#160;&#160;node.element.showDiagram();<br>&#160;&#160;node.id()<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="showPropertiesCommand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;showPropertiesCommand(node&#160;:&#160;ModelBrowserNode):XCore::Element<br>&#160;&#160;node.element.edit();<br>&#160;&#160;node.id()<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

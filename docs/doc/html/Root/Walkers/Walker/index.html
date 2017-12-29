@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+Walker
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>Walker</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+No Documentation Specified
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR><TD><B>refCount</B></TD><TD><A HREF="../../../Root/XCore/Integer/index.html">Integer<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>table</B></TD><TD><A HREF="../../../Root/XCore/Table/index.html">Table<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>visited</B></TD><TD><A HREF="../../../Root/XCore/Integer/index.html">Integer<A></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#defaultWalk">defaultWalk</a>(e:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#encounter">encounter</a>(element:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,label:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#encounter">encounter</a>(element:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#encountered">encountered</a>(element:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#getRef">getRef</a>(element:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#initWalker">initWalker</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newRef">newRef</a>():<A HREF="../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#reWalk">reWalk</a>(element:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#reset">reset</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#visited">visited</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walk">walk</a>(e:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkBigInt">walkBigInt</a>(b:<A HREF="../../../Root/XCore/Integer/index.html">Integer<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkBoolean">walkBoolean</a>(b:<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkBuffer">walkBuffer</a>(buffer:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkClient">walkClient</a>(client:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkCode">walkCode</a>(code:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkCodeBox">walkCodeBox</a>(codeBox:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkCont">walkCont</a>(cont:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkDaemon">walkDaemon</a>(daemon:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkFloat">walkFloat</a>(float:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkForeignFun">walkForeignFun</a>(fun:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkForeignObj">walkForeignObj</a>(obj:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkFun">walkFun</a>(fun:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkInputChannel">walkInputChannel</a>(inch:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkInteger">walkInteger</a>(i:<A HREF="../../../Root/XCore/Integer/index.html">Integer<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkNil">walkNil</a>(arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkNull">walkNull</a>(arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkObject">walkObject</a>(o:<A HREF="../../../Root/XCore/Object/index.html">Object<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkOutputChannel">walkOutputChannel</a>(out:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkSeq">walkSeq</a>(s:<A HREF="../../../Root/XCore/Element/index.html">Seq(Element)<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkSet">walkSet</a>(s:<A HREF="../../../Root/XCore/Element/index.html">Set(Element)<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkSlot">walkSlot</a>(o:<A HREF="../../../Root/XCore/Object/index.html">Object<A>,s:<A HREF="../../../Root/XCore/String/index.html">String<A>,v:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkString">walkString</a>(s:<A HREF="../../../Root/XCore/String/index.html">String<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkSymbol">walkSymbol</a>(symbol:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkTable">walkTable</a>(t:<A HREF="../../../Root/XCore/Table/index.html">Table<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkThread">walkThread</a>(thread:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkVector">walkVector</a>(v:<A HREF="../../../Root/XCore/Vector/index.html">Vector<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="defaultWalk"/><FONT FACE="Courier" SIZE="1">@Operation&#160;defaultWalk(e&#160;:&#160;Element,arg&#160;:&#160;Element):Element<br>&#160;&#160;e<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="encounter"/><FONT FACE="Courier" SIZE="1">@Operation&#160;encounter(element&#160;:&#160;XCore::Element,label&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;table.put(element,label)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="encounter"/><FONT FACE="Courier" SIZE="1">@Operation&#160;encounter(element&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.encounter(element,self.newRef())<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="encountered"/><FONT FACE="Courier" SIZE="1">@Operation&#160;encountered(element&#160;:&#160;XCore::Element):Boolean<br>&#160;&#160;table.hasKey(element)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="getRef"/><FONT FACE="Courier" SIZE="1">@Operation&#160;getRef(element&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;table.get(element)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="initWalker"/><FONT FACE="Courier" SIZE="1">@Operation&#160;initWalker():XCore::Element<br>&#160;&#160;self.reset()<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newRef"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newRef():Integer<br>&#160;&#160;self.refCount&#160;:=&#160;refCount&#160;+&#160;1;<br>&#160;&#160;refCount<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="reWalk"/><FONT FACE="Courier" SIZE="1">@Operation&#160;reWalk(element&#160;:&#160;XCore::Element,arg&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;element<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="reset"/><FONT FACE="Courier" SIZE="1">@Operation&#160;reset():XCore::Element<br>&#160;&#160;table.clear();<br>&#160;&#160;self.refCount&#160;:=&#160;0;<br>&#160;&#160;self.visited&#160;:=&#160;0<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="visited"/><FONT FACE="Courier" SIZE="1">@Operation&#160;visited[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.visited<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walk"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walk(e&#160;:&#160;XCore::Element,arg&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.visited&#160;:=&#160;self.visited&#160;+&#160;1;<br>&#160;&#160;if&#160;Kernel_tableHasKey(table,e)<br>&#160;&#160;then&#160;self.reWalk(e,arg)<br>&#160;&#160;else&#160;@CaseInt[35]&#160;Kernel_tag(e)&#160;of<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;XMF::ARRAY&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.walkVector(e,arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;XMF::BOOL&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.walkBoolean(e,arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;XMF::BUFFER&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.walkBuffer(e,arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;XMF::CLIENT&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.walkClient(e,arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;XMF::CODE&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.walkCode(e,arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;XMF::CODEBOX&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.walkCodeBox(e,arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;XMF::CONS&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.walkSeq(e,arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;XMF::CONT&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.walkCont(e,arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;XMF::DAEMON&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.walkDaemon(e,arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;XMF::FLOAT&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.walkFloat(e,arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;XMF::FOREIGNFUN&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.walkForeignFun(e,arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;XMF::FOREIGNOBJ&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.walkForeignObj(e,arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;XMF::FUN&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.walkFun(e,arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;XMF::HASHTABLE&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.walkTable(e,arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;XMF::INPUT_CHANNEL&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.walkInputChannel(e,arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;XMF::INT&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.walkInteger(e,arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;XMF::NEGINT&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.walkInteger(e,arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;XMF::NIL&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.walkNil(arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;XMF::OBJ&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.walkObject(e,arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;XMF::OUTPUT_CHANNEL&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.walkOutputChannel(e,arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;XMF::SET&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.walkSet(e,arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;XMF::STRING&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.walkString(e,arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;XMF::SYMBOL&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.walkSymbol(e,arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;XMF::THREAD&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.walkThread(e,arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;XMF::UNDEFINED&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.walkNull(arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;XMF::BIGINT&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.walkBigInt(e,arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;self.defaultWalk(e,arg)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkBigInt"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkBigInt(b&#160;:&#160;Integer,arg&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;b<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkBoolean"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkBoolean(b&#160;:&#160;Boolean,arg&#160;:&#160;Element):Element<br>&#160;&#160;b<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkBuffer"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkBuffer(buffer&#160;:&#160;XCore::Element,arg&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.encounter(buffer);<br>&#160;&#160;@Count&#160;i&#160;from&#160;0&#160;to&#160;buffer-&gt;size&#160;do<br>&#160;&#160;&#160;&#160;self.walk(buffer-&gt;at(i),arg)<br>&#160;&#160;end;<br>&#160;&#160;buffer<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkClient"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkClient(client&#160;:&#160;XCore::Element,arg&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;client<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkCode"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkCode(code&#160;:&#160;XCore::Element,arg&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;code<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkCodeBox"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkCodeBox(codeBox&#160;:&#160;XCore::Element,arg&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.encounter(codeBox);<br>&#160;&#160;self.walk(Kernel_codeBoxConstants(codeBox),arg);<br>&#160;&#160;self.walk(Kernel_codeBoxLocals(codeBox),arg);<br>&#160;&#160;self.walk(Kernel_codeBoxName(codeBox),arg);<br>&#160;&#160;self.walk(Kernel_codeBoxResourceName(codeBox),arg);<br>&#160;&#160;self.walk(Kernel_codeBoxSource(codeBox),arg);<br>&#160;&#160;codeBox<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkCont"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkCont(cont&#160;:&#160;XCore::Element,arg&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;cont<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkDaemon"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkDaemon(daemon&#160;:&#160;XCore::Element,arg&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.encounter(daemon);<br>&#160;&#160;self.walk(Kernel_daemonId(daemon),arg);<br>&#160;&#160;self.walk(Kernel_daemonType(daemon),arg);<br>&#160;&#160;self.walk(Kernel_daemonSlot(daemon),arg);<br>&#160;&#160;self.walk(Kernel_daemonAction(daemon),arg);<br>&#160;&#160;self.walk(Kernel_daemonPersistent(daemon),arg);<br>&#160;&#160;self.walk(Kernel_daemonTraced(daemon),arg);<br>&#160;&#160;self.walk(Kernel_daemonTarget(daemon),arg);<br>&#160;&#160;daemon<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkFloat"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkFloat(float&#160;:&#160;XCore::Element,arg&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;float<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkForeignFun"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkForeignFun(fun&#160;:&#160;XCore::Element,arg&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;fun<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkForeignObj"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkForeignObj(obj&#160;:&#160;XCore::Element,arg&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.encounter(obj);<br>&#160;&#160;obj<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkFun"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkFun(fun&#160;:&#160;XCore::Element,arg&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.encounter(fun);<br>&#160;&#160;self.walk(Kernel_funArity(fun),arg);<br>&#160;&#160;self.walk(Kernel_funCodeBox(fun),arg);<br>&#160;&#160;self.walk(Kernel_funDoc(fun),arg);<br>&#160;&#160;self.walk(Kernel_funDynamics(fun),arg);<br>&#160;&#160;self.walk(Kernel_funGlobals(fun),arg);<br>&#160;&#160;self.walk(Kernel_funOwner(fun),arg);<br>&#160;&#160;self.walk(Kernel_funProperties(fun),arg);<br>&#160;&#160;fun<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkInputChannel"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkInputChannel(inch&#160;:&#160;XCore::Element,arg&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;inch<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkInteger"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkInteger(i&#160;:&#160;Integer,arg&#160;:&#160;Element):XCore::Element<br>&#160;&#160;i<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkNil"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkNil(arg&#160;:&#160;Element):Element<br>&#160;&#160;Seq{}<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkNull"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkNull(arg&#160;:&#160;Element):XCore::Element<br>&#160;&#160;null<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkObject"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkObject(o&#160;:&#160;Object,arg&#160;:&#160;Element):XCore::Element<br>&#160;&#160;self.encounter(o);<br>&#160;&#160;@For&#160;slot&#160;in&#160;Kernel_objSlots(o)&#160;do<br>&#160;&#160;&#160;&#160;self.walkSlot(o,slot-&gt;head,slot-&gt;tail,arg)<br>&#160;&#160;end;<br>&#160;&#160;o<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkOutputChannel"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkOutputChannel(out&#160;:&#160;XCore::Element,arg&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;out<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkSeq"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkSeq(s&#160;:&#160;SeqOfElement,arg&#160;:&#160;Element):Element<br>&#160;&#160;self.encounter(s);<br>&#160;&#160;self.walk(s-&gt;head,arg);<br>&#160;&#160;self.walk(s-&gt;tail,arg);<br>&#160;&#160;s<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkSet"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkSet(s&#160;:&#160;SetOfElement,arg&#160;:&#160;Element):Element<br>&#160;&#160;@For&#160;e&#160;in&#160;s&#160;do<br>&#160;&#160;&#160;&#160;self.walk(e,arg)<br>&#160;&#160;end;<br>&#160;&#160;s<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkSlot"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkSlot(o&#160;:&#160;Object,s&#160;:&#160;String,v&#160;:&#160;Element,arg&#160;:&#160;Element):XCore::Element<br>&#160;&#160;self.walk(v,arg)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkString(s&#160;:&#160;String,arg&#160;:&#160;Element):Element<br>&#160;&#160;s<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkSymbol"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkSymbol(symbol&#160;:&#160;XCore::Element,arg&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;symbol<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkTable"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkTable(t&#160;:&#160;Table,arg&#160;:&#160;Element):Element<br>&#160;&#160;if&#160;t&#160;&lt;&gt;&#160;table<br>&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;self.encounter(t);<br>&#160;&#160;&#160;&#160;@For&#160;key&#160;inTableKeys&#160;t&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.walk(key,arg);<br>&#160;&#160;&#160;&#160;&#160;&#160;self.walk(t.get(key),arg)<br>&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;t<br>&#160;&#160;else&#160;false<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkThread"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkThread(thread&#160;:&#160;XCore::Element,arg&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;thread<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkVector"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkVector(v&#160;:&#160;Vector,arg&#160;:&#160;Element):Element<br>&#160;&#160;self.encounter(v);<br>&#160;&#160;@Count&#160;i&#160;from&#160;0&#160;to&#160;v-&gt;size&#160;do<br>&#160;&#160;&#160;&#160;self.walk(v-&gt;at(i),arg)<br>&#160;&#160;end;<br>&#160;&#160;v<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+Table
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>Table</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+
+      A table associates keys with values. Any element can be used as a key.
+      A table has an initial size and can support any number of values. Use 'hasKey/1'
+      to determine whether a table contains a key. Use 'get/1' to access a table
+      via a key and 'put/2' to update a table given a key and a value. Use 'keys/0'
+      to access the set of keys for a table.
+    
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#addDaemon">addDaemon</a>(d:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      All tables have a collection of daemons. A daemon is an operation that is
+      invoked whenever a table is updated. The operation is any invokable value 
+      (either an operation or an object that implements the 'invoke/2' operation. 
+      The invocation occurs after the table has been updated and is supplied with 
+      the index, the new bucket and the old bucket that has changed.
+    </TD></TR>
+<TR><TD><B><a href="#addKeyRemovedDaemon">addKeyRemovedDaemon</a>(d:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Use this operation to add a daemon that monitors the removal of
+      keys from a table. The args of the daemon are the key that is removed
+      and its value in the table.
+    </TD></TR>
+<TR><TD><B><a href="#addKeyRemovedDaemon">addKeyRemovedDaemon</a>(d:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,actionSource:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Use this operation to add a daemon that monitors the removal of
+      keys from a table. The args of the daemon are the key that is removed
+      and its value in the table.
+    </TD></TR>
+<TR><TD><B><a href="#addKeyValueChangedDaemon">addKeyValueChangedDaemon</a>(d:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Use this operation to add a daemon that monitors changes in key
+      values. This will not fire when the key is added or when the
+      key is removed. The args for the daemon are the key, the new value
+      and the old value.
+    </TD></TR>
+<TR><TD><B><a href="#addKeyValueChangedDaemon">addKeyValueChangedDaemon</a>(d:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,actionSource:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Use this operation to add a daemon that monitors changes in key
+      values. This will not fire when the key is added or when the
+      key is removed. The args for the daemon are the key, the new value
+      and the old value.
+    </TD></TR>
+<TR><TD><B><a href="#addNewKeyDaemon">addNewKeyDaemon</a>(d:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Use this operation to add a daemon that monitors the addition of
+      new keys to a table. The args for the daemon are the new key
+      and its value.
+    </TD></TR>
+<TR><TD><B><a href="#addNewKeyDaemon">addNewKeyDaemon</a>(d:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,actionSource:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Use this operation to add a daemon that monitors the addition of
+      new keys to a table. The args for the daemon are the new key
+      and its value.
+    </TD></TR>
+<TR><TD><B><a href="#asVector">asVector</a>():<A HREF="../../../Root/XCore/Vector/index.html">Vector<A></B></TD><TD>
+      Returns the receiver as a vector. This is essentially
+      just changing the type of the receiver from table to
+      vector.
+    </TD></TR>
+<TR><TD><B><a href="#clear">clear</a>():<A HREF="../../../Root/XCore/Table/index.html">Table<A></B></TD><TD>
+      Clears the table. Fires any daemons defined for the table.
+    </TD></TR>
+<TR><TD><B><a href="#daemonNamed">daemonNamed</a>(name:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#daemons">daemons</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Get the current daemons for the table.
+    </TD></TR>
+<TR><TD><B><a href="#destroyDaemon">destroyDaemon</a>(d:<A HREF="../../../Root/XCore/Daemon/index.html">Daemon<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#edit">edit</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#entries">entries</a>():<A HREF="../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD>
+      Returns the number of entries in the table.
+    </TD></TR>
+<TR><TD><B><a href="#fire">fire</a>(index:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,newBucket:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,oldBucket:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      When a table is updated, its daemons are fired by calling this operation. 
+      The operation is supplied with the bucket index, the old state of the changed 
+      bucket and the new state of the changed bucket. The index is supplied to make
+      the daemon mechanism compatible with that for arrays. In most cases the index
+      will be of no value. The table specific daemon definition operations
+      hide away the index.
+    </TD></TR>
+<TR><TD><B><a href="#get">get</a>(key:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Return the valueof the supplied key in the table.
+      If the key does not exist then an exception is
+      raised. Use 'hasKey/1' to check if the key exists.
+    </TD></TR>
+<TR><TD><B><a href="#getChildren">getChildren</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#getChildrenToolTips">getChildrenToolTips</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#hasDaemonNamed">hasDaemonNamed</a>(name:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#hasKey">hasKey</a>(key:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>
+      Tests whether the table has a key or not.
+    </TD></TR>
+<TR><TD><B><a href="#hasValue">hasValue</a>(value:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>
+      Tests whether the table has a value or not.
+    </TD></TR>
+<TR><TD><B><a href="#init">init</a>(args:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#isEmpty">isEmpty</a>():<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#keys">keys</a>():<A HREF="../../../Root/XCore/Element/index.html">Seq(Element)<A></B></TD><TD>
+      Returns all the keys in the table.
+    </TD></TR>
+<TR><TD><B><a href="#pprint">pprint</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>
+      This operation prints out all the entries in a table.
+    </TD></TR>
+<TR><TD><B><a href="#put">put</a>(key:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,value:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Add an association between the supplied key and value.
+      Any existing association for the key is removed.
+    </TD></TR>
+<TR><TD><B><a href="#ref">ref</a>(index:<A HREF="../../../Root/XCore/Integer/index.html">Integer<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#rehash">rehash</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#remove">remove</a>(key:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+     Remove the supplied key from the table. This succeeds whether
+     the key exists in the tabel or not. Any daemons defined for the
+     table are performed. The table is returned.
+   </TD></TR>
+<TR><TD><B><a href="#removeDaemon">removeDaemon</a>(d:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,target:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#removeDaemonNamed">removeDaemonNamed</a>(name:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#set">set</a>(index:<A HREF="../../../Root/XCore/Integer/index.html">Integer<A>,value:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setDaemons">setDaemons</a>(daemons:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#size">size</a>():<A HREF="../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD>
+      Returns the size of a table.
+    </TD></TR>
+<TR><TD><B><a href="#toString">toString</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>
+      Returns a string representation of a table.
+    </TD></TR>
+<TR><TD><B><a href="#values">values</a>():<A HREF="../../../Root/XCore/Element/index.html">Set(Element)<A></B></TD><TD>
+       Returns all elements in the table as a set. 
+     </TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="addDaemon"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addDaemon(d&#160;:&#160;XCore::Element):Element<br>&#160;&#160;self.setDaemons(self.daemons()&#160;+&#160;Seq{d})<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addKeyRemovedDaemon"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addKeyRemovedDaemon(d&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.addKeyRemovedDaemon(d,self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addKeyRemovedDaemon"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addKeyRemovedDaemon(d&#160;:&#160;XCore::Element,actionSource&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;daemon&#160;=&#160;@Operation&#160;anonymous(index&#160;:&#160;XCore::Element,newBucket&#160;:&#160;XCore::Element,oldBucket&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;oldBucket-&gt;size&#160;&gt;&#160;newBucket-&gt;size<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;let&#160;cell&#160;=&#160;(oldBucket&#160;-&#160;newBucket)-&gt;head<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;d.invoke(actionSource,Seq{cell-&gt;head,cell-&gt;tail})<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;in&#160;self.addDaemon(daemon);<br>&#160;&#160;&#160;&#160;&#160;daemon<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addKeyValueChangedDaemon"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addKeyValueChangedDaemon(d&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.addKeyValueChangedDaemon(d,self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addKeyValueChangedDaemon"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addKeyValueChangedDaemon(d&#160;:&#160;XCore::Element,actionSource&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;daemon&#160;=&#160;@Operation&#160;anonymous(index&#160;:&#160;XCore::Element,newBucket&#160;:&#160;XCore::Element,oldBucket&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;newBucket-&gt;size&#160;=&#160;oldBucket-&gt;size<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;let&#160;findSeq&#160;=&#160;newBucket-&gt;asSeq;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;=&#160;false;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;=&#160;null<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;declare(hidden,findSeq);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;declare(hidden,findDone);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;declare(hidden,findResult);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@While&#160;not&#160;findSeq-&gt;isEmpty&#160;and&#160;not&#160;findDone&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;newCell&#160;=&#160;findSeq-&gt;head&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findElement&#160;=&#160;findSeq-&gt;head<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;declare(hidden,findElement);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;let&#160;findSeq&#160;=&#160;oldBucket-&gt;asSeq;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;=&#160;false;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;=&#160;null<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;declare(hidden,findSeq);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;declare(hidden,findDone);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;declare(hidden,findResult);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@While&#160;not&#160;findSeq-&gt;isEmpty&#160;and&#160;not&#160;findDone&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;oldCell&#160;=&#160;findSeq-&gt;head&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findElement&#160;=&#160;findSeq-&gt;head<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;declare(hidden,findElement);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;oldCell-&gt;head&#160;=&#160;newCell-&gt;head&#160;and&#160;oldCell-&gt;tail&#160;&lt;&gt;&#160;newCell-&gt;tail<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;:=&#160;true;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;:=&#160;d.invoke(actionSource,Seq{oldCell-&gt;head,newCell-&gt;tail,oldCell-&gt;tail});<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;true<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;findSeq&#160;:=&#160;findSeq-&gt;tail<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;not&#160;findDone<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;findResult<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;:=&#160;true;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;:=&#160;findElement<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;findSeq&#160;:=&#160;findSeq-&gt;tail<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;not&#160;findDone<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;findResult<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;in&#160;self.addDaemon(daemon);<br>&#160;&#160;&#160;&#160;&#160;daemon<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addNewKeyDaemon"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addNewKeyDaemon(d&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.addNewKeyDaemon(d,self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addNewKeyDaemon"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addNewKeyDaemon(d&#160;:&#160;XCore::Element,actionSource&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;daemon&#160;=&#160;@Operation&#160;anonymous(index&#160;:&#160;XCore::Element,newBucket&#160;:&#160;XCore::Element,oldBucket&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;newBucket-&gt;size&#160;&gt;&#160;oldBucket-&gt;size<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;let&#160;cell&#160;=&#160;(newBucket&#160;-&#160;oldBucket)-&gt;head<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;d.invoke(actionSource,Seq{cell-&gt;head,cell-&gt;tail})<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;in&#160;self.addDaemon(daemon);<br>&#160;&#160;&#160;&#160;&#160;daemon<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="asVector"/><FONT FACE="Courier" SIZE="1">@Operation&#160;asVector():Vector<br>&#160;&#160;let&#160;v&#160;=&#160;Vector(self-&gt;size)<br>&#160;&#160;in&#160;@Count&#160;i&#160;from&#160;0&#160;to&#160;self-&gt;size&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;v.put(i,self.ref(i))<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;v<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="clear"/><FONT FACE="Courier" SIZE="1">@Operation&#160;clear():Table<br>&#160;&#160;@Count&#160;index&#160;from&#160;0&#160;to&#160;Kernel_arrayLength(self)&#160;do<br>&#160;&#160;&#160;&#160;Kernel_arraySet(self,index,Seq{})<br>&#160;&#160;end;<br>&#160;&#160;self<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="daemonNamed"/><FONT FACE="Courier" SIZE="1">@Operation&#160;daemonNamed(name&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;findSeq&#160;=&#160;self.daemons()-&gt;asSeq;<br>&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;=&#160;false;<br>&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;=&#160;null<br>&#160;&#160;in&#160;declare(hidden,findSeq);<br>&#160;&#160;&#160;&#160;&#160;declare(hidden,findDone);<br>&#160;&#160;&#160;&#160;&#160;declare(hidden,findResult);<br>&#160;&#160;&#160;&#160;&#160;@While&#160;not&#160;findSeq-&gt;isEmpty&#160;and&#160;not&#160;findDone&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;daemon&#160;=&#160;findSeq-&gt;head&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findElement&#160;=&#160;findSeq-&gt;head<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;declare(hidden,findElement);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;daemon.name().toString()&#160;=&#160;name.toString()<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;:=&#160;true;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;:=&#160;findElement<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;findSeq&#160;:=&#160;findSeq-&gt;tail<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;if&#160;not&#160;findDone<br>&#160;&#160;&#160;&#160;&#160;then&#160;false<br>&#160;&#160;&#160;&#160;&#160;else&#160;findResult<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="daemons"/><FONT FACE="Courier" SIZE="1">@Operation&#160;daemons():XCore::Element<br>&#160;&#160;Kernel_arrayDaemons(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="destroyDaemon"/><FONT FACE="Courier" SIZE="1">@Operation&#160;destroyDaemon(d&#160;:&#160;Daemon):XCore::Element<br>&#160;&#160;self.removeDaemon(d);<br>&#160;&#160;Daemon::removeFromDaemonTable(d)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="edit"/><FONT FACE="Courier" SIZE="1">@Operation&#160;edit():XCore::Element<br>&#160;&#160;let&#160;formClient&#160;=&#160;xmf.findClient(Clients::Forms::FormClient)<br>&#160;&#160;in&#160;if&#160;formClient&#160;&lt;&gt;&#160;null<br>&#160;&#160;&#160;&#160;&#160;then&#160;formClient.newForm(CollectionViewer::TableEditor(self))<br>&#160;&#160;&#160;&#160;&#160;else&#160;format(stdout,"Forms&#160;client&#160;not&#160;available.~%")<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end;<br>&#160;&#160;self<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="entries"/><FONT FACE="Courier" SIZE="1">@Operation&#160;entries():Integer<br>&#160;&#160;let&#160;entries&#160;=&#160;0<br>&#160;&#160;in&#160;@Count&#160;i&#160;from&#160;0&#160;to&#160;Kernel_arrayLength(self)&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;bucket&#160;=&#160;Kernel_arrayRef(self,i)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;if&#160;bucket&#160;&lt;&gt;&#160;Seq{}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;entries&#160;:=&#160;entries&#160;+&#160;bucket-&gt;size<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;entries<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="fire"/><FONT FACE="Courier" SIZE="1">@Operation&#160;fire(index&#160;:&#160;XCore::Element,newBucket&#160;:&#160;XCore::Element,oldBucket&#160;:&#160;XCore::Element):Element<br>&#160;&#160;let&#160;daemons&#160;=&#160;Kernel_arrayDaemons(self)<br>&#160;&#160;in&#160;@While&#160;daemons&#160;&lt;&gt;&#160;Seq{}&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;daemons-&gt;at(0).invoke(self,Seq{index,newBucket,oldBucket});<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;daemons&#160;:=&#160;daemons-&gt;tail<br>&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;end;<br>&#160;&#160;self<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="get"/><FONT FACE="Courier" SIZE="1">@Operation&#160;get(key&#160;:&#160;Element):Element<br>&#160;&#160;Kernel_tableGet(self,key)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="getChildren"/><FONT FACE="Courier" SIZE="1">@Operation&#160;getChildren():XCore::Element<br>&#160;&#160;self.values()-&gt;asSeq<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="getChildrenToolTips"/><FONT FACE="Courier" SIZE="1">@Operation&#160;getChildrenToolTips():XCore::Element<br>&#160;&#160;self.keys()-&gt;collect(key&#160;|<br>&#160;&#160;&#160;&#160;"key&#160;=&#160;"&#160;+&#160;key.labelString())<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="hasDaemonNamed"/><FONT FACE="Courier" SIZE="1">@Operation&#160;hasDaemonNamed(name&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.daemons()-&gt;exists(daemon&#160;|<br>&#160;&#160;&#160;&#160;daemon.name().toString()&#160;=&#160;name.toString())<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="hasKey"/><FONT FACE="Courier" SIZE="1">@Operation&#160;hasKey(key&#160;:&#160;Element):Boolean<br>&#160;&#160;Kernel_tableHasKey(self,key)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="hasValue"/><FONT FACE="Courier" SIZE="1">@Operation&#160;hasValue(value&#160;:&#160;Element):Boolean<br>&#160;&#160;Kernel_tableHasValue(self,value)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="init"/><FONT FACE="Courier" SIZE="1">@Operation&#160;init(args&#160;:&#160;XCore::Element):Element<br>&#160;&#160;if&#160;args-&gt;size&#160;&gt;&#160;0<br>&#160;&#160;then&#160;Kernel_mkTable(args-&gt;at(0))<br>&#160;&#160;else&#160;Kernel_mkTable(100)<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="isEmpty"/><FONT FACE="Courier" SIZE="1">@Operation&#160;isEmpty():Boolean<br>&#160;&#160;self.keys()-&gt;isEmpty<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="keys"/><FONT FACE="Courier" SIZE="1">@Operation&#160;keys():Seq(Element)<br>&#160;&#160;Kernel_tableKeys(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="pprint"/><FONT FACE="Courier" SIZE="1">@Operation&#160;pprint():String<br>&#160;&#160;let&#160;s&#160;=&#160;"&lt;Table";<br>&#160;&#160;&#160;&#160;&#160;&#160;keys&#160;=&#160;self.keys()<br>&#160;&#160;in&#160;if&#160;not&#160;keys-&gt;isEmpty<br>&#160;&#160;&#160;&#160;&#160;then&#160;s&#160;:=&#160;s&#160;+&#160;"&#160;"<br>&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;end&#160;;<br>&#160;&#160;&#160;&#160;&#160;@While&#160;keys&#160;&lt;&gt;&#160;Seq{}&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;key&#160;=&#160;keys-&gt;at(0)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;s&#160;:=&#160;s&#160;+&#160;key.toString()&#160;+&#160;"&#160;=&#160;"&#160;+&#160;self.get(key).toString();<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;keys&#160;:=&#160;keys-&gt;tail;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;keys&#160;&lt;&gt;&#160;Seq{}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;s&#160;:=&#160;s&#160;+&#160;","<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;s<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;s&#160;+&#160;"&gt;"<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="put"/><FONT FACE="Courier" SIZE="1">@Operation&#160;put(key&#160;:&#160;Element,value&#160;:&#160;Element):XCore::Element<br>&#160;&#160;Kernel_tablePut(self,key,value)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="ref"/><FONT FACE="Courier" SIZE="1">@Operation&#160;ref(index&#160;:&#160;Integer):XCore::Element<br>&#160;&#160;Kernel_arrayRef(self,index)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="rehash"/><FONT FACE="Courier" SIZE="1">@Operation&#160;rehash():XCore::Element<br>&#160;&#160;let&#160;size&#160;=&#160;self.size()<br>&#160;&#160;in&#160;@Letrec&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;hashBuckets(n&#160;:&#160;XCore::Element):XCore::Element&#160;=&#160;if&#160;n&#160;=&#160;size<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;self.clear()<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;let&#160;bucket&#160;=&#160;Kernel_arrayRef(self,n)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;hashBuckets(n&#160;+&#160;1);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@For&#160;cell&#160;in&#160;bucket&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.put(cell-&gt;head,cell-&gt;tail)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;in&#160;hashBuckets(0);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;self<br>&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="remove"/><FONT FACE="Courier" SIZE="1">@Operation&#160;remove(key&#160;:&#160;Element):XCore::Element<br>&#160;&#160;let&#160;index&#160;=&#160;key.hashCode()-&gt;mod(Kernel_arrayLength(self))&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;bucket&#160;=&#160;Kernel_arrayRef(self,index)<br>&#160;&#160;in&#160;let&#160;findSeq&#160;=&#160;bucket-&gt;asSeq;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;=&#160;false;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;=&#160;null<br>&#160;&#160;&#160;&#160;&#160;in&#160;declare(hidden,findSeq);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;declare(hidden,findDone);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;declare(hidden,findResult);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;@While&#160;not&#160;findSeq-&gt;isEmpty&#160;and&#160;not&#160;findDone&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;cell&#160;=&#160;findSeq-&gt;head&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findElement&#160;=&#160;findSeq-&gt;head<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;declare(hidden,findElement);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;cell-&gt;head&#160;=&#160;key<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;:=&#160;true;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;:=&#160;Kernel_arraySet(self,index,bucket-&gt;excluding(cell))<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;findSeq&#160;:=&#160;findSeq-&gt;tail<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;not&#160;findDone<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;findResult<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;self<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="removeDaemon"/><FONT FACE="Courier" SIZE="1">@Operation&#160;removeDaemon(d&#160;:&#160;XCore::Element,target&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.setDaemons(self.daemons()-&gt;excluding(d))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="removeDaemonNamed"/><FONT FACE="Courier" SIZE="1">@Operation&#160;removeDaemonNamed(name&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;if&#160;self.hasDaemonNamed(name)<br>&#160;&#160;then&#160;self.removeDaemon(self.daemonNamed(name))<br>&#160;&#160;else&#160;self<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="set"/><FONT FACE="Courier" SIZE="1">@Operation&#160;set(index&#160;:&#160;Integer,value&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;Kernel_arraySet(self,index,value)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setDaemons"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setDaemons(daemons&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;Kernel_arraySetDaemons(self,daemons)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="size"/><FONT FACE="Courier" SIZE="1">@Operation&#160;size():Integer<br>&#160;&#160;Kernel_arrayLength(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="toString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;toString():String<br>&#160;&#160;"&lt;Table&#160;length&#160;=&#160;"&#160;+&#160;Kernel_arrayLength(self)&#160;+&#160;"&#160;entries&#160;=&#160;"&#160;+&#160;self.entries()&#160;+&#160;"&gt;"<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="values"/><FONT FACE="Courier" SIZE="1">@Operation&#160;values():Set(Element)<br>&#160;&#160;self.keys()-&gt;asSet-&gt;collect(k&#160;|<br>&#160;&#160;&#160;&#160;self.get(k))<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+ConstraintReporter
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>ConstraintReporter</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+No Documentation Specified
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../Root/Walkers/Walker/index.html">Walker</A>
+,<A HREF="../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+<TR><TD>ConstraintReporter(justFailures)</TD><TD> No Documentation </TD></TR>
+<TR><TD>ConstraintReporter(justFailures,filter)</TD><TD> No Documentation </TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR><TD><B>filter</B></TD><TD><A HREF="../../../Root/OCL/Operation/index.html">Operation<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>justFailures</B></TD><TD><A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>reports</B></TD><TD><A HREF="../../../Root/XCore/ConstraintReport/index.html">Set(ConstraintReport)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/Walkers/Walker/index.html">Walker</A>: refCount, table, visited. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#addToReports">addToReports</a>(v:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#filter">filter</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setFilter">setFilter</a>(v:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#toString">toString</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkConstraints">walkConstraints</a>(e:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkObject">walkObject</a>(object:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkSeq">walkSeq</a>(s:<A HREF="../../../Root/XCore/Element/index.html">Seq(Element)<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkSet">walkSet</a>(s:<A HREF="../../../Root/XCore/Element/index.html">Set(Element)<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkSlot">walkSlot</a>(o:<A HREF="../../../Root/XCore/Object/index.html">Object<A>,s:<A HREF="../../../Root/XCore/String/index.html">String<A>,v:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkTable">walkTable</a>(t:<A HREF="../../../Root/XCore/Table/index.html">Table<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#walkVector">walkVector</a>(v:<A HREF="../../../Root/XCore/Vector/index.html">Vector<A>,arg:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/Walkers/Walker/index.html">Walker</A>: defaultWalk, encounter, encounter, encountered, getRef, initWalker, newRef, reWalk, reset, visited, walk, walkBigInt, walkBoolean, walkBuffer, walkClient, walkCode, walkCodeBox, walkCont, walkDaemon, walkFloat, walkForeignFun, walkForeignObj, walkFun, walkInputChannel, walkInteger, walkNil, walkNull, walkObject, walkOutputChannel, walkSeq, walkSet, walkSlot, walkString, walkSymbol, walkTable, walkThread, walkVector. <BR><B>From</B> <A HREF="../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="addToReports"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addToReports[EXTENDER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.reports&#160;:=&#160;self.reports-&gt;including(v)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="filter"/><FONT FACE="Courier" SIZE="1">@Operation&#160;filter[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.filter<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setFilter"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setFilter[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.filter&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="toString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;toString():String<br>&#160;&#160;try<br>&#160;&#160;&#160;&#160;self.of().name.toString()&#160;+&#160;"("&#160;+&#160;if&#160;self.hasSlot("justFailures")<br>&#160;&#160;&#160;&#160;then&#160;self.justFailures.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"justFailures"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;")"<br>&#160;&#160;catch(exception)<br>&#160;&#160;&#160;&#160;self.of().name&#160;+&#160;"(Constructor&#160;Error!)"<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkConstraints"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkConstraints(e&#160;:&#160;Element):XCore::Element<br>&#160;&#160;self.reports&#160;:=&#160;Set{};<br>&#160;&#160;self.walk(e,null);<br>&#160;&#160;let&#160;selfReport&#160;=&#160;ConstraintReport(e,null,true);<br>&#160;&#160;&#160;&#160;&#160;&#160;elementReports&#160;=&#160;self.reports-&gt;asSeq<br>&#160;&#160;in&#160;@For&#160;report&#160;in&#160;elementReports&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;selfReport.addToChildren(report)<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;let&#160;childrenSatisfied&#160;=&#160;selfReport.children-&gt;forAll(r&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;r.satisfied())<br>&#160;&#160;&#160;&#160;&#160;in&#160;selfReport.satisfied&#160;:=&#160;selfReport.satisfied&#160;and&#160;childrenSatisfied<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;selfReport<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkObject"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkObject(object&#160;:&#160;XCore::Element,arg&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;if&#160;filter(object)&#160;and&#160;not&#160;(object&#160;=&#160;self)<br>&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;let&#160;result&#160;=&#160;object.checkConstraints()<br>&#160;&#160;&#160;&#160;in&#160;if&#160;justFailures<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;if&#160;not&#160;result.satisfied<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;result.children&#160;:=&#160;result.failures();<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.addToReports(result)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;self.addToReports(result)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;super(object,arg)<br>&#160;&#160;else&#160;false<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkSeq"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkSeq(s&#160;:&#160;SeqOfElement,arg&#160;:&#160;Element):Element<br>&#160;&#160;if&#160;not&#160;s-&gt;isEmpty<br>&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;self.walk(s-&gt;head,arg);<br>&#160;&#160;&#160;&#160;self.walk(s-&gt;tail,arg)<br>&#160;&#160;else&#160;false<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkSet"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkSet(s&#160;:&#160;SetOfElement,arg&#160;:&#160;Element):Element<br>&#160;&#160;@For&#160;x&#160;in&#160;s&#160;do<br>&#160;&#160;&#160;&#160;self.walk(x,arg)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkSlot"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkSlot(o&#160;:&#160;Object,s&#160;:&#160;String,v&#160;:&#160;XCore::Element,arg&#160;:&#160;Element):XCore::Element<br>&#160;&#160;self.walk(v,arg)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkTable"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkTable(t&#160;:&#160;Table,arg&#160;:&#160;Element):Element<br>&#160;&#160;@For&#160;v&#160;inTableValues&#160;t&#160;do<br>&#160;&#160;&#160;&#160;self.walk(v,arg)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="walkVector"/><FONT FACE="Courier" SIZE="1">@Operation&#160;walkVector(v&#160;:&#160;Vector,arg&#160;:&#160;Element):Element<br>&#160;&#160;@Count&#160;i&#160;from&#160;0&#160;to&#160;v.size()&#160;-&#160;1&#160;do<br>&#160;&#160;&#160;&#160;self.walk(v.ref(i),arg)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

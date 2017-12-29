@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+Exception
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>Exception</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+
+      An exception is raised when something goes wrong. An exception contains a
+      message that reports what went wrong. An exception also contains a sequence
+      of stack frames that defines the history of computation at the point the
+      exception was raised. An exception may optionally contain information 
+      about where in the source file the error occurred. This is encoded as the
+      lineCount.
+    
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+<TR><TD>Exception()</TD><TD> No Documentation </TD></TR>
+<TR><TD>Exception(message)</TD><TD> No Documentation </TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR><TD><B>backtrace</B></TD><TD><A HREF="../../../Root/XCore/Element/index.html">Seq(Element)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>charCount</B></TD><TD><A HREF="../../../Root/XCore/Integer/index.html">Integer<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>lineCount</B></TD><TD><A HREF="../../../Root/XCore/Integer/index.html">Integer<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>message</B></TD><TD><A HREF="../../../Root/XCore/String/index.html">String<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>resourceName</B></TD><TD><A HREF="../../../Root/XCore/String/index.html">String<A></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#display">display</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Call this operation to display an exception to the user.
+      If Mosaic is in full swing then the stack trace will be
+      displayed as a tree. Otherwise the stack trace is printed 
+      in text.
+    </TD></TR>
+<TR><TD><B><a href="#edit">edit</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#printBacktrace">printBacktrace</a>(short:<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#printBacktrace">printBacktrace</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Call this operation to print out the state of the XMF
+      call stack at the point the exception was created
+      assuming it called setBacktrace() at that point.
+    </TD></TR>
+<TR><TD><B><a href="#printBacktraceHeader">printBacktraceHeader</a>(out:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#printBasicBacktrace">printBasicBacktrace</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#printFrame">printFrame</a>(frame:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      An exception stack frame contains information about the operation
+      that was currently executing, the target of the call, the arguments
+      and any locals. There also may be information about the original
+      source file and the position of execution in that file.
+    </TD></TR>
+<TR><TD><B><a href="#setBacktrace">setBacktrace</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#stackFrames">stackFrames</a>():<A HREF="../../../Root/Exceptions/StackFrame/index.html">Seq(StackFrame)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#toString">toString</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="display"/><FONT FACE="Courier" SIZE="1">@Operation&#160;display():XCore::Element<br>&#160;&#160;if&#160;Root.hasElement("Clients")<br>&#160;&#160;then&#160;if&#160;Root::Clients.hasElement("ExceptionReport")<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;self.edit()<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;self.printBacktrace()<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;else&#160;self.printBacktrace()<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="edit"/><FONT FACE="Courier" SIZE="1">@Operation&#160;edit():XCore::Element<br>&#160;&#160;try<br>&#160;&#160;&#160;&#160;let&#160;formsClient&#160;=&#160;xmf.findClient(Clients::Forms::FormClient)&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;viewer&#160;=&#160;Clients::ExceptionReport::ExceptionForm(self)<br>&#160;&#160;&#160;&#160;in&#160;if&#160;formsClient&#160;&lt;&gt;&#160;null<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;formsClient.newForm(viewer);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;xmf.killProgressDialogs()<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;self.printBacktrace()<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;self<br>&#160;&#160;catch(exception)<br>&#160;&#160;&#160;&#160;xmf.warning("Exception&#160;occurred&#160;when&#160;processing&#160;an&#160;exception&#160;(see&#160;Root::xx)");<br>&#160;&#160;&#160;&#160;Root::xx&#160;:=exception<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="printBacktrace"/><FONT FACE="Courier" SIZE="1">@Operation&#160;printBacktrace(short&#160;:&#160;Boolean):XCore::Element<br>&#160;&#160;self.printBacktraceHeader(stdout);<br>&#160;&#160;if&#160;Root.hasElement("Exceptions")&#160;andthen&#160;Exceptions.hasElement("Backtrace")<br>&#160;&#160;then&#160;Exceptions::Backtrace(self.stackFrames()).diagnostic(short)<br>&#160;&#160;else&#160;self.printBasicBacktrace()<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="printBacktrace"/><FONT FACE="Courier" SIZE="1">@Operation&#160;printBacktrace():XCore::Element<br>&#160;&#160;self.printBacktrace(true)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="printBacktraceHeader"/><FONT FACE="Courier" SIZE="1">@Operation&#160;printBacktraceHeader(out&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;format(out,"~%Exception:&#160;");<br>&#160;&#160;format(out,message);<br>&#160;&#160;format(out,"~%Source&#160;file&#160;position:&#160;line&#160;=&#160;~S~%",Seq{lineCount});<br>&#160;&#160;if&#160;resourceName&#160;&lt;&gt;&#160;""<br>&#160;&#160;then&#160;format(out,"Resource&#160;name&#160;=&#160;~S~%",Seq{resourceName})<br>&#160;&#160;else&#160;false<br>&#160;&#160;end&#160;;<br>&#160;&#160;format(out,"~S~%~%",Seq{self});<br>&#160;&#160;format(out,"~%The&#160;following&#160;backtrace&#160;shows&#160;recent&#160;message&#160;calls:~%~%")<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="printBasicBacktrace"/><FONT FACE="Courier" SIZE="1">@Operation&#160;printBasicBacktrace():XCore::Element<br>&#160;&#160;let&#160;frames&#160;=&#160;backtrace;<br>&#160;&#160;&#160;&#160;&#160;&#160;index&#160;=&#160;0;<br>&#160;&#160;&#160;&#160;&#160;&#160;unlimited&#160;=&#160;Exception::backtraceLimit&#160;&lt;&#160;0<br>&#160;&#160;in&#160;@While&#160;not&#160;frames-&gt;isEmpty&#160;and&#160;(index&#160;&lt;&#160;Exception::backtraceLimit&#160;or&#160;unlimited)&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;frame&#160;=&#160;frames-&gt;head<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;self.printFrame(frame);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;format(stdout,"~%----------------------------------~%~%",Seq{});<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;frames&#160;:=&#160;frames-&gt;tail;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;index&#160;:=&#160;index&#160;+&#160;1<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;if&#160;not&#160;frames-&gt;isEmpty<br>&#160;&#160;&#160;&#160;&#160;then&#160;format(stdout,"~%...more&#160;frames&#160;(increase&#160;Exception::backtraceLimit).~%")<br>&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="printFrame"/><FONT FACE="Courier" SIZE="1">@Operation&#160;printFrame(frame&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;codeBox&#160;=&#160;frame-&gt;at(0);<br>&#160;&#160;&#160;&#160;&#160;&#160;codeIndex&#160;=&#160;frame-&gt;at(1);<br>&#160;&#160;&#160;&#160;&#160;&#160;globals&#160;=&#160;frame-&gt;at(2);<br>&#160;&#160;&#160;&#160;&#160;&#160;dynamics&#160;=&#160;frame-&gt;at(3);<br>&#160;&#160;&#160;&#160;&#160;&#160;locals&#160;=&#160;frame-&gt;at(4);<br>&#160;&#160;&#160;&#160;&#160;&#160;target&#160;=&#160;frame-&gt;at(5);<br>&#160;&#160;&#160;&#160;&#160;&#160;supers&#160;=&#160;frame-&gt;at(6);<br>&#160;&#160;&#160;&#160;&#160;&#160;handler&#160;=&#160;frame-&gt;at(7);<br>&#160;&#160;&#160;&#160;&#160;&#160;values&#160;=&#160;frame-&gt;at(8);<br>&#160;&#160;&#160;&#160;&#160;&#160;lineCount&#160;=&#160;frame-&gt;at(9);<br>&#160;&#160;&#160;&#160;&#160;&#160;charCount&#160;=&#160;frame-&gt;at(10)&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;fun&#160;=&#160;if&#160;supers&#160;=&#160;null<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;null<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elseif&#160;supers-&gt;isEmpty<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;null<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;supers-&gt;head<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;paramNames&#160;=&#160;if&#160;fun&#160;=&#160;null<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;Seq{}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;fun.paramNames()<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;arity&#160;=&#160;paramNames-&gt;size&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;owner&#160;=&#160;if&#160;fun&#160;=&#160;null<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;"?"<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;elseif&#160;fun.owner&#160;&lt;&gt;&#160;null<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;fun.owner.name<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;"?"<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;in&#160;try<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;format(stdout,"~S::~S(~{,~;~S~})&#160;line&#160;=&#160;~S&#160;char&#160;=&#160;~S~%",Seq{owner,Kernel_codeBoxName(codeBox),paramNames,lineCount,charCount});<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;@For&#160;name&#160;in&#160;paramNames&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;format(stdout,"&#160;&#160;~S&#160;=&#160;~S~%",Seq{name,if&#160;values-&gt;isEmpty<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;"?"<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;values-&gt;head<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;});<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;not&#160;values-&gt;isEmpty<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;values&#160;:=&#160;values-&gt;tail<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;format(stdout,"&#160;&#160;self&#160;=&#160;~S~%",Seq{target});<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;not&#160;values-&gt;isEmpty<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;let&#160;local&#160;=&#160;arity<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;@For&#160;value&#160;in&#160;values&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;format(stdout,"&#160;&#160;local(~S)&#160;=&#160;~S~%",Seq{local,value});<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;local&#160;:=&#160;local&#160;+&#160;1<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;catch(exception)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;format(stdout,"Error&#160;printing&#160;stack&#160;frame&#160;~S~%",Seq{exception})<br>&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setBacktrace"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setBacktrace():XCore::Element<br>&#160;&#160;let&#160;frames&#160;=&#160;Kernel_stackFrames()&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;target&#160;=&#160;@Operation&#160;anonymous(frame&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;frame-&gt;at(5)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;skipSelf&#160;=&#160;@Operation&#160;anonymous(frame&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;target(frame)&#160;=&#160;self<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;xcnstr&#160;=&#160;@Operation&#160;anonymous(element&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;element.isReallyKindOf(Constructor)&#160;andthen&#160;element.owner().isReallyKindOf(Class)&#160;andthen&#160;element.owner().inheritsFrom(Exception)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;skipConstructor&#160;=&#160;@Operation&#160;anonymous(frame&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;xcnstr(target(frame))<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;skip&#160;=&#160;@Operation&#160;anonymous(frame&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;skipSelf(frame)&#160;or&#160;skipConstructor(frame)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;in&#160;@While&#160;not&#160;frames-&gt;isEmpty&#160;andthen&#160;skip(frames-&gt;head)&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;frames&#160;:=&#160;frames-&gt;tail<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;self.backtrace&#160;:=&#160;frames<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="stackFrames"/><FONT FACE="Courier" SIZE="1">@Operation&#160;stackFrames():Seq(StackFrame)<br>&#160;&#160;backtrace-&gt;collect(frame&#160;|<br>&#160;&#160;&#160;&#160;StackFrame[codeBox&#160;=&#160;frame-&gt;at(CODEBOX),codeIndex&#160;=&#160;frame-&gt;at(CODEINDEX),globals&#160;=&#160;frame-&gt;at(GLOBALS),dynamics&#160;=&#160;frame-&gt;at(DYNAMICS),locals&#160;=&#160;frame-&gt;at(LOCALS),target&#160;=&#160;frame-&gt;at(TARGET),supers&#160;=&#160;frame-&gt;at(SUPERS),handler&#160;=&#160;frame-&gt;at(HANDLER),values&#160;=&#160;frame-&gt;at(VALUES),line&#160;=&#160;frame-&gt;at(LINE)])<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="toString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;toString():String<br>&#160;&#160;"&lt;Exception&#160;"&#160;+&#160;message&#160;+&#160;"&gt;"<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

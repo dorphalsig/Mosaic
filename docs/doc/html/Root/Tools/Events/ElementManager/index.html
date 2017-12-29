@@ -1,0 +1,342 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+ElementManager
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>ElementManager</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+
+      An element manager is responsible for handling the events that are raised
+      by tool actions and by changes to the element that is being managed. The
+      manager contains handlers that match the names of events when the event is
+      raised. An element manager also contains a table of associations between
+      data values. These associations are created and used by the event handlers.
+    
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../../Root/XCore/NameSpace/index.html">NameSpace</A>
+,<A HREF="../../../../Root/XCore/IndexedContainer/index.html">IndexedContainer</A>
+,<A HREF="../../../../Root/XCore/NamedElement/index.html">NamedElement</A>
+,<A HREF="../../../../Root/XCore/DocumentedElement/index.html">DocumentedElement</A>
+,<A HREF="../../../../Root/XCore/Container/index.html">Container</A>
+,<A HREF="../../../../Root/XCore/Contained/index.html">Contained</A>
+,<A HREF="../../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+<TR><TD>ElementManager(name,parents,reportFails)</TD><TD> No Documentation </TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR><TD><B>cache</B></TD><TD><A HREF="../../../../Root/XCore/Table/index.html">Table<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>edges</B></TD><TD><A HREF="../../../../Root/XCore/Element/index.html">Seq(Element)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>handlers</B></TD><TD><A HREF="../../../../Root/Tools/Events/EventHandler/index.html">Seq(EventHandler)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>observers</B></TD><TD><A HREF="../../../../Root/Tools/Events/Observer/index.html">Seq(Observer)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>parents</B></TD><TD><A HREF="../../../../Root/Tools/Events/ElementManager/index.html">Seq(ElementManager)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>reportFails</B></TD><TD><A HREF="../../../../Root/XCore/Boolean/index.html">Boolean<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>table</B></TD><TD><A HREF="../../../../Root/XCore/Table/index.html">Table<A></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../../Root/XCore/NameSpace/index.html">NameSpace</A>: bindings, imports. <BR><B>From</B> <A HREF="../../../../Root/XCore/IndexedContainer/index.html">IndexedContainer</A>: contents. <BR><B>From</B> <A HREF="../../../../Root/XCore/NamedElement/index.html">NamedElement</A>: name. <BR><B>From</B> <A HREF="../../../../Root/XCore/DocumentedElement/index.html">DocumentedElement</A>: documentation. <BR><B>From</B> <A HREF="../../../../Root/XCore/Contained/index.html">Contained</A>: owner. <BR><B>From</B> <A HREF="../../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#add">add</a>(element:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#addDefinitions">addDefinitions</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#addToHandlers">addToHandlers</a>(v:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#addToObservers">addToObservers</a>(v:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#addToParents">addToParents</a>(v:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#allHandlers">allHandlers</a>():<A HREF="../../../../Root/Tools/Events/EventHandler/index.html">Seq(EventHandler)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#cache">cache</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#cacheHandlers">cacheHandlers</a>(event:<A HREF="../../../../Root/Tools/Events/Event/index.html">Event<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#deregister">deregister</a>(element:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#deregisterEdge">deregisterEdge</a>(source:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,key:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,target:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#edges">edges</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#expand">expand</a>(sig:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,reportFails:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,parents:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,defs:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#findEdge">findEdge</a>(source:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,key:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,target:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#findElement">findElement</a>(element:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#handleObjectStateChange">handleObjectStateChange</a>(tool:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,object:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,slot:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,new:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,old:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#handleObjectStateChanges">handleObjectStateChanges</a>(tool:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,object:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,slot:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,new:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,old:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#initialiseParents">initialiseParents</a>(table:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#isRegistered">isRegistered</a>(element:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#isRegisteredEdge">isRegisteredEdge</a>(source:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,key:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,target:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#mkDeregister">mkDeregister</a>(table:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#mkDeregisterEdge">mkDeregisterEdge</a>(manager:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#mkFind">mkFind</a>(table:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#mkFindEdge">mkFindEdge</a>(manager:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#mkIsRegistered">mkIsRegistered</a>(manager:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#mkIsRegisteredEdge">mkIsRegisteredEdge</a>(manager:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#mkRegister">mkRegister</a>(table:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#mkRegisterEdge">mkRegisterEdge</a>(manager:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#new">new</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#observeStateChange">observeStateChange</a>(tool:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,object:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,slot:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,new:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,old:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,modifier:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#parents">parents</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#raise">raise</a>(event:<A HREF="../../../../Root/Tools/Events/Event/index.html">Event<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#register">register</a>(e1:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,e2:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#registerEdge">registerEdge</a>(source:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,key:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,target:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,edge:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#reportFails">reportFails</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setEdges">setEdges</a>(v:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setReportFails">setReportFails</a>(v:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setTable">setTable</a>(v:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#table">table</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#toString">toString</a>():<A HREF="../../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#toolData">toolData</a>():<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../../Root/XCore/NameSpace/index.html">NameSpace</A>: add, addBinding, addImport, allHTMLEntries, allHTMLPackages, allImports, createSnapshot, define, generateHTML, getChildren, getContents, getElement, getInstantiableClasses, graphViz, hasBinding, hasElement, importedFrom, imports, init, init, initBindings, lift, liveDoc, lookupPath, nameChanged, names, newName, populateGraphViz, putElement, redefine, remove, removeBinding, removeImport, resolveNameClash, syntaxClasses, toGraphVizPage, toHTML, toHTMLDoc, toType, writeEcore. <BR><B>From</B> <A HREF="../../../../Root/XCore/IndexedContainer/index.html">IndexedContainer</A>: add, add, addContentDaemon, contentDaemons, contents, index, indices, init, initContents, remove, removeContentDaemon. <BR><B>From</B> <A HREF="../../../../Root/XCore/NamedElement/index.html">NamedElement</A>: getNamedElement, href, labelString, legalNameChangeCheck, name, path, pathSeq, repopulate, setName, toString. <BR><B>From</B> <A HREF="../../../../Root/XCore/DocumentedElement/index.html">DocumentedElement</A>: doc, ensureDoc, setDoc. <BR><B>From</B> <A HREF="../../../../Root/XCore/Container/index.html">Container</A>: add, addContentDaemon, allContents, allContentsOf, allContentsThat, checkConstraints, checkConstraints, containerCutHandler, containerPastePostHandler, containerPastePreHandler, contentDaemons, contents, contentsOf, contentsThat, deleteContainedDiagrams, deleteRecursive, find, getChildren, getChildrenToolTips, includes, init, initContents, loadXTO, remove, removeContentDaemon, traceAll, untraceAll. <BR><B>From</B> <A HREF="../../../../Root/XCore/Contained/index.html">Contained</A>: addTo, allOwners, deleteRecursive, delete_client, delete_client_check, delete_client_redirect, getDefaultClipboardSource, owner, removeFromOwner, setOwner. <BR><B>From</B> <A HREF="../../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="add"/><FONT FACE="Courier" SIZE="1">@Operation&#160;add(element&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@TypeCase(element)<br>&#160;&#160;&#160;&#160;EventHandler&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;cache.clear();<br>&#160;&#160;&#160;&#160;&#160;&#160;element.importNameSpace(self);<br>&#160;&#160;&#160;&#160;&#160;&#160;self.addToHandlers(element)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;Observer&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;element.importNameSpace(self);<br>&#160;&#160;&#160;&#160;&#160;&#160;self.addToObservers(element)<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addDefinitions"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addDefinitions():XCore::Element<br>&#160;&#160;self.add(ElementManager::mkFind(table));<br>&#160;&#160;self.add(ElementManager::mkRegister(table));<br>&#160;&#160;self.add(ElementManager::mkDeregister(table));<br>&#160;&#160;self.add(ElementManager::mkIsRegistered(self));<br>&#160;&#160;self.add(ElementManager::mkIsRegisteredEdge(self));<br>&#160;&#160;self.add(ElementManager::mkFindEdge(self));<br>&#160;&#160;self.add(ElementManager::mkRegisterEdge(self));<br>&#160;&#160;self.add(ElementManager::mkDeregisterEdge(self))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addToHandlers"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addToHandlers[EXTENDER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.handlers&#160;:=&#160;self.handlers-&gt;including(v)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addToObservers"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addToObservers[EXTENDER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.observers&#160;:=&#160;self.observers-&gt;including(v)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addToParents"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addToParents[EXTENDER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.parents&#160;:=&#160;self.parents-&gt;including(v)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="allHandlers"/><FONT FACE="Courier" SIZE="1">@Operation&#160;allHandlers():Seq(EventHandler)<br>&#160;&#160;parents-&gt;iterate(parent&#160;handlers&#160;=&#160;handlers&#160;|<br>&#160;&#160;&#160;&#160;handlers&#160;+&#160;parent.allHandlers())<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="cache"/><FONT FACE="Courier" SIZE="1">@Operation&#160;cache[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.cache<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="cacheHandlers"/><FONT FACE="Courier" SIZE="1">@Operation&#160;cacheHandlers(event&#160;:&#160;Event):XCore::Element<br>&#160;&#160;let&#160;eventHandlers&#160;=&#160;self.allHandlers()&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;handlers&#160;=&#160;event.matchHandlers(eventHandlers)<br>&#160;&#160;in&#160;@For&#160;handler&#160;in&#160;handlers&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;event.invokeHandler(handler)<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;cache.put(event.raisedName(),handlers);<br>&#160;&#160;&#160;&#160;&#160;if&#160;reportFails&#160;and&#160;handlers-&gt;isEmpty<br>&#160;&#160;&#160;&#160;&#160;then&#160;format(stdout,"Warning:&#160;No&#160;handler&#160;for&#160;event:&#160;~S~%",Seq{event})<br>&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="deregister"/><FONT FACE="Courier" SIZE="1">@Operation&#160;deregister(element&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;table.remove(element)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="deregisterEdge"/><FONT FACE="Courier" SIZE="1">@Operation&#160;deregisterEdge(source&#160;:&#160;XCore::Element,key&#160;:&#160;XCore::Element,target&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;findSeq&#160;=&#160;edges-&gt;asSeq;<br>&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;=&#160;false;<br>&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;=&#160;null<br>&#160;&#160;in&#160;declare(hidden,findSeq);<br>&#160;&#160;&#160;&#160;&#160;declare(hidden,findDone);<br>&#160;&#160;&#160;&#160;&#160;declare(hidden,findResult);<br>&#160;&#160;&#160;&#160;&#160;@While&#160;not&#160;findSeq-&gt;isEmpty&#160;and&#160;not&#160;findDone&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;record&#160;=&#160;findSeq-&gt;head&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findElement&#160;=&#160;findSeq-&gt;head<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;declare(hidden,findElement);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;record-&gt;at(0)&#160;=&#160;source&#160;and&#160;record-&gt;at(1)&#160;=&#160;key&#160;and&#160;record-&gt;at(2)&#160;=&#160;target<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;:=&#160;true;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;:=&#160;self.edges&#160;:=&#160;edges-&gt;excluding(record)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;findSeq&#160;:=&#160;findSeq-&gt;tail<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;if&#160;not&#160;findDone<br>&#160;&#160;&#160;&#160;&#160;then&#160;null<br>&#160;&#160;&#160;&#160;&#160;else&#160;findResult<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="edges"/><FONT FACE="Courier" SIZE="1">@Operation&#160;edges[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.edges<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="expand"/><FONT FACE="Courier" SIZE="1">@Operation&#160;expand(sig&#160;:&#160;XCore::Element,reportFails&#160;:&#160;XCore::Element,parents&#160;:&#160;XCore::Element,defs&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;name&#160;=&#160;sig-&gt;last&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;body&#160;=&#160;defs-&gt;iterate(def&#160;exp&#160;=&#160;[|&#160;Tools::Events::ElementManager(&lt;OCL::StrExp(name)&gt;,&lt;parents&gt;,&lt;reportFails&gt;)&#160;|]&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[|&#160;&lt;exp&gt;.add(&lt;def&gt;)&#160;|]);<br>&#160;&#160;&#160;&#160;&#160;&#160;path&#160;=&#160;if&#160;sig-&gt;size&#160;=&#160;1<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;null<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;let&#160;sig&#160;=&#160;sig-&gt;butLast&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;toolType&#160;=&#160;OCL::StrExp(sig-&gt;last)&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;sig&#160;=&#160;sig-&gt;butLast&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;class&#160;=&#160;OCL::Path::toPath(sig)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;[|&#160;xmf.toolManager().toolDescriptor(&lt;class&gt;,&lt;toolType&gt;)&#160;|]<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;in&#160;if&#160;sig-&gt;size&#160;=&#160;1<br>&#160;&#160;&#160;&#160;&#160;then&#160;body<br>&#160;&#160;&#160;&#160;&#160;else&#160;OCL::ContextDef(path,body)<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="findEdge"/><FONT FACE="Courier" SIZE="1">@Operation&#160;findEdge(source&#160;:&#160;XCore::Element,key&#160;:&#160;XCore::Element,target&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;findSeq&#160;=&#160;edges-&gt;asSeq;<br>&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;=&#160;false;<br>&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;=&#160;null<br>&#160;&#160;in&#160;declare(hidden,findSeq);<br>&#160;&#160;&#160;&#160;&#160;declare(hidden,findDone);<br>&#160;&#160;&#160;&#160;&#160;declare(hidden,findResult);<br>&#160;&#160;&#160;&#160;&#160;@While&#160;not&#160;findSeq-&gt;isEmpty&#160;and&#160;not&#160;findDone&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;record&#160;=&#160;findSeq-&gt;head&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findElement&#160;=&#160;findSeq-&gt;head<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;declare(hidden,findElement);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;record-&gt;at(0)&#160;=&#160;source&#160;and&#160;record-&gt;at(1)&#160;=&#160;key&#160;and&#160;record-&gt;at(2)&#160;=&#160;target<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findDone&#160;:=&#160;true;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;findResult&#160;:=&#160;record-&gt;at(3)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;findSeq&#160;:=&#160;findSeq-&gt;tail<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;if&#160;not&#160;findDone<br>&#160;&#160;&#160;&#160;&#160;then&#160;null<br>&#160;&#160;&#160;&#160;&#160;else&#160;findResult<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="findElement"/><FONT FACE="Courier" SIZE="1">@Operation&#160;findElement(element&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;if&#160;table.hasKey(element)<br>&#160;&#160;then&#160;table.get(element)<br>&#160;&#160;else&#160;self.error("Cannot&#160;find&#160;an&#160;element&#160;for&#160;"&#160;+&#160;element.toString()&#160;+&#160;"&#160;in&#160;"&#160;+&#160;table.keys().toString())<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="handleObjectStateChange"/><FONT FACE="Courier" SIZE="1">@Operation&#160;handleObjectStateChange(tool&#160;:&#160;XCore::Element,object&#160;:&#160;XCore::Element,slot&#160;:&#160;XCore::Element,new&#160;:&#160;XCore::Element,old&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;type&#160;=&#160;object.of()&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;attribute&#160;=&#160;type.getAttribute(slot)<br>&#160;&#160;in&#160;if&#160;attribute.type&#160;=&#160;attribute.underlyingType()<br>&#160;&#160;&#160;&#160;&#160;then&#160;self.observeStateChange(tool,object,slot,new,old,"!")<br>&#160;&#160;&#160;&#160;&#160;else&#160;self.handleObjectStateChanges(tool,object,slot,new,old)<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="handleObjectStateChanges"/><FONT FACE="Courier" SIZE="1">@Operation&#160;handleObjectStateChanges(tool&#160;:&#160;XCore::Element,object&#160;:&#160;XCore::Element,slot&#160;:&#160;XCore::Element,new&#160;:&#160;XCore::Element,old&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;if&#160;not&#160;(new&#160;-&#160;old)-&gt;isEmpty<br>&#160;&#160;then&#160;self.observeStateChange(tool,object,slot,new&#160;-&#160;old,old,"+")<br>&#160;&#160;else&#160;false<br>&#160;&#160;end&#160;;<br>&#160;&#160;if&#160;not&#160;(old&#160;-&#160;new)-&gt;isEmpty<br>&#160;&#160;then&#160;self.observeStateChange(tool,object,slot,new,old&#160;-&#160;new,"-")<br>&#160;&#160;else&#160;false<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="initialiseParents"/><FONT FACE="Courier" SIZE="1">@Operation&#160;initialiseParents(table&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@For&#160;parent&#160;in&#160;parents&#160;do<br>&#160;&#160;&#160;&#160;parent.setTable(table);<br>&#160;&#160;&#160;&#160;parent.initialiseParents(table)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="isRegistered"/><FONT FACE="Courier" SIZE="1">@Operation&#160;isRegistered(element&#160;:&#160;XCore::Element):Boolean<br>&#160;&#160;table.hasKey(element)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="isRegisteredEdge"/><FONT FACE="Courier" SIZE="1">@Operation&#160;isRegisteredEdge(source&#160;:&#160;XCore::Element,key&#160;:&#160;XCore::Element,target&#160;:&#160;XCore::Element):Boolean<br>&#160;&#160;self.findEdge(source,key,target)&#160;&lt;&gt;&#160;null<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="mkDeregister"/><FONT FACE="Courier" SIZE="1">@Operation&#160;mkDeregister(table&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@Operation&#160;deregister[closure="Tools::Events::ElementManager::mkDeregister"](element&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;table.remove(element)<br>&#160;&#160;end.setProperty("closure","Tools::Events::ElementManager::mkDeregister").setOwner(null)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="mkDeregisterEdge"/><FONT FACE="Courier" SIZE="1">@Operation&#160;mkDeregisterEdge(manager&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@Operation&#160;deregisterEdge[closure="Tools::Events::ElementManager::mkDeregisterEdge"](source&#160;:&#160;XCore::Element,key&#160;:&#160;XCore::Element,target&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;manager.deregisterEdge(source,key,target)<br>&#160;&#160;end.setProperty("closure","Tools::Events::ElementManager::mkDeregisterEdge").setOwner(null)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="mkFind"/><FONT FACE="Courier" SIZE="1">@Operation&#160;mkFind(table&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@Operation&#160;find[closure="Tools::Events::ElementManager::mkFind"](element&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;if&#160;table.hasKey(element)<br>&#160;&#160;&#160;&#160;then&#160;table.get(element)<br>&#160;&#160;&#160;&#160;else&#160;null<br>&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end.setProperty("closure","Tools::Events::ElementManager::mkFind").setOwner(null)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="mkFindEdge"/><FONT FACE="Courier" SIZE="1">@Operation&#160;mkFindEdge(manager&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@Operation&#160;findEdge[closure="Tools::Events::ElementManager::mkFindEdge"](source&#160;:&#160;XCore::Element,key&#160;:&#160;XCore::Element,target&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;manager.findEdge(source,key,target)<br>&#160;&#160;end.setProperty("closure","Tools::Events::ElementManager::mkFindEdge").setOwner(null)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="mkIsRegistered"/><FONT FACE="Courier" SIZE="1">@Operation&#160;mkIsRegistered(manager&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@Operation&#160;isRegistered[closure="Tools::Events::ElementManager::mkIsRegistered"](element&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;manager.isRegistered(element)<br>&#160;&#160;end.setProperty("closure","Tools::Events::ElementManager::mkIsRegistered").setOwner(null)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="mkIsRegisteredEdge"/><FONT FACE="Courier" SIZE="1">@Operation&#160;mkIsRegisteredEdge(manager&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@Operation&#160;isRegisteredEdge[closure="Tools::Events::ElementManager::mkIsRegisteredEdge"](source&#160;:&#160;XCore::Element,key&#160;:&#160;XCore::Element,target&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;manager.isRegisteredEdge(source,key,target)<br>&#160;&#160;end.setProperty("closure","Tools::Events::ElementManager::mkIsRegisteredEdge").setOwner(null)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="mkRegister"/><FONT FACE="Courier" SIZE="1">@Operation&#160;mkRegister(table&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@Operation&#160;register[closure="Tools::Events::ElementManager::mkRegister"](e1&#160;:&#160;XCore::Element,e2&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;table.put(e1,e2)<br>&#160;&#160;end.setProperty("closure","Tools::Events::ElementManager::mkRegister").setOwner(null)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="mkRegisterEdge"/><FONT FACE="Courier" SIZE="1">@Operation&#160;mkRegisterEdge(manager&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@Operation&#160;registerEdge[closure="Tools::Events::ElementManager::mkRegisterEdge"](source&#160;:&#160;XCore::Element,key&#160;:&#160;XCore::Element,target&#160;:&#160;XCore::Element,edge&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;manager.registerEdge(source,key,target,edge)<br>&#160;&#160;end.setProperty("closure","Tools::Events::ElementManager::mkRegisterEdge").setOwner(null)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="new"/><FONT FACE="Courier" SIZE="1">@Operation&#160;new():XCore::Element<br>&#160;&#160;let&#160;manager&#160;=&#160;self.copy()<br>&#160;&#160;in&#160;manager.table&#160;:=&#160;Table(14);<br>&#160;&#160;&#160;&#160;&#160;format(stdout,"Created&#160;new&#160;table!~%",Seq{});<br>&#160;&#160;&#160;&#160;&#160;Root::t0&#160;:=table;<br>&#160;&#160;&#160;&#160;&#160;Root::t1&#160;:=manager.table;<br>&#160;&#160;&#160;&#160;&#160;Root::m0&#160;:=self;<br>&#160;&#160;&#160;&#160;&#160;Root::m1&#160;:=manager;<br>&#160;&#160;&#160;&#160;&#160;manager.contents&#160;:=&#160;Table(10);<br>&#160;&#160;&#160;&#160;&#160;manager.handlers&#160;:=&#160;handlers-&gt;collect(handler&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;handler.new(manager,self));<br>&#160;&#160;&#160;&#160;&#160;manager.observers&#160;:=&#160;observers-&gt;collect(observer&#160;|<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;observer.new(manager,self));<br>&#160;&#160;&#160;&#160;&#160;manager.cache&#160;:=&#160;Table(10);<br>&#160;&#160;&#160;&#160;&#160;manager.addDefinitions();<br>&#160;&#160;&#160;&#160;&#160;manager<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="observeStateChange"/><FONT FACE="Courier" SIZE="1">@Operation&#160;observeStateChange(tool&#160;:&#160;XCore::Element,object&#160;:&#160;XCore::Element,slot&#160;:&#160;XCore::Element,new&#160;:&#160;XCore::Element,old&#160;:&#160;XCore::Element,modifier&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@For&#160;observer&#160;in&#160;observers&#160;when&#160;observer.observes(object,slot,modifier)&#160;and&#160;not&#160;observers-&gt;exists(observer2&#160;|<br>&#160;&#160;&#160;&#160;observer2&#160;&lt;&gt;&#160;observer&#160;andthen&#160;observer2.observes(object,slot,modifier)&#160;andthen&#160;observer2.type().inheritsFrom(observer.type())&#160;and&#160;not&#160;observer2.type()&#160;=&#160;observer.type())&#160;do<br>&#160;&#160;&#160;&#160;observer.invoke(tool,object,slot,new,old)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="parents"/><FONT FACE="Courier" SIZE="1">@Operation&#160;parents[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.parents<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="raise"/><FONT FACE="Courier" SIZE="1">@Operation&#160;raise(event&#160;:&#160;Event):XCore::Element<br>&#160;&#160;let&#160;eventType&#160;=&#160;event.raisedName()<br>&#160;&#160;in&#160;if&#160;cache.hasKey(eventType)<br>&#160;&#160;&#160;&#160;&#160;then&#160;let&#160;handlers&#160;=&#160;cache.get(eventType)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;if&#160;handlers-&gt;isEmpty<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;if&#160;reportFails<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;format(stdout,"Warning:&#160;No&#160;handler&#160;for&#160;event:&#160;~S~%",Seq{eventType})<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;event.invokeHandlers(handlers)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;else&#160;self.cacheHandlers(event)<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="register"/><FONT FACE="Courier" SIZE="1">@Operation&#160;register(e1&#160;:&#160;XCore::Element,e2&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;table.put(e1,e2)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="registerEdge"/><FONT FACE="Courier" SIZE="1">@Operation&#160;registerEdge(source&#160;:&#160;XCore::Element,key&#160;:&#160;XCore::Element,target&#160;:&#160;XCore::Element,edge&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.deregisterEdge(source,key,target);<br>&#160;&#160;self.edges&#160;:=&#160;Seq{Seq{source,key,target,edge}&#160;|&#160;edges};<br>&#160;&#160;edge<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="reportFails"/><FONT FACE="Courier" SIZE="1">@Operation&#160;reportFails[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.reportFails<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setEdges"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setEdges[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.edges&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setReportFails"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setReportFails[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.reportFails&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setTable"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setTable[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.table&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="table"/><FONT FACE="Courier" SIZE="1">@Operation&#160;table[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.table<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="toString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;toString():String<br>&#160;&#160;"&lt;ElementManager&#160;"&#160;+&#160;name&#160;+&#160;"&#160;"&#160;+&#160;Kernel_value(self).toString(16)&#160;+&#160;"&gt;"<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="toolData"/><FONT FACE="Courier" SIZE="1">@Operation&#160;toolData():XCore::Element<br>&#160;&#160;XManagerData(table,edges)<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=1><FONT SIZE="+2">
+<B>Grammar</B></FONT></TD>
+</TR>
+<TD><PRE>
+OptReportFails ::=  '!'  { OCL::BoolExp(true) } | { OCL::BoolExp(false) }.
+SetCmpExp ::=  LinePos   = l   '{'   CommaSepExps   = es   '}'   !  { SetExp(l,"Set",es) } |  LinePos   = l   '{'   Exp   = e   '|'   CmpClause   = c   SetCmpExp-Star0   = cs   '}'  { Comprehensions::Cmp("Set",e,Seq{c | cs}) }.
+Extends ::=  'extends'   Exp   = e   Extends-Star0   = es  { OCL::SetExp("Seq",Seq{e | es}) } | { OCL::SetExp("Seq",Seq{}) }.
+AddPattern-Dis0 ::=  '+'   AddPattern   = p2  { Addp(p1,p2) } |  <VarRef 28e813> .
+ManagerSigName ::=  Name  |  Str .
+BindValue ::=  OptType   = type   '='   SimpleExp   = value  { ValueBinding(name,type,value) }.
+Extends-Star0 ::=  ','   Exp   = $head   Extends-Star0   = $tail   Cons  |  Nil .
+Def ::=  'context'   Def-Dis0   = isForward   ImportPath   = path   PushChar   Exp   PopChar   = exp  { ContextDef(path,exp,isForward) }.
+ManagerSig ::=  ManagerSigName   = n   ManagerSig-Star0   = ns   <Pair 403527> .
+LocalParserImport-Star0 ::=  '::'   Name   = $head   LocalParserImport-Star0   = $tail   Cons  |  Nil .
+ManagerSig-Star0 ::=  '::'   ManagerSigName   = $head   ManagerSig-Star0   = $tail   Cons  |  Nil .
+NonEmptySeqTail ::=  PushChar   Expr   PopChar   = e   PairOrElements .
+ElementManager ::=  ManagerSig   = sig   OptReportFails   = reportFails   Extends   = parents   ElementManager-Star0   = defs   'end'  { ElementManager::expand(sig,reportFails,parents,defs) }.
+Import ::=  PushChar   'import'   ImportPath   = path   ';'  { Import(path) }  PopChar .
+ElementManager-Star0 ::=  Exp   = $head   ElementManager-Star0   = $tail   Cons  |  Nil .
+Varp ::=  AName   = name   Varp-Dis0   = pattern   Varp-Dis1   = type  { Varp(name,pattern,type) }.
+Keywordp ::=  Name   = name   Keywordp-Star0   = names   '['   Keyps   = keys   ']'  { Keywordp(name,names,keys) }.
+IfTail ::=  'else'   PushChar   Expr   PopChar   'end'  |  LinePos   = l   'elseif'   PushChar   Expr   PopChar   = e1   'then'   PushChar   Expr   PopChar   = e2   IfTail   = e3  { If(l,e1,e2,e3) } |  'end'  { BoolExp(false) }.
+SeqCmpExp-Star0 ::=  ','   CmpClause   = $head   SeqCmpExp-Star0   = $tail   Cons  |  Nil .
+AddPattern ::=  AtomicPattern   = p1   AddPattern-Dis0 .
+EvaluationUnit ::=  EvaluationUnit-Star0   EvaluationUnit-Star1   = imports   EvaluationUnit-Star2   = exps   EOF  { Evaluator::EvaluationUnit(imports,exps) }.
+Keyps-Star0 ::=  ','   Keyp   = $head   Keyps-Star0   = $tail   Cons  |  Nil .
+Atom ::=  PushChar   VarExp   PopChar   !  |  PushChar   Self   PopChar   !  |  PushChar   StrExp   PopChar   !  |  PushChar   IntExp   PopChar   !  |  PushChar   IfExp   PopChar   !  |  PushChar   BoolExp   PopChar   !  |  PushChar   LetExp   PopChar   !  |  PushChar   CollExp   PopChar   !  |  Parentheses  |  PushChar   Drop   PopChar  |  PushChar   Lift   PopChar  |  PushChar   Throw   PopChar  |  PushChar   Try   PopChar  |  PushChar   ImportIn   PopChar  |  PushChar   FloatExp   PopChar  |  PushChar   LocalParserImport   PopChar  |  PushChar   AtExp   PopChar .
+VarExp ::=  Name   = name   LinePos   = l  { Var(name,l) }.
+EvaluationUnit-Star2-Dis0 ::=  Def  |  TopLevelExp .
+BindingList ::=  PushChar   Binding   PopChar   = binding   BindingList-Star0   = bindings   <Pair 3246ba> .
+Syntaxp ::=  '[|'   PushChar   Exp   PopChar   = e   '|]'  { Syntaxp(e) }.
+Objectp ::=  Name   = name   Objectp-Star0   = names   '('   Patterns   = slots   ')'  { Objectp(name,names,slots) }.
+CollMessage ::=  '('   CommaSepExps   = as   ')'  { CollExp(c,n,as) }.
+SeqCmpExp ::=  LinePos   = l   '['   CommaSepExps   = es   ']'   !  { SetExp(l,"Seq",es) } |  LinePos   = l   '['   Exp   = e   '|'   CmpClause   = c   SeqCmpExp-Star0   = cs   ']'  { Comprehensions::Cmp(e,Seq{c | cs}) }.
+PathExp ::=  PushChar   Atom   PopChar   = atom   PathExp-Dis0 .
+Constp ::=  Intp  |  Strp  |  Boolp  |  Expp .
+Parentheses ::=  '('   PushChar   Expr   PopChar   = e   ')'  { Parentheses(e) }.
+SeqExp ::=  LinePos   = l   'Seq{'   SeqExp-Dis0 .
+CollOp ::=  CollMessage  |  Collect  |  Iterate  | { CollExp(c,n,Seq{}) }.
+ArgsTail-Star0 ::=  ','   PushChar   Expr   PopChar   = $head   ArgsTail-Star0   = $tail   Cons  |  Nil .
+Throw ::=  LinePos   = l   'throw'   PushChar   SimpleExp   PopChar   = value  { Throw(l,value) }.
+BindFunArgsTail ::=  Pattern   = p   BindFunArgsTail-Star0   = ps   ')'   <Pair 3f82ff>  |  ')'   Seq{} .
+EvaluationUnit-Star2 ::=  EvaluationUnit-Star2-Dis0   = $head   EvaluationUnit-Star2   = $tail   Cons  |  Nil .
+Drop ::=  '<'   DropExp   = e   '>'  { Drop(resolve(order(e))) } |  '<|'   Pattern   = p   '|>'  { DropPattern(p) }.
+ArrowTail ::=  Name   = n   CollOp   = x   Arrow .
+Objectp-Star0 ::=  '::'   Name   = $head   Objectp-Star0   = $tail   Cons  |  Nil .
+Exp ::=  PushChar   Expr   PopChar   = e   !  { resolve(order(e)) }.
+LogicalExp ::=  PushChar   SimpleExp   PopChar   = e  { resolve(order(e)) }.
+SetCmpExp-Star0 ::=  ','   CmpClause   = $head   SetCmpExp-Star0   = $tail   Cons  |  Nil .
+ImportPath ::=  Name   = n   ImportPath-Star0   = ns   <Pair 24cdc> .
+KeyArg ::=  Name   = name   '='   PushChar   Expr   PopChar   = exp  { KeyArg(name,exp) }.
+Varp-Dis0 ::=  '='   PushChar   Pattern   PopChar  |  null .
+Keyps ::=  Keyp   = key   Keyps-Star0   = keys   <Pair 16071e>  |  Seq{} .
+IfExp ::=  LinePos   = l   'if'   PushChar   Expr   PopChar   = e1   'then'   PushChar   Expr   PopChar   = e2   IfTail   = e3  { If(l,e1,e2,e3) }.
+Patterns-Star0 ::=  ','   Pattern   = $head   Patterns-Star0   = $tail   Cons  |  Nil .
+AName ::=  Name   !  |  Drop .
+EmptySeqTail ::=  '}'  { SetExp(l,"Seq",Seq{}) }.
+Keywordp-Star0 ::=  '::'   Name   = $head   Keywordp-Star0   = $tail   Cons  |  Nil .
+AtExp ::=  LinePos   = l   '@'   PushChar  At  PopChar   = e  { e.setLine(l) }.
+Try ::=  LinePos   = l   'try'   PushChar   Expr   PopChar   = body   'catch'   '('   Name   = name   ')'   PushChar   Expr   PopChar   = handler   'end'  { Try(l,body,name,handler) }.
+Def-Dis0 ::=  '!'  { true } | { false }.
+Bindings ::=  BindingList  |  Drop .
+Strp ::=  Str   = s  { Constp(StrExp(s)) }.
+Op ::=  BinOp   !  |  ';'   ; .
+Collect ::=  '('   AName   = v   '|'   PushChar   Expr   PopChar   = e   ')'  { IterExp(c,n,v,e) }.
+SetExp ::=  LinePos   = l   'Set{'   CommaSepExps   = es   '}'  { SetExp(l,"Set",es) }.
+Pattern ::=  AddPattern   = p   Pattern-Star0   = es  { es->iterate(e s = p |
+  Includingp(s,e)) }  = p   PatternGuard .
+Consp ::=  Pairp  |  Seqp  |  Emptyp .
+ParserImport ::=  'parserImport'   Name   = name   ParserImport-Star0   = names   ';'   <Pair 3dd7ab>  ImportAt { ParserImport(Seq{name} + names,null) }.
+Seqp ::=  'Seq{'   Pattern   = head   SeqpTail   = tail  { Consp(head,tail) }.
+CollExp ::=  PushChar   SetExp   PopChar   !  |  PushChar   SeqExp   PopChar   !  |  PushChar   SetCmpExp   PopChar   !  |  PushChar   SeqCmpExp   PopChar   ! .
+BindFunArgsTail-Star0 ::=  ','   Pattern   = $head   BindFunArgsTail-Star0   = $tail   Cons  |  Nil .
+TopLevelExp ::=  PushChar   SimpleExp   PopChar   = s   ';'  { resolve(order(s)) }.
+BindFunArgs ::=  '('   BindFunArgsTail .
+EvaluationUnit-Star1 ::=  EImport   = $head   EvaluationUnit-Star1   = $tail   Cons  |  Nil .
+DropExp ::=  'not'   DropExp   = e  { Negate(e) } |  PushChar   Apply   PopChar   = a   DropExpTail .
+ArgsTail ::=  ')'   Seq{}  |  PushChar   Expr   PopChar   = arg   ArgsTail-Star0   = args   ')'   <Pair 39e8e0> .
+PairOrElements-Star0 ::=  ','   PushChar   Expr   PopChar   = $head   PairOrElements-Star0   = $tail   Cons  |  Nil .
+Expr ::=  'not'   PushChar   Expr   PopChar   = e  { Negate(e) } |  '-'   PushChar   SimpleExp   PopChar   = e  { BinExp(IntExp(0),"-",e) } |  PushChar   Apply   PopChar   = a   ExpTail .
+LocalParserImport ::=  'parserImport'   Name   = name   LocalParserImport-Star0   = names   <Pair 560665>  ImportAt  'in'   PushChar   Expr   PopChar   = e   'end'  { ParserImport(Seq{name | names},e) }.
+SeqExp-Dis0 ::=  EmptySeqTail  |  NonEmptySeqTail .
+ImportIn ::=  'import'   ImportPath   = path   'in'   PushChar   Exp   PopChar   = body   'end'  { ImportIn(path,body) }.
+KeyArgs ::=  '['   KeyArgs-Dis0 .
+Varp-Dis1 ::=  ':'   PushChar   TypeExp   PopChar  | { NamedType() }.
+Keyp ::=  Name   = name   '='   Pattern   = pattern  { Keyp(name,pattern) }.
+FloatExp ::=  LinePos   = l   Float   = f  { f.lift().line := l }.
+Pattern-Star0 ::=  PatternTail   = $head   Pattern-Star0   = $tail   Cons  |  Nil .
+Apply ::=  PushChar   Atom   PopChar   = a   ApplyTail   = e   Arrow .
+Emptyp ::=  'Seq{'   '}'  { Constp(SetExp("Seq",Seq{})) } |  'Set{'   '}'  { Constp(SetExp("Set",Seq{})) }.
+KeyArgs-Dis0 ::=  ']'   Seq{}  |  KeyArg   = arg   KeyArgs-Dis0-Star0   = args   ']'   <Pair 39ea3e> .
+AtomicPattern ::=  PushChar   Varp   PopChar  |  PushChar   Constp   PopChar  |  PushChar   Objectp   PopChar  |  PushChar   Consp   PopChar  |  PushChar   Keywordp   PopChar  |  PushChar   Syntaxp   PopChar  |  '('   PushChar   Pattern   PopChar   ')' .
+TypePath ::=  Name   = name   TypePath-Star0   = names  { Seq{name | names}->collect(n |
+  Symbol(n)) }.
+CompilationUnit-Star0 ::=  ParserImport   = $head   CompilationUnit-Star0   = $tail   Cons  |  Nil .
+BinOp ::=  '<'   <  |  '<='   <=  |  '>'   >  |  '>='   >=  |  '<>'   <>  |  '='   =  |  '::'   ::  |  ':='   :=  |  '.'   .  |  'and'   and  |  'andthen'   andthen  |  'implies'   implies  |  'or'   or  |  'orelse'   orelse  |  '+'   +  |  '-'   -  |  '*'   *  |  '/'   / .
+StrExp ::=  LinePos   = l   Str   = e  { StrExp(l,e) }.
+OpType ::=  TypeArgs   = domains   '->'   PushChar   TypeExp   PopChar   = range  { OpType(domains,range) }.
+CommaSepExps ::=  PushChar   Expr   PopChar   = e   CommaSepExps-Star0   = es   <Pair 424079>  |  Seq{} .
+Self ::=  LinePos   = l   'self'  { Self(l) }.
+PatternGuard ::=  'when'   PushChar   Exp   PopChar   = e  { Condp(p,e) } |  <VarRef 3f8102> .
+CompilationBodyExps ::=  CompilationBody   = b   !   CompilationBodyExps   = bs   <Pair 443e80>  |  Seq{} .
+Pairp ::=  'Seq{'   Pattern   = head   '|'   Pattern   = tail   '}'  { Consp(head,tail) }.
+SeqpTail ::=  ','   Pattern   = head   SeqpTail   = tail  { Consp(head,tail) } |  '}'  { Constp(SetExp("Seq",Seq{})) }.
+CmpClause ::=  Name   = n   OptType   = t   '<-'   PushChar   Exp   PopChar   = e  { Comprehensions::Bind(n,t.toExp(),e) } |  '?'   PushChar   Exp   PopChar   = e  { Comprehensions::Filter(e) }.
+BindingList-Star0 ::=  ';'   PushChar   Binding   PopChar   = $head   BindingList-Star0   = $tail   Cons  |  Nil .
+TopLevelCommand ::=  PushChar   SimpleExp   PopChar   = c   pState   = p  { p.consumeToken := false }  ';'  { resolve(order(c)) }.
+BindFun ::=  BindFunArgs   = args   OptType   = type   '='   PushChar   SimpleExp   PopChar   = value  { FunBinding(name,args,type,value) }.
+EvaluationUnit-Star0 ::=  ParserImport   = $head   EvaluationUnit-Star0   = $tail   Cons  |  Nil .
+DropExpTail ::=  DropOp   = o   !   DropExp   = e  { BinExp(a,o,e) } |  <VarRef 423e9d> .
+Args ::=  '('   ArgsTail .
+ParserImport-Star0 ::=  '::'   Name   = $head   ParserImport-Star0   = $tail   Cons  |  Nil .
+ExpTail ::=  Op   = o   !   PushChar   Expr   PopChar   = e  { BinExp(a,o,e) } |  <VarRef 406d36> .
+Lift ::=  LinePos   = l   '[|'   PushChar   Exp   PopChar   = e   '|]'  { Lift(l,e) }.
+TypeExp-Dis0 ::=  TypeArgs   = args  { ParametricType(path,args) } | { NamedType(path) }.
+IntExp ::=  LinePos   = l   Int   = e  { IntExp(l,e) }.
+Iterate ::=  '('   AName   = v1   AName   = v2   '='   PushChar   Expr   PopChar   = init   '|'   PushChar   Expr   PopChar   = body   ')'  { Iterate(c,v1,v2,init,body) }.
+TypePath-Star0 ::=  '::'   Name   = $head   TypePath-Star0   = $tail   Cons  |  Nil .
+LetBody ::=  'in'   PushChar   Expr   PopChar   = body   <VarRef 49277b>  |  PushChar   'then'   PushChar   Bindings   PopChar   = bindings   LetBody   = body  { Let(bindings,body) }  PopChar .
+Expp ::=  '['   PushChar   Exp   PopChar   = exp   ']'  { Constp(exp) }.
+PathExp-Dis0 ::=  '::'   AName   = name   PathExp-Dis0-Star0   = names  { Path(atom,Seq{name | names}) } |  <VarRef 39eb9b> .
+ApplyTail ::=  Args   = args   !  { Apply(a,args) } |  KeyArgs   = args   !  { Instantiate(a,args) } |  <VarRef f37b0> .
+EImport ::=  'import'   TopLevelExp   = exp  { Evaluator::Import(exp) }.
+KeyArgs-Dis0-Star0 ::=  ','   KeyArg   = $head   KeyArgs-Dis0-Star0   = $tail   Cons  |  Nil .
+Binding ::=  AName   = name   BindingTail .
+TypeArgs ::=  '('   PushChar   TypeExp   PopChar   = arg   TypeArgs-Star0   = args   ')'   <Pair 4404e9> .
+CompilationUnit-Star1 ::=  Import   = $head   CompilationUnit-Star1   = $tail   Cons  |  Nil .
+BoolExp ::=  LinePos   = l   'true'  { BoolExp(l,true) } |  LinePos   = l   'false'  { BoolExp(l,false) }.
+SimpleExpTail ::=  BinOp   = o   !   PushChar   SimpleExp   PopChar   = e  { BinExp(a,o,e) } |  <VarRef f37a8> .
+OptType ::=  ':'   PushChar   TypeExp   PopChar  | { NamedType() }.
+CompilationUnit ::=  CompilationUnit-Star0   = parserImports   CompilationUnit-Star1   = imports   CompilationBodyExps   = exps   EOF   pState   = s  { CompilationUnit("",imports,exps,s.getSource(),parserImports) }.
+Patterns ::=  Pattern   = head   Patterns-Star0   = tail   <Pair 5dce40>  |  Seq{} .
+PatternTail ::=  '->'   Name   '('   Pattern   = p   ')'   <VarRef 47cd42> .
+CompilationBody ::=  Def  |  TopLevelExp .
+PairOrElements ::=  '|'   PushChar   Expr   PopChar   = t   '}'  { ConsExp(e,t) } |  PairOrElements-Star0   = es   '}'  { SetExp(l,"Seq",Seq{e | es}) }.
+SimpleExp ::=  'not'   PushChar   SimpleExp   PopChar   = e  { Negate(e) } |  '-'   PushChar   SimpleExp   PopChar   = e  { BinExp(IntExp(0),"-",e) } |  PushChar   Apply   PopChar   = a   SimpleExpTail .
+Boolp ::=  'true'  { Constp(BoolExp(true)) } |  'false'  { Constp(BoolExp(false)) }.
+CommaSepExps-Star0 ::=  ','   PushChar   Expr   PopChar   = $head   CommaSepExps-Star0   = $tail   Cons  |  Nil .
+TypeExp ::=  TypePath   = path   TypeExp-Dis0  |  '['   PushChar   TypeExp   PopChar   = t   ']'  { ParametricType(Seq{"Seq"},Seq{t}) } |  '{'   PushChar   TypeExp   PopChar   = t   '}'  { ParametricType(Seq{"Set"},Seq{t}) } |  Drop  |  OpType .
+BindingTail ::=  BindFun  |  BindValue .
+ImportPath-Star0 ::=  '::'   Name   = $head   ImportPath-Star0   = $tail   Cons  |  Nil .
+DropOp ::=  '<'   <  |  '<='   <=  |  '<>'   <>  |  '='   =  |  '::'   ::  |  ':='   :=  |  '.'   .  |  'and'   and  |  'andthen'   andthen  |  'implies'   implies  |  'or'   or  |  'orelse'   orelse  |  '+'   +  |  '-'   -  |  '*'   *  |  '/'   / .
+Arrow ::=  '->'   !   ArrowTail  |  <VarRef 2aacd0> .
+PathExp-Dis0-Star0 ::=  '::'   AName   = $head   PathExp-Dis0-Star0   = $tail   Cons  |  Nil .
+Exp1 ::=  PushChar   Exp   PopChar   EOF .
+LetExp ::=  LinePos   = l   'let'   PushChar   Bindings   PopChar   = bindings   LetBody   = body   'end'  { Let(l,bindings,body) }.
+TypeArgs-Star0 ::=  ','   PushChar   TypeExp   PopChar   = $head   TypeArgs-Star0   = $tail   Cons  |  Nil .
+Intp ::=  Int   = i  { Constp(IntExp(i)) }.
+</PRE></TD>
+</TABLE>
+</HTML>

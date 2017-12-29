@@ -1,0 +1,312 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+Attribute
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>Attribute</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+No Documentation Specified
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../Root/XOCL/Def/index.html">Def</A>
+,<A HREF="../../../Root/XCore/Performable/index.html">Performable</A>
+,<A HREF="../../../Root/XCore/Located/index.html">Located</A>
+,<A HREF="../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+<TR><TD>Attribute(name,mult,type,modifiers,init,doc,meta,properties)</TD><TD> No Documentation </TD></TR>
+<TR><TD>Attribute(name,mult,type,modifiers,init,doc)</TD><TD> No Documentation </TD></TR>
+<TR><TD>Attribute(name,mult,type,init,modifiers)</TD><TD> No Documentation </TD></TR>
+<TR><TD>Attribute(name,type,modifiers)</TD><TD> No Documentation </TD></TR>
+<TR><TD>Attribute(name,type,doc)</TD><TD> No Documentation </TD></TR>
+<TR><TD>Attribute(name,type)</TD><TD> No Documentation </TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR><TD><B>doc</B></TD><TD><A HREF="../../../Root/XCore/Performable/index.html">Performable<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>init</B></TD><TD><A HREF="../../../Root/XCore/Performable/index.html">Performable<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>meta</B></TD><TD><A HREF="../../../Root/XCore/Performable/index.html">Performable<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>modifiers</B></TD><TD><A HREF="../../../Root/XOCL/AttributeModifiers/index.html">AttributeModifiers<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>mult</B></TD><TD><A HREF="../../../Root/XCore/String/index.html">String<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>properties</B></TD><TD><A HREF="../../../Root/XCore/Element/index.html">Seq(Element)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>type</B></TD><TD><A HREF="../../../Root/XCore/Performable/index.html">Performable<A></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XOCL/Def/index.html">Def</A>: name. <BR><B>From</B> <A HREF="../../../Root/XCore/Performable/index.html">Performable</A>: endLine, line. <BR><B>From</B> <A HREF="../../../Root/XCore/Located/index.html">Located</A>: charEnd, charStart. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#FV">FV</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#accessor">accessor</a>():<A HREF="../../../Root/OCL/Operation/index.html">Seq(Operation)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#add">add</a>(element:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#compile">compile</a>(env:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,frame:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,isLast:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,saveSource:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#desugar">desugar</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#doc">doc</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#eval">eval</a>(target:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,env:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,imports:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#extender">extender</a>():<A HREF="../../../Root/OCL/Operation/index.html">Seq(Operation)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#guardExp">guardExp</a>():<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#initExp">initExp</a>(newAtt:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#initSlotsExp">initSlotsExp</a>(newAtt:<A HREF="../../../Root/XCore/Performable/index.html">Performable<A>):<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#initValue">initValue</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#isStatic">isStatic</a>():<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#lift">lift</a>():<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#maxLocals">maxLocals</a>():<A HREF="../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#metaExp">metaExp</a>():<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#operations">operations</a>():<A HREF="../../../Root/OCL/Operation/index.html">Seq(Operation)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#pprint">pprint</a>(out:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,indent:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#reducer">reducer</a>():<A HREF="../../../Root/OCL/Operation/index.html">Seq(Operation)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setIsComposite">setIsComposite</a>(newAtt:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setProperties">setProperties</a>(newAtt:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#toString">toString</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#typeExp">typeExp</a>():<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#updater">updater</a>():<A HREF="../../../Root/OCL/Operation/index.html">Seq(Operation)<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Performable/index.html">Performable</A>: FV, compile, endLine, eval, line, maxLocals, pprint, pprint, pprint, setEndLine, setLine. <BR><B>From</B> <A HREF="../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="FV"/><FONT FACE="Courier" SIZE="1">@Operation&#160;FV():XCore::Element<br>&#160;&#160;self.desugar().FV()<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="accessor"/><FONT FACE="Courier" SIZE="1">@Operation&#160;accessor():Seq(Operation)<br>&#160;&#160;if&#160;modifiers.accessor<br>&#160;&#160;then&#160;if&#160;modifiers.guard<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;Seq{[|&#160;@Operation&#160;Drop(Var(name,66))[ACCESSOR=true]():XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;self.hasStructuralFeature(&lt;StrExp(name)&gt;)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;self.&lt;name&gt;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;&lt;self.guardExp()&gt;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end.setProperty("ACCESSOR",true)&#160;|]}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;Seq{[|&#160;@Operation&#160;Drop(Var(name,77))[ACCESSOR=true]():XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.&lt;name&gt;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end.setProperty("ACCESSOR",true)&#160;|]}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;else&#160;Seq{}<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="add"/><FONT FACE="Courier" SIZE="1">@Operation&#160;add(element&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@TypeCase(element)<br>&#160;&#160;&#160;&#160;XCore::Doc&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;format(stdout,"Use&#160;XOCL::Doc&#160;instead&#160;of&#160;XCore::Doc.~%")<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;XOCL::Doc&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;self.doc&#160;:=&#160;element<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;Seq(Element)&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;@For&#160;e&#160;in&#160;element&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.add(e)<br>&#160;&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;&#160;self<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="compile"/><FONT FACE="Courier" SIZE="1">@Operation&#160;compile(env&#160;:&#160;XCore::Element,frame&#160;:&#160;XCore::Element,isLast&#160;:&#160;XCore::Element,saveSource&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.desugar().setLine(line).compile(env.incNameSpaceRefs(),frame,isLast,saveSource)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="desugar"/><FONT FACE="Courier" SIZE="1">@Operation&#160;desugar():XCore::Element<br>&#160;&#160;[|&#160;let&#160;type&#160;=&#160;@Operation&#160;anonymous():XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;try<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;self.typeExp()&gt;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;catch(exception)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;throw&#160;Exceptions::AttributeTypeException(&lt;name.lift()&gt;,&lt;self.typeExp().pprint().lift()&gt;,exception)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;newAtt&#160;=&#160;&lt;self.metaExp()&gt;.new()<br>&#160;&#160;&#160;&#160;in&#160;type.owner&#160;:=&#160;newAtt;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;newAtt.set("name",XCore::Symbol(&lt;StrExp(name)&gt;));<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;newAtt.set("type",type);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;newAtt.set("documentation",&lt;self.doc()&gt;);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;newAtt.set("init",&lt;self.initExp([|&#160;newAtt&#160;|])&gt;);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;self.setIsComposite([|&#160;newAtt&#160;|])&gt;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;self.setProperties([|&#160;newAtt&#160;|])&gt;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;self.initSlotsExp([|&#160;newAtt&#160;|])&gt;<br>&#160;&#160;&#160;&#160;end&#160;|]<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="doc"/><FONT FACE="Courier" SIZE="1">@Operation&#160;doc():XCore::Element<br>&#160;&#160;if&#160;doc&#160;=&#160;null<br>&#160;&#160;then&#160;[|&#160;null&#160;|]<br>&#160;&#160;else&#160;doc<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="eval"/><FONT FACE="Courier" SIZE="1">@Operation&#160;eval(target&#160;:&#160;XCore::Element,env&#160;:&#160;XCore::Element,imports&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;class&#160;=&#160;self.metaExp().eval(target,env,imports)&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;a&#160;=&#160;class(name,@Operation&#160;anonymous():XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;type.eval(target,env,imports)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end);<br>&#160;&#160;&#160;&#160;&#160;&#160;init&#160;=&#160;init<br>&#160;&#160;in&#160;a.setDoc(self.doc().eval(target,env,imports));<br>&#160;&#160;&#160;&#160;&#160;if&#160;init&#160;&lt;&gt;&#160;null<br>&#160;&#160;&#160;&#160;&#160;then&#160;a.init&#160;:=&#160;@Operation&#160;anonymous():XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;init.eval(a,env,imports)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;end&#160;;<br>&#160;&#160;&#160;&#160;&#160;@For&#160;property&#160;in&#160;properties&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;a.setProperty(property-&gt;at(0),property-&gt;at(1).eval(target,env,imports))<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;a<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="extender"/><FONT FACE="Courier" SIZE="1">@Operation&#160;extender():Seq(Operation)<br>&#160;&#160;if&#160;modifiers.extender<br>&#160;&#160;then&#160;if&#160;modifiers.guard<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;if&#160;modifiers.setOwner<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;Seq{[|&#160;@Operation&#160;Drop(BinExp(StrExp(addTo),+,Send(Var(name,183),upperCaseInitialLetter,Seq{})))[EXTENDER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;self.hasStructuralFeature(&lt;StrExp(name)&gt;)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;v.isReallyKindOf(XCore::Contained)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;v.setOwner(self)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.&lt;name&gt;&#160;:=&#160;self.&lt;name&gt;-&gt;including(v)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;self<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end.setProperty("EXTENDER",true)&#160;|]}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;Seq{[|&#160;@Operation&#160;Drop(BinExp(StrExp(addTo),+,Send(Var(name,198),upperCaseInitialLetter,Seq{})))[EXTENDER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;self.hasStructuralFeature(&lt;StrExp(name)&gt;)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;self.&lt;name&gt;&#160;:=&#160;self.&lt;name&gt;-&gt;including(v)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;self<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end.setProperty("EXTENDER",true)&#160;|]}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;elseif&#160;modifiers.setOwner<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;Seq{[|&#160;@Operation&#160;Drop(BinExp(StrExp(addTo),+,Send(Var(name,213),upperCaseInitialLetter,Seq{})))[EXTENDER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;v.isReallyKindOf(XCore::Contained)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;v.setOwner(self)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.&lt;name&gt;&#160;:=&#160;self.&lt;name&gt;-&gt;including(v)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end.setProperty("EXTENDER",true)&#160;|]}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;Seq{[|&#160;@Operation&#160;Drop(BinExp(StrExp(addTo),+,Send(Var(name,220),upperCaseInitialLetter,Seq{})))[EXTENDER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.&lt;name&gt;&#160;:=&#160;self.&lt;name&gt;-&gt;including(v)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end.setProperty("EXTENDER",true)&#160;|]}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;else&#160;Seq{}<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="guardExp"/><FONT FACE="Courier" SIZE="1">@Operation&#160;guardExp():Performable<br>&#160;&#160;if&#160;modifiers.guardExp&#160;=&#160;null<br>&#160;&#160;then&#160;if&#160;init&#160;=&#160;null<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;[|&#160;null&#160;|]<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;init<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;else&#160;modifiers.guardExp<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="initExp"/><FONT FACE="Courier" SIZE="1">@Operation&#160;initExp(newAtt&#160;:&#160;XCore::Element):Performable<br>&#160;&#160;if&#160;init&#160;=&#160;null<br>&#160;&#160;then&#160;[|&#160;null&#160;|]<br>&#160;&#160;elseif&#160;self.isStatic()<br>&#160;&#160;then&#160;[|&#160;let&#160;value&#160;=&#160;&lt;self.initValue()&gt;&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;init&#160;=&#160;@Operation&#160;anonymous[value=value]():XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;value<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end.setProperty("value",value)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;init.setOwner(&lt;newAtt&gt;);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;init<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;|]<br>&#160;&#160;else&#160;[|&#160;let&#160;init&#160;=&#160;@Operation&#160;anonymous():XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;init&gt;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;init.setOwner(&lt;newAtt&gt;);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;init<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;|]<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="initSlotsExp"/><FONT FACE="Courier" SIZE="1">@Operation&#160;initSlotsExp(newAtt&#160;:&#160;Performable):Performable<br>&#160;&#160;newAtt<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="initValue"/><FONT FACE="Courier" SIZE="1">@Operation&#160;initValue():XCore::Element<br>&#160;&#160;if&#160;init.isKindOf(Apply)&#160;andthen&#160;(init.operator.isKindOf(Var)&#160;andthen&#160;init.operator.name&#160;=&#160;"static")<br>&#160;&#160;then&#160;init.args-&gt;at(0)<br>&#160;&#160;else&#160;init<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="isStatic"/><FONT FACE="Courier" SIZE="1">@Operation&#160;isStatic():Boolean<br>&#160;&#160;init.isKindOf(IntExp)&#160;or&#160;init.isKindOf(BoolExp)&#160;or&#160;(init.isKindOf(BinExp)&#160;andthen&#160;init.left.isKindOf(IntExp)&#160;and&#160;init.right.isKindOf(IntExp))&#160;or&#160;init.isKindOf(StrExp)&#160;or&#160;(init.isKindOf(Apply)&#160;andthen&#160;(init.operator.isKindOf(Var)&#160;andthen&#160;init.operator.name&#160;=&#160;"static"))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="lift"/><FONT FACE="Courier" SIZE="1">@Operation&#160;lift():Performable<br>&#160;&#160;Element::lift.invoke(self,Seq{})<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="maxLocals"/><FONT FACE="Courier" SIZE="1">@Operation&#160;maxLocals():Integer<br>&#160;&#160;self.desugar().maxLocals()<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="metaExp"/><FONT FACE="Courier" SIZE="1">@Operation&#160;metaExp():Performable<br>&#160;&#160;if&#160;meta&#160;=&#160;null<br>&#160;&#160;then&#160;[|&#160;XCore::Attribute&#160;|]<br>&#160;&#160;else&#160;meta<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="operations"/><FONT FACE="Courier" SIZE="1">@Operation&#160;operations():Seq(Operation)<br>&#160;&#160;self.accessor()&#160;+&#160;self.updater()&#160;+&#160;self.extender()&#160;+&#160;self.reducer()<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="pprint"/><FONT FACE="Courier" SIZE="1">@Operation&#160;pprint(out&#160;:&#160;XCore::Element,indent&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;format(out,"@Attribute&#160;~S&#160;:&#160;",Seq{name});<br>&#160;&#160;type.pprint(out,indent);<br>&#160;&#160;modifiers.pprint(out);<br>&#160;&#160;format(out,"&#160;end")<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="reducer"/><FONT FACE="Courier" SIZE="1">@Operation&#160;reducer():Seq(Operation)<br>&#160;&#160;if&#160;modifiers.reducer<br>&#160;&#160;then&#160;if&#160;modifiers.guard<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;Seq{[|&#160;@Operation&#160;Drop(BinExp(StrExp(deleteFrom),+,Send(Var(name,342),upperCaseInitialLetter,Seq{})))[REDUCER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;self.hasStructuralFeature(&lt;StrExp(name)&gt;)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;self.&lt;name&gt;&#160;:=&#160;self.&lt;name&gt;-&gt;excluding(v)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;self<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end.setProperty("REDUCER",true)&#160;|]}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;Seq{[|&#160;@Operation&#160;Drop(BinExp(StrExp(deleteFrom),+,Send(Var(name,353),upperCaseInitialLetter,Seq{})))[REDUCER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.&lt;name&gt;&#160;:=&#160;self.&lt;name&gt;-&gt;excluding(v)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end.setProperty("REDUCER",true)&#160;|]}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;else&#160;Seq{}<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setIsComposite"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setIsComposite(newAtt&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;if&#160;modifiers.setOwner<br>&#160;&#160;then&#160;[|&#160;&lt;newAtt&gt;.isComposite&#160;:=&#160;true&#160;|]<br>&#160;&#160;else&#160;[|&#160;null&#160;|]<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setProperties"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setProperties(newAtt&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;properties-&gt;iterate(pair&#160;exp&#160;=&#160;newAtt&#160;|<br>&#160;&#160;&#160;&#160;[|&#160;&lt;exp&gt;.setProperty(&lt;pair-&gt;at(0).lift()&gt;,&lt;pair-&gt;at(1)&gt;)&#160;|])<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="toString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;toString():String<br>&#160;&#160;try<br>&#160;&#160;&#160;&#160;self.of().name.toString()&#160;+&#160;"("&#160;+&#160;if&#160;self.hasSlot("name")<br>&#160;&#160;&#160;&#160;then&#160;self.name.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"name"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("mult")<br>&#160;&#160;&#160;&#160;then&#160;self.mult.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"mult"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("type")<br>&#160;&#160;&#160;&#160;then&#160;self.type.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"type"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("modifiers")<br>&#160;&#160;&#160;&#160;then&#160;self.modifiers.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"modifiers"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("init")<br>&#160;&#160;&#160;&#160;then&#160;self.init.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"init"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("doc")<br>&#160;&#160;&#160;&#160;then&#160;self.doc.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"doc"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;")"<br>&#160;&#160;catch(exception)<br>&#160;&#160;&#160;&#160;self.of().name&#160;+&#160;"(Constructor&#160;Error!)"<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="typeExp"/><FONT FACE="Courier" SIZE="1">@Operation&#160;typeExp():Performable<br>&#160;&#160;if&#160;mult&#160;=&#160;""&#160;or&#160;mult&#160;=&#160;"!"<br>&#160;&#160;then&#160;type<br>&#160;&#160;elseif&#160;mult&#160;=&#160;"*"&#160;or&#160;mult-&gt;asSeq-&gt;includes("."-&gt;at(0))<br>&#160;&#160;then&#160;[|&#160;Set(&lt;type&gt;)&#160;|]<br>&#160;&#160;else&#160;[|&#160;Seq(&lt;type&gt;)&#160;|]<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="updater"/><FONT FACE="Courier" SIZE="1">@Operation&#160;updater():Seq(Operation)<br>&#160;&#160;if&#160;modifiers.updater<br>&#160;&#160;then&#160;if&#160;modifiers.guard<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;if&#160;modifiers.setOwner<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;Seq{[|&#160;@Operation&#160;Drop(BinExp(StrExp(set),+,Send(Var(name,391),upperCaseInitialLetter,Seq{})))[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;self.hasStructuralFeature(&lt;StrExp(name)&gt;)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;v.isReallyKindOf(XCore::Contained)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;v.setOwner(self)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.&lt;name&gt;&#160;:=&#160;v<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;self<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end.setProperty("UPDATER",true)&#160;|]}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;Seq{[|&#160;@Operation&#160;Drop(BinExp(StrExp(set),+,Send(Var(name,402),upperCaseInitialLetter,Seq{})))[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;self.hasStructuralFeature(&lt;StrExp(name)&gt;)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;self.&lt;name&gt;&#160;:=&#160;v<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;self<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end.setProperty("UPDATER",true)&#160;|]}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;elseif&#160;modifiers.setOwner<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;Seq{[|&#160;@Operation&#160;Drop(BinExp(StrExp(set),+,Send(Var(name,414),upperCaseInitialLetter,Seq{})))[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;v.isReallyKindOf(XCore::Contained)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;v.setOwner(self)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.&lt;name&gt;&#160;:=&#160;v<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end.setProperty("UPDATER",true)&#160;|]}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;Seq{[|&#160;@Operation&#160;Drop(BinExp(StrExp(set),+,Send(Var(name,421),upperCaseInitialLetter,Seq{})))[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.&lt;name&gt;&#160;:=&#160;v<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end.setProperty("UPDATER",true)&#160;|]}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;else&#160;Seq{}<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=1><FONT SIZE="+2">
+<B>Grammar</B></FONT></TD>
+</TR>
+<TD><PRE>
+Star ::=  '*'   * .
+SetCmpExp ::=  LinePos   = l   '{'   CommaSepExps   = es   '}'   !  { SetExp(l,"Set",es) } |  LinePos   = l   '{'   Exp   = e   '|'   CmpClause   = c   SetCmpExp-Star0   = cs   '}'  { Comprehensions::Cmp("Set",e,Seq{c | cs}) }.
+Mandatory ::=  '!'   ! .
+AddPattern-Dis0 ::=  '+'   AddPattern   = p2  { Addp(p1,p2) } |  <VarRef 26d457> .
+Ordered ::=  '<<'   '>'   '>'   << >> .
+BindValue ::=  OptType   = type   '='   SimpleExp   = value  { ValueBinding(name,type,value) }.
+AttMult ::=  Mandatory  |  Star  |  Ordered  |  LimitedSet  |  LimitedSeq  |   .
+Def ::=  'context'   Def-Dis0   = isForward   ImportPath   = path   PushChar   Exp   PopChar   = exp  { ContextDef(path,exp,isForward) }.
+LimitedSet ::=  Int   = n   '.'   '.'   LimitedSet-Dis0   = m  { n + ".." + m }.
+LocalParserImport-Star0 ::=  '::'   Name   = $head   LocalParserImport-Star0   = $tail   Cons  |  Nil .
+MetaClass ::=  'metaclass'   PushChar   Exp   PopChar  |  null .
+NonEmptySeqTail ::=  PushChar   Expr   PopChar   = e   PairOrElements .
+LimitedSeq ::=  Int   = n   '--'   LimitedSeq-Dis0   = m  { n + "--" + m }.
+Import ::=  PushChar   'import'   ImportPath   = path   ';'  { Import(path) }  PopChar .
+AttName ::=  AName  |  Str .
+Varp ::=  AName   = name   Varp-Dis0   = pattern   Varp-Dis1   = type  { Varp(name,pattern,type) }.
+Properties ::=  '['   Property   = p   Properties-Star0   = ps   ']'   <Pair 45826a>  |  Seq{} .
+IfTail ::=  'else'   PushChar   Expr   PopChar   'end'  |  LinePos   = l   'elseif'   PushChar   Expr   PopChar   = e1   'then'   PushChar   Expr   PopChar   = e2   IfTail   = e3  { If(l,e1,e2,e3) } |  'end'  { BoolExp(false) }.
+GuardMod ::=  '#'   GuardMod-Dis0   = e  { Seq{e} }.
+AddPattern ::=  AtomicPattern   = p1   AddPattern-Dis0 .
+Property ::=  Name   = n   '='   Exp   = e  { Seq{n,e} }.
+Keyps-Star0 ::=  ','   Keyp   = $head   Keyps-Star0   = $tail   Cons  |  Nil .
+AttTypeTail ::=  '('   CommaSepExps   = args   ')'  { Apply(n,args) } |  <VarRef 36b21f> .
+VarExp ::=  Name   = name   LinePos   = l  { Var(name,l) }.
+Properties-Star0 ::=  ','   Property   = $head   Properties-Star0   = $tail   Cons  |  Nil .
+BindingList ::=  PushChar   Binding   PopChar   = binding   BindingList-Star0   = bindings   <Pair 17eb14> .
+AttTypeName ::=  Name   = n   AttTypeName-Star0   = ns  { if ns->isEmpty
+then Var(n)
+else Path(Var(n),ns)
+end  }.
+Objectp ::=  Name   = name   Objectp-Star0   = names   '('   Patterns   = slots   ')'  { Objectp(name,names,slots) }.
+LimitedSeq-Dis0 ::=  Int  |  '*'   * .
+SeqCmpExp ::=  LinePos   = l   '['   CommaSepExps   = es   ']'   !  { SetExp(l,"Seq",es) } |  LinePos   = l   '['   Exp   = e   '|'   CmpClause   = c   SeqCmpExp-Star0   = cs   ']'  { Comprehensions::Cmp(e,Seq{c | cs}) }.
+AttType ::=  AttTypeName   = n   AttTypeTail  |  '['   PushChar   AttType   PopChar   = t   ']'  { Apply(Var("Seq"),Seq{t}) } |  '{'   PushChar   AttType   PopChar   = t   '}'  { Apply(Var("Set"),Seq{t}) } |  Drop .
+Constp ::=  Intp  |  Strp  |  Boolp  |  Expp .
+LimitedSet-Dis0 ::=  Int  |  '*'   * .
+SeqExp ::=  LinePos   = l   'Seq{'   SeqExp-Dis0 .
+AttMod ::=  '?'   ?  |  '!'   !  |  '+'   +  |  '-'   -  |  '^'   ^  |  GuardMod .
+ArgsTail-Star0 ::=  ','   PushChar   Expr   PopChar   = $head   ArgsTail-Star0   = $tail   Cons  |  Nil .
+GuardMod-Dis0 ::=  Exp  |  null .
+BindFunArgsTail ::=  Pattern   = p   BindFunArgsTail-Star0   = ps   ')'   <Pair 36c016>  |  ')'   Seq{} .
+AttModifier ::=  AttMod   = mod  { mods.defineModifier(mod) }.
+Drop ::=  '<'   DropExp   = e   '>'  { Drop(resolve(order(e))) } |  '<|'   Pattern   = p   '|>'  { DropPattern(p) }.
+AttTypeName-Star0 ::=  '::'   Name   = $head   AttTypeName-Star0   = $tail   Cons  |  Nil .
+Objectp-Star0 ::=  '::'   Name   = $head   Objectp-Star0   = $tail   Cons  |  Nil .
+AttMods ::= { AttributeModifiers() }  = mods   AttMods-Dis0   <VarRef 36b113> .
+LogicalExp ::=  PushChar   SimpleExp   PopChar   = e  { resolve(order(e)) }.
+AttMods-Dis0 ::=  '('   AttModifier   AttMods-Dis0-Star0   ')'  |  Nil .
+ImportPath ::=  Name   = n   ImportPath-Star0   = ns   <Pair 3eada7> .
+AttInit ::=  '='   PushChar   Exp   PopChar  |  '='   'static'   Exp   = e  { [| static(<e>) |] } |  null .
+Varp-Dis0 ::=  '='   PushChar   Pattern   PopChar  |  null .
+AttMods-Dis0-Star0 ::=  ','   AttModifier   = $head   AttMods-Dis0-Star0   = $tail   Cons  |  Nil .
+IfExp ::=  LinePos   = l   'if'   PushChar   Expr   PopChar   = e1   'then'   PushChar   Expr   PopChar   = e2   IfTail   = e3  { If(l,e1,e2,e3) }.
+Attribute ::=  AttName   = name   Properties   = ps   MetaClass   = meta   ':'   AttMult   = mult   PushChar   AttType   PopChar   = type   AttInit   = init   AttMods   = mods   Attribute-Star0   = body   'end'  { Attribute(name,mult,type,mods,init,null,meta,ps).add(body) }.
+AName ::=  Name   !  |  Drop .
+Attribute-Star0 ::=  PushChar   Exp   PopChar   = $head   Attribute-Star0   = $tail   Cons  |  Nil .
+Keywordp-Star0 ::=  '::'   Name   = $head   Keywordp-Star0   = $tail   Cons  |  Nil .
+Keywordp ::=  Name   = name   Keywordp-Star0   = names   '['   Keyps   = keys   ']'  { Keywordp(name,names,keys) }.
+Try ::=  LinePos   = l   'try'   PushChar   Expr   PopChar   = body   'catch'   '('   Name   = name   ')'   PushChar   Expr   PopChar   = handler   'end'  { Try(l,body,name,handler) }.
+SeqCmpExp-Star0 ::=  ','   CmpClause   = $head   SeqCmpExp-Star0   = $tail   Cons  |  Nil .
+Bindings ::=  BindingList  |  Drop .
+EvaluationUnit ::=  EvaluationUnit-Star0   EvaluationUnit-Star1   = imports   EvaluationUnit-Star2   = exps   EOF  { Evaluator::EvaluationUnit(imports,exps) }.
+Op ::=  BinOp   !  |  ';'   ; .
+Atom ::=  PushChar   VarExp   PopChar   !  |  PushChar   Self   PopChar   !  |  PushChar   StrExp   PopChar   !  |  PushChar   IntExp   PopChar   !  |  PushChar   IfExp   PopChar   !  |  PushChar   BoolExp   PopChar   !  |  PushChar   LetExp   PopChar   !  |  PushChar   CollExp   PopChar   !  |  Parentheses  |  PushChar   Drop   PopChar  |  PushChar   Lift   PopChar  |  PushChar   Throw   PopChar  |  PushChar   Try   PopChar  |  PushChar   ImportIn   PopChar  |  PushChar   FloatExp   PopChar  |  PushChar   LocalParserImport   PopChar  |  PushChar   AtExp   PopChar .
+SetExp ::=  LinePos   = l   'Set{'   CommaSepExps   = es   '}'  { SetExp(l,"Set",es) }.
+EvaluationUnit-Star2-Dis0 ::=  Def  |  TopLevelExp .
+Consp ::=  Pairp  |  Seqp  |  Emptyp .
+Syntaxp ::=  '[|'   PushChar   Exp   PopChar   = e   '|]'  { Syntaxp(e) }.
+Seqp ::=  'Seq{'   Pattern   = head   SeqpTail   = tail  { Consp(head,tail) }.
+CollMessage ::=  '('   CommaSepExps   = as   ')'  { CollExp(c,n,as) }.
+BindFunArgsTail-Star0 ::=  ','   Pattern   = $head   BindFunArgsTail-Star0   = $tail   Cons  |  Nil .
+PathExp ::=  PushChar   Atom   PopChar   = atom   PathExp-Dis0 .
+BindFunArgs ::=  '('   BindFunArgsTail .
+Parentheses ::=  '('   PushChar   Expr   PopChar   = e   ')'  { Parentheses(e) }.
+DropExp ::=  'not'   DropExp   = e  { Negate(e) } |  PushChar   Apply   PopChar   = a   DropExpTail .
+CollOp ::=  CollMessage  |  Collect  |  Iterate  | { CollExp(c,n,Seq{}) }.
+PairOrElements-Star0 ::=  ','   PushChar   Expr   PopChar   = $head   PairOrElements-Star0   = $tail   Cons  |  Nil .
+Throw ::=  LinePos   = l   'throw'   PushChar   SimpleExp   PopChar   = value  { Throw(l,value) }.
+LocalParserImport ::=  'parserImport'   Name   = name   LocalParserImport-Star0   = names   <Pair 5f19e7>  ImportAt  'in'   PushChar   Expr   PopChar   = e   'end'  { ParserImport(Seq{name | names},e) }.
+EvaluationUnit-Star2 ::=  EvaluationUnit-Star2-Dis0   = $head   EvaluationUnit-Star2   = $tail   Cons  |  Nil .
+ImportIn ::=  'import'   ImportPath   = path   'in'   PushChar   Exp   PopChar   = body   'end'  { ImportIn(path,body) }.
+ArrowTail ::=  Name   = n   CollOp   = x   Arrow .
+Varp-Dis1 ::=  ':'   PushChar   TypeExp   PopChar  | { NamedType() }.
+Exp ::=  PushChar   Expr   PopChar   = e   !  { resolve(order(e)) }.
+FloatExp ::=  LinePos   = l   Float   = f  { f.lift().line := l }.
+SetCmpExp-Star0 ::=  ','   CmpClause   = $head   SetCmpExp-Star0   = $tail   Cons  |  Nil .
+Apply ::=  PushChar   Atom   PopChar   = a   ApplyTail   = e   Arrow .
+KeyArg ::=  Name   = name   '='   PushChar   Expr   PopChar   = exp  { KeyArg(name,exp) }.
+KeyArgs-Dis0 ::=  ']'   Seq{}  |  KeyArg   = arg   KeyArgs-Dis0-Star0   = args   ']'   <Pair 341a71> .
+Keyps ::=  Keyp   = key   Keyps-Star0   = keys   <Pair 2ed48a>  |  Seq{} .
+TypePath ::=  Name   = name   TypePath-Star0   = names  { Seq{name | names}->collect(n |
+  Symbol(n)) }.
+Patterns-Star0 ::=  ','   Pattern   = $head   Patterns-Star0   = $tail   Cons  |  Nil .
+BinOp ::=  '<'   <  |  '<='   <=  |  '>'   >  |  '>='   >=  |  '<>'   <>  |  '='   =  |  '::'   ::  |  ':='   :=  |  '.'   .  |  'and'   and  |  'andthen'   andthen  |  'implies'   implies  |  'or'   or  |  'orelse'   orelse  |  '+'   +  |  '-'   -  |  '*'   *  |  '/'   / .
+EmptySeqTail ::=  '}'  { SetExp(l,"Seq",Seq{}) }.
+OpType ::=  TypeArgs   = domains   '->'   PushChar   TypeExp   PopChar   = range  { OpType(domains,range) }.
+AtExp ::=  LinePos   = l   '@'   PushChar  At  PopChar   = e  { e.setLine(l) }.
+Self ::=  LinePos   = l   'self'  { Self(l) }.
+Def-Dis0 ::=  '!'  { true } | { false }.
+CompilationBodyExps ::=  CompilationBody   = b   !   CompilationBodyExps   = bs   <Pair 3eaeb0>  |  Seq{} .
+Strp ::=  Str   = s  { Constp(StrExp(s)) }.
+SeqpTail ::=  ','   Pattern   = head   SeqpTail   = tail  { Consp(head,tail) } |  '}'  { Constp(SetExp("Seq",Seq{})) }.
+Collect ::=  '('   AName   = v   '|'   PushChar   Expr   PopChar   = e   ')'  { IterExp(c,n,v,e) }.
+BindingList-Star0 ::=  ';'   PushChar   Binding   PopChar   = $head   BindingList-Star0   = $tail   Cons  |  Nil .
+Pattern ::=  AddPattern   = p   Pattern-Star0   = es  { es->iterate(e s = p |
+  Includingp(s,e)) }  = p   PatternGuard .
+BindFun ::=  BindFunArgs   = args   OptType   = type   '='   PushChar   SimpleExp   PopChar   = value  { FunBinding(name,args,type,value) }.
+ParserImport ::=  'parserImport'   Name   = name   ParserImport-Star0   = names   ';'   <Pair 4597cc>  ImportAt { ParserImport(Seq{name} + names,null) }.
+DropExpTail ::=  DropOp   = o   !   DropExp   = e  { BinExp(a,o,e) } |  <VarRef 3b958a> .
+CollExp ::=  PushChar   SetExp   PopChar   !  |  PushChar   SeqExp   PopChar   !  |  PushChar   SetCmpExp   PopChar   !  |  PushChar   SeqCmpExp   PopChar   ! .
+ParserImport-Star0 ::=  '::'   Name   = $head   ParserImport-Star0   = $tail   Cons  |  Nil .
+TopLevelExp ::=  PushChar   SimpleExp   PopChar   = s   ';'  { resolve(order(s)) }.
+Lift ::=  LinePos   = l   '[|'   PushChar   Exp   PopChar   = e   '|]'  { Lift(l,e) }.
+EvaluationUnit-Star1 ::=  EImport   = $head   EvaluationUnit-Star1   = $tail   Cons  |  Nil .
+IntExp ::=  LinePos   = l   Int   = e  { IntExp(l,e) }.
+ArgsTail ::=  ')'   Seq{}  |  PushChar   Expr   PopChar   = arg   ArgsTail-Star0   = args   ')'   <Pair 341906> .
+TypePath-Star0 ::=  '::'   Name   = $head   TypePath-Star0   = $tail   Cons  |  Nil .
+Expr ::=  'not'   PushChar   Expr   PopChar   = e  { Negate(e) } |  '-'   PushChar   SimpleExp   PopChar   = e  { BinExp(IntExp(0),"-",e) } |  PushChar   Apply   PopChar   = a   ExpTail .
+Expp ::=  '['   PushChar   Exp   PopChar   = exp   ']'  { Constp(exp) }.
+SeqExp-Dis0 ::=  EmptySeqTail  |  NonEmptySeqTail .
+ApplyTail ::=  Args   = args   !  { Apply(a,args) } |  KeyArgs   = args   !  { Instantiate(a,args) } |  <VarRef f0667> .
+KeyArgs ::=  '['   KeyArgs-Dis0 .
+KeyArgs-Dis0-Star0 ::=  ','   KeyArg   = $head   KeyArgs-Dis0-Star0   = $tail   Cons  |  Nil .
+Keyp ::=  Name   = name   '='   Pattern   = pattern  { Keyp(name,pattern) }.
+TypeArgs ::=  '('   PushChar   TypeExp   PopChar   = arg   TypeArgs-Star0   = args   ')'   <Pair 3eaec4> .
+Pattern-Star0 ::=  PatternTail   = $head   Pattern-Star0   = $tail   Cons  |  Nil .
+BoolExp ::=  LinePos   = l   'true'  { BoolExp(l,true) } |  LinePos   = l   'false'  { BoolExp(l,false) }.
+Emptyp ::=  'Seq{'   '}'  { Constp(SetExp("Seq",Seq{})) } |  'Set{'   '}'  { Constp(SetExp("Set",Seq{})) }.
+OptType ::=  ':'   PushChar   TypeExp   PopChar  | { NamedType() }.
+AtomicPattern ::=  PushChar   Varp   PopChar  |  PushChar   Constp   PopChar  |  PushChar   Objectp   PopChar  |  PushChar   Consp   PopChar  |  PushChar   Keywordp   PopChar  |  PushChar   Syntaxp   PopChar  |  '('   PushChar   Pattern   PopChar   ')' .
+Patterns ::=  Pattern   = head   Patterns-Star0   = tail   <Pair 5b7cc6>  |  Seq{} .
+CompilationUnit-Star0 ::=  ParserImport   = $head   CompilationUnit-Star0   = $tail   Cons  |  Nil .
+CompilationBody ::=  Def  |  TopLevelExp .
+StrExp ::=  LinePos   = l   Str   = e  { StrExp(l,e) }.
+SimpleExp ::=  'not'   PushChar   SimpleExp   PopChar   = e  { Negate(e) } |  '-'   PushChar   SimpleExp   PopChar   = e  { BinExp(IntExp(0),"-",e) } |  PushChar   Apply   PopChar   = a   SimpleExpTail .
+CommaSepExps ::=  PushChar   Expr   PopChar   = e   CommaSepExps-Star0   = es   <Pair 3b9768>  |  Seq{} .
+CommaSepExps-Star0 ::=  ','   PushChar   Expr   PopChar   = $head   CommaSepExps-Star0   = $tail   Cons  |  Nil .
+PatternGuard ::=  'when'   PushChar   Exp   PopChar   = e  { Condp(p,e) } |  <VarRef 3925d2> .
+BindingTail ::=  BindFun  |  BindValue .
+Pairp ::=  'Seq{'   Pattern   = head   '|'   Pattern   = tail   '}'  { Consp(head,tail) }.
+DropOp ::=  '<'   <  |  '<='   <=  |  '<>'   <>  |  '='   =  |  '::'   ::  |  ':='   :=  |  '.'   .  |  'and'   and  |  'andthen'   andthen  |  'implies'   implies  |  'or'   or  |  'orelse'   orelse  |  '+'   +  |  '-'   -  |  '*'   *  |  '/'   / .
+CmpClause ::=  Name   = n   OptType   = t   '<-'   PushChar   Exp   PopChar   = e  { Comprehensions::Bind(n,t.toExp(),e) } |  '?'   PushChar   Exp   PopChar   = e  { Comprehensions::Filter(e) }.
+PathExp-Dis0-Star0 ::=  '::'   AName   = $head   PathExp-Dis0-Star0   = $tail   Cons  |  Nil .
+TopLevelCommand ::=  PushChar   SimpleExp   PopChar   = c   pState   = p  { p.consumeToken := false }  ';'  { resolve(order(c)) }.
+LetExp ::=  LinePos   = l   'let'   PushChar   Bindings   PopChar   = bindings   LetBody   = body   'end'  { Let(l,bindings,body) }.
+EvaluationUnit-Star0 ::=  ParserImport   = $head   EvaluationUnit-Star0   = $tail   Cons  |  Nil .
+Intp ::=  Int   = i  { Constp(IntExp(i)) }.
+Args ::=  '('   ArgsTail .
+TypeArgs-Star0 ::=  ','   PushChar   TypeExp   PopChar   = $head   TypeArgs-Star0   = $tail   Cons  |  Nil .
+ExpTail ::=  Op   = o   !   PushChar   Expr   PopChar   = e  { BinExp(a,o,e) } |  <VarRef 390d5c> .
+Exp1 ::=  PushChar   Exp   PopChar   EOF .
+TypeExp-Dis0 ::=  TypeArgs   = args  { ParametricType(path,args) } | { NamedType(path) }.
+Arrow ::=  '->'   !   ArrowTail  |  <VarRef 26d54c> .
+Iterate ::=  '('   AName   = v1   AName   = v2   '='   PushChar   Expr   PopChar   = init   '|'   PushChar   Expr   PopChar   = body   ')'  { Iterate(c,v1,v2,init,body) }.
+ImportPath-Star0 ::=  '::'   Name   = $head   ImportPath-Star0   = $tail   Cons  |  Nil .
+LetBody ::=  'in'   PushChar   Expr   PopChar   = body   <VarRef 480098>  |  PushChar   'then'   PushChar   Bindings   PopChar   = bindings   LetBody   = body  { Let(bindings,body) }  PopChar .
+TypeExp ::=  TypePath   = path   TypeExp-Dis0  |  '['   PushChar   TypeExp   PopChar   = t   ']'  { ParametricType(Seq{"Seq"},Seq{t}) } |  '{'   PushChar   TypeExp   PopChar   = t   '}'  { ParametricType(Seq{"Set"},Seq{t}) } |  Drop  |  OpType .
+PathExp-Dis0 ::=  '::'   AName   = name   PathExp-Dis0-Star0   = names  { Path(atom,Seq{name | names}) } |  <VarRef 341bbe> .
+Boolp ::=  'true'  { Constp(BoolExp(true)) } |  'false'  { Constp(BoolExp(false)) }.
+EImport ::=  'import'   TopLevelExp   = exp  { Evaluator::Import(exp) }.
+PairOrElements ::=  '|'   PushChar   Expr   PopChar   = t   '}'  { ConsExp(e,t) } |  PairOrElements-Star0   = es   '}'  { SetExp(l,"Seq",Seq{e | es}) }.
+Binding ::=  AName   = name   BindingTail .
+PatternTail ::=  '->'   Name   '('   Pattern   = p   ')'   <VarRef 438518> .
+CompilationUnit-Star1 ::=  Import   = $head   CompilationUnit-Star1   = $tail   Cons  |  Nil .
+CompilationUnit ::=  CompilationUnit-Star0   = parserImports   CompilationUnit-Star1   = imports   CompilationBodyExps   = exps   EOF   pState   = s  { CompilationUnit("",imports,exps,s.getSource(),parserImports) }.
+SimpleExpTail ::=  BinOp   = o   !   PushChar   SimpleExp   PopChar   = e  { BinExp(a,o,e) } |  <VarRef f065f> .
+</PRE></TD>
+</TABLE>
+</HTML>

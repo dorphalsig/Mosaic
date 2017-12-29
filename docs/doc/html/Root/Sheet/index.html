@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+Sheet
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>Sheet</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+No Documentation Specified
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+<TR><TD>Sheet(rows,cols)</TD><TD>
+        The default type for each cell in the sheet is Element
+      </TD></TR>
+<TR><TD>Sheet(rows,cols,map)</TD><TD>
+        Map is a binary operator that maps (row,col) pairs
+        to classifiers.
+      </TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR><TD><B>cols</B></TD><TD><A HREF="../../Root/XCore/Element/index.html">Seq(Element)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>data</B></TD><TD><A HREF="../../Array(Element)/index.html">Array(Element)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>inspectWidth</B></TD><TD><A HREF="../../Root/XCore/Integer/index.html">Integer<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>map</B></TD><TD><A HREF="../../Root/XCore/Operation/index.html">Operation<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>rows</B></TD><TD><A HREF="../../Root/XCore/Element/index.html">Seq(Element)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#colIndex">colIndex</a>(col:<A HREF="../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#getCell">getCell</a>(row:<A HREF="../../Root/XCore/Element/index.html">Element<A>,col:<A HREF="../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#hasCell">hasCell</a>(row:<A HREF="../../Root/XCore/Element/index.html">Element<A>,col:<A HREF="../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#hasCol">hasCol</a>(col:<A HREF="../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#hasRow">hasRow</a>(row:<A HREF="../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#initCells">initCells</a>(values:<A HREF="../../Root/XCore/Seq(Element)/index.html">Seq(Seq(Element))<A>):<A HREF="../../Root/Sheet/index.html">Sheet<A></B></TD><TD>
+        Initialise the sheet with the cell values. Values is a sequence of
+        rows. Each row is a sequence of values. Returns the receiver.
+      </TD></TR>
+<TR><TD><B><a href="#pprint">pprint</a>(out:<A HREF="../../Root/XCore/Element/index.html">Element<A>,width:<A HREF="../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#pprintLine">pprintLine</a>(out:<A HREF="../../Root/XCore/Element/index.html">Element<A>,width:<A HREF="../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#rowIndex">rowIndex</a>(row:<A HREF="../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setCell">setCell</a>(row:<A HREF="../../Root/XCore/Element/index.html">Element<A>,col:<A HREF="../../Root/XCore/Element/index.html">Element<A>,value:<A HREF="../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+        Sets the value of the cell indexed by (row,col).
+        Returns the receiver.
+      </TD></TR>
+<TR><TD><B><a href="#toString">toString</a>():<A HREF="../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#type">type</a>(row:<A HREF="../../Root/XCore/Element/index.html">Element<A>,col:<A HREF="../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="colIndex"/><FONT FACE="Courier" SIZE="1">@Operation&#160;colIndex(col&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;if&#160;cols-&gt;includes(col)<br>&#160;&#160;then&#160;cols-&gt;indexOf(col)<br>&#160;&#160;else&#160;self.error(col.toString()&#160;+&#160;"&#160;is&#160;not&#160;a&#160;col&#160;in&#160;sheet&#160;"&#160;+&#160;self.toString())<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="getCell"/><FONT FACE="Courier" SIZE="1">@Operation&#160;getCell(row&#160;:&#160;XCore::Element,col&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;data.ref((self.rowIndex(row)&#160;*&#160;cols-&gt;size)&#160;+&#160;self.colIndex(col))<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="hasCell"/><FONT FACE="Courier" SIZE="1">@Operation&#160;hasCell(row&#160;:&#160;XCore::Element,col&#160;:&#160;XCore::Element):Boolean<br>&#160;&#160;self.hasRow(row)&#160;and&#160;self.hasCol(col)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="hasCol"/><FONT FACE="Courier" SIZE="1">@Operation&#160;hasCol(col&#160;:&#160;XCore::Element):Boolean<br>&#160;&#160;cols-&gt;includes(col)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="hasRow"/><FONT FACE="Courier" SIZE="1">@Operation&#160;hasRow(row&#160;:&#160;XCore::Element):Boolean<br>&#160;&#160;rows-&gt;includes(row)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="initCells"/><FONT FACE="Courier" SIZE="1">@Operation&#160;initCells(values&#160;:&#160;Seq(Seq(Element))):Sheet<br>&#160;&#160;try<br>&#160;&#160;&#160;&#160;@For&#160;row&#160;in&#160;rows&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;let&#160;rowIndex&#160;=&#160;self.rowIndex(row)<br>&#160;&#160;&#160;&#160;&#160;&#160;in&#160;@For&#160;col&#160;in&#160;cols&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;let&#160;colIndex&#160;=&#160;self.colIndex(col)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;self.setCell(row,col,values-&gt;at(rowIndex)-&gt;at(colIndex))<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;end<br>&#160;&#160;catch(exception)<br>&#160;&#160;&#160;&#160;format(stdout,"Error&#160;initialising&#160;sheet&#160;cells.~%");<br>&#160;&#160;&#160;&#160;xmf.raise(exception)<br>&#160;&#160;end;<br>&#160;&#160;self<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="pprint"/><FONT FACE="Courier" SIZE="1">@Operation&#160;pprint(out&#160;:&#160;XCore::Element,width&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;format(out,"&#160;~V~{~;|&#160;~@~&lt;?&gt;S~}~%",Seq{width,cols-&gt;collect(c&#160;|<br>&#160;&#160;&#160;&#160;Seq{width,c.toString().truncate(width)})});<br>&#160;&#160;self.pprintLine(out,width);<br>&#160;&#160;@For&#160;row&#160;in&#160;rows&#160;do<br>&#160;&#160;&#160;&#160;format(out,"&#160;~&lt;?&gt;S",Seq{width,row.toString().truncate(width)});<br>&#160;&#160;&#160;&#160;@For&#160;col&#160;in&#160;cols&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;format(out,"|&#160;~&lt;?&gt;S",Seq{width,self.getCell(row,col).toString()-&gt;truncate(width)})<br>&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;format(out,"~%");<br>&#160;&#160;&#160;&#160;self.pprintLine(out,width)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="pprintLine"/><FONT FACE="Courier" SIZE="1">@Operation&#160;pprintLine(out&#160;:&#160;XCore::Element,width&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@Count&#160;i&#160;from&#160;0&#160;to&#160;((width&#160;+&#160;2)&#160;*&#160;(cols-&gt;size&#160;+&#160;1))&#160;+&#160;1&#160;do<br>&#160;&#160;&#160;&#160;format(out,"-")<br>&#160;&#160;end;<br>&#160;&#160;format(out,"~%")<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="rowIndex"/><FONT FACE="Courier" SIZE="1">@Operation&#160;rowIndex(row&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;if&#160;rows-&gt;includes(row)<br>&#160;&#160;then&#160;rows-&gt;indexOf(row)<br>&#160;&#160;else&#160;self.error(row.toString()&#160;+&#160;"&#160;is&#160;not&#160;a&#160;row&#160;in&#160;sheet&#160;"&#160;+&#160;self.toString())<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setCell"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setCell(row&#160;:&#160;XCore::Element,col&#160;:&#160;XCore::Element,value&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;try<br>&#160;&#160;&#160;&#160;data.put((self.rowIndex(row)&#160;*&#160;cols-&gt;size)&#160;+&#160;self.colIndex(col),value);<br>&#160;&#160;&#160;&#160;self<br>&#160;&#160;catch(exception)<br>&#160;&#160;&#160;&#160;format(stdout,"Error&#160;setting&#160;cell.~%");<br>&#160;&#160;&#160;&#160;xmf.raise(exception)<br>&#160;&#160;end;<br>&#160;&#160;self<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="toString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;toString():String<br>&#160;&#160;try<br>&#160;&#160;&#160;&#160;self.of().name.toString()&#160;+&#160;"("&#160;+&#160;if&#160;self.hasSlot("rows")<br>&#160;&#160;&#160;&#160;then&#160;self.rows.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"rows"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("cols")<br>&#160;&#160;&#160;&#160;then&#160;self.cols.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"cols"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;")"<br>&#160;&#160;catch(exception)<br>&#160;&#160;&#160;&#160;self.of().name&#160;+&#160;"(Constructor&#160;Error!)"<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="type"/><FONT FACE="Courier" SIZE="1">@Operation&#160;type(row&#160;:&#160;XCore::Element,col&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;map(row,col)<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

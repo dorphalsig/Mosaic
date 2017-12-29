@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+Buffer
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>Buffer</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+No Documentation Specified
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#add">add</a>(element:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD> 
+      Add the element at the next available index.
+    </TD></TR>
+<TR><TD><B><a href="#append">append</a>(elements:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD> 
+      Appen-d a sequence of elements. The argument
+      should be a sequence, buffer, vector or string.
+      The elements in the argument are added to the
+      receiver in order.
+    </TD></TR>
+<TR><TD><B><a href="#asSeq">asSeq</a>():<A HREF="../../../Root/XCore/Element/index.html">Seq(Element)<A></B></TD><TD>
+      Converts a buffer into a sequence.
+    </TD></TR>
+<TR><TD><B><a href="#asString">asString</a>():<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>
+      Returns true when the buffer is treated as a string.
+    </TD></TR>
+<TR><TD><B><a href="#at">at</a>(index:<A HREF="../../../Root/XCore/Integer/index.html">Integer<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#contains">contains</a>(element:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#daemons">daemons</a>():<A HREF="../../../Root/XCore/Daemon/index.html">Seq(Daemon)<A></B></TD><TD>
+      Returns the daemons that are monitoring the buffer.
+    </TD></TR>
+<TR><TD><B><a href="#daemonsActive">daemonsActive</a>():<A HREF="../../../Root/XCore/Daemon/index.html">Seq(Daemon)<A></B></TD><TD>
+      Returns whether or not daemons dire then the buffer is updated.
+    </TD></TR>
+<TR><TD><B><a href="#hasSuffix">hasSuffix</a>(s:<A HREF="../../../Root/XCore/Element/index.html">Seq(Element)<A>):<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#increment">increment</a>():<A HREF="../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD>
+      The amount of storage that the buffer grows by each time
+      it is expanded.
+    </TD></TR>
+<TR><TD><B><a href="#init">init</a>(args:<A HREF="../../../Root/XCore/Element/index.html">Seq(Element)<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#put">put</a>(index:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,value:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Put the element value into a buffer at position index.
+    </TD></TR>
+<TR><TD><B><a href="#ref">ref</a>(index:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Returns the value at position index in a buffer.
+    </TD></TR>
+<TR><TD><B><a href="#setSize">setSize</a>(size:<A HREF="../../../Root/XCore/Integer/index.html">Integer<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+      Sets the size of the buffer providing that size
+      is smaller than the current contents.
+    </TD></TR>
+<TR><TD><B><a href="#size">size</a>():<A HREF="../../../Root/XCore/Integer/index.html">Integer<A></B></TD><TD>
+      The number of elements currently in the buffer.
+    </TD></TR>
+<TR><TD><B><a href="#storage">storage</a>():<A HREF="../../../Root/XCore/Vector/index.html">Seq(Vector)<A></B></TD><TD>
+      Returns the sequence of vectors used as the underlying
+      storage for the buffer.
+    </TD></TR>
+<TR><TD><B><a href="#stringEqual">stringEqual</a>(string:<A HREF="../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>
+      Returns true when the supplied string contains the same chars
+      as the buffer.
+    </TD></TR>
+<TR><TD><B><a href="#subString">subString</a>(firstChar:<A HREF="../../../Root/XCore/String/index.html">String<A>,pastLastChar:<A HREF="../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>
+      Uses indices to chop up a string. The first
+      index is the starting character and the second index is 
+      1+ the final character.
+    </TD></TR>
+<TR><TD><B><a href="#toString">toString</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="add"/><FONT FACE="Courier" SIZE="1">@Operation&#160;add(element&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;Kernel_arraySet(self,self-&gt;size,element)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="append"/><FONT FACE="Courier" SIZE="1">@Operation&#160;append(elements&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;@Count&#160;i&#160;from&#160;0&#160;to&#160;elements-&gt;size&#160;do<br>&#160;&#160;&#160;&#160;self.add(elements-&gt;at(i))<br>&#160;&#160;end;<br>&#160;&#160;self<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="asSeq"/><FONT FACE="Courier" SIZE="1">@Operation&#160;asSeq():Seq(Element)<br>&#160;&#160;let&#160;i&#160;=&#160;self.size()&#160;-&#160;1;<br>&#160;&#160;&#160;&#160;&#160;&#160;seq&#160;=&#160;Seq{}<br>&#160;&#160;in&#160;@While&#160;i&#160;&gt;=&#160;0&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;seq&#160;:=&#160;Seq{self.ref(i)&#160;|&#160;seq};<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;i&#160;:=&#160;i&#160;-&#160;1<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;seq<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="asString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;asString():Boolean<br>&#160;&#160;Kernel_bufferAsString(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="at"/><FONT FACE="Courier" SIZE="1">@Operation&#160;at(index&#160;:&#160;Integer):Element<br>&#160;&#160;self-&gt;at(index)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="contains"/><FONT FACE="Courier" SIZE="1">@Operation&#160;contains(element&#160;:&#160;XCore::Element):Boolean<br>&#160;&#160;let&#160;i&#160;=&#160;0;<br>&#160;&#160;&#160;&#160;&#160;&#160;contains&#160;=&#160;false<br>&#160;&#160;in&#160;@While&#160;i&#160;&lt;&#160;self-&gt;size&#160;and&#160;not&#160;contains&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;contains&#160;:=&#160;self-&gt;at(i)&#160;=&#160;element;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;i&#160;:=&#160;i&#160;+&#160;1<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;contains<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="daemons"/><FONT FACE="Courier" SIZE="1">@Operation&#160;daemons():Seq(Daemon)<br>&#160;&#160;Kernel_bufferDaemons(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="daemonsActive"/><FONT FACE="Courier" SIZE="1">@Operation&#160;daemonsActive():Seq(Daemon)<br>&#160;&#160;Kernel_bufferDaemonsActive(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="hasSuffix"/><FONT FACE="Courier" SIZE="1">@Operation&#160;hasSuffix(s&#160;:&#160;Seq(Element)):Boolean<br>&#160;&#160;if&#160;self-&gt;size&#160;&lt;&#160;s-&gt;size<br>&#160;&#160;then&#160;false<br>&#160;&#160;else&#160;let&#160;i&#160;=&#160;self-&gt;size&#160;-&#160;s-&gt;size;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;j&#160;=&#160;0;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;same&#160;=&#160;true<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;@While&#160;same&#160;and&#160;i&#160;&lt;&#160;self-&gt;size&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;self-&gt;at(i)&#160;=&#160;s-&gt;at(j)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;i&#160;:=&#160;i&#160;+&#160;1;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;j&#160;:=&#160;j&#160;+&#160;1<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;same&#160;:=&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;same<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="increment"/><FONT FACE="Courier" SIZE="1">@Operation&#160;increment():Integer<br>&#160;&#160;Kernel_bufferIncrement(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="init"/><FONT FACE="Courier" SIZE="1">@Operation&#160;init(args&#160;:&#160;Seq(Element)):XCore::Element<br>&#160;&#160;let&#160;increment&#160;=&#160;args-&gt;at(0);<br>&#160;&#160;&#160;&#160;&#160;&#160;asString&#160;=&#160;args-&gt;at(1)&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;buffer&#160;=&#160;Kernel_mkBuffer(increment)<br>&#160;&#160;in&#160;Kernel_bufferSetAsString(buffer,asString);<br>&#160;&#160;&#160;&#160;&#160;buffer<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="put"/><FONT FACE="Courier" SIZE="1">@Operation&#160;put(index&#160;:&#160;XCore::Element,value&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;Kernel_arraySet(self,index,value)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="ref"/><FONT FACE="Courier" SIZE="1">@Operation&#160;ref(index&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;if&#160;self.size()&#160;&gt;&#160;index<br>&#160;&#160;then&#160;Kernel_arrayRef(self,index)<br>&#160;&#160;else&#160;throw&#160;IndexOutOfBounds(self,index)<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setSize"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setSize(size&#160;:&#160;Integer):XCore::Element<br>&#160;&#160;if&#160;size&#160;&lt;=&#160;self.size()<br>&#160;&#160;then&#160;Kernel_bufferSetSize(self,size)<br>&#160;&#160;else&#160;self.error("Cannot&#160;use&#160;setSize&#160;to&#160;extend&#160;a&#160;buffer.")<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="size"/><FONT FACE="Courier" SIZE="1">@Operation&#160;size():Integer<br>&#160;&#160;Kernel_bufferSize(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="storage"/><FONT FACE="Courier" SIZE="1">@Operation&#160;storage():Seq(Vector)<br>&#160;&#160;Kernel_bufferStorage(self)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="stringEqual"/><FONT FACE="Courier" SIZE="1">@Operation&#160;stringEqual(string&#160;:&#160;String):Boolean<br>&#160;&#160;if&#160;string-&gt;size&#160;=&#160;self-&gt;size<br>&#160;&#160;then&#160;let&#160;index&#160;=&#160;0;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;same&#160;=&#160;true<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;@While&#160;index&#160;&lt;&#160;string-&gt;size&#160;and&#160;same&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;if&#160;string-&gt;at(index)&#160;&lt;&gt;&#160;self-&gt;at(index)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;same&#160;:=&#160;false<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;index&#160;:=&#160;index&#160;+&#160;1<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;same<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;else&#160;false<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="subString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;subString(firstChar&#160;:&#160;String,pastLastChar&#160;:&#160;String):String<br>&#160;&#160;let&#160;s&#160;=&#160;Buffer(100,true)<br>&#160;&#160;in&#160;@While&#160;firstChar&#160;&lt;&#160;pastLastChar&#160;and&#160;firstChar&#160;&lt;&#160;self.size()&#160;do<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;s.add(self-&gt;at(firstChar));<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;firstChar&#160;:=&#160;firstChar&#160;+&#160;1<br>&#160;&#160;&#160;&#160;&#160;end;<br>&#160;&#160;&#160;&#160;&#160;s.toString()<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="toString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;toString():String<br>&#160;&#160;Kernel_asString(self)<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

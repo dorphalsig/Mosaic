@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+Java
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>Java</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+No Documentation Specified
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=1><FONT SIZE="+2">
+<B>Grammar</B></FONT></TD>
+</TR>
+<TD><PRE>
+Method ::=  Visibility   = visibility   OptStatic   = isStatic   OptAbstract   = isAbstract   ReturnType   = type   Name   = name   Formals   = params   JThrows   = throws   Method-Dis0 .
+VarUpdate ::=  Name   = n   '='   JExp   = e   ';'  { Update(n,e) }.
+JType ::=  Path   = path   JType-Dis0 .
+Switch ::=  'switch'   '('   JExp   = e   ')'   '{'   Switch-Star0   = cs   DefaultCase   = d   '}'  { Switch(e,cs,d) }.
+MethodSig ::=  Visibility   = visibility   OptStatic   = isStatic   OptAbstract   = isAbstract   ReturnType   = type   Name   = name   Formals   = params   JThrows   = throws   ';'  { MethodSig(Modifiers(visibility,isStatic,isAbstract),type,name,params,throws) }.
+JArithTail ::=  ArithOp   = op   JDot   = e2  { BinExp(e,op,e2) }  = e   JArithTail  |  <VarRef 6d6449> .
+Path ::=  Name   = n   Path-Star0   = ns   <Pair 6a5021> .
+JNew-Dis0 ::=  JArgs   = as  { New(p,as) } |  '['   JExp   = e   ']'  { New(p,Seq{}) }.
+XMFPath ::=  Name   = n   XMFPath-Star0   = ns   <Pair 6a4f5d> .
+JExps-Star0 ::=  ','   JExp   = $head   JExps-Star0   = $tail   Cons  |  Nil .
+ReturnType ::=  'void'  { Void() } |  JType .
+JArith ::=  JDot   = e   JArithTail .
+LanguageEscape ::=  'with'   XMFPath   = language   '{'   pState   = state  { let classifier = language.lookup() then
+    grammar = classifier.grammar
+in state.call(grammar,0,grammar.startingSymbol,Seq{},false)
+end }  = exp   '}'  { ExternalFeature(language.lookup(),language.lookup().grammar.startingSymbol,exp) }.
+Case-Star0 ::=  Statement   = $head   Case-Star0   = $tail   Cons  |  Nil .
+Formals ::=  '('   FormalList   ')' .
+JThis ::=  'this'  { This() }.
+Constructor ::=  Visibility   = visibility   Name   = name   Formals   = params   Block   = body  { Constructor(visibility,name,params,body) }.
+Switch-Star0 ::=  Case   = $head   Switch-Star0   = $tail   Cons  |  Nil .
+FormalList ::=  Formal   = formal   FormalList-Star0   = formals   <Pair 6bcb7b>  |  Seq{} .
+Do ::=  'do'   '{'   Statements   = statements   '}'   'while'   '('   JExp   = t   ')'   ';'  { Do(statements,t) }.
+FieldInit ::=  '='   JExp  |  null .
+EqlOp ::=  '=='   ==  |  '!='   != .
+Formal ::=  JType   = type   Name   = name  { Formal(type,name) }.
+ArithOp ::=  '+'   +  |  '-'   -  |  '*'   *  |  '/'   / .
+Field ::=  Visibility   = visibility   OptStatic   = isStatic   OptFinal   JType   = type   Name   = name   FieldInit   = value   ';'  { Field(Modifiers(visibility,isStatic,false),type,name,value) }.
+JPath ::=  Name   = n   JPath-Star0   = ns   <Pair 7338e8> .
+Visibility ::=  'public'   public  |  'private'   private  |  'protected'   protected  |  public .
+JArgs-Dis0 ::=  JExps  |  Seq{} .
+IFeature ::=  Field   !  |  MethodSig .
+FieldUpdate ::=  JExp   = e   '.'   Name   = n   '='   JExp   = v   ';'  { FieldUpdate(e,n,v) }.
+OptStatic ::=  'static'  { true } | { false }.
+BitOp ::=  '&'   &  |  '|'   | .
+Feature ::=  Field   !  |  Method  |  Constructor  |  LanguageEscape .
+SideEffect ::=  VarUpdate  |  FieldUpdate .
+OptAbstract ::=  'abstract'  { true } | { false }.
+Case ::=  'case'   JExp   = e   ':'   Case-Star0   = ss  { Case(e,ss) }.
+IFeatures ::=  IFeatures-Star0 .
+CmpOp ::=  '>'   >  |  '>='   >=  |  '<'   <  |  '<='   <= .
+OptFinal ::=  'final'  { true } | { false }.
+JCmp ::=  JArith   = e   JCmpTail .
+Features ::=  Features-Star0 .
+JEql ::=  JCmp   = e   JEqlTail .
+FormalList-Star0 ::=  ','   Formal   = $head   FormalList-Star0   = $tail   Cons  |  Nil .
+JVar ::=  Name   = name  { Var(name) }.
+JThrows ::=  'throws'   Path   = p   JThrows-Star0   = ps   <Pair 6b0678>  |  Seq{} .
+DefaultCase-Star0 ::=  Statement   = $head   DefaultCase-Star0   = $tail   Cons  |  Nil .
+Path-Star0 ::=  '.'   Name   = $head   Path-Star0   = $tail   Cons  |  Nil .
+JBool ::=  JBit   = e   JBoolTail .
+JImplements ::=  'implements'   Path   = p   JImplements-Star0   = ps   <Pair 6a5034>  |  Seq{} .
+Return-Dis0 ::=  ';'  { Return(null) } |  JExp   = e   ';'  { Return(e) }.
+JType-Dis0 ::=  '['   ']'  { ArrayType(NamedType(path)) } | { NamedType(path) }.
+While ::=  'while'   '('   JExp   = e   ')'   Statement   = s  { While(e,s) }.
+JParent ::=  'extends'   Path  |  null .
+JNavigateTail ::=  '.'   Name   = n  { FieldRef(e,n) }  = e   JNavigateTail  |  <VarRef 739f96> .
+Method-Dis0 ::=  Block   = body  { Method(Modifiers(visibility,isStatic,isAbstract),type,name,params,throws,body) } |  ';'  { MethodSig(Modifiers(visibility,isStatic,isAbstract),type,name,params,throws) }.
+JCmpTail ::=  CmpOp   = op   JArith   = e2  { BinExp(e,op,e2) }  = e   JCmpTail  |  <VarRef 72fd8a> .
+JImportPath ::=  Path  |  Path   = p   '.'   '*'  { p + Seq{"*"} }.
+JBoolTail ::=  BoolOp   = op   JBit   = e2  { BinExp(e,op,e2) }  = e   JBoolTail  |  <VarRef 72fd40> .
+XMFPath-Star0 ::=  '::'   Name   = $head   XMFPath-Star0   = $tail   Cons  |  Nil .
+JEqlTail ::=  EqlOp   = op   JCmp   = e2  { BinExp(e,op,e2) }  = e   JEqlTail  |  <VarRef 7339b5> .
+JImport ::=  'import'   JImportPath   = p   ';'  { Import(Path(p)) }.
+Dec ::=  JPath   = type   Name   = name   Dec-Dis0 .
+IFeatures-Star0 ::=  IFeature   = $head   IFeatures-Star0   = $tail   Cons  |  Nil .
+JDotNameTail ::=  JArgs   = a  { Send(e,n,a) }  = e   JDotTail  | { FieldRef(e,n) }  = e   JDotTail .
+Interface ::=  Visibility   'interface'   Name   = name   JParent   = parent   JImplements   = implements   '{'   IFeatures   = features   '}'  { Interface(name,implements,parent,features) }.
+Send ::=  Send-Dis0   = e   Name   = n   JArgs   = a   ';'  { Send(e,n,a) }.
+Features-Star0 ::=  Feature   = $head   Features-Star0   = $tail   Cons  |  Nil .
+DefaultCase ::=  'default'   ':'   DefaultCase-Star0   = ss  { DefaultCase(ss) } |  null .
+JCompilationUnit ::=  PackageDec   = p   JCompilationUnit-Star0   = i   JCompilationUnit-Dis0   = c  { CompilationUnit(p,i,c) }.
+JSend ::=  Name   = name   JArgs   = args  { Send(null,name,args) }.
+JThrows-Star0 ::=  ','   Path   = $head   JThrows-Star0   = $tail   Cons  |  Nil .
+JNavigate ::=  JCast   = e   JNavigateTail .
+Class ::=  Visibility   OptAbstract   = isAbstract   'class'   Name   = name   JParent   = parent   JImplements   = implements   '{'   Features   = features   '}'  { Class(name,isAbstract,implements,parent,features) }.
+JDotTail ::=  '.'   Name   = n   JDotNameTail  |  <VarRef 736dc4> .
+JImplements-Star0 ::=  ','   Path   = $head   JImplements-Star0   = $tail   Cons  |  Nil .
+BoolOp ::=  '&&'   &&  |  '||'   || .
+PackageDec ::=  'package'   Name   = n   ';'   <VarRef 6aab31>  |   .
+JTry-Star0 ::=  JCatch   = $head   JTry-Star0   = $tail   Cons  |  Nil .
+JCompilationUnit-Star0 ::=  JImport   = $head   JCompilationUnit-Star0   = $tail   Cons  |  Nil .
+JBoolean ::=  'true'  { Boolean(true) } |  'false'  { Boolean(false) }.
+Java ::=  JCompilationUnit   = j   'end'  { j.toXOCL() }.
+If-Dis0 ::=  'else'   Statement   = s2  { If(e,s1,s2) } | { If(e,s1,null) }.
+JCompilationUnit-Dis0 ::=  Class  |  Interface .
+Return ::=  'return'   Return-Dis0 .
+JAssign ::=  Name   = n   '='   JBool   = e  { Update(n,e) } |  JBool .
+JString ::=  Str   = s  { JString(s) }.
+JExps ::=  JExp   = e   JExps-Star0   = es   <Pair 72fcb4> .
+JPath-Star0 ::=  '.'   Name   = $head   JPath-Star0   = $tail   Cons  |  Nil .
+JThrow ::=  'throw'   JExp   = e   ';'  { Throw(e) }.
+JAtom ::=  JBoolean  |  JInt  |  JFloat  |  JString  |  JNew  |  JVar  |  JSend  |  JThis  |  '('   JExp   ')' .
+Statements ::=  Statements-Star0 .
+JDot ::=  JCast   = e   JDotTail .
+Send-Dis0 ::=  JNavigate   '.'  |  null .
+If ::=  'if'   '('   JExp   = e   ')'   Statement   = s1   If-Dis0 .
+For ::=  'for'   '('   Dec   = d   JExp   = p   ';'   Name   = n   '='   JExp   = e  { Update(n,e) }  = c   ')'   Statement   = b  { Statements::For(d,p,c,b) }.
+Statements-Star0 ::=  Statement   = $head   Statements-Star0   = $tail   Cons  |  Nil .
+JFloat ::=  Float   = f  { (Expressions.getElement("Int"))(f) }.
+Break ::=  'break'   ';'  { Break() }.
+JArgs ::=  '('   JArgs-Dis0   = es   ')'   <VarRef 739f5a> .
+JTry ::=  'try'   Block   = b   JTry-Star0   = cs  { Try(b,cs) }.
+JBitTail ::=  BitOp   = op   JEql   = e2  { BinExp(e,op,e2) }  = e   JBitTail  |  <VarRef 72fd5d> .
+JBit ::=  JEql   = e   JBitTail .
+JExp ::=  JAssign .
+JNew ::=  'new'   JPath   = p   JNew-Dis0 .
+Block ::=  '{'   Statements   = statements   '}'  { Block(statements) }.
+JInt ::=  Int   = i  { (Expressions.getElement("Int"))(i) }.
+Dec-Dis0 ::=  '='   JExp   = value   ';'  { Dec(type,name,value) } |  ';'  { Dec(type,name,null) }.
+JCast ::=  '('   JPath   = p   ')'   JAtom   = a  { Cast(p,a) } |  JAtom .
+Statement ::=  Break  |  Block  |  Send  |  While  |  Do  |  If  |  JTry  |  JThrow  |  SideEffect  |  Switch  |  Return  |  Dec  |  For .
+JCatch ::=  'catch'   '('   JPath   = p   Name   = n   ')'   Block   = b  { Catch(p,n,b) }.
+</PRE></TD>
+</TABLE>
+</HTML>

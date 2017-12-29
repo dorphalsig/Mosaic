@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+DialogCommandInterpreter
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>DialogCommandInterpreter</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+
+       This class defines a command interpreter over dialogs. The mapping handles the 
+       following output commands by sen-ding them in the appropriate format to the 
+       client connected
+           [newColorDialog(message,dialog)]
+           [newMessageDialog(dialogId,message)]
+           [newWarningDialog(dialogId,message)]
+           [newErrorDialog(dialogId,message)]
+           [newQuestionDialog(dialogId,message)]
+           [newQuestionDialogYesNoCancel(dialogId,message)]
+           [newQuestionDialogYesOnly(dialogId,message)]
+           [newConfirmDialog(dialogId,message)]
+           //[newMultioptionDialog(dialogId,message,type)]
+           [newFileDialog(dialogId,type,dir,ext)]
+           [newInputDialog(dialogId,title,question,value)]
+           [newOrderingDialog(dialogId,title,command,options)]
+           [newDirectoryDialog(dialogId,dir)]
+           [newSelectionDialog(dialogId,multi,title,message,options)]
+           [newTextAreaDialog(dialogId,type,message,text)]
+           [newProgressDialog(dialogId,workToBeDone)]
+           [addWork(dialogId,work)]
+           [finishWork(dialogId)]
+           [newBusyDialog(dialogId,title)]
+           [noLongerBusy(dialodId)]
+    
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../../Root/Clients/CommandInterpreter/index.html">CommandInterpreter</A>
+,<A HREF="../../../../Root/IO/XMLOutput/index.html">XMLOutput</A>
+,<A HREF="../../../../Root/XCore/Contained/index.html">Contained</A>
+,<A HREF="../../../../Root/IO/XMLData/index.html">XMLData</A>
+,<A HREF="../../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../../Root/Clients/CommandInterpreter/index.html">CommandInterpreter</A>: buffer, bufferPos, debug, flush, output, packetSize. <BR><B>From</B> <A HREF="../../../../Root/IO/XMLOutput/index.html">XMLOutput</A>: debug, name, output. <BR><B>From</B> <A HREF="../../../../Root/XCore/Contained/index.html">Contained</A>: owner. <BR><B>From</B> <A HREF="../../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#addWork">addWork</a>(dialog:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,work:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,text:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#finishWork">finishWork</a>(dialog:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>,text:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newBusyDialog">newBusyDialog</a>(dialog:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newColorDialog">newColorDialog</a>(dialog:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newConfirmDialog">newConfirmDialog</a>(dialog:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newDirectoryDialog">newDirectoryDialog</a>(dialog:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newErrorDialog">newErrorDialog</a>(dialog:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newFileDialog">newFileDialog</a>(dialog:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newFontDialog">newFontDialog</a>(dialog:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newInputDialog">newInputDialog</a>(dialog:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newMessageDialog">newMessageDialog</a>(dialog:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newMultiSelectionTreeDialog">newMultiSelectionTreeDialog</a>(dialog:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newOrderingDialog">newOrderingDialog</a>(dialog:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newOrderingDialog2">newOrderingDialog2</a>(dialog:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newProgressDialog">newProgressDialog</a>(dialog:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newQuestionDialog">newQuestionDialog</a>(dialog:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newQuestionDialogYesNoCancel">newQuestionDialogYesNoCancel</a>(dialog:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newQuestionDialogYesOnly">newQuestionDialogYesOnly</a>(dialog:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newSelectionDialog">newSelectionDialog</a>(dialog:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newTextAreaDialog">newTextAreaDialog</a>(dialog:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newTreeDialog">newTreeDialog</a>(dialog:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#newWarningDialog">newWarningDialog</a>(dialog:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#noLongerBusy">noLongerBusy</a>(dialog:<A HREF="../../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../../Root/Clients/CommandInterpreter/index.html">CommandInterpreter</A>: allocateId, call, debug, debug, flush, setFlush, setPacketSize, toString, writeCommand. <BR><B>From</B> <A HREF="../../../../Root/IO/XMLOutput/index.html">XMLOutput</A>: chars, createOutput, debug, endDocument, endElement, flush, startDocument, startElement. <BR><B>From</B> <A HREF="../../../../Root/XCore/Contained/index.html">Contained</A>: addTo, allOwners, deleteRecursive, delete_client, delete_client_check, delete_client_redirect, getDefaultClipboardSource, owner, removeFromOwner, setOwner. <BR><B>From</B> <A HREF="../../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="addWork"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addWork(dialog&#160;:&#160;XCore::Element,work&#160;:&#160;XCore::Element,text&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;b4862a&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="finishWork"/><FONT FACE="Courier" SIZE="1">@Operation&#160;finishWork(dialog&#160;:&#160;XCore::Element,text&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;b4886e&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newBusyDialog"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newBusyDialog(dialog&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;dialogId&#160;=&#160;self.allocateId(dialog)<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;b48ab8&gt;<br>&#160;&#160;&#160;&#160;&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newColorDialog"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newColorDialog(dialog&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;scci&#160;=&#160;self<br>&#160;&#160;in&#160;Kernel_call(scci.owner.name,Seq{"newColorDialog",dialog.message,dialog.default.red,dialog.default.green,dialog.default.blue}-&gt;asVector)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newConfirmDialog"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newConfirmDialog(dialog&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;scci&#160;=&#160;self<br>&#160;&#160;in&#160;Kernel_call(scci.owner.name,Seq{"newConfirmDialog",dialog.message}-&gt;asVector)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newDirectoryDialog"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newDirectoryDialog(dialog&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;scci&#160;=&#160;self<br>&#160;&#160;in&#160;Kernel_call(scci.owner.name,Seq{"newDirectoryDialog",dialog.dir}-&gt;asVector)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newErrorDialog"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newErrorDialog(dialog&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;dialogId&#160;=&#160;self.allocateId(dialog)<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;b450e6&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;dialogId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newFileDialog"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newFileDialog(dialog&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;scci&#160;=&#160;self<br>&#160;&#160;in&#160;Kernel_call(scci.owner.name,Seq{"newFileDialog",dialog.type,dialog.dir,dialog.ext,dialog.initName}-&gt;asVector)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newFontDialog"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newFontDialog(dialog&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;scci&#160;=&#160;self<br>&#160;&#160;in&#160;Kernel_call(scci.owner.name,Seq{"newFontDialog",dialog.default()}-&gt;asVector)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newInputDialog"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newInputDialog(dialog&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;result&#160;=&#160;self.call("newInputDialog",Seq{dialog.title,dialog.question,dialog.value})<br>&#160;&#160;in&#160;if&#160;result.of()&#160;=&#160;Boolean<br>&#160;&#160;&#160;&#160;&#160;then&#160;null<br>&#160;&#160;&#160;&#160;&#160;else&#160;result<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newMessageDialog"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newMessageDialog(dialog&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;dialogId&#160;=&#160;self.allocateId(dialog)<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;b44b74&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;dialogId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newMultiSelectionTreeDialog"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newMultiSelectionTreeDialog(dialog&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.call("newMultiSelectionTreeDialog",Seq{dialog.title(),dialog.tree()})<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newOrderingDialog"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newOrderingDialog(dialog&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;options&#160;=&#160;dialog.options-&gt;asSeq&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;strings&#160;=&#160;options-&gt;map("toString")<br>&#160;&#160;in&#160;self.call("newOrderingDialog",Seq{dialog.title,dialog.message,strings}).asSeq()<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newOrderingDialog2"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newOrderingDialog2(dialog&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;options&#160;=&#160;dialog.options-&gt;asSeq&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;strings&#160;=&#160;options-&gt;map("toString")<br>&#160;&#160;in&#160;self.call("newOrderingDialog2",Seq{dialog.title,strings}).asSeq()<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newProgressDialog"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newProgressDialog(dialog&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;dialogId&#160;=&#160;self.allocateId(dialog)<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;b48366&gt;<br>&#160;&#160;&#160;&#160;&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newQuestionDialog"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newQuestionDialog(dialog&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;scci&#160;=&#160;self<br>&#160;&#160;in&#160;Kernel_call(scci.owner.name,Seq{"newQuestionDialog",dialog.message}-&gt;asVector)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newQuestionDialogYesNoCancel"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newQuestionDialogYesNoCancel(dialog&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;scci&#160;=&#160;self<br>&#160;&#160;in&#160;Kernel_call(scci.owner.name,Seq{"newQuestionDialogYesNoCancel",dialog.message}-&gt;asVector)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newQuestionDialogYesOnly"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newQuestionDialogYesOnly(dialog&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;scci&#160;=&#160;self<br>&#160;&#160;in&#160;Kernel_call(scci.owner.name,Seq{"newQuestionDialogYesOnly",dialog.message}-&gt;asVector)<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newSelectionDialog"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newSelectionDialog(dialog&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;options&#160;=&#160;dialog.options-&gt;asSeq&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;strings&#160;=&#160;options-&gt;map("toString")&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;result&#160;=&#160;self.call("newSelectionDialog",Seq{dialog.multi,dialog.title,dialog.message,strings})<br>&#160;&#160;in&#160;if&#160;dialog.multi<br>&#160;&#160;&#160;&#160;&#160;then&#160;if&#160;result&#160;=&#160;"-1"<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;0&#160;-&#160;1<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;result.asSeq()<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;else&#160;result<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newTextAreaDialog"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newTextAreaDialog(dialog&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;dialogId&#160;=&#160;self.allocateId(dialog)<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;b45732&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;dialogId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newTreeDialog"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newTreeDialog(dialog&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.call("newTreeDialog",Seq{dialog.title(),dialog.tree()})<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="newWarningDialog"/><FONT FACE="Courier" SIZE="1">@Operation&#160;newWarningDialog(dialog&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;let&#160;dialogId&#160;=&#160;self.allocateId(dialog)<br>&#160;&#160;in&#160;//&#160;&lt;SendCommand&#160;b44e2c&gt;<br>&#160;&#160;&#160;&#160;&#160;;<br>&#160;&#160;&#160;&#160;&#160;dialogId<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="noLongerBusy"/><FONT FACE="Courier" SIZE="1">@Operation&#160;noLongerBusy(dialog&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;//&#160;&lt;SendCommand&#160;b48d1c&gt;<br>&#160;&#160;<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

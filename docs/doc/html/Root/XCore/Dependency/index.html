@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+Dependency
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>Dependency</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+
+      A depen-dency occurs between a source and a target model element.
+      When a depen-dency is created, the attach operation is performed
+      and when it is removed the detach operation is performed. These
+      operations allow sub-classes of Depen-dency to have semantics.
+      
+      In addition, a depen-dency has a set of names, which are translated
+      into labels on diagrams. Subclasses of depen-dency can set any number
+      of names as are needed, each of which can be associated with the source,
+      target or the depen-dency itself, and as with attach and detach, the
+      'setNameValue' can be redefined to provide the necessary semantics.
+    
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../Root/XCore/NameSpace/index.html">NameSpace</A>
+,<A HREF="../../../Root/XCore/IndexedContainer/index.html">IndexedContainer</A>
+,<A HREF="../../../Root/XCore/NamedElement/index.html">NamedElement</A>
+,<A HREF="../../../Root/XCore/DocumentedElement/index.html">DocumentedElement</A>
+,<A HREF="../../../Root/XCore/Container/index.html">Container</A>
+,<A HREF="../../../Root/XCore/Contained/index.html">Contained</A>
+,<A HREF="../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+<TR><TD>Dependency(source,target)</TD><TD> No Documentation </TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR><TD><B>names</B></TD><TD><A HREF="../../../Root/XCore/DependencyName/index.html">Set(DependencyName)<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>source</B></TD><TD><A HREF="../../../Root/XCore/Element/index.html">Element<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>target</B></TD><TD><A HREF="../../../Root/XCore/Element/index.html">Element<A></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/NameSpace/index.html">NameSpace</A>: bindings, imports. <BR><B>From</B> <A HREF="../../../Root/XCore/IndexedContainer/index.html">IndexedContainer</A>: contents. <BR><B>From</B> <A HREF="../../../Root/XCore/NamedElement/index.html">NamedElement</A>: name. <BR><B>From</B> <A HREF="../../../Root/XCore/DocumentedElement/index.html">DocumentedElement</A>: documentation. <BR><B>From</B> <A HREF="../../../Root/XCore/Contained/index.html">Contained</A>: owner. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#add">add</a>(n:<A HREF="../../../Root/XCore/NamedElement/index.html">NamedElement<A>):<A HREF="../../../Root/XCore/Classifier/index.html">Classifier<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#addDependencyName">addDependencyName</a>(dn:<A HREF="../../../Root/XCore/DependencyName/index.html">DependencyName<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#attach">attach</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#detach">detach</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#remove">remove</a>(n:<A HREF="../../../Root/XCore/NamedElement/index.html">NamedElement<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#removeDependencyName">removeDependencyName</a>(dn:<A HREF="../../../Root/XCore/DependencyName/index.html">DependencyName<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setNameValue">setNameValue</a>(name:<A HREF="../../../Root/XCore/String/index.html">String<A>,value:<A HREF="../../../Root/XCore/String/index.html">String<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setSource">setSource</a>(v:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#setTarget">setTarget</a>(v:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#source">source</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#target">target</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#toString">toString</a>():<A HREF="../../../Root/XCore/String/index.html">String<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/NameSpace/index.html">NameSpace</A>: add, addBinding, addImport, allHTMLEntries, allHTMLPackages, allImports, createSnapshot, define, generateHTML, getChildren, getContents, getElement, getInstantiableClasses, graphViz, hasBinding, hasElement, importedFrom, imports, init, init, initBindings, lift, liveDoc, lookupPath, nameChanged, names, newName, populateGraphViz, putElement, redefine, remove, removeBinding, removeImport, resolveNameClash, syntaxClasses, toGraphVizPage, toHTML, toHTMLDoc, toType, writeEcore. <BR><B>From</B> <A HREF="../../../Root/XCore/IndexedContainer/index.html">IndexedContainer</A>: add, add, addContentDaemon, contentDaemons, contents, index, indices, init, initContents, remove, removeContentDaemon. <BR><B>From</B> <A HREF="../../../Root/XCore/NamedElement/index.html">NamedElement</A>: getNamedElement, href, labelString, legalNameChangeCheck, name, path, pathSeq, repopulate, setName, toString. <BR><B>From</B> <A HREF="../../../Root/XCore/DocumentedElement/index.html">DocumentedElement</A>: doc, ensureDoc, setDoc. <BR><B>From</B> <A HREF="../../../Root/XCore/Container/index.html">Container</A>: add, addContentDaemon, allContents, allContentsOf, allContentsThat, checkConstraints, checkConstraints, containerCutHandler, containerPastePostHandler, containerPastePreHandler, contentDaemons, contents, contentsOf, contentsThat, deleteContainedDiagrams, deleteRecursive, find, getChildren, getChildrenToolTips, includes, init, initContents, loadXTO, remove, removeContentDaemon, traceAll, untraceAll. <BR><B>From</B> <A HREF="../../../Root/XCore/Contained/index.html">Contained</A>: addTo, allOwners, deleteRecursive, delete_client, delete_client_check, delete_client_redirect, getDefaultClipboardSource, owner, removeFromOwner, setOwner. <BR><B>From</B> <A HREF="../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="add"/><FONT FACE="Courier" SIZE="1">@Operation&#160;add(n&#160;:&#160;NamedElement):Classifier<br>&#160;&#160;if&#160;n.isKindOf(DependencyName)<br>&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;self.addDependencyName(n);<br>&#160;&#160;&#160;&#160;super(n)<br>&#160;&#160;else<br>&#160;&#160;&#160;&#160;n.setOwner(self);<br>&#160;&#160;&#160;&#160;super(n)<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="addDependencyName"/><FONT FACE="Courier" SIZE="1">@Operation&#160;addDependencyName(dn&#160;:&#160;DependencyName):XCore::Element<br>&#160;&#160;self.resolveNameClash(dn.name,names);<br>&#160;&#160;self.names&#160;:=&#160;names-&gt;including(dn);<br>&#160;&#160;dn.setOwner(self);<br>&#160;&#160;self<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="attach"/><FONT FACE="Courier" SIZE="1">@Operation&#160;attach():XCore::Element<br>&#160;&#160;self<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="detach"/><FONT FACE="Courier" SIZE="1">@Operation&#160;detach():XCore::Element<br>&#160;&#160;self<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="remove"/><FONT FACE="Courier" SIZE="1">@Operation&#160;remove(n&#160;:&#160;NamedElement):XCore::Element<br>&#160;&#160;if&#160;n.isKindOf(DependencyName)<br>&#160;&#160;then&#160;<br>&#160;&#160;&#160;&#160;self.removeDependencyName(n);<br>&#160;&#160;&#160;&#160;super(n)<br>&#160;&#160;else&#160;super(n)<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="removeDependencyName"/><FONT FACE="Courier" SIZE="1">@Operation&#160;removeDependencyName(dn&#160;:&#160;DependencyName):XCore::Element<br>&#160;&#160;self.names&#160;:=&#160;names-&gt;excluding(dn);<br>&#160;&#160;self<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setNameValue"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setNameValue(name&#160;:&#160;String,value&#160;:&#160;String):XCore::Element<br>&#160;&#160;if&#160;self.contents.hasKey(name)<br>&#160;&#160;then&#160;let&#160;dn&#160;=&#160;self.getContents(name)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;dn.value&#160;:=&#160;value<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;else&#160;false<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setSource"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setSource[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.source&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="setTarget"/><FONT FACE="Courier" SIZE="1">@Operation&#160;setTarget[UPDATER=true](v&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;self.target&#160;:=&#160;v<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="source"/><FONT FACE="Courier" SIZE="1">@Operation&#160;source[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.source<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="target"/><FONT FACE="Courier" SIZE="1">@Operation&#160;target[ACCESSOR=true]():XCore::Element<br>&#160;&#160;self.target<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="toString"/><FONT FACE="Courier" SIZE="1">@Operation&#160;toString():String<br>&#160;&#160;try<br>&#160;&#160;&#160;&#160;self.of().name.toString()&#160;+&#160;"("&#160;+&#160;if&#160;self.hasSlot("source")<br>&#160;&#160;&#160;&#160;then&#160;self.source.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"source"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;","&#160;+&#160;if&#160;self.hasSlot("target")<br>&#160;&#160;&#160;&#160;then&#160;self.target.toString()<br>&#160;&#160;&#160;&#160;else&#160;"NO&#160;SLOT&#160;--&gt;"&#160;+&#160;"target"&#160;+&#160;"&lt;--"<br>&#160;&#160;&#160;&#160;end&#160;&#160;+&#160;")"<br>&#160;&#160;catch(exception)<br>&#160;&#160;&#160;&#160;self.of().name&#160;+&#160;"(Constructor&#160;Error!)"<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+Format
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>Format</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+No Documentation Specified
+<BR><HR><BR>
+<B>Parents</B>
+<A HREF="../../../Root/XCore/Object/index.html">Object</A>
+,<A HREF="../../../Root/XCore/Element/index.html">Element</A>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Constructors</B></FONT></TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=3><FONT SIZE="+2">
+<B>Attributes</B></FONT></TD>
+</TR>
+<TR><TD><B>compilers</B></TD><TD><A HREF="../../../Root/XCore/Table/index.html">Table<A></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B>handlers</B></TD><TD><A HREF="../../../Root/XCore/Table/index.html">Table<A></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=3>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: roleFiller. <BR></FONT>
+</TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+<TR><TD><B><a href="#canCompile">canCompile</a>(control:<A HREF="../../../Root/XCore/Integer/index.html">Seq(Integer)<A>):<A HREF="../../../Root/XCore/Boolean/index.html">Boolean<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#compile">compile</a>(out:<A HREF="../../../Root/XCore/Performable/index.html">Performable<A>,control:<A HREF="../../../Root/XCore/String/index.html">String<A>,args:<A HREF="../../../Root/XCore/Performable/index.html">Seq(Performable)<A>):<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#compileControl">compileControl</a>(control:<A HREF="../../../Root/XCore/Integer/index.html">Seq(Integer)<A>,args:<A HREF="../../../Root/XCore/Performable/index.html">Seq(Performable)<A>):<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#compileDispatch">compileDispatch</a>(control:<A HREF="../../../Root/XCore/Integer/index.html">Seq(Integer)<A>,args:<A HREF="../../../Root/XCore/Performable/index.html">Seq(Performable)<A>):<A HREF="../../../Root/XCore/Performable/index.html">Performable<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#defineCompiler">defineCompiler</a>(char:<A HREF="../../../Root/XCore/Integer/index.html">Integer<A>,compiler:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#defineHandler">defineHandler</a>(char:<A HREF="../../../Root/XCore/Integer/index.html">Integer<A>,handler:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#dispatch">dispatch</a>(char:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,output:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,formatContext:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#format">format</a>(output:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,formatContext:<A HREF="../../../Root/XCore/Element/index.html">Element<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>
+        This is the formatting loop. While there are control chars:
+        if the char is '~' then jump to the handler otherwise just
+         print the char and go round again.
+      </TD></TR>
+<TR><TD><B><a href="#invoke">invoke</a>(target:<A HREF="../../../Root/XCore/Element/index.html">Element<A>,args:<A HREF="../../../Root/XCore/Element/index.html">Seq(Element)<A>):<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><a href="#target">target</a>():<A HREF="../../../Root/XCore/Element/index.html">Element<A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR>
+<TD COLSPAN=2>
+<FONT SIZE="-1">
+<B>From</B> <A HREF="../../../Root/XCore/Object/index.html">Object</A>: addDaemon, addDiagramListener, addMissingSlot, addMultiDaemon, addPersistentDaemon, addStructuralFeature, allCompositeValues, allCompositeValuesAndSelf, allDaemonsWithId, allDaemonsWithTarget, applyMapping_client, calcChildrenSlots, changedOnDiagram, compositeValues, daemonNamed, daemonWithId, daemonWithIdAndTarget, daemons, daemonsActive, destroyDaemon, edit, fire, get, getAvailableMappings, getChildren, getChildrenSlots, getChildrenToolTips, getDiagramListenerNamed, getDiagramListeners, getProperties, getProperty, getStructuralFeatureNames, hasDaemonNamed, hasDaemonWithId, hasDaemonWithIdAndTarget, hasDaemonWithTarget, hasProperty, hasSlot, hasStructuralFeature, hotLoad, hotLoaded, ignoreBy, ignoreByAll, init, initSlots, machineInit, nodeEvent, observeBy, observeBy, observedBy, observedBy, oldEdit, orderSequence, orderSequence, propertyTarget, removeDaemon, removeDaemonNamed, removeDaemonsWithId, removeDaemonsWithTarget, removeDiagramListener, removeDiagramListeners, removeStructuralFeature, renameSlot, saveXTO, saveXTOFile, set, setDaemons, setDaemonsActive, setHotLoad, setProperty, showAndLayoutDiagram, showDiagram, slotDenied, slotMissing, slotMissing, slots, synchronise. <BR><B>From</B> <A HREF="../../../Root/XCore/Element/index.html">Element</A>: addTo, allHTMLEntries, allHTMLPackages, assignToGlobal, assignToGlobal, browse, browse_redirect, checkConstraints, copy, copyToClipboard, copyToClipboard_transaction, createDiagram, createDiagramType, createDiagramType, createDiagramType, createTool, cutToClipboard, cutToClipboard_transaction, deleteRecursive, deployXML, die, doc, doubleClick, edit, edit_redirect, equals, error, evaluateExpression, ferror, getChildren, getChildrenToolTips, getDefaultClipboardSource, getDefaultClipboardTarget, graphVizNode, hashCode, init, init, invokeOp, isDeleteProtected, isKindOf, isProtected, isReallyKindOf, isTypeOf, isViewProtected, isWithinNameSpace, labelString, legalNameChangeCheck, legalSlotChangeCheck, legalSlotChangeCheck, lift, nameString, noOperationFound, oclIsKindOf, oclIsTypeOf, of, oldShowDiagram, pasteFromClipboard, populateGraphViz, pprint, pprint, pprint, pprintln, print, println, removeDaemon, removeDaemon, save, save2, selectDiagram, selectModelBrowserNode, send, setDelegation, setOf, setRoleFillerDialog, showAndLayoutDiagram, showDiagram, showModelBrowserNode, slotAffectsLabel, systemId, toHTML, toSVG, toSnapshot, toSnapshot, toString, toType, writeHTML, writeHTML, writeHTMLAllEntries, writeHTMLAllPackages, writeHTMLIndex, writeHTMLOverview, writeXML, writeXMLFile, yield. <BR><TR><TD COLSPAN=2><a name="canCompile"/><FONT FACE="Courier" SIZE="1">@Operation&#160;canCompile(control&#160;:&#160;Seq(Integer)):Boolean<br>&#160;&#160;if&#160;control-&gt;isEmpty<br>&#160;&#160;then&#160;true<br>&#160;&#160;elseif&#160;control-&gt;head&#160;=&#160;"~"-&gt;at(0)&#160;and&#160;control-&gt;size&#160;&gt;&#160;1<br>&#160;&#160;then&#160;compilers.hasKey(control-&gt;at(1))&#160;andthen&#160;self.canCompile(control-&gt;drop(2))<br>&#160;&#160;else&#160;self.canCompile(control-&gt;tail)<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="compile"/><FONT FACE="Courier" SIZE="1">@Operation&#160;compile(out&#160;:&#160;Performable,control&#160;:&#160;String,args&#160;:&#160;Seq(Performable)):Performable<br>&#160;&#160;[|&#160;let&#160;formatOut&#160;=&#160;&lt;out&gt;<br>&#160;&#160;&#160;&#160;in&#160;&lt;self.compileControl(control-&gt;asSeq,args)&gt;<br>&#160;&#160;&#160;&#160;end&#160;|]<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="compileControl"/><FONT FACE="Courier" SIZE="1">@Operation&#160;compileControl(control&#160;:&#160;Seq(Integer),args&#160;:&#160;Seq(Performable)):Performable<br>&#160;&#160;let&#160;pred&#160;=&#160;@Operation&#160;anonymous(c&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;c&#160;&lt;&gt;&#160;"~"-&gt;at(0)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;prefix&#160;=&#160;control-&gt;takeWhile(pred)&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;suffix&#160;=&#160;control-&gt;drop(prefix-&gt;size)&#160;then<br>&#160;&#160;&#160;&#160;&#160;&#160;command&#160;=&#160;[|&#160;formatOut.writeString(&lt;OCL::StrExp(prefix-&gt;asString)&gt;)&#160;|]<br>&#160;&#160;in&#160;if&#160;suffix-&gt;isEmpty<br>&#160;&#160;&#160;&#160;&#160;then&#160;command<br>&#160;&#160;&#160;&#160;&#160;else&#160;[|&#160;&lt;command&gt;;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;self.compileDispatch(suffix,args)&gt;&#160;|]<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="compileDispatch"/><FONT FACE="Courier" SIZE="1">@Operation&#160;compileDispatch(control&#160;:&#160;Seq(Integer),args&#160;:&#160;Seq(Performable)):Performable<br>&#160;&#160;let&#160;char&#160;=&#160;control-&gt;at(1)<br>&#160;&#160;in&#160;if&#160;compilers.hasKey(char)<br>&#160;&#160;&#160;&#160;&#160;then&#160;let&#160;handler&#160;=&#160;compilers.get(char)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;handler(control-&gt;drop(2),args,self)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;&#160;&#160;&#160;else&#160;self.error("Cannot&#160;find&#160;format&#160;compiler&#160;for&#160;"&#160;+&#160;char)<br>&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="defineCompiler"/><FONT FACE="Courier" SIZE="1">@Operation&#160;defineCompiler(char&#160;:&#160;Integer,compiler&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;compilers.put(char,compiler)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="defineHandler"/><FONT FACE="Courier" SIZE="1">@Operation&#160;defineHandler(char&#160;:&#160;Integer,handler&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;handlers.put(char,handler)<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="dispatch"/><FONT FACE="Courier" SIZE="1">@Operation&#160;dispatch(char&#160;:&#160;XCore::Element,output&#160;:&#160;XCore::Element,formatContext&#160;:&#160;XCore::Element):XCore::Element<br>&#160;&#160;if&#160;handlers.hasKey(char)<br>&#160;&#160;then&#160;let&#160;handler&#160;=&#160;handlers.get(char)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;handler(char,output,formatContext);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.format(output,formatContext)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;else&#160;self.error("Format::dispatch:&#160;no&#160;handler&#160;for&#160;"&#160;+&#160;Seq{char}-&gt;asString)<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="format"/><FONT FACE="Courier" SIZE="1">@Operation&#160;format(output&#160;:&#160;XCore::Element,formatContext&#160;:&#160;XCore::Element):Element<br>&#160;&#160;if&#160;formatContext.complete()<br>&#160;&#160;then&#160;self<br>&#160;&#160;else&#160;let&#160;char&#160;=&#160;formatContext.nextChar()<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;in&#160;if&#160;char&#160;=&#160;"~"-&gt;at(0)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;if&#160;formatContext.complete()<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;self.error("Format::format:&#160;expecting&#160;a&#160;char&#160;after&#160;~&#160;in&#160;"&#160;+&#160;formatContext.control)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;formatContext.parseArgs();<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.dispatch(formatContext.nextChar(),output,formatContext)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;output.write(char);<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.format(output,formatContext)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;end<br>&#160;&#160;end&#160;<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="invoke"/><FONT FACE="Courier" SIZE="1">@Operation&#160;invoke(target&#160;:&#160;Element,args&#160;:&#160;Seq(Element)):Element<br>&#160;&#160;let&#160;outputChannel&#160;=&#160;args-&gt;at(0);<br>&#160;&#160;&#160;&#160;&#160;&#160;controlString&#160;=&#160;args-&gt;at(1);<br>&#160;&#160;&#160;&#160;&#160;&#160;values&#160;=&#160;if&#160;args-&gt;size&#160;&gt;&#160;2<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;then&#160;args-&gt;at(2)<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;else&#160;Seq{}<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;end&#160;<br>&#160;&#160;in&#160;self.format(outputChannel,FormatContext(controlString,values,0));<br>&#160;&#160;&#160;&#160;&#160;outputChannel<br>&#160;&#160;end<br>end</FONT>
+</TD></TR>
+<TR><TD COLSPAN=2><a name="target"/><FONT FACE="Courier" SIZE="1">@Operation&#160;target():XCore::Element<br>&#160;&#160;self<br>end</FONT>
+</TD></TR>
+</FONT>
+</TD>
+</TR>
+</TABLE>
+</HTML>

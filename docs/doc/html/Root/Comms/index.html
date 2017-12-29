@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+Comms
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>Comms</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+No Documentation Specified
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Packages</B></FONT></TD>
+</TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Classes</B></FONT></TD>
+</TR>
+<TR><TD><B><A HREF="../../Root/Comms/Client/index.html">Client</A></B></TD><TD>
+       A class that implements a client interface. Use this class to
+       connect to a server either in blocking or non-blocking mode.
+       By default, a client is blocking.
+     </TD></TR>
+<TR><TD><B><A HREF="../../Root/Comms/Server/index.html">Server</A></B></TD><TD>
+      This class implements a server interface for the host XMF. Clients
+      connect to XMF by attempting to connect to a socket connection via
+      the port number that is defined in the XMF startup file. Once connected,
+      a client must supply the name that XMF will use as the clients index.
+      The name must be a series of chars terminated by 0. After se-nding the
+      name, the client should read a return value that is 1 if the
+      name was successfully registered. Once registered, a server connection
+      (an instance of this class) can be created. The input and output slots
+      will ne initialised to the appropriate communcation channels for
+      sen-ding and receiving information to and from the client.
+    </TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+</TABLE>
+</HTML>

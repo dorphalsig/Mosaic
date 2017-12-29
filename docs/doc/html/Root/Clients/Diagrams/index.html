@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+Diagrams
+</TITLE>
+</HEAD>
+<FONT SIZE="+2"><B>Diagrams</B></FONT><BR><BR><HR>
+<FONT SIZE="+1"><B>Overview</B></FONT><BR>
+<P>
+
+       This package defines a model for a diagram client.
+     
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Packages</B></FONT></TD>
+</TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/DiagramLayout/index.html">DiagramLayout</A></B></TD><TD>No Documentation Specified</TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Classes</B></FONT></TD>
+</TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/Box/index.html">Box</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/Color/index.html">Color</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/ContainedDiagramElement/index.html">ContainedDiagramElement</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/DefaultEdge/index.html">DefaultEdge</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/DefaultNode/index.html">DefaultNode</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/Diagram/index.html">Diagram</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/DiagramClient/index.html">DiagramClient</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/DiagramCommandInterpreter/index.html">DiagramCommandInterpreter</A></B></TD><TD>
+       This class defines a command interpreter over diagrams. It can be used as the basis
+       for defining event driven mappings. The mapping handles the following output
+       commands by sen-ding them in the appropriate format to the client.
+          // These are incomplete - please update the list...
+          // [deleteCommand(element)]
+          // [deleteRightClickMenu]
+          // [moveCommand(element,x,y)]
+          // [newBoxCommand(nodeId,box)]
+          // [newGroupCommand(nodeId,subDiagram)]
+          // [newDiagramCommand(diagram)]
+          // [renameDiagramCommand(diagram,label)]
+          // [showDiagramCommand(diagram)]
+          // [newEdgeCommand(edge)]
+          // [newEdgeTextCommand(edgeId,label)]
+          // [newEllipse(parentId,id,x,y,w,h,showOutline)]
+          // [newLineCommand(parentId,id,x1,y1,x2,y2)]
+          // [newNodeCommand(parentId,node)]
+          // [newImageCommand(parentId,image)]
+          // [newShapeCommand(parentId,shape)]
+          // [redrawShapeCommand(shape)]
+          // [newPortCommand(nodeId,port)]
+          // [newRightClickMenu(ownerId,menuId,option)]
+          // [newTextCommand(parentId,text,x,y,editable,r,g,b,font)]
+          // [clearToolPaletteCommand(diagramId)]
+          // [newToolCommand(diagramId,groupName,label,typeName,isEdge,iconPath)]
+          // [newToggleCommand(diagramId,groupName,label,typeName,state,iconPath)]
+          // [newActionCommand(diagramId,groupName,label,typeName,iconPath)]
+          // [removeAnyCommand(diagram,toolName)]
+          // [renameAnyCommand(diagram,toolName)]
+          // [newToolGroupCommand(diagramId,groupId,toolName,isEdge)]
+          // [newWayPointCommand(wayPoint)]
+          // [resizeCommand(element,width,height)]
+          // [repositionEdgeEndsCommand(edgeId,)]
+          // [setEdgeSourceCommand(edgeId,portId)]
+          // [setEdgeTargetCommand(edgeId,portId)]
+          // [setItaliciseCommand(textId,italicise)]
+          // [setTextCommand(textId,newText)]
+          // [setUnderlineCommand(textId,underline)]
+          // [setFill(id,boolean)]
+          // [resizeLineCommand(line)]
+          // [getTextDimension(text,eventHandler)]
+       </TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/DiagramDropEvent/index.html">DiagramDropEvent</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/DiagramEvent/index.html">DiagramEvent</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/DiagramEventHandler/index.html">DiagramEventHandler</A></B></TD><TD>
+      This class defines operations to handle the following incoming
+      events from the client. In each case the event is a sequence of strings
+      and integers. Each event has a fixed arity. Raising an event in the mapping
+      causes the appropriate diagram element (usually the containing element) to be
+      sent a message with the supplied arguments + the mapping. The diagram element
+      is then responsible for updating the diagram model and using the commands
+      listed above to update the client. Users of the mapping should always raise
+      events and not perform the commands directly. New types of diagram element can
+      handle the events in different ways. New types of diagram mapping can exten-d
+      the interface of events that can be raised.
+     </TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/DiagramIdError/index.html">DiagramIdError</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/DiagramListener/index.html">DiagramListener</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/DiagramsThemeAPI/index.html">DiagramsThemeAPI</A></B></TD><TD>
+      A set of utility operations which are inte-nded to be used to define
+      theme definitions
+    </TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/Dimension/index.html">Dimension</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/Display/index.html">Display</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/DisplayContainer/index.html">DisplayContainer</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/Edge/index.html">Edge</A></B></TD><TD>
+      Straightens the edge by comparing a given waypoint to the next 
+      waypoint from the list waypoints, which is supposed to hold the 
+      remaining waypoints of this edge. The next waypoint is then moved
+      on the x- or y-axis to the point where it is on the same x- or y-axis 
+      as the waypoint before, where the position on the other axis is kept. 
+      It is moved on that axis which requires less movement.
+      	After that the procedure is repeated on the remaining waypoints.
+      If the list of remaining waypoints is empty the nex cycle will stop 
+      the recursion.
+      
+      This operation should not be accessed externally as it is the 
+      iterating part od a recursion. It should only be used by the 
+      counterpart operation which will do the initialisation of the 
+      recursion.
+    </TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/Ellipse/index.html">Ellipse</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/Font/index.html">Font</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/Graph/index.html">Graph</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/Group/index.html">Group</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/Image/index.html">Image</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/Label/index.html">Label</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/Line/index.html">Line</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/MultilineLabel/index.html">MultilineLabel</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/MultilineText/index.html">MultilineText</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/Node/index.html">Node</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/NodeEvent/index.html">NodeEvent</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/Port/index.html">Port</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/PostNodeMoveEvent/index.html">PostNodeMoveEvent</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/PostNodeResizeEvent/index.html">PostNodeResizeEvent</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/PreNodeMoveEvent/index.html">PreNodeMoveEvent</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/PreNodeResizeEvent/index.html">PreNodeResizeEvent</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/Shape/index.html">Shape</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/SyncableDiagram/index.html">SyncableDiagram</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/Text/index.html">Text</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/ThemableDiagram/index.html">ThemableDiagram</A></B></TD><TD>No Documentation Specified</TD></TR>
+<TR><TD><B><A HREF="../../../Root/Clients/Diagrams/WayPoint/index.html">WayPoint</A></B></TD><TD>No Documentation Specified</TD></TR>
+</TABLE>
+<BR><HR><BR>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TD COLSPAN=2><FONT SIZE="+2">
+<B>Operations</B></FONT></TD>
+</TR>
+</TABLE>
+</HTML>
