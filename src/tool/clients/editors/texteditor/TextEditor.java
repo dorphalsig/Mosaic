@@ -130,9 +130,11 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
   Tray                    tray           = new Tray();
   Timer                   syntaxTimer    = new Timer(SYNTAX_DELAY, SYNTAX_INC, () -> sendTextChanged(), () -> timerIncrement());
   CheckSyntax             checkSyntax    = new CheckSyntax(this);
+  CheckTypes              checkTypes     = new CheckTypes(this);
   int[]                   offsets        = new int[] {};
   boolean                 dirty          = false;
   boolean                 checkingSyntax = true;
+  TypeCheck               checkingTypes  = TypeCheck.IGNORE_ELEMENT;
   boolean                 rendering      = true;
   char                    lastChar       = '\0';
   int                     flashBracket   = -1;
@@ -147,6 +149,35 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     createTray();
     createText(parent, editable, s);
     new UndoRedoImpl(text);
+  }
+
+  public void action(String name, Value[] args, int charStart, int charEnd) {
+    Object[] values = new Object[args.length];
+    for (int i = 0; i < values.length; i++) {
+      switch (args[i].type) {
+        case Value.INT:
+          values[i] = args[i].intValue;
+          break;
+        case Value.BOOL:
+          values[i] = args[i].boolValue;
+          break;
+        case Value.STRING:
+          values[i] = args[i].strValue();
+          break;
+        case Value.FLOAT:
+          values[i] = args[i].floatValue;
+          break;
+        case Value.BYTE:
+          values[i] = args[i].intValue;
+          break;
+        case Value.NEG:
+          values[i] = -args[i].intValue;
+          break;
+        default:
+          throw new Error("unknown action arg type: " + args[i]);
+      }
+    }
+    actions.add(new Action(name, values, charStart, charEnd));
   }
 
   private void addErrorListener(ErrorListener listener) {
@@ -166,6 +197,30 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
 
   public void addWordRule(String id, String text, int red, int green, int blue) {
     if (getId().equals(id)) lineStyler.addWordRule(id, text, red, green, blue);
+  }
+
+  public void advanceTypeCheck() {
+    Message message = EditorClient.theClient().getHandler().newMessage("typeCheckMode", 2);
+    message.args[0] = new Value(getId());
+    switch (checkingTypes) {
+      case OFF:
+        checkingTypes = TypeCheck.ON;
+        message.args[1] = new Value("ON");
+        break;
+      case ON:
+        checkingTypes = TypeCheck.IGNORE_ELEMENT;
+        message.args[1] = new Value("IGNORE_ELEMENT");
+        break;
+      case IGNORE_ELEMENT:
+        checkingTypes = TypeCheck.OFF;
+        message.args[1] = new Value("OFF");
+        break;
+      default:
+        checkingTypes = TypeCheck.OFF;
+        message.args[1] = new Value("OFF");
+    }
+    EditorClient.theClient().getHandler().raiseEvent(message);
+    sendTextChanged();
   }
 
   public void ast(String tooltip, int charStart, int charEnd) {
@@ -309,6 +364,11 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     tray.addTool(errors);
     tray.addTool(syntaxTimer);
     tray.addTool(showSignature);
+    tray.addTool(checkTypes);
+  }
+
+  public void dotError(int charStart, int charEnd, String name) {
+    errors.add(new FileError(charStart, charEnd, "no field named " + name));
   }
 
   private boolean errorToolTip(int x, int y) {
@@ -352,6 +412,21 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
       }
     }
     return false;
+  }
+
+  private Action getAction(int x, int y) {
+    try {
+      int offset = text.getOffsetAtLocation(new Point(x, y));
+      for (Action action : actions) {
+        if (action.containsOffset(offset)) return action;
+      }
+    } catch (Exception e) {
+    }
+    return null;
+  }
+
+  public TypeCheck getCheckingTypes() {
+    return checkingTypes;
   }
 
   private int getCurrentIndent() {
@@ -453,6 +528,10 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
 
   private boolean isRightClick(MouseEvent event) {
     return event.button == RIGHT_BUTTON || isCntrl(event);
+  }
+
+  public boolean isShowingSignature() {
+    return signature.isVisible();
   }
 
   private Vector<Terminal> isTerminator(String s, int index) {
@@ -590,22 +669,16 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     try {
       int bottomIndex = JFaceTextUtil.getPartialBottomIndex(text);
       int topIndex = JFaceTextUtil.getPartialTopIndex(text);
-      int height = text.getFont().getFontData()[0].getHeight();
-      Color c = gc.getForeground();
-      gc.setForeground(RED);
       for (FileError e : errors) {
         int start = e.getStart();
         int end = e.getEnd();
         if (validOffset(start) && validOffset(end)) {
           int line = text.getLineAtOffset(start);
           if (line >= topIndex && line <= bottomIndex) {
-            org.eclipse.swt.graphics.Point pStart = text.getLocationAtOffset(start);
-            org.eclipse.swt.graphics.Point pEnd = text.getLocationAtOffset(end);
-            gc.drawLine(pStart.x, pStart.y + height, pEnd.x, pEnd.y + height);
+            AST.paintDelimiters(gc, text, start, end, RED, true);
           }
         }
       }
-      gc.setForeground(c);
     } catch (Exception e) {
     }
   }
@@ -687,7 +760,9 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
   }
 
   void redraw() {
-    if (rendering) text.redraw();
+    if (rendering) {
+      text.redraw();
+    }
   }
 
   public void rightClick(MouseEvent event) {
@@ -702,17 +777,6 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
         } else MenuClient.popup(id, x, y);
       } else action.perform(x, y);
     } else tool.rightClick(x, y);
-  }
-
-  private Action getAction(int x, int y) {
-    try {
-      int offset = text.getOffsetAtLocation(new Point(x, y));
-      for (Action action : actions) {
-        if (action.containsOffset(offset)) return action;
-      }
-    } catch (Exception e) {
-    }
-    return null;
   }
 
   public void save() {
@@ -768,6 +832,7 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
 
   private void sendTextChanged() {
     varInfo.clear();
+    signature.clear();
     XModeler.getXModeler().getDisplay().syncExec(new Runnable() {
       public void run() {
         try {
@@ -804,6 +869,10 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
 
   public void setSelection(int index) {
     if (text.getText().length() > index) text.setSelection(index);
+  }
+
+  public void setShowingSignature(boolean b) {
+    signature.setIsVisible(b);
   }
 
   public void setSignature(Value[] entries) {
@@ -918,6 +987,10 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     } else return false;
   }
 
+  public void typeError(int charStart, int charEnd, String expected, String found) {
+    errors.add(new FileError(charStart, charEnd, "found type " + found + " but expecting " + expected));
+  }
+
   public void unboundVar(String name, int charStart, int charEnd) {
     errors.add(new FileError(charStart, charEnd, name + " is unbound"));
     for (ErrorListener listener : errorListeners) {
@@ -983,42 +1056,5 @@ public class TextEditor implements KeyListener, VerifyListener, VerifyKeyListene
     out.print(" toolTip='" + toolTip + "'");
     out.print(" editable='" + text.getEditable() + "'>");
     out.print("</TextEditor>");
-  }
-
-  public boolean isShowingSignature() {
-    return signature.isVisible();
-  }
-
-  public void setShowingSignature(boolean b) {
-    signature.setIsVisible(b);
-  }
-
-  public void action(String name, Value[] args, int charStart, int charEnd) {
-    Object[] values = new Object[args.length];
-    for (int i = 0; i < values.length; i++) {
-      switch (args[i].type) {
-        case Value.INT:
-          values[i] = args[i].intValue;
-          break;
-        case Value.BOOL:
-          values[i] = args[i].boolValue;
-          break;
-        case Value.STRING:
-          values[i] = args[i].strValue();
-          break;
-        case Value.FLOAT:
-          values[i] = args[i].floatValue;
-          break;
-        case Value.BYTE:
-          values[i] = args[i].intValue;
-          break;
-        case Value.NEG:
-          values[i] = -args[i].intValue;
-          break;
-        default:
-          throw new Error("unknown action arg type: " + args[i]);
-      }
-    }
-    actions.add(new Action(name, values, charStart, charEnd));
   }
 }

@@ -579,7 +579,38 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
       setSignature(message);
     else if (message.hasName("action"))
       action(message);
+    else if (message.hasName("typeError"))
+      typeError(message);
+    else if (message.hasName("dotError"))
+      dotError(message);
     else super.sendMessage(message);
+  }
+
+  private void dotError(Message message) {
+    String id = message.args[0].strValue();
+    int charStart = message.args[1].intValue;
+    int charEnd = message.args[2].intValue;
+    String name = message.args[3].strValue();
+    final ITextEditor editor = editors.get(id);
+    runOnDisplay(new Runnable() {
+      public void run() {
+        editor.dotError(charStart, charEnd, name);
+      }
+    });
+  }
+
+  private void typeError(Message message) {
+    String id = message.args[0].strValue();
+    int charStart = message.args[1].intValue;
+    int charEnd = message.args[2].intValue;
+    String expected = message.args[3].strValue();
+    String found = message.args[4].strValue();
+    final ITextEditor editor = editors.get(id);
+    runOnDisplay(new Runnable() {
+      public void run() {
+        editor.typeError(charStart, charEnd, expected, found);
+      }
+    });
   }
 
   private void action(Message message) {
@@ -591,7 +622,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
     final ITextEditor editor = editors.get(id);
     runOnDisplay(new Runnable() {
       public void run() {
-        editor.action(name,args,charStart,charEnd);
+        editor.action(name, args, charStart, charEnd);
       }
     });
   }
@@ -614,7 +645,7 @@ public class EditorClient extends Client implements LocationListener, CTabFolder
     final ITextEditor editor = editors.get(id);
     runOnDisplay(new Runnable() {
       public void run() {
-        editor.terminates(end,start);
+        editor.terminates(end, start);
       }
     });
   }

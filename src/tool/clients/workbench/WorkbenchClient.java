@@ -11,9 +11,61 @@ public class WorkbenchClient extends Client {
 
   static WorkbenchClient theClient;
 
+  public static WorkbenchClient theClient() {
+    return theClient;
+  }
+
   public WorkbenchClient() {
     super("com.ceteva.mosaic");
     theClient = this;
+  }
+
+  private void consoleDot(Message message) {
+    ConsoleClient.theConsole().dot(message);
+  }
+
+  private void consoleNamespace(Message message) {
+    ConsoleClient.theConsole().namespace(message);
+  }
+
+  public void dotConsole(String command) {
+    Message message = getHandler().newMessage("consoleDot", 1);
+    message.args[0] = new Value(command);
+    getHandler().raiseEvent(message);
+  }
+
+  public void fileDropped(String file) {
+    Message message = getHandler().newMessage("fileDropped", 1);
+    message.args[0] = new Value(file);
+    getHandler().raiseEvent(message);
+  }
+
+  private void inflate(Message message) {
+    Value inflationPath = message.args[0];
+    XModeler.inflate(inflationPath.strValue());
+  }
+
+  public void nameLookup(String command) {
+    Message message = getHandler().newMessage("nameLookup", 1);
+    message.args[0] = new Value(command);
+    getHandler().raiseEvent(message);
+  }
+
+  public boolean processMessage(Message message) {
+    return false;
+  }
+
+  private void saveInflater(Message message) {
+    Value inflationPath = message.args[0];
+    XModeler.saveInflator(inflationPath.strValue());
+  }
+
+  public void send(int targetHandle, String message, Value... args) {
+    Message m = getHandler().newMessage("send", 3);
+    m.args[0] = new Value(targetHandle);
+    m.args[1] = new Value(message);
+    m.args[2] = new Value(args);
+    getHandler().raiseEvent(m);
   }
 
   public void sendMessage(final Message message) {
@@ -30,35 +82,8 @@ public class WorkbenchClient extends Client {
     else super.sendMessage(message);
   }
 
-  private void consoleDot(Message message) {
-    ConsoleClient.theConsole().dot(message);
-  }
-
-  private void consoleNamespace(Message message) {
-    ConsoleClient.theConsole().namespace(message);
-  }
-
-  private void inflate(Message message) {
-    Value inflationPath = message.args[0];
-    XModeler.inflate(inflationPath.strValue());
-  }
-
-  private void saveInflater(Message message) {
-    Value inflationPath = message.args[0];
-    XModeler.saveInflator(inflationPath.strValue());
-  }
-
   private void shutdown(Message message) {
     XModeler.shutdown();
-  }
-
-  public boolean processMessage(Message message) {
-    return false;
-  }
-
-  public void shutdownEvent() {
-    Message message = getHandler().newMessage("shutdownRequest", 0);
-    getHandler().raiseEvent(message);
   }
 
   public void shutdownAndSaveEvent(String imagePath, String inflationPath) {
@@ -68,27 +93,8 @@ public class WorkbenchClient extends Client {
     getHandler().raiseEvent(message);
   }
 
-  public void send(int targetHandle, String message, Value... args) {
-    Message m = getHandler().newMessage("send", 3);
-    m.args[0] = new Value(targetHandle);
-    m.args[1] = new Value(message);
-    m.args[2] = new Value(args);
-    getHandler().raiseEvent(m);
-  }
-
-  public static WorkbenchClient theClient() {
-    return theClient;
-  }
-
-  public void dotConsole(String command) {
-    Message message = getHandler().newMessage("consoleDot", 1);
-    message.args[0] = new Value(command);
-    getHandler().raiseEvent(message);
-  }
-
-  public void nameLookup(String command) {
-    Message message = getHandler().newMessage("nameLookup", 1);
-    message.args[0] = new Value(command);
+  public void shutdownEvent() {
+    Message message = getHandler().newMessage("shutdownRequest", 0);
     getHandler().raiseEvent(message);
   }
 }

@@ -1,17 +1,29 @@
 package tool.console;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Vector;
 
 import org.eclipse.core.runtime.Preferences.PropertyChangeEvent;
-import org.eclipse.draw2d.LightweightSystem;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.custom.StyledTextContent;
 import org.eclipse.swt.custom.VerifyKeyListener;
+import org.eclipse.swt.dnd.DND;
+import org.eclipse.swt.dnd.DragSource;
+import org.eclipse.swt.dnd.DragSourceEvent;
+import org.eclipse.swt.dnd.DragSourceListener;
+import org.eclipse.swt.dnd.DropTarget;
+import org.eclipse.swt.dnd.DropTargetEvent;
+import org.eclipse.swt.dnd.DropTargetListener;
+import org.eclipse.swt.dnd.FileTransfer;
+import org.eclipse.swt.dnd.TextTransfer;
+import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.events.VerifyEvent;
@@ -22,11 +34,13 @@ import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
+
+import com.ceteva.consoleInterface.EscapeHandler;
+import com.ceteva.text.texteditor.ConsoleLineStyler;
 
 import tool.clients.dialogs.notifier.NotificationType;
 import tool.clients.dialogs.notifier.NotifierDialog;
@@ -35,9 +49,6 @@ import tool.xmodeler.XModeler;
 import uk.ac.mdx.xmf.swt.misc.ColorManager;
 import xos.Message;
 import xos.Value;
-
-import com.ceteva.consoleInterface.EscapeHandler;
-import com.ceteva.text.texteditor.ConsoleLineStyler;
 
 public class ConsoleView {
 
@@ -72,7 +83,131 @@ public class ConsoleView {
     // text.setFont(textFont);
     setFont("dejavu/DejaVuSansMono.ttf", "DejaVu Sans Mono");
     addVerifyListener(text);
+    setDropHandler();
+    setDragHandler();
     tabItem.setControl(c1);
+  }
+
+  private void setDragHandler() {
+
+    int operations = DND.DROP_COPY;
+    DragSource source = new DragSource(text, operations);
+
+    Transfer[] types = new Transfer[] { FileTransfer.getInstance() };
+    source.setTransfer(types);
+
+    source.addDragListener(new DragSourceListener() {
+      Point p = null;
+      public void dragStart(DragSourceEvent event) {
+        event.doit = false;
+        p = text.getSelection();
+        if (text.getSelectionText() != null && text.getSelectionText().length() > 0) {
+          event.doit = true;
+        }
+      }
+
+      public void dragSetData(DragSourceEvent event) {
+        // Provide the data of the requested type.
+        if (FileTransfer.getInstance().isSupportedType(event.dataType)) {
+          try {
+            File file = File.createTempFile("Console", ".txt");
+            FileWriter fout = new FileWriter(file);
+            if (p.x >= 0 && p.y <= text.getText().length() && p.x < p.y) {
+              String selected = text.getText().substring(p.x, p.y - 1);
+              fout.write(selected);
+              fout.write("\n");
+              fout.flush();
+              fout.close();
+              file.deleteOnExit();
+              event.data = new String[] { file.getAbsolutePath() };
+              event.doit = true;
+            } else event.doit = false;
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
+        }
+      }
+
+      public void dragFinished(DragSourceEvent event) {
+        System.err.println("DROP " + event.data);
+        event.doit = true;
+      }
+    });
+
+  }
+
+  private void setDropHandler() {
+    int operations = DND.DROP_MOVE | DND.DROP_COPY | DND.DROP_DEFAULT;
+    DropTarget target = new DropTarget(text, operations);
+
+    final TextTransfer textTransfer = TextTransfer.getInstance();
+    final FileTransfer fileTransfer = FileTransfer.getInstance();
+    Transfer[] types = new Transfer[] { fileTransfer, textTransfer };
+    target.setTransfer(types);
+
+    target.addDropListener(new DropTargetListener() {
+      public void dragEnter(DropTargetEvent event) {
+        if (event.detail == DND.DROP_DEFAULT) {
+          if ((event.operations & DND.DROP_COPY) != 0) {
+            event.detail = DND.DROP_COPY;
+          } else event.detail = DND.DROP_NONE;
+        }
+        // will accept text but prefer to have files dropped
+        for (int i = 0; i < event.dataTypes.length; i++) {
+          if (fileTransfer.isSupportedType(event.dataTypes[i])) {
+            event.currentDataType = event.dataTypes[i];
+            // files should only be copied
+            if (event.detail != DND.DROP_COPY) {
+              event.detail = DND.DROP_NONE;
+            }
+            break;
+          }
+        }
+      }
+
+      public void dragOver(DropTargetEvent event) {
+        event.feedback = DND.FEEDBACK_SELECT | DND.FEEDBACK_SCROLL;
+        if (textTransfer.isSupportedType(event.currentDataType)) {
+          // NOTE: on unsupported platforms this will return null
+          Object o = textTransfer.nativeToJava(event.currentDataType);
+          String t = (String) o;
+          if (t != null) System.out.println(t);
+        }
+      }
+
+      public void dragOperationChanged(DropTargetEvent event) {
+        if (event.detail == DND.DROP_DEFAULT) {
+          if ((event.operations & DND.DROP_COPY) != 0) {
+            event.detail = DND.DROP_COPY;
+          } else event.detail = DND.DROP_NONE;
+        }
+        // allow text to be moved but files should only be copied
+        if (fileTransfer.isSupportedType(event.currentDataType)) {
+          if (event.detail != DND.DROP_COPY) {
+            event.detail = DND.DROP_NONE;
+          }
+        }
+      }
+
+      public void dragLeave(DropTargetEvent event) {
+      }
+
+      public void dropAccept(DropTargetEvent event) {
+      }
+
+      public void drop(DropTargetEvent event) {
+        if (textTransfer.isSupportedType(event.currentDataType)) {
+          String text = (String) event.data;
+          System.err.println(text);
+        }
+        if (fileTransfer.isSupportedType(event.currentDataType)) {
+          String[] files = (String[]) event.data;
+          for (int i = 0; i < files.length; i++) {
+            WorkbenchClient.theClient().fileDropped(files[i]);
+          }
+        }
+      }
+    });
   }
 
   public final void setFont(String fileName, String name) {
@@ -128,6 +263,10 @@ public class ConsoleView {
         } else if (e.keyCode == SWT.ARROW_DOWN) {
           String command = recallFromHistoryBackward();
           if (command != "") addCommand(text, command);
+          e.doit = false;
+        } else if (e.keyCode == 'a' && ((e.stateMask & SWT.CTRL) == SWT.CTRL)) {
+          text.selectAll();
+          text.setSelection(new Point(0,text.getText().length()));
           e.doit = false;
         } else if (e.keyCode == '+' && ((e.stateMask & SWT.CTRL) == SWT.CTRL)) {
           fontData.setHeight(Math.min(fontData.getHeight() + FONT_INC, MAX_FONT_HEIGHT));
@@ -388,9 +527,9 @@ public class ConsoleView {
         try {
           Point p = text.getCaret().getLocation();
           Point displayPoint = text.toDisplay(p);
-          for(int i = 0; i < message.args[0].values.length;i++) {
+          for (int i = 0; i < message.args[0].values.length; i++) {
             String name = message.args[0].values[i].strValue();
-            message.args[0].values[i].values = new Value[] {new Value(name),new Value(name)};
+            message.args[0].values[i].values = new Value[] { new Value(name), new Value(name) };
           }
           String insertText = new AutoCompleteBox(XModeler.getXModeler().getShell(), message).show(displayPoint);
           if (insertText != null) insert(insertText);

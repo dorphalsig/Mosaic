@@ -1027,4 +1027,12 @@ public class TextEditor implements VerifyListener, VerifyKeyListener, MouseListe
   public void action(String name, Value[] args,int charStart,int charEnd) {
     
   }
+
+  public void typeError(int charStart, int charEnd, String expected, String found) {
+    
+  }
+
+  public void dotError(int charStart, int charEnd, String name) {
+    
+  }
 }

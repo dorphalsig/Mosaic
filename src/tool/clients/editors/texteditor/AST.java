@@ -13,13 +13,44 @@ import org.eclipse.swt.widgets.Display;
 
 public class AST {
 
-  private static final Color RED      = Display.getDefault().getSystemColor(SWT.COLOR_RED);
+  private static final Color HIGHLIGHT = Display.getDefault().getSystemColor(SWT.COLOR_DARK_GREEN);
 
-  StyledText                 text;
-  String                     tooltip;
-  int                        charStart;
-  int                        charEnd;
-  Vector<AST>                children = new Vector<AST>();
+  public static void paintDelimiters(GC gc, StyledText text, int charStart, int charEnd, Color colour, boolean isLine) {
+    Color c = gc.getForeground();
+    gc.setForeground(colour);
+    int height = gc.getFontMetrics().getHeight();
+    int gap = 2;
+    int width = 5;
+    int lStart = text.getLineAtOffset(charStart);
+    int lEnd = text.getLineAtOffset(charEnd);
+    Point pStart = text.getLocationAtOffset(charStart);
+    Point pEnd = text.getLocationAtOffset(charEnd);
+    if (lStart != lEnd) {
+      gc.drawLine(pStart.x, pStart.y + height / 2, pStart.x - gap, pStart.y + height / 2);
+      gc.drawLine(pStart.x - gap, pStart.y + height / 2, pStart.x - gap, pEnd.y + height / 2);
+      gc.drawLine(pStart.x - gap, pEnd.y + height / 2, pStart.x, pEnd.y + height / 2);
+    } else {
+      if (isLine) {
+        gc.drawLine(pStart.x, pStart.y + height, pEnd.x, pEnd.y + height);
+      } else {
+        gc.drawLine(pStart.x - gap, pStart.y + height, pStart.x - gap, pStart.y);
+        gc.drawLine(pStart.x - gap, pStart.y + height, pStart.x + width, pStart.y + height);
+        gc.drawLine(pStart.x - gap, pStart.y, pStart.x + width, pStart.y);
+        gc.drawLine(pEnd.x + gap, pEnd.y + height, pEnd.x + gap, pEnd.y);
+        gc.drawLine(pEnd.x + gap, pEnd.y + height, pEnd.x - width, pEnd.y + height);
+        gc.drawLine(pEnd.x + gap, pEnd.y, pEnd.x - width, pEnd.y);
+      }
+    }
+    gc.setForeground(c);
+  }
+
+  StyledText  text;
+  String      tooltip;
+  int         charStart;
+  int         charEnd;
+  Vector<AST> children = new Vector<AST>();
+
+  AST         parent   = null;
 
   public AST(StyledText text, String tooltip, int charStart, int charEnd) {
     super();
@@ -27,10 +58,6 @@ public class AST {
     this.tooltip = tooltip;
     this.charStart = charStart;
     this.charEnd = charEnd;
-  }
-
-  public boolean contains(AST a) {
-    return a.getCharStart() >= charStart && a.getCharEnd() <= charEnd;
   }
 
   public void add(AST a) {
@@ -41,6 +68,11 @@ public class AST {
       }
     }
     children.add(a);
+    a.parent = this;
+  }
+
+  public boolean contains(AST a) {
+    return a.getCharStart() >= charStart && a.getCharEnd() <= charEnd;
   }
 
   public AST find(int index) {
@@ -53,16 +85,20 @@ public class AST {
     return this;
   }
 
-  public String getTooltip() {
-    return tooltip;
+  public int getCharEnd() {
+    return charEnd;
   }
 
   public int getCharStart() {
     return charStart;
   }
 
-  public int getCharEnd() {
-    return charEnd;
+  public String getTooltip() {
+    return tooltip;
+  }
+
+  public boolean isRoot() {
+    return parent == null;
   }
 
   public void paint(GC gc) {
@@ -73,32 +109,13 @@ public class AST {
   }
 
   public void paintDelimiters(GC gc) {
+    if (!isRoot()) paintDelimiters(gc, text, charStart, charEnd, HIGHLIGHT, false);
 
     // Paint delimiters for the AST element...
 
-    Color c = gc.getForeground();
-    gc.setForeground(RED);
-    int height = gc.getFontMetrics().getHeight();
-    int gap = 2;
-    int width = 5;
-    int lStart = text.getLineAtOffset(charStart);
-    int lEnd = text.getLineAtOffset(charEnd);
-    Point pStart = text.getLocationAtOffset(charStart);
-    Point pEnd = text.getLocationAtOffset(charEnd);
-    if (lStart != lEnd) {
-      gc.drawLine(pStart.x, pStart.y + height/2, pStart.x - gap, pStart.y + height/2);
-      gc.drawLine(pStart.x - gap, pStart.y + height/2, pStart.x -gap, pEnd.y + height/2);
-      gc.drawLine(pStart.x - gap, pEnd.y + height/2, pStart.x, pEnd.y + height/2);
-    } else {
-      gc.drawLine(pStart.x - gap, pStart.y + height, pStart.x - gap, pStart.y);
-      gc.drawLine(pStart.x - gap, pStart.y + height, pStart.x + width, pStart.y + height);
-      gc.drawLine(pStart.x - gap, pStart.y, pStart.x + width, pStart.y);
+    if (!isRoot()) {
 
-      gc.drawLine(pEnd.x + gap, pEnd.y + height, pEnd.x + gap, pEnd.y);
-      gc.drawLine(pEnd.x + gap, pEnd.y + height, pEnd.x - width, pEnd.y + height);
-      gc.drawLine(pEnd.x + gap, pEnd.y, pEnd.x - width, pEnd.y);
     }
-    gc.setForeground(c);
   }
 
 }
